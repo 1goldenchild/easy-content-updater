@@ -88,3 +88,15 @@
     @apply min-h-screen bg-background;
   }
 }
+
+@layer utilities {
+  .mask-edges {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
+  }
+}

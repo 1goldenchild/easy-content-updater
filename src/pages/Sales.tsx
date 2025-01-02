@@ -1,120 +1,109 @@
 import { Routes, Route, useNavigate } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
 const SalesIntro = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="flex flex-col items-center justify-center py-12 px-4 space-y-8 text-center">
+    <div className="flex flex-col items-center justify-center space-y-20 py-12 px-4">
+      {/* Hero Section */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="space-y-4 max-w-3xl mx-auto"
+        className="space-y-6 max-w-4xl mx-auto text-center"
       >
-        <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-orange-500 to-pink-500 text-transparent bg-clip-text">
-          Discover Your Life's Purpose Through Numerology
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+          Ever Wonder How These People Get to Where They Are?{" "}
+          <span className="bg-gradient-to-r from-orange-500 to-pink-500 text-transparent bg-clip-text">
+            Numerology.
+          </span>
         </h1>
-        <p className="text-xl text-muted-foreground">
-          Unlock the hidden meanings behind your name and birth date with our personalized numerology reading.
-        </p>
       </motion.div>
 
+      {/* Carousel Section */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="space-y-6 max-w-2xl"
+        className="w-full max-w-5xl mx-auto px-8"
       >
-        <div className="grid gap-4 text-left">
-          <div className="flex items-start gap-4">
-            <div className="bg-primary/10 p-2 rounded-full">
-              <svg
-                className="w-5 h-5 text-primary"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            </div>
-            <div>
-              <h3 className="font-semibold">Personalized Analysis</h3>
-              <p className="text-muted-foreground">
-                Get insights based on your unique numerical vibrations
-              </p>
-            </div>
-          </div>
-          <div className="flex items-start gap-4">
-            <div className="bg-primary/10 p-2 rounded-full">
-              <svg
-                className="w-5 h-5 text-primary"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            </div>
-            <div>
-              <h3 className="font-semibold">Life Path Guidance</h3>
-              <p className="text-muted-foreground">
-                Understand your life's purpose and potential
-              </p>
-            </div>
-          </div>
-          <div className="flex items-start gap-4">
-            <div className="bg-primary/10 p-2 rounded-full">
-              <svg
-                className="w-5 h-5 text-primary"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            </div>
-            <div>
-              <h3 className="font-semibold">Detailed Report</h3>
-              <p className="text-muted-foreground">
-                Receive a comprehensive analysis of your numerological profile
-              </p>
-            </div>
-          </div>
-        </div>
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="relative"
+        >
+          <CarouselContent className="mask-edges">
+            {[
+              "photo-1649972904349-6e44c42644a7",
+              "photo-1488590528505-98d2b5aba04b",
+              "photo-1581091226825-a6a2a5aee158",
+              "photo-1486312338219-ce68d2c6f44d",
+              "photo-1581090464777-f3220bbe1b8b"
+            ].map((id, index) => (
+              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                <div className="p-1">
+                  <img
+                    src={`https://images.unsplash.com/${id}`}
+                    alt={`Success story ${index + 1}`}
+                    className="rounded-lg object-cover aspect-[4/3]"
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
       </motion.div>
 
+      {/* Get to Know Yourself Section */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6 }}
+        className="space-y-6 max-w-3xl mx-auto text-center"
       >
-        <Button
-          size="lg"
-          className="text-lg px-8"
-          onClick={() => navigate("info")}
-        >
-          Start Your Reading
-        </Button>
+        <h2 className="text-3xl md:text-4xl font-bold">
+          Get to Know Yourself Through Numerology Analysis
+        </h2>
+        <p className="text-xl text-muted-foreground">
+          Unlock the hidden patterns in your life and discover your true potential through our comprehensive numerology analysis.
+        </p>
+      </motion.div>
+
+      {/* NDA Protected Info Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.9 }}
+        className="space-y-8 max-w-3xl mx-auto text-center"
+      >
+        <div className="bg-secondary/50 p-8 rounded-lg">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">
+            Exclusive Access to Protected Insights
+          </h2>
+          <p className="text-lg text-muted-foreground mb-6">
+            Get access to personalized information about your numbers that we've recently secured behind an NDA. Unlock secrets that few have access to.
+          </p>
+          <Button
+            size="lg"
+            className="text-lg px-8"
+            onClick={() => navigate("info")}
+          >
+            Start Your Reading
+          </Button>
+        </div>
       </motion.div>
     </div>
   )
