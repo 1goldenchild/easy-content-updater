@@ -22,7 +22,7 @@ const SalesIntro = () => {
     "iar-afB0QQw",
     "npxXWgQ33ZQ",
     "cckf4TsHAuw",
-  ]
+  ].map(id => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=800&h=600`)
 
   return (
     <div className="flex flex-col items-center justify-center space-y-20 py-12 px-4">
@@ -76,11 +76,11 @@ const SalesIntro = () => {
               animation: 'scroll 20s linear infinite'
             }}
           >
-            {[...images, ...images, ...images].map((id, index) => (
+            {[...images, ...images, ...images].map((url, index) => (
               <CarouselItem key={index} className="basis-1/4 md:basis-1/3 lg:basis-1/4">
                 <div className="p-1">
                   <img
-                    src={`https://source.unsplash.com/${id}/800x600`}
+                    src={url}
                     alt={`Success story ${index + 1}`}
                     className="rounded-lg object-cover aspect-[4/3] w-full h-full"
                     loading="eager"
