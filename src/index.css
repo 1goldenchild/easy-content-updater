@@ -102,10 +102,18 @@
 }
 
 @keyframes scroll {
-  0% {
+  from {
     transform: translateX(0);
   }
-  100% {
-    transform: translateX(-33.33%);
+  to {
+    transform: translateX(calc(-100% / 3));
   }
+}
+
+.carousel-scroll {
+  animation: scroll 25s linear infinite;
+}
+
+.carousel-scroll:hover {
+  animation-play-state: paused;
 }

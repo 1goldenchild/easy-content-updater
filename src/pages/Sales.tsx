@@ -51,34 +51,14 @@ const SalesIntro = () => {
           opts={{
             align: "start",
             loop: true,
-            dragFree: true,
-            skipSnaps: true,
-            containScroll: false,
           }}
-          plugins={[
-            Autoplay({
-              delay: 0,
-              stopOnInteraction: false,
-              stopOnMouseEnter: false,
-              rootNode: null,
-              playOnInit: true,
-            }),
-          ]}
-          className="relative"
+          className="relative overflow-hidden"
         >
-          <CarouselContent 
-            className="mask-edges" 
-            style={{ 
-              scrollBehavior: 'smooth', 
-              transitionDuration: '20s',
-              transform: 'translateX(-100%)',
-              animation: 'scroll 20s linear infinite'
-            }}
-          >
+          <CarouselContent className="mask-edges carousel-scroll">
             {[...images, ...images, ...images].map((url, index) => {
               console.log('Rendering image:', url)
               return (
-                <CarouselItem key={index} className="basis-1/4 md:basis-1/3 lg:basis-1/4">
+                <CarouselItem key={index} className="basis-1/4 md:basis-1/3 lg:basis-1/4 pl-4">
                   <div className="p-1">
                     <img
                       src={url}
