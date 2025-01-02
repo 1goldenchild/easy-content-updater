@@ -5,8 +5,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
 
@@ -67,12 +65,12 @@ const SalesIntro = () => {
             align: "start",
             loop: true,
             dragFree: true,
+            skipSnaps: true,
             slidesToScroll: 1,
-            containScroll: "trimSnaps",
           }}
           plugins={[
             Autoplay({
-              delay: 2000,
+              delay: 0,
               stopOnInteraction: false,
               stopOnMouseEnter: false,
               rootNode: null,
@@ -93,8 +91,6 @@ const SalesIntro = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
         </Carousel>
       </motion.div>
 
