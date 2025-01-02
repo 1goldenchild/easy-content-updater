@@ -8,6 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import Autoplay from "embla-carousel-autoplay"
 
 const SalesIntro = () => {
   const navigate = useNavigate()
@@ -41,6 +42,11 @@ const SalesIntro = () => {
             align: "start",
             loop: true,
           }}
+          plugins={[
+            Autoplay({
+              delay: 3000,
+            }),
+          ]}
           className="relative"
         >
           <CarouselContent className="mask-edges">
