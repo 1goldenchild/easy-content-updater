@@ -8,6 +8,7 @@ import Footer from "./components/layout/Footer"
 import Index from "./pages/Index"
 import Analysis from "./pages/Analysis"
 import Blog from "./pages/Blog"
+import Sales from "./pages/Sales"
 
 const queryClient = new QueryClient()
 
@@ -23,6 +24,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/analysis" element={<Analysis />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/sales/*" element={<Sales />} />
           </Routes>
           <Footer />
         </div>
