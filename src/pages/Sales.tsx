@@ -12,17 +12,16 @@ const SalesIntro = () => {
   const navigate = useNavigate()
 
   const images = [
-    "ixS7UCr4_ps",
-    "u2Ru4QBXA5Q",
-    "5fNmWej4tAA",
-    "LrxSNa0-dhc",
-    "4-EeTnaC1S4",
-    "QckxruozjRg",
-    "gcsNOsPEXfs",
-    "iar-afB0QQw",
-    "npxXWgQ33ZQ",
-    "cckf4TsHAuw",
-  ].map(id => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=800&h=600`)
+    "bBiuSdck8tU",
+    "R-LK3sqLiBw",
+    "N-Y88TWmGwA",
+    "505eectW54k",
+    "xG8IQMqMITM"
+  ].map(id => {
+    const url = `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=800&h=600`
+    console.log('Loading image:', url)
+    return url
+  })
 
   return (
     <div className="flex flex-col items-center justify-center space-y-20 py-12 px-4">
@@ -76,18 +75,23 @@ const SalesIntro = () => {
               animation: 'scroll 20s linear infinite'
             }}
           >
-            {[...images, ...images, ...images].map((url, index) => (
-              <CarouselItem key={index} className="basis-1/4 md:basis-1/3 lg:basis-1/4">
-                <div className="p-1">
-                  <img
-                    src={url}
-                    alt={`Success story ${index + 1}`}
-                    className="rounded-lg object-cover aspect-[4/3] w-full h-full"
-                    loading="eager"
-                  />
-                </div>
-              </CarouselItem>
-            ))}
+            {[...images, ...images, ...images].map((url, index) => {
+              console.log('Rendering image:', url)
+              return (
+                <CarouselItem key={index} className="basis-1/4 md:basis-1/3 lg:basis-1/4">
+                  <div className="p-1">
+                    <img
+                      src={url}
+                      alt={`Success story ${index + 1}`}
+                      className="rounded-lg object-cover aspect-[4/3] w-full h-full"
+                      loading="eager"
+                      onError={(e) => console.error('Image failed to load:', url, e)}
+                      onLoad={() => console.log('Image loaded successfully:', url)}
+                    />
+                  </div>
+                </CarouselItem>
+              )
+            })}
           </CarouselContent>
         </Carousel>
       </motion.div>
