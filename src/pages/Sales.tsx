@@ -22,17 +22,6 @@ const SalesIntro = () => {
     "photo-1526374965328-7f61d4dc18c5",
     "photo-1531297484001-80022131f5a1",
     "photo-1487058792275-0ad4aaf24ca7",
-    // Duplicate images for continuous loop
-    "photo-1649972904349-6e44c42644a7",
-    "photo-1488590528505-98d2b5aba04b",
-    "photo-1518770660439-4636190af475",
-    "photo-1461749280684-dccba630e2f6",
-    "photo-1486312338219-ce68d2c6f44d",
-    "photo-1581091226825-a6a2a5aee158",
-    "photo-1485827404703-89b55fcc595e",
-    "photo-1526374965328-7f61d4dc18c5",
-    "photo-1531297484001-80022131f5a1",
-    "photo-1487058792275-0ad4aaf24ca7",
   ]
 
   return (
@@ -63,13 +52,13 @@ const SalesIntro = () => {
           opts={{
             align: "start",
             loop: true,
-            dragFree: false,
-            skipSnaps: false,
-            containScroll: "trimSnaps",
+            dragFree: true,
+            skipSnaps: true,
+            containScroll: false,
           }}
           plugins={[
             Autoplay({
-              delay: 3000,
+              delay: 0,
               stopOnInteraction: false,
               stopOnMouseEnter: false,
               rootNode: null,
@@ -78,9 +67,9 @@ const SalesIntro = () => {
           ]}
           className="relative"
         >
-          <CarouselContent>
-            {images.map((id, index) => (
-              <CarouselItem key={index} className="basis-full">
+          <CarouselContent className="mask-edges" style={{ scrollBehavior: 'smooth', transitionDuration: '20s' }}>
+            {[...images, ...images, ...images].map((id, index) => (
+              <CarouselItem key={index} className="basis-1/4 md:basis-1/3 lg:basis-1/4">
                 <div className="p-1">
                   <img
                     src={`https://images.unsplash.com/${id}`}
