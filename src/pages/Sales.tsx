@@ -11,7 +11,6 @@ import Autoplay from "embla-carousel-autoplay"
 const SalesIntro = () => {
   const navigate = useNavigate()
 
-  // Using recommended images that will repeat back-to-back
   const images = [
     "photo-1649972904349-6e44c42644a7",
     "photo-1488590528505-98d2b5aba04b",
@@ -23,7 +22,7 @@ const SalesIntro = () => {
     "photo-1526374965328-7f61d4dc18c5",
     "photo-1531297484001-80022131f5a1",
     "photo-1487058792275-0ad4aaf24ca7",
-    // Duplicate the same images to ensure continuous flow
+    // Duplicate images for continuous loop
     "photo-1649972904349-6e44c42644a7",
     "photo-1488590528505-98d2b5aba04b",
     "photo-1518770660439-4636190af475",
@@ -64,13 +63,13 @@ const SalesIntro = () => {
           opts={{
             align: "start",
             loop: true,
-            dragFree: true,
-            skipSnaps: true,
-            slidesToScroll: 1,
+            dragFree: false,
+            skipSnaps: false,
+            containScroll: "trimSnaps",
           }}
           plugins={[
             Autoplay({
-              delay: 0,
+              delay: 3000,
               stopOnInteraction: false,
               stopOnMouseEnter: false,
               rootNode: null,
@@ -79,9 +78,9 @@ const SalesIntro = () => {
           ]}
           className="relative"
         >
-          <CarouselContent className="mask-edges" style={{ scrollBehavior: 'smooth', transitionDuration: '8s' }}>
+          <CarouselContent>
             {images.map((id, index) => (
-              <CarouselItem key={index} className="basis-1/4 md:basis-1/3 lg:basis-1/4">
+              <CarouselItem key={index} className="basis-full">
                 <div className="p-1">
                   <img
                     src={`https://images.unsplash.com/${id}`}
