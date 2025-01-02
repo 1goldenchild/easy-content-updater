@@ -22,7 +22,7 @@ const SalesIntro = () => {
     "iar-afB0QQw",
     "npxXWgQ33ZQ",
     "cckf4TsHAuw",
-  ].map(id => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=800&h=600`)
+  ].map(id => `https://source.unsplash.com/${id}/800x600`)
 
   return (
     <div className="flex flex-col items-center justify-center space-y-20 py-12 px-4">
