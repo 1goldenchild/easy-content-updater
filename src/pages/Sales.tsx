@@ -6,7 +6,6 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel"
-import Autoplay from "embla-carousel-autoplay"
 
 const SalesIntro = () => {
   const navigate = useNavigate()
@@ -45,35 +44,29 @@ const SalesIntro = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="w-full max-w-5xl mx-auto px-8"
+        className="w-full max-w-5xl mx-auto px-8 overflow-hidden"
       >
-        <Carousel
-          opts={{
-            align: "start",
-            loop: true,
-          }}
-          className="relative overflow-hidden"
-        >
-          <CarouselContent className="mask-edges carousel-scroll">
-            {[...images, ...images, ...images].map((url, index) => {
-              console.log('Rendering image:', url)
-              return (
-                <CarouselItem key={index} className="basis-1/4 md:basis-1/3 lg:basis-1/4 pl-4">
-                  <div className="p-1">
-                    <img
-                      src={url}
-                      alt={`Success story ${index + 1}`}
-                      className="rounded-lg object-cover aspect-[4/3] w-full h-full"
-                      loading="eager"
-                      onError={(e) => console.error('Image failed to load:', url, e)}
-                      onLoad={() => console.log('Image loaded successfully:', url)}
-                    />
-                  </div>
-                </CarouselItem>
-              )
-            })}
-          </CarouselContent>
-        </Carousel>
+        <div className="relative overflow-hidden">
+          <div className="mask-edges">
+            <div className="carousel-scroll">
+              {[...images, ...images].map((url, index) => (
+                <div
+                  key={index}
+                  className="w-[300px] flex-shrink-0 px-2"
+                >
+                  <img
+                    src={url}
+                    alt={`Success story ${index + 1}`}
+                    className="rounded-lg object-cover w-full h-[225px]"
+                    loading="eager"
+                    onError={(e) => console.error('Image failed to load:', url, e)}
+                    onLoad={() => console.log('Image loaded successfully:', url)}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </motion.div>
 
       {/* Get to Know Yourself Section */}
