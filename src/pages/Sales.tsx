@@ -13,19 +13,29 @@ import Autoplay from "embla-carousel-autoplay"
 const SalesIntro = () => {
   const navigate = useNavigate()
 
-  // Duplicate the images array to ensure continuous flow
+  // Using recommended images that will repeat back-to-back
   const images = [
     "photo-1649972904349-6e44c42644a7",
     "photo-1488590528505-98d2b5aba04b",
-    "photo-1581091226825-a6a2a5aee158",
+    "photo-1518770660439-4636190af475",
+    "photo-1461749280684-dccba630e2f6",
     "photo-1486312338219-ce68d2c6f44d",
-    "photo-1581090464777-f3220bbe1b8b",
-    // Duplicate images for continuous flow
+    "photo-1581091226825-a6a2a5aee158",
+    "photo-1485827404703-89b55fcc595e",
+    "photo-1526374965328-7f61d4dc18c5",
+    "photo-1531297484001-80022131f5a1",
+    "photo-1487058792275-0ad4aaf24ca7",
+    // Duplicate the same images to ensure continuous flow
     "photo-1649972904349-6e44c42644a7",
     "photo-1488590528505-98d2b5aba04b",
-    "photo-1581091226825-a6a2a5aee158",
+    "photo-1518770660439-4636190af475",
+    "photo-1461749280684-dccba630e2f6",
     "photo-1486312338219-ce68d2c6f44d",
-    "photo-1581090464777-f3220bbe1b8b",
+    "photo-1581091226825-a6a2a5aee158",
+    "photo-1485827404703-89b55fcc595e",
+    "photo-1526374965328-7f61d4dc18c5",
+    "photo-1531297484001-80022131f5a1",
+    "photo-1487058792275-0ad4aaf24ca7",
   ]
 
   return (
