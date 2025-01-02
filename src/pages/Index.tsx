@@ -6,7 +6,7 @@ const Index = () => {
   return (
     <div className="flex-1">
       {/* Hero Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-br from-orange-500 via-orange-300 to-pink-500">
+      <section className="py-20 md:py-32 bg-background">
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center space-y-4 text-center">
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
