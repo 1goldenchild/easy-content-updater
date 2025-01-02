@@ -67,14 +67,23 @@ const SalesIntro = () => {
           ]}
           className="relative"
         >
-          <CarouselContent className="mask-edges" style={{ scrollBehavior: 'smooth', transitionDuration: '20s' }}>
+          <CarouselContent 
+            className="mask-edges" 
+            style={{ 
+              scrollBehavior: 'smooth', 
+              transitionDuration: '20s',
+              transform: 'translateX(-100%)',
+              animation: 'scroll 20s linear infinite'
+            }}
+          >
             {[...images, ...images, ...images].map((id, index) => (
               <CarouselItem key={index} className="basis-1/4 md:basis-1/3 lg:basis-1/4">
                 <div className="p-1">
                   <img
-                    src={`https://source.unsplash.com/${id}`}
+                    src={`https://source.unsplash.com/${id}/800x600`}
                     alt={`Success story ${index + 1}`}
-                    className="rounded-lg object-cover aspect-[4/3]"
+                    className="rounded-lg object-cover aspect-[4/3] w-full h-full"
+                    loading="eager"
                   />
                 </div>
               </CarouselItem>
