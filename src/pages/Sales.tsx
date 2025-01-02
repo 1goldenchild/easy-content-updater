@@ -74,11 +74,12 @@ const SalesIntro = () => {
               stopOnInteraction: false,
               stopOnMouseEnter: false,
               rootNode: null,
+              playOnInit: true,
             }),
           ]}
           className="relative"
         >
-          <CarouselContent className="mask-edges">
+          <CarouselContent className="mask-edges" style={{ scrollBehavior: 'smooth', transitionDuration: '8s' }}>
             {images.map((id, index) => (
               <CarouselItem key={index} className="basis-1/4 md:basis-1/3 lg:basis-1/4">
                 <div className="p-1">
