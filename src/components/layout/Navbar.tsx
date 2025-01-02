@@ -21,7 +21,7 @@ const Navbar = () => {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link to="/analysis">
+              <Link to="/sales">
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Analysis
                 </NavigationMenuLink>
