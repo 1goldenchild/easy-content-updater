@@ -13,6 +13,21 @@ import Autoplay from "embla-carousel-autoplay"
 const SalesIntro = () => {
   const navigate = useNavigate()
 
+  // Duplicate the images array to ensure continuous flow
+  const images = [
+    "photo-1649972904349-6e44c42644a7",
+    "photo-1488590528505-98d2b5aba04b",
+    "photo-1581091226825-a6a2a5aee158",
+    "photo-1486312338219-ce68d2c6f44d",
+    "photo-1581090464777-f3220bbe1b8b",
+    // Duplicate images for continuous flow
+    "photo-1649972904349-6e44c42644a7",
+    "photo-1488590528505-98d2b5aba04b",
+    "photo-1581091226825-a6a2a5aee158",
+    "photo-1486312338219-ce68d2c6f44d",
+    "photo-1581090464777-f3220bbe1b8b",
+  ]
+
   return (
     <div className="flex flex-col items-center justify-center space-y-20 py-12 px-4">
       {/* Hero Section */}
@@ -41,25 +56,23 @@ const SalesIntro = () => {
           opts={{
             align: "start",
             loop: true,
+            dragFree: true,
+            slidesToScroll: 1,
+            containScroll: "trimSnaps",
           }}
           plugins={[
             Autoplay({
-              delay: 3000,
-              stopOnInteraction: false, // This ensures continuous rotation
-              stopOnMouseEnter: false, // This ensures continuous rotation even when hovering
+              delay: 2000,
+              stopOnInteraction: false,
+              stopOnMouseEnter: false,
+              rootNode: null,
             }),
           ]}
           className="relative"
         >
           <CarouselContent className="mask-edges">
-            {[
-              "photo-1649972904349-6e44c42644a7",
-              "photo-1488590528505-98d2b5aba04b",
-              "photo-1581091226825-a6a2a5aee158",
-              "photo-1486312338219-ce68d2c6f44d",
-              "photo-1581090464777-f3220bbe1b8b"
-            ].map((id, index) => (
-              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+            {images.map((id, index) => (
+              <CarouselItem key={index} className="basis-1/4 md:basis-1/3 lg:basis-1/4">
                 <div className="p-1">
                   <img
                     src={`https://images.unsplash.com/${id}`}
