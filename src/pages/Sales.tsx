@@ -45,6 +45,8 @@ const SalesIntro = () => {
           plugins={[
             Autoplay({
               delay: 3000,
+              stopOnInteraction: false, // This ensures continuous rotation
+              stopOnMouseEnter: false, // This ensures continuous rotation even when hovering
             }),
           ]}
           className="relative"
