@@ -32,13 +32,15 @@ const Index = () => {
       </section>
 
       {/* Animated Line Separator */}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.5, ease: "easeInOut" }}
-        className="w-full h-px bg-white/20 origin-left"
-      />
+      <div className="container px-4 md:px-6">
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+          className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent origin-left my-8"
+        />
+      </div>
 
       {/* Features Section */}
       <section className="py-16 md:py-24">
@@ -86,13 +88,15 @@ const Index = () => {
       </section>
 
       {/* Another Animated Line Separator */}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.5, ease: "easeInOut" }}
-        className="w-full h-px bg-white/20 origin-left"
-      />
+      <div className="container px-4 md:px-6">
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+          className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent origin-left my-8"
+        />
+      </div>
     </div>
   )
 }
