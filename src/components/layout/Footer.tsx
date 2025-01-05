@@ -11,14 +11,14 @@ const Footer = () => {
       </div>
 
       <footer className="border-t border-purple-500/20 bg-gradient-to-b from-background/80 to-background backdrop-blur-lg">
-        <div className="container py-12 md:py-16">
+        <div className="container py-8 md:py-16">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="grid grid-cols-1 md:grid-cols-4 gap-8"
+            className="grid grid-cols-2 md:grid-cols-4 gap-8"
           >
-            <div className="space-y-4">
+            <div className="col-span-2 md:col-span-1 space-y-4">
               <h3 className="text-lg font-semibold bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">
                 Numerology Insights
               </h3>
@@ -30,11 +30,11 @@ const Footer = () => {
                   <a
                     key={social}
                     href={`#${social}`}
-                    className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#D946EF] p-[1px] hover:scale-110 transition-transform"
+                    className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#D946EF] p-[1px] hover:scale-110 transition-transform"
                   >
                     <div className="w-full h-full rounded-full bg-background flex items-center justify-center">
                       <span className="sr-only">{social}</span>
-                      <div className="w-5 h-5 bg-gradient-to-br from-[#8B5CF6] to-[#D946EF]" />
+                      <div className="w-4 h-4 md:w-5 md:h-5 bg-gradient-to-br from-[#8B5CF6] to-[#D946EF]" />
                     </div>
                   </a>
                 ))}
@@ -71,7 +71,7 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div>
+            <div className="col-span-2 md:col-span-1">
               <h4 className="text-sm font-semibold mb-4 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">Newsletter</h4>
               <p className="text-sm text-muted-foreground mb-4">
                 Subscribe to receive numerology insights and updates.
@@ -91,7 +91,7 @@ const Footer = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="mt-12 pt-8 border-t border-purple-500/20 text-center text-sm text-muted-foreground"
+            className="mt-8 md:mt-12 pt-8 border-t border-purple-500/20 text-center text-sm text-muted-foreground"
           >
             <p>&copy; {new Date().getFullYear()} Numerology Insights. All rights reserved.</p>
           </motion.div>
