@@ -38,31 +38,10 @@ const Hero = () => {
               rgba(155, 135, 245, 0.2), 
               rgba(126, 105, 171, 0.3), 
               rgba(26, 31, 44, 0.8)
-            ),
-            url("data:image/svg+xml,${encodeURIComponent(`
-              <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
-                <text x="5" y="15" fill="rgba(155, 135, 245, 0.3)" font-family="monospace" font-size="12">1</text>
-                <text x="15" y="25" fill="rgba(217, 70, 239, 0.3)" font-family="monospace" font-size="12">0</text>
-                <text x="25" y="15" fill="rgba(155, 135, 245, 0.3)" font-family="monospace" font-size="12">1</text>
-              </svg>
-            `)}")
-          `,
-          backgroundSize: '30px 30px',
-          animation: 'matrix-rain 15s linear infinite'
+            )
+          `
         }}
       />
-      <style>
-        {`
-          @keyframes matrix-rain {
-            0% {
-              background-position: 0 0;
-            }
-            100% {
-              background-position: 0 1000px;
-            }
-          }
-        `}
-      </style>
     </section>
   )
 }
