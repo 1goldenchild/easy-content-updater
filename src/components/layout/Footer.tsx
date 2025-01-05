@@ -6,8 +6,8 @@ const Footer = () => {
     <>
       {/* Gradient Separator */}
       <div className="w-full h-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/20 to-transparent animate-pulse" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#9b87f5]/10 to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#D946EF]/5 via-transparent to-transparent blur-xl" />
       </div>
 
       <footer className="border-t border-purple-500/20 bg-gradient-to-b from-background/80 to-background backdrop-blur-lg">
