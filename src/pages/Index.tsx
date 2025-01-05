@@ -9,6 +9,12 @@ const Index = () => {
       {/* Hero Section with Animated Gradient */}
       <section className="py-20 md:py-32 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#1A1F2C] via-[#8B5CF6] to-[#D946EF] opacity-20" />
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.5 }}
+          transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+          className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent"
+        />
         <div className="container px-4 md:px-6 relative">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -32,9 +38,21 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Animated Separator */}
+      <div className="w-full h-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/20 to-transparent animate-pulse" />
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+          className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent"
+        />
+      </div>
+
       {/* Features Section with Animated Cards */}
-      <section className="py-16 md:py-24 bg-[#1A1F2C]/50">
-        <div className="container px-4 md:px-6">
+      <section className="py-16 md:py-24 bg-[#1A1F2C]/50 relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5" />
+        <div className="container px-4 md:px-6 relative">
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -79,6 +97,17 @@ const Index = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Animated Separator */}
+      <div className="w-full h-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/20 to-transparent animate-pulse" />
+        <motion.div 
+          initial={{ opacity: 0, scale: 1.2 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+          className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent"
+        />
+      </div>
     </div>
   )
 }

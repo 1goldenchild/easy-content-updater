@@ -1,49 +1,103 @@
 import { Link } from "react-router-dom"
+import { motion } from "framer-motion"
 
 const Footer = () => {
   return (
-    <footer className="border-t bg-background">
-      <div className="container py-8 md:py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Numerology Insights</h3>
-            <p className="text-sm text-muted-foreground">
-              Discover your life's path through the ancient wisdom of numbers.
-            </p>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              <li><Link to="/" className="text-sm text-muted-foreground hover:text-foreground">Home</Link></li>
-              <li><Link to="/analysis" className="text-sm text-muted-foreground hover:text-foreground">Analysis</Link></li>
-              <li><Link to="/blog" className="text-sm text-muted-foreground hover:text-foreground">Blog</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold mb-4">Resources</h4>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground">About Numerology</a></li>
-              <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground">FAQ</a></li>
-              <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground">Contact</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold mb-4">Newsletter</h4>
-            <p className="text-sm text-muted-foreground mb-4">
-              Subscribe to receive numerology insights and updates.
-            </p>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="w-full px-3 py-2 text-sm border rounded-md"
-            />
-          </div>
-        </div>
-        <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Numerology Insights. All rights reserved.</p>
-        </div>
+    <>
+      {/* Gradient Separator */}
+      <div className="w-full h-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/20 to-transparent animate-pulse" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent" />
       </div>
-    </footer>
+
+      <footer className="border-t border-purple-500/20 bg-gradient-to-b from-background/80 to-background backdrop-blur-lg">
+        <div className="container py-12 md:py-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="grid grid-cols-1 md:grid-cols-4 gap-8"
+          >
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">
+                Numerology Insights
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Discover your life's path through the ancient wisdom of numbers.
+              </p>
+              <div className="flex space-x-4">
+                {['twitter', 'facebook', 'instagram'].map((social) => (
+                  <a
+                    key={social}
+                    href={`#${social}`}
+                    className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#D946EF] p-[1px] hover:scale-110 transition-transform"
+                  >
+                    <div className="w-full h-full rounded-full bg-background flex items-center justify-center">
+                      <span className="sr-only">{social}</span>
+                      <div className="w-5 h-5 bg-gradient-to-br from-[#8B5CF6] to-[#D946EF]" />
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold mb-4 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">Quick Links</h4>
+              <ul className="space-y-2">
+                <li>
+                  <Link to="/" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Home</Link>
+                </li>
+                <li>
+                  <Link to="/analysis" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Analysis</Link>
+                </li>
+                <li>
+                  <Link to="/blog" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Blog</Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold mb-4 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">Resources</h4>
+              <ul className="space-y-2">
+                <li>
+                  <a href="#" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">About Numerology</a>
+                </li>
+                <li>
+                  <a href="#" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">FAQ</a>
+                </li>
+                <li>
+                  <a href="#" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Contact</a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold mb-4 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">Newsletter</h4>
+              <p className="text-sm text-muted-foreground mb-4">
+                Subscribe to receive numerology insights and updates.
+              </p>
+              <div className="relative">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="w-full px-4 py-2 text-sm border rounded-lg bg-background/50 backdrop-blur-sm border-purple-500/20 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
+                />
+                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] opacity-0 hover:opacity-10 transition-opacity pointer-events-none" />
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="mt-12 pt-8 border-t border-purple-500/20 text-center text-sm text-muted-foreground"
+          >
+            <p>&copy; {new Date().getFullYear()} Numerology Insights. All rights reserved.</p>
+          </motion.div>
+        </div>
+      </footer>
+    </>
   )
 }
 
