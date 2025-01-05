@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 const MatrixLoading = ({ onLoadComplete }: { onLoadComplete: () => void }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [showText, setShowText] = useState(false);
+  const [opacity, setOpacity] = useState(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -42,13 +43,33 @@ const MatrixLoading = ({ onLoadComplete }: { onLoadComplete: () => void }) => {
       }
     };
 
-    // Show "Numerology" text after 0.5 seconds
-    setTimeout(() => setShowText(true), 500);
-
-    // Hide text and trigger completion after 2 seconds
+    // Fade in text smoothly
     setTimeout(() => {
-      setShowText(false);
-      setTimeout(onLoadComplete, 500); // Give 0.5s for text fade out
+      setShowText(true);
+      const fadeIn = setInterval(() => {
+        setOpacity(prev => {
+          if (prev >= 1) {
+            clearInterval(fadeIn);
+            return 1;
+          }
+          return prev + 0.05;
+        });
+      }, 50);
+    }, 500);
+
+    // Fade out text smoothly
+    setTimeout(() => {
+      const fadeOut = setInterval(() => {
+        setOpacity(prev => {
+          if (prev <= 0) {
+            clearInterval(fadeOut);
+            setShowText(false);
+            setTimeout(onLoadComplete, 200);
+            return 0;
+          }
+          return prev - 0.05;
+        });
+      }, 50);
     }, 2000);
 
     const interval = setInterval(draw, 33);
@@ -62,8 +83,13 @@ const MatrixLoading = ({ onLoadComplete }: { onLoadComplete: () => void }) => {
         ref={canvasRef}
         className="absolute inset-0"
       />
-      <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${showText ? 'opacity-100' : 'opacity-0'}`}>
-        <h1 className="text-[#0EA5E9] text-6xl font-bold">Numerology</h1>
+      <div 
+        className={`absolute inset-0 flex items-center justify-center ${showText ? 'block' : 'hidden'}`}
+        style={{ opacity }}
+      >
+        <h1 className="text-[#0EA5E9] text-6xl font-bold tracking-wider">
+          Numerology 33
+        </h1>
       </div>
     </div>
   );
