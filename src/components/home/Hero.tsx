@@ -40,17 +40,15 @@ const Hero = () => {
               rgba(26, 31, 44, 0.8)
             ),
             url("data:image/svg+xml,${encodeURIComponent(`
-              <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
-                <text x="5" y="15" fill="rgba(0, 255, 70, 0.15)" font-family="monospace" font-size="12">ﾊ</text>
-                <text x="20" y="25" fill="rgba(0, 255, 70, 0.15)" font-family="monospace" font-size="12">ﾐ</text>
-                <text x="10" y="35" fill="rgba(0, 255, 70, 0.15)" font-family="monospace" font-size="12">ｻ</text>
-                <text x="25" y="10" fill="rgba(0, 255, 70, 0.15)" font-family="monospace" font-size="12">ﾘ</text>
-                <text x="30" y="30" fill="rgba(0, 255, 70, 0.15)" font-family="monospace" font-size="12">ｽ</text>
+              <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+                <text x="5" y="15" fill="rgba(155, 135, 245, 0.3)" font-family="monospace" font-size="12">1</text>
+                <text x="15" y="25" fill="rgba(217, 70, 239, 0.3)" font-family="monospace" font-size="12">0</text>
+                <text x="25" y="15" fill="rgba(155, 135, 245, 0.3)" font-family="monospace" font-size="12">1</text>
               </svg>
             `)}")
           `,
-          backgroundSize: '40px 40px',
-          animation: 'matrix-rain 20s linear infinite'
+          backgroundSize: '30px 30px',
+          animation: 'matrix-rain 15s linear infinite'
         }}
       />
       <style>
