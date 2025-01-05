@@ -1,66 +1,82 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Link } from "react-router-dom"
+import { motion } from "framer-motion"
 
 const Index = () => {
   return (
     <div className="flex-1">
-      {/* Hero Section */}
-      <section className="py-20 md:py-32 bg-background">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center space-y-4 text-center">
-            <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
+      {/* Hero Section with Animated Gradient */}
+      <section className="py-20 md:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1A1F2C] via-[#8B5CF6] to-[#D946EF] opacity-20" />
+        <div className="container px-4 md:px-6 relative">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col items-center space-y-4 text-center"
+          >
+            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
               Discover Your Life's Path Through
-              <span className="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent"> Numerology</span>
+              <span className="block mt-2">Numerology</span>
             </h1>
-            <p className="mx-auto max-w-[700px] text-white/90 md:text-xl">
-              Unlock the hidden meanings behind your numbers and discover your true potential with our premium numerology readings.
+            <p className="mx-auto max-w-[700px] text-white/90 md:text-xl dark:text-white/90 backdrop-blur-sm">
+              Unlock the hidden meanings behind your numbers and discover your true potential with our advanced numerology readings.
             </p>
             <Link to="/analysis">
-              <Button size="lg" className="mt-6">Get Your Reading Now</Button>
+              <Button size="lg" className="mt-6 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:opacity-90 transition-all duration-300 transform hover:scale-105">
+                Get Your Reading Now
+              </Button>
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-16 md:py-24">
+      {/* Features Section with Animated Cards */}
+      <section className="py-16 md:py-24 bg-[#1A1F2C]/50">
         <div className="container px-4 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            <Card className="transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-orange-500/20">
-              <CardHeader>
-                <CardTitle>Life Path Number</CardTitle>
-                <CardDescription>Discover your core purpose and life mission</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Your Life Path Number reveals your natural talents, opportunities, and challenges throughout your life journey.
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-orange-500/20">
-              <CardHeader>
-                <CardTitle>Expression Number</CardTitle>
-                <CardDescription>Understand your natural abilities</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Your Expression Number shows how you express yourself and interact with the world around you.
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-orange-500/20">
-              <CardHeader>
-                <CardTitle>Soul Urge Number</CardTitle>
-                <CardDescription>Reveal your inner desires</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Your Soul Urge Number unveils your deepest desires, motivations, and what truly makes you happy.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+          >
+            {[
+              {
+                title: "Life Path Number",
+                description: "Discover your core purpose and life mission through your unique numerical signature.",
+                gradient: "from-[#8B5CF6] to-[#D946EF]"
+              },
+              {
+                title: "Expression Number",
+                description: "Understand your natural abilities and how you express yourself to the world.",
+                gradient: "from-[#0EA5E9] to-[#8B5CF6]"
+              },
+              {
+                title: "Soul Urge Number",
+                description: "Reveal your inner desires and what truly drives you forward in life.",
+                gradient: "from-[#F97316] to-[#D946EF]"
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 * (index + 1) }}
+              >
+                <Card className="transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/20 bg-black/20 backdrop-blur-sm border-purple-500/20">
+                  <CardHeader>
+                    <CardTitle className={`bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
+                      {feature.title}
+                    </CardTitle>
+                    <CardDescription className="text-white/70">
+                      {feature.description}
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
     </div>
