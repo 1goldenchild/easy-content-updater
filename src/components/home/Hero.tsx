@@ -30,7 +30,23 @@ const Hero = () => {
           </Link>
         </motion.div>
       </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/80 pointer-events-none" />
+      <div 
+        className="absolute inset-0 bg-gradient-to-b from-[#9b87f5]/20 via-[#7E69AB]/30 to-background/80 pointer-events-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(to bottom, 
+              rgba(155, 135, 245, 0.2), 
+              rgba(126, 105, 171, 0.3), 
+              rgba(26, 31, 44, 0.8)
+            ),
+            repeating-linear-gradient(
+              45deg,
+              rgba(155, 135, 245, 0.1) 0px,
+              rgba(217, 70, 239, 0.1) 40px
+            )
+          `
+        }}
+      />
     </section>
   )
 }
