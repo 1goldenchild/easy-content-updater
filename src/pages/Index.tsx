@@ -8,8 +8,8 @@ const Index = () => {
     <div className="flex-1">
       <Hero />
       <SecretKnowledge />
-      <Benefits />
       <CallToAction />
+      <Benefits />
     </div>
   )
 }
