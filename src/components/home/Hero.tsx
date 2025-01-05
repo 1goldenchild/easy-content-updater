@@ -43,8 +43,18 @@ const Hero = () => {
               45deg,
               rgba(155, 135, 245, 0.1) 0px,
               rgba(217, 70, 239, 0.1) 40px
-            )
-          `
+            ),
+            url("data:image/svg+xml,${encodeURIComponent(`
+              <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <text x="10" y="20" fill="rgba(155, 135, 245, 0.1)" font-family="monospace">1</text>
+                <text x="30" y="40" fill="rgba(217, 70, 239, 0.1)" font-family="monospace">0</text>
+                <text x="50" y="60" fill="rgba(155, 135, 245, 0.1)" font-family="monospace">7</text>
+                <text x="70" y="80" fill="rgba(217, 70, 239, 0.1)" font-family="monospace">4</text>
+                <text x="90" y="100" fill="rgba(155, 135, 245, 0.1)" font-family="monospace">9</text>
+              </svg>
+            `)}")
+          `,
+          backgroundSize: '100px 100px'
         }}
       />
     </section>
