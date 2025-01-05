@@ -30,9 +30,8 @@ const benefits = [
 
 const Benefits = () => {
   return (
-    <section className="py-16 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background to-background" />
-      <div className="container px-4 md:px-6 relative z-10">
+    <section className="py-16">
+      <div className="container px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {benefits.map((benefit, index) => (
             <motion.div

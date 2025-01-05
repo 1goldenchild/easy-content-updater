@@ -30,8 +30,7 @@ const Hero = () => {
           </Link>
         </motion.div>
       </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background to-background pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/80 pointer-events-none" />
     </section>
   )
 }
