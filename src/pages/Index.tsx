@@ -6,16 +6,9 @@ import { motion } from "framer-motion"
 const Index = () => {
   return (
     <div className="flex-1">
-      {/* Hero Section with Animated Gradient */}
-      <section className="py-20 md:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1A1F2C] via-[#8B5CF6] to-[#D946EF] opacity-20" />
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.5 }}
-          transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-          className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent"
-        />
-        <div className="container px-4 md:px-6 relative">
+      {/* Hero Section */}
+      <section className="py-20 md:py-32">
+        <div className="container px-4 md:px-6">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -26,11 +19,11 @@ const Index = () => {
               Discover Your Life's Path Through
               <span className="block mt-2">Numerology</span>
             </h1>
-            <p className="mx-auto max-w-[700px] text-white/90 md:text-xl dark:text-white/90 backdrop-blur-sm">
+            <p className="mx-auto max-w-[700px] text-white/90 md:text-xl dark:text-white/90">
               Unlock the hidden meanings behind your numbers and discover your true potential with our advanced numerology readings.
             </p>
             <Link to="/analysis">
-              <Button size="lg" className="mt-6 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:opacity-90 transition-all duration-300 transform hover:scale-105">
+              <Button size="lg" className="mt-6">
                 Get Your Reading Now
               </Button>
             </Link>
@@ -38,21 +31,18 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Animated Separator */}
-      <div className="w-full h-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/20 to-transparent animate-pulse" />
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-          className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent"
-        />
-      </div>
+      {/* Animated Line Separator */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.5, ease: "easeInOut" }}
+        className="w-full h-px bg-white/20 origin-left"
+      />
 
-      {/* Features Section with Animated Cards */}
-      <section className="py-16 md:py-24 bg-[#1A1F2C]/50 relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5" />
-        <div className="container px-4 md:px-6 relative">
+      {/* Features Section */}
+      <section className="py-16 md:py-24">
+        <div className="container px-4 md:px-6">
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -63,17 +53,14 @@ const Index = () => {
               {
                 title: "Life Path Number",
                 description: "Discover your core purpose and life mission through your unique numerical signature.",
-                gradient: "from-[#8B5CF6] to-[#D946EF]"
               },
               {
                 title: "Expression Number",
                 description: "Understand your natural abilities and how you express yourself to the world.",
-                gradient: "from-[#0EA5E9] to-[#8B5CF6]"
               },
               {
                 title: "Soul Urge Number",
                 description: "Reveal your inner desires and what truly drives you forward in life.",
-                gradient: "from-[#F97316] to-[#D946EF]"
               }
             ].map((feature, index) => (
               <motion.div
@@ -82,9 +69,9 @@ const Index = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 * (index + 1) }}
               >
-                <Card className="transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/20 bg-black/20 backdrop-blur-sm border-purple-500/20">
+                <Card className="bg-black/20 backdrop-blur-sm border-purple-500/20">
                   <CardHeader>
-                    <CardTitle className={`bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
+                    <CardTitle>
                       {feature.title}
                     </CardTitle>
                     <CardDescription className="text-white/70">
@@ -98,16 +85,14 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Animated Separator */}
-      <div className="w-full h-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/20 to-transparent animate-pulse" />
-        <motion.div 
-          initial={{ opacity: 0, scale: 1.2 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-          className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent"
-        />
-      </div>
+      {/* Another Animated Line Separator */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.5, ease: "easeInOut" }}
+        className="w-full h-px bg-white/20 origin-left"
+      />
     </div>
   )
 }
