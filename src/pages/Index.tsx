@@ -1,120 +1,142 @@
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
+import { ArrowRight, Star, Sparkles, Target, Users, TrendingUp, Lightbulb } from "lucide-react"
 
 const Index = () => {
   return (
     <div className="flex-1">
       {/* Hero Section */}
-      <section className="py-20 md:py-32">
+      <section className="relative py-20 md:py-32 overflow-hidden">
         <div className="container px-4 md:px-6">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="flex flex-col items-center space-y-4 text-center"
+            className="flex flex-col items-center space-y-4 text-center relative z-10"
           >
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
-              Discover Your Life's Path Through
-              <span className="block mt-2">Numerology</span>
+            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none">
+              Reach the next level with{" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
+                Numerology
+              </span>
             </h1>
             <p className="mx-auto max-w-[700px] text-white/90 md:text-xl dark:text-white/90">
-              Unlock the hidden meanings behind your numbers and discover your true potential with our advanced numerology readings.
+              Unlock the secrets hidden in your numbers and gain the clarity you've been searching for.
             </p>
             <Link to="/analysis">
-              <Button size="lg" className="mt-6">
+              <Button size="lg" className="mt-6 group">
                 Get Your Reading Now
+                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
           </motion.div>
         </div>
+        
+        {/* Background Effect */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/80 pointer-events-none" />
       </section>
 
-      {/* Animated Line Separator */}
-      <div className="container px-4 md:px-6 overflow-hidden">
-        <div className="relative py-8">
-          <motion.div
-            initial={{ width: "0%" }}
-            whileInView={{ width: "100%" }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
-            className="absolute left-1/2 -translate-x-1/2 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent mask-edges"
-          />
-          <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-white/20"
-          />
-        </div>
-      </div>
-
-      {/* Features Section */}
-      <section className="py-16 md:py-24">
+      {/* Secret Knowledge Section */}
+      <section className="py-16 relative overflow-hidden">
         <div className="container px-4 md:px-6">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative z-10 bg-black/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
           >
-            {[
-              {
-                title: "Life Path Number",
-                description: "Discover your core purpose and life mission through your unique numerical signature.",
-              },
-              {
-                title: "Expression Number",
-                description: "Understand your natural abilities and how you express yourself to the world.",
-              },
-              {
-                title: "Soul Urge Number",
-                description: "Reveal your inner desires and what truly drives you forward in life.",
-              }
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 * (index + 1) }}
-              >
-                <Card className="bg-black/20 backdrop-blur-sm border-purple-500/20">
-                  <CardHeader>
-                    <CardTitle>
-                      {feature.title}
-                    </CardTitle>
-                    <CardDescription className="text-white/70">
-                      {feature.description}
-                    </CardDescription>
-                  </CardHeader>
-                </Card>
-              </motion.div>
-            ))}
+            <div className="max-w-3xl mx-auto text-center space-y-6">
+              <Star className="w-12 h-12 mx-auto text-purple-400 animate-pulse" />
+              <h2 className="text-3xl md:text-4xl font-bold">
+                Guarded Knowledge Now Available
+              </h2>
+              <p className="text-lg text-white/80">
+                For centuries, this powerful knowledge has been guarded—kept secret under NDA agreements 
+                and passed only to the select few who understood its true potential. The world's most 
+                successful people have used numerology to gain an edge, and now this ancient wisdom is 
+                available to YOU.
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Another Animated Line Separator */}
-      <div className="container px-4 md:px-6 overflow-hidden">
-        <div className="relative py-8">
-          <motion.div
-            initial={{ width: "0%" }}
-            whileInView={{ width: "100%" }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
-            className="absolute left-1/2 -translate-x-1/2 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent mask-edges"
-          />
-          <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-white/20"
-          />
+      {/* Benefits Grid */}
+      <section className="py-16">
+        <div className="container px-4 md:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              {
+                icon: Users,
+                title: "Boost your relationships",
+                description: "Understand the dynamics of your connections and attract harmony into your life."
+              },
+              {
+                icon: TrendingUp,
+                title: "Accelerate your career",
+                description: "Discover the opportunities meant for you, aligning your actions with your natural path."
+              },
+              {
+                icon: Sparkles,
+                title: "Unlock financial flow",
+                description: "Tap into the numbers that lead to prosperity, making smarter moves to increase your income."
+              },
+              {
+                icon: Target,
+                title: "Become your best self",
+                description: "With clarity and purpose, you'll be empowered to make decisions that truly serve your highest good."
+              }
+            ].map((benefit, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+                className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-colors"
+              >
+                <benefit.icon className="w-10 h-10 text-purple-400 mb-4" />
+                <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
+                <p className="text-white/70">{benefit.description}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="py-20">
+        <div className="container px-4 md:px-6">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-purple-900/50 to-pink-900/50 p-8 md:p-12"
+          >
+            <div className="relative z-10 text-center space-y-6">
+              <Lightbulb className="w-16 h-16 mx-auto text-yellow-400" />
+              <h2 className="text-3xl md:text-4xl font-bold">
+                Don't wait—the secret is out
+              </h2>
+              <p className="text-xl text-white/90 max-w-2xl mx-auto">
+                It's time to use it to your advantage. Claim your Numerology Analysis now and start 
+                living a life of clarity, purpose, and success.
+              </p>
+              <Link to="/analysis">
+                <Button size="lg" variant="secondary" className="mt-4">
+                  Get Your Personalized Reading
+                </Button>
+              </Link>
+            </div>
+            
+            {/* Background Glow Effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-3xl" />
+          </motion.div>
+        </div>
+      </section>
     </div>
   )
 }
