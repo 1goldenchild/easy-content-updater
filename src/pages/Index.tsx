@@ -36,7 +36,7 @@ const Index = () => {
               </span>
             </h1>
             <p className="mx-auto max-w-[700px] text-white/90 md:text-xl dark:text-white/90">
-              Unlock the secrets hidden in your numbers and gain the clarity you've been searching for.
+              Discover the secrets the 1% and elite class have kept hidden—and how this powerful knowledge can transform your life, enhance your relationships, and even elevate your finances.
             </p>
             <Link to="/analysis">
               <Button size="lg" className="mt-6 group">
@@ -70,13 +70,14 @@ const Index = () => {
             <div className="max-w-3xl mx-auto text-center space-y-6">
               <Star className="w-12 h-12 mx-auto text-purple-400 animate-pulse" />
               <h2 className="text-3xl md:text-4xl font-bold">
-                Guarded Knowledge Now Available
+                Restricted Wisdom Now at Your Fingertips
               </h2>
               <p className="text-lg text-white/80">
-                For centuries, this powerful knowledge has been guarded—kept secret under NDA agreements 
-                and passed only to the select few who understood its true potential. The world's most 
-                successful people have used numerology to gain an edge, and now this ancient wisdom is 
-                available to YOU.
+                For centuries, this powerful knowledge was hidden—reserved only for the world's wealthiest and most successful individuals. Kept secret under NDAs and passed down to a privileged few, it gave them a competitive edge that most could never access.
+                <br /><br />
+                Now, that same exclusive knowledge is available to you.
+                <br /><br />
+                Unlock the secrets that have shaped the fortunes of the elite. Gain the insights that have been guarded for generations—and use them to transform your life, accelerate your success, and create the future you've always desired.
               </p>
             </div>
           </motion.div>
