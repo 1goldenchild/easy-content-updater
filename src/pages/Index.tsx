@@ -32,14 +32,23 @@ const Index = () => {
       </section>
 
       {/* Animated Line Separator */}
-      <div className="container px-4 md:px-6">
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.5, ease: "easeInOut" }}
-          className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent origin-left my-8"
-        />
+      <div className="container px-4 md:px-6 overflow-hidden">
+        <div className="relative py-8">
+          <motion.div
+            initial={{ width: "0%" }}
+            whileInView={{ width: "100%" }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+            className="absolute left-1/2 -translate-x-1/2 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent mask-edges"
+          />
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-white/20"
+          />
+        </div>
       </div>
 
       {/* Features Section */}
@@ -88,14 +97,23 @@ const Index = () => {
       </section>
 
       {/* Another Animated Line Separator */}
-      <div className="container px-4 md:px-6">
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.5, ease: "easeInOut" }}
-          className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent origin-left my-8"
-        />
+      <div className="container px-4 md:px-6 overflow-hidden">
+        <div className="relative py-8">
+          <motion.div
+            initial={{ width: "0%" }}
+            whileInView={{ width: "100%" }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+            className="absolute left-1/2 -translate-x-1/2 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent mask-edges"
+          />
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-white/20"
+          />
+        </div>
       </div>
     </div>
   )
