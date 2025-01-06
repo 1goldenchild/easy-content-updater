@@ -29,10 +29,10 @@ const LifepathAnalysis = ({ lifePath, isVisible }: LifepathAnalysisProps) => {
   };
 
   return (
-    <motion.div
+    <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="mt-8 p-6 rounded-lg bg-white/5 border border-white/10 max-w-4xl mx-auto"
+      className="mt-8 p-6 rounded-lg bg-white/5 border border-white/10 w-full container"
     >
       <h3 className="text-2xl font-bold text-white/90 mb-4">Your Lifepath Analysis</h3>
       <ScrollArea className="h-[500px] rounded-md">
