@@ -78,32 +78,27 @@ const CallToAction = () => {
               living a life that aligns with your true purpose.
             </p>
 
-            {/* Animated Button */}
-            <div className="flex justify-center w-full">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full max-w-[280px] sm:max-w-none sm:w-auto"
-              >
+            {/* Centered Button with Fixed Width */}
+            <div className="flex justify-center">
+              <div className="w-full max-w-[280px]">
                 <a 
                   href="https://www.numerology33.com/date-of-birth-collector" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="block w-full sm:w-auto"
+                  className="block w-full"
                 >
                   <Button 
                     size="lg" 
-                    className="w-full sm:w-auto relative bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold px-6 py-3 md:px-8 md:py-6 text-base md:text-lg shadow-xl hover:shadow-2xl transition-all duration-200 overflow-hidden group"
+                    className="w-full relative bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold text-base md:text-lg shadow-xl hover:shadow-2xl transition-all duration-200"
                   >
-                    <span className="relative z-10">Get Your Personalized Reading</span>
-                    <div className="absolute inset-0 bg-white/20 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                    Get Your Personalized Reading
                   </Button>
                 </a>
-              </motion.div>
+              </div>
             </div>
           </div>
           
-          {/* Floating Orbs */}
+          {/* Background Effects */}
           {[...Array(5)].map((_, i) => (
             <motion.div
               key={i}
