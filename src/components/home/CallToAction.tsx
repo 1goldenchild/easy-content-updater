@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 
 const CallToAction = () => {
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="py-12 md:py-20 relative overflow-hidden">
       {/* Stars Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[#1A1F2C]">
@@ -16,7 +16,7 @@ const CallToAction = () => {
                 <stop offset="100%" stopColor="transparent" stopOpacity="0" />
               </radialGradient>
             </defs>
-            {[...Array(50)].map((_, i) => {
+            {[...Array(100)].map((_, i) => {
               const size = Math.random() * 2 + 1;
               const x = Math.random() * 100;
               const y = Math.random() * 100;
@@ -49,60 +49,95 @@ const CallToAction = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-purple-900/90 to-pink-900/90 p-8 md:p-12"
+          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-purple-900/90 to-pink-900/90 p-6 md:p-12"
         >
-          <div className="relative z-10 text-center space-y-6">
-            <div className="w-16 h-16 mx-auto bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform duration-200">
+          <div className="relative z-10 text-center space-y-4 md:space-y-6">
+            {/* Animated Icon */}
+            <motion.div
+              animate={{
+                y: [0, -10, 0],
+                rotate: [0, 5, -5, 0]
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="w-16 h-16 mx-auto bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg"
+            >
               <Lightbulb className="w-8 h-8 text-white" />
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-yellow-200 to-pink-200 bg-clip-text text-transparent">
+            </motion.div>
+
+            {/* Glowing Text */}
+            <h2 className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-yellow-200 to-pink-200 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
               Get Your Personalized Numerology Analysis Today
             </h2>
-            <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
+
+            {/* Responsive Description */}
+            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
               Uncover the secrets behind your numbers, unlock your potential, and start 
-              living a life that aligns with your true purpose. Click below to claim your 
-              numerology analysis now and take the first step toward a clearer, more 
-              empowered future.
+              living a life that aligns with your true purpose.
             </p>
-            <Link to="/analysis">
-              <Button 
-                size="lg" 
-                className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold px-8 py-6 text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200"
+
+            {/* Animated Button */}
+            <Link to="/analysis" className="inline-block">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                Get Your Personalized Reading
-              </Button>
+                <Button 
+                  size="lg" 
+                  className="relative bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold px-6 py-3 md:px-8 md:py-6 text-base md:text-lg shadow-xl hover:shadow-2xl transition-all duration-200 overflow-hidden group"
+                >
+                  <span className="relative z-10">Get Your Personalized Reading</span>
+                  <div className="absolute inset-0 bg-white/20 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                </Button>
+              </motion.div>
             </Link>
           </div>
           
-          {/* Decorative elements */}
-          <div className="absolute top-0 left-0 w-full h-full">
-            <div className="absolute top-0 left-0 w-32 h-32 bg-purple-500/20 rounded-full blur-3xl" />
-            <div className="absolute bottom-0 right-0 w-40 h-40 bg-pink-500/20 rounded-full blur-3xl" />
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl" />
-          </div>
+          {/* Floating Orbs */}
+          {[...Array(5)].map((_, i) => (
+            <motion.div
+              key={i}
+              initial={{ x: 0, y: 0 }}
+              animate={{
+                x: [0, Math.random() * 100 - 50],
+                y: [0, Math.random() * 100 - 50],
+              }}
+              transition={{
+                duration: Math.random() * 5 + 5,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut",
+              }}
+              className="absolute w-16 h-16 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-xl"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+            />
+          ))}
           
-          {/* Animated particles */}
-          <div className="absolute inset-0 overflow-hidden">
-            {[...Array(3)].map((_, i) => (
+          {/* Sparkle Effects */}
+          <div className="absolute inset-0">
+            {[...Array(20)].map((_, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0.3, scale: 0 }}
-                animate={{ 
-                  opacity: [0.3, 0.6, 0.3],
-                  scale: [1, 1.2, 1],
-                  x: [0, 100, 0],
-                  y: [0, -50, 0]
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{
+                  scale: [0, 1, 0],
+                  opacity: [0, 1, 0],
                 }}
                 transition={{
-                  duration: 8,
+                  duration: 2,
                   repeat: Infinity,
-                  delay: i * 2,
-                  ease: "linear"
+                  delay: Math.random() * 2,
                 }}
-                className="absolute w-16 h-16 bg-white/10 rounded-full blur-xl"
+                className="absolute w-1 h-1 bg-white rounded-full"
                 style={{
                   left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`
+                  top: `${Math.random() * 100}%`,
                 }}
               />
             ))}
