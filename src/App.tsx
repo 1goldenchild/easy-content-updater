@@ -9,6 +9,7 @@ import Index from "./pages/Index"
 import Analysis from "./pages/Analysis"
 import Blog from "./pages/Blog"
 import Sales from "./pages/Sales"
+import CollectInfo from "./pages/CollectInfo"
 
 const queryClient = new QueryClient()
 
@@ -23,6 +24,7 @@ const App = () => {
             <Navbar />
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/collect-info" element={<CollectInfo />} />
               <Route path="/analysis" element={<Analysis />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/sales/*" element={<Sales />} />

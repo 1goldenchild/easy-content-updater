@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Link } from "react-router-dom"
 
 const Hero = () => {
   return (
@@ -22,12 +23,7 @@ const Hero = () => {
             Discover the secrets the 1% and elite class have kept hidden—and how this powerful knowledge can transform your life, enhance your relationships, and even elevate your finances.
           </p>
           <div className="w-full max-w-[280px]">
-            <a 
-              href="https://www.numerology33.com/date-of-birth-collector" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="w-full block"
-            >
+            <Link to="/collect-info" className="w-full block">
               <Button 
                 size="lg" 
                 className="w-full bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] hover:from-[#8B5CF6] hover:to-[#6E59A5]"
@@ -35,7 +31,7 @@ const Hero = () => {
                 Get Your Analysis Now
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>
