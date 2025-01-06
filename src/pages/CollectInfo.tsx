@@ -8,7 +8,7 @@ import { motion } from "framer-motion"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { format } from "date-fns"
-import { CalendarIcon, ChevronDown } from "lucide-react"
+import { CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import {
   Select,
@@ -85,15 +85,18 @@ const CollectInfo = () => {
                 <Button
                   variant="outline"
                   className={cn(
-                    "w-full justify-between text-left font-normal bg-white/5 border-white/10 hover:bg-white/10",
+                    "w-full justify-between text-left font-normal bg-[#1A1F2C] border-white/10 hover:bg-[#252a3a] transition-colors",
                     !date && "text-muted-foreground"
                   )}
                 >
                   {date ? format(date, "PPP") : <span>Pick a date</span>}
-                  <ChevronDown className="h-4 w-4 opacity-50" />
+                  <CalendarIcon className="h-4 w-4 opacity-50" />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
+              <PopoverContent 
+                className="w-auto p-0 bg-[#1A1F2C] border-white/10" 
+                align="start"
+              >
                 <Calendar
                   mode="single"
                   selected={date}
@@ -103,31 +106,44 @@ const CollectInfo = () => {
                   fromYear={1900}
                   toYear={new Date().getFullYear()}
                   classNames={{
-                    caption: "flex justify-center pt-1 relative items-center px-8",
-                    caption_label: "text-sm font-medium",
-                    nav: "space-x-1 flex items-center",
+                    months: "space-y-4",
+                    caption: "relative flex items-center justify-center pt-4 pb-2 px-8",
+                    caption_label: "text-base font-medium text-white/90",
+                    nav: "flex items-center gap-1",
                     nav_button: cn(
-                      "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 hover:bg-accent"
+                      "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 hover:bg-white/10 rounded-md transition-colors",
+                      "disabled:opacity-20 disabled:hover:bg-transparent"
                     ),
                     nav_button_previous: "absolute left-1",
                     nav_button_next: "absolute right-1",
-                    table: "w-full border-collapse space-y-1",
+                    table: "w-full border-collapse",
                     head_row: "flex",
-                    head_cell: "text-muted-foreground rounded-md w-8 font-normal text-[0.8rem]",
+                    head_cell: "text-white/50 rounded-md w-9 font-normal text-[0.8rem] p-0",
                     row: "flex w-full mt-2",
                     cell: cn(
-                      "relative p-0 text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent/50",
-                      "first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md"
+                      "relative p-0 text-center text-sm focus-within:relative focus-within:z-20",
+                      "first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md",
+                      "[&:has([aria-selected])]:bg-white/10"
                     ),
                     day: cn(
-                      "h-8 w-8 p-0 font-normal aria-selected:opacity-100 hover:bg-accent rounded-md"
+                      "h-9 w-9 p-0 font-normal rounded-md transition-colors",
+                      "hover:bg-white/10 focus:bg-white/10",
+                      "aria-selected:opacity-100"
                     ),
-                    day_range_end: "day-range-end",
-                    day_selected: "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",
-                    day_today: "bg-accent text-accent-foreground",
-                    day_outside: "text-muted-foreground opacity-50",
-                    day_disabled: "text-muted-foreground opacity-50",
+                    day_selected: "bg-white/20 text-white hover:bg-white/20 hover:text-white focus:bg-white/20",
+                    day_today: "bg-white/5 text-white",
+                    day_outside: "text-white/20 opacity-50 aria-selected:bg-white/5 aria-selected:text-white/20",
+                    day_disabled: "text-white/20 opacity-50 hover:bg-transparent",
+                    day_range_middle: "aria-selected:bg-white/5 aria-selected:text-white",
                     day_hidden: "invisible",
+                    dropdown: "bg-[#1A1F2C] border border-white/10 rounded-md p-1",
+                    dropdown_month: "bg-[#1A1F2C] text-white hover:bg-white/10 rounded-md px-2 py-1 text-sm transition-colors",
+                    dropdown_year: "bg-[#1A1F2C] text-white hover:bg-white/10 rounded-md px-2 py-1 text-sm transition-colors",
+                    dropdown_icon: "opacity-50 group-hover:opacity-100 transition-opacity"
+                  }}
+                  components={{
+                    IconLeft: () => <ChevronLeft className="h-4 w-4" />,
+                    IconRight: () => <ChevronRight className="h-4 w-4" />,
                   }}
                   disabled={(date) =>
                     date > new Date() || date < new Date("1900-01-01")
@@ -146,7 +162,7 @@ const CollectInfo = () => {
         </form>
       </motion.div>
     </div>
-  )
-}
+  );
+};
 
-export default CollectInfo
+export default CollectInfo;
