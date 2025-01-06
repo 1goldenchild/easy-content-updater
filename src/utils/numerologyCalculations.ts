@@ -58,37 +58,36 @@ export const calculateSecretNumber = (date: Date): number => {
   
   console.log("Day of year:", dayOfYear);
   
-  // First sum the digits of the day of year
-  let sumOfDayDigits = dayOfYear.toString()
+  // Get initial sum of the day of year digits
+  const initialSum = dayOfYear.toString()
     .split('')
     .reduce((sum, digit) => sum + parseInt(digit), 0);
     
-  console.log("Initial sum of day digits:", sumOfDayDigits);
+  console.log("Initial sum:", initialSum);
   
-  // If sum is greater than 9 and not a master number, reduce it
-  while (sumOfDayDigits > 9 && !MASTER_NUMBERS.includes(sumOfDayDigits)) {
-    sumOfDayDigits = sumOfDayDigits.toString()
+  // Check if initial sum is a master number
+  if (MASTER_NUMBERS.includes(initialSum)) {
+    console.log("Found master number in initial sum:", initialSum);
+    return initialSum === 29 || initialSum === 20 ? 11 : initialSum;
+  }
+  
+  // If not, reduce to single digit or until we find a master number
+  let currentSum = initialSum;
+  while (currentSum > 9) {
+    currentSum = currentSum.toString()
       .split('')
       .reduce((sum, digit) => sum + parseInt(digit), 0);
-    console.log("Reduced sum:", sumOfDayDigits);
+    console.log("Reduced to:", currentSum);
+    
+    // Check if reduced sum is a master number
+    if (MASTER_NUMBERS.includes(currentSum)) {
+      console.log("Found master number after reduction:", currentSum);
+      return currentSum === 29 || currentSum === 20 ? 11 : currentSum;
+    }
   }
   
-  // Now check for master numbers
-  if (sumOfDayDigits === 29 || sumOfDayDigits === 20 || sumOfDayDigits === 11) {
-    console.log("Found master number 11");
-    return 11;
-  }
-  if (sumOfDayDigits === 22) {
-    console.log("Found master number 22");
-    return 22;
-  }
-  if (sumOfDayDigits === 33) {
-    console.log("Found master number 33");
-    return 33;
-  }
-  
-  console.log("Final number:", sumOfDayDigits);
-  return sumOfDayDigits;
+  console.log("Final number:", currentSum);
+  return currentSum;
 };
 
 export const getChineseZodiac = (year: number): string => {
