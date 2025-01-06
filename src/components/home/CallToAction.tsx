@@ -91,7 +91,7 @@ const CallToAction = () => {
                     size="lg" 
                     className="w-full relative bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold text-base md:text-lg shadow-xl hover:shadow-2xl transition-all duration-200"
                   >
-                    Get Your Personalized Reading
+                    Get Your Personalized Analysis
                   </Button>
                 </a>
               </div>

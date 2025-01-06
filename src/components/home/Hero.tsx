@@ -32,7 +32,7 @@ const Hero = () => {
                 size="lg" 
                 className="w-full bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] hover:from-[#8B5CF6] hover:to-[#6E59A5]"
               >
-                Get Your Reading Now
+                Get Your Analysis Now
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </a>

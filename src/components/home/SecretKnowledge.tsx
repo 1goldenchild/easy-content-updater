@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
 import { Star } from "lucide-react"
 import { useEffect, useState } from "react"
+import { Button } from "@/components/ui/button"
 
 const SecretKnowledge = () => {
   const [showMatrix, setShowMatrix] = useState(false);
@@ -43,6 +44,21 @@ const SecretKnowledge = () => {
               <br /><br />
               Unlock the secrets that have shaped the fortunes of the elite. Gain the insights that have been guarded for generations—and use them to transform your life, accelerate your success, and create the future you've always desired.
             </p>
+            <div className="pt-6">
+              <a 
+                href="https://www.numerology33.com/date-of-birth-collector" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block"
+              >
+                <Button 
+                  size="lg"
+                  className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold px-8"
+                >
+                  Get Your Numerology Analysis
+                </Button>
+              </a>
+            </div>
           </div>
         </motion.div>
       </div>
