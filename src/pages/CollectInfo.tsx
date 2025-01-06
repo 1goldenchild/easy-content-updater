@@ -10,13 +10,11 @@ import { CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { supabase } from "@/integrations/supabase/client"
 import { toast } from "sonner"
-import { useNavigate } from "react-router-dom"
 
 const CollectInfo = () => {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [date, setDate] = useState<Date>()
-  const navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -51,7 +49,9 @@ const CollectInfo = () => {
 
       console.log("Successfully saved user reading:", data)
       toast.success("Information saved successfully!")
-      navigate("/analysis")
+      
+      // Redirect to the numerology checkout page
+      window.location.href = "https://www.numerology33.com/checkout"
     } catch (error) {
       console.error("Error in form submission:", error)
       toast.error("There was an error saving your information. Please try again.")
