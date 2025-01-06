@@ -55,7 +55,25 @@ export const calculateSecretNumber = (date: Date): number => {
   const start = new Date(date.getFullYear(), 0, 0);
   const diff = date.getTime() - start.getTime();
   const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
-  return reduceToSingleDigit(dayOfYear);
+  
+  // First get the sum of digits
+  const sum = dayOfYear.toString()
+    .split('')
+    .reduce((acc, digit) => acc + parseInt(digit), 0);
+    
+  // Check for master numbers first
+  if (sum === 29 || sum === 20 || sum === 11) {
+    return 11;
+  }
+  if (sum === 22) {
+    return 22;
+  }
+  if (sum === 33) {
+    return 33;
+  }
+  
+  // If not a master number, reduce to single digit
+  return reduceToSingleDigit(sum);
 };
 
 export const getChineseZodiac = (year: number): string => {
