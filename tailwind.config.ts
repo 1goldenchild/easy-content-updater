@@ -68,7 +68,6 @@ export default {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)'
       },
-      
       keyframes: {
         'accordion-down': {
           from: { height: '0' },
@@ -81,40 +80,12 @@ export default {
         'twinkle': {
           '0%, 100%': { opacity: '0.2' },
           '50%': { opacity: '1' }
-        },
-        'lightning': {
-          '0%, 9%, 11%, 100%': {
-            'box-shadow': '0 0 5px #8B5CF6, 0 0 10px #8B5CF6, 0 0 15px #8B5CF6',
-            opacity: '0.3'
-          },
-          '10%': {
-            'box-shadow': '0 0 20px #8B5CF6, 0 0 30px #D946EF, 0 0 40px #D946EF',
-            opacity: '1'
-          },
-          '50%, 60%': {
-            'box-shadow': '0 0 5px #8B5CF6, 0 0 10px #8B5CF6, 0 0 15px #8B5CF6',
-            opacity: '0.3'
-          },
-          '55%': {
-            'box-shadow': '0 0 20px #8B5CF6, 0 0 30px #D946EF, 0 0 40px #D946EF',
-            opacity: '1'
-          }
-        },
-        'electric-border': {
-          '0%, 100%': {
-            'border-color': 'rgba(139, 92, 246, 0.5)'
-          },
-          '50%': {
-            'border-color': 'rgba(217, 70, 239, 0.8)'
-          }
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'twinkle': 'twinkle 3s ease-in-out infinite',
-        'lightning': 'lightning 5s ease-in-out infinite',
-        'electric-border': 'electric-border 2s ease-in-out infinite'
+        'twinkle': 'twinkle 3s ease-in-out infinite'
       }
     }
   },

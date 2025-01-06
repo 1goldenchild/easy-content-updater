@@ -12,35 +12,25 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
           className="flex flex-col items-center space-y-4 text-center relative z-10"
         >
-          <div className="relative">
-            <div className="absolute -inset-1 rounded-lg border-2 border-transparent animate-electric-border"></div>
-            <div className="absolute -inset-1 rounded-lg animate-lightning"></div>
-            <h1 className="relative text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none bg-black/40 backdrop-blur-sm rounded-lg p-4 border border-purple-500/20">
-              Reach the next level with{" "}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
-                Numerology
-              </span>
-            </h1>
-          </div>
-          <div className="relative">
-            <div className="absolute -inset-1 rounded-lg border-2 border-transparent animate-electric-border"></div>
-            <div className="absolute -inset-1 rounded-lg animate-lightning"></div>
-            <p className="relative mx-auto max-w-[700px] text-white/90 md:text-xl dark:text-white/90 bg-black/40 backdrop-blur-sm rounded-lg p-4 border border-purple-500/20">
-              Discover the secrets the 1% and elite class have kept hidden—and how this powerful knowledge can transform your life, enhance your relationships, and even elevate your finances.
-            </p>
-          </div>
-          <div className="w-full max-w-[280px] relative">
-            <div className="absolute -inset-1 rounded-lg border-2 border-transparent animate-electric-border"></div>
-            <div className="absolute -inset-1 rounded-lg animate-lightning"></div>
+          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none">
+            Reach the next level with{" "}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
+              Numerology
+            </span>
+          </h1>
+          <p className="mx-auto max-w-[700px] text-white/90 md:text-xl dark:text-white/90">
+            Discover the secrets the 1% and elite class have kept hidden—and how this powerful knowledge can transform your life, enhance your relationships, and even elevate your finances.
+          </p>
+          <div className="w-full max-w-[280px]">
             <a 
               href="https://www.numerology33.com/date-of-birth-collector" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="w-full block relative"
+              className="w-full block"
             >
               <Button 
                 size="lg" 
-                className="w-full bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] hover:from-[#8B5CF6] hover:to-[#6E59A5] relative z-10"
+                className="w-full bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] hover:from-[#8B5CF6] hover:to-[#6E59A5]"
               >
                 Get Your Analysis Now
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
