@@ -1,100 +1,29 @@
 import { Link } from "react-router-dom"
-import { motion } from "framer-motion"
 
 const Footer = () => {
   return (
     <>
       {/* Gradient Separator */}
-      <div className="w-full h-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#9b87f5]/10 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#D946EF]/5 via-transparent to-transparent blur-xl" />
+      <div className="w-full h-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#8B5CF6]/5 to-[#D946EF]/10" />
+        <div 
+          className="absolute inset-0" 
+          style={{
+            background: 'linear-gradient(102.3deg, rgba(147,39,143,0.05) 5.9%, rgba(234,172,232,0.1) 64%, rgba(246,219,245,0.05) 89%)',
+            filter: 'blur(2px)'
+          }}
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,_var(--tw-gradient-stops))] from-[#9b87f5]/10 via-transparent to-transparent" />
       </div>
 
-      <footer className="border-t border-purple-500/20 bg-gradient-to-b from-background/80 to-background backdrop-blur-lg">
-        <div className="container py-8 md:py-16">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8"
-          >
-            <div className="col-span-2 md:col-span-1 space-y-4">
-              <h3 className="text-lg font-semibold bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">
-                Numerology Insights
-              </h3>
-              <p className="text-sm text-muted-foreground">
-                Discover your life's path through the ancient wisdom of numbers.
-              </p>
-              <div className="flex space-x-4">
-                {['twitter', 'facebook', 'instagram'].map((social) => (
-                  <a
-                    key={social}
-                    href={`#${social}`}
-                    className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#D946EF] p-[1px] hover:scale-110 transition-transform"
-                  >
-                    <div className="w-full h-full rounded-full bg-background flex items-center justify-center">
-                      <span className="sr-only">{social}</span>
-                      <div className="w-4 h-4 md:w-5 md:h-5 bg-gradient-to-br from-[#8B5CF6] to-[#D946EF]" />
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h4 className="text-sm font-semibold mb-4 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">Quick Links</h4>
-              <ul className="space-y-2">
-                <li>
-                  <Link to="/" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Home</Link>
-                </li>
-                <li>
-                  <Link to="/analysis" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Analysis</Link>
-                </li>
-                <li>
-                  <Link to="/blog" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Blog</Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-sm font-semibold mb-4 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">Resources</h4>
-              <ul className="space-y-2">
-                <li>
-                  <a href="#" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">About Numerology</a>
-                </li>
-                <li>
-                  <a href="#" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">FAQ</a>
-                </li>
-                <li>
-                  <a href="#" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Contact</a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="col-span-2 md:col-span-1">
-              <h4 className="text-sm font-semibold mb-4 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">Newsletter</h4>
-              <p className="text-sm text-muted-foreground mb-4">
-                Subscribe to receive numerology insights and updates.
-              </p>
-              <div className="relative">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full px-4 py-2 text-sm border rounded-lg bg-background/50 backdrop-blur-sm border-purple-500/20 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
-                />
-                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] opacity-0 hover:opacity-10 transition-opacity pointer-events-none" />
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="mt-8 md:mt-12 pt-8 border-t border-purple-500/20 text-center text-sm text-muted-foreground"
-          >
-            <p>&copy; {new Date().getFullYear()} Numerology Insights. All rights reserved.</p>
-          </motion.div>
+      <footer className="border-t border-purple-500/10 bg-gradient-to-b from-background/80 to-background backdrop-blur-lg">
+        <div className="container mx-auto py-8">
+          <div className="flex flex-col items-center">
+            <Link to="/" className="text-lg font-semibold text-white">Home</Link>
+            <Link to="/about" className="text-lg font-semibold text-white">About</Link>
+            <Link to="/contact" className="text-lg font-semibold text-white">Contact</Link>
+          </div>
+          <p className="mt-4 text-sm text-gray-400">© 2023 Numerology Insights. All rights reserved.</p>
         </div>
       </footer>
     </>
