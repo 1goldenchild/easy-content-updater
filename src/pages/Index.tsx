@@ -2,6 +2,7 @@ import Hero from "@/components/home/Hero"
 import SecretKnowledge from "@/components/home/SecretKnowledge"
 import Benefits from "@/components/home/Benefits"
 import CallToAction from "@/components/home/CallToAction"
+import CustomerCount from "@/components/home/CustomerCount"
 
 const Index = () => {
   return (
@@ -10,6 +11,7 @@ const Index = () => {
       <SecretKnowledge />
       <Benefits />
       <CallToAction />
+      <CustomerCount />
     </div>
   )
 }

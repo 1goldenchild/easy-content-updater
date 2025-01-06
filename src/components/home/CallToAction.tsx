@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { Lightbulb, Star } from "lucide-react"
+import { Lightbulb } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const CallToAction = () => {
@@ -51,26 +51,6 @@ const CallToAction = () => {
           className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-purple-900/90 to-pink-900/90 p-6 md:p-12"
         >
           <div className="relative z-10 text-center space-y-4 md:space-y-6">
-            {/* Customer Count Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="flex items-center justify-center gap-2 mb-4"
-            >
-              <Star className="w-6 h-6 text-yellow-400 fill-yellow-400" />
-              <span className="text-xl font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Over 1,000 Happy Customers
-              </span>
-              <Star className="w-6 h-6 text-yellow-400 fill-yellow-400" />
-            </motion.div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-              Transforming Lives Through Numerology
-            </h2>
-            <p className="text-white/70 max-w-2xl mx-auto text-center">
-              Join thousands of satisfied customers who have discovered their true potential through our personalized numerology readings.
-            </p>
-
             {/* Animated Icon */}
             <motion.div
               animate={{
