@@ -80,12 +80,17 @@ export default {
         'twinkle': {
           '0%, 100%': { opacity: '0.2' },
           '50%': { opacity: '1' }
+        },
+        'typewriter': {
+          '0%, 100%': { width: '0' },
+          '50%': { width: '100%' }
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'twinkle': 'twinkle 3s ease-in-out infinite'
+        'twinkle': 'twinkle 3s ease-in-out infinite',
+        'typewriter': 'typewriter 4s ease-in-out infinite'
       }
     }
   },
