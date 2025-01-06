@@ -52,9 +52,10 @@ export const calculatePartialEnergy = (day: number): number => {
 };
 
 export const calculateSecretNumber = (date: Date): number => {
+  // Get day of year, adding 1 because getTime() starts counting from 0
   const start = new Date(date.getFullYear(), 0, 0);
   const diff = date.getTime() - start.getTime();
-  const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24)) + 1;
   
   console.log("Day of year:", dayOfYear);
   
