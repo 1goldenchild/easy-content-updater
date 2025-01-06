@@ -19,7 +19,7 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center">
         <Link to="/" className="mr-4 flex items-center space-x-2">
-          <span className="text-xl font-black tracking-tighter animate-typewriter overflow-hidden whitespace-nowrap">
+          <span className="text-2xl font-black tracking-tighter">
             NUMEROLOGY
             <span className="bg-gradient-to-r from-[#9b87f5] to-[#D946EF] bg-clip-text text-transparent ml-1">
               33
