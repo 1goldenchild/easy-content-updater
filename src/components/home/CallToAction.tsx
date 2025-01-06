@@ -79,20 +79,21 @@ const CallToAction = () => {
             </p>
 
             {/* Animated Button */}
-            <div className="flex justify-center">
+            <div className="flex items-center justify-center w-full">
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                className="w-full sm:w-auto"
               >
                 <a 
                   href="https://www.numerology33.com/date-of-birth-collector" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-block"
+                  className="block w-full sm:w-auto"
                 >
                   <Button 
                     size="lg" 
-                    className="relative bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold px-6 py-3 md:px-8 md:py-6 text-base md:text-lg shadow-xl hover:shadow-2xl transition-all duration-200 overflow-hidden group"
+                    className="w-full sm:w-auto relative bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold px-6 py-3 md:px-8 md:py-6 text-base md:text-lg shadow-xl hover:shadow-2xl transition-all duration-200 overflow-hidden group"
                   >
                     <span className="relative z-10">Get Your Personalized Reading</span>
                     <div className="absolute inset-0 bg-white/20 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
