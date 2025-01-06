@@ -58,19 +58,26 @@ export const calculateSecretNumber = (date: Date): number => {
   
   console.log("Day of year:", dayOfYear);
   
-  // Check the actual day number first for master numbers
-  if (dayOfYear === 20 || dayOfYear === 29 || dayOfYear === 11) {
+  // First sum the digits of the day of year
+  const sumOfDayDigits = dayOfYear.toString()
+    .split('')
+    .reduce((sum, digit) => sum + parseInt(digit), 0);
+    
+  console.log("Sum of day digits:", sumOfDayDigits);
+  
+  // Check for master numbers in the sum
+  if (sumOfDayDigits === 29 || sumOfDayDigits === 20 || sumOfDayDigits === 11) {
     return 11;
   }
-  if (dayOfYear === 22) {
+  if (sumOfDayDigits === 22) {
     return 22;
   }
-  if (dayOfYear === 33) {
+  if (sumOfDayDigits === 33) {
     return 33;
   }
   
-  // If not a master number day, then reduce to single digit
-  return reduceToSingleDigit(dayOfYear);
+  // If not a master number sum, then reduce to single digit
+  return reduceToSingleDigit(sumOfDayDigits);
 };
 
 export const getChineseZodiac = (year: number): string => {
