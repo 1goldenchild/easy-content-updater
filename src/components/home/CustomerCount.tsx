@@ -1,5 +1,6 @@
 import { motion } from "framer-motion"
 import { Star } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 const CustomerCount = () => {
   return (
@@ -24,6 +25,23 @@ const CustomerCount = () => {
           <p className="text-white/70 max-w-2xl mx-auto">
             Join thousands of satisfied customers who have discovered their true potential through our personalized numerology readings.
           </p>
+          <div className="pt-6">
+            <div className="w-full max-w-[280px] mx-auto">
+              <a 
+                href="https://www.numerology33.com/date-of-birth-collector" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="block w-full"
+              >
+                <Button 
+                  size="lg"
+                  className="w-full bg-gradient-to-r from-purple-400 to-pink-400 hover:from-purple-500 hover:to-pink-500 text-white font-semibold"
+                >
+                  Start Your Journey Now
+                </Button>
+              </a>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
