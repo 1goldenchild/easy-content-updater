@@ -32,15 +32,17 @@ const LifepathAnalysis = ({ lifePath, isVisible }: LifepathAnalysisProps) => {
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="mt-8 px-4 md:px-8 lg:px-12"
+      className="w-full px-4 md:px-8 mt-8"
     >
-      <div className="rounded-lg bg-white/5 border border-white/10 p-6">
-        <h3 className="text-2xl font-bold text-white/90 mb-4">Your Lifepath Analysis</h3>
-        <ScrollArea className="h-[500px] rounded-md">
-          <div className="prose prose-invert max-w-none">
-            <p className="text-white/80 leading-relaxed whitespace-pre-line text-lg">
-              {getLifepathDescription(lifePath)}
-            </p>
+      <div className="max-w-[1200px] mx-auto rounded-lg bg-white/5 border border-white/10">
+        <ScrollArea className="h-[600px] w-full">
+          <div className="p-6 md:p-8">
+            <h3 className="text-2xl font-bold text-white/90 mb-4">Your Lifepath Analysis</h3>
+            <div className="prose prose-invert max-w-none">
+              <p className="text-white/80 leading-relaxed whitespace-pre-line text-lg">
+                {getLifepathDescription(lifePath)}
+              </p>
+            </div>
           </div>
         </ScrollArea>
       </div>
