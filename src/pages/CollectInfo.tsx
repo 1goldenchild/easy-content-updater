@@ -27,17 +27,21 @@ const CollectInfo = () => {
     }
 
     try {
-      console.log("Saving user reading to Supabase...", { name, email, date })
+      const formattedDate = format(date, 'yyyy-MM-dd')
+      console.log("Starting form submission with data:", { name, email, formattedDate })
       
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('user_readings')
         .insert([
           {
             name,
             email,
-            date_of_birth: format(date, 'yyyy-MM-dd')
+            date_of_birth: formattedDate
           }
         ])
+        .select()
+
+      console.log("Supabase response:", { data, error })
 
       if (error) {
         console.error("Error saving to Supabase:", error)
@@ -45,7 +49,7 @@ const CollectInfo = () => {
         return
       }
 
-      console.log("Successfully saved user reading")
+      console.log("Successfully saved user reading:", data)
       toast.success("Information saved successfully!")
       navigate("/analysis")
     } catch (error) {
