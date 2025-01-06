@@ -13,7 +13,7 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
           className="flex flex-col items-center space-y-4 text-center relative z-10"
         >
-          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none">
+          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none animate-shine bg-gradient-to-r from-white via-purple-500 to-white bg-[length:200%_auto] bg-clip-text text-transparent">
             Reach the next level with{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
               Numerology

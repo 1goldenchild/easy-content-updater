@@ -80,12 +80,23 @@ export default {
         'twinkle': {
           '0%, 100%': { opacity: '0.2' },
           '50%': { opacity: '1' }
+        },
+        'shine': {
+          '0%': { 
+            'background-position': '-200% center',
+            opacity: '0.5'
+          },
+          '100%': { 
+            'background-position': '200% center',
+            opacity: '1'
+          }
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'twinkle': 'twinkle 3s ease-in-out infinite'
+        'twinkle': 'twinkle 3s ease-in-out infinite',
+        'shine': 'shine 2s ease-in-out'
       }
     }
   },
