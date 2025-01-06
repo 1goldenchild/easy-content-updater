@@ -2,10 +2,12 @@ import { motion } from "framer-motion"
 import { Star } from "lucide-react"
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import { scrollToTop } from "./CallToAction"
 
 const SecretKnowledge = () => {
   const [showMatrix, setShowMatrix] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +18,11 @@ const SecretKnowledge = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleNavigate = () => {
+    navigate('/collect-info');
+    scrollToTop();
+  };
 
   return (
     <section className="py-16 relative overflow-hidden">
@@ -46,14 +53,13 @@ const SecretKnowledge = () => {
               Unlock the secrets that have shaped the fortunes of the elite. Gain the insights that have been guarded for generations—and use them to transform your life, accelerate your success, and create the future you've always desired.
             </p>
             <div className="pt-6">
-              <Link to="/collect-info" className="inline-block">
-                <Button 
-                  size="lg"
-                  className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold px-8"
-                >
-                  Get Your Numerology Analysis
-                </Button>
-              </Link>
+              <Button 
+                onClick={handleNavigate}
+                size="lg"
+                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold px-8"
+              >
+                Get Your Numerology Analysis
+              </Button>
             </div>
           </div>
         </motion.div>

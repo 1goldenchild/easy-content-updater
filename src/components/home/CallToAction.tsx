@@ -1,8 +1,23 @@
 import { motion } from "framer-motion"
 import { Lightbulb } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Link, useNavigate } from "react-router-dom"
+import { useEffect } from "react"
+
+// Add this at the top level of your file, outside any component
+export const scrollToTop = () => {
+  window.scrollTo(0, 0);
+};
 
 const CallToAction = () => {
+  const navigate = useNavigate();
+
+  // Handle navigation with scroll reset
+  const handleNavigate = () => {
+    navigate('/collect-info');
+    scrollToTop();
+  };
+
   return (
     <section className="py-12 md:py-20 relative overflow-hidden">
       {/* Stars Background */}
@@ -81,19 +96,13 @@ const CallToAction = () => {
             {/* Centered Button with Fixed Width */}
             <div className="flex justify-center">
               <div className="w-full max-w-[280px]">
-                <a 
-                  href="https://www.numerology33.com/date-of-birth-collector" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block w-full"
+                <Button 
+                  onClick={handleNavigate}
+                  size="lg" 
+                  className="w-full relative bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold text-base md:text-lg shadow-xl hover:shadow-2xl transition-all duration-200"
                 >
-                  <Button 
-                    size="lg" 
-                    className="w-full relative bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold text-base md:text-lg shadow-xl hover:shadow-2xl transition-all duration-200"
-                  >
-                    Get Your Personalized Analysis
-                  </Button>
-                </a>
+                  Get Your Personalized Analysis
+                </Button>
               </div>
             </div>
           </div>
