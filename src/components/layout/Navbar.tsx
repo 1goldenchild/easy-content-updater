@@ -19,8 +19,11 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center">
         <Link to="/" className="mr-4 flex items-center space-x-2">
-          <span className="text-lg font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            Numerology Insights
+          <span className="text-2xl font-black tracking-tighter">
+            NUMEROLOGY
+            <span className="bg-gradient-to-r from-[#9b87f5] to-[#D946EF] bg-clip-text text-transparent ml-1">
+              33
+            </span>
           </span>
         </Link>
 
