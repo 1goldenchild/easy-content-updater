@@ -8,7 +8,7 @@ const CallToAction = () => {
     <section className="py-20 relative overflow-hidden">
       {/* Stars Background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[#1A1F2C]">
           <svg className="w-full h-full opacity-70" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <radialGradient id="starGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
@@ -40,7 +40,7 @@ const CallToAction = () => {
             })}
           </svg>
         </div>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1A1F2C]/95 via-[#1A1F2C]/80 to-[#1A1F2C]" />
       </div>
 
       <div className="container px-4 md:px-6">
