@@ -12,25 +12,32 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
           className="flex flex-col items-center space-y-4 text-center relative z-10"
         >
-          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none">
-            Reach the next level with{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
-              Numerology
-            </span>
-          </h1>
-          <p className="mx-auto max-w-[700px] text-white/90 md:text-xl dark:text-white/90">
-            Discover the secrets the 1% and elite class have kept hidden—and how this powerful knowledge can transform your life, enhance your relationships, and even elevate your finances.
-          </p>
-          <div className="w-full max-w-[280px]">
+          <div className="relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur-lg opacity-75 animate-pulse-slow group-hover:opacity-100 transition duration-1000"></div>
+            <h1 className="relative text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none bg-white/5 rounded-lg p-4">
+              Reach the next level with{" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] animate-glow">
+                Numerology
+              </span>
+            </h1>
+          </div>
+          <div className="relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/50 to-pink-600/50 rounded-lg blur-md opacity-50 animate-pulse-slow"></div>
+            <p className="relative mx-auto max-w-[700px] text-white/90 md:text-xl dark:text-white/90 bg-black/20 rounded-lg p-4">
+              Discover the secrets the 1% and elite class have kept hidden—and how this powerful knowledge can transform your life, enhance your relationships, and even elevate your finances.
+            </p>
+          </div>
+          <div className="w-full max-w-[280px] relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-75 animate-pulse-slow group-hover:opacity-100 transition duration-1000"></div>
             <a 
               href="https://www.numerology33.com/date-of-birth-collector" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="w-full block"
+              className="w-full block relative"
             >
               <Button 
                 size="lg" 
-                className="w-full bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] hover:from-[#8B5CF6] hover:to-[#6E59A5]"
+                className="w-full bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] hover:from-[#8B5CF6] hover:to-[#6E59A5] relative z-10"
               >
                 Get Your Analysis Now
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
