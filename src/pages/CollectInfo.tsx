@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -10,16 +9,8 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { format } from "date-fns"
 import { CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 
 const CollectInfo = () => {
-  const navigate = useNavigate()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [date, setDate] = useState<Date>()
@@ -32,9 +23,8 @@ const CollectInfo = () => {
       return
     }
 
-    // For now just show success - we'll add Supabase integration later
-    toast.success("Information submitted successfully!")
-    console.log({ name, email, date })
+    // Redirect to checkout page
+    window.location.href = "https://www.numerology33.com/checkout"
   }
 
   return (
@@ -162,7 +152,7 @@ const CollectInfo = () => {
         </form>
       </motion.div>
     </div>
-  );
-};
+  )
+}
 
-export default CollectInfo;
+export default CollectInfo
