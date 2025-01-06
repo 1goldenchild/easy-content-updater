@@ -4,57 +4,26 @@ import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { motion } from "framer-motion"
 import { format } from "date-fns"
-import { CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react"
+import { CalendarIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
+import NumerologyResults from "@/components/numerology/NumerologyResults"
+import { 
+  calculateLifePath, 
+  calculatePartialEnergy, 
+  calculateSecretNumber, 
+  getChineseZodiac 
+} from "@/utils/numerologyCalculations"
 
 const Portal = () => {
   const [date, setDate] = useState<Date>()
-  const [lifePath, setLifePath] = useState<string>("")
-  const [partialEnergies, setPartialEnergies] = useState<{
-    month: number;
-    day: number;
-    year: number;
-  }>({ month: 0, day: 0, year: 0 })
-
-  const calculateLifePath = (birthDate: Date) => {
-    console.log("Calculating life path for date:", birthDate)
-    
-    const day = birthDate.getDate()
-    const month = birthDate.getMonth() + 1
-    const year = birthDate.getFullYear()
-
-    // Calculate partial energies first
-    const dayEnergy = reduceToSingleDigit(day)
-    const monthEnergy = reduceToSingleDigit(month)
-    const yearEnergy = reduceToSingleDigit(year)
-
-    setPartialEnergies({
-      day: dayEnergy,
-      month: monthEnergy,
-      year: yearEnergy
-    })
-
-    // Calculate life path number
-    const sum = dayEnergy + monthEnergy + yearEnergy
-    const lifePathNumber = reduceToSingleDigit(sum)
-
-    console.log("Life path calculation:", {
-      day: dayEnergy,
-      month: monthEnergy,
-      year: yearEnergy,
-      final: lifePathNumber
-    })
-
-    return lifePathNumber.toString()
-  }
-
-  const reduceToSingleDigit = (num: number): number => {
-    if (num <= 9) return num
-    return reduceToSingleDigit(
-      num.toString().split("").reduce((sum, digit) => sum + parseInt(digit), 0)
-    )
-  }
+  const [showResults, setShowResults] = useState(false)
+  const [results, setResults] = useState({
+    lifePath: 0,
+    partialEnergy: 0,
+    secretNumber: 0,
+    chineseZodiac: ""
+  })
 
   const handleCalculate = () => {
     if (!date) {
@@ -62,8 +31,27 @@ const Portal = () => {
       return
     }
 
-    const result = calculateLifePath(date)
-    setLifePath(result)
+    console.log("Calculating numerology for date:", date)
+    
+    const lifePath = calculateLifePath(date)
+    const partialEnergy = calculatePartialEnergy(date.getDate())
+    const secretNumber = calculateSecretNumber(date)
+    const chineseZodiac = getChineseZodiac(date.getFullYear())
+
+    console.log("Calculation results:", {
+      lifePath,
+      partialEnergy,
+      secretNumber,
+      chineseZodiac
+    })
+
+    setResults({
+      lifePath,
+      partialEnergy,
+      secretNumber,
+      chineseZodiac
+    })
+    setShowResults(true)
     toast.success("Calculation complete!")
   }
 
@@ -76,10 +64,10 @@ const Portal = () => {
       >
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
-            Life Path Calculator
+            Numerology Calculator
           </h2>
           <p className="mt-2 text-white/70">
-            Discover your life path number and partial energies
+            Discover your life path number and more
           </p>
         </div>
 
@@ -147,10 +135,6 @@ const Portal = () => {
                     dropdown_year: "bg-[#1A1F2C] text-white hover:bg-white/10 rounded-md px-2 py-1 text-sm transition-colors",
                     dropdown_icon: "opacity-50 group-hover:opacity-100 transition-opacity"
                   }}
-                  components={{
-                    IconLeft: () => <ChevronLeft className="h-4 w-4" />,
-                    IconRight: () => <ChevronRight className="h-4 w-4" />,
-                  }}
                 />
               </PopoverContent>
             </Popover>
@@ -163,35 +147,13 @@ const Portal = () => {
             Calculate
           </Button>
 
-          {lifePath && (
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="space-y-4 p-4 rounded-lg bg-white/5 border border-white/10"
-            >
-              <div className="text-center">
-                <h3 className="text-2xl font-bold text-white/90">Your Life Path Number</h3>
-                <p className="text-4xl font-bold mt-2 bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
-                  {lifePath}
-                </p>
-              </div>
-              
-              <div className="grid grid-cols-3 gap-4 pt-4 border-t border-white/10">
-                <div className="text-center">
-                  <p className="text-sm text-white/70">Month Energy</p>
-                  <p className="text-xl font-semibold text-white/90">{partialEnergies.month}</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-sm text-white/70">Day Energy</p>
-                  <p className="text-xl font-semibold text-white/90">{partialEnergies.day}</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-sm text-white/70">Year Energy</p>
-                  <p className="text-xl font-semibold text-white/90">{partialEnergies.year}</p>
-                </div>
-              </div>
-            </motion.div>
-          )}
+          <NumerologyResults 
+            lifePath={results.lifePath}
+            partialEnergy={results.partialEnergy}
+            secretNumber={results.secretNumber}
+            chineseZodiac={results.chineseZodiac}
+            isVisible={showResults}
+          />
         </div>
       </motion.div>
     </div>
