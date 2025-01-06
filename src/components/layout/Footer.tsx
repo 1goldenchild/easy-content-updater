@@ -4,14 +4,76 @@ import { motion } from "framer-motion"
 const Footer = () => {
   return (
     <>
-      {/* Gradient Separator */}
+      {/* Stars Background */}
       <div className="w-full h-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#9b87f5]/10 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#D946EF]/5 via-transparent to-transparent blur-xl" />
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[#1A1F2C]">
+            <svg className="w-full h-full opacity-70" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="starGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                  <stop offset="0%" stopColor="white" stopOpacity="0.3" />
+                  <stop offset="100%" stopColor="transparent" stopOpacity="0" />
+                </radialGradient>
+              </defs>
+              {[...Array(50)].map((_, i) => {
+                const size = Math.random() * 2 + 1;
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                const delay = Math.random() * 3;
+                const duration = Math.random() * 3 + 2;
+                
+                return (
+                  <circle
+                    key={i}
+                    cx={`${x}%`}
+                    cy={`${y}%`}
+                    r={size}
+                    fill="url(#starGlow)"
+                    className="animate-[twinkle_3s_ease-in-out_infinite]"
+                    style={{
+                      animationDelay: `${delay}s`,
+                      animationDuration: `${duration}s`
+                    }}
+                  />
+                );
+              })}
+            </svg>
+          </div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent" />
+        </div>
       </div>
 
-      <footer className="border-t border-purple-500/20 bg-gradient-to-b from-background/80 to-background backdrop-blur-lg">
-        <div className="container py-8 md:py-16">
+      <footer className="relative border-t border-purple-500/20 bg-[#1A1F2C]/95 backdrop-blur-xl">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0">
+            <svg className="w-full h-full opacity-30" xmlns="http://www.w3.org/2000/svg">
+              {[...Array(100)].map((_, i) => {
+                const size = Math.random() * 1.5 + 0.5;
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                const delay = Math.random() * 3;
+                const duration = Math.random() * 3 + 2;
+                
+                return (
+                  <circle
+                    key={i}
+                    cx={`${x}%`}
+                    cy={`${y}%`}
+                    r={size}
+                    fill="white"
+                    className="animate-[twinkle_3s_ease-in-out_infinite]"
+                    style={{
+                      animationDelay: `${delay}s`,
+                      animationDuration: `${duration}s`
+                    }}
+                  />
+                );
+              })}
+            </svg>
+          </div>
+        </div>
+
+        <div className="container py-8 md:py-16 relative">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
