@@ -79,11 +79,11 @@ const CallToAction = () => {
             </p>
 
             {/* Animated Button */}
-            <div className="flex justify-center w-full px-4 sm:px-0">
+            <div className="flex justify-center w-full">
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full max-w-md sm:max-w-none sm:w-auto"
+                className="w-full max-w-[280px] sm:max-w-none sm:w-auto"
               >
                 <a 
                   href="https://www.numerology33.com/date-of-birth-collector" 
