@@ -2,18 +2,21 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { toast } from "sonner"
 import { motion } from "framer-motion"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { format } from "date-fns"
 import { CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { supabase } from "@/integrations/supabase/client"
+import { toast } from "sonner"
+import { useNavigate } from "react-router-dom"
 
 const CollectInfo = () => {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [date, setDate] = useState<Date>()
+  const navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -23,8 +26,32 @@ const CollectInfo = () => {
       return
     }
 
-    // Redirect to checkout page
-    window.location.href = "https://www.numerology33.com/checkout"
+    try {
+      console.log("Saving user reading to Supabase...", { name, email, date })
+      
+      const { error } = await supabase
+        .from('user_readings')
+        .insert([
+          {
+            name,
+            email,
+            date_of_birth: format(date, 'yyyy-MM-dd')
+          }
+        ])
+
+      if (error) {
+        console.error("Error saving to Supabase:", error)
+        toast.error("There was an error saving your information. Please try again.")
+        return
+      }
+
+      console.log("Successfully saved user reading")
+      toast.success("Information saved successfully!")
+      navigate("/analysis")
+    } catch (error) {
+      console.error("Error in form submission:", error)
+      toast.error("There was an error saving your information. Please try again.")
+    }
   }
 
   return (
