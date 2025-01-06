@@ -3,10 +3,11 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface LifepathAnalysisProps {
   lifePath: number;
+  partialEnergy: number;
   isVisible: boolean;
 }
 
-const LifepathAnalysis = ({ lifePath, isVisible }: LifepathAnalysisProps) => {
+const LifepathAnalysis = ({ lifePath, partialEnergy, isVisible }: LifepathAnalysisProps) => {
   if (!isVisible) return null;
 
   const getLifepathDescription = (number: number): string => {
@@ -28,6 +29,25 @@ const LifepathAnalysis = ({ lifePath, isVisible }: LifepathAnalysisProps) => {
     return descriptions[number] || "Invalid lifepath number";
   };
 
+  const getPartialEnergyDescription = (number: number): string => {
+    const descriptions: { [key: number]: string } = {
+      1: "So the number 1 is active, masculine, it's the opposite of the number 2, which is passive, feminine, it's the male energy, these people are the most aggressive of all the numbers, not necessarily in a bad way, although you have to channel that energy right because with that much ruthlessness if it's not directed in the right field it can lead to a bad outcome...",
+      2: "So you're a Partial 2. 2 is the number of feminine energy, exuding compassion, care, and a natural inclination for diplomacy. Let's explore the captivating traits that define this remarkable number...",
+      3: "So you're a Partial3. 3 is the number of the child, 1 is the masculine number, 2 is the feminine number, and 3 is the childish number. When we say 'oh, you're childish,' it's usually an insult, but in this case, it is not...",
+      4: "So you're a Partial 4. 4 is the number of the hardest worker; individuals with 4 energy can work like no one else, especially if it's your Life Path number...",
+      5: "So you're a PARTIAL 5. The 5 is the number of freedom. They love freedom like no other number...",
+      6: "So you're a PARTIAL 6. 6 is the number of home and family; they love to settle down and have a family, unlike the 7 which is anti-family with a loner vibe...",
+      7: "So you're a Partial 7. One thing I must say now is that you have an incredible gift, but the gift also comes with multiple curses, so please read this without emotion and don't hate the messenger...",
+      8: "So you're a Partial 8. A lot of 8s are actually confused because they think that 8 is the number of money, but 8 is not the number of money… 8 is the number of abundance...",
+      9: "So you're a Partial 9. 9 is one of the most misunderstood numbers out here; it's an extremely important number in the matrix...",
+      11: "As a Partial 11, firstly, the Partial 11 is a master number. The master number doesn't operate on the same frequency as others...",
+      22: "The master number 22 is the number of the master builder. They are the second rarest number after the number 33, and they have an elevated master number frequency...",
+      33: "The master number 33 is at the pinnacle of the number sequence. They are the master teachers, possessing the highest frequency among all numbers..."
+    };
+
+    return descriptions[number] || "Invalid partial energy number";
+  };
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -37,11 +57,24 @@ const LifepathAnalysis = ({ lifePath, isVisible }: LifepathAnalysisProps) => {
       <div className="rounded-lg bg-white/5 border border-white/10">
         <ScrollArea className="h-[600px] w-full">
           <div className="p-6 md:p-8 lg:p-12">
-            <h3 className="text-2xl font-bold text-white/90 mb-4">Your Lifepath Analysis</h3>
-            <div className="prose prose-invert max-w-none">
-              <p className="text-white/80 leading-relaxed whitespace-pre-line text-lg">
-                {getLifepathDescription(lifePath)}
-              </p>
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-2xl font-bold text-white/90 mb-4">Your Lifepath Number</h3>
+                <div className="prose prose-invert max-w-none">
+                  <p className="text-white/80 leading-relaxed whitespace-pre-line text-lg">
+                    {getLifepathDescription(lifePath)}
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-bold text-white/90 mb-4">Your Partial Energy</h3>
+                <div className="prose prose-invert max-w-none">
+                  <p className="text-white/80 leading-relaxed whitespace-pre-line text-lg">
+                    {getPartialEnergyDescription(partialEnergy)}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </ScrollArea>
