@@ -10,6 +10,7 @@ import Analysis from "./pages/Analysis"
 import Blog from "./pages/Blog"
 import Sales from "./pages/Sales"
 import CollectInfo from "./pages/CollectInfo"
+import Portal from "./pages/Portal"
 
 const queryClient = new QueryClient()
 
@@ -28,6 +29,7 @@ const App = () => {
               <Route path="/analysis" element={<Analysis />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/sales/*" element={<Sales />} />
+              <Route path="/portal" element={<Portal />} />
             </Routes>
             <Footer />
           </div>
