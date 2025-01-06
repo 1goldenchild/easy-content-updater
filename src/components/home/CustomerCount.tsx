@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
 import { Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Link } from "react-router-dom"
 
 const CustomerCount = () => {
   return (
@@ -27,19 +28,14 @@ const CustomerCount = () => {
           </p>
           <div className="pt-6">
             <div className="w-full max-w-[280px] mx-auto">
-              <a 
-                href="https://www.numerology33.com/date-of-birth-collector" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="block w-full"
-              >
+              <Link to="/collect-info" className="block w-full">
                 <Button 
                   size="lg"
                   className="w-full bg-gradient-to-r from-purple-400 to-pink-400 hover:from-purple-500 hover:to-pink-500 text-white font-semibold"
                 >
                   Start Your Journey Now
                 </Button>
-              </a>
+              </Link>
             </div>
           </div>
         </motion.div>
