@@ -60,7 +60,7 @@ const NumerologyResults = ({
         </div>
       </div>
 
-      <LifepathAnalysis lifePath={lifePath} />
+      <LifepathAnalysis lifePath={lifePath} isVisible={isVisible} />
     </motion.div>
   );
 };
