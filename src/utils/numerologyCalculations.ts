@@ -39,9 +39,15 @@ export const calculateLifePath = (date: Date): number => {
 };
 
 export const calculatePartialEnergy = (day: number): number => {
-  if (MASTER_NUMBERS.includes(day)) {
-    return day;
+  // Special cases for master numbers in day
+  if (day === 29 || day === 20 || day === 11) {
+    return 11;
   }
+  if (day === 22) {
+    return 22;
+  }
+  
+  // For all other days, reduce to single digit
   return reduceToSingleDigit(day);
 };
 

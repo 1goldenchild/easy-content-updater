@@ -48,9 +48,12 @@ const NumerologyResults = ({
         </div>
         <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
           <p className="text-sm text-white/70">Chinese Zodiac</p>
-          <p className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
-            {chineseZodiac}
-          </p>
+          <div className="flex flex-col items-center">
+            <p className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
+              {chineseZodiac}
+            </p>
+            <p className="text-xs text-white/50 mt-1">Year of the {chineseZodiac}</p>
+          </div>
         </div>
       </div>
     </motion.div>
