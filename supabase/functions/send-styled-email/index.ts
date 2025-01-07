@@ -20,6 +20,12 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
+    // Check if RESEND_API_KEY is configured
+    if (!RESEND_API_KEY) {
+      console.error("RESEND_API_KEY is not configured");
+      throw new Error("Email service is not configured properly");
+    }
+
     const { to, templateName, userData }: EmailRequest = await req.json();
     console.log("Received email request:", { to, templateName, userData });
 
@@ -60,6 +66,10 @@ const handler = async (req: Request): Promise<Response> => {
 
     const data = await res.json();
     console.log("Resend API response:", data);
+
+    if (!res.ok) {
+      throw new Error(`Resend API error: ${JSON.stringify(data)}`);
+    }
 
     return new Response(JSON.stringify(data), {
       status: 200,
