@@ -48,7 +48,7 @@ const ProgressIndicator = () => {
     const sectionId = sections[index].toLowerCase()
     const element = document.getElementById(sectionId)
     if (element) {
-      const headerOffset = 80 // Adjust this value based on your header height
+      const headerOffset = 80
       const elementPosition = element.getBoundingClientRect().top
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset
 
@@ -59,20 +59,29 @@ const ProgressIndicator = () => {
     }
   }
 
-  if (isMobile) return null
-
+  // Remove the isMobile check to show on mobile
   return (
     <div className="fixed inset-0 pointer-events-none flex items-center justify-center z-50">
       <div className="relative w-full max-w-7xl mx-auto px-4">
         <div className="absolute right-0 flex items-center gap-2">
-          <div className="space-y-4">
+          <div className="space-y-8"> {/* Increased spacing between dots */}
             {sections.map((section, index) => (
               <div 
                 key={section}
-                className="relative flex items-center gap-2 justify-end"
+                className="relative flex items-center gap-2 justify-end group"
                 onClick={() => handleDotClick(index)}
                 style={{ cursor: 'pointer' }}
               >
+                {/* Connecting line */}
+                {index < sections.length - 1 && (
+                  <div className={`absolute top-4 right-1 w-[2px] h-8 ${
+                    index < activeSection 
+                      ? "bg-gradient-to-b from-purple-500 to-pink-500" 
+                      : "bg-white/10"
+                  }`} />
+                )}
+                
+                {/* Dot */}
                 <motion.div
                   className={`w-2 h-2 rounded-full transition-colors duration-300 ${
                     index === activeSection 
