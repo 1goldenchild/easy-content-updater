@@ -18,7 +18,7 @@ const NumberSection = ({ id, title, number, subtitle, gradientFrom, gradientTo }
     >
       <h3 className="text-sm font-semibold text-white/90 mb-1">{title}</h3>
       <div 
-        className={`text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-${gradientFrom} to-${gradientTo}`}
+        className="text-2xl font-bold text-white"
       >
         {number}
       </div>
