@@ -72,7 +72,7 @@ const Portal = () => {
     <div className="flex-1 p-4">
       <div className="flex">
         {showResults && <ProgressIndicator />}
-        <div id="portal-content" className="flex-1 max-w-7xl mx-auto space-y-8 pl-24">
+        <div id="portal-content" className="flex-1 max-w-7xl mx-auto space-y-8">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
