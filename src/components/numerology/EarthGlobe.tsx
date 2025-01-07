@@ -15,16 +15,13 @@ const EarthGlobe = () => {
       alpha: true 
     });
     
-    // Set renderer size to match container while maintaining aspect ratio
-    const containerWidth = mountRef.current.clientWidth;
-    const containerHeight = mountRef.current.clientHeight;
-    renderer.setSize(containerWidth, containerHeight);
+    renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
     mountRef.current.appendChild(renderer.domElement);
 
-    // Create a sphere geometry for the globe - adjusted radius for better height
-    const geometry = new THREE.SphereGeometry(0.8, 32, 32);
+    // Create a sphere geometry for the globe
+    const geometry = new THREE.SphereGeometry(1, 32, 32);
     const material = new THREE.MeshPhongMaterial({
-      color: 0x0EA5E9, // Changed to blue
+      color: 0x00ff99,
       transparent: true,
       opacity: 0.8,
       wireframe: true
@@ -37,14 +34,13 @@ const EarthGlobe = () => {
     const ambientLight = new THREE.AmbientLight(0x404040);
     scene.add(ambientLight);
 
-    // Add directional light - adjusted color to match globe
-    const directionalLight = new THREE.DirectionalLight(0x0EA5E9, 1);
+    // Add directional light
+    const directionalLight = new THREE.DirectionalLight(0x00ff99, 1);
     directionalLight.position.set(5, 3, 5);
     scene.add(directionalLight);
 
-    // Position camera - adjusted for better vertical view
-    camera.position.z = 2;
-    camera.position.y = 0.5;
+    // Position camera
+    camera.position.z = 2.5;
 
     // Animation
     const animate = () => {
@@ -55,21 +51,8 @@ const EarthGlobe = () => {
 
     animate();
 
-    // Handle window resize
-    const handleResize = () => {
-      if (!mountRef.current) return;
-      const width = mountRef.current.clientWidth;
-      const height = mountRef.current.clientHeight;
-      renderer.setSize(width, height);
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-    };
-
-    window.addEventListener('resize', handleResize);
-
     // Cleanup
     return () => {
-      window.removeEventListener('resize', handleResize);
       if (mountRef.current) {
         mountRef.current.removeChild(renderer.domElement);
       }
@@ -77,8 +60,8 @@ const EarthGlobe = () => {
   }, []);
 
   return (
-    <div ref={mountRef} className="w-full h-full relative">
-      <div className="absolute inset-0 bg-[#0EA5E9]/5 blur-3xl rounded-full animate-pulse" />
+    <div ref={mountRef} className="w-full h-full">
+      <div className="absolute inset-0 bg-[#00ff99]/5 blur-3xl rounded-full animate-pulse" />
     </div>
   );
 };
