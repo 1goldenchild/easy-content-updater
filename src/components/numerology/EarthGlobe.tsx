@@ -21,11 +21,9 @@ const EarthGlobe = () => {
     
     // Load earth texture with enhanced brightness
     const material = new THREE.MeshPhongMaterial({
-      map: textureLoader.load('/earth-blue-marble.jpg'),
-      bumpMap: textureLoader.load('/earth-topology.jpg'),
+      map: textureLoader.load('/earth-texture.jpg'), // Using the new texture
       bumpScale: 0.15,
-      specularMap: textureLoader.load('/earth-specular.jpg'),
-      specular: new THREE.Color('white'),
+      specular: new THREE.Color('grey'),
       shininess: 25
     });
 
@@ -33,10 +31,10 @@ const EarthGlobe = () => {
     scene.add(earth);
 
     // Enhanced lighting setup
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Increased ambient light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8); // Increased ambient light
     scene.add(ambientLight);
 
-    const directionalLight = new THREE.DirectionalLight(0x4499ff, 2.5); // Brighter blue-tinted light
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 2.0); // Brighter white light
     directionalLight.position.set(5, 3, 5);
     scene.add(directionalLight);
 
