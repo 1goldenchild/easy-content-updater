@@ -37,12 +37,12 @@ const SalesPitch = () => {
             {/* Human Body Visualization */}
             <div className="relative h-64 mb-8">
               <motion.div
-                className="absolute inset-0 bg-gradient-to-b from-purple-500/20 to-transparent"
+                className="absolute inset-0 bg-gradient-to-b from-[#8B5CF6]/20 to-transparent"
                 animate={{
-                  opacity: [0.5, 0.8, 0.5],
+                  opacity: [0.3, 0.5, 0.3],
                 }}
                 transition={{
-                  duration: 3,
+                  duration: 4,
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
@@ -51,7 +51,7 @@ const SalesPitch = () => {
                 viewBox="0 0 24 24"
                 className="w-full h-full"
                 style={{
-                  filter: "drop-shadow(0 0 10px rgba(168, 85, 247, 0.4))"
+                  filter: "drop-shadow(0 0 15px rgba(139, 92, 246, 0.3))"
                 }}
               >
                 <motion.path
@@ -60,7 +60,7 @@ const SalesPitch = () => {
                   initial={{ pathLength: 0 }}
                   animate={{ pathLength: 1 }}
                   transition={{
-                    duration: 2,
+                    duration: 3,
                     ease: "easeInOut",
                     repeat: Infinity,
                     repeatType: "reverse"
@@ -68,9 +68,9 @@ const SalesPitch = () => {
                 />
                 <defs>
                   <linearGradient id="humanGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#C084FC" />
-                    <stop offset="50%" stopColor="#E879F9" />
-                    <stop offset="100%" stopColor="#F0ABFC" />
+                    <stop offset="0%" stopColor="#9b87f5" />
+                    <stop offset="50%" stopColor="#7E69AB" />
+                    <stop offset="100%" stopColor="#6E59A5" />
                   </linearGradient>
                 </defs>
               </svg>
@@ -78,18 +78,18 @@ const SalesPitch = () => {
               {[...Array(5)].map((_, i) => (
                 <motion.div
                   key={i}
-                  className="absolute w-full h-0.5 bg-gradient-to-r from-purple-500/0 via-purple-500/50 to-purple-500/0"
+                  className="absolute w-full h-0.5 bg-gradient-to-r from-[#8B5CF6]/0 via-[#8B5CF6]/30 to-[#8B5CF6]/0"
                   style={{
                     top: `${20 + i * 15}%`,
                     transform: 'scaleX(0.8)',
                   }}
                   animate={{
-                    opacity: [0.3, 1, 0.3],
-                    scaleX: [0.8, 1, 0.8],
+                    opacity: [0.2, 0.4, 0.2],
+                    scaleX: [0.8, 0.9, 0.8],
                   }}
                   transition={{
-                    duration: 2,
-                    delay: i * 0.2,
+                    duration: 3,
+                    delay: i * 0.3,
                     repeat: Infinity,
                     ease: "easeInOut"
                   }}
@@ -97,7 +97,7 @@ const SalesPitch = () => {
               ))}
             </div>
 
-            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#9b87f5] to-[#6E59A5] bg-clip-text text-transparent">
               Unlock Your Complete Numerology Profile
             </h2>
             
@@ -150,6 +150,7 @@ const SalesPitch = () => {
                 </motion.div>
               ))}
             </div>
+
           </motion.div>
 
           {/* Right Column - CTA Section */}
@@ -158,7 +159,7 @@ const SalesPitch = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="relative bg-gradient-to-br from-purple-900/40 to-pink-900/40 rounded-3xl p-8 md:p-12 border border-white/10"
+            className="relative bg-gradient-to-br from-[#1A1F2C] to-[#403E43] rounded-3xl p-8 md:p-12 border border-white/10"
           >
             <div className="space-y-6 text-center">
               <motion.div
@@ -171,7 +172,7 @@ const SalesPitch = () => {
                   ease: "easeInOut"
                 }}
               >
-                <Sparkles className="w-12 h-12 mx-auto text-yellow-400" />
+                <Sparkles className="w-12 h-12 mx-auto text-[#9b87f5]" />
               </motion.div>
               
               <h3 className="text-2xl md:text-3xl font-bold text-white">
@@ -185,20 +186,20 @@ const SalesPitch = () => {
               <Button
                 onClick={handleGetStarted}
                 size="lg"
-                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold px-8 py-6 text-lg h-auto"
+                className="bg-gradient-to-r from-[#8B5CF6] to-[#6E59A5] hover:from-[#7E69AB] hover:to-[#5D4B8C] text-white font-semibold px-8 py-6 text-lg h-auto"
               >
                 Start Your Analysis
               </Button>
             </div>
 
-            {/* Animated background elements */}
+            {/* Ambient background elements */}
             {[...Array(3)].map((_, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0.3 }}
+                initial={{ opacity: 0.2 }}
                 animate={{
-                  opacity: [0.3, 0.6, 0.3],
-                  scale: [1, 1.2, 1],
+                  opacity: [0.2, 0.3, 0.2],
+                  scale: [1, 1.1, 1],
                 }}
                 transition={{
                   duration: 4,
@@ -206,7 +207,7 @@ const SalesPitch = () => {
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-xl"
+                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-[#8B5CF6]/10 to-[#6E59A5]/10 blur-xl"
                 style={{
                   left: `${20 + i * 25}%`,
                   top: `${20 + i * 20}%`,
