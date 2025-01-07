@@ -67,9 +67,9 @@ const CollectInfo = () => {
 
       if (welcomeEmailError) {
         console.error("Error sending welcome email:", welcomeEmailError)
-        toast.error("Your information was saved but we couldn't send the welcome email.")
+        toast.error("Your information was saved but we couldn't send the welcome email. Our team has been notified.")
       } else {
-        console.log("Welcome email sent successfully")
+        toast.success("Information saved and welcome email sent! Check your inbox (and spam folder).")
       }
 
       // Schedule analysis email to be sent after 24 hours
@@ -90,18 +90,14 @@ const CollectInfo = () => {
 
       if (scheduleError) {
         console.error("Error scheduling analysis email:", scheduleError)
-        toast.error("Your information was saved but we couldn't schedule the analysis email.")
-      } else {
-        console.log("Analysis email scheduled successfully")
+        toast.error("Your information was saved but we couldn't schedule the analysis email. Our team has been notified.")
       }
 
-      toast.success("Information saved successfully! Check your email for next steps.")
-      
       // Redirect to the numerology checkout page
       window.location.href = "https://www.numerology33.com/checkout"
     } catch (error) {
       console.error("Error in form submission:", error)
-      toast.error("There was an error saving your information. Please try again.")
+      toast.error("There was an error processing your request. Please try again.")
     } finally {
       setIsSubmitting(false)
     }
