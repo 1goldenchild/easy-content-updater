@@ -2,8 +2,8 @@ import { getWelcomeTemplate } from "../../supabase/functions/send-styled-email/t
 import { getAnalysisTemplate } from "../../supabase/functions/send-styled-email/templates/analysis";
 
 const EmailPreview = () => {
-  const welcomeHtml = getWelcomeTemplate("John");
-  const analysisHtml = getAnalysisTemplate("John", "1990-01-01");
+  const welcomeHtml = getWelcomeTemplate("Sarah Johnson");
+  const analysisHtml = getAnalysisTemplate("Sarah Johnson", "1990-01-01");
 
   return (
     <div className="container mx-auto p-4 space-y-8">
@@ -13,7 +13,7 @@ const EmailPreview = () => {
         <div>
           <h2 className="text-xl font-semibold mb-2">Welcome Email</h2>
           <div 
-            className="border rounded-lg p-4"
+            className="border rounded-lg p-4 bg-[#1a1f2c]"
             dangerouslySetInnerHTML={{ __html: welcomeHtml }} 
           />
         </div>
@@ -21,7 +21,7 @@ const EmailPreview = () => {
         <div>
           <h2 className="text-xl font-semibold mb-2">Analysis Email</h2>
           <div 
-            className="border rounded-lg p-4"
+            className="border rounded-lg p-4 bg-[#1a1f2c]"
             dangerouslySetInnerHTML={{ __html: analysisHtml }} 
           />
         </div>

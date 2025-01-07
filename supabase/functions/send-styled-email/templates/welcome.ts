@@ -4,7 +4,7 @@ export const getWelcomeTemplate = (name: string) => `
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Your Numerology Journey</title>
+    <title>Welcome to Numerology Insights</title>
   </head>
   <body style="
     margin: 0;
@@ -12,12 +12,20 @@ export const getWelcomeTemplate = (name: string) => `
     background-color: #1a1f2c;
     color: #ffffff;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
   ">
     <div style="
       max-width: 600px;
       margin: 0 auto;
       padding: 40px 20px;
     ">
+      <div style="text-align: center; margin-bottom: 30px;">
+        <img src="https://preview--easy-content-updater.lovable.app/lovable-uploads/984813d9-700a-4057-a369-08ae4035507b.png" 
+             alt="Numerology Logo" 
+             style="width: 120px; height: auto;"
+        />
+      </div>
+      
       <div style="
         background: linear-gradient(135deg, #9b87f5 0%, #7E69AB 100%);
         padding: 2px;
@@ -29,20 +37,18 @@ export const getWelcomeTemplate = (name: string) => `
           border-radius: 10px;
         ">
           <h1 style="
-            background: linear-gradient(135deg, #9b87f5 0%, #7E69AB 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #9b87f5;
             margin: 0 0 20px 0;
             font-size: 24px;
             text-align: center;
-          ">Welcome to Your Numerology Journey, ${name}!</h1>
+          ">Welcome to Your Numerology Journey, ${name}! ✨</h1>
           
           <p style="
             color: #ffffff;
             line-height: 1.6;
             margin-bottom: 20px;
           ">
-            You've taken the first step towards understanding the hidden patterns in your life. Your numerological analysis is being prepared with care and precision.
+            You've taken the first step towards understanding the hidden patterns in your life. Your personalized numerological analysis is being prepared with care and precision.
           </p>
 
           <div style="
@@ -56,15 +62,16 @@ export const getWelcomeTemplate = (name: string) => `
               color: #9b87f5;
               margin: 0 0 15px 0;
               font-size: 18px;
-            ">What's Next?</h2>
+            ">Your Journey Begins Here</h2>
             <ul style="
               color: #ffffff;
               padding-left: 20px;
               margin: 0;
             ">
-              <li style="margin-bottom: 10px">Your personal numerology reading is being calculated</li>
-              <li style="margin-bottom: 10px">You'll receive insights about your life path number</li>
-              <li style="margin-bottom: 10px">Discover your compatibility with different aspects of life</li>
+              <li style="margin-bottom: 10px">Discover your unique Life Path Number</li>
+              <li style="margin-bottom: 10px">Understand your personal year cycles</li>
+              <li style="margin-bottom: 10px">Explore relationship compatibility insights</li>
+              <li style="margin-bottom: 10px">Unlock career guidance based on your numbers</li>
             </ul>
           </div>
 
@@ -74,21 +81,32 @@ export const getWelcomeTemplate = (name: string) => `
             font-style: italic;
             margin: 30px 0;
           ">
-            "Numbers are the universal language offered by the deity to humans as confirmation of the truth."
+            "Numbers hold the key to understanding your unique life journey."
           </p>
 
           <div style="text-align: center;">
-            <a href="https://numerology33.com/portal" style="
-              display: inline-block;
-              background: linear-gradient(135deg, #9b87f5 0%, #7E69AB 100%);
-              color: #ffffff;
-              text-decoration: none;
-              padding: 12px 30px;
-              border-radius: 6px;
-              font-weight: bold;
-            ">View Your Dashboard</a>
+            <a href="https://preview--easy-content-updater.lovable.app/portal" 
+               style="
+                 display: inline-block;
+                 background: linear-gradient(135deg, #9b87f5 0%, #7E69AB 100%);
+                 color: #ffffff;
+                 text-decoration: none;
+                 padding: 12px 30px;
+                 border-radius: 6px;
+                 font-weight: bold;
+               "
+            >Access Your Portal</a>
           </div>
         </div>
+      </div>
+
+      <div style="
+        text-align: center;
+        margin-top: 30px;
+        color: #666;
+        font-size: 12px;
+      ">
+        <p>© ${new Date().getFullYear()} Numerology Insights. All rights reserved.</p>
       </div>
     </div>
   </body>
