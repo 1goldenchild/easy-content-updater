@@ -4,12 +4,14 @@ import { format } from "date-fns"
 import { supabase } from "@/integrations/supabase/client"
 import { toast } from "sonner"
 import { UserForm } from "@/components/numerology/UserForm"
+import { useNavigate } from "react-router-dom"
 
 const CollectInfo = () => {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [date, setDate] = useState<Date>()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -94,7 +96,7 @@ const CollectInfo = () => {
         toast.error("Your information was saved but we couldn't schedule the analysis email. Our team will look into this.")
       }
 
-      // Redirect to checkout
+      // Navigate to checkout using React Router
       window.location.href = "https://www.numerology33.com/checkout"
     } catch (error) {
       console.error("[Error] Unexpected error in form submission:", error)
