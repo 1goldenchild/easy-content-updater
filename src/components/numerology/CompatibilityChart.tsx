@@ -80,8 +80,8 @@ const CompatibilityChart = ({ lifePath, isVisible }: CompatibilityChartProps) =>
         Numerological Compatibility
       </h3>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="w-full h-[400px]">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="w-full h-[300px] md:h-[400px]">
           <h4 className="text-lg font-semibold text-center text-white/80 mb-4">Compatibility Distribution</h4>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
@@ -113,7 +113,7 @@ const CompatibilityChart = ({ lifePath, isVisible }: CompatibilityChartProps) =>
           </ResponsiveContainer>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-8 mt-8 lg:mt-0">
           <div>
             <h4 className="text-lg font-semibold text-white/80 mb-3">Compatible Numbers</h4>
             <div className="flex flex-wrap gap-3">
