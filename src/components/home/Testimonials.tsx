@@ -40,12 +40,39 @@ const testimonials = [
   }
 ]
 
+const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => (
+  <div className="min-w-[300px] md:min-w-[400px] p-6 mx-4">
+    <div className="bg-card/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:border-primary/20 transition-colors h-full">
+      <div className="flex gap-1 mb-4">
+        {[...Array(testimonial.rating)].map((_, i) => (
+          <Star
+            key={i}
+            className="w-4 h-4 fill-purple-500 text-purple-500"
+          />
+        ))}
+      </div>
+      <blockquote className="mb-4 text-sm text-white/80 leading-relaxed">
+        "{testimonial.text}"
+      </blockquote>
+      <footer>
+        <div className="font-semibold">{testimonial.name}</div>
+        <div className="text-sm text-muted-foreground">
+          {testimonial.role}
+        </div>
+      </footer>
+    </div>
+  </div>
+)
+
 const Testimonials = () => {
+  // Double the testimonials array for seamless infinite scroll
+  const doubledTestimonials = [...testimonials, ...testimonials]
+
   return (
-    <section className="py-16 bg-gradient-to-b from-background to-background/80">
+    <section className="py-16 bg-gradient-to-b from-background to-background/80 overflow-hidden">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white via-white/90 to-white/80 text-transparent bg-clip-text">
             Transforming Lives Through Energy Insights
           </h2>
           <p className="text-lg text-muted-foreground">
@@ -53,35 +80,19 @@ const Testimonials = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={testimonial.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-card/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:border-primary/20 transition-colors"
-            >
-              <div className="flex gap-1 mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className="w-4 h-4 fill-purple-500 text-purple-500"
-                  />
-                ))}
-              </div>
-              <blockquote className="mb-4 text-sm text-white/80 leading-relaxed">
-                "{testimonial.text}"
-              </blockquote>
-              <footer>
-                <div className="font-semibold">{testimonial.name}</div>
-                <div className="text-sm text-muted-foreground">
-                  {testimonial.role}
-                </div>
-              </footer>
-            </motion.div>
-          ))}
+        <div className="relative w-full">
+          {/* Gradient masks for smooth fade effect */}
+          <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-background to-transparent z-10" />
+          <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-background to-transparent z-10" />
+          
+          {/* Scrolling container */}
+          <div className="overflow-hidden mask-edges">
+            <div className="carousel-scroll">
+              {doubledTestimonials.map((testimonial, index) => (
+                <TestimonialCard key={`${testimonial.name}-${index}`} testimonial={testimonial} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
