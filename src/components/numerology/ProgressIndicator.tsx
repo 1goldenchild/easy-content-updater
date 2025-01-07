@@ -14,8 +14,8 @@ const ProgressIndicator = () => {
       const sectionElements = document.querySelectorAll("#portal-content > div");
       
       sectionElements.forEach((section, index) => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= windowHeight * 0.5 && rect.bottom >= windowHeight * 0.5) {
+        if (section.getBoundingClientRect().top <= windowHeight * 0.5 && 
+            section.getBoundingClientRect().bottom >= windowHeight * 0.5) {
           setActiveSection(index);
         }
       });
@@ -26,9 +26,7 @@ const ProgressIndicator = () => {
   }, []);
 
   return (
-    <div className={`fixed top-1/2 -translate-y-1/2 flex items-center gap-2 lg:gap-4 z-50 ${
-      isMobile ? 'right-2' : 'left-4 lg:left-8'
-    }`}>
+    <div className="fixed top-1/2 -translate-y-1/2 right-2 lg:right-8 flex items-center gap-2 lg:gap-4 z-50">
       {!isMobile && (
         <div className="h-[200px] lg:h-[300px] w-[1px] lg:w-[2px] bg-white/10 rounded-full relative">
           <motion.div 
@@ -49,11 +47,11 @@ const ProgressIndicator = () => {
         </div>
       )}
       
-      <div className={`space-y-4 lg:space-y-6 ${isMobile ? 'pr-1' : ''}`}>
+      <div className="space-y-4 lg:space-y-6">
         {sections.map((section, index) => (
           <div 
             key={section}
-            className="relative flex items-center gap-2 lg:gap-3"
+            className="relative flex items-center gap-2 lg:gap-3 justify-end"
           >
             <motion.div
               className={`w-1.5 h-1.5 lg:w-3 lg:h-3 rounded-full transition-colors duration-300 ${
