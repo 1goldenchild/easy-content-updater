@@ -9,6 +9,7 @@ import YearlyForecast from "./phone/sections/YearlyForecast";
 import CompatibilitySection from "./phone/CompatibilitySection";
 import CountryCompatibility from "./phone/sections/CountryCompatibility";
 import CarCompatibilitySection from "./phone/sections/CarCompatibilitySection";
+import TechCompatibilitySection from "./phone/sections/TechCompatibilitySection";
 
 const PhoneShowcase = () => {
   const [activeSection, setActiveSection] = useState("lifepath");
@@ -54,6 +55,7 @@ const PhoneShowcase = () => {
         <CareerPaths />
         <CountryCompatibility />
         <CarCompatibilitySection />
+        <TechCompatibilitySection />
         <YearlyForecast />
 
         {/* Secret Bonus Section */}
