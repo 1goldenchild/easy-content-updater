@@ -214,7 +214,9 @@ The 33 and the 7 are the most intelligent numbers, but the 7 struggles to commun
           <div className="p-6 md:p-8 lg:p-12">
             <div className="space-y-8">
               <div>
-                <h3 className="text-2xl font-bold text-white/90 mb-4">Your Lifepath Number</h3>
+                <h3 className="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] mb-4">
+                  Your Lifepath Number
+                </h3>
                 <div className="prose prose-invert max-w-none">
                   <p className="text-white/80 leading-relaxed whitespace-pre-line text-lg">
                     {getLifepathDescription(lifePath)}
