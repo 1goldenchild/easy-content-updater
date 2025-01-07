@@ -7,6 +7,21 @@ const SalesPitch = () => {
   return (
     <section className="py-20 relative overflow-hidden">
       <div className="container px-4 md:px-6">
+        {/* Preview Heading - Visible on mobile */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="lg:hidden text-center mb-8"
+        >
+          <h3 className="text-2xl font-bold bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent mb-2">
+            What's included in your analysis?
+          </h3>
+          <p className="text-white/70 text-lg">
+            See a sneak peek →
+          </p>
+        </motion.div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Features List */}
           <motion.div
@@ -24,10 +39,10 @@ const SalesPitch = () => {
                 transition={{ delay: 0.3 }}
                 className="relative mb-8"
               >
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent mb-2">
+                <h3 className="text-3xl font-bold bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent mb-2">
                   What's included in your analysis?
                 </h3>
-                <p className="text-white/70 text-lg">
+                <p className="text-white/70 text-xl">
                   See a sneak peek →
                 </p>
                 {/* Decorative elements */}
@@ -43,21 +58,6 @@ const SalesPitch = () => {
             </h2>
             
             <FeatureList />
-          </motion.div>
-
-          {/* Preview Heading - Visible on mobile */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="lg:hidden text-center mb-8"
-          >
-            <h3 className="text-2xl font-bold bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent mb-2">
-              What's included in your analysis?
-            </h3>
-            <p className="text-white/70 text-lg">
-              See a sneak peek →
-            </p>
           </motion.div>
 
           {/* Right Column - CTA Section */}
