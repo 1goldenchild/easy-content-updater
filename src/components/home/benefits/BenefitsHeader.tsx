@@ -48,6 +48,31 @@ const BenefitsHeader = () => {
             {/* Decorative line */}
             <div className="absolute left-1/2 -translate-x-1/2 -top-4 w-16 h-0.5 bg-gradient-to-r from-purple-500/50 to-blue-500/50" />
             
+            {/* Energy Flow Text with Wave Effect */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="mb-4"
+            >
+              <motion.div 
+                className="relative inline-flex items-center gap-3"
+              >
+                <span className="text-lg md:text-xl text-white/90">Get in the Flow of Energy</span>
+                <motion.div
+                  className="h-0.5 w-16 bg-gradient-to-r from-purple-500 to-blue-500"
+                  animate={{
+                    x: [-100, 100],
+                    opacity: [0.5, 1, 0.5],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+              </motion.div>
+            </motion.div>
+
             {/* Title */}
             <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-500 to-emerald-400 animate-shine bg-[length:200%_auto]">
               Unlock Your Hidden Potential
