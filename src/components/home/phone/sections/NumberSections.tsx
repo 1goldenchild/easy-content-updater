@@ -48,8 +48,8 @@ const NumberSections = () => {
             title="Chinese Zodiac"
             number="龍"
             subtitle="Year of the Dragon"
-            gradientFrom="[#F97316]"
-            gradientTo="[#FB923C]"
+            gradientFrom="[#0EA5E9]"
+            gradientTo="[#8B5CF6]"
           />
         </div>
 
