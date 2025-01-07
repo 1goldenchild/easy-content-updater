@@ -1,6 +1,5 @@
-import { ArrowRight } from "lucide-react"
-import { motion } from "framer-motion"
-import { Link } from "react-router-dom"
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const blogPosts = [
   {
@@ -49,16 +48,16 @@ const blogPosts = [
 
 const BlogPreview = () => {
   return (
-    <section className="py-16 bg-gradient-to-b from-background/80 to-background">
-      <div className="container mx-auto px-4 md:px-6">
+    <section className="py-16 bg-gradient-to-b from-background/80 to-background w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <span className="bg-gradient-to-r from-purple-400 to-pink-600 text-transparent bg-clip-text">
-              Latest Articles
+              Latest Insights
             </span>
           </h2>
-          <p className="text-lg text-muted-foreground">
-            Explore the ancient wisdom of numerology through our latest articles
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Explore our latest articles on numerology, spirituality, and personal growth
           </p>
         </div>
 
@@ -68,57 +67,40 @@ const BlogPreview = () => {
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="group"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="group relative bg-card rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
             >
-              <div className="bg-card/5 backdrop-blur-sm border border-white/10 rounded-lg overflow-hidden hover:border-primary/20 transition-colors">
-                <div className="aspect-video relative overflow-hidden">
+              <Link to="/blog" className="block">
+                <div className="aspect-w-16 aspect-h-9">
                   <img
                     src={post.image}
                     alt={post.title}
-                    className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-300"
+                    className="object-cover w-full h-48"
                   />
-                  <div className="absolute top-2 left-2 md:top-4 md:left-4">
-                    <span className="px-2 py-1 md:px-3 md:py-1 text-[10px] md:text-xs font-medium bg-purple-500/20 text-purple-300 rounded-full">
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium text-purple-400">
                       {post.category}
                     </span>
+                    <span className="text-sm text-muted-foreground">
+                      {post.readTime}
+                    </span>
                   </div>
-                </div>
-                <div className="p-3 md:p-6">
-                  <div className="text-xs md:text-sm text-muted-foreground mb-1 md:mb-2">
-                    {post.readTime}
-                  </div>
-                  <h3 className="text-sm md:text-xl font-semibold mb-1 md:mb-2 group-hover:text-purple-400 transition-colors line-clamp-2">
+                  <h3 className="text-xl font-semibold mb-2 group-hover:text-purple-400 transition-colors">
                     {post.title}
                   </h3>
-                  <p className="text-xs md:text-base text-muted-foreground mb-2 md:mb-4 line-clamp-2 md:line-clamp-none">
+                  <p className="text-muted-foreground">
                     {post.description}
                   </p>
-                  <Link 
-                    to="/blog" 
-                    className="inline-flex items-center text-purple-400 hover:text-purple-300 transition-colors text-xs md:text-base"
-                  >
-                    Read More <ArrowRight className="ml-1 md:ml-2 h-3 w-3 md:h-4 md:w-4" />
-                  </Link>
                 </div>
-              </div>
+              </Link>
             </motion.div>
           ))}
         </div>
-
-        <div className="text-center mt-8 md:mt-12">
-          <Link
-            to="/blog"
-            className="inline-flex items-center px-4 py-2 md:px-6 md:py-3 rounded-lg bg-purple-500/10 text-purple-300 hover:bg-purple-500/20 transition-colors text-sm md:text-base"
-          >
-            View All Articles
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default BlogPreview
+export default BlogPreview;
