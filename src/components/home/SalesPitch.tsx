@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import FeatureList from "./FeatureList";
 import CTASection from "./CTASection";
-import NetworkChart from "./NetworkChart";
 
 const SalesPitch = () => {
   return (
@@ -26,9 +25,6 @@ const SalesPitch = () => {
           {/* Right Column - CTA Section */}
           <CTASection />
         </div>
-
-        {/* Network Chart Section */}
-        <NetworkChart />
       </div>
     </section>
   );
