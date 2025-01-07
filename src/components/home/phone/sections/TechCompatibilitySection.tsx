@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { CarFront } from "lucide-react";
+import { Smartphone } from "lucide-react";
 
 const TechCompatibilitySection = () => {
   const companies = [
@@ -28,7 +28,7 @@ const TechCompatibilitySection = () => {
                 className="relative flex items-center justify-between px-3 py-2 rounded-lg bg-white/5 overflow-hidden"
               >
                 <div className="flex items-center gap-2 z-10">
-                  <CarFront className="w-4 h-4 text-green-400" />
+                  <Smartphone className="w-4 h-4 text-green-400" />
                   <span className="text-sm text-white/80">{company.name}</span>
                 </div>
                 <span className="text-sm font-medium text-green-300 z-10">{company.compatibility}%</span>
@@ -56,7 +56,7 @@ const TechCompatibilitySection = () => {
                 className="relative flex items-center justify-between px-3 py-2 rounded-lg bg-white/5 overflow-hidden"
               >
                 <div className="flex items-center gap-2 z-10">
-                  <CarFront className="w-4 h-4 text-red-400" />
+                  <Smartphone className="w-4 h-4 text-red-400" />
                   <span className="text-sm text-white/80">{company.name}</span>
                 </div>
                 <span className="text-sm font-medium text-red-300 z-10">{company.compatibility}%</span>
