@@ -3,6 +3,7 @@ import SecretKnowledge from "@/components/home/SecretKnowledge"
 import Benefits from "@/components/home/Benefits"
 import CallToAction from "@/components/home/CallToAction"
 import CustomerCount from "@/components/home/CustomerCount"
+import SalesPitch from "@/components/home/SalesPitch"
 
 const Index = () => {
   return (
@@ -10,6 +11,7 @@ const Index = () => {
       <Hero />
       <SecretKnowledge />
       <Benefits />
+      <SalesPitch />
       <CallToAction />
       <CustomerCount />
     </div>
