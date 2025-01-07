@@ -6,6 +6,7 @@ import CoreTraits from "./phone/sections/CoreTraits";
 import CareerPaths from "./phone/sections/CareerPaths";
 import YearlyForecast from "./phone/sections/YearlyForecast";
 import CompatibilitySection from "./phone/CompatibilitySection";
+import CarCompatibilitySection from "./phone/sections/CarCompatibilitySection";
 
 const PhoneShowcase = () => {
   const [activeSection, setActiveSection] = useState("numbers");
@@ -48,6 +49,7 @@ const PhoneShowcase = () => {
         <NumberSections />
         <CoreTraits />
         <CompatibilitySection />
+        <CarCompatibilitySection />
         <CareerPaths />
         <YearlyForecast />
 
