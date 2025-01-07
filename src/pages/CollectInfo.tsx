@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import PhoneShowcase from "@/components/home/PhoneShowcase";
 import CollectInfoForm from "@/components/collect-info/CollectInfoForm";
-import AnalysisFeatures from "@/components/collect-info/AnalysisFeatures";
 
 const CollectInfo = () => {
   return (
@@ -30,8 +29,8 @@ const CollectInfo = () => {
           {/* Form Section */}
           <CollectInfoForm />
 
-          {/* Preview Section */}
-          <div className="space-y-8">
+          {/* Preview Section - Only visible on desktop */}
+          <div className="hidden lg:block">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -40,9 +39,18 @@ const CollectInfo = () => {
             >
               <PhoneShowcase />
             </motion.div>
+          </div>
 
-            {/* What's Included Section */}
-            <AnalysisFeatures />
+          {/* Preview Section - Only visible on mobile */}
+          <div className="block lg:hidden">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="scale-75 origin-top"
+            >
+              <PhoneShowcase />
+            </motion.div>
           </div>
         </div>
       </div>
