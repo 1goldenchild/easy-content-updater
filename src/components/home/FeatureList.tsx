@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { 
   ChartPieIcon, 
   Fingerprint, 
@@ -8,6 +8,7 @@ import {
   Briefcase,
   Circle
 } from "lucide-react";
+import { useRef } from "react";
 
 const features = [
   {
@@ -15,6 +16,7 @@ const features = [
     title: "Personal Life Path Analysis",
     description: "Discover your core numbers and their profound meaning in your life journey",
     gradient: "from-blue-500 to-purple-500",
+    neonColor: "rgb(147, 51, 234)",
     number: 1
   },
   {
@@ -22,6 +24,7 @@ const features = [
     title: "Interactive Charts",
     description: "Visualize your numerological characteristics through dynamic, interactive charts",
     gradient: "from-purple-500 to-pink-500",
+    neonColor: "rgb(236, 72, 153)",
     number: 2
   },
   {
@@ -29,6 +32,7 @@ const features = [
     title: "Global Compatibility",
     description: "Find the best countries and locations aligned with your numerological profile",
     gradient: "from-pink-500 to-red-500",
+    neonColor: "rgb(239, 68, 68)",
     number: 3
   },
   {
@@ -36,6 +40,7 @@ const features = [
     title: "Vehicle Harmony",
     description: "Learn which vehicles resonate best with your energy patterns",
     gradient: "from-red-500 to-orange-500",
+    neonColor: "rgb(249, 115, 22)",
     number: 4
   },
   {
@@ -43,6 +48,7 @@ const features = [
     title: "Relationship Insights",
     description: "Understand compatibility patterns in your personal and professional relationships",
     gradient: "from-orange-500 to-yellow-500",
+    neonColor: "rgb(234, 179, 8)",
     number: 5
   },
   {
@@ -50,60 +56,91 @@ const features = [
     title: "Career Guidance",
     description: "Get tailored career recommendations based on your numerological profile",
     gradient: "from-yellow-500 to-green-500",
+    neonColor: "rgb(34, 197, 94)",
     number: 6
   }
 ];
 
 const FeatureList = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {features.map((feature, index) => (
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: index * 0.1 }}
-          whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-          className="relative group text-left"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl blur-xl -z-10" />
-          <div className={`h-full p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm relative overflow-hidden`}>
-            {/* Gradient overlay */}
-            <div className={`absolute inset-0 bg-gradient-to-r ${feature.gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-300`} />
-            
-            {/* Content */}
-            <div className="relative z-10">
-              {/* Number and Icon with gradient background */}
+    <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {features.map((feature, index) => {
+        const progress = useTransform(
+          scrollYProgress,
+          [index * 0.15, (index + 1) * 0.15],
+          [0, 1]
+        );
+
+        return (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1 }}
+            className="relative group"
+          >
+            <motion.div
+              style={{ opacity: progress }}
+              className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.1)] to-transparent"
+            />
+            <motion.div
+              style={{
+                opacity: progress,
+                boxShadow: `0 0 10px 1px ${feature.neonColor}, 
+                           0 0 20px 2px ${feature.neonColor}`
+              }}
+              className="absolute -inset-0.5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            />
+            <div className="relative h-full p-6 rounded-2xl bg-black/40 backdrop-blur-sm border border-white/10">
+              {/* Number and Icon */}
               <div className="flex items-center gap-4 mb-4">
-                <div className="relative w-8 h-8">
-                  <Circle className="w-8 h-8 text-white absolute" />
+                <motion.div 
+                  className="relative w-8 h-8"
+                  style={{ opacity: progress }}
+                >
+                  <Circle className="w-8 h-8 text-white/50" />
                   <span className="absolute inset-0 flex items-center justify-center text-white font-bold">
                     {feature.number}
                   </span>
-                </div>
-                <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${feature.gradient} p-2.5 shadow-lg`}>
+                </motion.div>
+                <motion.div 
+                  className={`relative w-12 h-12 rounded-lg bg-gradient-to-r ${feature.gradient} p-2.5`}
+                  style={{
+                    opacity: progress,
+                    boxShadow: `0 0 5px 1px ${feature.neonColor}, 
+                               0 0 10px 2px ${feature.neonColor}`
+                  }}
+                >
                   <feature.icon className="w-full h-full text-white" />
-                </div>
+                </motion.div>
               </div>
               
-              {/* Title with gradient text */}
-              <h3 className={`text-xl font-bold mb-2 bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
+              {/* Title */}
+              <motion.h3 
+                className={`text-xl font-bold mb-2 bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}
+                style={{ opacity: progress }}
+              >
                 {feature.title}
-              </h3>
+              </motion.h3>
               
               {/* Description */}
-              <p className="text-white/70 text-sm leading-relaxed">
+              <motion.p 
+                className="text-white/70 text-sm leading-relaxed"
+                style={{ opacity: progress }}
+              >
                 {feature.description}
-              </p>
-              
-              {/* Decorative elements */}
-              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-white/5 to-transparent rounded-full blur-2xl" />
-              <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-white/5 to-transparent rounded-full blur-xl" />
+              </motion.p>
             </div>
-          </div>
-        </motion.div>
-      ))}
+          </motion.div>
+        );
+      })}
     </div>
   );
 };
