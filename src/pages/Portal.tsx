@@ -9,26 +9,13 @@ import { cn } from "@/lib/utils"
 import { toast } from "sonner"
 import NumerologyResults from "@/components/numerology/NumerologyResults"
 import CompatibilityChart from "@/components/numerology/CompatibilityChart"
+import CountryCompatibility from "@/components/numerology/CountryCompatibility"
 import { 
   calculateLifePath, 
   calculatePartialEnergy, 
   calculateSecretNumber, 
   getChineseZodiac 
 } from "@/utils/numerologyCalculations"
-import { 
-  Radar, 
-  RadarChart, 
-  PolarGrid, 
-  PolarAngleAxis,
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend
-} from 'recharts';
 
 const Portal = () => {
   const [date, setDate] = useState<Date>()
@@ -70,19 +57,9 @@ const Portal = () => {
     toast.success("Calculation complete!")
   }
 
-  // Sample data for the charts
-  const numerologyStats = [
-    { subject: 'Spiritual Connection', value: 8, fullMark: 10 },
-    { subject: 'Leadership', value: 7, fullMark: 10 },
-    { subject: 'Creativity', value: 9, fullMark: 10 },
-    { subject: 'Intuition', value: 6, fullMark: 10 },
-    { subject: 'Material Success', value: 8, fullMark: 10 },
-    { subject: 'Personal Power', value: 7, fullMark: 10 },
-  ];
-
   return (
     <div className="flex-1 p-4 min-h-screen">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto space-y-8">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -189,7 +166,7 @@ const Portal = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="mt-8 p-8 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10"
+              className="p-8 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10"
             >
               <h3 className="text-2xl font-bold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
                 Your Numerological Profile
@@ -254,6 +231,11 @@ const Portal = () => {
 
             <CompatibilityChart 
               lifePath={results.lifePath}
+              isVisible={showResults}
+            />
+
+            <CountryCompatibility
+              chineseZodiac={results.chineseZodiac}
               isVisible={showResults}
             />
           </>
