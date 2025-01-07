@@ -13,14 +13,14 @@ const Index = () => {
         <Hero />
       </div>
       <ProgressIndicator />
-      <div id="knowledge">
-        <SecretKnowledge />
-      </div>
       <div id="benefits">
         <Benefits />
       </div>
       <div id="sales">
         <SalesPitch />
+      </div>
+      <div id="knowledge">
+        <SecretKnowledge />
       </div>
       <div id="cta">
         <CallToAction />
