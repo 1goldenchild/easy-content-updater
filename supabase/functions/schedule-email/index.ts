@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts"
 import { corsHeaders } from "../_shared/cors.ts"
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3"
 
 interface ScheduleEmailRequest {
   to: string
@@ -28,7 +29,6 @@ const handler = async (req: Request): Promise<Response> => {
       throw new Error("Cannot schedule email in the past")
     }
 
-    // Schedule the email using pg_cron
     const supabaseUrl = Deno.env.get("SUPABASE_URL")
     const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")
 
@@ -36,49 +36,43 @@ const handler = async (req: Request): Promise<Response> => {
       throw new Error("Missing Supabase configuration")
     }
 
+    // Initialize Supabase client with service role key
+    const supabase = createClient(supabaseUrl, supabaseKey)
+
     // Create a unique job name using the email and timestamp
     const jobName = `send-${templateName}-${to}-${Date.now()}`
 
-    // Schedule the job using pg_cron
-    const query = `
-      SELECT cron.schedule(
-        '${jobName}',
-        '* * * * *', -- Run every minute (we'll check the sendAt time in the function)
-        $$
-        SELECT net.http_post(
-          url:='${supabaseUrl}/functions/v1/send-styled-email',
-          headers:='{"Content-Type": "application/json", "Authorization": "Bearer ${supabaseKey}"}'::jsonb,
-          body:='{"to": ["${to}"], "templateName": "${templateName}", "userData": ${JSON.stringify(userData)}}'::jsonb
-        ) WHERE NOW() >= '${sendAt}'::timestamptz;
-        $$
-      );
-    `
-
-    const dbUrl = Deno.env.get("SUPABASE_DB_URL")
-    if (!dbUrl) {
-      throw new Error("Database URL not configured")
-    }
-
-    // Execute the scheduling query
-    const response = await fetch(dbUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${supabaseKey}`
-      },
-      body: JSON.stringify({
-        query: query
+    // Schedule the job using pg_cron via RPC
+    const { data: scheduleData, error: scheduleError } = await supabase.rpc('schedule_email', {
+      p_job_name: jobName,
+      p_schedule: '* * * * *', // Run every minute
+      p_command: JSON.stringify({
+        url: `${supabaseUrl}/functions/v1/send-styled-email`,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${supabaseKey}`
+        },
+        body: {
+          to: [to],
+          templateName,
+          userData,
+          scheduledTime: sendAt
+        }
       })
     })
 
-    if (!response.ok) {
-      throw new Error(`Failed to schedule email: ${await response.text()}`)
+    if (scheduleError) {
+      console.error("Error scheduling email:", scheduleError)
+      throw scheduleError
     }
 
     console.log(`Successfully scheduled ${templateName} email to ${to} at ${sendAt}`)
 
     return new Response(
-      JSON.stringify({ message: "Email scheduled successfully" }),
+      JSON.stringify({ 
+        message: "Email scheduled successfully",
+        data: scheduleData
+      }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     )
   } catch (error) {
