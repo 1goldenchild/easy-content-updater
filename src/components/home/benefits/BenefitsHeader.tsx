@@ -3,29 +3,33 @@ import { motion } from "framer-motion";
 const BenefitsHeader = () => {
   return (
     <div className="text-center mb-12 md:mb-20 relative">
-      {/* Organic shape divider - top */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden h-32 -translate-y-full">
+      {/* Top wave transition */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden h-40 -translate-y-full">
         <svg 
-          viewBox="0 0 1200 120" 
-          preserveAspectRatio="none" 
-          className="absolute bottom-0 w-full h-full text-[#1A1F2C]"
-          style={{ transform: 'rotateX(180deg)' }}
+          viewBox="0 0 1440 320" 
+          className="absolute bottom-0 w-full h-full"
+          preserveAspectRatio="none"
         >
           <path 
-            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
-            fill="currentColor"
+            fill="currentColor" 
+            fillOpacity="1"
+            className="text-background"
+            d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
           />
         </svg>
       </div>
 
       {/* Main content with enhanced gradient background */}
-      <div className="relative z-10 py-16">
+      <div className="relative z-10 py-24">
         {/* Animated background elements */}
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-emerald-500/10 blur-[100px]" />
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-purple-500/5 to-background" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-500/10 via-background to-background" />
+        </div>
         
         {/* Floating orbs */}
         <motion.div
-          className="absolute top-0 left-1/4 w-24 h-24 bg-purple-500/20 rounded-full blur-xl"
+          className="absolute top-20 left-1/4 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl"
           animate={{
             y: [0, -20, 0],
             scale: [1, 1.1, 1],
@@ -37,7 +41,7 @@ const BenefitsHeader = () => {
           }}
         />
         <motion.div
-          className="absolute bottom-0 right-1/4 w-32 h-32 bg-blue-500/20 rounded-full blur-xl"
+          className="absolute bottom-20 right-1/4 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl"
           animate={{
             y: [0, 20, 0],
             scale: [1, 1.2, 1],
@@ -80,26 +84,23 @@ const BenefitsHeader = () => {
                 and the world around you. Our expert analysis reveals the patterns 
                 that shape your life's journey.
               </p>
-              
-              {/* Decorative elements */}
-              <div className="absolute -inset-x-4 top-0 h-full">
-                <div className="h-full w-full bg-gradient-to-r from-purple-500/0 via-purple-500/5 to-purple-500/0" />
-              </div>
             </motion.div>
           </motion.div>
         </div>
       </div>
 
-      {/* Organic shape divider - bottom */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden h-32 translate-y-full">
+      {/* Bottom wave transition */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden h-40 translate-y-full">
         <svg 
-          viewBox="0 0 1200 120" 
-          preserveAspectRatio="none" 
-          className="absolute top-0 w-full h-full text-[#1A1F2C]"
+          viewBox="0 0 1440 320" 
+          className="absolute top-0 w-full h-full rotate-180"
+          preserveAspectRatio="none"
         >
           <path 
-            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
-            fill="currentColor"
+            fill="currentColor" 
+            fillOpacity="1"
+            className="text-background"
+            d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
           />
         </svg>
       </div>
