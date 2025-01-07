@@ -6,54 +6,54 @@ interface CarCompatibilityProps {
   isVisible: boolean;
 }
 
-const carCompatibility: Record<string, { best: { brand: string; model: string }, worst: { brand: string; model: string } }> = {
+const carCompatibility: Record<string, { best: { brand: string }, worst: { brand: string } }> = {
   "Rat": {
-    best: { brand: "Tesla", model: "Model S" },
-    worst: { brand: "Hummer", model: "H2" }
+    best: { brand: "Tesla" },
+    worst: { brand: "Hummer" }
   },
   "Ox": {
-    best: { brand: "Volvo", model: "XC90" },
-    worst: { brand: "Smart", model: "ForTwo" }
+    best: { brand: "Volvo" },
+    worst: { brand: "Smart" }
   },
   "Tiger": {
-    best: { brand: "Porsche", model: "911" },
-    worst: { brand: "Fiat", model: "500" }
+    best: { brand: "Porsche" },
+    worst: { brand: "Fiat" }
   },
   "Rabbit": {
-    best: { brand: "Lexus", model: "ES" },
-    worst: { brand: "Dodge", model: "Ram" }
+    best: { brand: "Lexus" },
+    worst: { brand: "Dodge" }
   },
   "Dragon": {
-    best: { brand: "Ferrari", model: "F8" },
-    worst: { brand: "Nissan", model: "Versa" }
+    best: { brand: "Ferrari" },
+    worst: { brand: "Nissan" }
   },
   "Snake": {
-    best: { brand: "Aston Martin", model: "DB11" },
-    worst: { brand: "Mitsubishi", model: "Mirage" }
+    best: { brand: "Aston Martin" },
+    worst: { brand: "Mitsubishi" }
   },
   "Horse": {
-    best: { brand: "Mustang", model: "GT" },
-    worst: { brand: "Chevrolet", model: "Spark" }
+    best: { brand: "Mustang" },
+    worst: { brand: "Chevrolet" }
   },
   "Goat": {
-    best: { brand: "Range Rover", model: "Sport" },
-    worst: { brand: "Suzuki", model: "Swift" }
+    best: { brand: "Range Rover" },
+    worst: { brand: "Suzuki" }
   },
   "Monkey": {
-    best: { brand: "BMW", model: "M4" },
-    worst: { brand: "Dacia", model: "Logan" }
+    best: { brand: "BMW" },
+    worst: { brand: "Dacia" }
   },
   "Rooster": {
-    best: { brand: "Mercedes", model: "AMG GT" },
-    worst: { brand: "Tata", model: "Nano" }
+    best: { brand: "Mercedes" },
+    worst: { brand: "Tata" }
   },
   "Dog": {
-    best: { brand: "Subaru", model: "WRX" },
-    worst: { brand: "Lada", model: "Granta" }
+    best: { brand: "Subaru" },
+    worst: { brand: "Lada" }
   },
   "Pig": {
-    best: { brand: "Bentley", model: "Continental GT" },
-    worst: { brand: "Yugo", model: "45" }
+    best: { brand: "Bentley" },
+    worst: { brand: "Yugo" }
   }
 };
 
@@ -84,7 +84,6 @@ const CarCompatibility = ({ chineseZodiac, isVisible }: CarCompatibilityProps) =
               <CarFront className="w-12 h-12 text-green-500" />
               <div>
                 <p className="text-xl font-bold text-white">{compatibility.best.brand}</p>
-                <p className="text-sm text-white/70">{compatibility.best.model}</p>
               </div>
             </div>
           </div>
@@ -100,7 +99,6 @@ const CarCompatibility = ({ chineseZodiac, isVisible }: CarCompatibilityProps) =
               <Car className="w-12 h-12 text-red-500" />
               <div>
                 <p className="text-xl font-bold text-white">{compatibility.worst.brand}</p>
-                <p className="text-sm text-white/70">{compatibility.worst.model}</p>
               </div>
             </div>
           </div>
