@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Menu } from "lucide-react"
 import { Link } from "react-router-dom"
 import { useState } from "react"
+import AnimatedLogo from "./AnimatedLogo"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -20,10 +21,7 @@ const Navbar = () => {
       <div className="container flex h-14 items-center">
         <Link to="/" className="mr-4 flex items-center space-x-2">
           <span className="text-2xl font-black tracking-tighter">
-            NUMEROLOGY
-            <span className="bg-gradient-to-r from-[#9b87f5] to-[#D946EF] bg-clip-text text-transparent ml-1">
-              33
-            </span>
+            <AnimatedLogo />
           </span>
         </Link>
 
