@@ -23,6 +23,13 @@ const blogPosts = [
     category: "Forecasts",
     readTime: "6 min read",
     image: "/placeholder.svg"
+  },
+  {
+    title: "Numerology in Relationships",
+    description: "Understanding compatibility and relationship dynamics through the lens of numerological patterns.",
+    category: "Relationships",
+    readTime: "5 min read",
+    image: "/placeholder.svg"
   }
 ]
 
@@ -33,7 +40,7 @@ const BlogPreview = () => {
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <span className="bg-gradient-to-r from-purple-400 to-pink-600 text-transparent bg-clip-text">
-              Latest Insights
+              Latest Articles
             </span>
           </h2>
           <p className="text-lg text-muted-foreground">
