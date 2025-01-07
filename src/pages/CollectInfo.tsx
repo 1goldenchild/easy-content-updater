@@ -23,9 +23,10 @@ const CollectInfo = () => {
 
     try {
       const formattedDate = format(date, 'yyyy-MM-dd')
-      console.log("Starting form submission with data:", { name, email, formattedDate })
+      console.log("[Form Submission] Starting with data:", { name, email, formattedDate })
       
-      const { data, error } = await supabase
+      // Step 1: Save to database
+      const { data: savedData, error: dbError } = await supabase
         .from('user_readings')
         .insert([
           {
@@ -36,22 +37,22 @@ const CollectInfo = () => {
         ])
         .select()
 
-      console.log("Supabase insert response:", { data, error })
+      console.log("[Database] Insert response:", { savedData, dbError })
 
-      if (error) {
-        console.error("Error saving to Supabase:", error)
-        toast.error(error.message || "There was an error saving your information. Please try again.")
+      if (dbError) {
+        console.error("[Database] Error saving to Supabase:", dbError)
+        toast.error("Database Error: " + (dbError.message || "Failed to save your information"))
         return
       }
 
-      if (!data || data.length === 0) {
-        console.error("No data returned from Supabase")
-        toast.error("There was an error saving your information. Please try again.")
+      if (!savedData || savedData.length === 0) {
+        console.error("[Database] No data returned from Supabase")
+        toast.error("Failed to save your information. Please try again.")
         return
       }
 
-      // Send welcome email immediately
-      console.log("Attempting to send welcome email...")
+      // Step 2: Send welcome email
+      console.log("[Email] Attempting to send welcome email...")
       const { data: welcomeData, error: welcomeEmailError } = await supabase.functions.invoke('send-styled-email', {
         body: {
           to: [email],
@@ -63,17 +64,17 @@ const CollectInfo = () => {
         }
       })
 
-      console.log("Welcome email response:", { welcomeData, welcomeEmailError })
+      console.log("[Email] Welcome email response:", { welcomeData, welcomeEmailError })
 
       if (welcomeEmailError) {
-        console.error("Error sending welcome email:", welcomeEmailError)
-        toast.error("Your information was saved but we couldn't send the welcome email. Our team has been notified.")
+        console.error("[Email] Error sending welcome email:", welcomeEmailError)
+        toast.error("Your information was saved but we couldn't send the welcome email. Our team will look into this.")
       } else {
-        toast.success("Information saved and welcome email sent! Check your inbox (and spam folder).")
+        toast.success("Information saved successfully! Check your inbox (and spam folder) for our welcome email.")
       }
 
-      // Schedule analysis email to be sent after 24 hours
-      console.log("Attempting to schedule analysis email...")
+      // Step 3: Schedule analysis email
+      console.log("[Schedule] Attempting to schedule analysis email...")
       const { data: scheduleData, error: scheduleError } = await supabase.functions.invoke('schedule-email', {
         body: {
           to: email,
@@ -86,18 +87,18 @@ const CollectInfo = () => {
         }
       })
 
-      console.log("Schedule email response:", { scheduleData, scheduleError })
+      console.log("[Schedule] Schedule email response:", { scheduleData, scheduleError })
 
       if (scheduleError) {
-        console.error("Error scheduling analysis email:", scheduleError)
-        toast.error("Your information was saved but we couldn't schedule the analysis email. Our team has been notified.")
+        console.error("[Schedule] Error scheduling analysis email:", scheduleError)
+        toast.error("Your information was saved but we couldn't schedule the analysis email. Our team will look into this.")
       }
 
-      // Redirect to the numerology checkout page
+      // Redirect to checkout
       window.location.href = "https://www.numerology33.com/checkout"
     } catch (error) {
-      console.error("Error in form submission:", error)
-      toast.error("There was an error processing your request. Please try again.")
+      console.error("[Error] Unexpected error in form submission:", error)
+      toast.error("An unexpected error occurred. Please try again.")
     } finally {
       setIsSubmitting(false)
     }
