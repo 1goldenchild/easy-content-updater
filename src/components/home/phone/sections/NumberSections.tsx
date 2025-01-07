@@ -14,42 +14,51 @@ const NumberSections = () => {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-3">
-        <NumberSection
-          id="lifepath"
-          title="Life Path Number"
-          number="8"
-          subtitle={<>The Powerhouse <span onClick={handleReadClick} className="text-[10px] text-white/60 block mt-1 cursor-pointer hover:text-white/80">Read Full Analysis →</span></>}
-          gradientFrom="[#8B5CF6]"
-          gradientTo="[#D946EF]"
-        />
+      <div className="space-y-4">
+        <div className="grid grid-cols-2 gap-3">
+          <NumberSection
+            id="lifepath"
+            title="Life Path Number"
+            number="8"
+            subtitle="The Powerhouse"
+            gradientFrom="[#8B5CF6]"
+            gradientTo="[#D946EF]"
+          />
 
-        <NumberSection
-          id="partial"
-          title="Partial Energy"
-          number="4"
-          subtitle={<>The Builder <span onClick={handleReadClick} className="text-[10px] text-white/60 block mt-1 cursor-pointer hover:text-white/80">Read Full Analysis →</span></>}
-          gradientFrom="[#F97316]"
-          gradientTo="[#D946EF]"
-        />
+          <NumberSection
+            id="partial"
+            title="Partial Energy"
+            number="4"
+            subtitle="The Builder"
+            gradientFrom="[#F97316]"
+            gradientTo="[#D946EF]"
+          />
 
-        <NumberSection
-          id="secret"
-          title="Secret Number"
-          number="33"
-          subtitle={<>The Master Teacher <span onClick={handleReadClick} className="text-[10px] text-white/60 block mt-1 cursor-pointer hover:text-white/80">Read Full Analysis →</span></>}
-          gradientFrom="[#0EA5E9]"
-          gradientTo="[#8B5CF6]"
-        />
+          <NumberSection
+            id="secret"
+            title="Secret Number"
+            number="33"
+            subtitle="The Master Teacher"
+            gradientFrom="[#0EA5E9]"
+            gradientTo="[#8B5CF6]"
+          />
 
-        <NumberSection
-          id="zodiac"
-          title="Chinese Zodiac"
-          number="龍"
-          subtitle={<>Year of the Dragon <span onClick={handleReadClick} className="text-[10px] text-white/60 block mt-1 cursor-pointer hover:text-white/80">Read Full Analysis →</span></>}
-          gradientFrom="[#F97316]"
-          gradientTo="[#0EA5E9]"
-        />
+          <NumberSection
+            id="zodiac"
+            title="Chinese Zodiac"
+            number="龍"
+            subtitle="Year of the Dragon"
+            gradientFrom="[#F97316]"
+            gradientTo="[#0EA5E9]"
+          />
+        </div>
+
+        <button
+          onClick={handleReadClick}
+          className="w-full py-2 px-4 rounded-lg bg-gradient-to-r from-[#8B5CF6]/20 to-[#D946EF]/20 border border-white/10 text-white/70 hover:text-white/90 transition-colors text-sm"
+        >
+          Read Full Analysis →
+        </button>
       </div>
 
       {showAnalysis && (
