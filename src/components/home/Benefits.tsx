@@ -8,7 +8,8 @@ const benefits = [
     description: "Use numerology to gain deep insights into yourself and others. Understand the motivations behind people's actions, discover why they behave the way they do, and unlock the hidden dynamics of your relationships.",
     bgGradient: "from-blue-400/10 via-blue-500/5 to-purple-500/10",
     iconColor: "text-blue-400",
-    borderColor: "border-blue-500/20"
+    borderColor: "border-blue-500/20",
+    burnGradient: "from-blue-400/0 via-blue-400/10 to-purple-500/5"
   },
   {
     icon: TrendingUp,
@@ -16,7 +17,8 @@ const benefits = [
     description: "Discover the opportunities meant for you by aligning your actions with your natural path. When you understand your true purpose, you can move with confidence and clarity, making decisions that resonate with your inner strengths.",
     bgGradient: "from-purple-400/10 via-pink-500/5 to-red-500/10",
     iconColor: "text-purple-400",
-    borderColor: "border-purple-500/20"
+    borderColor: "border-purple-500/20",
+    burnGradient: "from-purple-400/0 via-purple-400/10 to-pink-500/5"
   },
   {
     icon: Sparkles,
@@ -24,7 +26,8 @@ const benefits = [
     description: "Tap into the powerful numbers that unlock prosperity and guide you toward smarter financial decisions. Use the precision of numerology to identify the most profitable opportunities and align your actions with abundance.",
     bgGradient: "from-amber-400/10 via-orange-500/5 to-red-500/10",
     iconColor: "text-amber-400",
-    borderColor: "border-amber-500/20"
+    borderColor: "border-amber-500/20",
+    burnGradient: "from-amber-400/0 via-amber-400/10 to-orange-500/5"
   },
   {
     icon: Target,
@@ -32,7 +35,8 @@ const benefits = [
     description: "The truth about your numbers will reveal powerful insights into who you really are—illuminating the reasons behind your behaviors, choices, and patterns in life. Numerology teaches you to understand not just your strengths and potential.",
     bgGradient: "from-emerald-400/10 via-teal-500/5 to-cyan-500/10",
     iconColor: "text-emerald-400",
-    borderColor: "border-emerald-500/20"
+    borderColor: "border-emerald-500/20",
+    burnGradient: "from-emerald-400/0 via-emerald-400/10 to-teal-500/5"
   }
 ]
 
@@ -87,9 +91,13 @@ const Benefits = () => {
             <motion.div
               key={index}
               variants={itemVariants}
-              className={`group relative rounded-2xl p-4 sm:p-6 lg:p-6 border ${benefit.borderColor} bg-gradient-to-br ${benefit.bgGradient} backdrop-blur-sm hover:scale-[1.02] transition-all duration-300 ease-out`}
+              className={`group relative rounded-2xl p-4 sm:p-6 lg:p-6 border ${benefit.borderColor} bg-gradient-to-br ${benefit.bgGradient} backdrop-blur-sm hover:scale-[1.02] transition-all duration-300 ease-out overflow-hidden`}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-white/[0.04] to-transparent rounded-2xl" />
+              
+              {/* Burning effect overlay */}
+              <div className={`absolute inset-0 bg-gradient-to-t ${benefit.burnGradient} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-shine bg-[length:200%_200%]`} />
+              
               <div className="relative space-y-3 sm:space-y-4">
                 <div className={`${benefit.iconColor} w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 p-2 sm:p-2.5 ring-2 ring-white/10 group-hover:ring-white/20 transition-all duration-300`}>
                   <benefit.icon className="w-full h-full" />
