@@ -9,71 +9,83 @@ const getGematriaValue = (letter: string): string => {
 }
 
 const AnimatedLogo = () => {
-  const [isAnimated, setIsAnimated] = useState(false)
+  const [currentIndex, setCurrentIndex] = useState(-1)
+  const [showNumbers, setShowNumbers] = useState(true)
+  const [show33, setShow33] = useState(false)
   const word = "NUMEROLOGY"
   
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsAnimated(true)
-    }, 500)
-    
-    return () => clearTimeout(timer)
+    // First show all numbers for 1 second
+    const numbersTimer = setTimeout(() => {
+      // Start the letter transformation sequence
+      setCurrentIndex(0)
+      
+      // Set up interval to transform each letter
+      const interval = setInterval(() => {
+        setCurrentIndex(prev => {
+          if (prev >= word.length - 1) {
+            clearInterval(interval)
+            // Show 33 after last letter transforms
+            setTimeout(() => setShow33(true), 300)
+            return prev
+          }
+          return prev + 1
+        })
+      }, 100)
+
+      return () => clearInterval(interval)
+    }, 1000)
+
+    return () => clearTimeout(numbersTimer)
   }, [])
 
   return (
-    <div className="flex">
+    <div className="flex items-center">
       {word.split('').map((letter, index) => (
-        <motion.span
+        <motion.div
           key={index}
           className="inline-block relative font-bold text-2xl"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, delay: index * 0.05 }}
         >
           <AnimatePresence mode="wait">
-            {!isAnimated ? (
-              <motion.span
-                key="number"
-                initial={{ scale: 1.2, opacity: 0.5 }}
-                animate={{ 
-                  scale: [1.2, 0.9, 1],
-                  opacity: [0.5, 1, 0.8],
-                }}
-                exit={{ 
-                  scale: 0.8,
-                  opacity: 0,
-                  transition: { duration: 0.2 }
-                }}
-                transition={{ 
-                  duration: 0.4,
-                  delay: index * 0.1,
-                  ease: "easeOut"
-                }}
-                className="inline-block bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent animate-shine"
-              >
-                {getGematriaValue(letter)}
-              </motion.span>
-            ) : (
+            {index <= currentIndex ? (
               <motion.span
                 key="letter"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ 
-                  scale: 1,
-                  opacity: 1,
-                }}
-                transition={{ 
-                  duration: 0.3,
-                  delay: index * 0.1,
-                  ease: "easeOut"
-                }}
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.3 }}
                 className="inline-block"
               >
                 {letter}
               </motion.span>
+            ) : (
+              <motion.span
+                key="number"
+                initial={{ opacity: 1 }}
+                exit={{ y: 20, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="inline-block bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent"
+              >
+                {getGematriaValue(letter)}
+              </motion.span>
             )}
           </AnimatePresence>
-        </motion.span>
+        </motion.div>
       ))}
-      <span className="bg-gradient-to-r from-[#9b87f5] to-[#D946EF] bg-clip-text text-transparent ml-1">
-        33
-      </span>
+      <AnimatePresence>
+        {show33 && (
+          <motion.span
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3 }}
+            className="bg-gradient-to-r from-[#9b87f5] to-[#D946EF] bg-clip-text text-transparent ml-1"
+          >
+            33
+          </motion.span>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
