@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
-import { Instagram, Youtube } from "lucide-react"
+import { Youtube, Instagram } from "lucide-react"
 import TikTokIcon from "../icons/TikTokIcon"
 
 const Footer = () => {
@@ -89,43 +89,45 @@ const Footer = () => {
               <p className="text-sm text-muted-foreground">
                 Discover your life's path through the ancient wisdom of numbers.
               </p>
-              <div className="flex space-x-4">
-                {[
-                  { 
-                    name: 'tiktok', 
-                    url: 'https://www.tiktok.com/@numerology_33',
-                    icon: TikTokIcon,
-                    followers: '87k'
-                  },
-                  { 
-                    name: 'instagram', 
-                    url: '#',
-                    icon: Instagram
-                  },
-                  { 
-                    name: 'youtube', 
-                    url: 'https://www.youtube.com/@numerology-33',
-                    icon: Youtube
-                  }
-                ].map((social) => (
+              <div className="flex items-center space-x-4">
+                <div className="flex flex-col items-center">
                   <a
-                    key={social.name}
-                    href={social.url}
+                    href="https://www.tiktok.com/@numerology_33"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#D946EF] p-[1px] hover:scale-110 transition-transform group"
+                    className="relative w-10 h-10 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#D946EF] p-[1px] hover:scale-110 transition-transform"
                   >
                     <div className="w-full h-full rounded-full bg-background flex items-center justify-center">
-                      <span className="sr-only">{social.name}</span>
-                      <social.icon className="w-4 h-4 md:w-5 md:h-5 text-transparent bg-clip-text bg-gradient-to-br from-[#8B5CF6] to-[#D946EF]" />
+                      <span className="sr-only">TikTok</span>
+                      <TikTokIcon className="w-5 h-5 text-white" />
                     </div>
-                    {social.followers && (
-                      <span className="absolute -top-2 -right-2 text-xs bg-gradient-to-br from-[#8B5CF6] to-[#D946EF] text-white px-1.5 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                        {social.followers}
-                      </span>
-                    )}
                   </a>
-                ))}
+                  <span className="text-xs text-white mt-1">87k</span>
+                </div>
+
+                <a
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#D946EF] p-[1px] hover:scale-110 transition-transform"
+                >
+                  <div className="w-full h-full rounded-full bg-background flex items-center justify-center">
+                    <span className="sr-only">Instagram</span>
+                    <Instagram className="w-5 h-5 text-white" />
+                  </div>
+                </a>
+
+                <a
+                  href="https://www.youtube.com/@numerology-33"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#D946EF] p-[1px] hover:scale-110 transition-transform"
+                >
+                  <div className="w-full h-full rounded-full bg-background flex items-center justify-center">
+                    <span className="sr-only">YouTube</span>
+                    <Youtube className="w-5 h-5 text-white" />
+                  </div>
+                </a>
               </div>
             </div>
 
