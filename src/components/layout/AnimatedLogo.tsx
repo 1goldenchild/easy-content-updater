@@ -44,7 +44,7 @@ const AnimatedLogo = () => {
       {word.split('').map((letter, index) => (
         <motion.div
           key={index}
-          className="inline-block relative font-bold text-2xl w-[1.5em] text-center"
+          className="inline-block relative font-bold text-2xl"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: index * 0.05 }}
