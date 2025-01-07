@@ -1,6 +1,25 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const PhoneShowcase = () => {
+  const [activeSection, setActiveSection] = useState("lifepath");
+
+  const sections = [
+    { id: "lifepath", label: "Life Path" },
+    { id: "traits", label: "Core Traits" },
+    { id: "compatibility", label: "Matches" },
+    { id: "career", label: "Career" },
+    { id: "forecast", label: "Forecast" }
+  ];
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setActiveSection(id);
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -13,11 +32,27 @@ const PhoneShowcase = () => {
         {/* Notch */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-7 bg-black rounded-b-3xl z-20" />
         
+        {/* Navigation Dots */}
+        <div className="absolute right-2 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-4">
+          {sections.map((section) => (
+            <button
+              key={section.id}
+              onClick={() => scrollToSection(section.id)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                activeSection === section.id 
+                  ? "bg-gradient-to-r from-purple-400 to-pink-400 scale-150" 
+                  : "bg-white/20 hover:bg-white/40"
+              }`}
+              aria-label={section.label}
+            />
+          ))}
+        </div>
+        
         {/* Screen Content */}
         <div className="absolute inset-0 overflow-y-auto overflow-x-hidden scrollbar-hide">
           <div className="w-full space-y-6 p-4">
             {/* Life Path Section */}
-            <div className="rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 p-4 backdrop-blur-sm">
+            <div id="lifepath" className="rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 p-4 backdrop-blur-sm">
               <h3 className="text-lg font-semibold text-white mb-2">Life Path Number</h3>
               <motion.div 
                 initial={{ scale: 0.9 }}
@@ -27,11 +62,11 @@ const PhoneShowcase = () => {
               >
                 7
               </motion.div>
-              <p className="text-xs text-white/70 mt-2">The Seeker & Mystic</p>
+              <p className="text-xs text-white/70 mt-2">The Misunderstood Genius</p>
             </div>
 
             {/* Characteristics Chart */}
-            <div className="rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 p-4">
+            <div id="traits" className="rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 p-4">
               <h3 className="text-sm font-semibold text-white/90 mb-3">Core Traits</h3>
               <div className="space-y-2">
                 {["Spiritual", "Analytical", "Intuitive", "Reserved", "Philosophical"].map((trait, index) => (
@@ -47,7 +82,7 @@ const PhoneShowcase = () => {
             </div>
 
             {/* Compatibility Section */}
-            <div className="rounded-xl bg-gradient-to-br from-indigo-500/20 to-blue-500/20 p-4">
+            <div id="compatibility" className="rounded-xl bg-gradient-to-br from-indigo-500/20 to-blue-500/20 p-4">
               <h3 className="text-sm font-semibold text-white/90 mb-3">Best Matches</h3>
               <div className="grid grid-cols-3 gap-2">
                 {[1, 5, 7].map((num) => (
@@ -63,7 +98,7 @@ const PhoneShowcase = () => {
             </div>
 
             {/* Career Path */}
-            <div className="rounded-xl bg-gradient-to-br from-pink-500/20 to-orange-500/20 p-4">
+            <div id="career" className="rounded-xl bg-gradient-to-br from-pink-500/20 to-orange-500/20 p-4">
               <h3 className="text-sm font-semibold text-white/90 mb-3">Career Paths</h3>
               <div className="space-y-2">
                 {["Researcher", "Analyst", "Teacher", "Writer"].map((career) => (
@@ -75,7 +110,7 @@ const PhoneShowcase = () => {
             </div>
 
             {/* Yearly Forecast */}
-            <div className="rounded-xl bg-gradient-to-br from-green-500/20 to-teal-500/20 p-4">
+            <div id="forecast" className="rounded-xl bg-gradient-to-br from-green-500/20 to-teal-500/20 p-4">
               <h3 className="text-sm font-semibold text-white/90 mb-3">2024 Forecast</h3>
               <div className="relative h-32">
                 <motion.div
