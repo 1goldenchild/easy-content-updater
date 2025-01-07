@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import EarthGlobe from "@/components/numerology/EarthGlobe";
 
 const CountryCompatibility = () => {
   const countries = [
@@ -13,14 +12,17 @@ const CountryCompatibility = () => {
 
   return (
     <div id="countries" className="rounded-xl bg-gradient-to-br from-[#8B5CF6]/30 to-[#0EA5E9]/30 p-4">
-      <h3 className="text-sm font-semibold text-white/90 mb-3">Global Compatibility</h3>
+      <h3 className="text-sm font-semibold text-white/90 mb-3 text-center">Global Compatibility</h3>
       
-      <div className="relative w-full aspect-square mb-4">
-        <img 
-          src="https://media.giphy.com/media/wgHY9nSrlTMt2/giphy.gif" 
-          alt="Rotating globe animation"
-          className="w-full h-full object-contain rounded-lg" 
-        />
+      <div className="relative w-full aspect-square mb-4 flex items-center justify-center">
+        <div className="w-full h-full relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#1A1F2C]/50 to-[#1A1F2C] z-10" />
+          <img 
+            src="https://media.giphy.com/media/wgHY9nSrlTMt2/giphy.gif" 
+            alt="Rotating globe animation"
+            className="w-full h-full object-contain rounded-lg mix-blend-screen" 
+          />
+        </div>
       </div>
 
       <div className="space-y-4">
