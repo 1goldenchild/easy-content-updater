@@ -30,8 +30,8 @@ const NumberSections = () => {
             title="Partial Energy"
             number="4"
             subtitle="The Builder"
-            gradientFrom="[#F97316]"
-            gradientTo="[#D946EF]"
+            gradientFrom="[#E5DEFF]"
+            gradientTo="[#D6BCFA]"
           />
 
           <NumberSection
@@ -48,16 +48,28 @@ const NumberSections = () => {
             title="Chinese Zodiac"
             number="龍"
             subtitle="Year of the Dragon"
-            gradientFrom="[#F97316]"
-            gradientTo="[#0EA5E9]"
+            gradientFrom="[#D3E4FD]"
+            gradientTo="[#F1F0FB]"
           />
         </div>
 
         <button
           onClick={handleReadClick}
-          className="w-full py-2 px-4 rounded-lg bg-gradient-to-r from-[#8B5CF6]/20 to-[#D946EF]/20 border border-white/10 text-white/70 hover:text-white/90 transition-colors text-sm"
+          className="relative w-full py-2 px-4 rounded-lg bg-gradient-to-r from-[#8B5CF6]/20 to-[#D946EF]/20 border border-white/10 text-white/70 hover:text-white/90 transition-colors text-sm overflow-hidden group"
         >
-          Read Full Analysis →
+          <span className="relative z-10">Read Full Analysis →</span>
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+            initial={{ x: '-100%' }}
+            animate={{ x: '100%' }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              repeatType: "loop",
+              ease: "linear",
+              repeatDelay: 1
+            }}
+          />
         </button>
       </div>
 
