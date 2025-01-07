@@ -34,6 +34,69 @@ const SalesPitch = () => {
             transition={{ duration: 0.5 }}
             className="space-y-8"
           >
+            {/* Human Body Visualization */}
+            <div className="relative h-64 mb-8">
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-b from-purple-500/20 to-transparent"
+                animate={{
+                  opacity: [0.5, 0.8, 0.5],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+              <svg
+                viewBox="0 0 24 24"
+                className="w-full h-full"
+                style={{
+                  filter: "drop-shadow(0 0 10px rgba(168, 85, 247, 0.4))"
+                }}
+              >
+                <motion.path
+                  d="M12 2C9.24 2 7 4.24 7 7C7 9.76 9.24 12 12 12C14.76 12 17 9.76 17 7C17 4.24 14.76 2 12 2ZM12 14C8.13 14 5 17.13 5 21C5 21.55 5.45 22 6 22H18C18.55 22 19 21.55 19 21C19 17.13 15.87 14 12 14Z"
+                  fill="url(#humanGradient)"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{
+                    duration: 2,
+                    ease: "easeInOut",
+                    repeat: Infinity,
+                    repeatType: "reverse"
+                  }}
+                />
+                <defs>
+                  <linearGradient id="humanGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#C084FC" />
+                    <stop offset="50%" stopColor="#E879F9" />
+                    <stop offset="100%" stopColor="#F0ABFC" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              {/* Energy Lines */}
+              {[...Array(5)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-full h-0.5 bg-gradient-to-r from-purple-500/0 via-purple-500/50 to-purple-500/0"
+                  style={{
+                    top: `${20 + i * 15}%`,
+                    transform: 'scaleX(0.8)',
+                  }}
+                  animate={{
+                    opacity: [0.3, 1, 0.3],
+                    scaleX: [0.8, 1, 0.8],
+                  }}
+                  transition={{
+                    duration: 2,
+                    delay: i * 0.2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+              ))}
+            </div>
+
             <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
               Unlock Your Complete Numerology Profile
             </h2>
@@ -124,7 +187,7 @@ const SalesPitch = () => {
                 size="lg"
                 className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold px-8 py-6 text-lg h-auto"
               >
-                Start Your Free Analysis
+                Start Your Analysis
               </Button>
             </div>
 
