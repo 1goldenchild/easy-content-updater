@@ -18,7 +18,7 @@ const SalesPitch = () => {
           >
             <HumanVisualization />
 
-            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#0466c8] to-[#023e8a] bg-clip-text text-transparent">
+            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#0466c8] to-[#023e8a] bg-clip-text text-transparent text-center">
               Unlock Your Complete Numerology Profile
             </h2>
             
