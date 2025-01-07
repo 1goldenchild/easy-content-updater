@@ -169,6 +169,33 @@ const PhoneShowcase = () => {
         </div>
 
         <YearlyForecast />
+
+        {/* And More Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="relative rounded-xl bg-gradient-to-br from-[#8B5CF6]/30 to-[#0EA5E9]/30 p-6 text-center overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
+          <h3 className="relative text-xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent mb-2">
+            And More...
+          </h3>
+          <p className="relative text-sm text-white/70">
+            Unlock deeper insights and discover your full potential
+          </p>
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+            initial={{ x: '-100%' }}
+            animate={{ x: '100%' }}
+            transition={{ 
+              duration: 2,
+              repeat: Infinity,
+              repeatType: "loop",
+              ease: "linear",
+            }}
+          />
+        </motion.div>
       </div>
     </PhoneFrame>
   );
