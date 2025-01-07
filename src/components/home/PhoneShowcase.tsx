@@ -17,18 +17,23 @@ const PhoneShowcase = () => {
         <div className="absolute inset-0 overflow-y-auto overflow-x-hidden scrollbar-hide">
           <motion.div 
             initial={{ y: 0 }}
-            animate={{ y: -800 }}
+            animate={{ y: "-100%" }}
             transition={{ 
               duration: 20,
               repeat: Infinity,
               repeatType: "reverse",
               ease: "linear"
             }}
+            className="w-full"
           >
             <img 
               src="/lovable-uploads/fa5950c8-545a-4644-8d15-7796497be16d.png"
               alt="Numerology Analysis"
-              className="w-full object-cover"
+              className="w-full h-auto object-contain"
+              style={{ 
+                imageRendering: "auto",
+                maxWidth: "100%"
+              }}
             />
           </motion.div>
         </div>
