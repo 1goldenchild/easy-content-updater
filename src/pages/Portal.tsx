@@ -8,6 +8,7 @@ import CarCompatibility from "@/components/numerology/CarCompatibility"
 import OccupationGuidance from "@/components/numerology/OccupationGuidance"
 import DateSelector from "@/components/numerology/DateSelector"
 import ExportButton from "@/components/numerology/ExportButton"
+import ProgressIndicator from "@/components/numerology/ProgressIndicator"
 import { 
   calculateLifePath, 
   calculatePartialEnergy, 
@@ -124,7 +125,12 @@ const Portal = () => {
           </>
         )}
       </div>
-      {showResults && <ExportButton />}
+      {showResults && (
+        <>
+          <ExportButton />
+          <ProgressIndicator />
+        </>
+      )}
     </div>
   );
 };
