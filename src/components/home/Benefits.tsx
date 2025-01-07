@@ -61,7 +61,7 @@ const Benefits = () => {
   return (
     <section className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/5 to-transparent" />
-      <div className="container px-4 md:px-6 relative">
+      <div className="container max-w-6xl mx-auto px-4 md:px-6 relative">
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -81,7 +81,7 @@ const Benefits = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4 lg:gap-8"
+          className="grid grid-cols-2 gap-4 lg:gap-6"
         >
           {benefits.map((benefit, index) => (
             <motion.div
@@ -98,7 +98,7 @@ const Benefits = () => {
                   <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-white via-white/90 to-white/80 bg-clip-text text-transparent">
                     {benefit.title}
                   </h3>
-                  <p className="text-sm sm:text-base text-white/70 leading-relaxed">
+                  <p className="text-sm sm:text-base text-white/70 leading-relaxed line-clamp-4">
                     {benefit.description}
                   </p>
                 </div>
