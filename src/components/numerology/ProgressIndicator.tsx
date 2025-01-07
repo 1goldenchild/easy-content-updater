@@ -24,7 +24,7 @@ const ProgressIndicator = () => {
   }, []);
 
   return (
-    <div className="fixed left-8 top-1/2 -translate-y-1/2 flex items-center gap-4">
+    <div className="fixed left-8 top-1/2 -translate-y-1/2 flex items-center gap-4 z-50">
       <div className="h-[300px] w-[2px] bg-white/10 rounded-full relative">
         <motion.div 
           className="absolute w-full bg-gradient-to-b from-purple-500 to-pink-500 rounded-full"
