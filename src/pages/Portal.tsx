@@ -19,7 +19,14 @@ import {
   RadarChart, 
   PolarGrid, 
   PolarAngleAxis,
-  ResponsiveContainer 
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend
 } from 'recharts';
 
 const Portal = () => {
@@ -62,14 +69,14 @@ const Portal = () => {
     toast.success("Calculation complete!")
   }
 
-  // Sample data for the radar chart
+  // Sample data for the charts
   const numerologyStats = [
-    { subject: 'Spiritual Connection', A: 8, fullMark: 10 },
-    { subject: 'Leadership', A: 7, fullMark: 10 },
-    { subject: 'Creativity', A: 9, fullMark: 10 },
-    { subject: 'Intuition', A: 6, fullMark: 10 },
-    { subject: 'Material Success', A: 8, fullMark: 10 },
-    { subject: 'Personal Power', A: 7, fullMark: 10 },
+    { subject: 'Spiritual Connection', value: 8, fullMark: 10 },
+    { subject: 'Leadership', value: 7, fullMark: 10 },
+    { subject: 'Creativity', value: 9, fullMark: 10 },
+    { subject: 'Intuition', value: 6, fullMark: 10 },
+    { subject: 'Material Success', value: 8, fullMark: 10 },
+    { subject: 'Personal Power', value: 7, fullMark: 10 },
   ];
 
   return (
@@ -186,23 +193,63 @@ const Portal = () => {
             <h3 className="text-2xl font-bold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
               Your Numerological Profile
             </h3>
-            <div className="w-full h-[400px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <RadarChart cx="50%" cy="50%" outerRadius="80%" data={numerologyStats}>
-                  <PolarGrid stroke="rgba(255, 255, 255, 0.1)" />
-                  <PolarAngleAxis 
-                    dataKey="subject" 
-                    tick={{ fill: 'rgba(255, 255, 255, 0.7)', fontSize: 12 }}
-                  />
-                  <Radar
-                    name="Attributes"
-                    dataKey="A"
-                    stroke="rgba(139, 92, 246, 0.8)"
-                    fill="rgba(139, 92, 246, 0.3)"
-                    fillOpacity={0.6}
-                  />
-                </RadarChart>
-              </ResponsiveContainer>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Radar Chart */}
+              <div className="w-full h-[400px]">
+                <h4 className="text-lg font-semibold text-center text-white/80 mb-4">Attribute Balance</h4>
+                <ResponsiveContainer width="100%" height="100%">
+                  <RadarChart cx="50%" cy="50%" outerRadius="80%" data={numerologyStats}>
+                    <PolarGrid stroke="rgba(255, 255, 255, 0.1)" />
+                    <PolarAngleAxis 
+                      dataKey="subject" 
+                      tick={{ fill: 'rgba(255, 255, 255, 0.7)', fontSize: 12 }}
+                    />
+                    <Radar
+                      name="Attributes"
+                      dataKey="value"
+                      stroke="rgba(139, 92, 246, 0.8)"
+                      fill="rgba(139, 92, 246, 0.3)"
+                      fillOpacity={0.6}
+                    />
+                  </RadarChart>
+                </ResponsiveContainer>
+              </div>
+
+              {/* Bar Chart */}
+              <div className="w-full h-[400px]">
+                <h4 className="text-lg font-semibold text-center text-white/80 mb-4">Attribute Comparison</h4>
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={numerologyStats}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.1)" />
+                    <XAxis 
+                      dataKey="subject" 
+                      tick={{ fill: 'rgba(255, 255, 255, 0.7)', fontSize: 12 }}
+                      angle={-45}
+                      textAnchor="end"
+                      height={100}
+                    />
+                    <YAxis 
+                      tick={{ fill: 'rgba(255, 255, 255, 0.7)' }}
+                      domain={[0, 10]}
+                    />
+                    <Tooltip 
+                      contentStyle={{ 
+                        backgroundColor: 'rgba(26, 31, 44, 0.9)',
+                        border: '1px solid rgba(139, 92, 246, 0.3)',
+                        borderRadius: '8px',
+                        color: 'rgba(255, 255, 255, 0.8)'
+                      }}
+                    />
+                    <Legend />
+                    <Bar 
+                      dataKey="value" 
+                      name="Score"
+                      fill="rgba(139, 92, 246, 0.6)"
+                      radius={[4, 4, 0, 0]}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
           </motion.div>
         )}
