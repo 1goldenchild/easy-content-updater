@@ -53,7 +53,7 @@ const Footer = () => {
           >
             <div className="col-span-2 md:col-span-1 space-y-4">
               <h3 className="text-lg font-semibold bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">
-                Numerology Insights
+                Numerology 33
               </h3>
               <p className="text-sm text-muted-foreground">
                 Discover your life's path through the ancient wisdom of numbers.
