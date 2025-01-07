@@ -13,11 +13,10 @@ const Index = () => {
         <Hero />
       </div>
       <ProgressIndicator />
-      {/* Example of how to add a GIF */}
       <div className="flex justify-center py-8">
         <img 
-          src="your-gif-url.gif" 
-          alt="Description of your GIF"
+          src="https://media.giphy.com/media/wgHY9nSrlTMt2/giphy.gif" 
+          alt="Rotating globe animation"
           className="rounded-lg shadow-lg max-w-md" 
         />
       </div>
