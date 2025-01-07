@@ -36,7 +36,7 @@ const CollectInfo = () => {
         ])
         .select()
 
-      console.log("Supabase response:", { data, error })
+      console.log("Supabase insert response:", { data, error })
 
       if (error) {
         console.error("Error saving to Supabase:", error)
@@ -51,7 +51,8 @@ const CollectInfo = () => {
       }
 
       // Send welcome email immediately
-      const { error: welcomeEmailError } = await supabase.functions.invoke('send-styled-email', {
+      console.log("Attempting to send welcome email...")
+      const { data: welcomeData, error: welcomeEmailError } = await supabase.functions.invoke('send-styled-email', {
         body: {
           to: [email],
           templateName: "welcome",
@@ -62,6 +63,8 @@ const CollectInfo = () => {
         }
       })
 
+      console.log("Welcome email response:", { welcomeData, welcomeEmailError })
+
       if (welcomeEmailError) {
         console.error("Error sending welcome email:", welcomeEmailError)
         toast.error("Your information was saved but we couldn't send the welcome email.")
@@ -70,7 +73,8 @@ const CollectInfo = () => {
       }
 
       // Schedule analysis email to be sent after 24 hours
-      const { error: scheduleError } = await supabase.functions.invoke('schedule-email', {
+      console.log("Attempting to schedule analysis email...")
+      const { data: scheduleData, error: scheduleError } = await supabase.functions.invoke('schedule-email', {
         body: {
           to: email,
           templateName: "analysis",
@@ -82,6 +86,8 @@ const CollectInfo = () => {
         }
       })
 
+      console.log("Schedule email response:", { scheduleData, scheduleError })
+
       if (scheduleError) {
         console.error("Error scheduling analysis email:", scheduleError)
         toast.error("Your information was saved but we couldn't schedule the analysis email.")
@@ -89,7 +95,6 @@ const CollectInfo = () => {
         console.log("Analysis email scheduled successfully")
       }
 
-      console.log("Successfully saved user reading:", data)
       toast.success("Information saved successfully! Check your email for next steps.")
       
       // Redirect to the numerology checkout page
