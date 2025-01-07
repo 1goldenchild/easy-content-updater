@@ -15,8 +15,22 @@ const CompatibilitySection = () => {
     <div id="compatibility" className="rounded-xl bg-gradient-to-br from-[#8B5CF6]/30 to-[#0EA5E9]/30 p-4">
       <h3 className="text-sm font-semibold text-white/90 mb-3">Best Matches</h3>
       
-      {/* Donut Chart */}
+      {/* Donut Chart with Labels */}
       <div className="relative w-full aspect-square max-w-[120px] mx-auto mb-4">
+        {/* Labels */}
+        <div className="absolute -right-24 top-2 text-[10px] text-purple-300 font-medium flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-purple-500" />
+          Compatible
+        </div>
+        <div className="absolute -right-24 top-1/2 -translate-y-1/2 text-[10px] text-gray-400 font-medium flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-gray-400" />
+          Neutral
+        </div>
+        <div className="absolute -right-24 bottom-2 text-[10px] text-red-300 font-medium flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-red-500" />
+          Challenging
+        </div>
+
         <svg viewBox="0 0 100 100" className="transform -rotate-90">
           {/* Background circle */}
           <circle
@@ -40,15 +54,6 @@ const CompatibilitySection = () => {
             strokeLinecap="round"
             className="opacity-80"
           />
-          <text
-            x="50"
-            y="35"
-            textAnchor="middle"
-            fill="#8B5CF6"
-            className="text-[8px] font-medium"
-          >
-            Compatible
-          </text>
           {/* Neutral segment */}
           <motion.path
             initial={{ pathLength: 0 }}
@@ -67,15 +72,6 @@ const CompatibilitySection = () => {
             strokeLinecap="round"
             className="opacity-80"
           />
-          <text
-            x="65"
-            y="50"
-            textAnchor="middle"
-            fill="#6B7280"
-            className="text-[8px] font-medium"
-          >
-            Neutral
-          </text>
           {/* Challenging segment */}
           <motion.path
             initial={{ pathLength: 0 }}
@@ -94,15 +90,6 @@ const CompatibilitySection = () => {
             strokeLinecap="round"
             className="opacity-80"
           />
-          <text
-            x="50"
-            y="65"
-            textAnchor="middle"
-            fill="#EF4444"
-            className="text-[8px] font-medium"
-          >
-            Challenging
-          </text>
         </svg>
       </div>
 
