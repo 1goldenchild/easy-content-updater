@@ -6,25 +6,24 @@ const CollectInfo = () => {
   return (
     <div className="flex-1 container mx-auto px-4 py-8 md:py-12">
       <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-8"
+        >
+          <h1 className="text-3xl md:text-4xl font-bold relative">
+            <span className="relative inline-block">
+              <span className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500 opacity-50 blur-lg animate-pulse" />
+              <span className="relative bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500 bg-clip-text text-transparent animate-shine">
+                Unlock Your Complete Numerology Profile
+              </span>
+            </span>
+          </h1>
+        </motion.div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-          {/* Form Section with Title */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mb-8"
-            >
-              <h1 className="text-3xl md:text-4xl font-bold text-left">
-                <span className="relative inline-block">
-                  <span className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500 opacity-50 blur-lg animate-pulse" />
-                  <span className="relative bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500 bg-clip-text text-transparent animate-shine">
-                    Unlock Your Complete Numerology Profile
-                  </span>
-                </span>
-              </h1>
-            </motion.div>
-            <CollectInfoForm />
-          </div>
+          {/* Form Section */}
+          <CollectInfoForm />
 
           {/* Preview Section - Only visible on desktop */}
           <div className="hidden lg:block">
