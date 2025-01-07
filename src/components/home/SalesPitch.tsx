@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import HumanVisualization from "./HumanVisualization";
 import FeatureList from "./FeatureList";
 import CTASection from "./CTASection";
 
@@ -16,8 +15,6 @@ const SalesPitch = () => {
             transition={{ duration: 0.5 }}
             className="space-y-8"
           >
-            <HumanVisualization />
-
             <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#0466c8] to-[#023e8a] bg-clip-text text-transparent text-center">
               Unlock Your Complete Numerology Profile
             </h2>
