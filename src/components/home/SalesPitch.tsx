@@ -10,9 +10,18 @@ import {
   LineChart,
   Sparkles
 } from "lucide-react"
-import EarthGlobe from "../numerology/EarthGlobe"
+import { Button } from "@/components/ui/button"
+import { useNavigate } from "react-router-dom"
+import { scrollToTop } from "./CallToAction"
 
 const SalesPitch = () => {
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    navigate('/collect-info');
+    scrollToTop();
+  };
+
   return (
     <section className="py-20 relative overflow-hidden">
       <div className="container px-4 md:px-6">
@@ -80,47 +89,67 @@ const SalesPitch = () => {
             </div>
           </motion.div>
 
-          {/* Right Column - Visual Elements */}
+          {/* Right Column - CTA Section */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="relative"
+            className="relative bg-gradient-to-br from-purple-900/40 to-pink-900/40 rounded-3xl p-8 md:p-12 border border-white/10"
           >
-            <div className="relative w-full aspect-square">
-              <EarthGlobe />
+            <div className="space-y-6 text-center">
+              <motion.div
+                animate={{
+                  y: [0, -10, 0],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                <Sparkles className="w-12 h-12 mx-auto text-yellow-400" />
+              </motion.div>
               
-              {/* Floating Elements */}
-              {[...Array(3)].map((_, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ 
-                    opacity: [0.5, 1, 0.5],
-                    y: [0, -10, 0]
-                  }}
-                  transition={{
-                    duration: 3,
-                    delay: index * 0.5,
-                    repeat: Infinity,
-                  }}
-                  className="absolute"
-                  style={{
-                    top: `${20 + index * 30}%`,
-                    left: `${10 + index * 30}%`,
-                  }}
-                >
-                  {index === 0 ? (
-                    <LineChart className="w-8 h-8 text-purple-400" />
-                  ) : index === 1 ? (
-                    <Building2 className="w-8 h-8 text-pink-400" />
-                  ) : (
-                    <Sparkles className="w-8 h-8 text-blue-400" />
-                  )}
-                </motion.div>
-              ))}
+              <h3 className="text-2xl md:text-3xl font-bold text-white">
+                Ready to Discover Your True Path?
+              </h3>
+              
+              <p className="text-white/80 max-w-md mx-auto">
+                Get your personalized numerology reading today and unlock the secrets of your life's journey.
+              </p>
+              
+              <Button
+                onClick={handleGetStarted}
+                size="lg"
+                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold px-8 py-6 text-lg h-auto"
+              >
+                Start Your Free Analysis
+              </Button>
             </div>
+
+            {/* Animated background elements */}
+            {[...Array(3)].map((_, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0.3 }}
+                animate={{
+                  opacity: [0.3, 0.6, 0.3],
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration: 4,
+                  delay: i * 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-xl"
+                style={{
+                  left: `${20 + i * 25}%`,
+                  top: `${20 + i * 20}%`,
+                }}
+              />
+            ))}
           </motion.div>
         </div>
       </div>
