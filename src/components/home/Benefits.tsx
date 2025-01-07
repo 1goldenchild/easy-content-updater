@@ -1,6 +1,9 @@
 import { motion, useScroll, useTransform } from "framer-motion"
-import { TrendingUp, Target, Sparkles, Users } from "lucide-react"
+import { TrendingUp, Target, Sparkles, Users, ArrowRight } from "lucide-react"
 import { useRef } from "react"
+import { useNavigate } from "react-router-dom"
+import { Button } from "@/components/ui/button"
+import { scrollToTop } from "./CallToAction"
 
 const benefits = [
   {
@@ -51,10 +54,16 @@ const benefits = [
 
 const Benefits = () => {
   const containerRef = useRef<HTMLDivElement>(null)
+  const navigate = useNavigate()
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
   })
+
+  const handleGetStarted = () => {
+    navigate('/collect-info');
+    scrollToTop();
+  };
 
   return (
     <section className="relative py-20 overflow-hidden" ref={containerRef}>
@@ -175,9 +184,38 @@ const Benefits = () => {
             )
           })}
         </div>
+
+        {/* CTA Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex justify-center mt-12"
+        >
+          <Button
+            onClick={handleGetStarted}
+            className="relative group overflow-hidden bg-transparent border border-purple-500/20 hover:border-purple-500/40 text-white font-medium py-2 px-6 rounded-lg transition-all duration-300"
+          >
+            <span className="relative z-10 flex items-center gap-2 text-sm">
+              Start Your Journey
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </span>
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-fuchsia-500/20 to-pink-500/20"
+              animate={{
+                transform: ["translateX(-100%)", "translateX(100%)"],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            />
+          </Button>
+        </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default Benefits
