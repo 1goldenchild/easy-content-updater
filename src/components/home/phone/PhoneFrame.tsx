@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import PreviewOverlay from "./PreviewOverlay";
 
 interface PhoneFrameProps {
   children: ReactNode;
@@ -30,6 +31,9 @@ const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProp
       className="relative w-full max-w-[300px] mx-auto mb-12"
     >
       <div className="relative w-full aspect-[9/19.5] bg-[#1A1F2C] rounded-[3rem] border-4 border-gray-800 shadow-2xl overflow-hidden">
+        {/* Preview Overlay */}
+        <PreviewOverlay />
+        
         {/* Notch */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-7 bg-black rounded-b-3xl z-20" />
         
