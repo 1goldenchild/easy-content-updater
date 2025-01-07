@@ -13,19 +13,9 @@ const PhoneShowcase = () => {
         {/* Notch */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-7 bg-black rounded-b-3xl z-20" />
         
-        {/* Screen Content with Scroll */}
+        {/* Screen Content */}
         <div className="absolute inset-0 overflow-y-auto overflow-x-hidden scrollbar-hide">
-          <motion.div 
-            initial={{ y: 0 }}
-            animate={{ y: "-100%" }}
-            transition={{ 
-              duration: 30,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "linear"
-            }}
-            className="w-full space-y-6 p-4"
-          >
+          <div className="w-full space-y-6 p-4">
             {/* Life Path Section */}
             <div className="rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 p-4 backdrop-blur-sm">
               <h3 className="text-lg font-semibold text-white mb-2">Life Path Number</h3>
@@ -119,7 +109,7 @@ const PhoneShowcase = () => {
                 </motion.div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Reflection Effect */}
