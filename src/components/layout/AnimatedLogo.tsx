@@ -13,7 +13,6 @@ const AnimatedLogo = () => {
   const word = "NUMEROLOGY"
   
   useEffect(() => {
-    // Start animation after a brief delay
     const timer = setTimeout(() => {
       setIsAnimated(true)
     }, 500)
@@ -26,28 +25,44 @@ const AnimatedLogo = () => {
       {word.split('').map((letter, index) => (
         <motion.span
           key={index}
-          initial={{ opacity: 1 }}
-          animate={{ opacity: 1 }}
-          className="inline-block"
+          className="inline-block relative font-bold text-2xl"
         >
           <AnimatePresence mode="wait">
             {!isAnimated ? (
               <motion.span
                 key="number"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="inline-block"
+                initial={{ scale: 1.2, opacity: 0.5 }}
+                animate={{ 
+                  scale: [1.2, 0.9, 1],
+                  opacity: [0.5, 1, 0.8],
+                }}
+                exit={{ 
+                  scale: 0.8,
+                  opacity: 0,
+                  transition: { duration: 0.2 }
+                }}
+                transition={{ 
+                  duration: 0.4,
+                  delay: index * 0.1,
+                  ease: "easeOut"
+                }}
+                className="inline-block bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent animate-shine"
               >
                 {getGematriaValue(letter)}
               </motion.span>
             ) : (
               <motion.span
                 key="letter"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ 
+                  scale: 1,
+                  opacity: 1,
+                }}
+                transition={{ 
+                  duration: 0.3,
+                  delay: index * 0.1,
+                  ease: "easeOut"
+                }}
                 className="inline-block"
               >
                 {letter}
