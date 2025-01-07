@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client"
 import { toast } from "sonner"
 import { UserForm } from "@/components/numerology/UserForm"
 import { useNavigate } from "react-router-dom"
+import PhoneShowcase from "@/components/home/PhoneShowcase"
 
 const CollectInfo = () => {
   const [name, setName] = useState("")
@@ -107,32 +108,49 @@ const CollectInfo = () => {
   }
 
   return (
-    <div className="flex-1 flex items-center justify-center p-4">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md space-y-8 bg-white/5 p-8 rounded-xl backdrop-blur-sm border border-white/10"
-      >
-        <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
-            Get Your Personalized Analysis
-          </h2>
-          <p className="mt-2 text-white/70">
-            Enter your details below to receive your numerology insights
-          </p>
-        </div>
+    <div className="flex-1 p-4 md:p-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 items-start">
+          {/* Form Section */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="w-full space-y-8"
+          >
+            <div className="text-center md:text-left">
+              <h2 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
+                Get Your Personalized Analysis
+              </h2>
+              <p className="mt-2 text-white/70">
+                Enter your details below to receive your numerology insights
+              </p>
+            </div>
 
-        <UserForm
-          name={name}
-          email={email}
-          date={date}
-          setName={setName}
-          setEmail={setEmail}
-          setDate={setDate}
-          isSubmitting={isSubmitting}
-          onSubmit={handleSubmit}
-        />
-      </motion.div>
+            <div className="w-full max-w-md mx-auto md:mx-0 space-y-8 bg-white/5 p-8 rounded-xl backdrop-blur-sm border border-white/10">
+              <UserForm
+                name={name}
+                email={email}
+                date={date}
+                setName={setName}
+                setEmail={setEmail}
+                setDate={setDate}
+                isSubmitting={isSubmitting}
+                onSubmit={handleSubmit}
+              />
+            </div>
+          </motion.div>
+
+          {/* Phone Preview Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="hidden md:block"
+          >
+            <PhoneShowcase />
+          </motion.div>
+        </div>
+      </div>
     </div>
   )
 }
