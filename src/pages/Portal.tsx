@@ -3,6 +3,10 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import CharacteristicsChart from "@/components/numerology/CharacteristicsChart";
 
 const Portal = () => {
+  // For now, we'll use a default lifePath value of 1
+  // In a real application, this would come from user data or context
+  const lifePath = 1;
+
   return (
     <div className="flex-1 flex flex-col">
       <div className="flex-1">
@@ -29,7 +33,7 @@ const Portal = () => {
       
       {/* Characteristics Chart positioned above footer */}
       <div className="container py-12 bg-gradient-to-b from-transparent to-[#1A1F2C]/50">
-        <CharacteristicsChart isVisible={true} />
+        <CharacteristicsChart isVisible={true} lifePath={lifePath} />
       </div>
     </div>
   );
