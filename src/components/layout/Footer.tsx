@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
+import { TikTok, Instagram, Youtube } from "lucide-react"
 
 const Footer = () => {
   return (
@@ -89,21 +90,39 @@ const Footer = () => {
               </p>
               <div className="flex space-x-4">
                 {[
-                  { name: 'tiktok', url: 'https://www.tiktok.com/@numerology_33' },
-                  { name: 'instagram', url: '#' },
-                  { name: 'youtube', url: 'https://www.youtube.com/@numerology-33' }
+                  { 
+                    name: 'tiktok', 
+                    url: 'https://www.tiktok.com/@numerology_33',
+                    icon: TikTok,
+                    followers: '87k'
+                  },
+                  { 
+                    name: 'instagram', 
+                    url: '#',
+                    icon: Instagram
+                  },
+                  { 
+                    name: 'youtube', 
+                    url: 'https://www.youtube.com/@numerology-33',
+                    icon: Youtube
+                  }
                 ].map((social) => (
                   <a
                     key={social.name}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#D946EF] p-[1px] hover:scale-110 transition-transform"
+                    className="relative w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#D946EF] p-[1px] hover:scale-110 transition-transform group"
                   >
                     <div className="w-full h-full rounded-full bg-background flex items-center justify-center">
                       <span className="sr-only">{social.name}</span>
-                      <div className="w-4 h-4 md:w-5 md:h-5 bg-gradient-to-br from-[#8B5CF6] to-[#D946EF]" />
+                      <social.icon className="w-4 h-4 md:w-5 md:h-5 text-transparent bg-clip-text bg-gradient-to-br from-[#8B5CF6] to-[#D946EF]" />
                     </div>
+                    {social.followers && (
+                      <span className="absolute -top-2 -right-2 text-xs bg-gradient-to-br from-[#8B5CF6] to-[#D946EF] text-white px-1.5 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                        {social.followers}
+                      </span>
+                    )}
                   </a>
                 ))}
               </div>
