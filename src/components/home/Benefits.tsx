@@ -197,7 +197,7 @@ const Benefits = () => {
             className="relative group overflow-hidden bg-transparent border border-purple-500/20 hover:border-purple-500/40 text-white font-medium py-2 px-6 rounded-lg transition-all duration-300"
           >
             <span className="relative z-10 flex items-center gap-2 text-sm">
-              Start Your Journey
+              Get your numerology analysis
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </span>
             <motion.div
