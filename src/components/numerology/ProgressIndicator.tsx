@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { useLocation } from "react-router-dom"
-import { useMobile } from "@/hooks/use-mobile"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 const ProgressIndicator = () => {
   const [activeSection, setActiveSection] = useState(0)
-  const isMobile = useMobile()
+  const isMobile = useIsMobile()
   const location = useLocation()
 
   const sections = location.pathname === "/" 
