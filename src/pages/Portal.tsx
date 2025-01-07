@@ -31,18 +31,6 @@ const Portal = () => {
     window.scrollTo(0, 0)
   }, [])
 
-  const numerologyStats = [
-    { subject: 'Leadership', value: results.lifePath === 1 ? 9 : 5 },
-    { subject: 'Intuition', value: results.lifePath === 2 ? 9 : 6 },
-    { subject: 'Creativity', value: results.lifePath === 3 ? 9 : 4 },
-    { subject: 'Stability', value: results.lifePath === 4 ? 9 : 7 },
-    { subject: 'Freedom', value: results.lifePath === 5 ? 9 : 5 },
-    { subject: 'Harmony', value: results.lifePath === 6 ? 9 : 6 },
-    { subject: 'Analysis', value: results.lifePath === 7 ? 9 : 4 },
-    { subject: 'Power', value: results.lifePath === 8 ? 9 : 5 },
-    { subject: 'Wisdom', value: results.lifePath === 9 ? 9 : 6 }
-  ];
-
   const handleCalculate = () => {
     if (!date) {
       toast.error("Please select your date of birth")
@@ -98,36 +86,46 @@ const Portal = () => {
               onCalculate={handleCalculate}
             />
 
-            <NumerologyResults 
-              lifePath={results.lifePath}
-              partialEnergy={results.partialEnergy}
-              secretNumber={results.secretNumber}
-              chineseZodiac={results.chineseZodiac}
-              isVisible={showResults}
-            />
+            <div id="results">
+              <NumerologyResults 
+                lifePath={results.lifePath}
+                partialEnergy={results.partialEnergy}
+                secretNumber={results.secretNumber}
+                chineseZodiac={results.chineseZodiac}
+                isVisible={showResults}
+              />
+            </div>
           </motion.div>
 
           {showResults && (
             <>
-              <OccupationGuidance
-                lifePath={results.lifePath}
-                isVisible={showResults}
-              />
+              <div id="occupation">
+                <OccupationGuidance
+                  lifePath={results.lifePath}
+                  isVisible={showResults}
+                />
+              </div>
               
-              <CompatibilityChart 
-                lifePath={results.lifePath}
-                isVisible={showResults}
-              />
+              <div id="compatibility">
+                <CompatibilityChart 
+                  lifePath={results.lifePath}
+                  isVisible={showResults}
+                />
+              </div>
 
-              <CountryCompatibility
-                chineseZodiac={results.chineseZodiac}
-                isVisible={showResults}
-              />
+              <div id="country">
+                <CountryCompatibility
+                  chineseZodiac={results.chineseZodiac}
+                  isVisible={showResults}
+                />
+              </div>
 
-              <CarCompatibility
-                chineseZodiac={results.chineseZodiac}
-                isVisible={showResults}
-              />
+              <div id="car">
+                <CarCompatibility
+                  chineseZodiac={results.chineseZodiac}
+                  isVisible={showResults}
+                />
+              </div>
             </>
           )}
         </div>

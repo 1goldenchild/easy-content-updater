@@ -10,7 +10,7 @@ const ProgressIndicator = () => {
 
   const sections = location.pathname === "/" 
     ? ["Hero", "Knowledge", "Benefits", "Sales", "CTA", "Stats"]
-    : ["Results", "Occupation", "Compatibility", "Country", "Car"]
+    : ["results", "occupation", "compatibility", "country", "car"]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,6 +44,23 @@ const ProgressIndicator = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [sections])
 
+  const handleDotClick = (index: number) => {
+    const sectionId = sections[index].toLowerCase()
+    const element = document.getElementById(sectionId)
+    if (element) {
+      const headerOffset = 80 // Adjust this value based on your header height
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      })
+    }
+  }
+
+  if (isMobile) return null
+
   return (
     <div className="fixed inset-0 pointer-events-none flex items-center justify-center z-50">
       <div className="relative w-full max-w-7xl mx-auto px-4">
@@ -53,6 +70,8 @@ const ProgressIndicator = () => {
               <div 
                 key={section}
                 className="relative flex items-center gap-2 justify-end"
+                onClick={() => handleDotClick(index)}
+                style={{ cursor: 'pointer' }}
               >
                 <motion.div
                   className={`w-2 h-2 rounded-full transition-colors duration-300 ${
