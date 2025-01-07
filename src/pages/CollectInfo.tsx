@@ -3,7 +3,6 @@ import { motion } from "framer-motion"
 import { format } from "date-fns"
 import { supabase } from "@/integrations/supabase/client"
 import { toast } from "sonner"
-import DateSelector from "@/components/numerology/DateSelector"
 import { UserForm } from "@/components/numerology/UserForm"
 
 const CollectInfo = () => {
@@ -51,8 +50,8 @@ const CollectInfo = () => {
         return
       }
 
-      // Send welcome email
-      const { error: emailError } = await supabase.functions.invoke('send-styled-email', {
+      // Send welcome email immediately
+      const { error: welcomeEmailError } = await supabase.functions.invoke('send-styled-email', {
         body: {
           to: [email],
           templateName: "welcome",
@@ -63,15 +62,35 @@ const CollectInfo = () => {
         }
       })
 
-      if (emailError) {
-        console.error("Error sending welcome email:", emailError)
+      if (welcomeEmailError) {
+        console.error("Error sending welcome email:", welcomeEmailError)
         toast.error("Your information was saved but we couldn't send the welcome email.")
       } else {
         console.log("Welcome email sent successfully")
       }
 
+      // Schedule analysis email to be sent after 24 hours
+      const { error: scheduleError } = await supabase.functions.invoke('schedule-email', {
+        body: {
+          to: email,
+          templateName: "analysis",
+          userData: {
+            name,
+            dateOfBirth: formattedDate
+          },
+          sendAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString() // 24 hours from now
+        }
+      })
+
+      if (scheduleError) {
+        console.error("Error scheduling analysis email:", scheduleError)
+        toast.error("Your information was saved but we couldn't schedule the analysis email.")
+      } else {
+        console.log("Analysis email scheduled successfully")
+      }
+
       console.log("Successfully saved user reading:", data)
-      toast.success("Information saved successfully!")
+      toast.success("Information saved successfully! Check your email for next steps.")
       
       // Redirect to the numerology checkout page
       window.location.href = "https://www.numerology33.com/checkout"
