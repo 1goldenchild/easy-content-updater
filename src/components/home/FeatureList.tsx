@@ -6,12 +6,7 @@ import {
   Car, 
   HeartHandshake,
   Briefcase,
-  CircleIcon1,
-  CircleIcon2,
-  CircleIcon3,
-  CircleIcon4,
-  CircleIcon5,
-  CircleIcon6,
+  Circle
 } from "lucide-react";
 
 const features = [
@@ -20,42 +15,42 @@ const features = [
     title: "Personal Life Path Analysis",
     description: "Discover your core numbers and their profound meaning in your life journey",
     gradient: "from-blue-500 to-purple-500",
-    numberIcon: CircleIcon1
+    number: 1
   },
   {
     icon: ChartPieIcon,
     title: "Interactive Charts",
     description: "Visualize your numerological characteristics through dynamic, interactive charts",
     gradient: "from-purple-500 to-pink-500",
-    numberIcon: CircleIcon2
+    number: 2
   },
   {
     icon: Globe2,
     title: "Global Compatibility",
     description: "Find the best countries and locations aligned with your numerological profile",
     gradient: "from-pink-500 to-red-500",
-    numberIcon: CircleIcon3
+    number: 3
   },
   {
     icon: Car,
     title: "Vehicle Harmony",
     description: "Learn which vehicles resonate best with your energy patterns",
     gradient: "from-red-500 to-orange-500",
-    numberIcon: CircleIcon4
+    number: 4
   },
   {
     icon: HeartHandshake,
     title: "Relationship Insights",
     description: "Understand compatibility patterns in your personal and professional relationships",
     gradient: "from-orange-500 to-yellow-500",
-    numberIcon: CircleIcon5
+    number: 5
   },
   {
     icon: Briefcase,
     title: "Career Guidance",
     description: "Get tailored career recommendations based on your numerological profile",
     gradient: "from-yellow-500 to-green-500",
-    numberIcon: CircleIcon6
+    number: 6
   }
 ];
 
@@ -81,7 +76,12 @@ const FeatureList = () => {
             <div className="relative z-10">
               {/* Number and Icon with gradient background */}
               <div className="flex items-center gap-4 mb-4">
-                <feature.numberIcon className="w-8 h-8 text-white" />
+                <div className="relative w-8 h-8">
+                  <Circle className="w-8 h-8 text-white absolute" />
+                  <span className="absolute inset-0 flex items-center justify-center text-white font-bold">
+                    {feature.number}
+                  </span>
+                </div>
                 <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${feature.gradient} p-2.5 shadow-lg`}>
                   <feature.icon className="w-full h-full text-white" />
                 </div>
