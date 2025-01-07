@@ -14,6 +14,13 @@ import {
   calculateSecretNumber, 
   getChineseZodiac 
 } from "@/utils/numerologyCalculations"
+import { 
+  Radar, 
+  RadarChart, 
+  PolarGrid, 
+  PolarAngleAxis,
+  ResponsiveContainer 
+} from 'recharts';
 
 const Portal = () => {
   const [date, setDate] = useState<Date>()
@@ -54,6 +61,16 @@ const Portal = () => {
     setShowResults(true)
     toast.success("Calculation complete!")
   }
+
+  // Sample data for the radar chart
+  const numerologyStats = [
+    { subject: 'Spiritual Connection', A: 8, fullMark: 10 },
+    { subject: 'Leadership', A: 7, fullMark: 10 },
+    { subject: 'Creativity', A: 9, fullMark: 10 },
+    { subject: 'Intuition', A: 6, fullMark: 10 },
+    { subject: 'Material Success', A: 8, fullMark: 10 },
+    { subject: 'Personal Power', A: 7, fullMark: 10 },
+  ];
 
   return (
     <div className="flex-1 p-4 min-h-screen">
@@ -157,6 +174,38 @@ const Portal = () => {
             />
           </div>
         </motion.div>
+
+        {/* Numerology Statistics Section */}
+        {showResults && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="mt-8 p-8 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10"
+          >
+            <h3 className="text-2xl font-bold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
+              Your Numerological Profile
+            </h3>
+            <div className="w-full h-[400px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <RadarChart cx="50%" cy="50%" outerRadius="80%" data={numerologyStats}>
+                  <PolarGrid stroke="rgba(255, 255, 255, 0.1)" />
+                  <PolarAngleAxis 
+                    dataKey="subject" 
+                    tick={{ fill: 'rgba(255, 255, 255, 0.7)', fontSize: 12 }}
+                  />
+                  <Radar
+                    name="Attributes"
+                    dataKey="A"
+                    stroke="rgba(139, 92, 246, 0.8)"
+                    fill="rgba(139, 92, 246, 0.3)"
+                    fillOpacity={0.6}
+                  />
+                </RadarChart>
+              </ResponsiveContainer>
+            </div>
+          </motion.div>
+        )}
       </div>
     </div>
   )
