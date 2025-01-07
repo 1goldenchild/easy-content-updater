@@ -3,12 +3,12 @@ import NumberSection from "../NumberSection";
 
 const NumberSections = () => {
   return (
-    <>
+    <div className="grid grid-cols-2 gap-3">
       <NumberSection
         id="lifepath"
         title="Life Path Number"
         number="7"
-        subtitle="The Misunderstood Genius"
+        subtitle={<>The Misunderstood Genius <span className="text-[10px] text-white/60 block mt-1">Read Now →</span></>}
         gradientFrom="[#8B5CF6]"
         gradientTo="[#D946EF]"
       />
@@ -17,32 +17,29 @@ const NumberSections = () => {
         id="partial"
         title="Partial Energy"
         number="4"
-        subtitle="The Builder"
+        subtitle={<>The Builder <span className="text-[10px] text-white/60 block mt-1">Read Now →</span></>}
         gradientFrom="[#F97316]"
         gradientTo="[#D946EF]"
-        delay={0.3}
       />
 
       <NumberSection
         id="secret"
         title="Secret Number"
         number="9"
-        subtitle="The Humanitarian"
+        subtitle={<>The Humanitarian <span className="text-[10px] text-white/60 block mt-1">Read Now →</span></>}
         gradientFrom="[#0EA5E9]"
         gradientTo="[#8B5CF6]"
-        delay={0.6}
       />
 
       <NumberSection
         id="zodiac"
         title="Chinese Zodiac"
         number="龍"
-        subtitle="Year of the Dragon"
+        subtitle={<>Year of the Dragon <span className="text-[10px] text-white/60 block mt-1">Read Now →</span></>}
         gradientFrom="[#F97316]"
         gradientTo="[#0EA5E9]"
-        delay={0.9}
       />
-    </>
+    </div>
   );
 };
 
