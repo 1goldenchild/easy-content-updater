@@ -18,103 +18,113 @@ const EarthGlobe = () => {
     renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
     mountRef.current.appendChild(renderer.domElement);
 
-    // Load textures
+    // Load textures with absolute paths and error handling
     const textureLoader = new THREE.TextureLoader();
-    
-    // Earth textures with proper paths
-    const earthMap = textureLoader.load('/earth-map.jpg', undefined, undefined, (err) => {
-      console.error('Error loading earth map texture:', err);
-    });
-    const bumpMap = textureLoader.load('/earth-bump.jpg', undefined, undefined, (err) => {
-      console.error('Error loading bump map texture:', err);
-    });
-    const specularMap = textureLoader.load('/earth-specular.jpg', undefined, undefined, (err) => {
-      console.error('Error loading specular map texture:', err);
-    });
-    const cloudsMap = textureLoader.load('/earth-clouds.png', undefined, undefined, (err) => {
-      console.error('Error loading clouds texture:', err);
-    });
-
-    console.log('Loading textures:', { earthMap, bumpMap, specularMap, cloudsMap });
-
-    // Create star background
-    const starGeometry = new THREE.BufferGeometry();
-    const starMaterial = new THREE.PointsMaterial({
-      color: 0xFFFFFF,
-      size: 0.05,
-      transparent: true
-    });
-
-    const starVertices = [];
-    for (let i = 0; i < 10000; i++) {
-      const x = (Math.random() - 0.5) * 2000;
-      const y = (Math.random() - 0.5) * 2000;
-      const z = -Math.random() * 2000;
-      starVertices.push(x, y, z);
-    }
-
-    starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
-    const stars = new THREE.Points(starGeometry, starMaterial);
-    scene.add(stars);
-
-    // Create Earth with proper material settings
-    const earthGeometry = new THREE.SphereGeometry(1, 64, 64);
-    const earthMaterial = new THREE.MeshPhongMaterial({
-      map: earthMap,
-      bumpMap: bumpMap,
-      bumpScale: 0.05,
-      specularMap: specularMap,
-      specular: new THREE.Color('grey'),
-      shininess: 5
-    });
-
-    const earth = new THREE.Mesh(earthGeometry, earthMaterial);
-    scene.add(earth);
-
-    // Create cloud layer
-    const cloudGeometry = new THREE.SphereGeometry(1.02, 64, 64);
-    const cloudMaterial = new THREE.MeshPhongMaterial({
-      map: cloudsMap,
-      transparent: true,
-      opacity: 0.4
-    });
-
-    const clouds = new THREE.Mesh(cloudGeometry, cloudMaterial);
-    scene.add(clouds);
-
-    // Lighting setup for realistic appearance
-    const ambientLight = new THREE.AmbientLight(0x555555);
-    scene.add(ambientLight);
-
-    const sunLight = new THREE.DirectionalLight(0xffffff, 1);
-    sunLight.position.set(5, 3, 5);
-    scene.add(sunLight);
-
-    // Add subtle blue atmosphere glow
-    const atmosphereGeometry = new THREE.SphereGeometry(1.1, 64, 64);
-    const atmosphereMaterial = new THREE.MeshPhongMaterial({
-      color: 0x0077ff,
-      transparent: true,
-      opacity: 0.1,
-      side: THREE.BackSide
-    });
-
-    const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
-    scene.add(atmosphere);
-
-    // Position camera
-    camera.position.z = 2.5;
-
-    // Animation
-    const animate = () => {
-      requestAnimationFrame(animate);
-      earth.rotation.y += 0.001;
-      clouds.rotation.y += 0.0012;
-      stars.rotation.y -= 0.0001;
-      renderer.render(scene, camera);
+    const loadTexture = (url: string) => {
+      return new Promise<THREE.Texture>((resolve, reject) => {
+        textureLoader.load(
+          url,
+          (texture) => {
+            console.log(`Successfully loaded texture: ${url}`);
+            resolve(texture);
+          },
+          undefined,
+          (error) => {
+            console.error(`Failed to load texture ${url}:`, error);
+            reject(error);
+          }
+        );
+      });
     };
 
-    animate();
+    // Load all textures concurrently
+    Promise.all([
+      loadTexture('/earth-map.jpg'),
+      loadTexture('/earth-bump.jpg'),
+      loadTexture('/earth-specular.jpg'),
+      loadTexture('/earth-clouds.png')
+    ]).then(([earthMap, bumpMap, specularMap, cloudsMap]) => {
+      // Create star background
+      const starGeometry = new THREE.BufferGeometry();
+      const starMaterial = new THREE.PointsMaterial({
+        color: 0xFFFFFF,
+        size: 0.05,
+        transparent: true
+      });
+
+      const starVertices = [];
+      for (let i = 0; i < 10000; i++) {
+        const x = (Math.random() - 0.5) * 2000;
+        const y = (Math.random() - 0.5) * 2000;
+        const z = -Math.random() * 2000;
+        starVertices.push(x, y, z);
+      }
+
+      starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+      const stars = new THREE.Points(starGeometry, starMaterial);
+      scene.add(stars);
+
+      // Create Earth with proper material settings
+      const earthGeometry = new THREE.SphereGeometry(1, 64, 64);
+      const earthMaterial = new THREE.MeshPhongMaterial({
+        map: earthMap,
+        bumpMap: bumpMap,
+        bumpScale: 0.05,
+        specularMap: specularMap,
+        specular: new THREE.Color('grey'),
+        shininess: 5
+      });
+
+      const earth = new THREE.Mesh(earthGeometry, earthMaterial);
+      scene.add(earth);
+
+      // Create cloud layer
+      const cloudGeometry = new THREE.SphereGeometry(1.02, 64, 64);
+      const cloudMaterial = new THREE.MeshPhongMaterial({
+        map: cloudsMap,
+        transparent: true,
+        opacity: 0.4
+      });
+
+      const clouds = new THREE.Mesh(cloudGeometry, cloudMaterial);
+      scene.add(clouds);
+
+      // Lighting setup for realistic appearance
+      const ambientLight = new THREE.AmbientLight(0x555555);
+      scene.add(ambientLight);
+
+      const sunLight = new THREE.DirectionalLight(0xffffff, 1);
+      sunLight.position.set(5, 3, 5);
+      scene.add(sunLight);
+
+      // Add subtle blue atmosphere glow
+      const atmosphereGeometry = new THREE.SphereGeometry(1.1, 64, 64);
+      const atmosphereMaterial = new THREE.MeshPhongMaterial({
+        color: 0x0077ff,
+        transparent: true,
+        opacity: 0.1,
+        side: THREE.BackSide
+      });
+
+      const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
+      scene.add(atmosphere);
+
+      // Position camera
+      camera.position.z = 2.5;
+
+      // Animation
+      const animate = () => {
+        requestAnimationFrame(animate);
+        earth.rotation.y += 0.001;
+        clouds.rotation.y += 0.0012;
+        stars.rotation.y -= 0.0001;
+        renderer.render(scene, camera);
+      };
+
+      animate();
+    }).catch(error => {
+      console.error('Failed to load one or more textures:', error);
+    });
 
     // Handle cleanup
     return () => {
