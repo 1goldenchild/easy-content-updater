@@ -19,7 +19,7 @@ const PhoneShowcase = () => {
             initial={{ y: 0 }}
             animate={{ y: "-100%" }}
             transition={{ 
-              duration: 20,
+              duration: 30,
               repeat: Infinity,
               repeatType: "reverse",
               ease: "linear"
@@ -27,12 +27,15 @@ const PhoneShowcase = () => {
             className="w-full"
           >
             <img 
-              src="/lovable-uploads/fa5950c8-545a-4644-8d15-7796497be16d.png"
-              alt="Numerology Analysis"
+              src="/lovable-uploads/984813d9-700a-4057-a369-08ae4035507b.png"
+              alt="Numerology Portal Results"
               className="w-full h-auto object-contain"
               style={{ 
-                imageRendering: "auto",
-                maxWidth: "100%"
+                imageRendering: "crisp-edges",
+                maxWidth: "100%",
+                WebkitBackfaceVisibility: "hidden",
+                MozBackfaceVisibility: "hidden",
+                backfaceVisibility: "hidden"
               }}
             />
           </motion.div>
