@@ -73,7 +73,7 @@ const AstrologyAnalysis = ({ chineseZodiac, isVisible }: AstrologyAnalysisProps)
       className="space-y-4 mt-4"
     >
       <div className="p-6 rounded-lg bg-white/5 border border-white/10">
-        <h3 className="text-2xl font-bold text-white/90 mb-4">Astrology Analysis</h3>
+        <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] mb-4">Astrology Analysis</h3>
         
         <div className="space-y-6">
           <div>
