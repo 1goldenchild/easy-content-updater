@@ -15,6 +15,7 @@ const CollectInfo = () => {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [date, setDate] = useState<Date>()
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -23,6 +24,8 @@ const CollectInfo = () => {
       toast.error("Please fill in all fields")
       return
     }
+
+    setIsSubmitting(true)
 
     try {
       const formattedDate = format(date, 'yyyy-MM-dd')
@@ -43,6 +46,12 @@ const CollectInfo = () => {
 
       if (error) {
         console.error("Error saving to Supabase:", error)
+        toast.error(error.message || "There was an error saving your information. Please try again.")
+        return
+      }
+
+      if (!data || data.length === 0) {
+        console.error("No data returned from Supabase")
         toast.error("There was an error saving your information. Please try again.")
         return
       }
@@ -55,6 +64,8 @@ const CollectInfo = () => {
     } catch (error) {
       console.error("Error in form submission:", error)
       toast.error("There was an error saving your information. Please try again.")
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -84,6 +95,7 @@ const CollectInfo = () => {
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter your full name"
               className="bg-white/5 border-white/10"
+              disabled={isSubmitting}
             />
           </div>
 
@@ -96,6 +108,7 @@ const CollectInfo = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               className="bg-white/5 border-white/10"
+              disabled={isSubmitting}
             />
           </div>
 
@@ -109,6 +122,7 @@ const CollectInfo = () => {
                     "w-full justify-between text-left font-normal bg-[#1A1F2C] border-white/10 hover:bg-[#252a3a] transition-colors",
                     !date && "text-muted-foreground"
                   )}
+                  disabled={isSubmitting}
                 >
                   {date ? format(date, "PPP") : <span>Pick a date</span>}
                   <CalendarIcon className="h-4 w-4 opacity-50" />
@@ -177,8 +191,9 @@ const CollectInfo = () => {
           <Button 
             type="submit"
             className="w-full bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] hover:from-[#8B5CF6] hover:to-[#6E59A5]"
+            disabled={isSubmitting}
           >
-            Get Your Analysis
+            {isSubmitting ? "Saving..." : "Get Your Analysis"}
           </Button>
         </form>
       </motion.div>
