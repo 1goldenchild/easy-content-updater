@@ -10,15 +10,15 @@ const Footer = () => {
       <div className="w-full h-24 relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[#1A1F2C]">
-            <svg className="w-full h-full opacity-70" xmlns="http://www.w3.org/2000/svg">
+            <svg className="w-full h-full opacity-90" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <radialGradient id="starGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                  <stop offset="0%" stopColor="white" stopOpacity="0.3" />
+                  <stop offset="0%" stopColor="white" stopOpacity="0.5" />
                   <stop offset="100%" stopColor="transparent" stopOpacity="0" />
                 </radialGradient>
               </defs>
               {[...Array(50)].map((_, i) => {
-                const size = Math.random() * 2 + 1;
+                const size = Math.random() * 2.5 + 1; // Slightly larger stars
                 const x = Math.random() * 100;
                 const y = Math.random() * 100;
                 const delay = Math.random() * 3;
@@ -41,16 +41,16 @@ const Footer = () => {
               })}
             </svg>
           </div>
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900/30 via-transparent to-transparent" />
         </div>
       </div>
 
-      <footer className="relative border-t border-purple-500/20 bg-[#1A1F2C]/95 backdrop-blur-xl">
+      <footer className="relative border-t border-purple-500/20 bg-[#221F26]/95 backdrop-blur-xl">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0">
-            <svg className="w-full h-full opacity-30" xmlns="http://www.w3.org/2000/svg">
+            <svg className="w-full h-full opacity-40" xmlns="http://www.w3.org/2000/svg">
               {[...Array(100)].map((_, i) => {
-                const size = Math.random() * 1.5 + 0.5;
+                const size = Math.random() * 2 + 0.5;
                 const x = Math.random() * 100;
                 const y = Math.random() * 100;
                 const delay = Math.random() * 3;
