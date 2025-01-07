@@ -72,9 +72,9 @@ const Benefits = () => {
               transition={{ delay: index * 0.1 }}
               className="relative group"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-background to-background/50 rounded-3xl transition-all duration-500 group-hover:scale-[0.98]" />
-              <div className="relative p-6 md:p-8 rounded-3xl border bg-card hover:bg-card/50 transition-colors">
-                <div className={`w-12 h-12 rounded-full bg-gradient-to-r ${benefit.gradient} flex items-center justify-center mb-4`}>
+              <div className="absolute inset-0 bg-gradient-to-r from-background/80 to-background/50 rounded-3xl transition-all duration-500 group-hover:scale-[0.98] shadow-xl" />
+              <div className="relative p-6 md:p-8 rounded-3xl border bg-gradient-to-br from-card/90 to-card/50 backdrop-blur-sm hover:bg-card/60 transition-colors shadow-lg">
+                <div className={`w-12 h-12 rounded-full bg-gradient-to-r ${benefit.gradient} flex items-center justify-center mb-4 shadow-lg`}>
                   <benefit.icon className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
