@@ -4,6 +4,7 @@ import { getWelcomeTemplate } from "./templates/welcome.ts";
 import { getAnalysisTemplate } from "./templates/analysis.ts";
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+const VERIFIED_EMAIL = "mafi28tv@gmail.com"; // Using your verified email
 
 interface EmailRequest {
   to: string[];
@@ -57,8 +58,8 @@ const handler = async (req: Request): Promise<Response> => {
         Authorization: `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: "Numerology <onboarding@resend.dev>",
-        to,
+        from: `Numerology <${VERIFIED_EMAIL}>`,
+        to: [VERIFIED_EMAIL], // For testing, always send to verified email
         subject,
         html: emailHtml,
       }),
