@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Globe2 } from "lucide-react";
 
 const CountryCompatibility = () => {
   const countries = [
@@ -12,7 +13,10 @@ const CountryCompatibility = () => {
 
   return (
     <div id="countries" className="rounded-xl bg-gradient-to-br from-[#8B5CF6]/30 to-[#0EA5E9]/30 p-4">
-      <h3 className="text-sm font-semibold text-white/90 mb-3 text-center">Global Compatibility</h3>
+      <h3 className="text-sm font-semibold text-white/90 mb-3 flex items-center gap-2">
+        <Globe2 className="w-5 h-5 text-blue-400" />
+        Global Compatibility
+      </h3>
       
       <div className="relative w-full aspect-square mb-4 flex items-center justify-center">
         <div className="w-full h-full relative rounded-2xl overflow-hidden">
@@ -38,7 +42,10 @@ const CountryCompatibility = () => {
                 transition={{ delay: index * 0.1 }}
                 className="relative flex items-center justify-between px-3 py-2 rounded-lg bg-white/5 overflow-hidden"
               >
-                <span className="text-sm text-white/80 z-10">{country.name}</span>
+                <div className="flex items-center gap-2 z-10">
+                  <Globe2 className="w-4 h-4 text-green-400" />
+                  <span className="text-sm text-white/80">{country.name}</span>
+                </div>
                 <span className="text-sm font-medium text-green-300 z-10">{country.compatibility}%</span>
                 <motion.div 
                   initial={{ width: 0 }}
@@ -63,7 +70,10 @@ const CountryCompatibility = () => {
                 transition={{ delay: index * 0.1 }}
                 className="relative flex items-center justify-between px-3 py-2 rounded-lg bg-white/5 overflow-hidden"
               >
-                <span className="text-sm text-white/80 z-10">{country.name}</span>
+                <div className="flex items-center gap-2 z-10">
+                  <Globe2 className="w-4 h-4 text-red-400" />
+                  <span className="text-sm text-white/80">{country.name}</span>
+                </div>
                 <span className="text-sm font-medium text-red-300 z-10">{country.compatibility}%</span>
                 <motion.div 
                   initial={{ width: 0 }}
