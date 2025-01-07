@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion"; // Add this import
+import { motion } from "framer-motion";
 import PhoneFrame from "./phone/PhoneFrame";
 import NumberSection from "./phone/NumberSection";
 import CompatibilitySection from "./phone/CompatibilitySection";
@@ -14,6 +14,13 @@ const PhoneShowcase = () => {
       setActiveSection(id);
     }
   };
+
+  // Sample country compatibility data
+  const countries = [
+    { name: "Japan", compatibility: 92 },
+    { name: "Thailand", compatibility: 88 },
+    { name: "Singapore", compatibility: 85 }
+  ];
 
   return (
     <PhoneFrame activeSection={activeSection} onSectionChange={scrollToSection}>
@@ -82,6 +89,29 @@ const PhoneShowcase = () => {
             <div key={career} className="px-3 py-2 rounded-lg bg-white/5 text-sm text-white/80">
               {career}
             </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Country Compatibility Section */}
+      <div id="countries" className="rounded-xl bg-gradient-to-br from-[#8B5CF6]/30 to-[#0EA5E9]/30 p-4">
+        <h3 className="text-sm font-semibold text-white/90 mb-3">Best Countries</h3>
+        <div className="space-y-2">
+          {countries.map((country, index) => (
+            <motion.div
+              key={country.name}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="flex items-center justify-between px-3 py-2 rounded-lg bg-white/5"
+            >
+              <span className="text-sm text-white/80">{country.name}</span>
+              <span className="text-sm font-medium text-white/90">{country.compatibility}%</span>
+              <div 
+                className="absolute left-0 top-0 h-full bg-white/10 rounded-lg transition-all"
+                style={{ width: `${country.compatibility}%` }}
+              />
+            </motion.div>
           ))}
         </div>
       </div>
