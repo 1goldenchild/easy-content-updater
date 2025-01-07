@@ -16,17 +16,17 @@ const CompatibilitySection = () => {
       <h3 className="text-sm font-semibold text-white/90 mb-3">Best Matches</h3>
       
       {/* Donut Chart with Labels */}
-      <div className="relative w-full aspect-square max-w-[120px] ml-4 mb-4">
+      <div className="relative w-full aspect-square max-w-[120px] ml-2 mb-4">
         {/* Labels */}
-        <div className="absolute -right-20 top-2 text-[10px] text-purple-300 font-medium flex items-center gap-2">
+        <div className="absolute -right-16 top-2 text-[10px] text-purple-300 font-medium flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-purple-500" />
           Compatible
         </div>
-        <div className="absolute -right-20 top-1/2 -translate-y-1/2 text-[10px] text-gray-400 font-medium flex items-center gap-2">
+        <div className="absolute -right-16 top-1/2 -translate-y-1/2 text-[10px] text-gray-400 font-medium flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-gray-400" />
           Neutral
         </div>
-        <div className="absolute -right-20 bottom-2 text-[10px] text-red-300 font-medium flex items-center gap-2">
+        <div className="absolute -right-16 bottom-2 text-[10px] text-red-300 font-medium flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-red-500" />
           Challenging
         </div>
