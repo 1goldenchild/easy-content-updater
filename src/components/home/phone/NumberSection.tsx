@@ -12,12 +12,11 @@ interface NumberSectionProps {
 
 const NumberSection = ({ id, title, number, subtitle, gradientFrom, gradientTo }: NumberSectionProps) => {
   return (
-    <div 
-      id={id} 
-      className={`rounded-xl bg-gradient-to-br from-${gradientFrom}/80 to-${gradientTo}/80 p-3 backdrop-blur-sm border border-white/10`}
-    >
-      <h3 className="text-sm font-semibold text-white/90 mb-1">{title}</h3>
-      <div className="text-2xl font-bold text-white">
+    <div id={id} className={`rounded-xl bg-gradient-to-br from-${gradientFrom}/30 to-${gradientTo}/30 p-3 backdrop-blur-sm`}>
+      <h3 className="text-sm font-semibold text-white mb-1">{title}</h3>
+      <div 
+        className={`text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-${gradientFrom} to-${gradientTo}`}
+      >
         {number}
       </div>
       <p className="text-xs text-white/70 mt-1">{subtitle}</p>
