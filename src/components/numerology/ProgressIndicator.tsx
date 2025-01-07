@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { useLocation } from "react-router-dom"
-import { useIsMobile } from "@/hooks/use-mobile"
 
 const ProgressIndicator = () => {
   const [activeSection, setActiveSection] = useState(0)
-  const isMobile = useIsMobile()
   const location = useLocation()
 
   const sections = location.pathname === "/" 
@@ -59,12 +57,29 @@ const ProgressIndicator = () => {
     }
   }
 
-  // Remove the isMobile check to show on mobile
   return (
     <div className="fixed inset-0 pointer-events-none flex items-center justify-center z-50">
       <div className="relative w-full max-w-7xl mx-auto px-4">
         <div className="absolute right-0 flex items-center gap-2">
-          <div className="space-y-8"> {/* Increased spacing between dots */}
+          <div className="space-y-8 relative">
+            {/* Animated progress line */}
+            <motion.div 
+              className="absolute right-1 w-[2px] bg-gradient-to-b from-purple-500 to-pink-500"
+              initial={{ height: 0 }}
+              animate={{ 
+                height: `${(activeSection / (sections.length - 1)) * 100}%`,
+                top: 0
+              }}
+              transition={{ duration: 0.3 }}
+              style={{
+                position: 'absolute',
+                zIndex: -1
+              }}
+            />
+            
+            {/* Static background line */}
+            <div className="absolute right-1 w-[2px] h-full bg-white/10" style={{ zIndex: -2 }} />
+
             {sections.map((section, index) => (
               <div 
                 key={section}
@@ -72,19 +87,9 @@ const ProgressIndicator = () => {
                 onClick={() => handleDotClick(index)}
                 style={{ cursor: 'pointer' }}
               >
-                {/* Connecting line */}
-                {index < sections.length - 1 && (
-                  <div className={`absolute top-4 right-1 w-[2px] h-8 ${
-                    index < activeSection 
-                      ? "bg-gradient-to-b from-purple-500 to-pink-500" 
-                      : "bg-white/10"
-                  }`} />
-                )}
-                
-                {/* Dot */}
                 <motion.div
                   className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                    index === activeSection 
+                    index <= activeSection 
                       ? "bg-gradient-to-r from-purple-500 to-pink-500" 
                       : "bg-white/20"
                   }`}
