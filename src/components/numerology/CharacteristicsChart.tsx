@@ -3,10 +3,38 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface CharacteristicsChartProps {
   isVisible: boolean;
+  lifePath: number;
 }
 
-const CharacteristicsChart = ({ isVisible }: CharacteristicsChartProps) => {
+const CharacteristicsChart = ({ isVisible, lifePath }: CharacteristicsChartProps) => {
   if (!isVisible) return null;
+
+  const getSpiritualConnectionValue = (number: number): number => {
+    const values: Record<number, number> = {
+      1: 7,
+      2: 10,
+      3: 7,
+      4: 5,
+      5: 7,
+      6: 7,
+      7: 10,
+      8: 8,
+      9: 9,
+      11: 9,
+      22: 6,
+      33: 10
+    };
+    return values[number] || 7; // Default to 7 if number not found
+  };
+
+  // Random values between 5 and 10 for other traits
+  const getRandomValue = () => Math.floor(Math.random() * 6) + 5;
+
+  const spiritualConnection = getSpiritualConnectionValue(lifePath);
+  const leadership = getRandomValue();
+  const creativity = getRandomValue();
+  const intuition = getRandomValue();
+  const materialSuccess = getRandomValue();
 
   return (
     <motion.div 
@@ -37,31 +65,46 @@ const CharacteristicsChart = ({ isVisible }: CharacteristicsChartProps) => {
                     <div className="flex justify-between items-center">
                       <span className="text-white/70">Spiritual Connection</span>
                       <div className="w-32 h-2 bg-white/10 rounded-full overflow-hidden">
-                        <div className="h-full w-3/4 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full" />
+                        <div 
+                          className="h-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full" 
+                          style={{ width: `${(spiritualConnection / 10) * 100}%` }}
+                        />
                       </div>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-white/70">Leadership</span>
                       <div className="w-32 h-2 bg-white/10 rounded-full overflow-hidden">
-                        <div className="h-full w-4/5 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full" />
+                        <div 
+                          className="h-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full"
+                          style={{ width: `${(leadership / 10) * 100}%` }}
+                        />
                       </div>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-white/70">Creativity</span>
                       <div className="w-32 h-2 bg-white/10 rounded-full overflow-hidden">
-                        <div className="h-full w-2/3 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full" />
+                        <div 
+                          className="h-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full"
+                          style={{ width: `${(creativity / 10) * 100}%` }}
+                        />
                       </div>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-white/70">Intuition</span>
                       <div className="w-32 h-2 bg-white/10 rounded-full overflow-hidden">
-                        <div className="h-full w-1/2 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full" />
+                        <div 
+                          className="h-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full"
+                          style={{ width: `${(intuition / 10) * 100}%` }}
+                        />
                       </div>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-white/70">Material Success</span>
                       <div className="w-32 h-2 bg-white/10 rounded-full overflow-hidden">
-                        <div className="h-full w-4/5 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full" />
+                        <div 
+                          className="h-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full"
+                          style={{ width: `${(materialSuccess / 10) * 100}%` }}
+                        />
                       </div>
                     </div>
                   </div>
