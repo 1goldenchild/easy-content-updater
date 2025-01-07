@@ -1,87 +1,89 @@
 import { motion } from "framer-motion";
+import { ScrollText, Sparkles } from "lucide-react";
 
 const YearlyForecast = () => {
   return (
-    <div id="forecast" className="rounded-xl bg-gradient-to-br from-[#0EA5E9]/30 to-[#F97316]/30 p-4 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
+    <div id="forecast" className="rounded-xl bg-gradient-to-br from-[#1a1f2c] to-[#2d3748] p-6 relative overflow-hidden">
+      {/* Background gradient effect */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(120,119,198,0.15),rgba(255,255,255,0))]" />
       
-      <h3 className="text-sm font-semibold text-white/90 mb-3 relative">
-        Numerology Forecast
-      </h3>
-      
-      <div className="relative h-32">
-        {/* Animated Stars */}
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-white rounded-full"
-            initial={{ opacity: 0.2, scale: 0.5 }}
-            animate={{
-              opacity: [0.2, 0.8, 0.2],
-              scale: [0.5, 1, 0.5],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              delay: i * 0.1,
-            }}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-          />
-        ))}
-
-        {/* Energy Path */}
-        <svg className="w-full h-full absolute top-0 left-0">
-          <motion.path
-            d="M0,50 C60,20 120,80 240,50"
-            stroke="url(#energyGradient)"
-            strokeWidth="3"
-            fill="none"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{
-              duration: 2,
-              ease: "easeInOut",
-              repeat: Infinity,
-              repeatType: "reverse"
-            }}
-          />
-          <defs>
-            <linearGradient id="energyGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#0EA5E9">
-                <animate
-                  attributeName="stop-color"
-                  values="#0EA5E9; #8B5CF6; #0EA5E9"
-                  dur="4s"
-                  repeatCount="indefinite"
-                />
-              </stop>
-              <stop offset="100%" stopColor="#8B5CF6">
-                <animate
-                  attributeName="stop-color"
-                  values="#8B5CF6; #0EA5E9; #8B5CF6"
-                  dur="4s"
-                  repeatCount="indefinite"
-                />
-              </stop>
-            </linearGradient>
-          </defs>
-        </svg>
-
-        {/* Timeline Points */}
-        <div className="absolute bottom-4 left-0 right-0 flex justify-between px-4 text-xs font-medium text-white/80">
-          <span>Foundation</span>
-          <span>Pinnacle</span>
-          <span>Destiny</span>
+      <div className="relative">
+        {/* Header */}
+        <div className="flex items-center gap-2 mb-4">
+          <ScrollText className="w-5 h-5 text-indigo-400" />
+          <h3 className="text-base font-semibold text-white/90">
+            Numerological Timeline
+          </h3>
         </div>
-      </div>
 
-      <div className="relative mt-2 text-center">
-        <p className="text-xs text-white/80 font-medium">
-          Discover your numerological path through time
-        </p>
+        {/* Timeline visualization */}
+        <div className="relative mt-6 mb-8">
+          <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 rounded-lg" />
+          <div className="relative h-[120px] flex items-center">
+            {/* Timeline line */}
+            <div className="absolute h-0.5 w-full bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20">
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+              />
+            </div>
+
+            {/* Timeline points */}
+            {["Past", "Present", "Future"].map((point, index) => (
+              <motion.div
+                key={point}
+                className="absolute flex flex-col items-center gap-2"
+                style={{ left: `${index * 50}%`, transform: 'translateX(-50%)' }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2 }}
+              >
+                <div className="w-3 h-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 shadow-lg shadow-purple-500/20" />
+                <span className="text-xs font-medium text-white/70">{point}</span>
+              </motion.div>
+            ))}
+
+            {/* Floating elements */}
+            {[...Array(5)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute"
+                initial={{ 
+                  opacity: 0,
+                  scale: 0.5,
+                  x: `${Math.random() * 100}%`,
+                  y: `${Math.random() * 100}%`
+                }}
+                animate={{
+                  opacity: [0.2, 0.5, 0.2],
+                  scale: [0.5, 1, 0.5],
+                  y: [`${Math.random() * 100}%`, `${Math.random() * 100}%`]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  delay: i * 0.5
+                }}
+              >
+                <Sparkles className="w-3 h-3 text-purple-400/30" />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Description */}
+        <div className="space-y-3">
+          <p className="text-sm text-white/70 leading-relaxed">
+            Your numerological journey unfolds across three distinct phases, each revealing unique opportunities and challenges. Understanding these temporal patterns provides invaluable insight into your life's trajectory.
+          </p>
+          <div className="flex items-center gap-2 text-xs text-white/50">
+            <Sparkles className="w-4 h-4" />
+            <span>Updated based on your current life path number</span>
+          </div>
+        </div>
       </div>
     </div>
   );
