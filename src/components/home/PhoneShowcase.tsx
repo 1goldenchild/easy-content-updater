@@ -4,6 +4,7 @@ import PhoneFrame from "./phone/PhoneFrame";
 import NumberSection from "./phone/NumberSection";
 import CompatibilitySection from "./phone/CompatibilitySection";
 import EarthGlobe from "@/components/numerology/EarthGlobe";
+import CareerCompatibility from "@/components/numerology/CareerCompatibility";
 
 const PhoneShowcase = () => {
   const [activeSection, setActiveSection] = useState("lifepath");
@@ -87,7 +88,7 @@ const PhoneShowcase = () => {
 
       {/* Career Path */}
       <div id="career" className="rounded-xl bg-gradient-to-br from-[#D946EF]/30 to-[#F97316]/30 p-4">
-        <h3 className="text-sm font-semibold text-white/90 mb-3">Career Paths</h3>
+        <h3 className="text-sm font-semibold text-white mb-2">Career Paths</h3>
         <div className="space-y-2">
           {["Researcher", "Analyst", "Teacher", "Writer"].map((career) => (
             <div key={career} className="px-3 py-2 rounded-lg bg-white/5 text-sm text-white/80">
@@ -95,6 +96,11 @@ const PhoneShowcase = () => {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Career Compatibility Section */}
+      <div id="career-compatibility">
+        <CareerCompatibility lifePath="7" isVisible={activeSection === "career-compatibility"} />
       </div>
 
       {/* Country Compatibility Section */}
