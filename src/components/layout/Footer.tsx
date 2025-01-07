@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
-import { Youtube, Instagram } from "lucide-react"
+import { Youtube } from "lucide-react"
 import TikTokIcon from "../icons/TikTokIcon"
 
 const Footer = () => {
@@ -95,7 +95,7 @@ const Footer = () => {
                     href="https://www.tiktok.com/@numerology_33"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative w-10 h-10 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#D946EF] p-[1px] hover:scale-110 transition-transform"
+                    className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#D946EF] p-[1px] hover:scale-110 transition-transform"
                   >
                     <div className="w-full h-full rounded-full bg-background flex items-center justify-center">
                       <span className="sr-only">TikTok</span>
@@ -105,29 +105,20 @@ const Footer = () => {
                   <span className="text-xs text-white mt-1">87k</span>
                 </div>
 
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#D946EF] p-[1px] hover:scale-110 transition-transform"
-                >
-                  <div className="w-full h-full rounded-full bg-background flex items-center justify-center">
-                    <span className="sr-only">Instagram</span>
-                    <Instagram className="w-5 h-5 text-white" />
-                  </div>
-                </a>
-
-                <a
-                  href="https://www.youtube.com/@numerology-33"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#D946EF] p-[1px] hover:scale-110 transition-transform"
-                >
-                  <div className="w-full h-full rounded-full bg-background flex items-center justify-center">
-                    <span className="sr-only">YouTube</span>
-                    <Youtube className="w-5 h-5 text-white" />
-                  </div>
-                </a>
+                <div className="flex flex-col items-center">
+                  <a
+                    href="https://www.youtube.com/@numerology-33"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#D946EF] p-[1px] hover:scale-110 transition-transform"
+                  >
+                    <div className="w-full h-full rounded-full bg-background flex items-center justify-center">
+                      <span className="sr-only">YouTube</span>
+                      <Youtube className="w-5 h-5 text-white" />
+                    </div>
+                  </a>
+                  <span className="text-xs text-white mt-1">&nbsp;</span>
+                </div>
               </div>
             </div>
 
