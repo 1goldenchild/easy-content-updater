@@ -61,7 +61,7 @@ const Benefits = () => {
   return (
     <section className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/5 to-transparent" />
-      <div className="container px-4 md:px-6 relative">
+      <div className="container max-w-7xl px-3 md:px-4 relative">
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -81,13 +81,13 @@ const Benefits = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4 lg:gap-8"
+          className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-3 lg:gap-6"
         >
           {benefits.map((benefit, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
-              className={`group relative rounded-2xl p-4 sm:p-6 lg:p-8 border ${benefit.borderColor} bg-gradient-to-br ${benefit.bgGradient} backdrop-blur-sm hover:scale-[1.02] transition-all duration-300 ease-out`}
+              className={`group relative rounded-2xl p-4 sm:p-6 lg:p-6 border ${benefit.borderColor} bg-gradient-to-br ${benefit.bgGradient} backdrop-blur-sm hover:scale-[1.02] transition-all duration-300 ease-out`}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-white/[0.04] to-transparent rounded-2xl" />
               <div className="relative space-y-3 sm:space-y-4">
@@ -98,7 +98,7 @@ const Benefits = () => {
                   <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-white via-white/90 to-white/80 bg-clip-text text-transparent">
                     {benefit.title}
                   </h3>
-                  <p className="text-sm sm:text-base text-white/70 leading-relaxed">
+                  <p className="text-sm sm:text-base text-white/70 leading-relaxed pr-2">
                     {benefit.description}
                   </p>
                 </div>
