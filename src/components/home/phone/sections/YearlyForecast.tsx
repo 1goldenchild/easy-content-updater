@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ScrollText, Sparkles } from "lucide-react";
+import { ScrollText } from "lucide-react";
 
 const YearlyForecast = () => {
   return (
@@ -18,10 +18,10 @@ const YearlyForecast = () => {
 
         {/* Timeline visualization */}
         <div className="relative mt-6 mb-8">
-          <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 rounded-lg" />
-          <div className="relative h-[120px] flex items-center">
+          <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/5 via-purple-500/5 to-pink-500/5 rounded-lg" />
+          <div className="relative h-24">
             {/* Timeline line */}
-            <div className="absolute h-0.5 w-full bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20">
+            <div className="absolute top-1/2 h-0.5 w-full bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20">
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
                 initial={{ scaleX: 0, opacity: 0 }}
@@ -35,55 +35,22 @@ const YearlyForecast = () => {
               <motion.div
                 key={point}
                 className="absolute flex flex-col items-center gap-2"
-                style={{ left: `${index * 50}%`, transform: 'translateX(-50%)' }}
+                style={{ left: `${index * 50}%`, top: "50%", transform: 'translate(-50%, -50%)' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2 }}
               >
-                <div className="w-3 h-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 shadow-lg shadow-purple-500/20" />
+                <div className="w-2 h-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500" />
                 <span className="text-xs font-medium text-white/70">{point}</span>
-              </motion.div>
-            ))}
-
-            {/* Floating elements */}
-            {[...Array(5)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute"
-                initial={{ 
-                  opacity: 0,
-                  scale: 0.5,
-                  x: `${Math.random() * 100}%`,
-                  y: `${Math.random() * 100}%`
-                }}
-                animate={{
-                  opacity: [0.2, 0.5, 0.2],
-                  scale: [0.5, 1, 0.5],
-                  y: [`${Math.random() * 100}%`, `${Math.random() * 100}%`]
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                  delay: i * 0.5
-                }}
-              >
-                <Sparkles className="w-3 h-3 text-purple-400/30" />
               </motion.div>
             ))}
           </div>
         </div>
 
         {/* Description */}
-        <div className="space-y-3">
-          <p className="text-sm text-white/70 leading-relaxed">
-            Your numerological journey unfolds across three distinct phases, each revealing unique opportunities and challenges. Understanding these temporal patterns provides invaluable insight into your life's trajectory.
-          </p>
-          <div className="flex items-center gap-2 text-xs text-white/50">
-            <Sparkles className="w-4 h-4" />
-            <span>Updated based on your current life path number</span>
-          </div>
-        </div>
+        <p className="text-sm text-white/70 leading-relaxed">
+          Your energy patterns unfold across three distinct phases, each revealing unique opportunities and challenges that shape your path forward.
+        </p>
       </div>
     </div>
   );
