@@ -40,6 +40,15 @@ const CompatibilitySection = () => {
             strokeLinecap="round"
             className="opacity-80"
           />
+          <text
+            x="50"
+            y="35"
+            textAnchor="middle"
+            fill="#8B5CF6"
+            className="text-[8px] font-medium"
+          >
+            Compatible
+          </text>
           {/* Neutral segment */}
           <motion.path
             initial={{ pathLength: 0 }}
@@ -58,6 +67,15 @@ const CompatibilitySection = () => {
             strokeLinecap="round"
             className="opacity-80"
           />
+          <text
+            x="65"
+            y="50"
+            textAnchor="middle"
+            fill="#6B7280"
+            className="text-[8px] font-medium"
+          >
+            Neutral
+          </text>
           {/* Challenging segment */}
           <motion.path
             initial={{ pathLength: 0 }}
@@ -76,6 +94,15 @@ const CompatibilitySection = () => {
             strokeLinecap="round"
             className="opacity-80"
           />
+          <text
+            x="50"
+            y="65"
+            textAnchor="middle"
+            fill="#EF4444"
+            className="text-[8px] font-medium"
+          >
+            Challenging
+          </text>
         </svg>
       </div>
 
