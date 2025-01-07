@@ -19,26 +19,31 @@ const EarthGlobe = () => {
     const geometry = new THREE.SphereGeometry(2, 32, 32);
     const textureLoader = new THREE.TextureLoader();
     
-    // Load earth texture with a futuristic blue theme
+    // Load earth texture with enhanced brightness
     const material = new THREE.MeshPhongMaterial({
       map: textureLoader.load('/earth-blue-marble.jpg'),
       bumpMap: textureLoader.load('/earth-topology.jpg'),
-      bumpScale: 0.1,
+      bumpScale: 0.15,
       specularMap: textureLoader.load('/earth-specular.jpg'),
-      specular: new THREE.Color('grey'),
-      shininess: 10
+      specular: new THREE.Color('white'),
+      shininess: 25
     });
 
     const earth = new THREE.Mesh(geometry, material);
     scene.add(earth);
 
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0x404040);
+    // Enhanced lighting setup
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Increased ambient light
     scene.add(ambientLight);
 
-    const directionalLight = new THREE.DirectionalLight(0x3311ff, 2);
+    const directionalLight = new THREE.DirectionalLight(0x4499ff, 2.5); // Brighter blue-tinted light
     directionalLight.position.set(5, 3, 5);
     scene.add(directionalLight);
+
+    // Add a secondary light source for better illumination
+    const secondaryLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    secondaryLight.position.set(-5, -3, -5);
+    scene.add(secondaryLight);
 
     camera.position.z = 5;
 
