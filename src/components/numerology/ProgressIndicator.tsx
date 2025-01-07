@@ -25,38 +25,38 @@ const ProgressIndicator = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  if (isMobile) {
-    return null; // Hide on mobile to prevent layout issues
-  }
-
   return (
-    <div className="fixed left-4 lg:left-8 top-1/2 -translate-y-1/2 flex items-center gap-2 lg:gap-4 z-50">
-      <div className="h-[200px] lg:h-[300px] w-[1px] lg:w-[2px] bg-white/10 rounded-full relative">
-        <motion.div 
-          className="absolute w-full bg-gradient-to-b from-purple-500 to-pink-500 rounded-full"
-          style={{
-            top: `${(activeSection / (sections.length - 1)) * 100}%`,
-            height: `${100 / sections.length}%`
-          }}
-          animate={{
-            top: `${(activeSection / (sections.length - 1)) * 100}%`
-          }}
-          transition={{
-            type: "spring",
-            stiffness: 300,
-            damping: 30
-          }}
-        />
-      </div>
+    <div className={`fixed top-1/2 -translate-y-1/2 flex items-center gap-2 lg:gap-4 z-50 ${
+      isMobile ? 'right-2' : 'left-4 lg:left-8'
+    }`}>
+      {!isMobile && (
+        <div className="h-[200px] lg:h-[300px] w-[1px] lg:w-[2px] bg-white/10 rounded-full relative">
+          <motion.div 
+            className="absolute w-full bg-gradient-to-b from-purple-500 to-pink-500 rounded-full"
+            style={{
+              top: `${(activeSection / (sections.length - 1)) * 100}%`,
+              height: `${100 / sections.length}%`
+            }}
+            animate={{
+              top: `${(activeSection / (sections.length - 1)) * 100}%`
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 300,
+              damping: 30
+            }}
+          />
+        </div>
+      )}
       
-      <div className="space-y-4 lg:space-y-6">
+      <div className={`space-y-4 lg:space-y-6 ${isMobile ? 'pr-1' : ''}`}>
         {sections.map((section, index) => (
           <div 
             key={section}
             className="relative flex items-center gap-2 lg:gap-3"
           >
             <motion.div
-              className={`w-2 h-2 lg:w-3 lg:h-3 rounded-full transition-colors duration-300 ${
+              className={`w-1.5 h-1.5 lg:w-3 lg:h-3 rounded-full transition-colors duration-300 ${
                 index === activeSection 
                   ? "bg-gradient-to-r from-purple-500 to-pink-500" 
                   : "bg-white/20"
@@ -65,15 +65,17 @@ const ProgressIndicator = () => {
                 scale: index === activeSection ? 1.2 : 1
               }}
             />
-            <span 
-              className={`text-xs lg:text-sm transition-colors duration-300 ${
-                index === activeSection 
-                  ? "text-white" 
-                  : "text-white/40"
-              }`}
-            >
-              {section}
-            </span>
+            {!isMobile && (
+              <span 
+                className={`text-xs lg:text-sm transition-colors duration-300 ${
+                  index === activeSection 
+                    ? "text-white" 
+                    : "text-white/40"
+                }`}
+              >
+                {section}
+              </span>
+            )}
           </div>
         ))}
       </div>
