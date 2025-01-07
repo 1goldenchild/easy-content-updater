@@ -82,13 +82,6 @@ const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
           </PopoverContent>
         </Popover>
       </div>
-
-      <Button 
-        onClick={onCalculate}
-        className="w-full bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] hover:from-[#8B5CF6] hover:to-[#6E59A5]"
-      >
-        Calculate
-      </Button>
     </div>
   );
 };

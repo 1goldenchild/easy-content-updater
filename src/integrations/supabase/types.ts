@@ -38,7 +38,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      schedule_email: {
+        Args: {
+          p_job_name: string
+          p_schedule: string
+          p_command: Json
+        }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never
