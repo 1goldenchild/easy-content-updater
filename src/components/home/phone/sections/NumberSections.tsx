@@ -46,8 +46,8 @@ const NumberSections = () => {
           <NumberSection
             id="zodiac"
             title="Chinese Zodiac"
-            number="龍"
-            subtitle="Year of the Dragon"
+            number="羊"
+            subtitle="Year of the Goat"
             gradientFrom="[#0EA5E9]"
             gradientTo="[#8B5CF6]"
           />
