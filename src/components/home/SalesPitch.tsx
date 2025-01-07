@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import CTASection from "./CTASection";
 import PreviewSection from "./sections/PreviewSection";
 import MainContentSection from "./sections/MainContentSection";
 
@@ -19,9 +18,6 @@ const SalesPitch = () => {
             <PreviewSection />
             <MainContentSection />
           </motion.div>
-
-          {/* Right Column - CTA Section */}
-          <CTASection />
         </div>
       </div>
     </section>
