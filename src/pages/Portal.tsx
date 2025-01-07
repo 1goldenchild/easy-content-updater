@@ -70,60 +70,62 @@ const Portal = () => {
 
   return (
     <div className="flex-1 p-4">
-      <div id="portal-content" className="max-w-7xl mx-auto space-y-8">
+      <div className="flex">
         {showResults && <ProgressIndicator />}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="w-full space-y-8 bg-white/5 p-8 rounded-xl backdrop-blur-sm border border-white/10"
-        >
-          <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
-              Numerology Calculator
-            </h2>
-            <p className="mt-2 text-white/70">
-              Discover your life path number and more
-            </p>
-          </div>
+        <div id="portal-content" className="flex-1 max-w-7xl mx-auto space-y-8 pl-24">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="w-full space-y-8 bg-white/5 p-8 rounded-xl backdrop-blur-sm border border-white/10"
+          >
+            <div className="text-center">
+              <h2 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
+                Numerology Calculator
+              </h2>
+              <p className="mt-2 text-white/70">
+                Discover your life path number and more
+              </p>
+            </div>
 
-          <DateSelector 
-            date={date}
-            setDate={setDate}
-            onCalculate={handleCalculate}
-          />
-
-          <NumerologyResults 
-            lifePath={results.lifePath}
-            partialEnergy={results.partialEnergy}
-            secretNumber={results.secretNumber}
-            chineseZodiac={results.chineseZodiac}
-            isVisible={showResults}
-          />
-        </motion.div>
-
-        {showResults && (
-          <>
-            <OccupationGuidance
-              lifePath={results.lifePath}
-              isVisible={showResults}
-            />
-            
-            <CompatibilityChart 
-              lifePath={results.lifePath}
-              isVisible={showResults}
+            <DateSelector 
+              date={date}
+              setDate={setDate}
+              onCalculate={handleCalculate}
             />
 
-            <CountryCompatibility
+            <NumerologyResults 
+              lifePath={results.lifePath}
+              partialEnergy={results.partialEnergy}
+              secretNumber={results.secretNumber}
               chineseZodiac={results.chineseZodiac}
               isVisible={showResults}
             />
+          </motion.div>
 
-            <CarCompatibility
-              chineseZodiac={results.chineseZodiac}
-              isVisible={showResults}
-            />
-          </>
-        )}
+          {showResults && (
+            <>
+              <OccupationGuidance
+                lifePath={results.lifePath}
+                isVisible={showResults}
+              />
+              
+              <CompatibilityChart 
+                lifePath={results.lifePath}
+                isVisible={showResults}
+              />
+
+              <CountryCompatibility
+                chineseZodiac={results.chineseZodiac}
+                isVisible={showResults}
+              />
+
+              <CarCompatibility
+                chineseZodiac={results.chineseZodiac}
+                isVisible={showResults}
+              />
+            </>
+          )}
+        </div>
       </div>
       {showResults && <ExportButton />}
     </div>
