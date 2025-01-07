@@ -7,8 +7,8 @@ const NumberSections = () => {
       <NumberSection
         id="lifepath"
         title="Life Path Number"
-        number="7"
-        subtitle={<>The Misunderstood Genius <span className="text-[10px] text-white/60 block mt-1">Read Now →</span></>}
+        number="8"
+        subtitle={<>The Powerhouse <span className="text-[10px] text-white/60 block mt-1">Read Now →</span></>}
         gradientFrom="[#8B5CF6]"
         gradientTo="[#D946EF]"
       />
@@ -25,8 +25,8 @@ const NumberSections = () => {
       <NumberSection
         id="secret"
         title="Secret Number"
-        number="9"
-        subtitle={<>The Humanitarian <span className="text-[10px] text-white/60 block mt-1">Read Now →</span></>}
+        number="33"
+        subtitle={<>The Master Teacher <span className="text-[10px] text-white/60 block mt-1">Read Now →</span></>}
         gradientFrom="[#0EA5E9]"
         gradientTo="[#8B5CF6]"
       />
