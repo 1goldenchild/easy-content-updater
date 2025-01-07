@@ -15,11 +15,11 @@ const CountryCompatibility = () => {
     <div id="countries" className="rounded-xl bg-gradient-to-br from-[#8B5CF6]/30 to-[#0EA5E9]/30 p-4">
       <h3 className="text-sm font-semibold text-white/90 mb-3">Global Compatibility</h3>
       
-      <div className="relative w-full h-32 mb-4">
+      <div className="relative w-full aspect-square mb-4">
         <img 
           src="https://media.giphy.com/media/wgHY9nSrlTMt2/giphy.gif" 
           alt="Rotating globe animation"
-          className="w-full h-full object-cover rounded-lg" 
+          className="w-full h-full object-contain rounded-lg" 
         />
       </div>
 
