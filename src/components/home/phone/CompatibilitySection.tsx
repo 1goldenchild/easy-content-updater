@@ -11,12 +11,6 @@ const CompatibilitySection = () => {
   const neutralPercentage = (neutralNumbers.length / total) * 100;
   const challengingPercentage = (challengingNumbers.length / total) * 100;
 
-  // Calculate stroke dasharray and dashoffset for each segment
-  const circumference = 2 * Math.PI * 40; // radius = 40
-  const compatibleDash = (circumference * compatiblePercentage) / 100;
-  const neutralDash = (circumference * neutralPercentage) / 100;
-  const challengingDash = (circumference * challengingPercentage) / 100;
-
   return (
     <div id="compatibility" className="rounded-xl bg-gradient-to-br from-[#8B5CF6]/30 to-[#0EA5E9]/30 p-4">
       <h3 className="text-sm font-semibold text-white/90 mb-3">Best Matches</h3>
@@ -24,50 +18,61 @@ const CompatibilitySection = () => {
       {/* Donut Chart */}
       <div className="relative w-full aspect-square max-w-[120px] mx-auto mb-4">
         <svg viewBox="0 0 100 100" className="transform -rotate-90">
-          {/* Compatible segment */}
-          <motion.circle
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: compatiblePercentage / 100 }}
-            transition={{ duration: 1, ease: "easeInOut" }}
+          {/* Background circle */}
+          <circle
             cx="50"
             cy="50"
             r="40"
             fill="none"
+            stroke="#1f2937"
+            strokeWidth="12"
+            className="opacity-20"
+          />
+          {/* Compatible segment */}
+          <motion.path
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+            d={describeArc(50, 50, 40, 0, (compatiblePercentage * 360) / 100)}
+            fill="none"
             stroke="#8B5CF6"
             strokeWidth="12"
-            strokeDasharray={`${compatibleDash} ${circumference}`}
             strokeLinecap="round"
             className="opacity-80"
           />
           {/* Neutral segment */}
-          <motion.circle
+          <motion.path
             initial={{ pathLength: 0 }}
-            animate={{ pathLength: neutralPercentage / 100 }}
+            animate={{ pathLength: 1 }}
             transition={{ duration: 1, ease: "easeInOut", delay: 0.3 }}
-            cx="50"
-            cy="50"
-            r="40"
+            d={describeArc(
+              50,
+              50,
+              40,
+              (compatiblePercentage * 360) / 100,
+              ((compatiblePercentage + neutralPercentage) * 360) / 100
+            )}
             fill="none"
             stroke="#6B7280"
             strokeWidth="12"
-            strokeDasharray={`${neutralDash} ${circumference}`}
-            strokeDashoffset={-compatibleDash}
             strokeLinecap="round"
             className="opacity-80"
           />
           {/* Challenging segment */}
-          <motion.circle
+          <motion.path
             initial={{ pathLength: 0 }}
-            animate={{ pathLength: challengingPercentage / 100 }}
+            animate={{ pathLength: 1 }}
             transition={{ duration: 1, ease: "easeInOut", delay: 0.6 }}
-            cx="50"
-            cy="50"
-            r="40"
+            d={describeArc(
+              50,
+              50,
+              40,
+              ((compatiblePercentage + neutralPercentage) * 360) / 100,
+              360
+            )}
             fill="none"
             stroke="#EF4444"
             strokeWidth="12"
-            strokeDasharray={`${challengingDash} ${circumference}`}
-            strokeDashoffset={-(compatibleDash + neutralDash)}
             strokeLinecap="round"
             className="opacity-80"
           />
@@ -132,5 +137,33 @@ const CompatibilitySection = () => {
     </div>
   );
 };
+
+// Helper function to create arc paths
+function polarToCartesian(centerX: number, centerY: number, radius: number, angleInDegrees: number) {
+  const angleInRadians = ((angleInDegrees - 90) * Math.PI) / 180.0;
+  return {
+    x: centerX + radius * Math.cos(angleInRadians),
+    y: centerY + radius * Math.sin(angleInRadians),
+  };
+}
+
+function describeArc(x: number, y: number, radius: number, startAngle: number, endAngle: number) {
+  const start = polarToCartesian(x, y, radius, endAngle);
+  const end = polarToCartesian(x, y, radius, startAngle);
+  const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+  return [
+    "M",
+    start.x,
+    start.y,
+    "A",
+    radius,
+    radius,
+    0,
+    largeArcFlag,
+    0,
+    end.x,
+    end.y,
+  ].join(" ");
+}
 
 export default CompatibilitySection;
