@@ -58,7 +58,7 @@ const FeatureList = () => {
           viewport={{ once: true }}
           transition={{ delay: index * 0.1 }}
           whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-          className="relative group"
+          className={`relative group ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}
         >
           <div className="absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl blur-xl -z-10" />
           <div className={`h-full p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm relative overflow-hidden`}>
@@ -67,9 +67,14 @@ const FeatureList = () => {
             
             {/* Content */}
             <div className="relative z-10">
-              {/* Icon with gradient background */}
-              <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${feature.gradient} p-2.5 mb-4 shadow-lg`}>
-                <feature.icon className="w-full h-full text-white" />
+              {/* Number and Icon with gradient background */}
+              <div className="flex items-center gap-4 mb-4">
+                <div className={`w-8 h-8 rounded-full bg-gradient-to-r ${feature.gradient} flex items-center justify-center text-white font-bold`}>
+                  {index + 1}
+                </div>
+                <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${feature.gradient} p-2.5 shadow-lg`}>
+                  <feature.icon className="w-full h-full text-white" />
+                </div>
               </div>
               
               {/* Title with gradient text */}
