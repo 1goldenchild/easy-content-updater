@@ -19,7 +19,7 @@ const NumberSections = () => {
           id="lifepath"
           title="Life Path Number"
           number="8"
-          subtitle={<>The Powerhouse <span onClick={handleReadClick} className="text-[10px] text-white/60 block mt-1 cursor-pointer hover:text-white/80">Read Analysis →</span></>}
+          subtitle={<>The Powerhouse <span onClick={handleReadClick} className="text-[10px] text-white/60 block mt-1 cursor-pointer hover:text-white/80">Read Full Analysis →</span></>}
           gradientFrom="[#8B5CF6]"
           gradientTo="[#D946EF]"
         />
@@ -28,7 +28,7 @@ const NumberSections = () => {
           id="partial"
           title="Partial Energy"
           number="4"
-          subtitle={<>The Builder <span onClick={handleReadClick} className="text-[10px] text-white/60 block mt-1 cursor-pointer hover:text-white/80">Read Analysis →</span></>}
+          subtitle={<>The Builder <span onClick={handleReadClick} className="text-[10px] text-white/60 block mt-1 cursor-pointer hover:text-white/80">Read Full Analysis →</span></>}
           gradientFrom="[#F97316]"
           gradientTo="[#D946EF]"
         />
@@ -37,7 +37,7 @@ const NumberSections = () => {
           id="secret"
           title="Secret Number"
           number="33"
-          subtitle={<>The Master Teacher <span onClick={handleReadClick} className="text-[10px] text-white/60 block mt-1 cursor-pointer hover:text-white/80">Read Analysis →</span></>}
+          subtitle={<>The Master Teacher <span onClick={handleReadClick} className="text-[10px] text-white/60 block mt-1 cursor-pointer hover:text-white/80">Read Full Analysis →</span></>}
           gradientFrom="[#0EA5E9]"
           gradientTo="[#8B5CF6]"
         />
@@ -46,7 +46,7 @@ const NumberSections = () => {
           id="zodiac"
           title="Chinese Zodiac"
           number="龍"
-          subtitle={<>Year of the Dragon <span onClick={handleReadClick} className="text-[10px] text-white/60 block mt-1 cursor-pointer hover:text-white/80">Read Analysis →</span></>}
+          subtitle={<>Year of the Dragon <span onClick={handleReadClick} className="text-[10px] text-white/60 block mt-1 cursor-pointer hover:text-white/80">Read Full Analysis →</span></>}
           gradientFrom="[#F97316]"
           gradientTo="[#0EA5E9]"
         />
@@ -72,7 +72,7 @@ const NumberSections = () => {
               <div className="space-y-8 py-8">
                 <div>
                   <h2 className="text-2xl font-bold bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent mb-4">
-                    Your Personalized Numerology Analysis
+                    Your Complete Numerological Profile
                   </h2>
                   
                   <div className="space-y-6">
