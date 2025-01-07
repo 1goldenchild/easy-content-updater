@@ -2,11 +2,11 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import FeatureList from "./FeatureList";
 import CTASection from "./CTASection";
 import PhoneShowcase from "./PhoneShowcase";
 import { scrollToTop } from "./CallToAction";
+import CTAButton from "./buttons/CTAButton";
 
 const SalesPitch = () => {
   const navigate = useNavigate();
@@ -173,34 +173,18 @@ const SalesPitch = () => {
 
             <PhoneShowcase />
             
-            {/* CTA Button after Phone Showcase */}
+            {/* First CTA Button after Phone Showcase */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="flex justify-center"
             >
-              <Button
+              <CTAButton 
                 onClick={handleGetStarted}
-                size="lg"
-                className="bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] hover:opacity-90 text-white font-semibold px-8 py-6 text-lg h-auto group relative overflow-hidden"
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  Unlock Your Reading
-                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                </span>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] opacity-0 group-hover:opacity-100 transition-opacity"
-                  animate={{
-                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "linear"
-                  }}
-                />
-              </Button>
+                text="Unlock Your Reading"
+                icon="arrow"
+              />
             </motion.div>
             
             <motion.h2 
@@ -219,34 +203,18 @@ const SalesPitch = () => {
             
             <FeatureList />
 
-            {/* CTA Button after Feature List */}
+            {/* Second CTA Button after Feature List */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="flex justify-center pt-8"
             >
-              <Button
+              <CTAButton 
                 onClick={handleGetStarted}
-                size="lg"
-                className="bg-gradient-to-r from-[#D946EF] via-[#F97316] to-[#8B5CF6] hover:opacity-90 text-white font-semibold px-8 py-6 text-lg h-auto group relative overflow-hidden"
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  Start Your Journey Now
-                  <Sparkles className="w-5 h-5 transition-transform group-hover:rotate-12" />
-                </span>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-[#D946EF] via-[#F97316] to-[#8B5CF6] opacity-0 group-hover:opacity-100 transition-opacity"
-                  animate={{
-                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "linear"
-                  }}
-                />
-              </Button>
+                text="Start Your Journey Now"
+                icon="sparkles"
+              />
             </motion.div>
           </motion.div>
 
