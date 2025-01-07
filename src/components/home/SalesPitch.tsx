@@ -4,8 +4,8 @@ import MainContentSection from "./sections/MainContentSection";
 
 const SalesPitch = () => {
   return (
-    <section className="py-20 relative overflow-hidden">
-      <div className="container px-4 md:px-6">
+    <section className="w-full py-20 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Features List */}
           <motion.div
