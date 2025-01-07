@@ -15,7 +15,7 @@ const EarthGlobe = () => {
       alpha: true 
     });
     
-    renderer.setSize(400, 400); // Increased size for better visibility
+    renderer.setSize(400, 400);
     mountRef.current.appendChild(renderer.domElement);
 
     // Earth setup with higher detail
@@ -52,17 +52,15 @@ const EarthGlobe = () => {
     const ambientLight = new THREE.AmbientLight(0x001100, 1);
     scene.add(ambientLight);
 
-    // Main directional light (green tint)
     const directionalLight = new THREE.DirectionalLight(0x00ff99, 2.5);
     directionalLight.position.set(5, 3, 5);
     scene.add(directionalLight);
 
-    // Secondary rim light
     const rimLight = new THREE.DirectionalLight(0x00ffaa, 1.5);
     rimLight.position.set(-5, 0, 0);
     scene.add(rimLight);
 
-    // Digital rain effect (particle system)
+    // Digital rain effect
     const rainGeometry = new THREE.BufferGeometry();
     const rainCount = 1000;
     const positions = new Float32Array(rainCount * 3);
@@ -90,13 +88,24 @@ const EarthGlobe = () => {
 
     camera.position.z = 5;
 
-    // Animation loop
+    // Time tracking for smooth rotation
+    const clock = new THREE.Clock();
+    let time = 0;
+
+    // Animation loop with enhanced rotation
     const animate = () => {
       requestAnimationFrame(animate);
+      
+      // Update time
+      time += clock.getDelta();
 
-      // Rotate Earth
-      earth.rotation.y += 0.001;
-      atmosphere.rotation.y += 0.001;
+      // Rotate Earth with varying speed and some wobble
+      earth.rotation.y += 0.005; // Increased base rotation speed
+      earth.rotation.x = Math.sin(time * 0.5) * 0.1; // Add slight wobble
+      
+      // Match atmosphere rotation
+      atmosphere.rotation.y = earth.rotation.y;
+      atmosphere.rotation.x = earth.rotation.x;
 
       // Animate digital rain
       const positions = rain.geometry.attributes.position.array as Float32Array;
