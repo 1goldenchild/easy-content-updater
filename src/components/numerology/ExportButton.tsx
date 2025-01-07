@@ -13,11 +13,23 @@ const ExportButton = () => {
       setIsExporting(true);
       toast.info("Preparing your PDF...");
 
-      // Get the content container (everything except footer)
+      // Get the content container
       const contentElement = document.getElementById("portal-content");
       if (!contentElement) {
         throw new Error("Content element not found");
       }
+
+      // Temporarily modify scrollable elements to show full content
+      const scrollAreas = contentElement.querySelectorAll('[class*="scroll"]');
+      const originalStyles: { element: HTMLElement; style: string }[] = [];
+
+      scrollAreas.forEach((area) => {
+        const element = area as HTMLElement;
+        originalStyles.push({ element, style: element.style.cssText });
+        element.style.height = 'auto';
+        element.style.maxHeight = 'none';
+        element.style.overflow = 'visible';
+      });
 
       // Create canvas from the content with improved settings
       const canvas = await html2canvas(contentElement, {
@@ -67,6 +79,12 @@ const ExportButton = () => {
             // Preserve borders
             if (style.border) {
               el.style.border = style.border;
+            }
+
+            // Make all content visible
+            el.style.overflow = 'visible';
+            if (el.style.maxHeight) {
+              el.style.maxHeight = 'none';
             }
           }
 
@@ -127,6 +145,11 @@ const ExportButton = () => {
       const timestamp = new Date().toISOString().split('T')[0];
       pdf.save(`numerology-reading-${timestamp}.pdf`);
       toast.success("PDF exported successfully!");
+
+      // Restore original scroll area styles
+      originalStyles.forEach(({ element, style }) => {
+        element.style.cssText = style;
+      });
     } catch (error) {
       console.error("PDF export error:", error);
       toast.error("Failed to export PDF. Please try again.");
