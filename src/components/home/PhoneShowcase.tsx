@@ -13,17 +13,32 @@ const PhoneShowcase = () => {
         {/* Notch */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-7 bg-black rounded-b-3xl z-20" />
         
-        {/* Screen Content */}
-        <div className="absolute inset-0 overflow-hidden">
-          <img 
-            src="/lovable-uploads/984813d9-700a-4057-a369-08ae4035507b.png"
-            alt="Numerology Analysis"
-            className="w-full h-full object-cover"
-          />
+        {/* Screen Content with Scroll */}
+        <div className="absolute inset-0 overflow-y-auto overflow-x-hidden scrollbar-hide">
+          <motion.div 
+            initial={{ y: 0 }}
+            animate={{ y: -800 }}
+            transition={{ 
+              duration: 20,
+              repeat: Infinity,
+              repeatType: "reverse",
+              ease: "linear"
+            }}
+          >
+            <img 
+              src="/lovable-uploads/fa5950c8-545a-4644-8d15-7796497be16d.png"
+              alt="Numerology Analysis"
+              className="w-full object-cover"
+            />
+          </motion.div>
         </div>
 
         {/* Reflection Effect */}
         <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none" />
+        
+        {/* Scroll Fade Overlays */}
+        <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[#1A1F2C] to-transparent pointer-events-none z-10" />
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#1A1F2C] to-transparent pointer-events-none z-10" />
       </div>
 
       {/* Decorative Elements */}
