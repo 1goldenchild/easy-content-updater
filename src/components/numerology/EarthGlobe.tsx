@@ -15,7 +15,7 @@ const EarthGlobe = () => {
       alpha: true 
     });
     
-    renderer.setSize(300, 300);
+    renderer.setSize(400, 400); // Increased size for better visibility
     mountRef.current.appendChild(renderer.domElement);
 
     // Earth setup with higher detail
@@ -23,55 +23,91 @@ const EarthGlobe = () => {
     const textureLoader = new THREE.TextureLoader();
     
     // Create atmosphere glow effect
-    const atmosphereGeometry = new THREE.SphereGeometry(2.2, 64, 64);
+    const atmosphereGeometry = new THREE.SphereGeometry(2.1, 64, 64);
     const atmosphereMaterial = new THREE.MeshPhongMaterial({
-      color: 0x0066ff,
+      color: 0x00ff99,
       transparent: true,
-      opacity: 0.15,
+      opacity: 0.2,
       side: THREE.BackSide,
     });
     const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
     scene.add(atmosphere);
 
-    // Enhanced Earth material with Matrix-style look
+    // Matrix-style Earth material
     const material = new THREE.MeshPhongMaterial({
       map: textureLoader.load('/earth-texture.jpg'),
-      bumpScale: 0.1,
-      specular: new THREE.Color(0x2d4ea3),
-      shininess: 15,
-      emissive: new THREE.Color(0x112244),
-      emissiveIntensity: 0.2
+      bumpScale: 0.15,
+      specular: new THREE.Color(0x00ff99),
+      shininess: 25,
+      emissive: new THREE.Color(0x002211),
+      emissiveIntensity: 0.3,
+      transparent: true,
+      opacity: 0.95
     });
 
     const earth = new THREE.Mesh(geometry, material);
     scene.add(earth);
 
     // Matrix-style lighting setup
-    const ambientLight = new THREE.AmbientLight(0x222244, 1);
+    const ambientLight = new THREE.AmbientLight(0x001100, 1);
     scene.add(ambientLight);
 
-    // Main directional light (sun-like)
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
+    // Main directional light (green tint)
+    const directionalLight = new THREE.DirectionalLight(0x00ff99, 2.5);
     directionalLight.position.set(5, 3, 5);
     scene.add(directionalLight);
 
-    // Blue rim light for atmosphere effect
-    const rimLight = new THREE.DirectionalLight(0x0066ff, 1.5);
+    // Secondary rim light
+    const rimLight = new THREE.DirectionalLight(0x00ffaa, 1.5);
     rimLight.position.set(-5, 0, 0);
     scene.add(rimLight);
 
-    // Soft fill light from below
-    const fillLight = new THREE.DirectionalLight(0x0044aa, 0.5);
-    fillLight.position.set(0, -5, 0);
-    scene.add(fillLight);
+    // Digital rain effect (particle system)
+    const rainGeometry = new THREE.BufferGeometry();
+    const rainCount = 1000;
+    const positions = new Float32Array(rainCount * 3);
+    const velocities = new Float32Array(rainCount);
+
+    for (let i = 0; i < rainCount; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 20;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 20;
+      velocities[i] = 0.1 + Math.random() * 0.1;
+    }
+
+    rainGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    
+    const rainMaterial = new THREE.PointsMaterial({
+      color: 0x00ff99,
+      size: 0.05,
+      transparent: true,
+      opacity: 0.6,
+      blending: THREE.AdditiveBlending
+    });
+
+    const rain = new THREE.Points(rainGeometry, rainMaterial);
+    scene.add(rain);
 
     camera.position.z = 5;
 
-    // Smooth rotation animation
+    // Animation loop
     const animate = () => {
       requestAnimationFrame(animate);
-      earth.rotation.y += 0.001; // Slower rotation
-      atmosphere.rotation.y += 0.001; // Match Earth rotation
+
+      // Rotate Earth
+      earth.rotation.y += 0.001;
+      atmosphere.rotation.y += 0.001;
+
+      // Animate digital rain
+      const positions = rain.geometry.attributes.position.array as Float32Array;
+      for (let i = 0; i < rainCount; i++) {
+        positions[i * 3 + 1] -= velocities[i];
+        if (positions[i * 3 + 1] < -10) {
+          positions[i * 3 + 1] = 10;
+        }
+      }
+      rain.geometry.attributes.position.needsUpdate = true;
+
       renderer.render(scene, camera);
     };
 
@@ -80,8 +116,8 @@ const EarthGlobe = () => {
     // Handle resize
     const handleResize = () => {
       if (!mountRef.current) return;
-      const width = 300;
-      const height = 300;
+      const width = 400;
+      const height = 400;
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
@@ -96,7 +132,11 @@ const EarthGlobe = () => {
     };
   }, []);
 
-  return <div ref={mountRef} className="w-[300px] h-[300px] mx-auto" />;
+  return (
+    <div ref={mountRef} className="w-[400px] h-[400px] mx-auto relative">
+      <div className="absolute inset-0 bg-[#00ff99]/5 blur-3xl rounded-full animate-pulse" />
+    </div>
+  );
 };
 
 export default EarthGlobe;
