@@ -11,7 +11,8 @@ const benefits = [
     iconColor: "text-blue-400",
     borderColor: "border-blue-500/20",
     burnGradient: "from-blue-400/0 via-blue-400/10 to-purple-500/5",
-    glowColor: "blue"
+    glowColor: "blue",
+    neonColor: "rgba(59, 130, 246, 0.5)" // Blue neon
   },
   {
     icon: TrendingUp,
@@ -21,7 +22,8 @@ const benefits = [
     iconColor: "text-purple-400",
     borderColor: "border-purple-500/20",
     burnGradient: "from-purple-400/0 via-purple-400/10 to-pink-500/5",
-    glowColor: "purple"
+    glowColor: "purple",
+    neonColor: "rgba(168, 85, 247, 0.5)" // Purple neon
   },
   {
     icon: Sparkles,
@@ -31,7 +33,8 @@ const benefits = [
     iconColor: "text-amber-400",
     borderColor: "border-amber-500/20",
     burnGradient: "from-amber-400/0 via-amber-400/10 to-orange-500/5",
-    glowColor: "amber"
+    glowColor: "amber",
+    neonColor: "rgba(251, 191, 36, 0.5)" // Amber neon
   },
   {
     icon: Target,
@@ -41,7 +44,8 @@ const benefits = [
     iconColor: "text-emerald-400",
     borderColor: "border-emerald-500/20",
     burnGradient: "from-emerald-400/0 via-emerald-400/10 to-teal-500/5",
-    glowColor: "emerald"
+    glowColor: "emerald",
+    neonColor: "rgba(52, 211, 153, 0.5)" // Emerald neon
   }
 ]
 
@@ -106,11 +110,12 @@ const Benefits = () => {
                 }}
                 className={`group relative rounded-2xl p-4 sm:p-6 lg:p-6 border ${benefit.borderColor} bg-gradient-to-br ${benefit.bgGradient} backdrop-blur-sm transition-all duration-300 ease-out overflow-hidden`}
               >
-                {/* Glow effect */}
+                {/* Neon glow effect */}
                 <motion.div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100"
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   style={{
-                    background: `radial-gradient(circle at center, ${benefit.glowColor}500/30 0%, transparent 70%)`,
+                    boxShadow: `0 0 20px 2px ${benefit.neonColor}, 
+                               0 0 40px 6px ${benefit.neonColor}`,
                     opacity: progress
                   }}
                 />
@@ -120,12 +125,20 @@ const Benefits = () => {
                 
                 <div className="relative space-y-3 sm:space-y-4">
                   <motion.div 
-                    className={`${benefit.iconColor} w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 p-2 sm:p-2.5 ring-2 ring-white/10 group-hover:ring-white/20 transition-all duration-300`}
+                    className={`${benefit.iconColor} w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 p-2 sm:p-2.5 ring-2 ring-white/10 group-hover:ring-white/20 transition-all duration-300 relative`}
                     style={{
                       filter: useTransform(progress, [0, 1], ["brightness(0.5)", "brightness(1.2)"])
                     }}
                   >
-                    <benefit.icon className="w-full h-full" />
+                    {/* Icon neon glow */}
+                    <div 
+                      className="absolute inset-0 rounded-xl transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                      style={{
+                        boxShadow: `0 0 10px 2px ${benefit.neonColor}, 
+                                   0 0 20px 4px ${benefit.neonColor}`,
+                      }}
+                    />
+                    <benefit.icon className="w-full h-full relative z-10" />
                   </motion.div>
                   <h3 className="text-xl sm:text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-br from-white to-white/80">
                     {benefit.title}
