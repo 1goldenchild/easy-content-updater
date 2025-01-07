@@ -19,10 +19,6 @@ const CollectInfo = () => {
               </span>
             </span>
           </h1>
-          <p className="text-white/70 max-w-2xl mx-auto mt-4">
-            Enter your details below to receive a comprehensive analysis of your
-            life path, relationships, and future opportunities.
-          </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
