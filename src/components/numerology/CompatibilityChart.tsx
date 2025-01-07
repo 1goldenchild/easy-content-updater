@@ -52,12 +52,18 @@ const CompatibilityChart = ({ lifePath, isVisible }: CompatibilityChartProps) =>
     return enemyMap[number] || [];
   };
 
+  const getNeutralNumbers = (compatibleNums: number[], enemyNums: number[]): number[] => {
+    const allNumbers = Array.from({ length: 9 }, (_, i) => i + 1);
+    return allNumbers.filter(num => !compatibleNums.includes(num) && !enemyNums.includes(num));
+  };
+
   const compatibleNumbers = getCompatibleNumbers(lifePath);
   const enemyNumbers = getEnemyNumbers(lifePath);
+  const neutralNumbers = getNeutralNumbers(compatibleNumbers, enemyNumbers);
 
   const compatibilityData = [
     { name: 'Compatible', value: compatibleNumbers.length, numbers: compatibleNumbers },
-    { name: 'Neutral', value: 9 - (compatibleNumbers.length + enemyNumbers.length), numbers: [] },
+    { name: 'Neutral', value: neutralNumbers.length, numbers: neutralNumbers },
     { name: 'Challenging', value: enemyNumbers.length, numbers: enemyNumbers }
   ];
 
@@ -82,7 +88,7 @@ const CompatibilityChart = ({ lifePath, isVisible }: CompatibilityChartProps) =>
               <Pie
                 data={compatibilityData}
                 cx="50%"
-                cy="50%"
+                cy="45%"
                 innerRadius={60}
                 outerRadius={100}
                 fill="#8884d8"
@@ -102,7 +108,7 @@ const CompatibilityChart = ({ lifePath, isVisible }: CompatibilityChartProps) =>
                   color: 'rgba(255, 255, 255, 0.8)'
                 }}
               />
-              <Legend />
+              <Legend verticalAlign="bottom" height={36} />
             </PieChart>
           </ResponsiveContainer>
         </div>
@@ -115,6 +121,20 @@ const CompatibilityChart = ({ lifePath, isVisible }: CompatibilityChartProps) =>
                 <div
                   key={`compatible-${num}`}
                   className="px-4 py-2 rounded-full bg-purple-500/20 border border-purple-500/30 text-purple-300"
+                >
+                  {num}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h4 className="text-lg font-semibold text-white/80 mb-3">Neutral Numbers</h4>
+            <div className="flex flex-wrap gap-3">
+              {neutralNumbers.map((num) => (
+                <div
+                  key={`neutral-${num}`}
+                  className="px-4 py-2 rounded-full bg-gray-500/20 border border-gray-500/30 text-gray-300"
                 >
                   {num}
                 </div>
