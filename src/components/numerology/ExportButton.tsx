@@ -23,32 +23,48 @@ const ExportButton = () => {
       const canvas = await html2canvas(contentElement, {
         scale: 2, // Higher quality
         useCORS: true, // Handle cross-origin images
-        logging: false,
-        windowWidth: contentElement.scrollWidth,
-        windowHeight: contentElement.scrollHeight,
-        allowTaint: true,
-        foreignObjectRendering: true,
-        removeContainer: true,
-        backgroundColor: "#1A1F2C", // Match the background color
+        logging: true, // Enable logging for debugging
+        backgroundColor: null, // Transparent background
         onclone: (clonedDoc) => {
-          // Ensure all text elements are visible
+          // Process all elements to ensure visibility
           const elements = clonedDoc.getElementsByTagName('*');
           for (let i = 0; i < elements.length; i++) {
-            const el = elements[i];
+            const el = elements[i] as HTMLElement;
             const style = window.getComputedStyle(el);
-            if (style.position === 'fixed') {
-              (el as HTMLElement).style.position = 'absolute';
-            }
-            // Ensure text is visible
+            
+            // Handle gradient text
             if (style.backgroundClip === 'text' || style.webkitBackgroundClip === 'text') {
-              (el as HTMLElement).style.color = window.getComputedStyle(el).backgroundImage;
-              (el as HTMLElement).style.backgroundClip = 'unset';
-              (el as HTMLElement).style.webkitBackgroundClip = 'unset';
-              (el as HTMLElement).style.backgroundImage = 'none';
+              if (style.backgroundImage.includes('gradient')) {
+                el.style.color = '#8B5CF6'; // Use a solid color instead of gradient
+              }
+              el.style.backgroundClip = 'unset';
+              el.style.webkitBackgroundClip = 'unset';
+              el.style.backgroundImage = 'none';
+            }
+
+            // Ensure text contrast
+            if (style.color === 'rgba(0, 0, 0, 0)' || style.color === 'transparent') {
+              el.style.color = '#FFFFFF';
+            }
+
+            // Convert semi-transparent whites to solid white
+            if (style.color.includes('rgba(255, 255, 255,')) {
+              el.style.color = '#FFFFFF';
+            }
+
+            // Handle fixed positioning
+            if (style.position === 'fixed') {
+              el.style.position = 'absolute';
             }
           }
+
+          // Set background color for the content
+          clonedDoc.body.style.backgroundColor = '#1a1f2c';
+          contentElement.style.backgroundColor = '#1a1f2c';
         }
       });
+
+      console.log("Canvas created with dimensions:", canvas.width, "x", canvas.height);
 
       // Calculate dimensions to maintain aspect ratio
       const imgWidth = 595.28; // A4 width in points (72 dpi)
@@ -61,10 +77,10 @@ const ExportButton = () => {
         format: "a4"
       });
 
-      // Add the canvas as an image with proper scaling
+      // Add the canvas as an image
       pdf.addImage(
-        canvas.toDataURL("image/jpeg", 1.0),
-        "JPEG",
+        canvas.toDataURL("image/png", 1.0),
+        "PNG",
         0,
         0,
         imgWidth,
@@ -73,7 +89,7 @@ const ExportButton = () => {
         'FAST'
       );
 
-      // If content is longer than one page, add more pages
+      // Handle multiple pages if content is longer
       let heightLeft = imgHeight;
       let position = 0;
       const pageHeight = pdf.internal.pageSize.getHeight();
@@ -82,8 +98,8 @@ const ExportButton = () => {
         position = heightLeft - imgHeight;
         pdf.addPage();
         pdf.addImage(
-          canvas.toDataURL("image/jpeg", 1.0),
-          "JPEG",
+          canvas.toDataURL("image/png", 1.0),
+          "PNG",
           0,
           position,
           imgWidth,
