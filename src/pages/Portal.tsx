@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { toast } from "sonner"
 import NumerologyResults from "@/components/numerology/NumerologyResults"
@@ -25,6 +25,11 @@ const Portal = () => {
     secretNumber: 0,
     chineseZodiac: ""
   })
+
+  useEffect(() => {
+    // Reset scroll position when component mounts
+    window.scrollTo(0, 0)
+  }, [])
 
   const numerologyStats = [
     { subject: 'Leadership', value: results.lifePath === 1 ? 9 : 5 },

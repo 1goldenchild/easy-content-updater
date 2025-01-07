@@ -9,13 +9,25 @@ import ProgressIndicator from "@/components/numerology/ProgressIndicator"
 const Index = () => {
   return (
     <div className="flex-1">
-      <Hero />
+      <div id="hero">
+        <Hero />
+      </div>
       <ProgressIndicator />
-      <SecretKnowledge />
-      <Benefits />
-      <SalesPitch />
-      <CallToAction />
-      <CustomerCount />
+      <div id="knowledge">
+        <SecretKnowledge />
+      </div>
+      <div id="benefits">
+        <Benefits />
+      </div>
+      <div id="sales">
+        <SalesPitch />
+      </div>
+      <div id="cta">
+        <CallToAction />
+      </div>
+      <div id="stats">
+        <CustomerCount />
+      </div>
     </div>
   )
 }

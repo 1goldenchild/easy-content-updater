@@ -1,29 +1,48 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
+import { useLocation } from "react-router-dom"
+import { useMobile } from "@/hooks/use-mobile"
 
 const ProgressIndicator = () => {
-  const [activeSection, setActiveSection] = useState(0);
-  const sections = ["Calculator", "Occupation", "Compatibility", "Countries", "Cars"];
-  const isMobile = useIsMobile();
+  const [activeSection, setActiveSection] = useState(0)
+  const isMobile = useMobile()
+  const location = useLocation()
+
+  const sections = location.pathname === "/" 
+    ? ["Hero", "Knowledge", "Benefits", "Sales", "CTA", "Stats"]
+    : ["Results", "Occupation", "Compatibility", "Country", "Car"]
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const sectionElements = document.querySelectorAll("#portal-content > div");
-      
-      sectionElements.forEach((section, index) => {
-        if (section.getBoundingClientRect().top <= windowHeight * 0.5 && 
-            section.getBoundingClientRect().bottom >= windowHeight * 0.5) {
-          setActiveSection(index);
-        }
-      });
-    };
+      const sectionElements = sections.map(section => 
+        document.getElementById(section.toLowerCase())
+      )
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+      const viewportHeight = window.innerHeight
+      const scrollPosition = window.scrollY + (viewportHeight / 3)
+
+      const activeIndex = sectionElements.findIndex((element, index) => {
+        if (!element) return false
+        const nextElement = sectionElements[index + 1]
+        
+        const elementTop = element.offsetTop
+        const elementBottom = nextElement 
+          ? nextElement.offsetTop 
+          : document.documentElement.scrollHeight
+
+        return scrollPosition >= elementTop && scrollPosition < elementBottom
+      })
+
+      if (activeIndex !== -1) {
+        setActiveSection(activeIndex)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    handleScroll() // Initial check
+
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [sections])
 
   return (
     <div className="fixed inset-0 pointer-events-none flex items-center justify-center z-50">
@@ -51,7 +70,7 @@ const ProgressIndicator = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProgressIndicator;
+export default ProgressIndicator
