@@ -1,16 +1,9 @@
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { motion } from "framer-motion"
-import { Calendar } from "@/components/ui/calendar"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { format } from "date-fns"
-import { CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react"
-import { cn } from "@/lib/utils"
 import { supabase } from "@/integrations/supabase/client"
 import { toast } from "sonner"
-import { DateSelector } from "@/components/numerology/DateSelector"
+import DateSelector from "@/components/numerology/DateSelector"
 import { UserForm } from "@/components/numerology/UserForm"
 
 const CollectInfo = () => {
