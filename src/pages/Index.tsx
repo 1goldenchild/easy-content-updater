@@ -13,13 +13,6 @@ const Index = () => {
         <Hero />
       </div>
       <ProgressIndicator />
-      <div className="flex justify-center py-8">
-        <img 
-          src="https://media.giphy.com/media/wgHY9nSrlTMt2/giphy.gif" 
-          alt="Rotating globe animation"
-          className="rounded-lg shadow-lg max-w-md" 
-        />
-      </div>
       <div id="benefits">
         <Benefits />
       </div>
