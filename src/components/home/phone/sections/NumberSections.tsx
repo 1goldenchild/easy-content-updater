@@ -3,7 +3,7 @@ import NumberSection from "../NumberSection";
 
 const NumberSections = () => {
   return (
-    <div className="grid grid-cols-2 gap-3">
+    <div id="numbers" className="grid grid-cols-2 gap-3">
       <NumberSection
         id="lifepath"
         title="Life Path Number"
