@@ -96,8 +96,8 @@ const CollectInfo = () => {
         toast.error("Your information was saved but we couldn't schedule the analysis email. Our team will look into this.")
       }
 
-      // Navigate to checkout using React Router
-      window.open("https://www.numerology33.com/checkout", "_blank")
+      // Navigate to checkout in the same tab
+      window.location.replace("https://www.numerology33.com/checkout")
     } catch (error) {
       console.error("[Error] Unexpected error in form submission:", error)
       toast.error("An unexpected error occurred. Please try again.")
