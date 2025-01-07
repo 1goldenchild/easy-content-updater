@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const HumanVisualization = () => {
   return (
-    <div className="relative h-64 mb-8 bg-[#000814]/80 rounded-xl overflow-hidden">
+    <div className="relative h-64 mb-8 bg-[#000814] rounded-xl overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-[#0466c8]/10 to-transparent" />
       
       {/* Main holographic body */}
@@ -13,7 +13,7 @@ const HumanVisualization = () => {
         transition={{ duration: 1 }}
       >
         <img 
-          src="/lovable-uploads/d1990443-8db4-4e9b-94aa-997289290dda.png"
+          src="/lovable-uploads/1e3f4b34-6805-4822-a03b-71cee7add12f.png"
           alt="Holographic human body"
           className="h-full w-auto object-contain opacity-80"
           style={{
