@@ -21,11 +21,21 @@ const EarthGlobe = () => {
     // Load textures
     const textureLoader = new THREE.TextureLoader();
     
-    // Earth textures
-    const earthMap = textureLoader.load('/earth-map.jpg');
-    const bumpMap = textureLoader.load('/earth-bump.jpg');
-    const specularMap = textureLoader.load('/earth-specular.jpg');
-    const cloudsMap = textureLoader.load('/earth-clouds.png');
+    // Earth textures with proper paths
+    const earthMap = textureLoader.load('/earth-map.jpg', undefined, undefined, (err) => {
+      console.error('Error loading earth map texture:', err);
+    });
+    const bumpMap = textureLoader.load('/earth-bump.jpg', undefined, undefined, (err) => {
+      console.error('Error loading bump map texture:', err);
+    });
+    const specularMap = textureLoader.load('/earth-specular.jpg', undefined, undefined, (err) => {
+      console.error('Error loading specular map texture:', err);
+    });
+    const cloudsMap = textureLoader.load('/earth-clouds.png', undefined, undefined, (err) => {
+      console.error('Error loading clouds texture:', err);
+    });
+
+    console.log('Loading textures:', { earthMap, bumpMap, specularMap, cloudsMap });
 
     // Create star background
     const starGeometry = new THREE.BufferGeometry();
@@ -47,15 +57,15 @@ const EarthGlobe = () => {
     const stars = new THREE.Points(starGeometry, starMaterial);
     scene.add(stars);
 
-    // Create Earth
+    // Create Earth with proper material settings
     const earthGeometry = new THREE.SphereGeometry(1, 64, 64);
     const earthMaterial = new THREE.MeshPhongMaterial({
       map: earthMap,
       bumpMap: bumpMap,
       bumpScale: 0.05,
       specularMap: specularMap,
-      specular: new THREE.Color(0x333333),
-      shininess: 25
+      specular: new THREE.Color('grey'),
+      shininess: 5
     });
 
     const earth = new THREE.Mesh(earthGeometry, earthMaterial);
@@ -72,7 +82,7 @@ const EarthGlobe = () => {
     const clouds = new THREE.Mesh(cloudGeometry, cloudMaterial);
     scene.add(clouds);
 
-    // Lighting
+    // Lighting setup for realistic appearance
     const ambientLight = new THREE.AmbientLight(0x555555);
     scene.add(ambientLight);
 
