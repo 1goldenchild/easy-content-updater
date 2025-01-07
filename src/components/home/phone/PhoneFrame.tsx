@@ -15,6 +15,9 @@ const sections = [
   { id: "traits", label: "Core Traits" },
   { id: "compatibility", label: "Matches" },
   { id: "career", label: "Career" },
+  { id: "car-compatibility", label: "Car Match" },
+  { id: "career-compatibility", label: "Career Match" },
+  { id: "countries", label: "Countries" },
   { id: "forecast", label: "Forecast" }
 ];
 
