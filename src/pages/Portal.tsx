@@ -7,6 +7,7 @@ import CountryCompatibility from "@/components/numerology/CountryCompatibility"
 import CarCompatibility from "@/components/numerology/CarCompatibility"
 import OccupationGuidance from "@/components/numerology/OccupationGuidance"
 import DateSelector from "@/components/numerology/DateSelector"
+import ExportButton from "@/components/numerology/ExportButton"
 import { 
   calculateLifePath, 
   calculatePartialEnergy, 
@@ -69,7 +70,7 @@ const Portal = () => {
 
   return (
     <div className="flex-1 p-4">
-      <div className="max-w-7xl mx-auto space-y-8">
+      <div id="portal-content" className="max-w-7xl mx-auto space-y-8">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -123,6 +124,7 @@ const Portal = () => {
           </>
         )}
       </div>
+      {showResults && <ExportButton />}
     </div>
   );
 };
