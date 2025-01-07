@@ -44,7 +44,7 @@ const AnimatedLogo = () => {
       {word.split('').map((letter, index) => (
         <motion.div
           key={index}
-          className="inline-block relative font-bold text-2xl"
+          className="inline-block relative font-bold text-2xl w-[1.5em]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: index * 0.05 }}
@@ -56,7 +56,7 @@ const AnimatedLogo = () => {
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.3 }}
-                className="inline-block"
+                className="inline-block absolute left-1/2 -translate-x-1/2"
               >
                 {letter}
               </motion.span>
@@ -66,7 +66,7 @@ const AnimatedLogo = () => {
                 initial={{ opacity: 1 }}
                 exit={{ y: 20, opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="inline-block bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent"
+                className="inline-block absolute left-1/2 -translate-x-1/2 text-[#00ff00] font-matrix"
               >
                 {getGematriaValue(letter)}
               </motion.span>
