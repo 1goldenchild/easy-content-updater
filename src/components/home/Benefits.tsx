@@ -51,6 +51,24 @@ const benefits = [
   }
 ];
 
+const NeonLine = () => (
+  <div className="relative w-full h-24 overflow-hidden my-8">
+    <motion.div 
+      className="absolute w-full h-[2px] bg-gradient-to-r from-purple-600/0 via-purple-600 to-purple-600/0"
+      style={{
+        boxShadow: "0 0 10px #9333ea, 0 0 20px #9333ea, 0 0 30px #9333ea",
+      }}
+      initial={{ x: "-100%" }}
+      animate={{ x: "100%" }}
+      transition={{
+        duration: 3,
+        repeat: Infinity,
+        ease: "linear"
+      }}
+    />
+  </div>
+);
+
 const Benefits = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -64,6 +82,8 @@ const Benefits = () => {
       
       <div className="relative max-w-7xl mx-auto px-3 md:px-4">
         <BenefitsHeader />
+        
+        <NeonLine />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-6 relative">
           {/* Connecting lines */}
