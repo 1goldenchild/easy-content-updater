@@ -62,7 +62,6 @@ const FooterStars = () => {
             })}
           </svg>
         </div>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900/50 via-purple-900/20 to-transparent" />
       </div>
     </div>
   );
