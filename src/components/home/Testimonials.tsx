@@ -76,7 +76,7 @@ const Testimonials = () => {
             Transforming Lives Through Energy Insights
           </h2>
           <p className="text-lg text-muted-foreground">
-            Join thousands who have discovered their true potential
+            Join over 1000 high-profile customers
           </p>
         </div>
         
