@@ -81,24 +81,24 @@ const Benefits = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12"
+          className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4 lg:gap-8"
         >
           {benefits.map((benefit, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
-              className={`group relative rounded-2xl p-8 border ${benefit.borderColor} bg-gradient-to-br ${benefit.bgGradient} backdrop-blur-sm hover:scale-[1.02] transition-all duration-300 ease-out`}
+              className={`group relative rounded-2xl p-4 sm:p-6 lg:p-8 border ${benefit.borderColor} bg-gradient-to-br ${benefit.bgGradient} backdrop-blur-sm hover:scale-[1.02] transition-all duration-300 ease-out`}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-white/[0.04] to-transparent rounded-2xl" />
-              <div className="relative space-y-4">
-                <div className={`${benefit.iconColor} w-12 h-12 rounded-xl bg-white/5 p-2.5 ring-2 ring-white/10 group-hover:ring-white/20 transition-all duration-300`}>
+              <div className="relative space-y-3 sm:space-y-4">
+                <div className={`${benefit.iconColor} w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 p-2 sm:p-2.5 ring-2 ring-white/10 group-hover:ring-white/20 transition-all duration-300`}>
                   <benefit.icon className="w-full h-full" />
                 </div>
                 <div className="space-y-2">
-                  <h3 className="text-xl font-semibold bg-gradient-to-r from-white via-white/90 to-white/80 bg-clip-text text-transparent">
+                  <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-white via-white/90 to-white/80 bg-clip-text text-transparent">
                     {benefit.title}
                   </h3>
-                  <p className="text-white/70 leading-relaxed">
+                  <p className="text-sm sm:text-base text-white/70 leading-relaxed">
                     {benefit.description}
                   </p>
                 </div>
