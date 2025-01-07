@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
-import { TikTok, Instagram, Youtube } from "lucide-react"
+import { Instagram, Youtube } from "lucide-react"
+import TikTokIcon from "../icons/TikTokIcon"
 
 const Footer = () => {
   return (
@@ -93,7 +94,7 @@ const Footer = () => {
                   { 
                     name: 'tiktok', 
                     url: 'https://www.tiktok.com/@numerology_33',
-                    icon: TikTok,
+                    icon: TikTokIcon,
                     followers: '87k'
                   },
                   { 
