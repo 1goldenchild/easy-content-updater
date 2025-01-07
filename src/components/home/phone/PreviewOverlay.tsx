@@ -22,6 +22,23 @@ const PreviewOverlay = () => {
           <div className="absolute -left-6 top-1/2 -translate-y-1/2 w-4 h-[1px] bg-gradient-to-r from-transparent to-white/30" />
           <div className="absolute -right-6 top-1/2 -translate-y-1/2 w-4 h-[1px] bg-gradient-to-l from-transparent to-white/30" />
         </div>
+
+        {/* Word Count Indicator */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mt-3 relative"
+        >
+          <div className="px-4 py-1.5 rounded-full bg-gradient-to-r from-violet-500/80 to-fuchsia-500/80 backdrop-blur-sm border border-white/30 shadow-lg shadow-purple-500/20">
+            <p className="text-xs font-semibold text-white flex items-center gap-1">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+              On average, 2500 words
+            </p>
+          </div>
+          {/* Shine effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shine rounded-full" />
+        </motion.div>
       </motion.div>
 
       {/* Animated corner indicators */}
