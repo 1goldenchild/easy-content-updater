@@ -5,6 +5,7 @@ import NumerologyResults from "@/components/numerology/NumerologyResults"
 import CompatibilityChart from "@/components/numerology/CompatibilityChart"
 import CountryCompatibility from "@/components/numerology/CountryCompatibility"
 import CarCompatibility from "@/components/numerology/CarCompatibility"
+import OccupationGuidance from "@/components/numerology/OccupationGuidance"
 import DateSelector from "@/components/numerology/DateSelector"
 import { 
   calculateLifePath, 
@@ -100,6 +101,11 @@ const Portal = () => {
 
         {showResults && (
           <>
+            <OccupationGuidance
+              lifePath={results.lifePath}
+              isVisible={showResults}
+            />
+            
             <CompatibilityChart 
               lifePath={results.lifePath}
               isVisible={showResults}
@@ -118,7 +124,7 @@ const Portal = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Portal
+export default Portal;
