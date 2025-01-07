@@ -7,7 +7,12 @@ import CountryCompatibility from "@/components/numerology/CountryCompatibility"
 import CarCompatibility from "@/components/numerology/CarCompatibility"
 import OccupationGuidance from "@/components/numerology/OccupationGuidance"
 import DateSelector from "@/components/numerology/DateSelector"
-import ExportButton from "@/components/numerology/ExportButton"
+</lov-replace>
+
+<lov-search>
+      {showResults && <ExportButton />}
+</lov-search>
+<lov-replace>
 import ProgressIndicator from "@/components/numerology/ProgressIndicator"
 import { 
   calculateLifePath, 
