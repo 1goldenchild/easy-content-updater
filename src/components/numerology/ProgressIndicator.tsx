@@ -28,35 +28,15 @@ const ProgressIndicator = () => {
   return (
     <div className="fixed inset-0 pointer-events-none flex items-center justify-center z-50">
       <div className="relative w-full max-w-7xl mx-auto px-4">
-        <div className="absolute right-0 flex items-center gap-2 lg:gap-4 pointer-events-auto">
-          {!isMobile && (
-            <div className="h-[200px] lg:h-[300px] w-[1px] lg:w-[2px] bg-white/10 rounded-full relative">
-              <motion.div 
-                className="absolute w-full bg-gradient-to-b from-purple-500 to-pink-500 rounded-full"
-                style={{
-                  top: `${(activeSection / (sections.length - 1)) * 100}%`,
-                  height: `${100 / sections.length}%`
-                }}
-                animate={{
-                  top: `${(activeSection / (sections.length - 1)) * 100}%`
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 30
-                }}
-              />
-            </div>
-          )}
-          
-          <div className="space-y-4 lg:space-y-6">
+        <div className="absolute right-0 flex items-center gap-2">
+          <div className="space-y-4">
             {sections.map((section, index) => (
               <div 
                 key={section}
-                className="relative flex items-center gap-2 lg:gap-3 justify-end"
+                className="relative flex items-center gap-2 justify-end"
               >
                 <motion.div
-                  className={`w-1.5 h-1.5 lg:w-3 lg:h-3 rounded-full transition-colors duration-300 ${
+                  className={`w-2 h-2 rounded-full transition-colors duration-300 ${
                     index === activeSection 
                       ? "bg-gradient-to-r from-purple-500 to-pink-500" 
                       : "bg-white/20"
@@ -65,17 +45,6 @@ const ProgressIndicator = () => {
                     scale: index === activeSection ? 1.2 : 1
                   }}
                 />
-                {!isMobile && (
-                  <span 
-                    className={`text-xs lg:text-sm transition-colors duration-300 ${
-                      index === activeSection 
-                        ? "text-white" 
-                        : "text-white/40"
-                    }`}
-                  >
-                    {section}
-                  </span>
-                )}
               </div>
             ))}
           </div>
