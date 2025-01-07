@@ -16,6 +16,20 @@ import {
   calculateSecretNumber, 
   getChineseZodiac 
 } from "@/utils/numerologyCalculations"
+import {
+  ResponsiveContainer,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  Radar,
+  BarChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  Bar
+} from 'recharts';
 
 const Portal = () => {
   const [date, setDate] = useState<Date>()
@@ -26,6 +40,19 @@ const Portal = () => {
     secretNumber: 0,
     chineseZodiac: ""
   })
+
+  // Define numerology stats based on results
+  const numerologyStats = [
+    { subject: 'Leadership', value: results.lifePath === 1 ? 9 : 5 },
+    { subject: 'Intuition', value: results.lifePath === 2 ? 9 : 6 },
+    { subject: 'Creativity', value: results.lifePath === 3 ? 9 : 4 },
+    { subject: 'Stability', value: results.lifePath === 4 ? 9 : 7 },
+    { subject: 'Freedom', value: results.lifePath === 5 ? 9 : 5 },
+    { subject: 'Harmony', value: results.lifePath === 6 ? 9 : 6 },
+    { subject: 'Analysis', value: results.lifePath === 7 ? 9 : 4 },
+    { subject: 'Power', value: results.lifePath === 8 ? 9 : 5 },
+    { subject: 'Wisdom', value: results.lifePath === 9 ? 9 : 6 }
+  ];
 
   const handleCalculate = () => {
     if (!date) {
