@@ -28,17 +28,33 @@ const SalesPitch = () => {
           transition={{ delay: 0.3 }}
           className="lg:hidden text-center mb-8 relative"
         >
-          <h3 className="text-2xl font-bold bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent mb-2">
-            What's included in your analysis?
-          </h3>
-          <div className="relative inline-flex items-center">
-            <p className="text-white/70 text-lg">
+          <div className="relative inline-block">
+            <motion.h3 
+              className="text-2xl font-bold relative z-10 px-6 py-2"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <span className="bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] bg-clip-text text-transparent relative">
+                What's included in your analysis?
+              </span>
+              {/* Animated background glow */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-[#8B5CF6]/20 via-[#D946EF]/20 to-[#F97316]/20 rounded-lg blur-xl animate-pulse" />
+            </motion.h3>
+          </div>
+          <motion.div 
+            className="relative inline-flex items-center mt-4 group cursor-pointer"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/10 via-[#D946EF]/10 to-[#F97316]/10 rounded-full blur-md" />
+            <p className="text-white/90 text-lg font-medium bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] bg-clip-text text-transparent">
               See a sneak peek
             </p>
             <motion.span 
-              className="ml-1 inline-block"
+              className="ml-2 inline-block text-[#D946EF]"
               animate={{ 
-                y: [0, 10, 0],
+                y: [0, 8, 0],
                 rotate: [0, 10, 0]
               }}
               transition={{
@@ -49,7 +65,9 @@ const SalesPitch = () => {
             >
               ↓
             </motion.span>
-          </div>
+            {/* Hover effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/0 via-[#D946EF]/0 to-[#F97316]/0 rounded-full transition-all duration-300 group-hover:from-[#8B5CF6]/10 group-hover:via-[#D946EF]/10 group-hover:to-[#F97316]/10" />
+          </motion.div>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -69,17 +87,33 @@ const SalesPitch = () => {
                 transition={{ delay: 0.3 }}
                 className="relative mb-8"
               >
-                <h3 className="text-3xl font-bold bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent mb-2">
-                  What's included in your analysis?
-                </h3>
-                <div className="relative inline-flex items-center">
-                  <p className="text-white/70 text-xl">
+                <div className="relative inline-block">
+                  <motion.h3 
+                    className="text-3xl font-bold relative z-10 px-6 py-2"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <span className="bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] bg-clip-text text-transparent">
+                      What's included in your analysis?
+                    </span>
+                    {/* Animated background glow */}
+                    <div className="absolute -inset-1 bg-gradient-to-r from-[#8B5CF6]/20 via-[#D946EF]/20 to-[#F97316]/20 rounded-lg blur-xl animate-pulse" />
+                  </motion.h3>
+                </div>
+                <motion.div 
+                  className="relative inline-flex items-center mt-4 group cursor-pointer"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/10 via-[#D946EF]/10 to-[#F97316]/10 rounded-full blur-md" />
+                  <p className="text-white/90 text-xl font-medium bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] bg-clip-text text-transparent">
                     See a sneak peek
                   </p>
                   <motion.span 
-                    className="ml-1 inline-block"
+                    className="ml-2 inline-block text-[#D946EF]"
                     animate={{ 
-                      x: [0, 10, 0],
+                      x: [0, 8, 0],
                       rotate: [0, 10, 0]
                     }}
                     transition={{
@@ -90,10 +124,9 @@ const SalesPitch = () => {
                   >
                     →
                   </motion.span>
-                </div>
-                {/* Decorative elements */}
-                <div className="absolute -left-4 -top-4 w-20 h-20 bg-gradient-to-r from-violet-500/20 to-fuchsia-500/20 rounded-full blur-xl" />
-                <div className="absolute -right-4 -bottom-4 w-20 h-20 bg-gradient-to-r from-fuchsia-500/20 to-violet-500/20 rounded-full blur-xl" />
+                  {/* Hover effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/0 via-[#D946EF]/0 to-[#F97316]/0 rounded-full transition-all duration-300 group-hover:from-[#8B5CF6]/10 group-hover:via-[#D946EF]/10 group-hover:to-[#F97316]/10" />
+                </motion.div>
               </motion.div>
             </div>
 
