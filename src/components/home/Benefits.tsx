@@ -95,16 +95,17 @@ const Benefits = () => {
           </div>
 
           {benefits.map((benefit, index) => {
+            // Adjust the scroll trigger points to show sections earlier
             const progress = useTransform(
               scrollYProgress,
-              [index * 0.25, (index + 1) * 0.25],
+              [index * 0.2, (index + 1) * 0.2], // Changed from 0.25 to 0.2 to trigger earlier
               [0, 1]
             )
 
             const nextProgress = index < benefits.length - 1 
               ? useTransform(
                   scrollYProgress,
-                  [(index + 1) * 0.25, (index + 2) * 0.25],
+                  [(index + 1) * 0.2, (index + 2) * 0.2], // Changed from 0.25 to 0.2
                   [0, 1]
                 )
               : null
@@ -121,13 +122,13 @@ const Benefits = () => {
                 }}
                 className="relative"
               >
-                {/* Section glow effect container */}
+                {/* Section glow effect container - reduced glow size */}
                 <motion.div
-                  className="absolute -inset-1 rounded-2xl transition-opacity duration-500"
+                  className="absolute -inset-0.5 rounded-2xl transition-opacity duration-500"
                   style={{
                     opacity: sectionOpacity,
-                    boxShadow: `0 0 30px 4px ${benefit.neonColor}, 
-                               0 0 60px 8px ${benefit.neonColor}`,
+                    boxShadow: `0 0 15px 2px ${benefit.neonColor}, 
+                               0 0 30px 4px ${benefit.neonColor}`,
                   }}
                 />
                 
@@ -136,8 +137,8 @@ const Benefits = () => {
                   <motion.div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style={{
-                      boxShadow: `0 0 20px 2px ${benefit.neonColor}, 
-                                 0 0 40px 6px ${benefit.neonColor}`,
+                      boxShadow: `0 0 10px 1px ${benefit.neonColor}, 
+                                 0 0 20px 3px ${benefit.neonColor}`,
                       opacity: progress
                     }}
                   />
@@ -152,12 +153,12 @@ const Benefits = () => {
                         filter: useTransform(progress, [0, 1], ["brightness(0.5)", "brightness(1.2)"])
                       }}
                     >
-                      {/* Icon neon glow */}
+                      {/* Icon neon glow - reduced glow size */}
                       <div 
                         className="absolute inset-0 rounded-xl transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                         style={{
-                          boxShadow: `0 0 10px 2px ${benefit.neonColor}, 
-                                     0 0 20px 4px ${benefit.neonColor}`,
+                          boxShadow: `0 0 5px 1px ${benefit.neonColor}, 
+                                     0 0 10px 2px ${benefit.neonColor}`,
                         }}
                       />
                       <benefit.icon className="w-full h-full relative z-10" />
