@@ -6,54 +6,54 @@ interface CarCompatibilityProps {
   isVisible: boolean;
 }
 
-const carCompatibility: Record<string, { best: { brand: string }, worst: { brand: string } }> = {
+const carCompatibility: Record<string, { best: string[], worst: string[] }> = {
   "Rat": {
-    best: { brand: "Tesla" },
-    worst: { brand: "Hummer" }
+    best: ["Tesla", "BMW", "Mercedes", "Porsche", "Audi"],
+    worst: ["Hummer", "Jeep", "RAM", "Ford F150", "GMC"]
   },
   "Ox": {
-    best: { brand: "Volvo" },
-    worst: { brand: "Smart" }
+    best: ["Volvo", "Toyota", "Honda", "Subaru", "Lexus"],
+    worst: ["Smart", "Mini", "Fiat", "Suzuki", "Dacia"]
   },
   "Tiger": {
-    best: { brand: "Porsche" },
-    worst: { brand: "Fiat" }
+    best: ["Porsche", "Ferrari", "Lamborghini", "McLaren", "Bugatti"],
+    worst: ["Fiat", "Lada", "Tata", "Proton", "Chery"]
   },
   "Rabbit": {
-    best: { brand: "Lexus" },
-    worst: { brand: "Dodge" }
+    best: ["Lexus", "Infiniti", "Genesis", "Acura", "Lincoln"],
+    worst: ["Dodge", "Chrysler", "Plymouth", "Pontiac", "Saturn"]
   },
   "Dragon": {
-    best: { brand: "Ferrari" },
-    worst: { brand: "Nissan" }
+    best: ["Ferrari", "Maserati", "Alfa Romeo", "Pagani", "Koenigsegg"],
+    worst: ["Nissan", "Mitsubishi", "Mazda", "Kia", "Hyundai"]
   },
   "Snake": {
-    best: { brand: "Aston Martin" },
-    worst: { brand: "Mitsubishi" }
+    best: ["Aston Martin", "Bentley", "Rolls Royce", "Maybach", "Lotus"],
+    worst: ["Mitsubishi", "Daihatsu", "Seat", "Skoda", "Opel"]
   },
   "Horse": {
-    best: { brand: "Mustang" },
-    worst: { brand: "Chevrolet" }
+    best: ["Mustang", "Corvette", "Camaro", "Viper", "GT"],
+    worst: ["Chevrolet", "Buick", "Oldsmobile", "Mercury", "Geo"]
   },
   "Goat": {
-    best: { brand: "Range Rover" },
-    worst: { brand: "Suzuki" }
+    best: ["Range Rover", "Land Rover", "Cadillac", "Lincoln", "Genesis"],
+    worst: ["Suzuki", "Isuzu", "Mahindra", "Great Wall", "Haval"]
   },
   "Monkey": {
-    best: { brand: "BMW" },
-    worst: { brand: "Dacia" }
+    best: ["BMW", "Audi", "Mercedes", "Porsche", "Volkswagen"],
+    worst: ["Dacia", "Renault", "Citroen", "Peugeot", "Vauxhall"]
   },
   "Rooster": {
-    best: { brand: "Mercedes" },
-    worst: { brand: "Tata" }
+    best: ["Mercedes", "Maybach", "AMG", "Brabus", "Alpina"],
+    worst: ["Tata", "Maruti", "Holden", "Daewoo", "Scion"]
   },
   "Dog": {
-    best: { brand: "Subaru" },
-    worst: { brand: "Lada" }
+    best: ["Subaru", "Volvo", "Toyota", "Honda", "Mazda"],
+    worst: ["Lada", "UAZ", "GAZ", "ZAZ", "Moskvitch"]
   },
   "Pig": {
-    best: { brand: "Bentley" },
-    worst: { brand: "Yugo" }
+    best: ["Bentley", "Rolls Royce", "Maybach", "Lexus", "Range Rover"],
+    worst: ["Yugo", "Trabant", "Wartburg", "FSO", "ARO"]
   }
 };
 
@@ -77,14 +77,22 @@ const CarCompatibility = ({ chineseZodiac, isVisible }: CarCompatibilityProps) =
         <div className="space-y-4">
           <div className="flex items-center gap-2">
             <ThumbsUp className="w-6 h-6 text-green-500" />
-            <h4 className="text-lg font-semibold text-white/90">Best Car Match</h4>
+            <h4 className="text-lg font-semibold text-white/90">Best Car Matches</h4>
           </div>
           <div className="p-6 rounded-lg bg-gradient-to-br from-green-500/10 to-green-600/10 border border-green-500/20">
-            <div className="flex items-center gap-4">
-              <CarFront className="w-12 h-12 text-green-500" />
-              <div>
-                <p className="text-xl font-bold text-white">{compatibility.best.brand}</p>
-              </div>
+            <div className="space-y-4">
+              {compatibility.best.map((brand, index) => (
+                <motion.div 
+                  key={brand}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="flex items-center gap-4 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                >
+                  <CarFront className="w-8 h-8 text-green-500" />
+                  <p className="text-lg font-semibold text-white">{brand}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
@@ -92,14 +100,22 @@ const CarCompatibility = ({ chineseZodiac, isVisible }: CarCompatibilityProps) =
         <div className="space-y-4">
           <div className="flex items-center gap-2">
             <ThumbsDown className="w-6 h-6 text-red-500" />
-            <h4 className="text-lg font-semibold text-white/90">Worst Car Match</h4>
+            <h4 className="text-lg font-semibold text-white/90">Worst Car Matches</h4>
           </div>
           <div className="p-6 rounded-lg bg-gradient-to-br from-red-500/10 to-red-600/10 border border-red-500/20">
-            <div className="flex items-center gap-4">
-              <Car className="w-12 h-12 text-red-500" />
-              <div>
-                <p className="text-xl font-bold text-white">{compatibility.worst.brand}</p>
-              </div>
+            <div className="space-y-4">
+              {compatibility.worst.map((brand, index) => (
+                <motion.div 
+                  key={brand}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="flex items-center gap-4 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                >
+                  <Car className="w-8 h-8 text-red-500" />
+                  <p className="text-lg font-semibold text-white">{brand}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
