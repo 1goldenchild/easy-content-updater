@@ -54,8 +54,8 @@ const NumberSections = () => {
         </div>
 
         <button
-          onClick={handleReadClick}
-          className="relative w-full py-2 px-4 rounded-lg bg-gradient-to-r from-[#8B5CF6]/20 to-[#D946EF]/20 border border-white/10 text-white/70 hover:text-white/90 transition-colors text-sm overflow-hidden group"
+          disabled
+          className="relative w-full py-2 px-4 rounded-lg bg-gradient-to-r from-[#8B5CF6]/20 to-[#D946EF]/20 border border-white/10 text-white/50 cursor-not-allowed text-sm overflow-hidden"
         >
           <span className="relative z-10">Read Full Analysis →</span>
           <motion.div
