@@ -30,8 +30,8 @@ const NumberSections = () => {
             title="Partial Energy"
             number="4"
             subtitle="The Builder"
-            gradientFrom="[#6366F1]"
-            gradientTo="[#A855F7]"
+            gradientFrom="[#3B82F6]"
+            gradientTo="[#6366F1]"
           />
 
           <NumberSection
@@ -39,8 +39,8 @@ const NumberSections = () => {
             title="Secret Number"
             number="33"
             subtitle="The Master Teacher"
-            gradientFrom="[#EC4899]"
-            gradientTo="[#F43F5E]"
+            gradientFrom="[#F59E0B]"
+            gradientTo="[#EF4444]"
           />
 
           <NumberSection
@@ -49,7 +49,7 @@ const NumberSections = () => {
             number="龍"
             subtitle="Year of the Dragon"
             gradientFrom="[#10B981]"
-            gradientTo="[#14B8A6]"
+            gradientTo="[#059669]"
           />
         </div>
 
