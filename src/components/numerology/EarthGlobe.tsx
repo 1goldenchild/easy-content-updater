@@ -18,34 +18,48 @@ const EarthGlobe = () => {
     renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
     mountRef.current.appendChild(renderer.domElement);
 
-    // Create a sphere geometry for the globe
-    const geometry = new THREE.SphereGeometry(1, 32, 32);
+    // Create a sphere geometry with more segments for smoother appearance
+    const geometry = new THREE.SphereGeometry(1, 64, 64);
+    
+    // Create a more sophisticated material with gradient colors
     const material = new THREE.MeshPhongMaterial({
-      color: 0x00ff99,
+      color: 0x1EAEDB, // Modern blue color
+      shininess: 80,
+      opacity: 0.9,
       transparent: true,
-      opacity: 0.8,
-      wireframe: true
+      wireframe: true,
+      wireframeLinewidth: 0.5
     });
 
     const globe = new THREE.Mesh(geometry, material);
     scene.add(globe);
 
-    // Add ambient light
-    const ambientLight = new THREE.AmbientLight(0x404040);
+    // Add ambient light with a soft blue tint
+    const ambientLight = new THREE.AmbientLight(0x33C3F0, 0.4);
     scene.add(ambientLight);
 
-    // Add directional light
-    const directionalLight = new THREE.DirectionalLight(0x00ff99, 1);
-    directionalLight.position.set(5, 3, 5);
-    scene.add(directionalLight);
+    // Add multiple directional lights for better depth
+    const mainLight = new THREE.DirectionalLight(0x0EA5E9, 1);
+    mainLight.position.set(5, 3, 5);
+    scene.add(mainLight);
+
+    const secondaryLight = new THREE.DirectionalLight(0x0FA0CE, 0.5);
+    secondaryLight.position.set(-5, -3, -5);
+    scene.add(secondaryLight);
+
+    // Add point light in the center for inner glow
+    const pointLight = new THREE.PointLight(0x33C3F0, 0.8);
+    pointLight.position.set(0, 0, 0);
+    scene.add(pointLight);
 
     // Position camera
     camera.position.z = 2.5;
 
-    // Animation
+    // Animation with smooth rotation
     const animate = () => {
       requestAnimationFrame(animate);
-      globe.rotation.y += 0.005;
+      globe.rotation.y += 0.003; // Slower, smoother rotation
+      globe.rotation.x += 0.001; // Slight tilt rotation
       renderer.render(scene, camera);
     };
 
@@ -61,7 +75,7 @@ const EarthGlobe = () => {
 
   return (
     <div ref={mountRef} className="w-full h-full">
-      <div className="absolute inset-0 bg-[#00ff99]/5 blur-3xl rounded-full animate-pulse" />
+      <div className="absolute inset-0 bg-[#1EAEDB]/5 blur-3xl rounded-full animate-pulse" />
     </div>
   );
 };
