@@ -24,7 +24,9 @@ const ExportButton = () => {
         scale: 2, // Higher quality
         useCORS: true, // Handle cross-origin images
         logging: true, // Enable logging for debugging
-        backgroundColor: null, // Transparent background
+        backgroundColor: "#1a1f2c", // Set dark background
+        windowWidth: contentElement.scrollWidth,
+        windowHeight: contentElement.scrollHeight,
         onclone: (clonedDoc) => {
           // Process all elements to ensure visibility
           const elements = clonedDoc.getElementsByTagName('*');
@@ -56,6 +58,16 @@ const ExportButton = () => {
             if (style.position === 'fixed') {
               el.style.position = 'absolute';
             }
+
+            // Ensure backgrounds are preserved
+            if (style.backgroundColor && style.backgroundColor !== 'rgba(0, 0, 0, 0)') {
+              el.style.backgroundColor = style.backgroundColor;
+            }
+
+            // Preserve borders
+            if (style.border) {
+              el.style.border = style.border;
+            }
           }
 
           // Set background color for the content
@@ -74,7 +86,8 @@ const ExportButton = () => {
       const pdf = new jsPDF({
         orientation: imgHeight > imgWidth ? "portrait" : "landscape",
         unit: "pt",
-        format: "a4"
+        format: "a4",
+        compress: true
       });
 
       // Add the canvas as an image
