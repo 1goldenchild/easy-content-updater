@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import LifepathAnalysis from "./LifepathAnalysis";
 import PartialEnergyAnalysis from "./PartialEnergyAnalysis";
 import AstrologyAnalysis from "./AstrologyAnalysis";
+import CharacteristicsChart from "./CharacteristicsChart";
 
 interface NumerologyResultsProps {
   lifePath: number;
@@ -62,6 +63,7 @@ const NumerologyResults = ({
         </div>
       </div>
 
+      <CharacteristicsChart isVisible={isVisible} />
       <LifepathAnalysis lifePath={lifePath} isVisible={isVisible} />
       <PartialEnergyAnalysis partialEnergy={partialEnergy} isVisible={isVisible} />
       <AstrologyAnalysis chineseZodiac={chineseZodiac} isVisible={isVisible} />
