@@ -58,7 +58,7 @@ const handler = async (req: Request): Promise<Response> => {
         Authorization: `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: `Numerology <${VERIFIED_EMAIL}>`,
+        from: "Numerology <onboarding@resend.dev>", // Using Resend's default domain
         to: [VERIFIED_EMAIL], // For testing, always send to verified email
         subject,
         html: emailHtml,
