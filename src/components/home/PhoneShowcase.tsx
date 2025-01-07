@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import PhoneFrame from "./phone/PhoneFrame";
 import NumberSections from "./phone/sections/NumberSections";
 import CoreTraits from "./phone/sections/CoreTraits";
