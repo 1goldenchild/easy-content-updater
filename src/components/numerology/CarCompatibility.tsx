@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Car, CarFront, ThumbsUp, ThumbsDown } from "lucide-react";
+import { Car, CarFront } from "lucide-react";
 
 interface CarCompatibilityProps {
   chineseZodiac: string;
@@ -66,58 +66,83 @@ const CarCompatibility = ({ chineseZodiac, isVisible }: CarCompatibilityProps) =
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.4 }}
-      className="w-full space-y-8 bg-white/5 p-8 rounded-xl backdrop-blur-sm border border-white/10 mb-8"
+      transition={{ duration: 0.5 }}
+      className="relative w-full overflow-hidden rounded-xl bg-gradient-to-br from-[#1a1f2c] to-[#2d3748] p-8 shadow-2xl"
     >
-      <h3 className="text-2xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
-        Your Zodiac Car Compatibility
-      </h3>
+      {/* Background Effect */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/10 via-transparent to-transparent opacity-50" />
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <ThumbsUp className="w-6 h-6 text-green-500" />
-            <h4 className="text-lg font-semibold text-white/90">Best Car Matches</h4>
-          </div>
-          <div className="p-6 rounded-lg bg-gradient-to-br from-green-500/10 to-green-600/10 border border-green-500/20">
-            <div className="space-y-4">
+      <div className="relative z-10">
+        <h3 className="text-3xl font-bold text-center mb-8">
+          <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            Your Perfect Car Match
+          </span>
+        </h3>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Best Matches */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+            className="space-y-6"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <Car className="w-8 h-8 text-green-400" />
+              <h4 className="text-xl font-semibold text-green-400">Best Matches</h4>
+            </div>
+            <div className="space-y-3">
               {compatibility.best.map((brand, index) => (
-                <motion.div 
+                <motion.div
                   key={brand}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex items-center gap-4 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                  transition={{ delay: 0.1 * index }}
+                  className="group relative"
                 >
-                  <CarFront className="w-8 h-8 text-green-500" />
-                  <p className="text-lg font-semibold text-white">{brand}</p>
+                  <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-lg transform transition-all duration-300 group-hover:scale-105" />
+                  <div className="relative flex items-center gap-4 p-4 rounded-lg backdrop-blur-sm border border-green-500/20">
+                    <CarFront className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform" />
+                    <span className="text-lg font-medium text-white group-hover:text-green-400 transition-colors">
+                      {brand}
+                    </span>
+                  </div>
                 </motion.div>
               ))}
             </div>
-          </div>
-        </div>
+          </motion.div>
 
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <ThumbsDown className="w-6 h-6 text-red-500" />
-            <h4 className="text-lg font-semibold text-white/90">Worst Car Matches</h4>
-          </div>
-          <div className="p-6 rounded-lg bg-gradient-to-br from-red-500/10 to-red-600/10 border border-red-500/20">
-            <div className="space-y-4">
+          {/* Worst Matches */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+            className="space-y-6"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <Car className="w-8 h-8 text-red-400" />
+              <h4 className="text-xl font-semibold text-red-400">Challenging Matches</h4>
+            </div>
+            <div className="space-y-3">
               {compatibility.worst.map((brand, index) => (
-                <motion.div 
+                <motion.div
                   key={brand}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex items-center gap-4 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                  transition={{ delay: 0.1 * index }}
+                  className="group relative"
                 >
-                  <Car className="w-8 h-8 text-red-500" />
-                  <p className="text-lg font-semibold text-white">{brand}</p>
+                  <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-rose-500/20 rounded-lg transform transition-all duration-300 group-hover:scale-105" />
+                  <div className="relative flex items-center gap-4 p-4 rounded-lg backdrop-blur-sm border border-red-500/20">
+                    <CarFront className="w-6 h-6 text-red-400 group-hover:scale-110 transition-transform" />
+                    <span className="text-lg font-medium text-white group-hover:text-red-400 transition-colors">
+                      {brand}
+                    </span>
+                  </div>
                 </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </motion.div>
