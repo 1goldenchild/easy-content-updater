@@ -8,20 +8,20 @@ const ProgressIndicator = () => {
   const isMobile = useIsMobile()
   const location = useLocation()
 
-  const sections = location.pathname === "/" 
-    ? ["Hero", "Knowledge", "Benefits", "Sales", "CTA", "Stats"]
-    : ["Results", "Occupation", "Compatibility", "Country", "Car"]
+  const sections = location.pathname === "/"
+    ? ["hero", "benefits", "features", "cta"]
+    : ["info", "analysis", "results"]
 
   useEffect(() => {
     const handleScroll = () => {
       const sectionElements = sections.map(section => 
-        document.getElementById(section.toLowerCase())
+        document.getElementById(section)
       )
 
       const viewportHeight = window.innerHeight
       const scrollPosition = window.scrollY + (viewportHeight / 3)
 
-      const activeIndex = sectionElements.findIndex((element, index) => {
+      const activeSectionIndex = sectionElements.findIndex((element, index) => {
         if (!element) return false
         const nextElement = sectionElements[index + 1]
         
@@ -33,43 +33,64 @@ const ProgressIndicator = () => {
         return scrollPosition >= elementTop && scrollPosition < elementBottom
       })
 
-      if (activeIndex !== -1) {
-        setActiveSection(activeIndex)
+      if (activeSectionIndex !== -1) {
+        setActiveSection(activeSectionIndex)
       }
     }
 
+    handleScroll()
     window.addEventListener("scroll", handleScroll)
-    handleScroll() // Initial check
-
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [sections])
+  }, [location.pathname, sections])
+
+  const handleDotClick = (index: number) => {
+    const sectionElement = document.getElementById(sections[index])
+    if (sectionElement) {
+      const offset = 80 // Adjust this value based on your header height
+      const elementPosition = sectionElement.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - offset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      })
+    }
+  }
+
+  if (location.pathname !== "/" && location.pathname !== "/portal") {
+    return null
+  }
 
   return (
-    <div className="fixed inset-0 pointer-events-none flex items-center justify-center z-50">
-      <div className="relative w-full max-w-7xl mx-auto px-4">
-        <div className="absolute right-0 flex items-center gap-2">
-          <div className="space-y-4">
-            {sections.map((section, index) => (
-              <div 
-                key={section}
-                className="relative flex items-center gap-2 justify-end"
-              >
-                <motion.div
-                  className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                    index === activeSection 
-                      ? "bg-gradient-to-r from-purple-500 to-pink-500" 
-                      : "bg-white/20"
-                  }`}
-                  animate={{
-                    scale: index === activeSection ? 1.2 : 1
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.5 }}
+      className={`fixed ${isMobile ? "bottom-24 right-4" : "right-8 top-1/2 -translate-y-1/2"} z-50`}
+    >
+      <div className="flex flex-col gap-3">
+        {sections.map((section, index) => (
+          <button
+            key={section}
+            onClick={() => handleDotClick(index)}
+            className="group relative p-1"
+          >
+            <div
+              className={`h-2 w-2 rounded-full transition-all duration-300 ${
+                activeSection === index
+                  ? "bg-purple-500 scale-150"
+                  : "bg-gray-400 group-hover:bg-purple-400"
+              }`}
+            />
+            {!isMobile && (
+              <span className="absolute left-0 top-1/2 -translate-x-[calc(100%+0.75rem)] -translate-y-1/2 rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100">
+                {section.charAt(0).toUpperCase() + section.slice(1)}
+              </span>
+            )}
+          </button>
+        ))}
       </div>
-    </div>
+    </motion.div>
   )
 }
 
