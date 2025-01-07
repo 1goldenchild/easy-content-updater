@@ -97,7 +97,7 @@ const CollectInfo = () => {
       }
 
       // Navigate to checkout using React Router
-      window.location.href = "https://www.numerology33.com/checkout"
+      window.open("https://www.numerology33.com/checkout", "_blank")
     } catch (error) {
       console.error("[Error] Unexpected error in form submission:", error)
       toast.error("An unexpected error occurred. Please try again.")
