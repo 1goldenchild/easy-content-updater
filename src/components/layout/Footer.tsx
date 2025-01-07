@@ -88,14 +88,20 @@ const Footer = () => {
                 Discover your life's path through the ancient wisdom of numbers.
               </p>
               <div className="flex space-x-4">
-                {['twitter', 'facebook', 'instagram'].map((social) => (
+                {[
+                  { name: 'tiktok', url: 'https://www.tiktok.com/@numerology_33' },
+                  { name: 'instagram', url: '#' },
+                  { name: 'youtube', url: 'https://www.youtube.com/@numerology-33' }
+                ].map((social) => (
                   <a
-                    key={social}
-                    href={`#${social}`}
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#D946EF] p-[1px] hover:scale-110 transition-transform"
                   >
                     <div className="w-full h-full rounded-full bg-background flex items-center justify-center">
-                      <span className="sr-only">{social}</span>
+                      <span className="sr-only">{social.name}</span>
                       <div className="w-4 h-4 md:w-5 md:h-5 bg-gradient-to-br from-[#8B5CF6] to-[#D946EF]" />
                     </div>
                   </a>
