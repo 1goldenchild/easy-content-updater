@@ -16,7 +16,11 @@ const CountryCompatibility = () => {
       <h3 className="text-sm font-semibold text-white/90 mb-3">Global Compatibility</h3>
       
       <div className="relative w-full h-32 mb-4">
-        <EarthGlobe />
+        <img 
+          src="https://media.giphy.com/media/wgHY9nSrlTMt2/giphy.gif" 
+          alt="Rotating globe animation"
+          className="w-full h-full object-cover rounded-lg" 
+        />
       </div>
 
       <div className="space-y-4">
