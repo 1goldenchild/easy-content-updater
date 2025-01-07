@@ -24,20 +24,101 @@ const PhoneShowcase = () => {
               repeatType: "reverse",
               ease: "linear"
             }}
-            className="w-full"
+            className="w-full space-y-6 p-4"
           >
-            <img 
-              src="/lovable-uploads/984813d9-700a-4057-a369-08ae4035507b.png"
-              alt="Numerology Portal Results"
-              className="w-full h-auto object-contain"
-              style={{ 
-                imageRendering: "crisp-edges",
-                maxWidth: "100%",
-                WebkitBackfaceVisibility: "hidden",
-                MozBackfaceVisibility: "hidden",
-                backfaceVisibility: "hidden"
-              }}
-            />
+            {/* Life Path Section */}
+            <div className="rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 p-4 backdrop-blur-sm">
+              <h3 className="text-lg font-semibold text-white mb-2">Life Path Number</h3>
+              <motion.div 
+                initial={{ scale: 0.9 }}
+                animate={{ scale: 1 }}
+                transition={{ repeat: Infinity, duration: 2 }}
+                className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400"
+              >
+                7
+              </motion.div>
+              <p className="text-xs text-white/70 mt-2">The Seeker & Mystic</p>
+            </div>
+
+            {/* Characteristics Chart */}
+            <div className="rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 p-4">
+              <h3 className="text-sm font-semibold text-white/90 mb-3">Core Traits</h3>
+              <div className="space-y-2">
+                {["Spiritual", "Analytical", "Intuitive", "Reserved", "Philosophical"].map((trait, index) => (
+                  <motion.div 
+                    key={trait}
+                    initial={{ width: "0%" }}
+                    animate={{ width: `${(100 - index * 15)}%` }}
+                    transition={{ duration: 1, delay: index * 0.2 }}
+                    className="h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Compatibility Section */}
+            <div className="rounded-xl bg-gradient-to-br from-indigo-500/20 to-blue-500/20 p-4">
+              <h3 className="text-sm font-semibold text-white/90 mb-3">Best Matches</h3>
+              <div className="grid grid-cols-3 gap-2">
+                {[1, 5, 7].map((num) => (
+                  <motion.div
+                    key={num}
+                    whileHover={{ scale: 1.05 }}
+                    className="aspect-square rounded-lg bg-white/10 flex items-center justify-center"
+                  >
+                    <span className="text-2xl font-bold text-white/90">{num}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Career Path */}
+            <div className="rounded-xl bg-gradient-to-br from-pink-500/20 to-orange-500/20 p-4">
+              <h3 className="text-sm font-semibold text-white/90 mb-3">Career Paths</h3>
+              <div className="space-y-2">
+                {["Researcher", "Analyst", "Teacher", "Writer"].map((career) => (
+                  <div key={career} className="px-3 py-2 rounded-lg bg-white/5 text-sm text-white/80">
+                    {career}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Yearly Forecast */}
+            <div className="rounded-xl bg-gradient-to-br from-green-500/20 to-teal-500/20 p-4">
+              <h3 className="text-sm font-semibold text-white/90 mb-3">2024 Forecast</h3>
+              <div className="relative h-32">
+                <motion.div
+                  animate={{
+                    pathLength: [0, 1],
+                    pathOffset: [0, 1]
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "linear"
+                  }}
+                  style={{
+                    pathLength: 0,
+                    stroke: "url(#gradient)",
+                    strokeWidth: 2,
+                    fill: "none",
+                    strokeDasharray: "5,5"
+                  }}
+                  className="absolute inset-0 w-full h-full"
+                >
+                  <svg className="w-full h-full">
+                    <defs>
+                      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#22C55E" />
+                        <stop offset="100%" stopColor="#14B8A6" />
+                      </linearGradient>
+                    </defs>
+                    <path d="M0,50 Q60,20 120,60 T240,50" stroke="url(#gradient)" fill="none" />
+                  </svg>
+                </motion.div>
+              </div>
+            </div>
           </motion.div>
         </div>
 
