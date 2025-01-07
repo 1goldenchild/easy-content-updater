@@ -6,6 +6,9 @@ const PhoneShowcase = () => {
 
   const sections = [
     { id: "lifepath", label: "Life Path" },
+    { id: "partial", label: "Partial Energy" },
+    { id: "secret", label: "Secret Number" },
+    { id: "zodiac", label: "Chinese Zodiac" },
     { id: "traits", label: "Core Traits" },
     { id: "compatibility", label: "Matches" },
     { id: "career", label: "Career" },
@@ -40,7 +43,7 @@ const PhoneShowcase = () => {
               onClick={() => scrollToSection(section.id)}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
                 activeSection === section.id 
-                  ? "bg-gradient-to-r from-purple-400 to-pink-400 scale-150" 
+                  ? "bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] scale-150" 
                   : "bg-white/20 hover:bg-white/40"
               }`}
               aria-label={section.label}
@@ -52,21 +55,63 @@ const PhoneShowcase = () => {
         <div className="absolute inset-0 overflow-y-auto overflow-x-hidden scrollbar-hide">
           <div className="w-full space-y-6 p-4">
             {/* Life Path Section */}
-            <div id="lifepath" className="rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 p-4 backdrop-blur-sm">
+            <div id="lifepath" className="rounded-xl bg-gradient-to-br from-[#8B5CF6]/30 to-[#D946EF]/30 p-4 backdrop-blur-sm">
               <h3 className="text-lg font-semibold text-white mb-2">Life Path Number</h3>
               <motion.div 
                 initial={{ scale: 0.9 }}
                 animate={{ scale: 1 }}
                 transition={{ repeat: Infinity, duration: 2 }}
-                className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400"
+                className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]"
               >
                 7
               </motion.div>
               <p className="text-xs text-white/70 mt-2">The Misunderstood Genius</p>
             </div>
 
-            {/* Characteristics Chart */}
-            <div id="traits" className="rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 p-4">
+            {/* Partial Energy Section */}
+            <div id="partial" className="rounded-xl bg-gradient-to-br from-[#F97316]/30 to-[#D946EF]/30 p-4">
+              <h3 className="text-lg font-semibold text-white mb-2">Partial Energy</h3>
+              <motion.div 
+                initial={{ scale: 0.9 }}
+                animate={{ scale: 1 }}
+                transition={{ repeat: Infinity, duration: 2, delay: 0.3 }}
+                className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#F97316] to-[#D946EF]"
+              >
+                4
+              </motion.div>
+              <p className="text-xs text-white/70 mt-2">The Builder</p>
+            </div>
+
+            {/* Secret Number Section */}
+            <div id="secret" className="rounded-xl bg-gradient-to-br from-[#0EA5E9]/30 to-[#8B5CF6]/30 p-4">
+              <h3 className="text-lg font-semibold text-white mb-2">Secret Number</h3>
+              <motion.div 
+                initial={{ scale: 0.9 }}
+                animate={{ scale: 1 }}
+                transition={{ repeat: Infinity, duration: 2, delay: 0.6 }}
+                className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#0EA5E9] to-[#8B5CF6]"
+              >
+                9
+              </motion.div>
+              <p className="text-xs text-white/70 mt-2">The Humanitarian</p>
+            </div>
+
+            {/* Chinese Zodiac Section */}
+            <div id="zodiac" className="rounded-xl bg-gradient-to-br from-[#F97316]/30 to-[#0EA5E9]/30 p-4">
+              <h3 className="text-lg font-semibold text-white mb-2">Chinese Zodiac</h3>
+              <motion.div 
+                initial={{ scale: 0.9 }}
+                animate={{ scale: 1 }}
+                transition={{ repeat: Infinity, duration: 2, delay: 0.9 }}
+                className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#F97316] to-[#0EA5E9]"
+              >
+                龍
+              </motion.div>
+              <p className="text-xs text-white/70 mt-2">Year of the Dragon</p>
+            </div>
+
+            {/* Core Traits Section */}
+            <div id="traits" className="rounded-xl bg-gradient-to-br from-[#0EA5E9]/30 to-[#8B5CF6]/30 p-4">
               <h3 className="text-sm font-semibold text-white/90 mb-3">Core Traits</h3>
               <div className="space-y-2">
                 {["Spiritual", "Analytical", "Intuitive", "Reserved", "Philosophical"].map((trait, index) => (
@@ -75,14 +120,14 @@ const PhoneShowcase = () => {
                     initial={{ width: "0%" }}
                     animate={{ width: `${(100 - index * 15)}%` }}
                     transition={{ duration: 1, delay: index * 0.2 }}
-                    className="h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"
+                    className="h-2 bg-gradient-to-r from-[#0EA5E9] to-[#8B5CF6] rounded-full"
                   />
                 ))}
               </div>
             </div>
 
             {/* Compatibility Section */}
-            <div id="compatibility" className="rounded-xl bg-gradient-to-br from-indigo-500/20 to-blue-500/20 p-4">
+            <div id="compatibility" className="rounded-xl bg-gradient-to-br from-[#8B5CF6]/30 to-[#0EA5E9]/30 p-4">
               <h3 className="text-sm font-semibold text-white/90 mb-3">Best Matches</h3>
               <div className="grid grid-cols-3 gap-2">
                 {[1, 5, 7].map((num) => (
@@ -98,7 +143,7 @@ const PhoneShowcase = () => {
             </div>
 
             {/* Career Path */}
-            <div id="career" className="rounded-xl bg-gradient-to-br from-pink-500/20 to-orange-500/20 p-4">
+            <div id="career" className="rounded-xl bg-gradient-to-br from-[#D946EF]/30 to-[#F97316]/30 p-4">
               <h3 className="text-sm font-semibold text-white/90 mb-3">Career Paths</h3>
               <div className="space-y-2">
                 {["Researcher", "Analyst", "Teacher", "Writer"].map((career) => (
@@ -110,7 +155,7 @@ const PhoneShowcase = () => {
             </div>
 
             {/* Yearly Forecast */}
-            <div id="forecast" className="rounded-xl bg-gradient-to-br from-green-500/20 to-teal-500/20 p-4">
+            <div id="forecast" className="rounded-xl bg-gradient-to-br from-[#0EA5E9]/30 to-[#F97316]/30 p-4">
               <h3 className="text-sm font-semibold text-white/90 mb-3">2024 Forecast</h3>
               <div className="relative h-32">
                 <motion.div
@@ -135,8 +180,8 @@ const PhoneShowcase = () => {
                   <svg className="w-full h-full">
                     <defs>
                       <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#22C55E" />
-                        <stop offset="100%" stopColor="#14B8A6" />
+                        <stop offset="0%" stopColor="#0EA5E9" />
+                        <stop offset="100%" stopColor="#F97316" />
                       </linearGradient>
                     </defs>
                     <path d="M0,50 Q60,20 120,60 T240,50" stroke="url(#gradient)" fill="none" />
@@ -160,13 +205,13 @@ const PhoneShowcase = () => {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.3 }}
-        className="absolute -left-8 -bottom-8 w-24 h-24 bg-gradient-to-r from-purple-500/30 to-pink-500/30 rounded-full blur-xl"
+        className="absolute -left-8 -bottom-8 w-24 h-24 bg-gradient-to-r from-[#8B5CF6]/30 to-[#D946EF]/30 rounded-full blur-xl"
       />
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.4 }}
-        className="absolute -right-8 -top-8 w-24 h-24 bg-gradient-to-r from-blue-500/30 to-purple-500/30 rounded-full blur-xl"
+        className="absolute -right-8 -top-8 w-24 h-24 bg-gradient-to-r from-[#0EA5E9]/30 to-[#8B5CF6]/30 rounded-full blur-xl"
       />
     </motion.div>
   );
