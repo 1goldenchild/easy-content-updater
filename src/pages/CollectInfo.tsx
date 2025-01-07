@@ -145,7 +145,7 @@ const CollectInfo = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="hidden md:block"
+            className="scale-75 md:scale-75 origin-top"
           >
             <PhoneShowcase />
           </motion.div>
