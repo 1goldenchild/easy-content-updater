@@ -1,12 +1,11 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import FeatureList from "./FeatureList";
 import CTASection from "./CTASection";
 import PhoneShowcase from "./PhoneShowcase";
 import { scrollToTop } from "./CallToAction";
+import GradientCTAButton from "./GradientCTAButton";
 
 const SalesPitch = () => {
   const navigate = useNavigate();
@@ -31,7 +30,6 @@ const SalesPitch = () => {
   return (
     <section className="py-20 relative overflow-hidden">
       <div className="container px-4 md:px-6">
-        {/* Preview Heading - Visible on mobile */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -81,7 +79,6 @@ const SalesPitch = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column - Features List */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -89,7 +86,6 @@ const SalesPitch = () => {
             transition={{ duration: 0.5 }}
             className="space-y-8"
           >
-            {/* Preview Heading - Visible on larger screens */}
             <div className="hidden lg:block">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -180,27 +176,11 @@ const SalesPitch = () => {
               viewport={{ once: true }}
               className="flex justify-center"
             >
-              <Button
+              <GradientCTAButton
                 onClick={handleGetStarted}
-                size="lg"
-                className="bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] hover:opacity-90 text-white font-semibold px-8 py-6 text-lg h-auto group relative overflow-hidden"
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  Unlock Your Reading
-                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                </span>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] opacity-0 group-hover:opacity-100 transition-opacity"
-                  animate={{
-                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "linear"
-                  }}
-                />
-              </Button>
+                text="Unlock Your Reading"
+                icon="arrow"
+              />
             </motion.div>
             
             <motion.h2 
@@ -226,27 +206,14 @@ const SalesPitch = () => {
               viewport={{ once: true }}
               className="flex justify-center pt-8"
             >
-              <Button
+              <GradientCTAButton
                 onClick={handleGetStarted}
-                size="lg"
-                className="bg-gradient-to-r from-[#D946EF] via-[#F97316] to-[#8B5CF6] hover:opacity-90 text-white font-semibold px-8 py-6 text-lg h-auto group relative overflow-hidden"
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  Start Your Journey Now
-                  <Sparkles className="w-5 h-5 transition-transform group-hover:rotate-12" />
-                </span>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-[#D946EF] via-[#F97316] to-[#8B5CF6] opacity-0 group-hover:opacity-100 transition-opacity"
-                  animate={{
-                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "linear"
-                  }}
-                />
-              </Button>
+                text="Start Your Journey Now"
+                icon="sparkles"
+                gradientFrom="[#D946EF]"
+                gradientVia="[#F97316]"
+                gradientTo="[#8B5CF6]"
+              />
             </motion.div>
           </motion.div>
 
