@@ -55,22 +55,22 @@ const PhoneShowcase = () => {
         <CarCompatibilitySection />
         <YearlyForecast />
 
-        {/* And More Section */}
+        {/* Secret Bonus Section */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="relative rounded-xl bg-gradient-to-br from-[#8B5CF6]/30 to-[#0EA5E9]/30 p-6 text-center overflow-hidden"
+          className="relative rounded-xl bg-black/90 p-6 text-center overflow-hidden border border-amber-500/20"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
-          <h3 className="relative text-xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent mb-2">
-            And More...
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(251,191,36,0.1),rgba(0,0,0,0))]" />
+          <h3 className="relative text-xl font-bold bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 bg-clip-text text-transparent mb-3">
+            Secret Bonus
           </h3>
-          <p className="relative text-sm text-white/70">
-            Unlock deeper insights and discover your full potential
+          <p className="relative text-sm text-amber-300/90 font-medium">
+            Unlock exclusive insights reserved for advanced seekers
           </p>
           <motion.div 
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-500/10 to-transparent"
             initial={{ x: '-100%' }}
             animate={{ x: '100%' }}
             transition={{ 
@@ -80,6 +80,11 @@ const PhoneShowcase = () => {
               ease: "linear",
             }}
           />
+          <div className="relative mt-3">
+            <span className="text-xs text-amber-400/70">
+              Limited time access available
+            </span>
+          </div>
         </motion.div>
       </div>
     </PhoneFrame>
