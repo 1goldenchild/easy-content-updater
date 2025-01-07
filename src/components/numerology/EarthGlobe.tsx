@@ -18,54 +18,95 @@ const EarthGlobe = () => {
     renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
     mountRef.current.appendChild(renderer.domElement);
 
-    // Create a sphere geometry with more segments for smoother appearance
-    const geometry = new THREE.SphereGeometry(1, 64, 64);
+    // Load textures
+    const textureLoader = new THREE.TextureLoader();
     
-    // Create a more sophisticated material with gradient colors
-    const material = new THREE.MeshPhongMaterial({
-      color: 0x1EAEDB, // Modern blue color
-      shininess: 80,
-      opacity: 0.9,
-      transparent: true,
-      wireframe: true,
-      wireframeLinewidth: 0.5
+    // Earth textures
+    const earthMap = textureLoader.load('/earth-map.jpg');
+    const bumpMap = textureLoader.load('/earth-bump.jpg');
+    const specularMap = textureLoader.load('/earth-specular.jpg');
+    const cloudsMap = textureLoader.load('/earth-clouds.png');
+
+    // Create star background
+    const starGeometry = new THREE.BufferGeometry();
+    const starMaterial = new THREE.PointsMaterial({
+      color: 0xFFFFFF,
+      size: 0.05,
+      transparent: true
     });
 
-    const globe = new THREE.Mesh(geometry, material);
-    scene.add(globe);
+    const starVertices = [];
+    for (let i = 0; i < 10000; i++) {
+      const x = (Math.random() - 0.5) * 2000;
+      const y = (Math.random() - 0.5) * 2000;
+      const z = -Math.random() * 2000;
+      starVertices.push(x, y, z);
+    }
 
-    // Add ambient light with a soft blue tint
-    const ambientLight = new THREE.AmbientLight(0x33C3F0, 0.4);
+    starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+    const stars = new THREE.Points(starGeometry, starMaterial);
+    scene.add(stars);
+
+    // Create Earth
+    const earthGeometry = new THREE.SphereGeometry(1, 64, 64);
+    const earthMaterial = new THREE.MeshPhongMaterial({
+      map: earthMap,
+      bumpMap: bumpMap,
+      bumpScale: 0.05,
+      specularMap: specularMap,
+      specular: new THREE.Color(0x333333),
+      shininess: 25
+    });
+
+    const earth = new THREE.Mesh(earthGeometry, earthMaterial);
+    scene.add(earth);
+
+    // Create cloud layer
+    const cloudGeometry = new THREE.SphereGeometry(1.02, 64, 64);
+    const cloudMaterial = new THREE.MeshPhongMaterial({
+      map: cloudsMap,
+      transparent: true,
+      opacity: 0.4
+    });
+
+    const clouds = new THREE.Mesh(cloudGeometry, cloudMaterial);
+    scene.add(clouds);
+
+    // Lighting
+    const ambientLight = new THREE.AmbientLight(0x555555);
     scene.add(ambientLight);
 
-    // Add multiple directional lights for better depth
-    const mainLight = new THREE.DirectionalLight(0x0EA5E9, 1);
-    mainLight.position.set(5, 3, 5);
-    scene.add(mainLight);
+    const sunLight = new THREE.DirectionalLight(0xffffff, 1);
+    sunLight.position.set(5, 3, 5);
+    scene.add(sunLight);
 
-    const secondaryLight = new THREE.DirectionalLight(0x0FA0CE, 0.5);
-    secondaryLight.position.set(-5, -3, -5);
-    scene.add(secondaryLight);
+    // Add subtle blue atmosphere glow
+    const atmosphereGeometry = new THREE.SphereGeometry(1.1, 64, 64);
+    const atmosphereMaterial = new THREE.MeshPhongMaterial({
+      color: 0x0077ff,
+      transparent: true,
+      opacity: 0.1,
+      side: THREE.BackSide
+    });
 
-    // Add point light in the center for inner glow
-    const pointLight = new THREE.PointLight(0x33C3F0, 0.8);
-    pointLight.position.set(0, 0, 0);
-    scene.add(pointLight);
+    const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
+    scene.add(atmosphere);
 
     // Position camera
     camera.position.z = 2.5;
 
-    // Animation with smooth rotation
+    // Animation
     const animate = () => {
       requestAnimationFrame(animate);
-      globe.rotation.y += 0.003; // Slower, smoother rotation
-      globe.rotation.x += 0.001; // Slight tilt rotation
+      earth.rotation.y += 0.001;
+      clouds.rotation.y += 0.0012;
+      stars.rotation.y -= 0.0001;
       renderer.render(scene, camera);
     };
 
     animate();
 
-    // Cleanup
+    // Handle cleanup
     return () => {
       if (mountRef.current) {
         mountRef.current.removeChild(renderer.domElement);
@@ -74,8 +115,8 @@ const EarthGlobe = () => {
   }, []);
 
   return (
-    <div ref={mountRef} className="w-full h-full">
-      <div className="absolute inset-0 bg-[#1EAEDB]/5 blur-3xl rounded-full animate-pulse" />
+    <div ref={mountRef} className="w-full h-full relative">
+      <div className="absolute inset-0 bg-blue-500/5 blur-3xl rounded-full animate-pulse" />
     </div>
   );
 };
