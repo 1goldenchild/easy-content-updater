@@ -11,7 +11,10 @@ import VIPOption from "@/components/checkout/VIPOption"
 import { packages } from "@/components/checkout/PackageSelection"
 import { supabase } from "@/integrations/supabase/client"
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
+// Initialize Stripe with the publishable key
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '')
+
+console.log('Stripe initialization with key:', import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY ? '[Present]' : '[Missing]')
 
 const Checkout = () => {
   const navigate = useNavigate()
