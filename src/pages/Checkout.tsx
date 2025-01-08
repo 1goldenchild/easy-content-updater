@@ -90,6 +90,10 @@ const Checkout = () => {
     }
   }
 
+  // Calculate selected package and total
+  const selectedPackage = packages.find(pkg => pkg.id === formData.selectedPackage)
+  const total = (selectedPackage?.price || 0) + (formData.isVip ? 11 : 0)
+
   return (
     <div className="container max-w-4xl mx-auto px-4 py-8">
       <div className="space-y-8 bg-[#1A1F2C] p-6 rounded-lg">
@@ -133,7 +137,7 @@ const Checkout = () => {
           <div className="flex justify-between items-center">
             <span className="font-semibold">Total:</span>
             <span className="text-xl font-bold">
-              ${((selectedPackage?.price || 0) + (formData.isVip ? 11 : 0)).toFixed(2)}
+              ${total.toFixed(2)}
             </span>
           </div>
         </div>
