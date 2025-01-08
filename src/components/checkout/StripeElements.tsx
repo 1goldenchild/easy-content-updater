@@ -34,7 +34,7 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
     <div>
       <h2 className="text-lg font-semibold mb-4 text-gray-200">PAYMENT INFORMATION</h2>
       <div className="space-y-4">
-        <div className="bg-[#2A2F3C] p-6 rounded-lg border border-gray-700">
+        <div className="bg-[#2A2F3C] p-4 rounded-lg border border-gray-700">
           <CardElement
             options={{
               style: {
@@ -45,9 +45,11 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
                   '::placeholder': {
                     color: '#aab7c4',
                   },
-                  padding: '16px',
-                  backgroundColor: '#2A2F3C',
-                  iconColor: '#fff',
+                  backgroundColor: 'transparent',
+                  letterSpacing: '0.025em',
+                  ':-webkit-autofill': {
+                    color: '#ffffff',
+                  },
                 },
                 invalid: {
                   color: '#fa755a',
@@ -55,11 +57,6 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
                 },
               },
               hidePostalCode: true,
-              classes: {
-                base: 'stripe-element-base',
-                focus: 'stripe-element-focus',
-                invalid: 'stripe-element-invalid',
-              },
             }}
           />
         </div>

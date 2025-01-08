@@ -61,31 +61,30 @@
     );
   }
 
-  /* Hide scrollbar for Chrome, Safari and Opera */
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
   
-  /* Hide scrollbar for IE, Edge and Firefox */
   .scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 
 /* Stripe Elements Custom Styling */
 .StripeElement {
   width: 100%;
-  padding: 12px;
-  color: white;
-  background-color: #2A2F3C;
+  padding: 16px;
+  background: #2A2F3C;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 4px;
-  border: 1px solid transparent;
-  transition: box-shadow 150ms ease;
+  outline: none;
+  transition: all 0.3s ease;
 }
 
 .StripeElement--focus {
-  box-shadow: 0 1px 3px 0 #cfd7df;
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
 .StripeElement--invalid {
