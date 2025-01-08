@@ -9,6 +9,7 @@ const Upsell2 = () => {
   const navigate = useNavigate()
   const { toast } = useToast()
   const [customerData, setCustomerData] = useState<any>(null)
+  const [isProcessing, setIsProcessing] = useState(false)
 
   useEffect(() => {
     const fetchCustomerData = async () => {
@@ -37,7 +38,8 @@ const Upsell2 = () => {
     fetchCustomerData()
   }, [toast])
 
-  const handlePurchase = async (productId: string) => {
+  const handlePurchase = async () => {
+    setIsProcessing(true)
     try {
       const response = await fetch("/api/create-payment", {
         method: "POST",
@@ -45,7 +47,7 @@ const Upsell2 = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          productId,
+          productId: upsellProducts2[0].priceId,
           customerId: customerData?.stripe_customer_id,
           customerEmail: customerData?.email
         }),
@@ -63,30 +65,31 @@ const Upsell2 = () => {
         title: "Error",
         description: "Failed to process purchase"
       })
+    } finally {
+      setIsProcessing(false)
     }
+  }
+
+  const handleDecline = () => {
+    navigate("/portal")
   }
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-center mb-8">
-        Special One-Time Offer!
-      </h1>
       <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
         {upsellProducts2.map((product) => (
           <UpsellProduct
             key={product.id}
-            product={product}
-            onPurchase={() => handlePurchase(product.id)}
+            name={product.name}
+            description={product.description}
+            price={product.price}
+            features={product.features}
+            image={product.image}
+            isProcessing={isProcessing}
+            onAccept={handlePurchase}
+            onDecline={handleDecline}
           />
         ))}
-      </div>
-      <div className="text-center mt-8">
-        <button
-          onClick={() => navigate("/portal")}
-          className="text-blue-600 hover:text-blue-800 underline"
-        >
-          No thanks, take me to my dashboard
-        </button>
       </div>
     </div>
   )
