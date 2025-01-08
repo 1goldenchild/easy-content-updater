@@ -33,10 +33,10 @@ serve(async (req) => {
       })
     }
 
-    // Create the payment intent with the price ID
+    // Create the payment intent
     console.log('Creating payment intent...')
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(amount * 100),
+      amount: Math.round(amount * 100), // Convert to cents
       currency: 'usd',
       customer: customer.id,
       payment_method: paymentMethod,
@@ -45,14 +45,11 @@ serve(async (req) => {
       automatic_payment_methods: {
         enabled: true,
         allow_redirects: 'never'
-      },
-      metadata: {
-        priceId: priceId
       }
     })
 
-    // Create the order in Stripe
-    console.log('Creating Stripe order...')
+    // Create the order
+    console.log('Creating order...')
     const order = await stripe.orders.create({
       currency: 'usd',
       customer: customer.id,

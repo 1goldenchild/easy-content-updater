@@ -1,17 +1,2 @@
-project_id = "rqklestpzesrdeupnkau"
-
-[api]
-enabled = true
-port = 54321
-schemas = ["public", "storage", "graphql_public"]
-
-[db]
-port = 54322
-
-[studio]
-enabled = true
-port = 54323
-
-[inbucket]
-enabled = true
-port = 54324
+[functions.create-payment]
+verify_jwt = false
