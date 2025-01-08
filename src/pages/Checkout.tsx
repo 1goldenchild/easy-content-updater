@@ -11,7 +11,7 @@ import VIPOption from "@/components/checkout/VIPOption"
 import { packages } from "@/components/checkout/PackageSelection"
 import { supabase } from "@/integrations/supabase/client"
 
-// Initialize Stripe with your new publishable key
+// Initialize Stripe with your publishable key
 console.log('Initializing Stripe...')
 const stripePromise = loadStripe('pk_test_51QenBpCg2w6KJiVSELGpXqQZQPP8su4GY9mxvH4YEXDGCnhQZHYtqhvhRNwxLNBzdqbMqAEVWp4VZLYLWHYNNTZf00vFRFNTZf')
   .then(stripe => {
