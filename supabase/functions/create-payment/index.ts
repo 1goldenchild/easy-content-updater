@@ -12,21 +12,19 @@ serve(async (req) => {
   }
 
   try {
-    const { paymentMethod, amount, priceId } = await req.json()
+    const { amount, priceId, isOneClick } = await req.json()
     
-    console.log('Creating payment with:', { amount, paymentMethod, priceId })
+    console.log('Creating payment with:', { amount, priceId, isOneClick })
     
     const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') || '', {
       apiVersion: '2023-10-16',
     })
 
-    // Create a payment intent
+    // For one-click upsells, create a payment intent with automatic confirmation
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Math.round(amount * 100), // Convert to cents
       currency: 'usd',
-      payment_method: paymentMethod,
-      confirm: true,
-      payment_method_types: ['card'],
+      setup_future_usage: isOneClick ? 'off_session' : undefined,
       automatic_payment_methods: {
         enabled: true,
         allow_redirects: 'never'

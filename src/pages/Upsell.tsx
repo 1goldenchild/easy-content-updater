@@ -1,13 +1,8 @@
 import { useState } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
-import { loadStripe } from "@stripe/stripe-js"
-import { Elements } from "@stripe/react-stripe-js"
-import StripeElements from "@/components/checkout/StripeElements"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 import { supabase } from "@/integrations/supabase/client"
-
-const stripePromise = loadStripe('pk_test_51QepBxCibdAmag3r0tq7dMFmpymVQanEUGj3OMBjM3MQM4uwOhxbEdnfMfKTzMY5D6chc8SBsnT8skVnA5368BlM00HZSqQPHx')
 
 const upsellProducts = [
   {
@@ -36,18 +31,17 @@ const UpsellContent = () => {
   const currentStep = parseInt(location.pathname.split('/').pop() || '1')
   const currentProduct = upsellProducts[currentStep - 1]
 
-  const handlePayment = async (e: React.FormEvent, paymentMethod: string) => {
-    e.preventDefault()
+  const handleAccept = async () => {
     setIsProcessing(true)
     
     try {
-      console.log('Processing upsell payment for:', currentProduct.name)
+      console.log('Processing one-click upsell for:', currentProduct.name)
       
       const { data, error } = await supabase.functions.invoke('create-payment', {
         body: {
-          paymentMethod,
-          amount: currentProduct.price,
           priceId: currentProduct.priceId,
+          amount: currentProduct.price,
+          isOneClick: true
         }
       })
 
@@ -106,13 +100,15 @@ const UpsellContent = () => {
         </div>
 
         <div className="space-y-6">
-          <StripeElements 
-            onSubmit={handlePayment}
-            isProcessing={isProcessing}
-          />
+          <Button 
+            onClick={handleAccept}
+            disabled={isProcessing}
+            className="w-full bg-purple-600 hover:bg-purple-700 text-lg py-6"
+          >
+            {isProcessing ? "Processing..." : `Yes! Add ${currentProduct.name} for $${currentProduct.price.toFixed(2)}`}
+          </Button>
           
           <Button 
-            type="button"
             onClick={handleDecline}
             variant="outline"
             className="w-full text-lg py-6"
@@ -126,11 +122,7 @@ const UpsellContent = () => {
 }
 
 const Upsell = () => {
-  return (
-    <Elements stripe={stripePromise}>
-      <UpsellContent />
-    </Elements>
-  )
+  return <UpsellContent />
 }
 
 export default Upsell
