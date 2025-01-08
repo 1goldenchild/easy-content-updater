@@ -6,27 +6,21 @@ import { ProductDetails } from "@/components/upsell/ProductDetails"
 
 const features = [
   {
-    text: "Advanced Financial Numerology: Unlock powerful strategies for wealth creation through numerology."
+    text: "The Power of Every Number & Number Compatibility: Understand the profound significance of each number, Learn how to find compatibility and success by understanding the compatibility of numbers in relationships and business partnerships."
   },
   {
-    text: "Billionaire Tactics Revealed: Discover the hidden techniques the ultra-wealthy use to attract fortune."
+    text: "Master Numbers 11, 22, and 33: Dive into the hidden meanings of the Master Numbers, and learn how they hold extraordinary potential for personal and financial growth."
   },
   {
-    text: "Using Gematria in Your Business: Learn how to apply gematria to boost your financial success."
+    text: "Ancient Secrets of Numerology: Tap into powerful ancient techniques that have been used for centuries to create wealth, success, and spiritual harmony."
   },
   {
-    text: "Building the Right Team: Master the art of choosing the perfect team to fuel your success."
-  },
-  {
-    text: "Timing Your Success: Know the precise moments to execute projects and seize lucrative opportunities."
-  },
-  {
-    text: "Bonus: Numerology Logo Tip: Learn how to design a logo that aligns with financial abundance and attracts prosperity."
+    text: "Mystery Bonus: Unlock a surprise bonus that will take your numerology knowledge to the next level."
   }
 ]
 
 const Upsell = () => {
-  console.log('Rendering upsell page with updated title and image')
+  console.log('Rendering upsell page with updated features list')
   
   return (
     <UpsellContainer>
