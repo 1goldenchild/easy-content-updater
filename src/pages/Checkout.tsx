@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
 import { loadStripe } from "@stripe/stripe-js"
 import { Elements } from "@stripe/react-stripe-js"
 import { toast } from "sonner"
@@ -77,7 +76,7 @@ const Checkout = () => {
 
   return (
     <div className="container max-w-4xl mx-auto px-4 py-8">
-      <form className="space-y-8 bg-[#1A1F2C] p-6 rounded-lg">
+      <div className="space-y-8 bg-[#1A1F2C] p-6 rounded-lg">
         <ContactInfo
           firstName={formData.firstName}
           lastName={formData.lastName}
@@ -88,6 +87,11 @@ const Checkout = () => {
         <PackageSelection
           selectedPackage={formData.selectedPackage}
           onPackageChange={(value) => handleFieldChange('selectedPackage', value)}
+        />
+
+        <VIPOption
+          isVip={formData.isVip}
+          onVipChange={(value) => setFormData(prev => ({ ...prev, isVip: value }))}
         />
 
         <BillingInfo
@@ -101,13 +105,11 @@ const Checkout = () => {
         />
 
         <Elements stripe={stripePromise}>
-          <StripeElements onSubmit={handleSubmit} isProcessing={isProcessing} />
+          <StripeElements 
+            onSubmit={handleSubmit} 
+            isProcessing={isProcessing} 
+          />
         </Elements>
-
-        <VIPOption
-          isVip={formData.isVip}
-          onVipChange={(value) => setFormData(prev => ({ ...prev, isVip: value }))}
-        />
 
         <div className="bg-[#2A2F3C] p-4 rounded-lg">
           <div className="flex justify-between items-center">
@@ -119,7 +121,7 @@ const Checkout = () => {
         <p className="text-center text-sm text-gray-400">
           We Never Share Your Information With Anyone
         </p>
-      </form>
+      </div>
     </div>
   )
 }
