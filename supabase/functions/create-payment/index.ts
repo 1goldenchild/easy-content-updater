@@ -15,8 +15,13 @@ serve(async (req) => {
     const { paymentMethod, amount, email, name } = await req.json()
     console.log('Creating payment with:', { amount, email, name })
     
+    const stripeKey = Deno.env.get('STRIPE_SECRET_KEY')
+    if (!stripeKey) {
+      throw new Error('Stripe secret key not found')
+    }
+
     // Initialize Stripe with the secret key
-    const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') || '', {
+    const stripe = new Stripe(stripeKey, {
       apiVersion: '2023-10-16',
     })
 
