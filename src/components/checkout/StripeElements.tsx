@@ -52,7 +52,7 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
   }
 
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <h2 className="text-lg font-semibold mb-4 text-gray-200">PAYMENT INFORMATION</h2>
       <div className="space-y-4">
         <div className="bg-[#2A2F3C] p-4 rounded-lg border border-gray-700">
@@ -72,15 +72,14 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
           />
         </div>
         <Button
-          type="button"
-          onClick={handleSubmit}
+          type="submit"
           disabled={isProcessing}
           className="w-full bg-purple-500 hover:bg-purple-600 text-white py-6"
         >
           {isProcessing ? 'Processing...' : 'Submit Payment'}
         </Button>
       </div>
-    </div>
+    </form>
   )
 }
 
