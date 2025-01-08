@@ -46,20 +46,27 @@ const Upsell = () => {
     }
 
     fetchCustomerData()
-  }, [navigate])
+  }, [])
 
   const handlePurchase = async () => {
     setIsProcessing(true)
     try {
-      console.log('Processing upsell purchase:', currentProduct)
+      if (!customerData?.email) {
+        throw new Error("Customer email is required")
+      }
+
+      console.log('Processing upsell purchase with customer data:', {
+        email: customerData.email,
+        stripeCustomerId: customerData?.stripe_customer_id
+      })
       
       const { data, error } = await supabase.functions.invoke('create-payment', {
         body: {
           priceId: currentProduct.priceId,
           customerId: customerData?.stripe_customer_id,
-          customerEmail: customerData?.email || '',
+          customerEmail: customerData.email,
           amount: currentProduct.price,
-          mode: 'payment' // Set to one-time payment mode
+          mode: 'payment'
         }
       })
 
