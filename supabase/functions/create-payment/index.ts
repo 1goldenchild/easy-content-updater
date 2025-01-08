@@ -13,9 +13,13 @@ serve(async (req) => {
   }
 
   try {
-    const { priceId, customerId, customerEmail, amount, mode = 'payment' } = await req.json()
-    console.log('Creating payment with:', { priceId, customerId, customerEmail, amount, mode })
+    const { priceId, customerId, customerEmail, amount, mode = 'payment', paymentMethod, name } = await req.json()
+    console.log('Creating payment with:', { priceId, customerId, customerEmail, amount, mode, paymentMethod, name })
     
+    if (!customerEmail && !customerId) {
+      throw new Error('Either customerId or customerEmail is required')
+    }
+
     const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') || '', {
       apiVersion: '2023-10-16',
     })
@@ -26,11 +30,39 @@ serve(async (req) => {
       customer = await stripe.customers.retrieve(customerId)
     } else if (customerEmail) {
       const customers = await stripe.customers.list({ email: customerEmail, limit: 1 })
-      customer = customers.data[0] || await stripe.customers.create({ email: customerEmail })
-    } else {
-      throw new Error('Either customerId or customerEmail is required')
+      customer = customers.data[0] || await stripe.customers.create({ 
+        email: customerEmail,
+        name: name
+      })
     }
 
+    if (!customer) {
+      throw new Error('Failed to create or retrieve customer')
+    }
+
+    // If payment method is provided, create a direct charge
+    if (paymentMethod) {
+      console.log('Creating direct charge with payment method:', paymentMethod)
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: Math.round(amount * 100),
+        currency: 'usd',
+        customer: customer.id,
+        payment_method: paymentMethod,
+        confirm: true,
+        automatic_payment_methods: {
+          enabled: true,
+          allow_redirects: 'never'
+        }
+      })
+
+      console.log('Payment intent created:', paymentIntent.id)
+      return new Response(
+        JSON.stringify({ success: true, paymentIntentId: paymentIntent.id }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+
+    // Otherwise create a checkout session
     console.log('Creating checkout session...')
     const session = await stripe.checkout.sessions.create({
       customer: customer.id,
@@ -46,19 +78,13 @@ serve(async (req) => {
     console.log('Checkout session created:', session.id)
     return new Response(
       JSON.stringify({ success: true, url: session.url }),
-      { 
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        status: 200 
-      }
+      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     )
   } catch (error) {
     console.error('Payment processing error:', error)
     return new Response(
       JSON.stringify({ success: false, error: error.message }),
-      { 
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        status: 400 
-      }
+      { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400 }
     )
   }
 })

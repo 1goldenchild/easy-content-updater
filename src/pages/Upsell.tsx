@@ -18,27 +18,15 @@ const Upsell = () => {
     const fetchCustomerData = async () => {
       try {
         console.log('Fetching customer data...')
-        const { data: { session } } = await supabase.auth.getSession()
-        
-        if (!session?.user?.email) {
-          console.log('No user session found')
-          return
-        }
-
-        const { data, error: dbError } = await supabase
+        const { data: customers } = await supabase
           .from('customers')
           .select('*')
-          .eq('email', session.user.email)
-          .single()
-
-        if (dbError) {
-          console.error('Error fetching customer:', dbError)
-          return
-        }
-
-        if (data) {
-          console.log('Customer data fetched:', data)
-          setCustomerData(data)
+          .order('created_at', { ascending: false })
+          .limit(1)
+        
+        if (customers && customers.length > 0) {
+          console.log('Customer data fetched:', customers[0])
+          setCustomerData(customers[0])
         }
       } catch (err) {
         console.error('Error in fetchCustomerData:', err)
