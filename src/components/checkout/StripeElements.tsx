@@ -30,21 +30,29 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
 
     try {
       console.log('Creating payment method...')
-      const { error, paymentMethod } = await stripe.createPaymentMethod({
+      const { error: createError, paymentMethod } = await stripe.createPaymentMethod({
         type: 'card',
         card: cardElement,
       })
 
-      if (error) {
-        console.error('Error creating payment method:', error)
-        toast.error(error.message || "Payment failed. Please try again.")
+      if (createError) {
+        console.error('Error creating payment method:', createError)
+        toast.error(createError.message || "Failed to process card. Please try again.")
         return
       }
 
-      if (paymentMethod) {
-        console.log('Payment method created successfully:', paymentMethod.id)
-        await onSubmit(e, paymentMethod.id)
+      if (!paymentMethod) {
+        console.error('No payment method created')
+        toast.error("Failed to process card. Please try again.")
+        return
       }
+
+      console.log('Payment method created successfully:', paymentMethod.id)
+      await onSubmit(e, paymentMethod.id)
+      
+      // Clear the card input on success
+      cardElement.clear()
+      
     } catch (error) {
       console.error('Unexpected error during payment:', error)
       toast.error("An unexpected error occurred. Please try again.")
@@ -73,7 +81,7 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
         </div>
         <Button
           type="submit"
-          disabled={isProcessing}
+          disabled={isProcessing || !stripe}
           className="w-full bg-purple-500 hover:bg-purple-600 text-white py-6"
         >
           {isProcessing ? 'Processing...' : 'Submit Payment'}

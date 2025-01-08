@@ -29,9 +29,22 @@ serve(async (req) => {
       customer = await stripe.customers.create({
         email: email,
         name: name,
-        payment_method: paymentMethod,
       })
     }
+
+    // Attach the payment method to the customer
+    console.log('Attaching payment method to customer...')
+    await stripe.paymentMethods.attach(paymentMethod, {
+      customer: customer.id,
+    })
+
+    // Set as default payment method
+    console.log('Setting as default payment method...')
+    await stripe.customers.update(customer.id, {
+      invoice_settings: {
+        default_payment_method: paymentMethod,
+      },
+    })
 
     console.log('Creating payment intent...')
     const paymentIntent = await stripe.paymentIntents.create({
@@ -39,6 +52,7 @@ serve(async (req) => {
       currency: 'usd',
       customer: customer.id,
       payment_method: paymentMethod,
+      off_session: false,
       confirm: true,
       metadata: {
         priceId: priceId
