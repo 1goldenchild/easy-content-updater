@@ -30,17 +30,6 @@ serve(async (req) => {
         email: email,
         name: name,
         payment_method: paymentMethod,
-        invoice_settings: {
-          default_payment_method: paymentMethod,
-        },
-      })
-    } else {
-      console.log('Updating existing customer payment method...')
-      await stripe.customers.update(customer.id, {
-        payment_method: paymentMethod,
-        invoice_settings: {
-          default_payment_method: paymentMethod,
-        },
       })
     }
 
