@@ -12,45 +12,55 @@ serve(async (req) => {
   }
 
   try {
-    const { paymentMethod, amount, email, name, packageId, isVip } = await req.json()
+    const { paymentMethod, amount, email, name } = await req.json()
 
-    console.log('Initializing Stripe with secret key...')
+    console.log('Creating payment with:', { amount, email, name })
+    
     const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') || '', {
       apiVersion: '2023-10-16',
     })
 
-    console.log('Creating payment intent for:', { email, amount, packageId })
+    // Create a customer
+    const customer = await stripe.customers.create({
+      email,
+      name,
+      payment_method: paymentMethod,
+    })
 
+    console.log('Customer created:', customer.id)
+
+    // Create a payment intent
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Math.round(amount * 100), // Convert to cents
       currency: 'usd',
+      customer: customer.id,
       payment_method: paymentMethod,
-      confirmation_method: 'manual',
+      off_session: true,
       confirm: true,
-      receipt_email: email,
-      metadata: {
-        customerName: name,
-        package: packageId,
-        isVip: isVip ? 'yes' : 'no'
-      }
     })
 
     console.log('Payment intent created:', paymentIntent.id)
 
     return new Response(
-      JSON.stringify({ clientSecret: paymentIntent.client_secret }),
+      JSON.stringify({ 
+        success: true,
+        paymentIntent: paymentIntent.id 
+      }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         status: 200,
       }
     )
   } catch (error) {
-    console.error('Error processing payment:', error)
+    console.error('Payment processing error:', error)
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ 
+        success: false,
+        error: error.message 
+      }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        status: 500,
+        status: 400,
       }
     )
   }

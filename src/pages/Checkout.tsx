@@ -11,7 +11,6 @@ import VIPOption from "@/components/checkout/VIPOption"
 import { packages } from "@/components/checkout/PackageSelection"
 import { supabase } from "@/integrations/supabase/client"
 
-// Initialize Stripe with your publishable key
 console.log('Initializing Stripe...')
 const stripePromise = loadStripe('pk_test_51QepBxCibdAmag3r0tq7dMFmpymVQanEUGj3OMBjM3MQM4uwOhxbEdnfMfKTzMY5D6chc8SBsnT8skVnA5368BlM00HZSqQPHx')
   .then(stripe => {
@@ -70,15 +69,17 @@ const Checkout = () => {
           paymentMethod,
           amount: total,
           email: formData.email,
-          name: `${formData.firstName} ${formData.lastName}`,
-          packageId: selectedPkg.id,
-          isVip: formData.isVip
+          name: `${formData.firstName} ${formData.lastName}`
         }
       })
 
       if (error) {
         console.error('Payment processing error:', error)
         throw error
+      }
+
+      if (!data.success) {
+        throw new Error(data.error || "Payment failed")
       }
 
       console.log('Payment successful:', data)
