@@ -17,20 +17,13 @@ const UpsellContent = () => {
 
   console.log('Current step:', currentStep)
   console.log('Current product:', currentProduct)
+  console.log('Current pathname:', location.pathname)
 
   // If we're on the base /upsell route, redirect to /upsell/1
   if (location.pathname === '/upsell') {
     console.log('Redirecting to /upsell/1')
     return <Navigate to="/upsell/1" replace />
   }
-
-  useEffect(() => {
-    if (!currentProduct) {
-      console.log('No product found for step:', currentStep)
-      toast.error("Product not found")
-      navigate('/success')
-    }
-  }, [currentStep, currentProduct, navigate])
 
   useEffect(() => {
     const fetchCustomerData = async () => {
@@ -113,6 +106,8 @@ const UpsellContent = () => {
   }
 
   if (!currentProduct) {
+    console.log('No product found, redirecting to success')
+    navigate('/success')
     return null
   }
 
