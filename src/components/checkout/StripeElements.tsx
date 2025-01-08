@@ -1,6 +1,8 @@
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
+import { useState } from "react"
+import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
+import { useNavigate } from "react-router-dom"
 
 interface StripeElementsProps {
   onSubmit: (e: React.FormEvent, paymentMethod: string) => Promise<void>
@@ -10,23 +12,26 @@ interface StripeElementsProps {
 const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
   const stripe = useStripe()
   const elements = useElements()
+  const navigate = useNavigate()
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Form submitted, starting payment process...')
-    
+
     if (!stripe || !elements) {
-      console.error('Stripe not initialized:', { stripe, elements })
-      toast.error("Payment system not initialized")
+      console.error('Stripe.js has not loaded')
+      toast.error("Payment system not ready. Please try again.")
       return
     }
 
     const cardElement = elements.getElement(CardElement)
     if (!cardElement) {
       console.error('Card element not found')
-      toast.error("Card element not found")
+      toast.error("Payment form not ready. Please try again.")
       return
     }
+
+    setIsSubmitting(true)
 
     try {
       console.log('Creating payment method...')
@@ -53,38 +58,45 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
       // Clear the card input on success
       cardElement.clear()
       
+      // Navigate to the first upsell page after successful payment
+      console.log('Payment successful, navigating to first upsell...')
+      navigate('/upsell/1')
+      
     } catch (error) {
       console.error('Unexpected error during payment:', error)
       toast.error("An unexpected error occurred. Please try again.")
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2 className="text-lg font-semibold mb-4 text-gray-200">PAYMENT INFORMATION</h2>
+    <form onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-4">
-        <div className="bg-[#2A2F3C] p-4 rounded-lg border border-gray-700">
+        <div className="rounded-md border p-4">
           <CardElement
             options={{
               style: {
                 base: {
                   fontSize: '16px',
-                  color: '#ffffff',
+                  color: '#424770',
                   '::placeholder': {
                     color: '#aab7c4',
                   },
                 },
+                invalid: {
+                  color: '#9e2146',
+                },
               },
-              hidePostalCode: true,
             }}
           />
         </div>
         <Button
           type="submit"
-          disabled={isProcessing || !stripe}
+          disabled={isProcessing || !stripe || isSubmitting}
           className="w-full bg-purple-500 hover:bg-purple-600 text-white py-6"
         >
-          {isProcessing ? 'Processing...' : 'Submit Payment'}
+          {isProcessing || isSubmitting ? 'Processing...' : 'Submit Payment'}
         </Button>
       </div>
     </form>
