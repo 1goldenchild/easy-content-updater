@@ -17,20 +17,20 @@ serve(async (req) => {
   }
 
   try {
-    const { amount, email, name } = await req.json()
+    const { amount } = await req.json()
+    console.log("Creating payment intent for amount:", amount)
 
     // Create a PaymentIntent with the order amount and currency
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
       currency: 'usd',
-      payment_method_types: ['card'],
-      receipt_email: email,
-      metadata: {
-        customerName: name
-      }
+      automatic_payment_methods: {
+        enabled: true,
+      },
     })
 
-    // Send publishable data to client
+    console.log("Payment intent created:", paymentIntent.id)
+
     const response = {
       clientSecret: paymentIntent.client_secret,
     }
