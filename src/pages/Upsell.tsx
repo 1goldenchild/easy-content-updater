@@ -6,7 +6,7 @@ import { supabase } from "@/integrations/supabase/client"
 
 const upsellProducts = [
   {
-    id: 2,
+    id: 1, // Changed from 2 to 1 to match array index
     name: "Money Numerology Secrets eBook (2023 Edition)",
     description: "Unlock the ancient secrets of wealth attraction through the power of numerology. This comprehensive guide reveals how numbers influence your financial destiny.",
     price: 37.00,
