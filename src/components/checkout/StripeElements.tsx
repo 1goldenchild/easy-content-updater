@@ -1,5 +1,6 @@
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import { Button } from "@/components/ui/button"
+import { toast } from "sonner"
 
 interface StripeElementsProps {
   onSubmit: (e: React.FormEvent, paymentMethod: string) => Promise<void>
@@ -12,55 +13,56 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!stripe || !elements) return
-
-    const cardElement = elements.getElement(CardElement)
-    if (!cardElement) return
-
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
-      card: cardElement,
-    })
-
-    if (error) {
-      console.error('Error creating payment method:', error)
+    if (!stripe || !elements) {
+      toast.error("Stripe has not been properly initialized")
       return
     }
 
-    await onSubmit(e, paymentMethod.id)
+    const cardElement = elements.getElement(CardElement)
+    if (!cardElement) {
+      toast.error("Card element not found")
+      return
+    }
+
+    try {
+      const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: cardElement,
+      })
+
+      if (error) {
+        console.error('Error creating payment method:', error)
+        toast.error(error.message || "Payment failed. Please try again.")
+        return
+      }
+
+      if (paymentMethod) {
+        console.log('Payment method created successfully:', paymentMethod.id)
+        await onSubmit(e, paymentMethod.id)
+      }
+    } catch (error) {
+      console.error('Unexpected error:', error)
+      toast.error("An unexpected error occurred. Please try again.")
+    }
   }
 
   return (
     <div>
       <h2 className="text-lg font-semibold mb-4 text-gray-200">PAYMENT INFORMATION</h2>
       <div className="space-y-4">
-        <div className="stripe-element-container">
+        <div className="bg-[#2A2F3C] p-4 rounded-lg border border-gray-700">
           <CardElement
             options={{
               style: {
                 base: {
                   fontSize: '16px',
                   color: '#ffffff',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
                   '::placeholder': {
-                    color: 'rgba(255, 255, 255, 0.5)',
+                    color: '#aab7c4',
                   },
-                  iconColor: '#ffffff',
-                },
-                invalid: {
-                  color: '#fa755a',
-                  iconColor: '#fa755a',
                 },
               },
               hidePostalCode: true,
-              classes: {
-                base: 'stripe-element',
-                complete: 'stripe-element--complete',
-                empty: 'stripe-element--empty',
-                focus: 'stripe-element--focus',
-                invalid: 'stripe-element--invalid',
-                webkitAutofill: 'stripe-element--webkit-autofill'
-              },
             }}
           />
         </div>

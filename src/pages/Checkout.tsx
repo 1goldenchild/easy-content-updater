@@ -11,8 +11,8 @@ import VIPOption from "@/components/checkout/VIPOption"
 import { packages } from "@/components/checkout/PackageSelection"
 import { supabase } from "@/integrations/supabase/client"
 
-// Initialize Stripe with the publishable key
-const stripePromise = loadStripe('pk_live_51PCkQ1Cg2w6KJiVS2XXOvH4VzXsB4gJqJ2uHxRUPFtw7CEuwoOu0RtE70OXxEpUWZCgN33doSM1CiuZPFfHABcop00rx4or186')
+// Initialize Stripe with the test publishable key for development
+const stripePromise = loadStripe('pk_test_51PCkQ1Cg2w6KJiVSPxYxRXHMZlrAVxqWk5TAFpQGHyLXQXOJBEeQWEhvDVHBXXVrg4WbF2V6tWRHXkhkYsrQEHVB00vFRFNTZf')
 
 console.log('Stripe initialization:', stripePromise ? 'Successful' : 'Failed')
 
