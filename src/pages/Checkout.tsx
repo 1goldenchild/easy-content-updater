@@ -2,7 +2,13 @@ import { useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
-import { ArrowRight, ArrowLeft } from "lucide-react"
+import { ArrowRight } from "lucide-react"
+import { loadStripe } from "@stripe/stripe-js"
+import { supabase } from "@/integrations/supabase/client"
+import { toast } from "sonner"
+
+// Initialize Stripe
+const stripePromise = loadStripe("pk_test_your_publishable_key") // Replace with your Stripe publishable key
 
 const CheckoutStep1 = () => {
   const navigate = useNavigate()
@@ -75,6 +81,7 @@ const CheckoutStep1 = () => {
 
 const CheckoutStep2 = () => {
   const navigate = useNavigate()
+  const [isProcessing, setIsProcessing] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -83,10 +90,39 @@ const CheckoutStep2 = () => {
     cvc: ""
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle payment processing here
-    navigate("/checkout/success")
+    setIsProcessing(true)
+
+    try {
+      // Call our Supabase Edge Function to create payment intent
+      const { data, error } = await supabase.functions.invoke('create-payment-intent', {
+        body: {
+          amount: 3700, // $37.00
+          email: formData.email,
+          name: formData.name
+        }
+      })
+
+      if (error) throw error
+
+      // Handle successful payment
+      toast.success("Payment successful!")
+      navigate("/checkout/success")
+    } catch (error) {
+      console.error('Payment error:', error)
+      toast.error("Payment failed. Please try again.")
+    } finally {
+      setIsProcessing(false)
+    }
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
   }
 
   return (
@@ -101,39 +137,36 @@ const CheckoutStep2 = () => {
             Complete Your Order
           </h1>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6 max-w-md mx-auto">
             <div className="space-y-4">
-              <input
-                type="text"
-                placeholder="Full Name"
-                className="w-full p-3 rounded bg-gray-800/50 border border-gray-700"
-                required
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                className="w-full p-3 rounded bg-gray-800/50 border border-gray-700"
-                required
-              />
-              <input
-                type="text"
-                placeholder="Card Number"
-                className="w-full p-3 rounded bg-gray-800/50 border border-gray-700"
-                required
-              />
-              <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium mb-1">Full Name</label>
                 <input
+                  id="name"
+                  name="name"
                   type="text"
-                  placeholder="MM/YY"
+                  value={formData.name}
+                  onChange={handleInputChange}
                   className="w-full p-3 rounded bg-gray-800/50 border border-gray-700"
                   required
                 />
+              </div>
+              
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
                 <input
-                  type="text"
-                  placeholder="CVC"
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   className="w-full p-3 rounded bg-gray-800/50 border border-gray-700"
                   required
                 />
+              </div>
+
+              <div id="card-element" className="p-3 rounded bg-gray-800/50 border border-gray-700">
+                {/* Stripe Elements will be mounted here */}
               </div>
             </div>
 
@@ -141,9 +174,16 @@ const CheckoutStep2 = () => {
               type="submit"
               size="lg"
               className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4"
+              disabled={isProcessing}
             >
-              Complete Purchase
-              <ArrowRight className="ml-2" />
+              {isProcessing ? (
+                "Processing..."
+              ) : (
+                <>
+                  Complete Purchase
+                  <ArrowRight className="ml-2" />
+                </>
+              )}
             </Button>
           </form>
         </motion.div>
