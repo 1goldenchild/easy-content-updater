@@ -9,13 +9,15 @@ import {
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 import { supabase } from "@/integrations/supabase/client"
+import { useNavigate } from "react-router-dom"
 
-const stripePromise = loadStripe("pk_test_51OxLkqFXwCGjXVFPZGBVxPBGwxPBxvqGQX8Z9Z9Z9Z9Z9Z9Z9Z9Z9")
+const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY || "")
 
 const CheckoutForm = () => {
   const stripe = useStripe()
   const elements = useElements()
   const [isProcessing, setIsProcessing] = useState(false)
+  const navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
