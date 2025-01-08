@@ -9,6 +9,7 @@ const Upsell = () => {
   const navigate = useNavigate()
   const [isProcessing, setIsProcessing] = useState(false)
   const [customerData, setCustomerData] = useState<any>(null)
+  const [isLoading, setIsLoading] = useState(true)
   
   const currentProduct = upsellProducts[0]
   
@@ -17,11 +18,14 @@ const Upsell = () => {
   useEffect(() => {
     const fetchCustomerData = async () => {
       try {
+        setIsLoading(true)
         console.log('Fetching customer data...')
         const { data: { session } } = await supabase.auth.getSession()
         
         if (!session?.user?.email) {
           console.log('No user session found')
+          toast.error("User session not found")
+          navigate('/checkout')
           return
         }
 
@@ -33,28 +37,43 @@ const Upsell = () => {
 
         if (dbError) {
           console.error('Error fetching customer:', dbError)
+          toast.error("Failed to fetch customer data")
           return
         }
 
         if (data) {
           console.log('Customer data fetched:', data)
           setCustomerData(data)
+        } else {
+          console.error('No customer data found')
+          toast.error("Customer data not found")
+          navigate('/checkout')
         }
       } catch (err) {
         console.error('Error in fetchCustomerData:', err)
+        toast.error("Failed to load customer data")
+      } finally {
+        setIsLoading(false)
       }
     }
 
     fetchCustomerData()
-  }, [])
+  }, [navigate])
 
   const handlePurchase = async () => {
+    if (isLoading) {
+      toast.error("Please wait while we load your data")
+      return
+    }
+
+    if (!customerData?.email) {
+      console.error('No customer email found')
+      toast.error("Customer data is missing")
+      return
+    }
+
     setIsProcessing(true)
     try {
-      if (!customerData?.email) {
-        throw new Error("Customer email is required")
-      }
-
       console.log('Processing upsell purchase with customer data:', {
         email: customerData.email,
         stripeCustomerId: customerData?.stripe_customer_id
@@ -100,6 +119,10 @@ const Upsell = () => {
     console.log('No product found, redirecting to upsell2')
     navigate('/upsell2')
     return null
+  }
+
+  if (isLoading) {
+    return <div className="container max-w-4xl mx-auto px-4 py-8">Loading...</div>
   }
 
   return (
