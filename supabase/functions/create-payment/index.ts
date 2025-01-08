@@ -12,14 +12,15 @@ serve(async (req) => {
   }
 
   try {
-    const { paymentMethod, amount, email, name, priceId } = await req.json()
-    console.log('Creating payment with:', { amount, email, name, priceId })
+    const { paymentMethod, amount, email, name } = await req.json()
+    console.log('Creating payment with:', { amount, email, name })
     
+    // Initialize Stripe with the secret key
     const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') || '', {
       apiVersion: '2023-10-16',
     })
 
-    // Create or retrieve customer
+    // Get or create customer
     console.log('Looking up customer...')
     const customers = await stripe.customers.list({ email: email, limit: 1 })
     let customer = customers.data[0]
@@ -55,7 +56,8 @@ serve(async (req) => {
       customer: customer.id,
       payment: paymentIntent.id,
       line_items: [{
-        price: priceId,
+        description: "Money Manifestation Secrets eBook",
+        amount: Math.round(amount * 100),
         quantity: 1
       }]
     })
