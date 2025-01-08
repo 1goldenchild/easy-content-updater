@@ -3,65 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upsell Offer</title>
+    <title>Special One-Time Offer</title>
     <style>
-        /* Reset and base styles */
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(to bottom right, #1A1F2C, #221F26);
-            color: #fff;
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #121212;
+            color: white;
             min-height: 100vh;
-            padding: 20px;
+            padding: 3rem 1rem;
         }
 
-        /* Container styles */
-        .upsell-container {
-            background-color: #1A1F2C;
-            padding: 32px;
-            border-radius: 8px;
-            max-width: 1000px;
+        .container {
+            max-width: 56rem;
             margin: 0 auto;
+            padding: 0 1rem;
         }
 
-        /* Header styles */
+        .upsell-card {
+            background-color: #1A1F2C;
+            padding: 2rem;
+            border-radius: 0.5rem;
+        }
+
         .header {
             text-align: center;
-            margin-bottom: 32px;
+            margin-bottom: 2rem;
         }
 
-        .header h1 {
-            font-size: 1.875rem;
+        .title {
+            font-size: 3rem;
             font-weight: bold;
-            margin-bottom: 16px;
-            background: linear-gradient(to right, #A78BFA, #EC4899, #F97316);
+            letter-spacing: -0.025em;
+            background: linear-gradient(to right, white, #8B5CF6, white);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: shine 8s linear infinite;
+            margin-bottom: 1rem;
         }
 
-        .header p {
-            color: #94A3B8;
+        .subtitle {
+            color: white;
+            font-weight: 600;
+            font-size: 1.125rem;
         }
 
-        /* Product section styles */
         .product-section {
             background-color: #2A2F3C;
-            padding: 24px;
-            border-radius: 8px;
-            margin-bottom: 32px;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
         }
 
         .product-content {
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 1.5rem;
         }
 
         @media (min-width: 768px) {
@@ -70,196 +68,153 @@
             }
         }
 
-        /* Image container styles */
-        .image-container {
+        .product-image-container {
             position: relative;
             width: 100%;
         }
 
         @media (min-width: 768px) {
-            .image-container {
-                width: 33.333%;
+            .product-image-container {
+                width: 33.333333%;
             }
         }
 
         .product-image {
             width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
-        .offer-badge {
+        .special-offer-badge {
             position: absolute;
-            top: -8px;
-            right: -8px;
-            background-color: #9333EA;
+            top: -0.5rem;
+            right: -0.5rem;
+            background-color: #8B5CF6;
             color: white;
-            padding: 4px 12px;
+            padding: 0.25rem 0.75rem;
             border-radius: 9999px;
             font-size: 0.875rem;
             font-weight: 600;
         }
 
-        /* Product details styles */
         .product-details {
-            flex: 1;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .product-details {
+                width: 66.666667%;
+            }
         }
 
         .product-title {
             font-size: 1.5rem;
             font-weight: 600;
+            margin-bottom: 1rem;
             color: white;
-            margin-bottom: 16px;
         }
 
         .product-description {
-            color: #94A3B8;
-            margin-bottom: 16px;
+            color: white;
+            font-weight: 700;
+            margin-bottom: 1rem;
         }
 
-        /* Features list styles */
         .features-list {
             list-style: none;
-            space-y: 8px;
+            padding: 0;
+            margin: 0;
+            space-y: 0.5rem;
         }
 
         .feature-item {
             display: flex;
             align-items: center;
-            color: #94A3B8;
-            margin-bottom: 8px;
+            color: #D1D5DB;
+            margin-bottom: 0.5rem;
         }
 
         .feature-check {
             color: #A78BFA;
-            margin-right: 8px;
+            margin-right: 0.5rem;
         }
 
-        /* Price section styles */
         .price-section {
-            margin-top: 24px;
+            margin-top: 1.5rem;
         }
 
         .price {
             font-size: 1.875rem;
-            font-weight: bold;
+            font-weight: 700;
             color: #A78BFA;
-            margin-bottom: 8px;
+            margin-bottom: 0.5rem;
         }
 
         .price-note {
-            color: #94A3B8;
+            color: #9CA3AF;
             font-size: 0.875rem;
-        }
-
-        /* Button styles */
-        .button-container {
-            margin-top: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .accept-button {
-            background: linear-gradient(to right, #9333EA, #EC4899);
-            color: white;
-            padding: 24px;
-            border: none;
-            border-radius: 6px;
-            font-size: 1.125rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-
-        .accept-button:hover {
-            opacity: 0.9;
-        }
-
-        .decline-button {
-            background: transparent;
-            color: white;
-            padding: 24px;
-            border: 1px solid #4B5563;
-            border-radius: 6px;
-            font-size: 1.125rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .decline-button:hover {
-            background-color: rgba(75, 85, 99, 0.2);
-        }
-
-        @keyframes shine {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
         }
     </style>
 </head>
 <body>
-    <div class="upsell-container">
-        <div class="header">
-            <h1>Special One-Time Offer!</h1>
-            <p>Enhance Your Numerology Reading with Advanced Money Manifestation Secrets</p>
-        </div>
+    <div class="container">
+        <div class="upsell-card">
+            <div class="header">
+                <h1 class="title">
+                    Special One-Time <span style="background: linear-gradient(to right, #8B5CF6, #D946EF); -webkit-background-clip: text; background-clip: text; color: transparent;">Offer!</span>
+                </h1>
+                <p class="subtitle">
+                    Enhance Your Numerology Reading with Advanced Money Manifestation Secrets
+                </p>
+            </div>
 
-        <div class="product-section">
-            <div class="product-content">
-                <div class="image-container">
-                    <img src="YOUR_IMAGE_URL_HERE" alt="Product Image" class="product-image">
-                    <div class="offer-badge">Special Offer</div>
-                </div>
-                <div class="product-details">
-                    <h2 class="product-title">Advanced Money Manifestation Guide</h2>
-                    <p class="product-description">Unlock the secrets of financial abundance through ancient numerology practices and modern manifestation techniques.</p>
-                    <ul class="features-list">
-                        <li class="feature-item">
-                            <span class="feature-check">✓</span>
-                            Detailed money manifestation rituals
-                        </li>
-                        <li class="feature-item">
-                            <span class="feature-check">✓</span>
-                            Personal wealth number analysis
-                        </li>
-                        <li class="feature-item">
-                            <span class="feature-check">✓</span>
-                            Abundance meditation techniques
-                        </li>
-                        <li class="feature-item">
-                            <span class="feature-check">✓</span>
-                            Financial success case studies
-                        </li>
-                    </ul>
-                    <div class="price-section">
-                        <div class="price">$37.00</div>
-                        <p class="price-note">One-time payment - Instant digital delivery</p>
+            <div class="product-section">
+                <div class="product-content">
+                    <div class="product-image-container">
+                        <img 
+                            src="/lovable-uploads/984813d9-700a-4057-a369-08ae4035507b.png" 
+                            alt="Get Rich Using Numerology eBook"
+                            class="product-image"
+                        >
+                        <div class="special-offer-badge">Special Offer</div>
+                    </div>
+                    <div class="product-details">
+                        <h2 class="product-title">Get Rich Using Numerology eBook (2023 Edition)</h2>
+                        <p class="product-description">Discover how the elites use numerology to amass extraordinary wealth.</p>
+                        <ul class="features-list">
+                            <li class="feature-item">
+                                <span class="feature-check">✓</span>
+                                Advanced Financial Numerology: Unlock powerful strategies for wealth creation through numerology.
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-check">✓</span>
+                                Billionaire Tactics Revealed: Discover the hidden techniques the ultra-wealthy use to attract fortune.
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-check">✓</span>
+                                Using Gematria in Your Business: Learn how to apply gematria to boost your financial success.
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-check">✓</span>
+                                Building the Right Team: Master the art of choosing the perfect team to fuel your success.
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-check">✓</span>
+                                Timing Your Success: Know the precise moments to execute projects and seize lucrative opportunities.
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-check">✓</span>
+                                Bonus: Numerology Logo Tip: Learn how to design a logo that aligns with financial abundance and attracts prosperity.
+                            </li>
+                        </ul>
+                        <div class="price-section">
+                            <div class="price">$28.00</div>
+                            <p class="price-note">One-click payment - Instant digital delivery</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="button-container">
-            <button class="accept-button" onclick="handleAccept()">
-                Yes! Add This To My Order For $37.00
-            </button>
-            <button class="decline-button" onclick="handleDecline()">
-                No thanks, I'll pass
-            </button>
-        </div>
     </div>
-
-    <script>
-        function handleAccept() {
-            // Add your acceptance logic here
-            console.log('Offer accepted');
-        }
-
-        function handleDecline() {
-            // Add your decline logic here
-            console.log('Offer declined');
-        }
-    </script>
 </body>
 </html>
