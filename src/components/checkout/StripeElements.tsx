@@ -45,7 +45,7 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
                   '::placeholder': {
                     color: 'rgba(255, 255, 255, 0.5)',
                   },
-                  padding: '10px 14px',
+                  iconColor: '#ffffff',
                 },
                 invalid: {
                   color: '#fa755a',
@@ -53,6 +53,14 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
                 },
               },
               hidePostalCode: true,
+              classes: {
+                base: 'stripe-element',
+                complete: 'stripe-element--complete',
+                empty: 'stripe-element--empty',
+                focus: 'stripe-element--focus',
+                invalid: 'stripe-element--invalid',
+                webkitAutofill: 'stripe-element--webkit-autofill'
+              },
             }}
           />
         </div>
