@@ -13,9 +13,8 @@ serve(async (req) => {
   }
 
   try {
-    console.log('Starting payment processing...')
-    const { priceId, email, name, amount } = await req.json()
-    console.log('Payment request details:', { priceId, email, amount })
+    const { priceId, email, name, amount, customerId } = await req.json()
+    console.log('Payment request received:', { priceId, email, amount, customerId })
 
     if (!priceId) {
       throw new Error('Price ID is required')
@@ -25,27 +24,32 @@ serve(async (req) => {
       apiVersion: '2023-10-16',
     })
 
-    // First, check if customer exists
-    console.log('Checking for existing customer with email:', email)
-    const existingCustomers = await stripe.customers.list({
-      email: email,
-      limit: 1
-    })
-
     let customer
-    if (existingCustomers.data.length > 0) {
-      customer = existingCustomers.data[0]
-      console.log('Found existing customer:', customer.id)
+    if (customerId) {
+      console.log('Using existing customer:', customerId)
+      customer = { id: customerId }
     } else {
-      // Create new customer
-      customer = await stripe.customers.create({
+      // First, check if customer exists
+      console.log('Checking for existing customer with email:', email)
+      const existingCustomers = await stripe.customers.list({
         email: email,
-        name: name
+        limit: 1
       })
-      console.log('Created new customer:', customer.id)
+
+      if (existingCustomers.data.length > 0) {
+        customer = existingCustomers.data[0]
+        console.log('Found existing customer:', customer.id)
+      } else {
+        // Create new customer
+        customer = await stripe.customers.create({
+          email: email,
+          name: name
+        })
+        console.log('Created new customer:', customer.id)
+      }
     }
 
-    // Create checkout session
+    // Create checkout session with detailed logging
     console.log('Creating checkout session with price ID:', priceId)
     const session = await stripe.checkout.sessions.create({
       customer: customer.id,
@@ -54,7 +58,7 @@ serve(async (req) => {
         quantity: 1,
       }],
       mode: 'payment',
-      success_url: `${req.headers.get('origin')}/upsell`,
+      success_url: `${req.headers.get('origin')}/upsell/1`,
       cancel_url: `${req.headers.get('origin')}/checkout`,
       metadata: {
         customerEmail: email,
@@ -65,7 +69,11 @@ serve(async (req) => {
     console.log('Checkout session created successfully:', session.id)
     
     return new Response(
-      JSON.stringify({ success: true, url: session.url }),
+      JSON.stringify({ 
+        success: true, 
+        url: session.url,
+        sessionId: session.id 
+      }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         status: 200 
@@ -74,7 +82,11 @@ serve(async (req) => {
   } catch (error) {
     console.error('Payment processing error:', error)
     return new Response(
-      JSON.stringify({ success: false, error: error.message }),
+      JSON.stringify({ 
+        success: false, 
+        error: error.message,
+        details: error.stack 
+      }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         status: 400 

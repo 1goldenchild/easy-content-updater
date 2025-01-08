@@ -46,20 +46,23 @@ const Upsell = () => {
     }
 
     fetchCustomerData()
-  }, [navigate])
+  }, [])
 
   const handlePurchase = async () => {
     setIsProcessing(true)
     try {
-      console.log('Processing upsell purchase:', currentProduct)
+      console.log('Processing upsell purchase:', {
+        product: currentProduct,
+        customerData
+      })
       
       const { data, error } = await supabase.functions.invoke('create-payment', {
         body: {
           priceId: currentProduct.priceId,
           customerId: customerData?.stripe_customer_id,
-          customerEmail: customerData?.email || '',
+          customerEmail: customerData?.email,
           amount: currentProduct.price,
-          mode: 'payment' // Set to one-time payment mode
+          mode: 'payment'
         }
       })
 
@@ -68,16 +71,20 @@ const Upsell = () => {
         throw error
       }
 
+      if (!data?.success) {
+        throw new Error(data?.error || 'Failed to create payment session')
+      }
+
       if (data?.url) {
         console.log('Redirecting to Stripe checkout:', data.url)
         window.location.href = data.url
       } else {
-        console.log('No payment URL received, navigating to upsell2')
-        navigate('/upsell2')
+        console.error('No payment URL received')
+        throw new Error('No payment URL received')
       }
     } catch (error) {
       console.error("Error creating checkout session:", error)
-      toast.error("Failed to process purchase")
+      toast.error("Failed to process purchase. Please try again.")
       navigate('/upsell2')
     } finally {
       setIsProcessing(false)
