@@ -70,17 +70,23 @@ const Upsell = () => {
 
       if (data.url) {
         window.location.href = data.url
+      } else {
+        // If no URL is returned, navigate to the second upsell
+        console.log('No payment URL, navigating to second upsell')
+        navigate('/upsell2')
       }
     } catch (error) {
       console.error("Error creating checkout session:", error)
       toast.error("Failed to process purchase")
+      // Even if purchase fails, move to second upsell
+      navigate('/upsell2')
     } finally {
       setIsProcessing(false)
     }
   }
 
   const handleDecline = () => {
-    console.log('User declined upsell')
+    console.log('User declined first upsell, navigating to second upsell')
     navigate('/upsell2')
   }
 
