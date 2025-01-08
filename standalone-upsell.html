@@ -221,16 +221,24 @@
             padding: 0 0.25rem;
         }
 
-        .original-price::before {
+        .original-price::before,
+        .original-price::after {
             content: '';
             position: absolute;
-            width: 110%;
+            width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, transparent, #ea384c, transparent);
+            background: #ea384c;
             top: 50%;
-            left: -5%;
-            transform: rotate(-8deg);
+            left: 0;
             box-shadow: 0 0 8px rgba(234, 56, 76, 0.4);
+        }
+
+        .original-price::before {
+            transform: rotate(45deg);
+        }
+
+        .original-price::after {
+            transform: rotate(-45deg);
         }
 
         .price {
