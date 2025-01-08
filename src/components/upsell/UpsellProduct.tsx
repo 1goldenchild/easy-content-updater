@@ -32,7 +32,7 @@ const UpsellProduct = ({
             Offer!
           </span>
         </h1>
-        <p className="text-gray-400">
+        <p className="text-gray-400 font-semibold text-lg">
           Enhance Your Numerology Reading with Advanced Money Manifestation Secrets
         </p>
       </div>
@@ -57,7 +57,7 @@ const UpsellProduct = ({
           </div>
           <div className="w-full md:w-2/3">
             <h2 className="text-2xl font-semibold mb-4 text-white">{name}</h2>
-            <p className="text-gray-300 mb-4">{description}</p>
+            <p className="text-gray-300 font-medium mb-4">{description}</p>
             <ul className="space-y-2">
               {features.map((feature, index) => (
                 <li key={index} className="flex items-center text-gray-300">
@@ -82,7 +82,7 @@ const UpsellProduct = ({
         <Button 
           onClick={onAccept}
           disabled={isProcessing}
-          className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-lg py-6"
+          className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-lg py-6 font-bold"
         >
           {isProcessing ? "Processing..." : `Yes! Add This To My Order For $${price.toFixed(2)}`}
         </Button>
@@ -90,7 +90,7 @@ const UpsellProduct = ({
         <Button 
           onClick={onDecline}
           variant="outline"
-          className="w-full text-lg py-6"
+          className="w-full text-lg py-6 font-bold"
         >
           No thanks, I'll pass
         </Button>
