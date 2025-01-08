@@ -12,6 +12,6 @@ export const upsellProducts = [
       "Discover the best dates for financial decisions",
       "Bonus: Money affirmations aligned with your numbers"
     ],
-    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=2936&auto=format&fit=crop"
+    image: "/lovable-uploads/984813d9-700a-4057-a369-08ae4035507b.png"
   }
 ]

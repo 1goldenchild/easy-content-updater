@@ -20,6 +20,7 @@ const UpsellContent = () => {
     step: currentStep,
     pathname: location.pathname,
     productFound: !!currentProduct,
+    productDetails: currentProduct,
     isProcessing
   })
 
@@ -153,6 +154,7 @@ const UpsellContent = () => {
     return null
   }
 
+  console.log('Rendering UpsellProduct with:', currentProduct)
   return (
     <div className="container max-w-4xl mx-auto px-4 py-8">
       <UpsellProduct
