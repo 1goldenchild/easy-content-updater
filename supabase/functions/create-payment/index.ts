@@ -24,7 +24,6 @@ serve(async (req) => {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Math.round(amount * 100), // Convert to cents
       currency: 'usd',
-      setup_future_usage: isOneClick ? 'off_session' : undefined,
       automatic_payment_methods: {
         enabled: true,
         allow_redirects: 'never'
