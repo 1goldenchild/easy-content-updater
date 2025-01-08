@@ -26,14 +26,14 @@ const features = [
 ]
 
 const Upsell = () => {
-  console.log('Rendering upsell page with new design')
+  console.log('Rendering upsell page with updated title and image')
   
   return (
     <UpsellContainer>
       <UpsellHeader />
       <ProductSection>
         <ProductImage 
-          src="https://statics.myclickfunnels.com/workspace/eodNKN/image/3343725/file/029c13c846548bb273ac940dd605d3a7.jpeg"
+          src="https://statics.myclickfunnels.com/workspace/eodNKN/image/3343726/file/fa6d35c21fe41164af7da6ca60ba6b7c.jpg"
           alt="Get Rich Using Numerology eBook"
         />
         <ProductDetails
