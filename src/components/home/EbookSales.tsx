@@ -1,10 +1,11 @@
 import { motion } from "framer-motion"
 import { ArrowRight, CheckCircle2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { supabase } from "@/integrations/supabase/client"
+import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
 
 const EbookSales = () => {
+  const navigate = useNavigate()
   const benefits = [
     "Discover Your Wealth Number for 2024",
     "Learn Money Manifestation Techniques",
@@ -14,23 +15,8 @@ const EbookSales = () => {
     "Compatibility with Business Partners"
   ]
 
-  const handleCheckout = async () => {
-    try {
-      const { data, error } = await supabase.functions.invoke('create-checkout', {
-        body: { priceId: 'price_1QenCoCg2w6KJiVSH7uDgmYQ' }
-      })
-
-      if (error) throw error
-      
-      if (data?.url) {
-        window.location.href = data.url
-      } else {
-        throw new Error('No checkout URL received')
-      }
-    } catch (error) {
-      console.error('Checkout error:', error)
-      toast.error('Unable to start checkout. Please try again.')
-    }
+  const handleCheckout = () => {
+    navigate("/checkout/step1")
   }
 
   return (
