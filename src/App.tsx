@@ -1,22 +1,36 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import Navbar from "@/components/layout/Navbar"
+import Footer from "@/components/layout/Footer"
 import Index from "@/pages/Index"
+import Analysis from "@/pages/Analysis"
+import Blog from "@/pages/Blog"
+import Sales from "@/pages/Sales"
 import Checkout from "@/pages/Checkout"
+import CollectInfo from "@/pages/CollectInfo"
+import EmailPreview from "@/pages/EmailPreview"
+import Portal from "@/pages/Portal"
 import Upsell from "@/pages/Upsell"
-import ContactInfo from "@/components/checkout/ContactInfo"
-import PackageSelection from "@/components/checkout/PackageSelection"
-import BillingInfo from "@/components/checkout/BillingInfo"
-import StripeElements from "@/components/checkout/StripeElements"
-import VIPOption from "@/components/checkout/VIPOption"
 
 const App = () => {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/upsell/1" element={<Upsell />} />
-        <Route path="/upsell/2" element={<Upsell />} />
-      </Routes>
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-1">
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/analysis" element={<Analysis />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/sales" element={<Sales />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/collect-info" element={<CollectInfo />} />
+            <Route path="/email-preview" element={<EmailPreview />} />
+            <Route path="/portal" element={<Portal />} />
+            <Route path="/upsell" element={<Upsell />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </Router>
   )
 }
