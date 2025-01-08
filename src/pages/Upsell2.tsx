@@ -117,3 +117,5 @@ const Upsell2 = () => {
     </div>
   )
 }
+
+export default Upsell2
