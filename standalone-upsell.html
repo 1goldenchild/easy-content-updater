@@ -42,15 +42,40 @@
             margin-right: auto;
         }
 
+        @keyframes shine {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
         .title {
             font-size: clamp(2rem, 5vw, 3rem);
             font-weight: bold;
             letter-spacing: -0.025em;
             background: linear-gradient(to right, white, #8B5CF6, white);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             margin-bottom: 1rem;
+            animation: shine 8s linear infinite;
+            position: relative;
+        }
+
+        .title span {
+            background: linear-gradient(to right, #8B5CF6, #D946EF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .title::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(45deg, rgba(139, 92, 246, 0.1), rgba(217, 70, 239, 0.2));
+            border-radius: inherit;
+            z-index: -1;
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
 
         .subtitle {
@@ -73,7 +98,6 @@
             overflow: hidden;
         }
 
-        /* Add green glow effect */
         .product-section::before {
             content: '';
             position: absolute;
@@ -85,12 +109,8 @@
         }
 
         @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
         .product-content {
@@ -234,7 +254,7 @@
         <div class="upsell-card">
             <div class="header">
                 <h1 class="title">
-                    Special One-Time <span style="background: linear-gradient(to right, #8B5CF6, #D946EF); -webkit-background-clip: text; background-clip: text; color: transparent;">Offer!</span>
+                    Special One-Time <span>Offer!</span>
                 </h1>
                 <p class="subtitle">
                     Enhance Your Numerology Reading with Advanced Money Manifestation Secrets
