@@ -11,7 +11,7 @@ import { toast } from "sonner"
 import { supabase } from "@/integrations/supabase/client"
 import { useNavigate } from "react-router-dom"
 
-const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY || "")
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || "")
 
 const CheckoutForm = () => {
   const stripe = useStripe()
