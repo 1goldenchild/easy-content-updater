@@ -7,18 +7,18 @@ import { supabase } from "@/integrations/supabase/client"
 const upsellProducts = [
   {
     id: 2,
-    name: "Get Rich Using Numerology eBook (2023 Edition)",
-    description: "Learn how to attract wealth using ancient numerology secrets",
+    name: "Money Numerology Secrets eBook (2023 Edition)",
+    description: "Unlock the ancient secrets of wealth attraction through the power of numerology. This comprehensive guide reveals how numbers influence your financial destiny.",
     price: 37.00,
     priceId: "price_1QepknCibdAmag3rYOiVW2bl",
     features: [
-      "Discover your personal wealth number",
-      "Learn the secret money manifestation rituals",
-      "Understand which numbers attract prosperity",
-      "Master the art of financial numerology",
-      "Daily wealth affirmations based on your numbers"
+      "Calculate your personal wealth number",
+      "Daily money manifestation rituals based on numerology",
+      "Learn which numbers attract prosperity in your life",
+      "Discover the best dates for financial decisions",
+      "Bonus: Money affirmations aligned with your numbers"
     ],
-    image: "/placeholder.svg"
+    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=2936&auto=format&fit=crop"
   }
 ]
 
@@ -133,10 +133,10 @@ const UpsellContent = () => {
       <div className="bg-[#1A1F2C] p-8 rounded-lg">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-500 to-orange-500 text-transparent bg-clip-text animate-shine">
-            Wait! Special One-Time Offer!
+            Special One-Time Offer!
           </h1>
           <p className="text-gray-400">
-            Unlock the secrets of financial abundance with numerology
+            Enhance Your Numerology Reading with Advanced Money Manifestation Secrets
           </p>
         </div>
 
@@ -147,9 +147,9 @@ const UpsellContent = () => {
                 <img 
                   src={currentProduct.image} 
                   alt={currentProduct.name}
-                  className="w-full rounded-lg"
+                  className="w-full rounded-lg shadow-lg"
                 />
-                <div className="absolute -top-2 -right-2 bg-purple-600 text-white px-3 py-1 rounded-full text-sm">
+                <div className="absolute -top-2 -right-2 bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
                   Special Offer
                 </div>
               </div>
