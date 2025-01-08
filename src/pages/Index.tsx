@@ -6,6 +6,7 @@ import SalesPitch from "@/components/home/SalesPitch"
 import ProgressIndicator from "@/components/numerology/ProgressIndicator"
 import Testimonials from "@/components/home/Testimonials"
 import BlogPreview from "@/components/home/BlogPreview"
+import EbookSales from "@/components/home/EbookSales"
 
 const Index = () => {
   return (
@@ -19,6 +20,9 @@ const Index = () => {
       </div>
       <div id="sales">
         <SalesPitch />
+      </div>
+      <div id="ebook-sales">
+        <EbookSales />
       </div>
       <div id="testimonials">
         <Testimonials />
