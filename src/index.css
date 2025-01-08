@@ -71,20 +71,20 @@
   }
 }
 
-/* Stripe Elements Custom Styling */
+.stripe-element-container {
+  background: #2A2F3C;
+  padding: 16px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .StripeElement {
   width: 100%;
-  padding: 16px;
-  background: #2A2F3C;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  outline: none;
-  transition: all 0.3s ease;
+  min-height: 20px;
 }
 
 .StripeElement--focus {
   border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
 .StripeElement--invalid {

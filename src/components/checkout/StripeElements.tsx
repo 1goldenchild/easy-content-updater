@@ -34,21 +34,15 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
     <div>
       <h2 className="text-lg font-semibold mb-4 text-gray-200">PAYMENT INFORMATION</h2>
       <div className="space-y-4">
-        <div className="bg-[#2A2F3C] p-4 rounded-lg border border-gray-700">
+        <div className="stripe-element-container">
           <CardElement
             options={{
               style: {
                 base: {
                   fontSize: '16px',
                   color: '#ffffff',
-                  fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
                   '::placeholder': {
                     color: '#aab7c4',
-                  },
-                  backgroundColor: 'transparent',
-                  letterSpacing: '0.025em',
-                  ':-webkit-autofill': {
-                    color: '#ffffff',
                   },
                 },
                 invalid: {
