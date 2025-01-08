@@ -51,34 +51,34 @@ const Upsell = () => {
     fetchCustomerData()
   }, [navigate])
 
-  const handlePurchase = async (priceId: string) => {
+  const handlePurchase = async () => {
     setIsProcessing(true)
     try {
-      const response = await fetch("/api/create-payment", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          productId: priceId,
+      console.log('Processing upsell purchase:', currentProduct)
+      
+      const { data, error } = await supabase.functions.invoke('create-payment', {
+        body: {
+          priceId: currentProduct.priceId,
           customerId: customerData?.stripe_customer_id,
-          customerEmail: customerData?.email
-        }),
+          customerEmail: customerData?.email,
+          amount: currentProduct.price
+        }
       })
 
-      const data = await response.json()
+      if (error) {
+        console.error('Payment processing error:', error)
+        throw error
+      }
 
-      if (data.url) {
+      if (data?.url) {
         window.location.href = data.url
       } else {
-        // If no URL is returned, navigate to the second upsell
         console.log('No payment URL, navigating to second upsell')
         navigate('/upsell2')
       }
     } catch (error) {
       console.error("Error creating checkout session:", error)
       toast.error("Failed to process purchase")
-      // Even if purchase fails, move to second upsell
       navigate('/upsell2')
     } finally {
       setIsProcessing(false)
@@ -105,7 +105,7 @@ const Upsell = () => {
         features={currentProduct.features}
         image={currentProduct.image}
         isProcessing={isProcessing}
-        onAccept={() => handlePurchase(currentProduct.priceId)}
+        onAccept={() => handlePurchase()}
         onDecline={handleDecline}
       />
     </div>

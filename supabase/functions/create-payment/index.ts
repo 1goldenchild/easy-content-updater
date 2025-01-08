@@ -7,88 +7,57 @@ const corsHeaders = {
 }
 
 serve(async (req) => {
+  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders })
   }
 
   try {
-    const { paymentMethod, amount, email, name } = await req.json()
-    console.log('Creating payment with:', { amount, email, name })
+    const { priceId, customerId, customerEmail, amount } = await req.json()
+    console.log('Creating payment with:', { priceId, customerId, amount })
     
-    const stripeKey = Deno.env.get('STRIPE_SECRET_KEY')
-    if (!stripeKey) {
-      throw new Error('Stripe secret key not found')
-    }
-
-    const stripe = new Stripe(stripeKey, {
+    const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') || '', {
       apiVersion: '2023-10-16',
     })
 
-    // Get or create customer
-    console.log('Looking up customer...')
-    const customers = await stripe.customers.list({ email, limit: 1 })
-    let customer = customers.data[0]
-    
-    if (!customer) {
-      console.log('Creating new customer...')
-      customer = await stripe.customers.create({
-        email,
-        name,
-        payment_method: paymentMethod,
-      })
+    // Create or get customer
+    let customer
+    if (customerId) {
+      customer = await stripe.customers.retrieve(customerId)
+    } else if (customerEmail) {
+      const customers = await stripe.customers.list({ email: customerEmail, limit: 1 })
+      customer = customers.data[0] || await stripe.customers.create({ email: customerEmail })
+    } else {
+      throw new Error('Either customerId or customerEmail is required')
     }
 
-    // Create the payment intent
-    console.log('Creating payment intent...')
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(amount * 100), // Convert to cents
-      currency: 'usd',
+    // Create checkout session
+    const session = await stripe.checkout.sessions.create({
       customer: customer.id,
-      payment_method: paymentMethod,
-      off_session: false,
-      confirm: true,
-      automatic_payment_methods: {
-        enabled: true,
-        allow_redirects: 'never'
-      }
-    })
-
-    // Create the order
-    console.log('Creating order...')
-    const order = await stripe.orders.create({
-      currency: 'usd',
-      customer: customer.id,
-      payment: paymentIntent.id,
+      payment_method_types: ['card'],
       line_items: [{
-        description: "Numerology Reading",
-        amount: Math.round(amount * 100),
-        quantity: 1
-      }]
+        price: priceId,
+        quantity: 1,
+      }],
+      mode: 'payment',
+      success_url: `${req.headers.get('origin')}/upsell2`,
+      cancel_url: `${req.headers.get('origin')}/upsell2`,
     })
-
-    console.log('Order created:', order.id)
 
     return new Response(
-      JSON.stringify({ 
-        success: true,
-        paymentIntent: paymentIntent.id,
-        orderId: order.id
-      }),
+      JSON.stringify({ success: true, url: session.url }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        status: 200,
+        status: 200 
       }
     )
   } catch (error) {
     console.error('Payment processing error:', error)
     return new Response(
-      JSON.stringify({ 
-        success: false,
-        error: error.message 
-      }),
+      JSON.stringify({ success: false, error: error.message }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        status: 400,
+        status: 400 
       }
     )
   }
