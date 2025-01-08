@@ -29,23 +29,11 @@ serve(async (req) => {
       customer = await stripe.customers.create({
         email: email,
         name: name,
+        payment_method: paymentMethod,
       })
     }
 
-    // Attach the payment method to the customer
-    console.log('Attaching payment method to customer...')
-    await stripe.paymentMethods.attach(paymentMethod, {
-      customer: customer.id,
-    })
-
-    // Set as default payment method
-    console.log('Setting as default payment method...')
-    await stripe.customers.update(customer.id, {
-      invoice_settings: {
-        default_payment_method: paymentMethod,
-      },
-    })
-
+    // Create the payment intent with the price ID
     console.log('Creating payment intent...')
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Math.round(amount * 100),
@@ -54,17 +42,34 @@ serve(async (req) => {
       payment_method: paymentMethod,
       off_session: false,
       confirm: true,
+      automatic_payment_methods: {
+        enabled: true,
+        allow_redirects: 'never'
+      },
       metadata: {
         priceId: priceId
       }
     })
 
-    console.log('Payment intent created:', paymentIntent.id)
+    // Create the order in Stripe
+    console.log('Creating Stripe order...')
+    const order = await stripe.orders.create({
+      currency: 'usd',
+      customer: customer.id,
+      payment: paymentIntent.id,
+      line_items: [{
+        price: priceId,
+        quantity: 1
+      }]
+    })
+
+    console.log('Order created:', order.id)
 
     return new Response(
       JSON.stringify({ 
         success: true,
-        paymentIntent: paymentIntent.id 
+        paymentIntent: paymentIntent.id,
+        orderId: order.id
       }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
