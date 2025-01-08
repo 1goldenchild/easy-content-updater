@@ -41,7 +41,7 @@ const Upsell = () => {
           description="Discover how the elites use numerology to amass extraordinary wealth."
           features={features}
           originalPrice={29.38}
-          discountedPrice={19.19}
+          discountedPrice={19.10}
         />
       </ProductSection>
     </UpsellContainer>
