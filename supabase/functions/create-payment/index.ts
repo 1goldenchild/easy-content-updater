@@ -12,50 +12,52 @@ serve(async (req) => {
   }
 
   try {
-    const { email, name, priceId, amount } = await req.json()
-    console.log('Payment request received:', { email, priceId, amount })
-
-    if (!priceId) {
-      throw new Error('Price ID is required')
-    }
+    const { customerId, priceId, customerEmail, amount, mode = 'payment' } = await req.json()
+    console.log('Payment request received:', { customerId, priceId, customerEmail, amount, mode })
 
     const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') || '', {
       apiVersion: '2023-10-16',
     })
 
-    // Check if customer exists or create new one
-    console.log('Looking up customer with email:', email)
-    const customers = await stripe.customers.list({
-      email: email,
-      limit: 1
-    })
+    // For 1-click upsells, we'll use the stored customer
+    let stripeCustomerId = customerId
 
-    let customerId
-    if (customers.data.length > 0) {
-      customerId = customers.data[0].id
-      console.log('Found existing customer:', customerId)
-    } else {
-      const customer = await stripe.customers.create({
-        email: email,
-        name: name
+    if (!stripeCustomerId && customerEmail) {
+      console.log('Looking up customer with email:', customerEmail)
+      const customers = await stripe.customers.list({
+        email: customerEmail,
+        limit: 1
       })
-      customerId = customer.id
-      console.log('Created new customer:', customerId)
+
+      if (customers.data.length > 0) {
+        stripeCustomerId = customers.data[0].id
+        console.log('Found existing customer:', stripeCustomerId)
+      } else {
+        const customer = await stripe.customers.create({
+          email: customerEmail
+        })
+        stripeCustomerId = customer.id
+        console.log('Created new customer:', stripeCustomerId)
+      }
     }
 
     // Create checkout session
     console.log('Creating checkout session with price ID:', priceId)
     const session = await stripe.checkout.sessions.create({
-      customer: customerId,
+      customer: stripeCustomerId,
+      payment_method_types: ['card'],
+      mode,
       line_items: [{
         price: priceId,
         quantity: 1,
       }],
-      mode: 'payment',
       success_url: `${req.headers.get('origin')}/upsell`,
       cancel_url: `${req.headers.get('origin')}/checkout`,
+      payment_intent_data: {
+        setup_future_usage: 'off_session', // This enables future 1-click payments
+      },
       metadata: {
-        customerEmail: email
+        customerEmail
       }
     })
 

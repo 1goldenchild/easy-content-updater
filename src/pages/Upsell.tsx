@@ -18,30 +18,21 @@ const Upsell = () => {
     const fetchCustomerData = async () => {
       try {
         console.log('Fetching customer data...')
-        const { data: { session } } = await supabase.auth.getSession()
+        const { data: customers, error } = await supabase
+          .from("customers")
+          .select("*")
+          .order("created_at", { ascending: false })
+          .limit(1)
         
-        if (!session?.user?.email) {
-          console.log('No user session found')
-          return
-        }
-
-        const { data, error: dbError } = await supabase
-          .from('customers')
-          .select('*')
-          .eq('email', session.user.email)
-          .single()
-
-        if (dbError) {
-          console.error('Error fetching customer:', dbError)
-          return
-        }
-
-        if (data) {
-          console.log('Customer data fetched:', data)
-          setCustomerData(data)
+        if (error) throw error
+        
+        if (customers && customers.length > 0) {
+          console.log('Customer data fetched:', customers[0])
+          setCustomerData(customers[0])
         }
       } catch (err) {
         console.error('Error in fetchCustomerData:', err)
+        toast.error("Failed to load customer data")
       }
     }
 
@@ -76,7 +67,7 @@ const Upsell = () => {
       }
 
       if (data?.url) {
-        console.log('Redirecting to Stripe checkout:', data.url)
+        console.log('Redirecting to payment URL:', data.url)
         window.location.href = data.url
       } else {
         console.error('No payment URL received')
