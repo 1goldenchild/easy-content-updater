@@ -10,10 +10,6 @@ const Upsell = () => {
   const [isProcessing, setIsProcessing] = useState(false)
   const [customerData, setCustomerData] = useState<any>(null)
   
-  const currentProduct = upsellProducts[0]
-  
-  console.log('Upsell page rendering with product:', currentProduct)
-
   useEffect(() => {
     const fetchCustomerData = async () => {
       try {
@@ -22,7 +18,7 @@ const Upsell = () => {
         
         if (!session?.user?.email) {
           console.log('No user session found')
-          navigate('/success')
+          navigate('/upsell2')
           return
         }
 
@@ -34,7 +30,7 @@ const Upsell = () => {
 
         if (dbError) {
           console.error('Error fetching customer:', dbError)
-          navigate('/success')
+          navigate('/upsell2')
           return
         }
 
@@ -44,51 +40,36 @@ const Upsell = () => {
         }
       } catch (err) {
         console.error('Error in fetchCustomerData:', err)
-        navigate('/success')
+        navigate('/upsell2')
       }
     }
 
     fetchCustomerData()
   }, [navigate])
 
-  const handleAccept = async () => {
-    if (!customerData) {
-      console.error('No customer data available')
-      toast.error("Unable to process. Please try again.")
-      navigate('/success')
-      return
-    }
-
+  const handlePurchase = async (priceId: string) => {
     setIsProcessing(true)
-    
     try {
-      console.log('Processing upsell payment for:', {
-        customerEmail: customerData.email,
-        product: currentProduct.name
-      })
-      
-      const { data, error } = await supabase.functions.invoke('create-payment', {
-        body: {
-          priceId: currentProduct.priceId,
-          amount: currentProduct.price,
-          isOneClick: true,
-          email: customerData.email,
-          name: `${customerData.first_name} ${customerData.last_name}`
-        }
+      const response = await fetch("/api/create-payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          productId: priceId,
+          customerId: customerData?.stripe_customer_id,
+          customerEmail: customerData?.email
+        }),
       })
 
-      if (error) throw error
-      
-      if (!data?.success) {
-        throw new Error(data?.error || "Payment failed")
+      const data = await response.json()
+
+      if (data.url) {
+        window.location.href = data.url
       }
-
-      console.log('Upsell payment successful')
-      toast.success("Thank you for your purchase!")
-      navigate('/success')
-    } catch (error: any) {
-      console.error('Upsell payment error:', error)
-      toast.error(error.message || "Payment failed. Please try again.")
+    } catch (error) {
+      console.error("Error creating checkout session:", error)
+      toast.error("Failed to process purchase")
     } finally {
       setIsProcessing(false)
     }
@@ -96,24 +77,24 @@ const Upsell = () => {
 
   const handleDecline = () => {
     console.log('User declined upsell')
-    navigate('/success')
+    navigate('/upsell2')
   }
 
-  if (!currentProduct) {
-    console.log('No product found, redirecting to success')
-    navigate('/success')
-    return null
-  }
-
-  console.log('Rendering UpsellProduct component with:', currentProduct)
   return (
     <div className="container max-w-4xl mx-auto px-4 py-8">
-      <UpsellProduct
-        {...currentProduct}
-        isProcessing={isProcessing}
-        onAccept={handleAccept}
-        onDecline={handleDecline}
-      />
+      {upsellProducts.map((product) => (
+        <UpsellProduct
+          key={product.id}
+          name={product.name}
+          description={product.description}
+          price={product.price}
+          features={product.features}
+          image={product.image}
+          isProcessing={isProcessing}
+          onAccept={() => handlePurchase(product.priceId)}
+          onDecline={handleDecline}
+        />
+      ))}
     </div>
   )
 }
