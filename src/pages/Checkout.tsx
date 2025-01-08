@@ -13,7 +13,7 @@ import { supabase } from "@/integrations/supabase/client"
 
 // Initialize Stripe with your new publishable key
 console.log('Initializing Stripe...')
-const stripePromise = loadStripe('pk_test_51PCkQ1Cg2w6KJiVSPxYxRXHMZlrAVxqWk5TAFpQGHyLXQXOJBEeQWEhvDVHBXXVrg4WbF2V6tWRHXkhkYsrQEHVB00vFRFNTZf')
+const stripePromise = loadStripe('pk_test_51QenBpCg2w6KJiVSELGpXqQZQPP8su4GY9mxvH4YEXDGCnhQZHYtqhvhRNwxLNBzdqbMqAEVWp4VZLYLWHYNNTZf00vFRFNTZf')
   .then(stripe => {
     if (!stripe) {
       const error = 'Failed to initialize Stripe - stripe object is null'
