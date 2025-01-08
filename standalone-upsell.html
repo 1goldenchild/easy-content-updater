@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upsell Offer</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom right, #1A1F2C, #221F26);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Container styles */
+        .upsell-container {
+            background-color: #1A1F2C;
+            padding: 32px;
+            border-radius: 8px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Header styles */
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .header h1 {
+            font-size: 1.875rem;
+            font-weight: bold;
+            margin-bottom: 16px;
+            background: linear-gradient(to right, #A78BFA, #EC4899, #F97316);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: shine 8s linear infinite;
+        }
+
+        .header p {
+            color: #94A3B8;
+        }
+
+        /* Product section styles */
+        .product-section {
+            background-color: #2A2F3C;
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: 32px;
+        }
+
+        .product-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .product-content {
+                flex-direction: row;
+            }
+        }
+
+        /* Image container styles */
+        .image-container {
+            position: relative;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .image-container {
+                width: 33.333%;
+            }
+        }
+
+        .product-image {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .offer-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #9333EA;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        /* Product details styles */
+        .product-details {
+            flex: 1;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .product-description {
+            color: #94A3B8;
+            margin-bottom: 16px;
+        }
+
+        /* Features list styles */
+        .features-list {
+            list-style: none;
+            space-y: 8px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            color: #94A3B8;
+            margin-bottom: 8px;
+        }
+
+        .feature-check {
+            color: #A78BFA;
+            margin-right: 8px;
+        }
+
+        /* Price section styles */
+        .price-section {
+            margin-top: 24px;
+        }
+
+        .price {
+            font-size: 1.875rem;
+            font-weight: bold;
+            color: #A78BFA;
+            margin-bottom: 8px;
+        }
+
+        .price-note {
+            color: #94A3B8;
+            font-size: 0.875rem;
+        }
+
+        /* Button styles */
+        .button-container {
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .accept-button {
+            background: linear-gradient(to right, #9333EA, #EC4899);
+            color: white;
+            padding: 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .accept-button:hover {
+            opacity: 0.9;
+        }
+
+        .decline-button {
+            background: transparent;
+            color: white;
+            padding: 24px;
+            border: 1px solid #4B5563;
+            border-radius: 6px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .decline-button:hover {
+            background-color: rgba(75, 85, 99, 0.2);
+        }
+
+        @keyframes shine {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="upsell-container">
+        <div class="header">
+            <h1>Special One-Time Offer!</h1>
+            <p>Enhance Your Numerology Reading with Advanced Money Manifestation Secrets</p>
+        </div>
+
+        <div class="product-section">
+            <div class="product-content">
+                <div class="image-container">
+                    <img src="YOUR_IMAGE_URL_HERE" alt="Product Image" class="product-image">
+                    <div class="offer-badge">Special Offer</div>
+                </div>
+                <div class="product-details">
+                    <h2 class="product-title">Advanced Money Manifestation Guide</h2>
+                    <p class="product-description">Unlock the secrets of financial abundance through ancient numerology practices and modern manifestation techniques.</p>
+                    <ul class="features-list">
+                        <li class="feature-item">
+                            <span class="feature-check">✓</span>
+                            Detailed money manifestation rituals
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-check">✓</span>
+                            Personal wealth number analysis
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-check">✓</span>
+                            Abundance meditation techniques
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-check">✓</span>
+                            Financial success case studies
+                        </li>
+                    </ul>
+                    <div class="price-section">
+                        <div class="price">$37.00</div>
+                        <p class="price-note">One-time payment - Instant digital delivery</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button class="accept-button" onclick="handleAccept()">
+                Yes! Add This To My Order For $37.00
+            </button>
+            <button class="decline-button" onclick="handleDecline()">
+                No thanks, I'll pass
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function handleAccept() {
+            // Add your acceptance logic here
+            console.log('Offer accepted');
+        }
+
+        function handleDecline() {
+            // Add your decline logic here
+            console.log('Offer declined');
+        }
+    </script>
+</body>
+</html>
