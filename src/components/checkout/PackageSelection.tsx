@@ -5,18 +5,21 @@ export const packages = [
   {
     id: "basic",
     name: "Numerology Analysis Basic Package™",
-    price: 33.00
+    price: 33.00,
+    priceId: "price_1QenG3Cg2w6KJiVSv6RhBkXp"
   },
   {
     id: "premium",
     name: "Numerology Analysis Premium Package™ (Hidden Number Revealed!)",
-    price: 44.00
+    price: 44.00,
+    priceId: "price_1QenF6Cg2w6KJiVSFiAOCT0l"
   },
   {
     id: "supreme",
     name: "⭐Numerology Analysis Supreme Package™ (Astrology Included)",
     price: 49.40,
     originalPrice: 71.00,
+    priceId: "price_1QenE4Cg2w6KJiVSku7b1nWC",
     isBestSelling: true
   }
 ]

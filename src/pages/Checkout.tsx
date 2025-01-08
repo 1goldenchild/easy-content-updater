@@ -52,7 +52,9 @@ const Checkout = () => {
           paymentMethod,
           amount: total,
           email: formData.email,
-          name: `${formData.firstName} ${formData.lastName}`
+          name: `${formData.firstName} ${formData.lastName}`,
+          packageId: selectedPackage.id,
+          isVip: formData.isVip
         }
       })
 
