@@ -11,10 +11,22 @@ import VIPOption from "@/components/checkout/VIPOption"
 import { packages } from "@/components/checkout/PackageSelection"
 import { supabase } from "@/integrations/supabase/client"
 
-// Initialize Stripe with the correct test publishable key
+// Initialize Stripe with explicit error handling
 const stripePromise = loadStripe('pk_test_51PCkQ1Cg2w6KJiVSPxYxRXHMZlrAVxqWk5TAFpQGHyLXQXOJBEeQWEhvDVHBXXVrg4WbF2V6tWRHXkhkYsrQEHVB00vFRFNTZf')
-
-console.log('Stripe initialization:', stripePromise ? 'Successful' : 'Failed')
+  .then(stripe => {
+    if (!stripe) {
+      console.error('Failed to initialize Stripe')
+      toast.error('Payment system initialization failed')
+      return null
+    }
+    console.log('Stripe initialized successfully')
+    return stripe
+  })
+  .catch(error => {
+    console.error('Stripe initialization error:', error)
+    toast.error('Payment system initialization failed')
+    return null
+  })
 
 const Checkout = () => {
   const navigate = useNavigate()
@@ -60,7 +72,10 @@ const Checkout = () => {
         }
       })
 
-      if (error) throw error
+      if (error) {
+        console.error('Payment processing error:', error)
+        throw error
+      }
 
       console.log('Payment successful:', data)
       
