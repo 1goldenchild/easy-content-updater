@@ -17,9 +17,6 @@ const FooterLinks = () => {
             <Link to="/blog" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Blog</Link>
           </li>
           <li>
-            <Link to="/checkout" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Checkout</Link>
-          </li>
-          <li>
             <Link to="/portal" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Portal</Link>
           </li>
           <li>
