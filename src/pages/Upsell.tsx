@@ -29,7 +29,19 @@ const UpsellContent = () => {
   const [customerData, setCustomerData] = useState<any>(null)
   
   const currentStep = parseInt(location.pathname.split('/').pop() || '1')
+  console.log('Current step:', currentStep)
+  
   const currentProduct = upsellProducts[currentStep - 1]
+  console.log('Current product:', currentProduct)
+
+  // Redirect if no valid product found
+  useEffect(() => {
+    if (!currentProduct) {
+      console.log('No product found for step:', currentStep)
+      toast.error("Product not found")
+      navigate('/success')
+    }
+  }, [currentStep, currentProduct, navigate])
 
   useEffect(() => {
     const fetchCustomerData = async () => {
@@ -59,6 +71,12 @@ const UpsellContent = () => {
   const handleAccept = async () => {
     if (!customerData) {
       toast.error("Customer information not found")
+      navigate('/success')
+      return
+    }
+
+    if (!currentProduct) {
+      toast.error("Product not found")
       navigate('/success')
       return
     }
@@ -103,6 +121,11 @@ const UpsellContent = () => {
     } else {
       navigate('/success')
     }
+  }
+
+  // Don't render anything if no product is found
+  if (!currentProduct) {
+    return null
   }
 
   return (
