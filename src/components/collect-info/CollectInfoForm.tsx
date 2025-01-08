@@ -54,7 +54,7 @@ const CollectInfoForm = () => {
         description: "Your information has been submitted successfully.",
       });
 
-      navigate("/analysis");
+      navigate("/upsell");
     } catch (error) {
       console.error("Error:", error);
       toast({

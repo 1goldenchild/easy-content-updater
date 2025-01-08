@@ -12,23 +12,13 @@ const UpsellContent = () => {
   const [customerData, setCustomerData] = useState<any>(null)
   const [error, setError] = useState<string | null>(null)
   
-  // Extract step from URL or default to 1
-  const currentStep = parseInt(location.pathname.split('/').pop() || '1')
-  const currentProduct = upsellProducts[currentStep - 1]
+  const currentProduct = upsellProducts[0]
 
   console.log('Upsell Component - Current state:', {
-    step: currentStep,
-    pathname: location.pathname,
     productFound: !!currentProduct,
     productDetails: currentProduct,
     isProcessing
   })
-
-  // If we're on the base /upsell route, redirect to /upsell/1
-  if (location.pathname === '/upsell') {
-    console.log('Redirecting to /upsell/1')
-    return <Navigate to="/upsell/1" replace />
-  }
 
   useEffect(() => {
     const fetchCustomerData = async () => {
@@ -39,7 +29,6 @@ const UpsellContent = () => {
         if (!session?.user?.email) {
           console.log('No user session found')
           setError('No user session found')
-          navigate('/success')
           return
         }
 
@@ -52,7 +41,6 @@ const UpsellContent = () => {
         if (dbError) {
           console.error('Error fetching customer:', dbError)
           setError(dbError.message)
-          navigate('/success')
           return
         }
 
@@ -62,12 +50,10 @@ const UpsellContent = () => {
         } else {
           console.log('No customer data found')
           setError('Customer not found')
-          navigate('/success')
         }
       } catch (err) {
         console.error('Error in fetchCustomerData:', err)
         setError(err.message)
-        navigate('/success')
       }
     }
 
@@ -83,7 +69,7 @@ const UpsellContent = () => {
     }
 
     if (!currentProduct) {
-      console.error('No product found for current step')
+      console.error('No product found')
       toast.error("Product not found")
       navigate('/success')
       return
@@ -119,12 +105,7 @@ const UpsellContent = () => {
 
       console.log('Payment successful')
       toast.success("Thank you for your purchase!")
-      
-      if (currentStep === 1) {
-        navigate('/upsell/2')
-      } else {
-        navigate('/success')
-      }
+      navigate('/success')
     } catch (error) {
       console.error('Upsell payment error:', error)
       toast.error(error.message || "Payment failed. Please try again.")
@@ -135,12 +116,8 @@ const UpsellContent = () => {
   }
 
   const handleDecline = () => {
-    console.log('User declined upsell:', { currentStep })
-    if (currentStep === 1) {
-      navigate('/upsell/2')
-    } else {
-      navigate('/success')
-    }
+    console.log('User declined upsell')
+    navigate('/success')
   }
 
   if (!currentProduct) {
