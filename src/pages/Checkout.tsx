@@ -76,8 +76,6 @@ const Checkout = () => {
             city: formData.city,
             postal_code: formData.postalCode
           }
-        }, {
-          onConflict: 'email'
         })
         .select()
         .single()
