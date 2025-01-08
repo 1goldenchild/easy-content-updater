@@ -2,8 +2,9 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { supabase } from "@/integrations/supabase/client"
 import { upsellProducts2 } from "@/components/upsell/upsellProducts2"
+import { upsellProducts } from "@/components/upsell/upsellProducts"
 import UpsellProduct from "@/components/upsell/UpsellProduct"
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/hooks/use-toast"
 
 const Upsell2 = () => {
   const navigate = useNavigate()
@@ -38,7 +39,7 @@ const Upsell2 = () => {
     fetchCustomerData()
   }, [toast])
 
-  const handlePurchase = async () => {
+  const handlePurchase = async (priceId: string) => {
     setIsProcessing(true)
     try {
       const response = await fetch("/api/create-payment", {
@@ -47,7 +48,7 @@ const Upsell2 = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          productId: upsellProducts2[0].priceId,
+          productId: priceId,
           customerId: customerData?.stripe_customer_id,
           customerEmail: customerData?.email
         }),
@@ -77,6 +78,22 @@ const Upsell2 = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
+        {/* First upsell product */}
+        {upsellProducts.map((product) => (
+          <UpsellProduct
+            key={product.id}
+            name={product.name}
+            description={product.description}
+            price={product.price}
+            features={product.features}
+            image={product.image}
+            isProcessing={isProcessing}
+            onAccept={() => handlePurchase(product.priceId)}
+            onDecline={handleDecline}
+          />
+        ))}
+        
+        {/* Second upsell product */}
         {upsellProducts2.map((product) => (
           <UpsellProduct
             key={product.id}
@@ -86,7 +103,7 @@ const Upsell2 = () => {
             features={product.features}
             image={product.image}
             isProcessing={isProcessing}
-            onAccept={handlePurchase}
+            onAccept={() => handlePurchase(product.priceId)}
             onDecline={handleDecline}
           />
         ))}
