@@ -69,28 +69,11 @@ const Checkout = () => {
       const total = selectedPkg.price + (formData.isVip ? 11 : 0)
       console.log('Processing payment for amount:', total)
 
-      // First create or get customer
-      const { data: customerData, error: customerError } = await supabase
-        .from('customers')
-        .insert([{
-          email: formData.email,
-          first_name: formData.firstName,
-          last_name: formData.lastName
-        }])
-        .select()
-        .single()
-
-      if (customerError) {
-        console.error('Customer creation error:', customerError)
-        throw new Error("Failed to create customer")
-      }
-
-      // Then process payment
       const { data, error } = await supabase.functions.invoke('create-payment', {
         body: {
           paymentMethod,
           amount: total,
-          customerEmail: formData.email,
+          email: formData.email,
           name: `${formData.firstName} ${formData.lastName}`,
           priceId: selectedPkg.priceId
         }
@@ -107,7 +90,7 @@ const Checkout = () => {
 
       console.log('Payment successful:', data)
       toast.success("Payment processed successfully!")
-      navigate("/upsell")
+      navigate("/upsell/1")
     } catch (error) {
       console.error('Payment error:', error)
       toast.error(error.message || "Payment failed. Please try again.")

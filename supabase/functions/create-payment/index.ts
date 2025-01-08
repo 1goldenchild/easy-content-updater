@@ -7,37 +7,38 @@ const corsHeaders = {
 }
 
 serve(async (req) => {
+  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders })
   }
 
   try {
-    const { priceId, customerEmail, amount, mode = 'payment' } = await req.json()
-    
-    if (!customerEmail) {
-      throw new Error('Customer email is required')
-    }
-
-    console.log('Creating payment with:', { priceId, customerEmail, amount, mode })
+    const { priceId, customerId, customerEmail, amount, mode = 'payment' } = await req.json()
+    console.log('Creating payment with:', { priceId, customerId, customerEmail, amount, mode })
     
     const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') || '', {
       apiVersion: '2023-10-16',
     })
 
-    // Get or create customer
-    const customers = await stripe.customers.list({ email: customerEmail, limit: 1 })
-    const customer = customers.data[0] || await stripe.customers.create({ email: customerEmail })
-    
-    console.log('Customer found/created:', customer.id)
+    // Create or get customer
+    let customer
+    if (customerId) {
+      customer = await stripe.customers.retrieve(customerId)
+    } else if (customerEmail) {
+      const customers = await stripe.customers.list({ email: customerEmail, limit: 1 })
+      customer = customers.data[0] || await stripe.customers.create({ email: customerEmail })
+    } else {
+      throw new Error('Either customerId or customerEmail is required')
+    }
 
-    // Create checkout session
+    console.log('Creating checkout session...')
     const session = await stripe.checkout.sessions.create({
       customer: customer.id,
       line_items: [{
         price: priceId,
         quantity: 1,
       }],
-      mode,
+      mode: mode,
       success_url: `${req.headers.get('origin')}/upsell2`,
       cancel_url: `${req.headers.get('origin')}/upsell2`,
     })
@@ -45,13 +46,19 @@ serve(async (req) => {
     console.log('Checkout session created:', session.id)
     return new Response(
       JSON.stringify({ success: true, url: session.url }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      { 
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200 
+      }
     )
   } catch (error) {
     console.error('Payment processing error:', error)
     return new Response(
       JSON.stringify({ success: false, error: error.message }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400 }
+      { 
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 400 
+      }
     )
   }
 })
