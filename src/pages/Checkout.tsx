@@ -11,7 +11,7 @@ import VIPOption from "@/components/checkout/VIPOption"
 import { packages } from "@/components/checkout/PackageSelection"
 import { supabase } from "@/integrations/supabase/client"
 
-// Initialize Stripe with the correct test publishable key
+// Initialize Stripe with your new publishable key
 console.log('Initializing Stripe...')
 const stripePromise = loadStripe('pk_test_51PCkQ1Cg2w6KJiVSPxYxRXHMZlrAVxqWk5TAFpQGHyLXQXOJBEeQWEhvDVHBXXVrg4WbF2V6tWRHXkhkYsrQEHVB00vFRFNTZf')
   .then(stripe => {
@@ -57,10 +57,13 @@ const Checkout = () => {
     
     try {
       console.log('Starting payment processing...')
-      const selectedPackage = packages.find(pkg => pkg.id === formData.selectedPackage)
-      if (!selectedPackage) throw new Error("Package not found")
+      // Find the selected package first to avoid undefined errors
+      const selectedPkg = packages.find(pkg => pkg.id === formData.selectedPackage)
+      if (!selectedPkg) {
+        throw new Error("Selected package not found")
+      }
 
-      const total = selectedPackage.price + (formData.isVip ? 11 : 0)
+      const total = selectedPkg.price + (formData.isVip ? 11 : 0)
       console.log('Processing payment for amount:', total)
 
       const { data, error } = await supabase.functions.invoke('create-payment', {
@@ -69,7 +72,7 @@ const Checkout = () => {
           amount: total,
           email: formData.email,
           name: `${formData.firstName} ${formData.lastName}`,
-          packageId: selectedPackage.id,
+          packageId: selectedPkg.id,
           isVip: formData.isVip
         }
       })
