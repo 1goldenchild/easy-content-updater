@@ -61,6 +61,10 @@ const Checkout = () => {
         throw new Error("Selected package not found")
       }
 
+      // Store customer information for upsell
+      sessionStorage.setItem('customerEmail', formData.email)
+      sessionStorage.setItem('customerName', `${formData.firstName} ${formData.lastName}`)
+
       const total = selectedPkg.price + (formData.isVip ? 11 : 0)
       console.log('Processing payment for amount:', total)
 
@@ -69,7 +73,8 @@ const Checkout = () => {
           paymentMethod,
           amount: total,
           email: formData.email,
-          name: `${formData.firstName} ${formData.lastName}`
+          name: `${formData.firstName} ${formData.lastName}`,
+          priceId: selectedPkg.priceId
         }
       })
 
@@ -84,7 +89,7 @@ const Checkout = () => {
 
       console.log('Payment successful:', data)
       toast.success("Payment processed successfully!")
-      navigate("/upsell/1") // Redirect to first upsell instead of success page
+      navigate("/upsell/1")
     } catch (error) {
       console.error('Payment error:', error)
       toast.error(error.message || "Payment failed. Please try again.")

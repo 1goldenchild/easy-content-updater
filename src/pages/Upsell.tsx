@@ -30,8 +30,16 @@ const UpsellContent = () => {
   
   const currentStep = parseInt(location.pathname.split('/').pop() || '1')
   const currentProduct = upsellProducts[currentStep - 1]
+  const customerEmail = sessionStorage.getItem('customerEmail')
+  const customerName = sessionStorage.getItem('customerName')
 
   const handleAccept = async () => {
+    if (!customerEmail || !customerName) {
+      toast.error("Customer information not found")
+      navigate('/success')
+      return
+    }
+
     setIsProcessing(true)
     
     try {
@@ -41,7 +49,9 @@ const UpsellContent = () => {
         body: {
           priceId: currentProduct.priceId,
           amount: currentProduct.price,
-          isOneClick: true
+          isOneClick: true,
+          email: customerEmail,
+          name: customerName
         }
       })
 
@@ -59,6 +69,7 @@ const UpsellContent = () => {
     } catch (error) {
       console.error('Upsell payment error:', error)
       toast.error(error.message || "Payment failed. Please try again.")
+      navigate('/success') // Redirect to success page on error
     } finally {
       setIsProcessing(false)
     }
