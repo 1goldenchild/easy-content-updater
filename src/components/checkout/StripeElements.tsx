@@ -56,7 +56,7 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
       console.log('Payment method created successfully:', paymentMethod.id)
       
       try {
-        console.log('Submitting payment to backend...')
+        console.log('Submitting payment...')
         await onSubmit(e, paymentMethod.id)
         console.log('Payment processed successfully')
         
