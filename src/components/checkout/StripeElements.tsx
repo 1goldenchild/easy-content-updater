@@ -66,7 +66,7 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
         // Small delay before navigation to ensure cleanup
         setTimeout(() => {
           console.log('Navigating to first upsell...')
-          navigate('/upsell/1')
+          navigate('/upsell')
         }, 100)
         
       } catch (submitError) {
