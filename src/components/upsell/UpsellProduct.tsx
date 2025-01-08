@@ -68,7 +68,7 @@ const UpsellProduct = ({
                 ${price.toFixed(2)}
               </div>
               <p className="text-gray-400 text-sm">
-                One-time payment - Instant digital delivery
+                One-click payment - Instant digital delivery
               </p>
             </div>
           </div>
