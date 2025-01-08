@@ -40,8 +40,8 @@ const Upsell = () => {
           title="Get Rich Using Numerology eBook (2023 Edition)"
           description="Discover how the elites use numerology to amass extraordinary wealth."
           features={features}
-          originalPrice={37.33}
-          discountedPrice={28.00}
+          originalPrice={29.38}
+          discountedPrice={19.19}
         />
       </ProductSection>
     </UpsellContainer>
