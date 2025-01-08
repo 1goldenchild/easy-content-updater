@@ -122,17 +122,21 @@ const Checkout = () => {
           onFieldChange={handleFieldChange}
         />
 
-        <Elements stripe={stripePromise}>
-          <StripeElements 
-            onSubmit={handleSubmit} 
-            isProcessing={isProcessing} 
-          />
-        </Elements>
+        {stripePromise && (
+          <Elements stripe={stripePromise}>
+            <StripeElements 
+              onSubmit={handleSubmit} 
+              isProcessing={isProcessing} 
+            />
+          </Elements>
+        )}
 
         <div className="bg-[#2A2F3C] p-4 rounded-lg">
           <div className="flex justify-between items-center">
             <span className="font-semibold">Total:</span>
-            <span className="text-xl font-bold">${total.toFixed(2)}</span>
+            <span className="text-xl font-bold">
+              ${((selectedPackage?.price || 0) + (formData.isVip ? 11 : 0)).toFixed(2)}
+            </span>
           </div>
         </div>
 
