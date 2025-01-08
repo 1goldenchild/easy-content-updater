@@ -41,9 +41,11 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
                 base: {
                   fontSize: '16px',
                   color: '#ffffff',
+                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
                   '::placeholder': {
-                    color: '#aab7c4',
+                    color: 'rgba(255, 255, 255, 0.5)',
                   },
+                  iconColor: '#ffffff',
                 },
                 invalid: {
                   color: '#fa755a',
@@ -51,6 +53,14 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
                 },
               },
               hidePostalCode: true,
+              classes: {
+                base: 'stripe-element',
+                complete: 'stripe-element--complete',
+                empty: 'stripe-element--empty',
+                focus: 'stripe-element--focus',
+                invalid: 'stripe-element--invalid',
+                webkitAutofill: 'stripe-element--webkit-autofill'
+              },
             }}
           />
         </div>

@@ -50,49 +50,31 @@
   }
 }
 
-@layer utilities {
-  .mask-edges {
-    mask-image: linear-gradient(
-      to right,
-      transparent,
-      black 5%,
-      black 95%,
-      transparent
-    );
-  }
-
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-}
-
 .stripe-element-container {
   background: #2A2F3C;
-  padding: 16px;
-  border-radius: 4px;
+  padding: 12px;
+  border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 45px;
+  display: flex;
+  align-items: center;
 }
 
-.StripeElement {
+.stripe-element {
   width: 100%;
-  min-height: 20px;
+  padding: 8px 4px;
 }
 
-.StripeElement--focus {
-  border-color: rgba(255, 255, 255, 0.3);
+.stripe-element--focus {
+  outline: none;
 }
 
-.StripeElement--invalid {
+.stripe-element--invalid {
   border-color: #fa755a;
 }
 
-.StripeElement--webkit-autofill {
-  background-color: #2A2F3C !important;
+.stripe-element--webkit-autofill {
+  background-color: transparent !important;
 }
 
 @keyframes scroll {
