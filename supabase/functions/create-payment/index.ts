@@ -12,9 +12,9 @@ serve(async (req) => {
   }
 
   try {
-    const { paymentMethod, amount, email, name, priceId } = await req.json()
+    const { paymentMethod, amount, priceId } = await req.json()
     
-    console.log('Creating payment with:', { amount, email, name, priceId })
+    console.log('Creating payment with:', { amount, paymentMethod, priceId })
     
     const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') || '', {
       apiVersion: '2023-10-16',
@@ -26,6 +26,7 @@ serve(async (req) => {
       currency: 'usd',
       payment_method: paymentMethod,
       confirm: true,
+      payment_method_types: ['card'],
       automatic_payment_methods: {
         enabled: true,
         allow_redirects: 'never'
