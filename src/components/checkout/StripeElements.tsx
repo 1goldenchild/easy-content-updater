@@ -17,9 +17,10 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    console.log('Starting payment submission...')
 
     if (!stripe || !elements) {
-      console.error('Stripe.js has not loaded')
+      console.error('Stripe.js has not loaded yet')
       toast.error("Payment system not ready. Please try again.")
       return
     }
@@ -53,14 +54,23 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
       }
 
       console.log('Payment method created successfully:', paymentMethod.id)
-      await onSubmit(e, paymentMethod.id)
       
-      // Clear the card input on success
-      cardElement.clear()
-      
-      // Navigate to the first upsell page after successful payment
-      console.log('Payment successful, navigating to first upsell...')
-      navigate('/upsell/1')
+      try {
+        console.log('Submitting payment to backend...')
+        await onSubmit(e, paymentMethod.id)
+        console.log('Payment processed successfully')
+        
+        // Clear the card input on success
+        cardElement.clear()
+        
+        // Navigate to the first upsell page after successful payment
+        console.log('Navigating to first upsell...')
+        navigate('/upsell/1')
+        
+      } catch (submitError) {
+        console.error('Error during payment submission:', submitError)
+        toast.error("Payment failed. Please try again.")
+      }
       
     } catch (error) {
       console.error('Unexpected error during payment:', error)
