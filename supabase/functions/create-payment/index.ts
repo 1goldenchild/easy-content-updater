@@ -18,7 +18,7 @@ serve(async (req) => {
       apiVersion: '2023-10-16',
     })
 
-    console.log('Creating payment intent for package:', packageId)
+    console.log('Creating payment intent for:', { email, amount, packageId })
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Math.round(amount * 100), // Convert to cents
@@ -26,7 +26,6 @@ serve(async (req) => {
       payment_method: paymentMethod,
       confirmation_method: 'manual',
       confirm: true,
-      return_url: `${req.headers.get('origin')}/success`,
       receipt_email: email,
       metadata: {
         customerName: name,
