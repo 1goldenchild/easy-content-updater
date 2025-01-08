@@ -12,6 +12,7 @@ import Sales from "./pages/Sales"
 import CollectInfo from "./pages/CollectInfo"
 import Portal from "./pages/Portal"
 import EmailPreview from "./pages/EmailPreview"
+import Checkout from "./pages/Checkout"
 
 const queryClient = new QueryClient()
 
@@ -32,6 +33,7 @@ const App = () => {
               <Route path="/sales/*" element={<Sales />} />
               <Route path="/portal" element={<Portal />} />
               <Route path="/email-preview" element={<EmailPreview />} />
+              <Route path="/checkout" element={<Checkout />} />
             </Routes>
             <Footer />
           </div>
