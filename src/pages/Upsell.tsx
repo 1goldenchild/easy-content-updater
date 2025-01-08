@@ -2,7 +2,10 @@ import UpsellProduct from "@/components/upsell/UpsellProduct"
 import { upsellProducts } from "@/components/upsell/upsellProducts"
 
 const Upsell = () => {
-  const currentProduct = upsellProducts[0]
+  const currentProduct = {
+    ...upsellProducts[0],
+    price: 28 // Override the price to $28
+  }
   console.log('Rendering upsell page with product:', currentProduct)
 
   return (

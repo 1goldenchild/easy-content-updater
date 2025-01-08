@@ -77,24 +77,6 @@ const UpsellProduct = ({
           </div>
         </div>
       </div>
-
-      <div className="space-y-4">
-        <Button 
-          onClick={onAccept}
-          disabled={isProcessing}
-          className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-lg py-6 font-bold"
-        >
-          {isProcessing ? "Processing..." : `Yes! Add This To My Order For $${price.toFixed(2)}`}
-        </Button>
-        
-        <Button 
-          onClick={onDecline}
-          variant="outline"
-          className="w-full text-lg py-6 font-bold"
-        >
-          No thanks, I'll pass
-        </Button>
-      </div>
     </div>
   )
 }
