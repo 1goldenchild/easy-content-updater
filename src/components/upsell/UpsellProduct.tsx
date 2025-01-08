@@ -28,10 +28,10 @@ const UpsellProduct = ({
   console.log('UpsellProduct rendering with:', { name, image, price });
   
   return (
-    <div className="bg-[#1A1F2C] p-8 rounded-lg w-full">
+    <div className="bg-[#1A1F2C] p-4 md:p-8 rounded-lg w-full">
       <UpsellHeader />
 
-      <div className="bg-[#2A2F3C] p-6 rounded-lg mb-8 w-full">
+      <div className="bg-[#2A2F3C] p-4 md:p-6 rounded-lg mb-8 w-full">
         <div className="flex flex-col md:flex-row gap-6 items-start max-w-[1200px] mx-auto">
           <ProductImage src={image} alt={name} />
           

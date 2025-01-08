@@ -4,7 +4,8 @@ import { upsellProducts } from "@/components/upsell/upsellProducts"
 const Upsell = () => {
   const currentProduct = {
     ...upsellProducts[0],
-    price: 28 // Override the price to $28
+    price: 28,
+    image: "https://statics.myclickfunnels.com/workspace/eodNKN/image/3343725/file/029c13c846548bb273ac940dd605d3a7.jpeg"
   }
   console.log('Rendering upsell page with product:', currentProduct)
 
