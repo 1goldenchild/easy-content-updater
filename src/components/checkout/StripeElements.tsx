@@ -5,7 +5,7 @@ import {
   PaymentElement,
   useStripe,
   useElements,
-} from "@stripe/stripe-elements"
+} from "@stripe/react-stripe-js"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 import { supabase } from "@/integrations/supabase/client"
