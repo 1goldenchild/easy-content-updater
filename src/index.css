@@ -56,24 +56,24 @@
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   min-height: 45px;
-  display: flex;
-  align-items: center;
-}
-
-.stripe-element {
   width: 100%;
-  padding: 8px 4px;
 }
 
-.stripe-element--focus {
+.StripeElement {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+}
+
+.StripeElement--focus {
   outline: none;
 }
 
-.stripe-element--invalid {
+.StripeElement--invalid {
   border-color: #fa755a;
 }
 
-.stripe-element--webkit-autofill {
+.StripeElement--webkit-autofill {
   background-color: transparent !important;
 }
 
