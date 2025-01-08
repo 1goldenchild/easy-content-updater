@@ -13,18 +13,23 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    console.log('Starting payment submission...')
+    
     if (!stripe || !elements) {
+      console.error('Stripe not initialized:', { stripe, elements })
       toast.error("Stripe has not been properly initialized")
       return
     }
 
     const cardElement = elements.getElement(CardElement)
     if (!cardElement) {
+      console.error('Card element not found')
       toast.error("Card element not found")
       return
     }
 
     try {
+      console.log('Creating payment method...')
       const { error, paymentMethod } = await stripe.createPaymentMethod({
         type: 'card',
         card: cardElement,
@@ -41,7 +46,7 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
         await onSubmit(e, paymentMethod.id)
       }
     } catch (error) {
-      console.error('Unexpected error:', error)
+      console.error('Unexpected error during payment:', error)
       toast.error("An unexpected error occurred. Please try again.")
     }
   }

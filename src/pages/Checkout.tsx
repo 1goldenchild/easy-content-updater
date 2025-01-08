@@ -55,13 +55,19 @@ const Checkout = () => {
     setIsProcessing(true)
     
     try {
-      console.log('Starting payment processing...')
+      console.log('Starting payment processing with data:', { 
+        email: formData.email,
+        package: formData.selectedPackage,
+        isVip: formData.isVip
+      })
+
       const selectedPkg = packages.find(pkg => pkg.id === formData.selectedPackage)
       if (!selectedPkg) {
         throw new Error("Selected package not found")
       }
 
       // Store customer information in Supabase
+      console.log('Storing customer data...')
       const { data: customerData, error: customerError } = await supabase
         .from('customers')
         .upsert({
