@@ -1,7 +1,7 @@
 export const upsellProducts2 = [
   {
     id: 2,
-    name: "Numerology Love Compatibility Guide",
+    name: "The Golden Numerology Guide (2023 Edition)",
     description: "Discover your perfect match and deepen your relationships with our comprehensive love compatibility analysis.",
     price: 27.00,
     priceId: "price_1QepknCibdAmag3rYOiVW2bl",

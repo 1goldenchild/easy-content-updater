@@ -10,6 +10,10 @@ const Upsell = () => {
   const [isProcessing, setIsProcessing] = useState(false)
   const [customerData, setCustomerData] = useState<any>(null)
   
+  const currentProduct = upsellProducts[0]
+  
+  console.log('Upsell page rendering with product:', currentProduct)
+
   useEffect(() => {
     const fetchCustomerData = async () => {
       try {
@@ -80,21 +84,24 @@ const Upsell = () => {
     navigate('/upsell2')
   }
 
+  if (!currentProduct) {
+    console.log('No product found, redirecting to upsell2')
+    navigate('/upsell2')
+    return null
+  }
+
   return (
     <div className="container max-w-4xl mx-auto px-4 py-8">
-      {upsellProducts.map((product) => (
-        <UpsellProduct
-          key={product.id}
-          name={product.name}
-          description={product.description}
-          price={product.price}
-          features={product.features}
-          image={product.image}
-          isProcessing={isProcessing}
-          onAccept={() => handlePurchase(product.priceId)}
-          onDecline={handleDecline}
-        />
-      ))}
+      <UpsellProduct
+        name={currentProduct.name}
+        description={currentProduct.description}
+        price={currentProduct.price}
+        features={currentProduct.features}
+        image={currentProduct.image}
+        isProcessing={isProcessing}
+        onAccept={() => handlePurchase(currentProduct.priceId)}
+        onDecline={handleDecline}
+      />
     </div>
   )
 }

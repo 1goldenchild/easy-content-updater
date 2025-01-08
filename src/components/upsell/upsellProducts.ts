@@ -1,7 +1,7 @@
 export const upsellProducts = [
   {
     id: 1,
-    name: "Money Manifestation Secrets 2024",
+    name: "Get Rich Using Numerology eBook (2023 Edition)",
     description: "Unlock the hidden wealth potential in your numerology chart with our comprehensive money manifestation guide.",
     price: 37.00,
     priceId: "price_1QepknCibdAmag3rYOiVW2bl",

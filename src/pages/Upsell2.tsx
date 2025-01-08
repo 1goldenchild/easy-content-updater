@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { supabase } from "@/integrations/supabase/client"
 import { upsellProducts2 } from "@/components/upsell/upsellProducts2"
-import { upsellProducts } from "@/components/upsell/upsellProducts"
 import UpsellProduct from "@/components/upsell/UpsellProduct"
 import { useToast } from "@/hooks/use-toast"
 
@@ -11,6 +10,8 @@ const Upsell2 = () => {
   const { toast } = useToast()
   const [customerData, setCustomerData] = useState<any>(null)
   const [isProcessing, setIsProcessing] = useState(false)
+
+  const currentProduct = upsellProducts2[0]
 
   useEffect(() => {
     const fetchCustomerData = async () => {
@@ -75,38 +76,25 @@ const Upsell2 = () => {
     navigate("/portal")
   }
 
+  if (!currentProduct) {
+    console.log('No product found, redirecting to portal')
+    navigate('/portal')
+    return null
+  }
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
-        {/* First upsell product */}
-        {upsellProducts.map((product) => (
-          <UpsellProduct
-            key={product.id}
-            name={product.name}
-            description={product.description}
-            price={product.price}
-            features={product.features}
-            image={product.image}
-            isProcessing={isProcessing}
-            onAccept={() => handlePurchase(product.priceId)}
-            onDecline={handleDecline}
-          />
-        ))}
-        
-        {/* Second upsell product */}
-        {upsellProducts2.map((product) => (
-          <UpsellProduct
-            key={product.id}
-            name={product.name}
-            description={product.description}
-            price={product.price}
-            features={product.features}
-            image={product.image}
-            isProcessing={isProcessing}
-            onAccept={() => handlePurchase(product.priceId)}
-            onDecline={handleDecline}
-          />
-        ))}
+        <UpsellProduct
+          name={currentProduct.name}
+          description={currentProduct.description}
+          price={currentProduct.price}
+          features={currentProduct.features}
+          image={currentProduct.image}
+          isProcessing={isProcessing}
+          onAccept={() => handlePurchase(currentProduct.priceId)}
+          onDecline={handleDecline}
+        />
       </div>
     </div>
   )
