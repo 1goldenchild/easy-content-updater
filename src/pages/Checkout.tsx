@@ -84,7 +84,7 @@ const Checkout = () => {
 
       console.log('Payment successful:', data)
       toast.success("Payment processed successfully!")
-      navigate("/success")
+      navigate("/upsell/1") // Redirect to first upsell instead of success page
     } catch (error) {
       console.error('Payment error:', error)
       toast.error(error.message || "Payment failed. Please try again.")
