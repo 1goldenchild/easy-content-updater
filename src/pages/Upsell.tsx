@@ -4,7 +4,7 @@ import { upsellProducts } from "@/components/upsell/upsellProducts"
 const Upsell = () => {
   const currentProduct = {
     ...upsellProducts[0],
-    price: 28 // Override the price to $28
+    price: 37 // Set price back to $37 as shown in the image
   }
   console.log('Rendering upsell page with product:', currentProduct)
 
@@ -19,7 +19,7 @@ const Upsell = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#121212] py-8">
+    <div className="min-h-screen bg-[#171B26] py-16">
       <UpsellProduct
         name={currentProduct.name}
         description={currentProduct.description}
