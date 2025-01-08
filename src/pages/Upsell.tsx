@@ -1,24 +1,18 @@
 import { useState, useEffect } from "react"
-import { useNavigate, useLocation, Navigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
 import { supabase } from "@/integrations/supabase/client"
 import UpsellProduct from "@/components/upsell/UpsellProduct"
 import { upsellProducts } from "@/components/upsell/upsellProducts"
 
-const UpsellContent = () => {
+const Upsell = () => {
   const navigate = useNavigate()
-  const location = useLocation()
   const [isProcessing, setIsProcessing] = useState(false)
   const [customerData, setCustomerData] = useState<any>(null)
-  const [error, setError] = useState<string | null>(null)
   
   const currentProduct = upsellProducts[0]
-
-  console.log('Upsell Component - Current state:', {
-    productFound: !!currentProduct,
-    productDetails: currentProduct,
-    isProcessing
-  })
+  
+  console.log('Upsell page rendering with product:', currentProduct)
 
   useEffect(() => {
     const fetchCustomerData = async () => {
@@ -28,7 +22,7 @@ const UpsellContent = () => {
         
         if (!session?.user?.email) {
           console.log('No user session found')
-          setError('No user session found')
+          navigate('/success')
           return
         }
 
@@ -40,20 +34,17 @@ const UpsellContent = () => {
 
         if (dbError) {
           console.error('Error fetching customer:', dbError)
-          setError(dbError.message)
+          navigate('/success')
           return
         }
 
         if (data) {
-          console.log('Customer data fetched successfully')
+          console.log('Customer data fetched:', data)
           setCustomerData(data)
-        } else {
-          console.log('No customer data found')
-          setError('Customer not found')
         }
       } catch (err) {
         console.error('Error in fetchCustomerData:', err)
-        setError(err.message)
+        navigate('/success')
       }
     }
 
@@ -63,14 +54,7 @@ const UpsellContent = () => {
   const handleAccept = async () => {
     if (!customerData) {
       console.error('No customer data available')
-      toast.error("Customer information not found")
-      navigate('/success')
-      return
-    }
-
-    if (!currentProduct) {
-      console.error('No product found')
-      toast.error("Product not found")
+      toast.error("Unable to process. Please try again.")
       navigate('/success')
       return
     }
@@ -78,9 +62,9 @@ const UpsellContent = () => {
     setIsProcessing(true)
     
     try {
-      console.log('Processing one-click upsell for:', {
-        productName: currentProduct.name,
-        customerEmail: customerData.email
+      console.log('Processing upsell payment for:', {
+        customerEmail: customerData.email,
+        product: currentProduct.name
       })
       
       const { data, error } = await supabase.functions.invoke('create-payment', {
@@ -93,23 +77,18 @@ const UpsellContent = () => {
         }
       })
 
-      if (error) {
-        console.error('Payment processing error:', error)
-        throw error
-      }
+      if (error) throw error
       
       if (!data?.success) {
-        console.error('Payment failed:', data?.error)
         throw new Error(data?.error || "Payment failed")
       }
 
-      console.log('Payment successful')
+      console.log('Upsell payment successful')
       toast.success("Thank you for your purchase!")
       navigate('/success')
-    } catch (error) {
+    } catch (error: any) {
       console.error('Upsell payment error:', error)
       toast.error(error.message || "Payment failed. Please try again.")
-      navigate('/success')
     } finally {
       setIsProcessing(false)
     }
@@ -126,12 +105,7 @@ const UpsellContent = () => {
     return null
   }
 
-  if (error) {
-    console.log('Error state:', error)
-    return null
-  }
-
-  console.log('Rendering UpsellProduct with:', currentProduct)
+  console.log('Rendering UpsellProduct component with:', currentProduct)
   return (
     <div className="container max-w-4xl mx-auto px-4 py-8">
       <UpsellProduct
@@ -142,10 +116,6 @@ const UpsellContent = () => {
       />
     </div>
   )
-}
-
-const Upsell = () => {
-  return <UpsellContent />
 }
 
 export default Upsell
