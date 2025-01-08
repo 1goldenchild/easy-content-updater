@@ -9,6 +9,7 @@ const Upsell = () => {
   const navigate = useNavigate()
   const [isProcessing, setIsProcessing] = useState(false)
   const [customerData, setCustomerData] = useState<any>(null)
+  const [isLoading, setIsLoading] = useState(true)
   
   const currentProduct = upsellProducts[0]
   
@@ -17,22 +18,44 @@ const Upsell = () => {
   useEffect(() => {
     const fetchCustomerData = async () => {
       try {
-        console.log('Fetching customer data...')
+        setIsLoading(true)
+        console.log('Attempting to fetch customer data...')
+        
+        // Test the connection first
+        const { data: connectionTest, error: connectionError } = await supabase
+          .from('customers')
+          .select('count(*)')
+          .limit(1)
+          
+        if (connectionError) {
+          console.error('Connection test error:', connectionError)
+          throw connectionError
+        }
+        
+        console.log('Connection test successful:', connectionTest)
+
         const { data: customers, error } = await supabase
           .from("customers")
           .select("*")
           .order("created_at", { ascending: false })
           .limit(1)
         
-        if (error) throw error
+        if (error) {
+          console.error('Customer fetch error:', error)
+          throw error
+        }
         
         if (customers && customers.length > 0) {
-          console.log('Customer data fetched:', customers[0])
+          console.log('Customer data fetched successfully:', customers[0])
           setCustomerData(customers[0])
+        } else {
+          console.log('No customer data found')
         }
       } catch (err) {
         console.error('Error in fetchCustomerData:', err)
-        toast.error("Failed to load customer data")
+        toast.error("Unable to load customer data. Please try again later.")
+      } finally {
+        setIsLoading(false)
       }
     }
 
@@ -40,6 +63,12 @@ const Upsell = () => {
   }, [])
 
   const handlePurchase = async () => {
+    if (!customerData) {
+      console.error('No customer data available')
+      toast.error("Unable to process purchase. Please try again later.")
+      return
+    }
+
     setIsProcessing(true)
     try {
       console.log('Processing upsell purchase:', {
@@ -91,6 +120,14 @@ const Upsell = () => {
     console.log('No product found, redirecting to upsell2')
     navigate('/upsell2')
     return null
+  }
+
+  if (isLoading) {
+    return (
+      <div className="container max-w-4xl mx-auto px-4 py-8">
+        <div className="text-center">Loading...</div>
+      </div>
+    )
   }
 
   return (
