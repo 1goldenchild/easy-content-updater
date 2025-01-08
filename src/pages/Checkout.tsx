@@ -61,9 +61,33 @@ const Checkout = () => {
         throw new Error("Selected package not found")
       }
 
-      // Store customer information for upsell
-      sessionStorage.setItem('customerEmail', formData.email)
-      sessionStorage.setItem('customerName', `${formData.firstName} ${formData.lastName}`)
+      // Store customer information in Supabase
+      const { data: customerData, error: customerError } = await supabase
+        .from('customers')
+        .upsert({
+          email: formData.email,
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          metadata: {
+            address: formData.address,
+            apartment: formData.apartment,
+            country: formData.country,
+            state: formData.state,
+            city: formData.city,
+            postal_code: formData.postalCode
+          }
+        }, {
+          onConflict: 'email'
+        })
+        .select()
+        .single()
+
+      if (customerError) {
+        console.error('Error storing customer data:', customerError)
+        throw new Error("Failed to store customer information")
+      }
+
+      console.log('Customer data stored successfully:', customerData)
 
       const total = selectedPkg.price + (formData.isVip ? 11 : 0)
       console.log('Processing payment for amount:', total)
@@ -98,7 +122,6 @@ const Checkout = () => {
     }
   }
 
-  // Calculate selected package and total
   const selectedPackage = packages.find(pkg => pkg.id === formData.selectedPackage)
   const total = (selectedPackage?.price || 0) + (formData.isVip ? 11 : 0)
 

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
@@ -27,14 +27,38 @@ const UpsellContent = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const [isProcessing, setIsProcessing] = useState(false)
+  const [customerData, setCustomerData] = useState<any>(null)
   
   const currentStep = parseInt(location.pathname.split('/').pop() || '1')
   const currentProduct = upsellProducts[currentStep - 1]
-  const customerEmail = sessionStorage.getItem('customerEmail')
-  const customerName = sessionStorage.getItem('customerName')
+
+  useEffect(() => {
+    const fetchCustomerData = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session?.user?.email) {
+        const { data, error } = await supabase
+          .from('customers')
+          .select('*')
+          .eq('email', session.user.email)
+          .single()
+
+        if (error) {
+          console.error('Error fetching customer:', error)
+          navigate('/success')
+          return
+        }
+
+        if (data) {
+          setCustomerData(data)
+        }
+      }
+    }
+
+    fetchCustomerData()
+  }, [navigate])
 
   const handleAccept = async () => {
-    if (!customerEmail || !customerName) {
+    if (!customerData) {
       toast.error("Customer information not found")
       navigate('/success')
       return
@@ -50,8 +74,8 @@ const UpsellContent = () => {
           priceId: currentProduct.priceId,
           amount: currentProduct.price,
           isOneClick: true,
-          email: customerEmail,
-          name: customerName
+          email: customerData.email,
+          name: `${customerData.first_name} ${customerData.last_name}`
         }
       })
 
@@ -60,7 +84,6 @@ const UpsellContent = () => {
 
       toast.success("Thank you for your purchase!")
       
-      // Navigate to next upsell or success page
       if (currentStep === 1) {
         navigate('/upsell/2')
       } else {
@@ -69,7 +92,7 @@ const UpsellContent = () => {
     } catch (error) {
       console.error('Upsell payment error:', error)
       toast.error(error.message || "Payment failed. Please try again.")
-      navigate('/success') // Redirect to success page on error
+      navigate('/success')
     } finally {
       setIsProcessing(false)
     }
