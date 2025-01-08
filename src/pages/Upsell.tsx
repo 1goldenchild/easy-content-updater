@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useNavigate, useLocation } from "react-router-dom"
+import { useNavigate, useLocation, Navigate } from "react-router-dom"
 import { toast } from "sonner"
 import { supabase } from "@/integrations/supabase/client"
 import UpsellProduct from "@/components/upsell/UpsellProduct"
@@ -11,11 +11,18 @@ const UpsellContent = () => {
   const [isProcessing, setIsProcessing] = useState(false)
   const [customerData, setCustomerData] = useState<any>(null)
   
+  // Extract step from URL or default to 1
   const currentStep = parseInt(location.pathname.split('/').pop() || '1')
   const currentProduct = upsellProducts[currentStep - 1]
 
   console.log('Current step:', currentStep)
   console.log('Current product:', currentProduct)
+
+  // If we're on the base /upsell route, redirect to /upsell/1
+  if (location.pathname === '/upsell') {
+    console.log('Redirecting to /upsell/1')
+    return <Navigate to="/upsell/1" replace />
+  }
 
   useEffect(() => {
     if (!currentProduct) {
