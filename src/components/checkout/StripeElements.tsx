@@ -63,11 +63,9 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
         // Clear the card input before navigation
         cardElement.clear()
         
-        // Small delay before navigation to ensure cleanup
-        setTimeout(() => {
-          console.log('Navigating to first upsell...')
-          navigate('/upsell')
-        }, 100)
+        // Navigate directly to /upsell
+        console.log('Navigating to upsell page...')
+        navigate('/upsell')
         
       } catch (submitError) {
         console.error('Error during payment submission:', submitError)
