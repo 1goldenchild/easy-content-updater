@@ -11,15 +11,17 @@ import VIPOption from "@/components/checkout/VIPOption"
 import { packages } from "@/components/checkout/PackageSelection"
 import { supabase } from "@/integrations/supabase/client"
 
-// Initialize Stripe with explicit error handling
+// Initialize Stripe with detailed logging
+console.log('Initializing Stripe...')
 const stripePromise = loadStripe('pk_test_51PCkQ1Cg2w6KJiVSPxYxRXHMZlrAVxqWk5TAFpQGHyLXQXOJBEeQWEhvDVHBXXVrg4WbF2V6tWRHXkhkYsrQEHVB00vFRFNTZf')
   .then(stripe => {
     if (!stripe) {
-      console.error('Failed to initialize Stripe')
+      const error = 'Failed to initialize Stripe - stripe object is null'
+      console.error(error)
       toast.error('Payment system initialization failed')
       return null
     }
-    console.log('Stripe initialized successfully')
+    console.log('Stripe initialized successfully:', stripe)
     return stripe
   })
   .catch(error => {
@@ -54,11 +56,11 @@ const Checkout = () => {
     setIsProcessing(true)
     
     try {
+      console.log('Starting payment processing...')
       const selectedPackage = packages.find(pkg => pkg.id === formData.selectedPackage)
       if (!selectedPackage) throw new Error("Package not found")
 
       const total = selectedPackage.price + (formData.isVip ? 11 : 0)
-
       console.log('Processing payment for amount:', total)
 
       const { data, error } = await supabase.functions.invoke('create-payment', {
@@ -78,7 +80,6 @@ const Checkout = () => {
       }
 
       console.log('Payment successful:', data)
-      
       toast.success("Payment processed successfully!")
       navigate("/success")
     } catch (error) {
@@ -88,9 +89,6 @@ const Checkout = () => {
       setIsProcessing(false)
     }
   }
-
-  const selectedPackage = packages.find(pkg => pkg.id === formData.selectedPackage)
-  const total = (selectedPackage?.price || 0) + (formData.isVip ? 11 : 0)
 
   return (
     <div className="container max-w-4xl mx-auto px-4 py-8">
