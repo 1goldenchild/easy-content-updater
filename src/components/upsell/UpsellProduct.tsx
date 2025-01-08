@@ -32,7 +32,7 @@ const UpsellProduct = ({
             Offer!
           </span>
         </h1>
-        <p className="text-gray-400 font-semibold text-lg">
+        <p className="text-white font-semibold text-lg">
           Enhance Your Numerology Reading with Advanced Money Manifestation Secrets
         </p>
       </div>
@@ -57,7 +57,7 @@ const UpsellProduct = ({
           </div>
           <div className="w-full md:w-2/3">
             <h2 className="text-2xl font-semibold mb-4 text-white">{name}</h2>
-            <p className="text-gray-300 font-medium mb-4">{description}</p>
+            <p className="text-white font-bold mb-4">{description}</p>
             <ul className="space-y-2">
               {features.map((feature, index) => (
                 <li key={index} className="flex items-center text-gray-300">
