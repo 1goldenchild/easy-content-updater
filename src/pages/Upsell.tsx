@@ -37,8 +37,8 @@ const Upsell = () => {
           alt="Get Rich Using Numerology eBook"
         />
         <ProductDetails
-          title="Get Rich Using Numerology eBook (2023 Edition)"
-          description="Discover how the elites use numerology to amass extraordinary wealth."
+          title="The Golden Numerology Guide (2023 Edition)"
+          description="Learn all the secret tactics the numerology community won't tell you!"
           features={features}
           originalPrice={29.38}
           discountedPrice={19.10}
