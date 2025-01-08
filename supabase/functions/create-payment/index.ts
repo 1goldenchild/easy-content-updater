@@ -7,14 +7,13 @@ const corsHeaders = {
 }
 
 serve(async (req) => {
-  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders })
   }
 
   try {
-    const { priceId, email, name, amount, customerId } = await req.json()
-    console.log('Payment request received:', { priceId, email, amount, customerId })
+    const { email, name, priceId, amount } = await req.json()
+    console.log('Payment request received:', { email, priceId, amount })
 
     if (!priceId) {
       throw new Error('Price ID is required')
@@ -24,45 +23,39 @@ serve(async (req) => {
       apiVersion: '2023-10-16',
     })
 
-    let customer
-    if (customerId) {
-      console.log('Using existing customer:', customerId)
-      customer = { id: customerId }
-    } else {
-      // First, check if customer exists
-      console.log('Checking for existing customer with email:', email)
-      const existingCustomers = await stripe.customers.list({
-        email: email,
-        limit: 1
-      })
+    // Check if customer exists or create new one
+    console.log('Looking up customer with email:', email)
+    const customers = await stripe.customers.list({
+      email: email,
+      limit: 1
+    })
 
-      if (existingCustomers.data.length > 0) {
-        customer = existingCustomers.data[0]
-        console.log('Found existing customer:', customer.id)
-      } else {
-        // Create new customer
-        customer = await stripe.customers.create({
-          email: email,
-          name: name
-        })
-        console.log('Created new customer:', customer.id)
-      }
+    let customerId
+    if (customers.data.length > 0) {
+      customerId = customers.data[0].id
+      console.log('Found existing customer:', customerId)
+    } else {
+      const customer = await stripe.customers.create({
+        email: email,
+        name: name
+      })
+      customerId = customer.id
+      console.log('Created new customer:', customerId)
     }
 
-    // Create checkout session with detailed logging
+    // Create checkout session
     console.log('Creating checkout session with price ID:', priceId)
     const session = await stripe.checkout.sessions.create({
-      customer: customer.id,
+      customer: customerId,
       line_items: [{
         price: priceId,
         quantity: 1,
       }],
       mode: 'payment',
-      success_url: `${req.headers.get('origin')}/upsell/1`,
+      success_url: `${req.headers.get('origin')}/upsell`,
       cancel_url: `${req.headers.get('origin')}/checkout`,
       metadata: {
-        customerEmail: email,
-        productType: 'numerology_analysis'
+        customerEmail: email
       }
     })
 
@@ -84,8 +77,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({ 
         success: false, 
-        error: error.message,
-        details: error.stack 
+        error: error.message 
       }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },

@@ -55,27 +55,24 @@ const Checkout = () => {
     setIsProcessing(true)
     
     try {
-      console.log('Starting payment processing with data:', { 
-        email: formData.email,
-        package: formData.selectedPackage,
-        isVip: formData.isVip
-      })
-
       const selectedPkg = packages.find(pkg => pkg.id === formData.selectedPackage)
       if (!selectedPkg) {
         throw new Error("Selected package not found")
       }
 
-      const total = selectedPkg.price + (formData.isVip ? 11 : 0)
-      console.log('Processing payment for amount:', total)
+      console.log('Creating payment session with data:', {
+        email: formData.email,
+        name: `${formData.firstName} ${formData.lastName}`,
+        priceId: selectedPkg.priceId,
+        amount: selectedPkg.price + (formData.isVip ? 11 : 0)
+      })
 
       const { data, error } = await supabase.functions.invoke('create-payment', {
         body: {
-          paymentMethod,
-          amount: total,
           email: formData.email,
           name: `${formData.firstName} ${formData.lastName}`,
-          priceId: selectedPkg.priceId
+          priceId: selectedPkg.priceId,
+          amount: selectedPkg.price + (formData.isVip ? 11 : 0)
         }
       })
 
@@ -88,9 +85,15 @@ const Checkout = () => {
         throw new Error(data.error || "Payment failed")
       }
 
-      console.log('Payment successful:', data)
-      toast.success("Payment processed successfully!")
-      navigate("/upsell/1")
+      console.log('Payment session created:', data)
+      
+      // Redirect to Stripe Checkout
+      if (data.url) {
+        window.location.href = data.url
+      } else {
+        throw new Error("No checkout URL received")
+      }
+
     } catch (error) {
       console.error('Payment error:', error)
       toast.error(error.message || "Payment failed. Please try again.")
