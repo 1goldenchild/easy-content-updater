@@ -24,7 +24,7 @@ const UpsellProduct = ({
   console.log('UpsellProduct rendering with:', { name, image, price })
   
   return (
-    <div className="w-full bg-[#1A1F2C] p-4 md:p-8">
+    <div className="w-full bg-[#1A1F2C]">
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none animate-shine bg-gradient-to-r from-white via-purple-500 to-white bg-[length:200%_auto] bg-clip-text text-transparent">
           Special One-Time{" "}
@@ -37,7 +37,7 @@ const UpsellProduct = ({
         </p>
       </div>
 
-      <div className="bg-[#2A2F3C] p-4 md:p-6">
+      <div className="bg-[#2A2F3C]">
         <div className="flex flex-col md:flex-row gap-6 items-center">
           <div className="w-full md:w-1/3">
             <div className="relative">
