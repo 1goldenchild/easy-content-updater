@@ -3,16 +3,20 @@ import { Button } from "@/components/ui/button"
 import { loadStripe } from "@stripe/stripe-js"
 import { Elements } from "@stripe/react-stripe-js"
 import { toast } from "sonner"
+import { useNavigate } from "react-router-dom"
 import ContactInfo from "@/components/checkout/ContactInfo"
 import PackageSelection from "@/components/checkout/PackageSelection"
 import BillingInfo from "@/components/checkout/BillingInfo"
 import StripeElements from "@/components/checkout/StripeElements"
 import VIPOption from "@/components/checkout/VIPOption"
 import { packages } from "@/components/checkout/PackageSelection"
+import { supabase } from "@/integrations/supabase/client"
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
 
 const Checkout = () => {
+  const navigate = useNavigate()
+  const [isProcessing, setIsProcessing] = useState(false)
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -31,9 +35,39 @@ const Checkout = () => {
     setFormData(prev => ({ ...prev, [field]: value }))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent, paymentMethod: string) => {
     e.preventDefault()
-    toast.success("Processing payment...")
+    setIsProcessing(true)
+    
+    try {
+      const selectedPackage = packages.find(pkg => pkg.id === formData.selectedPackage)
+      if (!selectedPackage) throw new Error("Package not found")
+
+      const total = selectedPackage.price + (formData.isVip ? 11 : 0)
+
+      console.log('Processing payment for amount:', total)
+
+      const { data, error } = await supabase.functions.invoke('create-payment', {
+        body: {
+          paymentMethod,
+          amount: total,
+          email: formData.email,
+          name: `${formData.firstName} ${formData.lastName}`
+        }
+      })
+
+      if (error) throw error
+
+      console.log('Payment successful:', data)
+      
+      toast.success("Payment processed successfully!")
+      navigate("/success")
+    } catch (error) {
+      console.error('Payment error:', error)
+      toast.error(error.message || "Payment failed. Please try again.")
+    } finally {
+      setIsProcessing(false)
+    }
   }
 
   const selectedPackage = packages.find(pkg => pkg.id === formData.selectedPackage)
@@ -41,7 +75,7 @@ const Checkout = () => {
 
   return (
     <div className="container max-w-4xl mx-auto px-4 py-8">
-      <form onSubmit={handleSubmit} className="space-y-8 bg-[#1A1F2C] p-6 rounded-lg">
+      <form className="space-y-8 bg-[#1A1F2C] p-6 rounded-lg">
         <ContactInfo
           firstName={formData.firstName}
           lastName={formData.lastName}
@@ -65,7 +99,7 @@ const Checkout = () => {
         />
 
         <Elements stripe={stripePromise}>
-          <StripeElements />
+          <StripeElements onSubmit={handleSubmit} isProcessing={isProcessing} />
         </Elements>
 
         <VIPOption
@@ -79,13 +113,6 @@ const Checkout = () => {
             <span className="text-xl font-bold">${total.toFixed(2)}</span>
           </div>
         </div>
-
-        <Button
-          type="submit"
-          className="w-full bg-purple-500 hover:bg-purple-600 text-white py-6"
-        >
-          Submit
-        </Button>
 
         <p className="text-center text-sm text-gray-400">
           We Never Share Your Information With Anyone
