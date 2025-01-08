@@ -13,11 +13,11 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Starting payment submission...')
+    console.log('Form submitted, starting payment process...')
     
     if (!stripe || !elements) {
       console.error('Stripe not initialized:', { stripe, elements })
-      toast.error("Stripe has not been properly initialized")
+      toast.error("Payment system not initialized")
       return
     }
 
