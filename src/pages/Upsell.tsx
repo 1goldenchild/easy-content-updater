@@ -8,71 +8,61 @@ import { upsellProducts } from "@/components/upsell/upsellProducts"
 const Upsell = () => {
   const navigate = useNavigate()
   const [isProcessing, setIsProcessing] = useState(false)
-  const [customerData, setCustomerData] = useState<any>(null)
-  
+  const [customerEmail, setCustomerEmail] = useState<string | null>(null)
   const currentProduct = upsellProducts[0]
   
-  console.log('Upsell page rendering with product:', currentProduct)
-
   useEffect(() => {
-    const fetchCustomerData = async () => {
-      try {
-        console.log('Fetching customer data...')
-        const { data: customers } = await supabase
-          .from('customers')
-          .select('*')
-          .order('created_at', { ascending: false })
-          .limit(1)
-        
-        if (customers && customers.length > 0) {
-          console.log('Customer data fetched:', customers[0])
-          setCustomerData(customers[0])
-        }
-      } catch (err) {
-        console.error('Error in fetchCustomerData:', err)
+    const getCustomerEmail = async () => {
+      const { data, error } = await supabase
+        .from('customers')
+        .select('email')
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .single()
+      
+      if (error) {
+        console.error('Error fetching customer:', error)
+        return
+      }
+
+      if (data?.email) {
+        console.log('Customer email found:', data.email)
+        setCustomerEmail(data.email)
       }
     }
 
-    fetchCustomerData()
+    getCustomerEmail()
   }, [])
 
   const handlePurchase = async () => {
-    if (!customerData?.email) {
+    if (!customerEmail) {
       console.error('No customer email found')
+      toast.error("Unable to process purchase. Please try again.")
       return
     }
 
     setIsProcessing(true)
     try {
-      console.log('Processing upsell purchase with customer data:', {
-        email: customerData.email,
-        stripeCustomerId: customerData?.stripe_customer_id
-      })
+      console.log('Processing upsell purchase for:', customerEmail)
       
       const { data, error } = await supabase.functions.invoke('create-payment', {
         body: {
+          customerEmail,
           priceId: currentProduct.priceId,
-          customerId: customerData?.stripe_customer_id,
-          customerEmail: customerData.email,
           amount: currentProduct.price,
           mode: 'payment'
         }
       })
 
-      if (error) {
-        console.error('Payment processing error:', error)
-        throw error
-      }
+      if (error) throw error
 
       if (data?.url) {
-        console.log('Redirecting to Stripe checkout:', data.url)
         window.location.href = data.url
       } else {
-        console.log('No payment URL received, navigating to upsell2')
         navigate('/upsell2')
       }
     } catch (error) {
-      console.error("Error creating checkout session:", error)
+      console.error("Payment error:", error)
       toast.error("Failed to process purchase")
       navigate('/upsell2')
     } finally {
@@ -81,12 +71,10 @@ const Upsell = () => {
   }
 
   const handleDecline = () => {
-    console.log('User declined first upsell, navigating to second upsell')
     navigate('/upsell2')
   }
 
   if (!currentProduct) {
-    console.log('No product found, redirecting to upsell2')
     navigate('/upsell2')
     return null
   }
