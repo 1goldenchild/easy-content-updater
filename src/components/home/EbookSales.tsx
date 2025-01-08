@@ -1,6 +1,8 @@
 import { motion } from "framer-motion"
 import { ArrowRight, CheckCircle2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { supabase } from "@/integrations/supabase/client"
+import { toast } from "sonner"
 
 const EbookSales = () => {
   const benefits = [
@@ -11,6 +13,25 @@ const EbookSales = () => {
     "Daily Wealth Rituals & Practices",
     "Compatibility with Business Partners"
   ]
+
+  const handleCheckout = async () => {
+    try {
+      const { data, error } = await supabase.functions.invoke('create-checkout', {
+        body: { priceId: 'price_1QenCoCg2w6KJiVSH7uDgmYQ' }
+      })
+
+      if (error) throw error
+      
+      if (data?.url) {
+        window.location.href = data.url
+      } else {
+        throw new Error('No checkout URL received')
+      }
+    } catch (error) {
+      console.error('Checkout error:', error)
+      toast.error('Unable to start checkout. Please try again.')
+    }
+  }
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-b from-black to-[#001a00] text-white py-12 px-4">
@@ -80,7 +101,7 @@ const EbookSales = () => {
               <Button 
                 size="lg"
                 className="w-full sm:w-auto bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white font-bold text-lg px-8 py-6 h-auto"
-                onClick={() => window.location.href = "#checkout"}
+                onClick={handleCheckout}
               >
                 <span className="flex items-center gap-2">
                   Get Instant Access
