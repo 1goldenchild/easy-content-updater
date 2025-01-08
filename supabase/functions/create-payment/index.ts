@@ -13,37 +13,57 @@ serve(async (req) => {
   }
 
   try {
-    const { priceId, customerId, customerEmail, amount, mode = 'payment' } = await req.json()
-    console.log('Creating payment with:', { priceId, customerId, customerEmail, amount, mode })
-    
+    console.log('Starting payment processing...')
+    const { priceId, email, name, amount } = await req.json()
+    console.log('Payment request details:', { priceId, email, amount })
+
+    if (!priceId) {
+      throw new Error('Price ID is required')
+    }
+
     const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') || '', {
       apiVersion: '2023-10-16',
     })
 
-    // Create or get customer
+    // First, check if customer exists
+    console.log('Checking for existing customer with email:', email)
+    const existingCustomers = await stripe.customers.list({
+      email: email,
+      limit: 1
+    })
+
     let customer
-    if (customerId) {
-      customer = await stripe.customers.retrieve(customerId)
-    } else if (customerEmail) {
-      const customers = await stripe.customers.list({ email: customerEmail, limit: 1 })
-      customer = customers.data[0] || await stripe.customers.create({ email: customerEmail })
+    if (existingCustomers.data.length > 0) {
+      customer = existingCustomers.data[0]
+      console.log('Found existing customer:', customer.id)
     } else {
-      throw new Error('Either customerId or customerEmail is required')
+      // Create new customer
+      customer = await stripe.customers.create({
+        email: email,
+        name: name
+      })
+      console.log('Created new customer:', customer.id)
     }
 
-    console.log('Creating checkout session...')
+    // Create checkout session
+    console.log('Creating checkout session with price ID:', priceId)
     const session = await stripe.checkout.sessions.create({
       customer: customer.id,
       line_items: [{
         price: priceId,
         quantity: 1,
       }],
-      mode: mode,
-      success_url: `${req.headers.get('origin')}/upsell2`,
-      cancel_url: `${req.headers.get('origin')}/upsell2`,
+      mode: 'payment',
+      success_url: `${req.headers.get('origin')}/upsell`,
+      cancel_url: `${req.headers.get('origin')}/checkout`,
+      metadata: {
+        customerEmail: email,
+        productType: 'numerology_analysis'
+      }
     })
 
-    console.log('Checkout session created:', session.id)
+    console.log('Checkout session created successfully:', session.id)
+    
     return new Response(
       JSON.stringify({ success: true, url: session.url }),
       { 

@@ -3,6 +3,7 @@ import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 import { useNavigate } from "react-router-dom"
+import { supabase } from "@/integrations/supabase/client"
 
 interface StripeElementsProps {
   onSubmit: (e: React.FormEvent, paymentMethod: string) => Promise<void>
