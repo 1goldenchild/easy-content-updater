@@ -8,8 +8,18 @@ const Upsell = () => {
   }
   console.log('Rendering upsell page with product:', currentProduct)
 
+  const handleAccept = () => {
+    console.log('Accept clicked')
+    // Add your ClickFunnels acceptance logic here
+  }
+
+  const handleDecline = () => {
+    console.log('Decline clicked')
+    // Add your ClickFunnels decline logic here
+  }
+
   return (
-    <div className="min-h-screen bg-[#121212]">
+    <div className="min-h-screen bg-[#121212] py-8">
       <UpsellProduct
         name={currentProduct.name}
         description={currentProduct.description}
@@ -17,8 +27,8 @@ const Upsell = () => {
         features={currentProduct.features}
         image={currentProduct.image}
         isProcessing={false}
-        onAccept={() => console.log('Accept clicked')}
-        onDecline={() => console.log('Decline clicked')}
+        onAccept={handleAccept}
+        onDecline={handleDecline}
       />
     </div>
   )
