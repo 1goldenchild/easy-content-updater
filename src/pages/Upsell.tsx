@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 import { loadStripe } from "@stripe/stripe-js"
+import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 import { supabase } from "@/integrations/supabase/client"
@@ -26,25 +27,41 @@ const upsellProducts = [
   }
 ]
 
-const Upsell = () => {
+const UpsellContent = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const [isProcessing, setIsProcessing] = useState(false)
+  const stripe = useStripe()
+  const elements = useElements()
   
-  // Get the current upsell step from the URL (1 or 2)
   const currentStep = parseInt(location.pathname.split('/').pop() || '1')
   const currentProduct = upsellProducts[currentStep - 1]
 
-  const handleAccept = async () => {
+  const handleAccept = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!stripe || !elements) return
+
     setIsProcessing(true)
     try {
       console.log('Processing upsell payment for:', currentProduct.name)
       
-      const stripe = await stripePromise
-      if (!stripe) throw new Error("Stripe failed to initialize")
+      // Create payment method
+      const { error: paymentMethodError, paymentMethod } = await stripe.createPaymentMethod({
+        elements,
+        params: {
+          payment_method_data: {
+            billing_details: {}
+          }
+        }
+      })
+
+      if (paymentMethodError) {
+        throw paymentMethodError
+      }
 
       const { data, error } = await supabase.functions.invoke('create-payment', {
         body: {
+          paymentMethod: paymentMethod.id,
           amount: currentProduct.price,
           priceId: currentProduct.priceId,
         }
@@ -104,24 +121,39 @@ const Upsell = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4">
-          <Button 
-            onClick={handleAccept}
-            disabled={isProcessing}
-            className="w-full bg-purple-600 hover:bg-purple-700 text-lg py-6"
-          >
-            {isProcessing ? "Processing..." : `Yes! Add ${currentProduct.name}`}
-          </Button>
-          <Button 
-            onClick={handleDecline}
-            variant="outline"
-            className="w-full text-lg py-6"
-          >
-            No thanks, I'll pass
-          </Button>
-        </div>
+        <form onSubmit={handleAccept} className="space-y-6">
+          <div className="bg-[#2A2F3C] p-6 rounded-lg">
+            <PaymentElement />
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <Button 
+              type="submit"
+              disabled={isProcessing || !stripe}
+              className="w-full bg-purple-600 hover:bg-purple-700 text-lg py-6"
+            >
+              {isProcessing ? "Processing..." : `Yes! Add ${currentProduct.name}`}
+            </Button>
+            <Button 
+              type="button"
+              onClick={handleDecline}
+              variant="outline"
+              className="w-full text-lg py-6"
+            >
+              No thanks, I'll pass
+            </Button>
+          </div>
+        </form>
       </div>
     </div>
+  )
+}
+
+const Upsell = () => {
+  return (
+    <Elements stripe={stripePromise}>
+      <UpsellContent />
+    </Elements>
   )
 }
 

@@ -12,31 +12,24 @@ serve(async (req) => {
   }
 
   try {
-    const { paymentMethod, amount, email, name } = await req.json()
-
-    console.log('Creating payment with:', { amount, email, name })
+    const { paymentMethod, amount, email, name, priceId } = await req.json()
+    
+    console.log('Creating payment with:', { amount, email, name, priceId })
     
     const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') || '', {
       apiVersion: '2023-10-16',
     })
 
-    // Create a customer
-    const customer = await stripe.customers.create({
-      email,
-      name,
-      payment_method: paymentMethod,
-    })
-
-    console.log('Customer created:', customer.id)
-
     // Create a payment intent
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Math.round(amount * 100), // Convert to cents
       currency: 'usd',
-      customer: customer.id,
       payment_method: paymentMethod,
-      off_session: true,
       confirm: true,
+      automatic_payment_methods: {
+        enabled: true,
+        allow_redirects: 'never'
+      }
     })
 
     console.log('Payment intent created:', paymentIntent.id)
