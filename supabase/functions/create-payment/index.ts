@@ -13,8 +13,8 @@ serve(async (req) => {
   }
 
   try {
-    const { priceId, customerId, customerEmail, amount } = await req.json()
-    console.log('Creating payment with:', { priceId, customerId, amount })
+    const { priceId, customerId, customerEmail, amount, mode = 'payment' } = await req.json()
+    console.log('Creating payment with:', { priceId, customerId, customerEmail, amount, mode })
     
     const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') || '', {
       apiVersion: '2023-10-16',
@@ -31,19 +31,19 @@ serve(async (req) => {
       throw new Error('Either customerId or customerEmail is required')
     }
 
-    // Create checkout session
+    console.log('Creating checkout session...')
     const session = await stripe.checkout.sessions.create({
       customer: customer.id,
-      payment_method_types: ['card'],
       line_items: [{
         price: priceId,
         quantity: 1,
       }],
-      mode: 'payment',
+      mode: mode,
       success_url: `${req.headers.get('origin')}/upsell2`,
       cancel_url: `${req.headers.get('origin')}/upsell2`,
     })
 
+    console.log('Checkout session created:', session.id)
     return new Response(
       JSON.stringify({ success: true, url: session.url }),
       { 

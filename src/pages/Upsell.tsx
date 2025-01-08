@@ -57,8 +57,9 @@ const Upsell = () => {
         body: {
           priceId: currentProduct.priceId,
           customerId: customerData?.stripe_customer_id,
-          customerEmail: customerData?.email,
-          amount: currentProduct.price
+          customerEmail: customerData?.email || '',
+          amount: currentProduct.price,
+          mode: 'payment' // Set to one-time payment mode
         }
       })
 
@@ -68,9 +69,10 @@ const Upsell = () => {
       }
 
       if (data?.url) {
+        console.log('Redirecting to Stripe checkout:', data.url)
         window.location.href = data.url
       } else {
-        console.log('No payment URL, navigating to second upsell')
+        console.log('No payment URL received, navigating to upsell2')
         navigate('/upsell2')
       }
     } catch (error) {
