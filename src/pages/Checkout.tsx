@@ -57,7 +57,6 @@ const Checkout = () => {
     
     try {
       console.log('Starting payment processing...')
-      // Find the selected package first to avoid undefined errors
       const selectedPkg = packages.find(pkg => pkg.id === formData.selectedPackage)
       if (!selectedPkg) {
         throw new Error("Selected package not found")

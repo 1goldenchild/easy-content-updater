@@ -14,6 +14,7 @@ serve(async (req) => {
   try {
     const { paymentMethod, amount, email, name, packageId, isVip } = await req.json()
 
+    console.log('Initializing Stripe with secret key...')
     const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') || '', {
       apiVersion: '2023-10-16',
     })
