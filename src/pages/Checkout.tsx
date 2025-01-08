@@ -12,9 +12,9 @@ import { packages } from "@/components/checkout/PackageSelection"
 import { supabase } from "@/integrations/supabase/client"
 
 // Initialize Stripe with the publishable key
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '')
+const stripePromise = loadStripe('pk_live_51PCkQ1Cg2w6KJiVS2XXOvH4VzXsB4gJqJ2uHxRUPFtw7CEuwoOu0RtE70OXxEpUWZCgN33doSM1CiuZPFfHABcop00rx4or186')
 
-console.log('Stripe initialization with key:', import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY ? '[Present]' : '[Missing]')
+console.log('Stripe initialization:', stripePromise ? 'Successful' : 'Failed')
 
 const Checkout = () => {
   const navigate = useNavigate()
