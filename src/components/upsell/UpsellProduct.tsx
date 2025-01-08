@@ -26,8 +26,11 @@ const UpsellProduct = ({
   return (
     <div className="bg-[#1A1F2C] p-8 rounded-lg">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-500 to-orange-500 text-transparent bg-clip-text animate-shine">
-          Special One-Time Offer!
+        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none animate-shine bg-gradient-to-r from-white via-purple-500 to-white bg-[length:200%_auto] bg-clip-text text-transparent">
+          Special One-Time{" "}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
+            Offer!
+          </span>
         </h1>
         <p className="text-gray-400">
           Enhance Your Numerology Reading with Advanced Money Manifestation Secrets
