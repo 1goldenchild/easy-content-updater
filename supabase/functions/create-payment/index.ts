@@ -12,8 +12,8 @@ serve(async (req) => {
   }
 
   try {
-    const { customerId, priceId, customerEmail, amount, mode = 'payment' } = await req.json()
-    console.log('Payment request received:', { customerId, priceId, customerEmail, amount, mode })
+    const { customerId, priceId, customerEmail, amount, isUpsell = false } = await req.json()
+    console.log('Payment request received:', { customerId, priceId, customerEmail, amount, isUpsell })
 
     const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') || '', {
       apiVersion: '2023-10-16',
@@ -46,7 +46,7 @@ serve(async (req) => {
     const session = await stripe.checkout.sessions.create({
       customer: stripeCustomerId,
       payment_method_types: ['card'],
-      mode,
+      mode: 'payment',
       line_items: [{
         price: priceId,
         quantity: 1,
@@ -54,10 +54,11 @@ serve(async (req) => {
       success_url: `${req.headers.get('origin')}/upsell`,
       cancel_url: `${req.headers.get('origin')}/checkout`,
       payment_intent_data: {
-        setup_future_usage: 'off_session', // This enables future 1-click payments
+        setup_future_usage: isUpsell ? undefined : 'off_session', // Enable future payments only for initial purchase
       },
       metadata: {
-        customerEmail
+        customerEmail,
+        isUpsell: isUpsell.toString()
       }
     })
 

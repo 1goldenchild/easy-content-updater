@@ -6,13 +6,15 @@ export const packages = [
     id: "basic",
     name: "Numerology Analysis Basic Package™",
     price: 33.00,
-    priceId: "price_1QepZTCibdAmag3ruLEDrHWO"
+    priceId: "price_1QepZTCibdAmag3ruLEDrHWO",
+    productId: "prod_RXvQl1kJWmE0lK"
   },
   {
     id: "premium",
     name: "Numerology Analysis Premium Package™ (Hidden Number Revealed!)",
     price: 44.00,
-    priceId: "price_1QepaQCibdAmag3rICiD03Go"
+    priceId: "price_1QepaQCibdAmag3rICiD03Go",
+    productId: "prod_RXvRf8GHWMsvcf"
   },
   {
     id: "supreme",
@@ -20,6 +22,7 @@ export const packages = [
     price: 49.40,
     originalPrice: 71.00,
     priceId: "price_1QepbECibdAmag3rm3LbVCvQ",
+    productId: "prod_RXvSZbsFsu67jS",
     isBestSelling: true
   }
 ]

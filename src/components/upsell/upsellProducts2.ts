@@ -4,7 +4,8 @@ export const upsellProducts2 = [
     name: "The Golden Numerology Guide (2023 Edition)",
     description: "Discover your perfect match and deepen your relationships with our comprehensive love compatibility analysis.",
     price: 27.00,
-    priceId: "price_1QepknCibdAmag3rYOiVW2bl",
+    priceId: "price_1QeplSCibdAmag3rpQqzAo7x",
+    productId: "prod_RXvcui4tECjas4",
     features: [
       "Personal love number calculation",
       "Relationship compatibility analysis",

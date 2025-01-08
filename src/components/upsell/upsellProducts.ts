@@ -5,6 +5,7 @@ export const upsellProducts = [
     description: "Unlock the hidden wealth potential in your numerology chart with our comprehensive money manifestation guide.",
     price: 37.00,
     priceId: "price_1QepknCibdAmag3rYOiVW2bl",
+    productId: "prod_RXvc9E48J1A0DC",
     features: [
       "Personalized wealth number analysis",
       "Daily money manifestation rituals",
