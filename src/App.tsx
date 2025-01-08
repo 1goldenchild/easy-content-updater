@@ -10,6 +10,7 @@ import CollectInfo from "@/pages/CollectInfo"
 import EmailPreview from "@/pages/EmailPreview"
 import Portal from "@/pages/Portal"
 import Upsell from "@/pages/Upsell"
+import Upsell2 from "@/pages/Upsell2"
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="/email-preview" element={<EmailPreview />} />
             <Route path="/portal" element={<Portal />} />
             <Route path="/upsell" element={<Upsell />} />
+            <Route path="/upsell2" element={<Upsell2 />} />
           </Routes>
         </main>
         <Footer />
