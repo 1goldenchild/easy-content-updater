@@ -1,179 +1,278 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { motion } from "framer-motion"
-import { useNavigate } from "react-router-dom"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { loadStripe } from "@stripe/stripe-js"
+import { Elements } from "@stripe/react-stripe-js"
+import { CardElement } from "@stripe/react-stripe-js"
 import { toast } from "sonner"
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
 
 const packages = [
   {
     id: "basic",
-    name: "Essential Insights",
-    price: 29.99,
-    features: [
-      "Basic Life Path Number Analysis",
-      "Personality Number Reading",
-      "Core Numbers Interpretation",
-      "24-hour Support"
-    ]
+    name: "Numerology Analysis Basic Package™",
+    price: 33.00
   },
   {
     id: "premium",
-    name: "Deep Discovery",
-    price: 49.99,
-    features: [
-      "Everything in Essential",
-      "Detailed Compatibility Analysis",
-      "Career Path Guidance",
-      "Monthly Numerology Forecast",
-      "Priority Support"
-    ]
+    name: "Numerology Analysis Premium Package™ (Hidden Number Revealed!)",
+    price: 44.00
   },
   {
-    id: "ultimate",
-    name: "Complete Transformation",
-    price: 99.99,
-    features: [
-      "Everything in Deep Discovery",
-      "Personal Year Cycles",
-      "Life Purpose Analysis",
-      "Karmic Debt Numbers",
-      "Weekly Video Consultations",
-      "VIP Support"
-    ]
-  }
-]
-
-const ebooks = [
-  {
-    id: "ebook1",
-    name: "Mastering Numerology",
-    price: 19.99,
-    description: "A comprehensive guide to understanding and applying numerology in your daily life."
-  },
-  {
-    id: "ebook2",
-    name: "Sacred Numbers",
-    price: 24.99,
-    description: "Discover the ancient wisdom and spiritual significance behind numbers."
+    id: "supreme",
+    name: "⭐Numerology Analysis Supreme Package™ (Astrology Included)",
+    price: 49.40,
+    originalPrice: 71.00,
+    isBestSelling: true
   }
 ]
 
 const Checkout = () => {
-  const [step, setStep] = useState<"package" | "ebook1" | "ebook2" | "payment">("package")
-  const [selectedPackage, setSelectedPackage] = useState<string | null>(null)
-  const [selectedEbooks, setSelectedEbooks] = useState<string[]>([])
-  const navigate = useNavigate()
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    address: "",
+    apartment: "",
+    country: "",
+    state: "",
+    city: "",
+    postalCode: "",
+    selectedPackage: "supreme",
+    isVip: false
+  })
 
-  const handlePackageSelect = (packageId: string) => {
-    setSelectedPackage(packageId)
-    setStep("ebook1")
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    // Here we'll add the Stripe payment processing
+    toast.success("Processing payment...")
   }
 
-  const handleEbookSelect = (ebookId: string, addToCart: boolean) => {
-    if (addToCart) {
-      setSelectedEbooks([...selectedEbooks, ebookId])
-    }
-    
-    if (step === "ebook1") {
-      setStep("ebook2")
-    } else if (step === "ebook2") {
-      setStep("payment")
-      // Here we would normally initialize the payment process
-      toast.success("Proceeding to payment...")
-      // For now, just redirect back to home
-      setTimeout(() => navigate("/"), 2000)
-    }
-  }
+  const selectedPackage = packages.find(pkg => pkg.id === formData.selectedPackage)
+  const total = (selectedPackage?.price || 0) + (formData.isVip ? 11 : 0)
 
   return (
-    <div className="container mx-auto px-4 py-8 min-h-screen">
-      {step === "package" && (
-        <div className="space-y-8">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
-              Choose Your Numerology Package
-            </h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Select the package that best suits your journey of self-discovery
-            </p>
+    <div className="container max-w-4xl mx-auto px-4 py-8">
+      <form onSubmit={handleSubmit} className="space-y-8 bg-[#1A1F2C] p-6 rounded-lg">
+        {/* Contact Information */}
+        <div>
+          <h2 className="text-lg font-semibold mb-4 text-gray-200">CONTACT INFORMATION</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="firstName">First Name</Label>
+              <Input
+                id="firstName"
+                value={formData.firstName}
+                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                className="bg-[#2A2F3C] border-gray-700"
+              />
+            </div>
+            <div>
+              <Label htmlFor="lastName">Last Name</Label>
+              <Input
+                id="lastName"
+                value={formData.lastName}
+                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                className="bg-[#2A2F3C] border-gray-700"
+              />
+            </div>
           </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {packages.map((pkg) => (
-              <motion.div
-                key={pkg.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Card className="p-6 space-y-4 hover:shadow-lg transition-shadow">
-                  <h3 className="text-2xl font-semibold text-center">{pkg.name}</h3>
-                  <div className="text-3xl font-bold text-center text-purple-600">
-                    ${pkg.price}
-                  </div>
-                  <ul className="space-y-2">
-                    {pkg.features.map((feature, index) => (
-                      <li key={index} className="flex items-center gap-2">
-                        <span className="text-purple-500">✓</span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button
-                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-                    onClick={() => handlePackageSelect(pkg.id)}
-                  >
-                    Select Package
-                  </Button>
-                </Card>
-              </motion.div>
-            ))}
+          <div className="mt-4">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              className="bg-[#2A2F3C] border-gray-700"
+            />
           </div>
         </div>
-      )}
 
-      {(step === "ebook1" || step === "ebook2") && (
-        <div className="max-w-2xl mx-auto space-y-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
-              Special Offer
-            </h2>
-            <p className="text-muted-foreground">
-              Enhance your numerology journey with our exclusive ebook
-            </p>
-          </div>
-
-          <Card className="p-6">
-            <div className="space-y-4">
-              <h3 className="text-2xl font-semibold">
-                {ebooks[step === "ebook1" ? 0 : 1].name}
-              </h3>
-              <p className="text-muted-foreground">
-                {ebooks[step === "ebook1" ? 0 : 1].description}
-              </p>
-              <div className="text-2xl font-bold text-purple-600">
-                ${ebooks[step === "ebook1" ? 0 : 1].price}
+        {/* Product Selection */}
+        <div>
+          <h2 className="text-lg font-semibold mb-4 text-gray-200">SELECT PRODUCT</h2>
+          <RadioGroup
+            value={formData.selectedPackage}
+            onValueChange={(value) => setFormData({ ...formData, selectedPackage: value })}
+            className="space-y-2"
+          >
+            {packages.map((pkg) => (
+              <div
+                key={pkg.id}
+                className={`flex items-center justify-between p-4 rounded-lg ${
+                  pkg.isBestSelling ? 'bg-[#2A2F3C] border border-purple-500' : 'hover:bg-[#2A2F3C]'
+                }`}
+              >
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value={pkg.id} id={pkg.id} />
+                  <Label htmlFor={pkg.id} className="cursor-pointer">
+                    {pkg.isBestSelling && <span className="text-sm text-purple-400 block">BEST SELLING</span>}
+                    {pkg.name}
+                  </Label>
+                </div>
+                <div className="text-right">
+                  {pkg.originalPrice && (
+                    <span className="text-sm line-through text-gray-400 mr-2">${pkg.originalPrice.toFixed(2)}</span>
+                  )}
+                  <span className="text-white">${pkg.price.toFixed(2)}</span>
+                </div>
               </div>
-              <div className="flex gap-4">
-                <Button
-                  className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-                  onClick={() => handleEbookSelect(ebooks[step === "ebook1" ? 0 : 1].id, true)}
+            ))}
+          </RadioGroup>
+        </div>
+
+        {/* Billing Information */}
+        <div>
+          <h2 className="text-lg font-semibold mb-4 text-gray-200">BILLING INFORMATION</h2>
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="address">Address</Label>
+              <Input
+                id="address"
+                value={formData.address}
+                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                className="bg-[#2A2F3C] border-gray-700"
+              />
+            </div>
+            <div>
+              <Label htmlFor="apartment">Apartment, building, floor (optional)</Label>
+              <Input
+                id="apartment"
+                value={formData.apartment}
+                onChange={(e) => setFormData({ ...formData, apartment: e.target.value })}
+                className="bg-[#2A2F3C] border-gray-700"
+              />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="country">Country</Label>
+                <Select
+                  value={formData.country}
+                  onValueChange={(value) => setFormData({ ...formData, country: value })}
                 >
-                  Add to Order
-                </Button>
-                <Button
-                  variant="outline"
-                  className="flex-1"
-                  onClick={() => handleEbookSelect(ebooks[step === "ebook1" ? 0 : 1].id, false)}
+                  <SelectTrigger className="bg-[#2A2F3C] border-gray-700">
+                    <SelectValue placeholder="Select country" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="us">United States</SelectItem>
+                    <SelectItem value="ca">Canada</SelectItem>
+                    <SelectItem value="uk">United Kingdom</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label htmlFor="state">State</Label>
+                <Select
+                  value={formData.state}
+                  onValueChange={(value) => setFormData({ ...formData, state: value })}
                 >
-                  No, Thanks
-                </Button>
+                  <SelectTrigger className="bg-[#2A2F3C] border-gray-700">
+                    <SelectValue placeholder="Select state" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="ny">New York</SelectItem>
+                    <SelectItem value="ca">California</SelectItem>
+                    <SelectItem value="tx">Texas</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
-          </Card>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="city">City</Label>
+                <Input
+                  id="city"
+                  value={formData.city}
+                  onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                  className="bg-[#2A2F3C] border-gray-700"
+                />
+              </div>
+              <div>
+                <Label htmlFor="postalCode">Postal Code</Label>
+                <Input
+                  id="postalCode"
+                  value={formData.postalCode}
+                  onChange={(e) => setFormData({ ...formData, postalCode: e.target.value })}
+                  className="bg-[#2A2F3C] border-gray-700"
+                />
+              </div>
+            </div>
+          </div>
         </div>
-      )}
+
+        {/* Payment Information */}
+        <div>
+          <h2 className="text-lg font-semibold mb-4 text-gray-200">PAYMENT INFORMATION</h2>
+          <Elements stripe={stripePromise}>
+            <div className="space-y-4">
+              <div className="bg-[#2A2F3C] p-4 rounded-lg border border-gray-700">
+                <CardElement
+                  options={{
+                    style: {
+                      base: {
+                        fontSize: '16px',
+                        color: '#ffffff',
+                        '::placeholder': {
+                          color: '#aab7c4',
+                        },
+                      },
+                      invalid: {
+                        color: '#fa755a',
+                      },
+                    },
+                  }}
+                />
+              </div>
+            </div>
+          </Elements>
+        </div>
+
+        {/* VIP Option */}
+        <div className="border border-purple-500 rounded-lg p-4 bg-[#2A2F3C]/50">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="font-semibold text-purple-400">⭐VIP CUSTOMER⭐</h3>
+              <p className="text-sm text-gray-400">By Joining The VIP List You Get to Skip The Line And Receive Your Analysis Sooner!</p>
+            </div>
+            <div className="text-right">
+              <div className="text-white mb-1">$11.00</div>
+              <Button
+                type="button"
+                variant="outline"
+                className={`border-purple-500 ${formData.isVip ? 'bg-purple-500 text-white' : 'text-purple-500'}`}
+                onClick={() => setFormData({ ...formData, isVip: !formData.isVip })}
+              >
+                {formData.isVip ? '- Remove' : '+ Add'}
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Summary */}
+        <div className="bg-[#2A2F3C] p-4 rounded-lg">
+          <div className="flex justify-between items-center">
+            <span className="font-semibold">Total:</span>
+            <span className="text-xl font-bold">${total.toFixed(2)}</span>
+          </div>
+        </div>
+
+        {/* Submit Button */}
+        <Button
+          type="submit"
+          className="w-full bg-purple-500 hover:bg-purple-600 text-white py-6"
+        >
+          Submit
+        </Button>
+
+        <p className="text-center text-sm text-gray-400">
+          We Never Share Your Information With Anyone
+        </p>
+      </form>
     </div>
   )
 }
