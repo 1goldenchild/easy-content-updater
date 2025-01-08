@@ -60,12 +60,14 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
         await onSubmit(e, paymentMethod.id)
         console.log('Payment processed successfully')
         
-        // Clear the card input on success
+        // Clear the card input before navigation
         cardElement.clear()
         
-        // Navigate to the first upsell page after successful payment
-        console.log('Navigating to first upsell...')
-        navigate('/upsell/1')
+        // Small delay before navigation to ensure cleanup
+        setTimeout(() => {
+          console.log('Navigating to first upsell...')
+          navigate('/upsell/1')
+        }, 100)
         
       } catch (submitError) {
         console.error('Error during payment submission:', submitError)

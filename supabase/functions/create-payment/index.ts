@@ -20,21 +20,20 @@ serve(async (req) => {
       throw new Error('Stripe secret key not found')
     }
 
-    // Initialize Stripe with the secret key
     const stripe = new Stripe(stripeKey, {
       apiVersion: '2023-10-16',
     })
 
     // Get or create customer
     console.log('Looking up customer...')
-    const customers = await stripe.customers.list({ email: email, limit: 1 })
+    const customers = await stripe.customers.list({ email, limit: 1 })
     let customer = customers.data[0]
     
     if (!customer) {
       console.log('Creating new customer...')
       customer = await stripe.customers.create({
-        email: email,
-        name: name,
+        email,
+        name,
         payment_method: paymentMethod,
       })
     }
@@ -61,7 +60,7 @@ serve(async (req) => {
       customer: customer.id,
       payment: paymentIntent.id,
       line_items: [{
-        description: "Money Manifestation Secrets eBook",
+        description: "Numerology Reading",
         amount: Math.round(amount * 100),
         quantity: 1
       }]
