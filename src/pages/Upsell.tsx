@@ -22,7 +22,6 @@ const Upsell = () => {
         
         if (!session?.user?.email) {
           console.log('No user session found')
-          navigate('/upsell2')
           return
         }
 
@@ -34,7 +33,6 @@ const Upsell = () => {
 
         if (dbError) {
           console.error('Error fetching customer:', dbError)
-          navigate('/upsell2')
           return
         }
 
@@ -44,7 +42,6 @@ const Upsell = () => {
         }
       } catch (err) {
         console.error('Error in fetchCustomerData:', err)
-        navigate('/upsell2')
       }
     }
 
@@ -105,7 +102,7 @@ const Upsell = () => {
         features={currentProduct.features}
         image={currentProduct.image}
         isProcessing={isProcessing}
-        onAccept={() => handlePurchase()}
+        onAccept={handlePurchase}
         onDecline={handleDecline}
       />
     </div>

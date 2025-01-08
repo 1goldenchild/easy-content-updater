@@ -63,8 +63,8 @@ const StripeElements = ({ onSubmit, isProcessing }: StripeElementsProps) => {
         // Clear the card input before navigation
         cardElement.clear()
         
-        // Navigate directly to /upsell
-        console.log('Navigating to upsell page...')
+        // Navigate to first upsell
+        console.log('Navigating to first upsell page...')
         navigate('/upsell')
         
       } catch (submitError) {
