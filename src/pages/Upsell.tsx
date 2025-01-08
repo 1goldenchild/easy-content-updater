@@ -21,18 +21,18 @@ const Upsell = () => {
         setIsLoading(true)
         console.log('Attempting to fetch customer data...')
         
-        // Test the connection first
-        const { data: connectionTest, error: connectionError } = await supabase
+        // Using correct PostgREST syntax for checking if table is accessible
+        const { data: testData, error: testError } = await supabase
           .from('customers')
-          .select('count(*)')
+          .select('id')
           .limit(1)
           
-        if (connectionError) {
-          console.error('Connection test error:', connectionError)
-          throw connectionError
+        if (testError) {
+          console.error('Connection test error:', testError)
+          throw testError
         }
         
-        console.log('Connection test successful:', connectionTest)
+        console.log('Connection test successful:', testData)
 
         const { data: customers, error } = await supabase
           .from("customers")
