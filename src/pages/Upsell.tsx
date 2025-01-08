@@ -6,19 +6,18 @@ import { supabase } from "@/integrations/supabase/client"
 
 const upsellProducts = [
   {
-    id: 1,
-    name: "The Golden Numerology Guide (2023 Edition)",
-    description: "Unlock the secrets of numerology with our comprehensive guide",
-    price: 27.00,
-    priceId: "price_1QeplSCibdAmag3rpQqzAo7x",
-    image: "/placeholder.svg"
-  },
-  {
     id: 2,
     name: "Get Rich Using Numerology eBook (2023 Edition)",
     description: "Learn how to attract wealth using ancient numerology secrets",
     price: 37.00,
     priceId: "price_1QepknCibdAmag3rYOiVW2bl",
+    features: [
+      "Discover your personal wealth number",
+      "Learn the secret money manifestation rituals",
+      "Understand which numbers attract prosperity",
+      "Master the art of financial numerology",
+      "Daily wealth affirmations based on your numbers"
+    ],
     image: "/placeholder.svg"
   }
 ]
@@ -110,36 +109,58 @@ const UpsellContent = () => {
     <div className="container max-w-4xl mx-auto px-4 py-8">
       <div className="bg-[#1A1F2C] p-8 rounded-lg">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-4">Special One-Time Offer!</h1>
-          <p className="text-gray-400">Don't miss out on this exclusive opportunity</p>
+          <h1 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-500 to-orange-500 text-transparent bg-clip-text animate-shine">
+            Wait! Special One-Time Offer!
+          </h1>
+          <p className="text-gray-400">
+            Unlock the secrets of financial abundance with numerology
+          </p>
         </div>
 
         <div className="bg-[#2A2F3C] p-6 rounded-lg mb-8">
           <div className="flex flex-col md:flex-row gap-6 items-center">
             <div className="w-full md:w-1/3">
-              <img 
-                src={currentProduct.image} 
-                alt={currentProduct.name}
-                className="w-full rounded-lg"
-              />
+              <div className="relative">
+                <img 
+                  src={currentProduct.image} 
+                  alt={currentProduct.name}
+                  className="w-full rounded-lg"
+                />
+                <div className="absolute -top-2 -right-2 bg-purple-600 text-white px-3 py-1 rounded-full text-sm">
+                  Special Offer
+                </div>
+              </div>
             </div>
             <div className="w-full md:w-2/3">
               <h2 className="text-2xl font-semibold mb-4">{currentProduct.name}</h2>
               <p className="text-gray-300 mb-4">{currentProduct.description}</p>
-              <div className="text-2xl font-bold text-purple-400 mb-6">
-                ${currentProduct.price.toFixed(2)}
+              <ul className="space-y-2">
+                {currentProduct.features.map((feature, index) => (
+                  <li key={index} className="flex items-center text-gray-300">
+                    <span className="mr-2 text-purple-400">✓</span>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6">
+                <div className="text-3xl font-bold text-purple-400 mb-2">
+                  ${currentProduct.price.toFixed(2)}
+                </div>
+                <p className="text-gray-400 text-sm">
+                  One-time payment - Instant digital delivery
+                </p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           <Button 
             onClick={handleAccept}
             disabled={isProcessing}
-            className="w-full bg-purple-600 hover:bg-purple-700 text-lg py-6"
+            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-lg py-6"
           >
-            {isProcessing ? "Processing..." : `Yes! Add ${currentProduct.name} for $${currentProduct.price.toFixed(2)}`}
+            {isProcessing ? "Processing..." : `Yes! Add This To My Order For $${currentProduct.price.toFixed(2)}`}
           </Button>
           
           <Button 
