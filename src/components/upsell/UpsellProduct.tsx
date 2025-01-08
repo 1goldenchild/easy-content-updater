@@ -1,6 +1,6 @@
 import React from 'react';
-import UpsellHeader from './UpsellHeader';
-import ProductImage from './ProductImage';
+import { UpsellHeader } from './UpsellHeader';
+import { ProductImage } from './ProductImage';
 import ProductFeatures from './ProductFeatures';
 import PriceSection from './PriceSection';
 
