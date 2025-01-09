@@ -4,9 +4,11 @@ import PreviewOverlay from "./PreviewOverlay";
 
 interface PhoneFrameProps {
   children: ReactNode;
+  activeSection?: string;
+  onSectionChange?: (id: string) => void;
 }
 
-const PhoneFrame = ({ children }: PhoneFrameProps) => {
+const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
