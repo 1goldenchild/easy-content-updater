@@ -40,7 +40,7 @@ const Hero = () => {
         </motion.div>
       </div>
       <div 
-        className="absolute inset-0 bg-gradient-to-t from-[#1A1F2C]/95 via-[#1A1F2C]/80 to-[#E5DEFF]/5 pointer-events-none"
+        className="absolute inset-0 bg-gradient-to-t from-[#1A1F2C]/95 via-[#1A1F2C]/80 to-[#E5DEFF]/29 pointer-events-none"
       />
     </section>
   )
