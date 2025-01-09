@@ -73,7 +73,7 @@ const ProgressIndicator = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const handleDotClick = (index: number) => {
+  const handleSectionClick = (index: number) => {
     const section = sections[index]
     let element: Element | null = null
 
@@ -93,62 +93,67 @@ const ProgressIndicator = () => {
   }
 
   return (
-    <div className="fixed left-0 top-1/2 -translate-y-1/2 z-50">
-      <div className="relative py-4 bg-black/20 backdrop-blur-sm">
-        <div className="flex flex-col items-center gap-8 relative">
-          {/* Vertical progress line background */}
-          <div className="absolute top-0 bottom-0 w-[2px] bg-white/10" />
+    <div className="fixed left-0 top-0 h-full z-50 flex items-center">
+      <div className="relative h-[60vh] flex items-center">
+        {/* Background line */}
+        <div className="absolute left-0 w-1 h-full bg-gradient-to-b from-white/5 via-white/10 to-white/5 rounded-full backdrop-blur-sm" />
+        
+        {/* Animated progress line */}
+        <motion.div 
+          className="absolute left-0 w-1 bg-gradient-to-b from-purple-500 via-fuchsia-500 to-pink-500 rounded-full"
+          style={{
+            height: `${(activeSection / (sections.length - 1)) * 100}%`,
+            top: 0,
+          }}
+          initial={{ height: "0%" }}
+          animate={{ 
+            height: `${(activeSection / (sections.length - 1)) * 100}%`,
+          }}
+          transition={{ duration: 0.3 }}
+        >
+          {/* Glowing effect */}
+          <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-purple-500 via-fuchsia-500 to-pink-500 blur-md opacity-50" />
           
-          {/* Animated progress line */}
-          <motion.div 
-            className="absolute top-0 w-[2px] bg-gradient-to-b from-emerald-400 to-emerald-500"
-            initial={{ height: "0%" }}
-            animate={{ 
-              height: `${(activeSection / (sections.length - 1)) * 100}%`
+          {/* Animated particle effect at the bottom of the progress */}
+          <motion.div
+            className="absolute -bottom-2 -left-1 w-3 h-3 bg-white rounded-full"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.5, 1, 0.5],
             }}
-            transition={{ duration: 0.3 }}
-          />
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <div className="absolute inset-0 bg-white/20 rounded-full blur-md" />
+          </motion.div>
+        </motion.div>
 
+        {/* Section labels */}
+        <div className="absolute left-4 h-full">
           {sections.map((section, index) => (
             <motion.button
               key={section.name}
-              onClick={() => handleDotClick(index)}
-              className="relative z-10 group"
+              onClick={() => handleSectionClick(index)}
+              className={`relative text-sm font-medium transition-all duration-300 ${
+                index === activeSection 
+                  ? "text-white" 
+                  : "text-white/40 hover:text-white/60"
+              }`}
+              style={{
+                position: "absolute",
+                top: `${(index / (sections.length - 1)) * 100}%`,
+                transform: "translateY(-50%)",
+              }}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <div className="relative">
-                <motion.div
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === activeSection
-                      ? "bg-gradient-to-r from-emerald-400 to-emerald-500 scale-125"
-                      : index < activeSection
-                      ? "bg-emerald-400"
-                      : "bg-white/20 group-hover:bg-white/40"
-                  }`}
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.95 }}
-                />
-                {index === activeSection && (
-                  <motion.div
-                    className="absolute inset-0 rounded-full bg-emerald-400/20"
-                    initial={{ scale: 1 }}
-                    animate={{ scale: 1.8, opacity: 0 }}
-                    transition={{ 
-                      repeat: Infinity,
-                      duration: 2,
-                      ease: "easeOut"
-                    }}
-                  />
-                )}
-              </div>
-              
-              <div className="pointer-events-none absolute left-full ml-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <span className="text-sm font-medium text-white/90 whitespace-nowrap bg-black/50 px-2 py-1 rounded-md backdrop-blur-sm">
-                  {section.name}
-                </span>
-              </div>
+              <span className="whitespace-nowrap bg-black/50 px-2 py-1 rounded-md backdrop-blur-sm">
+                {section.name}
+              </span>
             </motion.button>
           ))}
         </div>
