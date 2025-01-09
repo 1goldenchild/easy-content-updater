@@ -1,31 +1,12 @@
 import { motion } from "framer-motion";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import PreviewOverlay from "./PreviewOverlay";
 
 interface PhoneFrameProps {
   children: ReactNode;
-  activeSection: string;
-  onSectionChange: (id: string) => void;
 }
 
 const PhoneFrame = ({ children }: PhoneFrameProps) => {
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = (e: Event) => {
-      const container = e.target as HTMLElement;
-      const scrollPercentage = (container.scrollTop / (container.scrollHeight - container.clientHeight)) * 100;
-      setScrollProgress(scrollPercentage);
-      console.log("Phone scroll progress:", scrollPercentage);
-    };
-
-    const container = document.querySelector('.scrollbar-hide');
-    if (container) {
-      container.addEventListener('scroll', handleScroll);
-      return () => container.removeEventListener('scroll', handleScroll);
-    }
-  }, []);
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -39,54 +20,6 @@ const PhoneFrame = ({ children }: PhoneFrameProps) => {
         
         {/* Notch */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-7 bg-black rounded-b-3xl z-20" />
-        
-        {/* Progress Bar */}
-        <div className="absolute right-2 top-1/2 -translate-y-1/2 z-30 h-[90%] w-1">
-          <div className="relative h-full w-full">
-            {/* Background line */}
-            <div className="absolute inset-0 w-full h-full bg-white/5 rounded-full" />
-            
-            {/* Progress line */}
-            <motion.div 
-              className="absolute bottom-0 w-full rounded-full bg-gradient-to-t from-[#8B5CF6] via-[#D946EF] to-[#F97316]"
-              style={{ 
-                height: `${scrollProgress}%`,
-                filter: 'blur(4px)',
-                opacity: 0.6
-              }}
-            />
-            
-            {/* Solid progress line */}
-            <motion.div 
-              className="absolute bottom-0 w-full rounded-full bg-gradient-to-t from-[#8B5CF6] via-[#D946EF] to-[#F97316]"
-              style={{ height: `${scrollProgress}%` }}
-            />
-
-            {/* Animated particles */}
-            <div className="absolute inset-0 overflow-hidden">
-              {[...Array(5)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-1 h-1 bg-white rounded-full"
-                  animate={{
-                    y: ["0%", "100%"],
-                    opacity: [0, 1, 0],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    delay: i * 0.4,
-                    ease: "linear",
-                  }}
-                  style={{
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
         
         {/* Screen Content */}
         <div className="absolute inset-0 overflow-y-auto overflow-x-hidden scrollbar-hide">
