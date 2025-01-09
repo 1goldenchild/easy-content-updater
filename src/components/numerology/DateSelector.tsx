@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useState, useRef, KeyboardEvent, ChangeEvent } from "react"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, X } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface DateSelectorProps {
@@ -10,37 +10,58 @@ interface DateSelectorProps {
 }
 
 const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
-  const [input, setInput] = useState("")
+  const [day, setDay] = useState("")
+  const [month, setMonth] = useState("")
+  const [year, setYear] = useState("")
+  
+  const dayRef = useRef<HTMLInputElement>(null)
+  const monthRef = useRef<HTMLInputElement>(null)
+  const yearRef = useRef<HTMLInputElement>(null)
 
-  const handleNumberClick = (num: string) => {
-    if (input.length < 8) {
-      let newInput = input + num
-      setInput(newInput)
-      
-      // Format as user types: DD/MM/YYYY
-      if (newInput.length === 2 || newInput.length === 4) {
-        newInput += "/"
-        setInput(newInput)
-      }
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    field: "day" | "month" | "year",
+    maxLength: number,
+    nextRef?: React.RefObject<HTMLInputElement>
+  ) => {
+    const value = e.target.value.replace(/\D/g, "")
+    
+    // Validate input based on field type
+    if (field === "day" && parseInt(value) > 31) return
+    if (field === "month" && parseInt(value) > 12) return
+    
+    // Update state based on field type
+    if (field === "day") setDay(value)
+    if (field === "month") setMonth(value)
+    if (field === "year") setYear(value)
+
+    // Auto-advance to next field
+    if (value.length === maxLength && nextRef?.current) {
+      nextRef.current.focus()
     }
   }
 
-  const handleDelete = () => {
-    if (input.length > 0) {
-      let newInput = input.slice(0, -1)
-      // Remove trailing slash if deleting
-      if (newInput.endsWith("/")) {
-        newInput = newInput.slice(0, -1)
+  const handleKeyDown = (
+    e: KeyboardEvent<HTMLInputElement>,
+    field: "day" | "month" | "year",
+    prevRef?: React.RefObject<HTMLInputElement>
+  ) => {
+    if (e.key === "Backspace") {
+      if (field === "day" && day === "" && prevRef?.current) {
+        prevRef.current.focus()
       }
-      setInput(newInput)
+      if (field === "month" && month === "" && prevRef?.current) {
+        prevRef.current.focus()
+      }
+      if (field === "year" && year === "" && prevRef?.current) {
+        prevRef.current.focus()
+      }
     }
   }
 
   const handleSubmit = () => {
-    if (input.length === 10) { // DD/MM/YYYY format
-      const [day, month, year] = input.split("/")
+    if (day && month && year && year.length === 4) {
       const dateObj = new Date(parseInt(year), parseInt(month) - 1, parseInt(day))
-      
       if (!isNaN(dateObj.getTime())) {
         setDate(dateObj)
         onCalculate()
@@ -48,72 +69,63 @@ const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
     }
   }
 
-  const renderButton = (content: React.ReactNode, onClick: () => void, className?: string) => (
-    <Button
-      type="button"
-      variant="outline"
-      onClick={onClick}
-      className={cn(
-        "h-16 text-xl font-medium bg-white/5 border-white/10 hover:bg-white/10 transition-colors",
-        className
-      )}
-    >
-      {content}
-    </Button>
-  )
+  const isComplete = day.length === 2 && month.length === 2 && year.length === 4
 
   return (
     <div className="space-y-6 max-w-md mx-auto">
       <div className="text-center">
         <h2 className="text-2xl font-bold mb-4">What's your date of birth?</h2>
-        <div className="relative w-full h-14 bg-white/5 rounded-lg border border-white/10 mb-8">
-          <input
-            type="text"
-            value={input}
-            readOnly
-            placeholder="DD/MM/YYYY"
-            className="w-full h-full bg-transparent px-4 text-xl text-center"
-          />
-          {input.length === 10 && (
+        <div className="flex items-center justify-center gap-2 mb-8">
+          <div className="relative">
+            <input
+              ref={dayRef}
+              type="text"
+              value={day}
+              onChange={(e) => handleInputChange(e, "day", 2, monthRef)}
+              onKeyDown={(e) => handleKeyDown(e, "day")}
+              placeholder="DD"
+              maxLength={2}
+              className="w-16 h-14 bg-white/5 border border-white/10 rounded-lg text-center text-xl focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+          </div>
+          <span className="text-2xl text-white/50">/</span>
+          <div className="relative">
+            <input
+              ref={monthRef}
+              type="text"
+              value={month}
+              onChange={(e) => handleInputChange(e, "month", 2, yearRef)}
+              onKeyDown={(e) => handleKeyDown(e, "month", dayRef)}
+              placeholder="MM"
+              maxLength={2}
+              className="w-16 h-14 bg-white/5 border border-white/10 rounded-lg text-center text-xl focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+          </div>
+          <span className="text-2xl text-white/50">/</span>
+          <div className="relative">
+            <input
+              ref={yearRef}
+              type="text"
+              value={year}
+              onChange={(e) => handleInputChange(e, "year", 4)}
+              onKeyDown={(e) => handleKeyDown(e, "year", monthRef)}
+              placeholder="YYYY"
+              maxLength={4}
+              className="w-20 h-14 bg-white/5 border border-white/10 rounded-lg text-center text-xl focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+          </div>
+          {isComplete && (
             <Button
               onClick={handleSubmit}
-              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full w-10 h-10 p-0 bg-black hover:bg-gray-800"
+              className={cn(
+                "ml-2 rounded-full w-10 h-10 p-0",
+                "bg-gradient-to-r from-purple-500 to-pink-500",
+                "hover:from-purple-600 hover:to-pink-600",
+                "transition-all duration-300"
+              )}
             >
               <ArrowRight className="h-5 w-5" />
             </Button>
-          )}
-        </div>
-      </div>
-
-      <div className="grid grid-cols-3 gap-2">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
-          <div key={num}>
-            {renderButton(
-              <div className="flex flex-col items-center">
-                <span>{num}</span>
-                <span className="text-xs opacity-60 mt-1">
-                  {num === 1 ? "" :
-                   num === 2 ? "ABC" :
-                   num === 3 ? "DEF" :
-                   num === 4 ? "GHI" :
-                   num === 5 ? "JKL" :
-                   num === 6 ? "MNO" :
-                   num === 7 ? "PQRS" :
-                   num === 8 ? "TUV" :
-                   "WXYZ"}
-                </span>
-              </div>,
-              () => handleNumberClick(num.toString())
-            )}
-          </div>
-        ))}
-        <div>{renderButton("＊", () => {})}</div>
-        <div>{renderButton("0", () => handleNumberClick("0"))}</div>
-        <div>
-          {renderButton(
-            <X className="h-6 w-6" />,
-            handleDelete,
-            "hover:bg-red-500/20"
           )}
         </div>
       </div>
