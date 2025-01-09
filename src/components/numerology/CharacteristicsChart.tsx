@@ -24,6 +24,11 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
 
   console.log("Rendering characteristics for life path:", lifePath);
   console.log("Traits data:", traits);
+  console.log("Compatibility data:", compatibility);
+
+  // Get compatible and challenging numbers as strings
+  const compatibleNumbers = compatibility.compatible.join(', ');
+  const challengingNumbers = compatibility.challenging.join(', ');
 
   return (
     <motion.div 
@@ -40,13 +45,13 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Radar Chart */}
-              <div className="aspect-square bg-white/5 rounded-lg border border-white/10 p-4">
+              <div className="aspect-square min-h-[400px] bg-white/5 rounded-lg border border-white/10 p-4">
                 <ResponsiveContainer width="100%" height="100%">
                   <RadarChart cx="50%" cy="50%" outerRadius="80%" data={numberedTraits}>
                     <PolarGrid stroke="rgba(255,255,255,0.1)" />
                     <PolarAngleAxis
                       dataKey="number"
-                      tick={{ fill: 'rgba(255,255,255,0.7)', fontSize: 12 }}
+                      tick={{ fill: '#8B5CF6', fontSize: 14, fontWeight: 'bold' }}
                     />
                     <Radar
                       name="Traits"
@@ -65,11 +70,9 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
                   <h4 className="text-lg font-semibold text-white/90 mb-4">Core Traits</h4>
                   <div className="space-y-3">
                     {traits.map((trait, index) => (
-                      <div key={index} className="flex justify-between items-center">
-                        <div className="flex items-center gap-2">
-                          <span className="text-white/70 min-w-[20px]">{index + 1}.</span>
-                          <span className="text-white/70">{trait.trait}</span>
-                        </div>
+                      <div key={index} className="flex items-center gap-4">
+                        <span className="text-[#8B5CF6] font-bold min-w-[24px]">{index + 1}</span>
+                        <span className="text-white/70 flex-grow">{trait.trait}</span>
                         <div className="w-32 h-2 bg-white/10 rounded-full overflow-hidden">
                           <div 
                             className="h-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full" 
@@ -92,7 +95,7 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
                       <div className="relative">
                         <h5 className="text-sm font-medium text-white/70 mb-2">Best Match</h5>
                         <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-600">
-                          {compatibility.loveCompatible[0]}
+                          {compatibleNumbers}
                         </div>
                       </div>
                     </div>
@@ -104,7 +107,7 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
                       <div className="relative">
                         <h5 className="text-sm font-medium text-white/70 mb-2">Challenge</h5>
                         <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-red-600">
-                          {compatibility.challenging[0]}
+                          {challengingNumbers}
                         </div>
                       </div>
                     </div>
