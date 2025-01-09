@@ -90,16 +90,17 @@ const Benefits = () => {
           </div>
 
           {benefits.map((benefit, index) => {
+            // Adjust the timing by reducing the multiplier and offset
             const progress = useTransform(
               scrollYProgress,
-              [index * 0.2, (index + 1) * 0.2],
+              [index * 0.15, Math.min(0.85, (index + 1) * 0.15)], // Reduced from 0.2 to 0.15 and capped at 0.85
               [0, 1]
             );
 
             const nextProgress = index < benefits.length - 1 
               ? useTransform(
                   scrollYProgress,
-                  [(index + 1) * 0.2, (index + 2) * 0.2],
+                  [(index + 1) * 0.15, Math.min(0.85, (index + 2) * 0.15)],
                   [0, 1]
                 )
               : null;
