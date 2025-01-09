@@ -1,9 +1,6 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { format } from "date-fns"
-import { CalendarIcon } from "lucide-react"
+import { ArrowRight, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface DateSelectorProps {
@@ -13,105 +10,115 @@ interface DateSelectorProps {
 }
 
 const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
+  const [input, setInput] = useState("")
+
+  const handleNumberClick = (num: string) => {
+    if (input.length < 8) {
+      let newInput = input + num
+      setInput(newInput)
+      
+      // Format as user types: DD/MM/YYYY
+      if (newInput.length === 2 || newInput.length === 4) {
+        newInput += "/"
+        setInput(newInput)
+      }
+    }
+  }
+
+  const handleDelete = () => {
+    if (input.length > 0) {
+      let newInput = input.slice(0, -1)
+      // Remove trailing slash if deleting
+      if (newInput.endsWith("/")) {
+        newInput = newInput.slice(0, -1)
+      }
+      setInput(newInput)
+    }
+  }
+
+  const handleSubmit = () => {
+    if (input.length === 10) { // DD/MM/YYYY format
+      const [day, month, year] = input.split("/")
+      const dateObj = new Date(parseInt(year), parseInt(month) - 1, parseInt(day))
+      
+      if (!isNaN(dateObj.getTime())) {
+        setDate(dateObj)
+        onCalculate()
+      }
+    }
+  }
+
+  const renderButton = (content: React.ReactNode, onClick: () => void, className?: string) => (
+    <Button
+      type="button"
+      variant="outline"
+      onClick={onClick}
+      className={cn(
+        "h-16 text-xl font-medium bg-white/5 border-white/10 hover:bg-white/10 transition-colors",
+        className
+      )}
+    >
+      {content}
+    </Button>
+  )
+
   return (
-    <div className="space-y-6">
-      <div className="space-y-2">
-        <label className="block text-sm font-medium text-white/90">Date of Birth</label>
-        <Popover>
-          <PopoverTrigger asChild>
+    <div className="space-y-6 max-w-md mx-auto">
+      <div className="text-center">
+        <h2 className="text-2xl font-bold mb-4">What's your date of birth?</h2>
+        <div className="relative w-full h-14 bg-white/5 rounded-lg border border-white/10 mb-8">
+          <input
+            type="text"
+            value={input}
+            readOnly
+            placeholder="DD/MM/YYYY"
+            className="w-full h-full bg-transparent px-4 text-xl text-center"
+          />
+          {input.length === 10 && (
             <Button
-              variant="outline"
-              className={cn(
-                "w-full justify-between text-left font-normal bg-[#1A1F2C] border-white/10 hover:bg-[#252a3a] transition-colors relative overflow-hidden group",
-                !date && "text-muted-foreground"
-              )}
+              onClick={handleSubmit}
+              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full w-10 h-10 p-0 bg-black hover:bg-gray-800"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:animate-shine" />
-              <div className="relative flex items-center">
-                {date ? (
-                  <span className="flex items-center gap-2">
-                    <CalendarIcon className="h-4 w-4 opacity-70" />
-                    <span className="font-medium">{format(date, "MMMM d, yyyy")}</span>
-                  </span>
-                ) : (
-                  <span className="flex items-center gap-2">
-                    <CalendarIcon className="h-4 w-4 opacity-50" />
-                    <span>Pick your birth date</span>
-                  </span>
-                )}
-              </div>
-              <div className="relative ml-auto pl-3 opacity-60">
-                <CalendarIcon className="h-4 w-4" />
-              </div>
+              <ArrowRight className="h-5 w-5" />
             </Button>
-          </PopoverTrigger>
-          <PopoverContent 
-            className="w-auto p-0 bg-[#1A1F2C] border-white/10" 
-            align="start"
-          >
-            <Calendar
-              mode="single"
-              selected={date}
-              onSelect={setDate}
-              initialFocus
-              captionLayout="dropdown-buttons"
-              fromYear={1900}
-              toYear={new Date().getFullYear()}
-              classNames={{
-                months: "space-y-4",
-                caption: "relative flex items-center justify-center pt-4 pb-2 px-8",
-                caption_label: "text-base font-medium text-white/90",
-                nav: "flex items-center gap-1",
-                nav_button: cn(
-                  "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 hover:bg-white/10 rounded-md transition-colors",
-                  "disabled:opacity-20 disabled:hover:bg-transparent"
-                ),
-                nav_button_previous: "absolute left-1",
-                nav_button_next: "absolute right-1",
-                table: "w-full border-collapse",
-                head_row: "flex",
-                head_cell: "text-white/50 rounded-md w-9 font-normal text-[0.8rem] p-0",
-                row: "flex w-full mt-2",
-                cell: cn(
-                  "relative p-0 text-center text-sm focus-within:relative focus-within:z-20",
-                  "first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md",
-                  "[&:has([aria-selected])]:bg-white/10"
-                ),
-                day: cn(
-                  "h-9 w-9 p-0 font-normal rounded-md transition-colors hover:bg-white/10",
-                  "aria-selected:opacity-100 aria-selected:bg-white/20 aria-selected:text-white hover:aria-selected:bg-white/20"
-                ),
-                day_selected: "bg-white/20 text-white hover:bg-white/20 hover:text-white focus:bg-white/20",
-                day_today: "bg-white/5 text-white",
-                day_outside: "text-white/20 opacity-50 aria-selected:bg-white/5 aria-selected:text-white/20",
-                day_disabled: "text-white/20 opacity-50 hover:bg-transparent",
-                day_range_middle: "aria-selected:bg-white/5 aria-selected:text-white",
-                day_hidden: "invisible",
-                dropdown: "bg-[#1A1F2C] border border-white/10 rounded-md p-1 shadow-lg",
-                dropdown_month: "bg-[#1A1F2C] text-white hover:bg-white/10 rounded-md px-2 py-1 text-sm transition-colors cursor-pointer",
-                dropdown_year: "bg-[#1A1F2C] text-white hover:bg-white/10 rounded-md px-2 py-1 text-sm transition-colors cursor-pointer",
-                dropdown_icon: "opacity-50 group-hover:opacity-100 transition-opacity"
-              }}
-            />
-          </PopoverContent>
-        </Popover>
+          )}
+        </div>
       </div>
 
-      <Button 
-        onClick={onCalculate}
-        disabled={!date}
-        className={cn(
-          "w-full relative overflow-hidden group",
-          "bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] hover:from-[#8B5CF6] hover:to-[#6E59A5]"
-        )}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:animate-shine" />
-        <span className="relative">
-          {date ? "Calculate Your Numbers" : "Please Select Your Birth Date"}
-        </span>
-      </Button>
+      <div className="grid grid-cols-3 gap-2">
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+          <div key={num}>
+            {renderButton(
+              <div className="flex flex-col items-center">
+                <span>{num}</span>
+                <span className="text-xs opacity-60 mt-1">
+                  {num === 1 ? "" :
+                   num === 2 ? "ABC" :
+                   num === 3 ? "DEF" :
+                   num === 4 ? "GHI" :
+                   num === 5 ? "JKL" :
+                   num === 6 ? "MNO" :
+                   num === 7 ? "PQRS" :
+                   num === 8 ? "TUV" :
+                   "WXYZ"}
+                </span>
+              </div>,
+              () => handleNumberClick(num.toString())
+            )}
+          </div>
+        ))}
+        <div>{renderButton("＊", () => {})}</div>
+        <div>{renderButton("0", () => handleNumberClick("0"))}</div>
+        <div>
+          {renderButton(
+            <X className="h-6 w-6" />,
+            handleDelete,
+            "hover:bg-red-500/20"
+          )}
+        </div>
+      </div>
     </div>
-  );
-};
+  )
+}
 
-export default DateSelector;
+export default DateSelector
