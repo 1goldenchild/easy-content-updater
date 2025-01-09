@@ -31,14 +31,25 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Radar Chart */}
+              {/* Radar Chart - Adjusted height and margins */}
               <div className="aspect-square bg-white/5 rounded-lg border border-white/10 p-4">
                 <ResponsiveContainer width="100%" height="100%">
-                  <RadarChart cx="50%" cy="50%" outerRadius="80%" data={traits}>
+                  <RadarChart 
+                    cx="50%" 
+                    cy="50%" 
+                    outerRadius="60%" 
+                    margin={{ top: 30, right: 30, bottom: 30, left: 30 }}
+                    data={traits}
+                  >
                     <PolarGrid stroke="rgba(255,255,255,0.1)" />
                     <PolarAngleAxis
                       dataKey="trait"
-                      tick={{ fill: 'rgba(255,255,255,0.7)', fontSize: 12 }}
+                      tick={{ 
+                        fill: 'rgba(255,255,255,0.7)', 
+                        fontSize: 11,
+                        dy: 3 // Adjust text position
+                      }}
+                      tickLine={false}
                     />
                     <Radar
                       name="Traits"
