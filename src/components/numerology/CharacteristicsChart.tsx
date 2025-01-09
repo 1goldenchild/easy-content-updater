@@ -70,16 +70,28 @@ const CharacteristicsChart = ({ isVisible }: CharacteristicsChartProps) => {
                 <div>
                   <h4 className="text-lg font-semibold text-white/90 mb-4">Compatibility</h4>
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                      <h5 className="text-sm font-medium text-white/70 mb-2">Best Match</h5>
-                      <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
-                        9
+                    <div className="p-4 rounded-lg bg-white/5 border border-white/10 relative overflow-hidden">
+                      <div className="absolute inset-0 bg-emerald-500/5" />
+                      <div className="absolute inset-0">
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-emerald-500/10 to-transparent animate-[shimmer_3s_linear_infinite]" />
+                      </div>
+                      <div className="relative">
+                        <h5 className="text-sm font-medium text-white/70 mb-2">Best Match</h5>
+                        <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-600">
+                          9
+                        </div>
                       </div>
                     </div>
-                    <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                      <h5 className="text-sm font-medium text-white/70 mb-2">Challenge</h5>
-                      <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
-                        4
+                    <div className="p-4 rounded-lg bg-white/5 border border-white/10 relative overflow-hidden">
+                      <div className="absolute inset-0 bg-red-500/5" />
+                      <div className="absolute inset-0">
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-red-500/10 to-transparent animate-[shimmer_3s_linear_infinite]" />
+                      </div>
+                      <div className="relative">
+                        <h5 className="text-sm font-medium text-white/70 mb-2">Challenge</h5>
+                        <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-red-600">
+                          4
+                        </div>
                       </div>
                     </div>
                   </div>
