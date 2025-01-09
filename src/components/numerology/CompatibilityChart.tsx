@@ -108,12 +108,16 @@ const CompatibilityChart = ({ lifePath, isVisible }: CompatibilityChartProps) =>
                   color: 'rgba(255, 255, 255, 0.8)'
                 }}
               />
-              <Legend verticalAlign="bottom" height={36} />
+              <Legend 
+                verticalAlign="bottom" 
+                height={36}
+                formatter={(value) => <span className="text-sm whitespace-nowrap">{value}</span>}
+              />
             </PieChart>
           </ResponsiveContainer>
         </div>
 
-        <div className="space-y-8 mt-8 lg:mt-0">
+        <div className="space-y-8">
           <div>
             <h4 className="text-lg font-semibold text-white/80 mb-3">Compatible Numbers</h4>
             <div className="flex flex-wrap gap-3">
