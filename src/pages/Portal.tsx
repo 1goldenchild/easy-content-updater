@@ -26,7 +26,6 @@ const Portal = () => {
   })
 
   useEffect(() => {
-    // Reset scroll position when component mounts
     window.scrollTo(0, 0)
   }, [])
 
@@ -61,72 +60,74 @@ const Portal = () => {
   }
 
   return (
-    <div className="flex-1 p-4">
-      <div className="flex">
-        {showResults && <ProgressIndicator />}
-        <div id="portal-content" className="flex-1 max-w-7xl mx-auto space-y-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="w-full space-y-8 bg-white/5 p-8 rounded-xl backdrop-blur-sm border border-white/10"
-          >
-            <div className="text-center">
-              <h2 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
-                Numerology Calculator
-              </h2>
-              <p className="mt-2 text-white/70">
-                Discover your life path number and more
-              </p>
-            </div>
+    <div className="min-h-screen w-full overflow-x-hidden">
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="flex flex-col items-center">
+          {showResults && <ProgressIndicator />}
+          <div className="w-full space-y-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="w-full bg-white/5 p-8 rounded-xl backdrop-blur-sm border border-white/10"
+            >
+              <div className="text-center">
+                <h2 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
+                  Numerology Calculator
+                </h2>
+                <p className="mt-2 text-white/70">
+                  Discover your life path number and more
+                </p>
+              </div>
 
-            <DateSelector 
-              date={date}
-              setDate={setDate}
-              onCalculate={handleCalculate}
-            />
-
-            <div id="results">
-              <NumerologyResults 
-                lifePath={results.lifePath}
-                partialEnergy={results.partialEnergy}
-                secretNumber={results.secretNumber}
-                chineseZodiac={results.chineseZodiac}
-                isVisible={showResults}
+              <DateSelector 
+                date={date}
+                setDate={setDate}
+                onCalculate={handleCalculate}
               />
-            </div>
-          </motion.div>
 
-          {showResults && (
-            <>
-              <div id="occupation">
-                <OccupationGuidance
+              <div id="results">
+                <NumerologyResults 
                   lifePath={results.lifePath}
-                  isVisible={showResults}
-                />
-              </div>
-              
-              <div id="compatibility">
-                <CompatibilityChart 
-                  lifePath={results.lifePath}
-                  isVisible={showResults}
-                />
-              </div>
-
-              <div id="country">
-                <CountryCompatibility
+                  partialEnergy={results.partialEnergy}
+                  secretNumber={results.secretNumber}
                   chineseZodiac={results.chineseZodiac}
                   isVisible={showResults}
                 />
               </div>
+            </motion.div>
 
-              <div id="car">
-                <CarCompatibility
-                  chineseZodiac={results.chineseZodiac}
-                  isVisible={showResults}
-                />
-              </div>
-            </>
-          )}
+            {showResults && (
+              <>
+                <div id="occupation">
+                  <OccupationGuidance
+                    lifePath={results.lifePath}
+                    isVisible={showResults}
+                  />
+                </div>
+                
+                <div id="compatibility">
+                  <CompatibilityChart 
+                    lifePath={results.lifePath}
+                    isVisible={showResults}
+                  />
+                </div>
+
+                <div id="country">
+                  <CountryCompatibility
+                    chineseZodiac={results.chineseZodiac}
+                    isVisible={showResults}
+                  />
+                </div>
+
+                <div id="car">
+                  <CarCompatibility
+                    chineseZodiac={results.chineseZodiac}
+                    isVisible={showResults}
+                  />
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>

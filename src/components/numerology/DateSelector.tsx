@@ -72,7 +72,7 @@ const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
   const isComplete = day.length === 2 && month.length === 2 && year.length === 4
 
   return (
-    <div className="space-y-6 max-w-md mx-auto">
+    <div className="w-full max-w-md mx-auto px-4">
       <div className="text-center">
         <h2 className="text-2xl font-bold mb-4">What's your date of birth?</h2>
         <div className="flex items-center justify-center gap-2 mb-8">
