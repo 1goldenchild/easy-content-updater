@@ -6,8 +6,8 @@ import {
   Cell,
   Legend,
   Tooltip,
-  Label
 } from 'recharts';
+import { numerologyCompatibility } from "@/utils/numerologyCompatibility";
 
 interface CompatibilityChartProps {
   lifePath: number;
@@ -53,16 +53,32 @@ const CompatibilityChart = ({ lifePath, isVisible }: CompatibilityChartProps) =>
     return enemyMap[number] || [];
   };
 
-  const getNeutralNumbers = (compatibleNums: number[], enemyNums: number[]): number[] => {
+  const getLoveNumbers = (number: number): number[] => {
+    const compatibility = numerologyCompatibility[number];
+    return compatibility?.loveCompatible || [];
+  };
+
+  const getNeutralNumbers = (compatibleNums: number[], enemyNums: number[], loveNums: number[]): number[] => {
     const allNumbers = Array.from({ length: 9 }, (_, i) => i + 1);
-    return allNumbers.filter(num => !compatibleNums.includes(num) && !enemyNums.includes(num));
+    return allNumbers.filter(num => 
+      !compatibleNums.includes(num) && 
+      !enemyNums.includes(num) && 
+      !loveNums.includes(num)
+    );
   };
 
   const compatibleNumbers = getCompatibleNumbers(lifePath);
   const enemyNumbers = getEnemyNumbers(lifePath);
-  const neutralNumbers = getNeutralNumbers(compatibleNumbers, enemyNumbers);
+  const loveNumbers = getLoveNumbers(lifePath);
+  const neutralNumbers = getNeutralNumbers(compatibleNumbers, enemyNumbers, loveNumbers);
 
   const compatibilityData = [
+    { 
+      name: 'Love', 
+      value: loveNumbers.length, 
+      numbers: loveNumbers,
+      color: '#FF1493' // Deep pink for love
+    },
     { 
       name: 'Compatible', 
       value: compatibleNumbers.length, 
@@ -116,20 +132,16 @@ const CompatibilityChart = ({ lifePath, isVisible }: CompatibilityChartProps) =>
                     strokeWidth={2}
                   />
                 ))}
-                <Label
-                  content={({ viewBox: { cx, cy } }) => (
-                    <text
-                      x={cx}
-                      y={cy}
-                      textAnchor="middle"
-                      dominantBaseline="central"
-                      className="fill-white/80 text-lg font-semibold"
-                    >
-                      {lifePath}
-                    </text>
-                  )}
-                />
               </Pie>
+              <text
+                x="50%"
+                y="50%"
+                textAnchor="middle"
+                dominantBaseline="central"
+                className="fill-white/80 text-lg font-semibold"
+              >
+                {lifePath}
+              </text>
               <Tooltip
                 contentStyle={{
                   backgroundColor: 'rgba(26, 31, 44, 0.95)',
