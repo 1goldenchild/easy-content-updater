@@ -1,5 +1,7 @@
+import { ReactNode } from "react"
+
 interface Feature {
-  text: string
+  text: string | ReactNode
 }
 
 interface ProductDetailsProps {
@@ -24,8 +26,14 @@ export const ProductDetails = ({
     <ul className="space-y-3 mb-6 max-w-[700px]">
       {features.map((feature, index) => (
         <li key={index} className="flex items-start text-gray-300 leading-relaxed">
-          <span className="text-purple-400 mr-2 flex-shrink-0">✓</span>
-          {feature.text}
+          {typeof feature.text === 'string' ? (
+            <>
+              <span className="text-purple-400 mr-2 flex-shrink-0">✓</span>
+              {feature.text}
+            </>
+          ) : (
+            feature.text
+          )}
         </li>
       ))}
     </ul>
