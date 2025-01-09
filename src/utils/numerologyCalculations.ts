@@ -11,9 +11,9 @@ export const reduceToSingleDigit = (num: number): number => {
   let currentSum = sumDigits(num);
   
   // Check for master numbers before reducing further
-  if (MASTER_NUMBERS.includes(currentSum)) {
-    console.log(`Found master number: ${currentSum}`);
-    return currentSum;
+  if (MASTER_NUMBERS.includes(num)) {
+    console.log(`Found master number in original input: ${num}`);
+    return num;
   }
 
   // Keep reducing until we get a single digit or master number
@@ -35,15 +35,22 @@ export const calculateLifePath = (date: Date): number => {
 
   console.log(`Calculating lifepath for date: ${day}/${month}/${year}`);
 
-  // Add all digits individually
-  const allDigits = `${day}${month}${year}`.split('').map(Number);
-  const sum = allDigits.reduce((a, b) => a + b, 0);
+  // Handle master numbers in day and month separately
+  const dayNum = MASTER_NUMBERS.includes(day) ? day : reduceToSingleDigit(day);
+  const monthNum = MASTER_NUMBERS.includes(month) ? month : reduceToSingleDigit(month);
   
-  console.log(`Total sum before reduction: ${sum}`);
+  // Calculate year sum
+  const yearNum = reduceToSingleDigit(year);
 
-  // Check if sum is a master number
+  console.log(`Processed numbers - Day: ${dayNum}, Month: ${monthNum}, Year: ${yearNum}`);
+  
+  // Sum all components
+  const sum = dayNum + monthNum + yearNum;
+  console.log(`Total sum before final reduction: ${sum}`);
+
+  // Check if final sum is a master number
   if (MASTER_NUMBERS.includes(sum)) {
-    console.log(`Found master number in sum: ${sum}`);
+    console.log(`Found master number in final sum: ${sum}`);
     return sum;
   }
 
@@ -56,14 +63,9 @@ export const calculateLifePath = (date: Date): number => {
 
 export const calculatePartialEnergy = (day: number): number => {
   // Special cases for master numbers in day
-  if (day === 29 || day === 20 || day === 11) {
-    return 11;
-  }
-  if (day === 22) {
-    return 22;
-  }
-  if (day === 33) {
-    return 33;
+  if (MASTER_NUMBERS.includes(day)) {
+    console.log(`Found master number in day: ${day}`);
+    return day;
   }
   
   // For all other days, reduce to single digit
