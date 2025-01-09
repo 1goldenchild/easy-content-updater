@@ -6,60 +6,81 @@ const ProgressIndicator = () => {
   const [activeSection, setActiveSection] = useState(0)
   const location = useLocation()
 
-  const sections = location.pathname === "/numerology-reading" 
-    ? ["Hero", "Knowledge", "Benefits", "Sales", "CTA", "Stats"]
-    : ["results", "occupation", "compatibility", "country", "car"]
+  // Define sections based on their IDs and display names
+  const sections = [
+    { id: "hero", name: "Hero" },
+    { id: "scroll-start", name: "Overview" },
+    { id: "preview", name: "Preview" },
+    { id: "numerology-profile", name: "Profile" },
+    { id: "testimonials", name: "Testimonials" },
+    { id: "secret-knowledge", name: "Wisdom" },
+    { id: "cta", name: "Get Started" }
+  ]
 
   useEffect(() => {
     const handleScroll = () => {
-      const sectionElements = sections.map(section => 
-        document.getElementById(section.toLowerCase())
-      )
-
+      const scrollPosition = window.scrollY
       const viewportHeight = window.innerHeight
-      const scrollPosition = window.scrollY + (viewportHeight / 3)
-
-      const activeIndex = sectionElements.findIndex((element, index) => {
-        if (!element) return false
-        const nextElement = sectionElements[index + 1]
-        
-        const elementTop = element.offsetTop
-        const elementBottom = nextElement 
-          ? nextElement.offsetTop 
-          : document.documentElement.scrollHeight
-
-        return scrollPosition >= elementTop && scrollPosition < elementBottom
-      })
-
-      if (activeIndex !== -1) {
-        setActiveSection(activeIndex)
+      
+      // First section is always visible at start
+      if (scrollPosition === 0) {
+        setActiveSection(0)
+        return
       }
+
+      // Second section activates on first scroll
+      if (scrollPosition > 50) {
+        setActiveSection(Math.max(1, activeSection))
+      }
+
+      // Check other sections by their element positions
+      const sectionElements = {
+        preview: document.querySelector("h3:contains('What's included in your analysis?')"),
+        "numerology-profile": document.querySelector("h2:contains('Unlock Your Complete Numerology Profile')"),
+        testimonials: document.querySelector("h2:contains('Transforming Lives Through Energy Insights')"),
+        "secret-knowledge": document.querySelector("h2:contains('Restricted Wisdom Now at Your Fingertips')"),
+        cta: document.querySelector("h2:contains('Get Your Personalized Numerology Analysis Today')")
+      }
+
+      // Find the active section based on element visibility
+      Object.entries(sectionElements).forEach(([key, element], index) => {
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          if (rect.top <= viewportHeight * 0.7 && rect.bottom >= 0) {
+            setActiveSection(index + 2) // +2 because we have two initial sections
+          }
+        }
+      })
     }
 
     window.addEventListener("scroll", handleScroll)
-    handleScroll()
+    handleScroll() // Initial check
 
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [sections])
+  }, [])
 
   const handleDotClick = (index: number) => {
-    const sectionId = sections[index].toLowerCase()
-    const element = document.getElementById(sectionId)
-    if (element) {
-      const headerOffset = 80
-      const elementPosition = element.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+    const section = sections[index]
+    let element: Element | null = null
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      })
+    switch (section.id) {
+      case "hero":
+        window.scrollTo({ top: 0, behavior: "smooth" })
+        break
+      case "scroll-start":
+        window.scrollTo({ top: 100, behavior: "smooth" })
+        break
+      default:
+        element = document.getElementById(section.id)
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" })
+        }
     }
   }
 
   return (
-    <div className="fixed left-8 top-1/2 -translate-y-1/2 z-50">
-      <div className="relative py-4 px-2 bg-black/20 backdrop-blur-sm rounded-full">
+    <div className="fixed left-0 top-1/2 -translate-y-1/2 z-50">
+      <div className="relative py-4 px-2 bg-black/20 backdrop-blur-sm">
         <div className="flex flex-col items-center gap-8 relative">
           {/* Vertical progress line background */}
           <div className="absolute top-0 bottom-0 w-[2px] bg-white/10" />
@@ -76,7 +97,7 @@ const ProgressIndicator = () => {
 
           {sections.map((section, index) => (
             <motion.button
-              key={section}
+              key={section.name}
               onClick={() => handleDotClick(index)}
               className="relative z-10 group"
               initial={{ opacity: 0, x: -20 }}
@@ -111,7 +132,7 @@ const ProgressIndicator = () => {
               
               <div className="pointer-events-none absolute left-full ml-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <span className="text-sm font-medium text-white/90 whitespace-nowrap bg-black/50 px-2 py-1 rounded-md backdrop-blur-sm">
-                  {section}
+                  {section.name}
                 </span>
               </div>
             </motion.button>
