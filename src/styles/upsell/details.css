@@ -41,6 +41,20 @@
     flex-shrink: 0;
 }
 
+.mystery-bonus {
+    display: block;
+    margin-top: 1.5rem;
+}
+
+.plus-circle {
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #F59E0B;
+}
+
 @media (min-width: 768px) {
     .product-details {
         width: 66.666667%;
