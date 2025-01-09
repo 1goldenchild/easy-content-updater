@@ -11,6 +11,10 @@ import EmailPreview from "@/pages/EmailPreview"
 import Portal from "@/pages/Portal"
 import Upsell from "@/pages/Upsell"
 import Upsell2 from "@/pages/Upsell2"
+import Terms from "@/pages/Terms"
+import Privacy from "@/pages/Privacy"
+import Refund from "@/pages/Refund"
+import Support from "@/pages/Support"
 
 const App = () => {
   return (
@@ -29,6 +33,10 @@ const App = () => {
             <Route path="/portal" element={<Portal />} />
             <Route path="/upsell" element={<Upsell />} />
             <Route path="/upsell2" element={<Upsell2 />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/refund" element={<Refund />} />
+            <Route path="/support" element={<Support />} />
           </Routes>
         </main>
         <Footer />

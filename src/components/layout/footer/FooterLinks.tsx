@@ -16,29 +16,23 @@ const FooterLinks = () => {
           <li>
             <Link to="/blog" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Blog</Link>
           </li>
-          <li>
-            <Link to="/checkout" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Checkout</Link>
-          </li>
-          <li>
-            <Link to="/portal" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Portal</Link>
-          </li>
-          <li>
-            <Link to="/email-preview" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Flow</Link>
-          </li>
         </ul>
       </div>
 
       <div>
-        <h4 className="text-sm font-semibold mb-4 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">Resources</h4>
+        <h4 className="text-sm font-semibold mb-4 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">Legal & Support</h4>
         <ul className="space-y-2">
           <li>
-            <a href="#" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">About Numerology</a>
+            <Link to="/terms" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Terms & Conditions</Link>
           </li>
           <li>
-            <a href="#" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">FAQ</a>
+            <Link to="/privacy" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Privacy Policy</Link>
           </li>
           <li>
-            <a href="#" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Contact</a>
+            <Link to="/refund" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Refund Policy</Link>
+          </li>
+          <li>
+            <Link to="/support" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Support</Link>
           </li>
         </ul>
       </div>
