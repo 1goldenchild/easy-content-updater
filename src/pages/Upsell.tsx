@@ -15,7 +15,17 @@ const features = [
     text: "Ancient Secrets of Numerology: Tap into powerful ancient techniques that have been used for centuries to create wealth, success, and spiritual harmony."
   },
   {
-    text: "Mystery Bonus: Unlock a surprise bonus that will take your numerology knowledge to the next level."
+    text: (
+      <div className="relative rounded-xl bg-black/90 p-4 text-center overflow-hidden border border-amber-500/20 mt-6">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(251,191,36,0.1),rgba(0,0,0,0))]"></div>
+        <h3 className="relative flex items-center justify-center gap-2 text-xl font-bold bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 bg-clip-text text-transparent mb-3">
+          <span className="w-5 h-5 inline-flex items-center justify-center text-amber-500">+</span> Mystery Bonus
+        </h3>
+        <p className="relative text-sm text-amber-300/90 font-medium">
+          Unlock exclusive insights reserved for advanced seekers
+        </p>
+      </div>
+    )
   }
 ]
 
