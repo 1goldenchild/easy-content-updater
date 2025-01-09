@@ -35,25 +35,20 @@ export const calculateLifePath = (date: Date): number => {
 
   console.log(`Calculating lifepath for date: ${day}/${month}/${year}`);
 
-  // Split each component into individual digits and sum them
-  const daySum = day.toString().split('').reduce((sum, digit) => sum + parseInt(digit), 0);
-  const monthSum = month.toString().split('').reduce((sum, digit) => sum + parseInt(digit), 0);
-  const yearSum = year.toString().split('').reduce((sum, digit) => sum + parseInt(digit), 0);
+  // Add all digits individually
+  const allDigits = `${day}${month}${year}`.split('').map(Number);
+  const sum = allDigits.reduce((a, b) => a + b, 0);
+  
+  console.log(`Total sum before reduction: ${sum}`);
 
-  console.log(`Individual sums - Day: ${daySum}, Month: ${monthSum}, Year: ${yearSum}`);
-
-  // Add all the sums together
-  const totalSum = daySum + monthSum + yearSum;
-  console.log(`Total sum before reduction: ${totalSum}`);
-
-  // Check if total sum is a master number
-  if (MASTER_NUMBERS.includes(totalSum)) {
-    console.log(`Found master number in total sum: ${totalSum}`);
-    return totalSum;
+  // Check if sum is a master number
+  if (MASTER_NUMBERS.includes(sum)) {
+    console.log(`Found master number in sum: ${sum}`);
+    return sum;
   }
 
   // If not a master number, reduce to single digit
-  const lifePath = reduceToSingleDigit(totalSum);
+  const lifePath = reduceToSingleDigit(sum);
   console.log(`Final lifepath number: ${lifePath}`);
 
   return lifePath;
@@ -66,6 +61,9 @@ export const calculatePartialEnergy = (day: number): number => {
   }
   if (day === 22) {
     return 22;
+  }
+  if (day === 33) {
+    return 33;
   }
   
   // For all other days, reduce to single digit
@@ -90,7 +88,7 @@ export const calculateSecretNumber = (date: Date): number => {
   // Check if initial sum is a master number
   if (MASTER_NUMBERS.includes(initialSum)) {
     console.log("Found master number in initial sum:", initialSum);
-    return initialSum === 29 || initialSum === 20 ? 11 : initialSum;
+    return initialSum;
   }
   
   // If not, reduce to single digit or until we find a master number
@@ -104,7 +102,7 @@ export const calculateSecretNumber = (date: Date): number => {
     // Check if reduced sum is a master number
     if (MASTER_NUMBERS.includes(currentSum)) {
       console.log("Found master number after reduction:", currentSum);
-      return currentSum === 29 || currentSum === 20 ? 11 : currentSum;
+      return currentSum;
     }
   }
   
