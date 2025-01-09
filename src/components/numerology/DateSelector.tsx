@@ -1,141 +1,92 @@
-import { useState, useRef, KeyboardEvent, ChangeEvent } from "react"
-import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
 
 interface DateSelectorProps {
-  date: Date | undefined;
-  setDate: (date: Date | undefined) => void;
-  onCalculate: () => void;
+  date?: Date;
+  setDate: (date: Date) => void;
+  onCalculate?: () => void;
 }
 
 const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
-  const [day, setDay] = useState("")
-  const [month, setMonth] = useState("")
-  const [year, setYear] = useState("")
-  
-  const dayRef = useRef<HTMLInputElement>(null)
-  const monthRef = useRef<HTMLInputElement>(null)
-  const yearRef = useRef<HTMLInputElement>(null)
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
 
-  const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement>,
-    field: "day" | "month" | "year",
-    maxLength: number,
-    nextRef?: React.RefObject<HTMLInputElement>
+  const handleDateChange = (
+    value: string,
+    setter: (value: string) => void,
+    maxLength: number
   ) => {
-    const value = e.target.value.replace(/\D/g, "")
-    
-    // Validate input based on field type
-    if (field === "day" && parseInt(value) > 31) return
-    if (field === "month" && parseInt(value) > 12) return
-    
-    // Update state based on field type
-    if (field === "day") setDay(value)
-    if (field === "month") setMonth(value)
-    if (field === "year") setYear(value)
-
-    // Auto-advance to next field
-    if (value.length === maxLength && nextRef?.current) {
-      nextRef.current.focus()
+    const numericValue = value.replace(/\D/g, "");
+    if (numericValue.length <= maxLength) {
+      setter(numericValue);
+      updateDate(
+        setter === setDay ? numericValue : day,
+        setter === setMonth ? numericValue : month,
+        setter === setYear ? numericValue : year
+      );
     }
-  }
+  };
 
-  const handleKeyDown = (
-    e: KeyboardEvent<HTMLInputElement>,
-    field: "day" | "month" | "year",
-    prevRef?: React.RefObject<HTMLInputElement>
+  const updateDate = (
+    newDay: string,
+    newMonth: string,
+    newYear: string
   ) => {
-    if (e.key === "Backspace") {
-      if (field === "day" && day === "" && prevRef?.current) {
-        prevRef.current.focus()
-      }
-      if (field === "month" && month === "" && prevRef?.current) {
-        prevRef.current.focus()
-      }
-      if (field === "year" && year === "" && prevRef?.current) {
-        prevRef.current.focus()
-      }
-    }
-  }
-
-  const handleSubmit = () => {
-    if (day && month && year && year.length === 4) {
-      const dateObj = new Date(parseInt(year), parseInt(month) - 1, parseInt(day))
+    if (newDay && newMonth && newYear && 
+        newYear.length === 4 && 
+        newMonth.length >= 1 && 
+        newDay.length >= 1) {
+      const dateObj = new Date(parseInt(newYear), parseInt(newMonth) - 1, parseInt(newDay));
       if (!isNaN(dateObj.getTime())) {
-        setDate(dateObj)
+        setDate(dateObj);
         // Only call onCalculate if it's provided
         if (onCalculate) {
-          onCalculate()
+          onCalculate();
         }
       }
     }
-  }
-
-  const isComplete = day.length === 2 && month.length === 2 && year.length === 4
+  };
 
   return (
-    <div className="w-full max-w-md mx-auto px-4">
-      <div className="text-center">
-        <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-          What's your date of birth?
-        </h2>
-        <div className="flex items-center justify-center gap-2 mb-8">
-          <div className="relative">
-            <input
-              ref={dayRef}
-              type="text"
-              value={day}
-              onChange={(e) => handleInputChange(e, "day", 2, monthRef)}
-              onKeyDown={(e) => handleKeyDown(e, "day")}
-              placeholder="DD"
-              maxLength={2}
-              className="w-16 h-14 bg-white/5 border border-white/10 rounded-lg text-center text-xl focus:outline-none focus:ring-2 focus:ring-purple-500"
-            />
-          </div>
-          <span className="text-2xl text-white/50">/</span>
-          <div className="relative">
-            <input
-              ref={monthRef}
-              type="text"
-              value={month}
-              onChange={(e) => handleInputChange(e, "month", 2, yearRef)}
-              onKeyDown={(e) => handleKeyDown(e, "month", dayRef)}
-              placeholder="MM"
-              maxLength={2}
-              className="w-16 h-14 bg-white/5 border border-white/10 rounded-lg text-center text-xl focus:outline-none focus:ring-2 focus:ring-purple-500"
-            />
-          </div>
-          <span className="text-2xl text-white/50">/</span>
-          <div className="relative">
-            <input
-              ref={yearRef}
-              type="text"
-              value={year}
-              onChange={(e) => handleInputChange(e, "year", 4)}
-              onKeyDown={(e) => handleKeyDown(e, "year", monthRef)}
-              placeholder="YYYY"
-              maxLength={4}
-              className="w-20 h-14 bg-white/5 border border-white/10 rounded-lg text-center text-xl focus:outline-none focus:ring-2 focus:ring-purple-500"
-            />
-          </div>
-          {isComplete && (
-            <Button
-              onClick={handleSubmit}
-              className={cn(
-                "ml-2 rounded-full w-14 h-14 p-0",
-                "bg-gradient-to-r from-purple-500 to-pink-500",
-                "hover:from-purple-600 hover:to-pink-600",
-                "transition-all duration-300"
-              )}
-            >
-              <ArrowRight className="h-5 w-5" />
-            </Button>
-          )}
+    <div className="space-y-4">
+      <label className="block text-sm font-medium text-white/70">
+        Date of Birth
+      </label>
+      <div className="flex gap-4">
+        <div>
+          <Input
+            type="text"
+            placeholder="DD"
+            value={day}
+            onChange={(e) => handleDateChange(e.target.value, setDay, 2)}
+            className="w-20"
+            maxLength={2}
+          />
+        </div>
+        <div>
+          <Input
+            type="text"
+            placeholder="MM"
+            value={month}
+            onChange={(e) => handleDateChange(e.target.value, setMonth, 2)}
+            className="w-20"
+            maxLength={2}
+          />
+        </div>
+        <div>
+          <Input
+            type="text"
+            placeholder="YYYY"
+            value={year}
+            onChange={(e) => handleDateChange(e.target.value, setYear, 4)}
+            className="w-28"
+            maxLength={4}
+          />
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DateSelector
+export default DateSelector;
