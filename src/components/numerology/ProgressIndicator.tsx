@@ -6,7 +6,7 @@ const ProgressIndicator = () => {
   const [activeSection, setActiveSection] = useState(0)
   const location = useLocation()
 
-  const sections = location.pathname === "/" 
+  const sections = location.pathname === "/numerology-reading" 
     ? ["Hero", "Knowledge", "Benefits", "Sales", "CTA", "Stats"]
     : ["results", "occupation", "compatibility", "country", "car"]
 
@@ -58,49 +58,48 @@ const ProgressIndicator = () => {
   }
 
   return (
-    <div className="fixed inset-0 pointer-events-none flex items-center justify-center z-50">
-      <div className="relative w-full max-w-7xl mx-auto px-4">
-        <div className="absolute right-0 flex items-center gap-2">
-          <div className="space-y-8 relative">
-            {/* Animated progress line */}
-            <motion.div 
-              className="absolute right-1 w-[2px] bg-gradient-to-b from-purple-500 to-pink-500"
-              initial={{ height: 0 }}
-              animate={{ 
-                height: `${(activeSection / (sections.length - 1)) * 100}%`,
-                top: 0
-              }}
-              transition={{ duration: 0.3 }}
-              style={{
-                position: 'absolute',
-                zIndex: -1
-              }}
-            />
-            
-            {/* Static background line */}
-            <div className="absolute right-1 w-[2px] h-full bg-white/10" style={{ zIndex: -2 }} />
-
-            {sections.map((section, index) => (
-              <div 
-                key={section}
-                className="relative flex items-center gap-2 justify-end group"
-                onClick={() => handleDotClick(index)}
-                style={{ cursor: 'pointer' }}
-              >
+    <div className="fixed right-8 top-1/2 -translate-y-1/2 z-50">
+      <div className="flex flex-col items-center gap-3">
+        {sections.map((section, index) => (
+          <motion.button
+            key={section}
+            onClick={() => handleDotClick(index)}
+            className="group relative flex items-center gap-3"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: index * 0.1 }}
+          >
+            <div className="relative">
+              <motion.div
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === activeSection
+                    ? "bg-gradient-to-r from-emerald-400 to-emerald-500 scale-125"
+                    : "bg-white/20 group-hover:bg-white/40"
+                }`}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.95 }}
+              />
+              {index === activeSection && (
                 <motion.div
-                  className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                    index <= activeSection 
-                      ? "bg-gradient-to-r from-purple-500 to-pink-500" 
-                      : "bg-white/20"
-                  }`}
-                  animate={{
-                    scale: index === activeSection ? 1.2 : 1
+                  className="absolute inset-0 rounded-full bg-emerald-400/20"
+                  initial={{ scale: 1 }}
+                  animate={{ scale: 1.8, opacity: 0 }}
+                  transition={{ 
+                    repeat: Infinity,
+                    duration: 2,
+                    ease: "easeOut"
                   }}
                 />
-              </div>
-            ))}
-          </div>
-        </div>
+              )}
+            </div>
+            
+            <div className="pointer-events-none absolute right-full mr-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span className="text-sm font-medium text-white/90 whitespace-nowrap bg-black/50 px-2 py-1 rounded-md backdrop-blur-sm">
+                {section}
+              </span>
+            </div>
+          </motion.button>
+        ))}
       </div>
     </div>
   )
