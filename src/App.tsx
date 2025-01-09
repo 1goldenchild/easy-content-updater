@@ -2,14 +2,10 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Navbar from "@/components/layout/Navbar"
 import Footer from "@/components/layout/Footer"
 import Index from "@/pages/Index"
-import Analysis from "@/pages/Analysis"
 import Sales from "@/pages/Sales"
-import Checkout from "@/pages/Checkout"
 import CollectInfo from "@/pages/CollectInfo"
 import EmailPreview from "@/pages/EmailPreview"
 import Portal from "@/pages/Portal"
-import Upsell from "@/pages/Upsell"
-import Upsell2 from "@/pages/Upsell2"
 import Terms from "@/pages/Terms"
 import Privacy from "@/pages/Privacy"
 import Refund from "@/pages/Refund"
@@ -24,14 +20,10 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Navigate to="/numerology-reading" replace />} />
             <Route path="/numerology-reading" element={<Index />} />
-            <Route path="/analysis" element={<Analysis />} />
             <Route path="/sales" element={<Sales />} />
-            <Route path="/checkout" element={<Checkout />} />
             <Route path="/collect-info" element={<CollectInfo />} />
             <Route path="/email-preview" element={<EmailPreview />} />
             <Route path="/portal" element={<Portal />} />
-            <Route path="/upsell" element={<Upsell />} />
-            <Route path="/upsell2" element={<Upsell2 />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/refund" element={<Refund />} />
