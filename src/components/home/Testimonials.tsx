@@ -42,12 +42,12 @@ const testimonials = [
 
 const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => (
   <div className="min-w-[300px] md:min-w-[400px] p-6 mx-4">
-    <div className="bg-card/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:border-primary/20 transition-colors h-full">
+    <div className="bg-emerald-400/5 backdrop-blur-sm border border-emerald-500/10 rounded-lg p-6 hover:border-emerald-500/20 transition-colors h-full">
       <div className="flex gap-1 mb-4">
         {[...Array(testimonial.rating)].map((_, i) => (
           <Star
             key={i}
-            className="w-4 h-4 fill-purple-500 text-purple-500"
+            className="w-4 h-4 fill-emerald-500 text-emerald-500"
           />
         ))}
       </div>
