@@ -10,6 +10,7 @@ import CompatibilitySection from "./phone/CompatibilitySection";
 import CountryCompatibility from "./phone/sections/CountryCompatibility";
 import CarCompatibilitySection from "./phone/sections/CarCompatibilitySection";
 import TechCompatibilitySection from "./phone/sections/TechCompatibilitySection";
+import LoveCompatibility from "./phone/sections/LoveCompatibility";
 
 const PhoneShowcase = () => {
   const [activeSection, setActiveSection] = useState("lifepath");
@@ -46,12 +47,17 @@ const PhoneShowcase = () => {
     }
   }, []);
 
+  // For demo purposes, using a hardcoded life path number
+  // In a real application, this would come from your calculation
+  const lifePathNumber = 1;
+
   return (
     <PhoneFrame activeSection={activeSection} onSectionChange={scrollToSection}>
       <div className="w-full space-y-6 p-4">
         <NumberSections />
         <CoreTraits />
         <CompatibilitySection />
+        <LoveCompatibility lifePathNumber={lifePathNumber} />
         <CareerPaths />
         <CountryCompatibility />
         <CarCompatibilitySection />
