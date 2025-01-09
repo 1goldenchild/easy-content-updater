@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button"
 import { Menu } from "lucide-react"
 import { Link } from "react-router-dom"
 import { useState } from "react"
-import AnimatedLogo from "./AnimatedLogo"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -12,12 +11,9 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center justify-between">
         <Link to="/" className="flex items-center space-x-2">
-          <div className="relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-amber-900/50 via-yellow-900/50 to-amber-900/50 rounded-lg blur-sm"></div>
-            <span className="relative text-2xl font-black tracking-tighter bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-700 bg-clip-text text-transparent">
-              <AnimatedLogo />
-            </span>
-          </div>
+          <span className="text-2xl font-black tracking-tighter">
+            Numerology
+          </span>
         </Link>
 
         {/* Mobile Navigation */}
