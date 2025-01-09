@@ -7,7 +7,10 @@ interface OccupationGuidanceProps {
 }
 
 const OccupationGuidance = ({ lifePath, isVisible }: OccupationGuidanceProps) => {
+  console.log("OccupationGuidance rendering for lifePath:", lifePath);
+  
   const getOccupations = (number: number) => {
+    console.log("Getting occupations for lifePath:", number);
     switch (number) {
       case 1:
         return [
@@ -15,7 +18,12 @@ const OccupationGuidance = ({ lifePath, isVisible }: OccupationGuidanceProps) =>
           "CEO/Executive",
           "Military Leader",
           "Sales Director",
-          "Project Manager"
+          "Project Manager",
+          "Business Owner",
+          "Innovator",
+          "Independent Contractor",
+          "Politician",
+          "Startup Founder"
         ];
       case 2:
         return [
@@ -23,7 +31,12 @@ const OccupationGuidance = ({ lifePath, isVisible }: OccupationGuidanceProps) =>
           "Counselor/Therapist",
           "Human Resources Manager",
           "Mediator",
-          "Social Worker"
+          "Social Worker",
+          "Teacher",
+          "Nurse",
+          "Psychologist",
+          "Team Coordinator",
+          "Peace Negotiator"
         ];
       case 3:
         return [
@@ -31,7 +44,12 @@ const OccupationGuidance = ({ lifePath, isVisible }: OccupationGuidanceProps) =>
           "Writer/Journalist",
           "Actor/Performer",
           "Marketing Creative",
-          "Public Speaker"
+          "Public Speaker",
+          "Musician",
+          "Fashion Designer",
+          "Interior Designer",
+          "Creative Director",
+          "Entertainment Producer"
         ];
       case 4:
         return [
@@ -39,7 +57,12 @@ const OccupationGuidance = ({ lifePath, isVisible }: OccupationGuidanceProps) =>
           "Architect",
           "Financial Analyst",
           "Systems Administrator",
-          "Construction Manager"
+          "Construction Manager",
+          "Accountant",
+          "Project Planner",
+          "Quality Control Manager",
+          "Database Administrator",
+          "Real Estate Developer"
         ];
       case 5:
         return [
@@ -47,7 +70,12 @@ const OccupationGuidance = ({ lifePath, isVisible }: OccupationGuidanceProps) =>
           "Digital Nomad",
           "Journalist",
           "Sales Representative",
-          "Event Planner"
+          "Event Planner",
+          "Adventure Tour Leader",
+          "Marketing Manager",
+          "Communications Director",
+          "Foreign Correspondent",
+          "Social Media Manager"
         ];
       case 6:
         return [
@@ -55,7 +83,12 @@ const OccupationGuidance = ({ lifePath, isVisible }: OccupationGuidanceProps) =>
           "Healthcare Provider",
           "Interior Designer",
           "Chef/Restaurateur",
-          "Family Counselor"
+          "Family Counselor",
+          "Nurse",
+          "Social Worker",
+          "Wedding Planner",
+          "Child Care Provider",
+          "Home Designer"
         ];
       case 7:
         return [
@@ -63,7 +96,12 @@ const OccupationGuidance = ({ lifePath, isVisible }: OccupationGuidanceProps) =>
           "Scientist",
           "Philosopher",
           "Technical Analyst",
-          "Strategic Consultant"
+          "Strategic Consultant",
+          "Professor",
+          "Data Scientist",
+          "Investigator",
+          "Technology Researcher",
+          "Mystery Writer"
         ];
       case 8:
         return [
@@ -71,7 +109,12 @@ const OccupationGuidance = ({ lifePath, isVisible }: OccupationGuidanceProps) =>
           "Real Estate Developer",
           "Business Consultant",
           "Corporate Lawyer",
-          "Stock Trader"
+          "Stock Trader",
+          "CEO",
+          "Financial Manager",
+          "Business Owner",
+          "Executive Director",
+          "Venture Capitalist"
         ];
       case 9:
         return [
@@ -79,7 +122,12 @@ const OccupationGuidance = ({ lifePath, isVisible }: OccupationGuidanceProps) =>
           "International Relations",
           "Non-profit Director",
           "Environmental Scientist",
-          "Religious Leader"
+          "Religious Leader",
+          "World Health Worker",
+          "Human Rights Advocate",
+          "Charity Organizer",
+          "Global Education Coordinator",
+          "Peace Corps Worker"
         ];
       case 11:
         return [
@@ -87,7 +135,12 @@ const OccupationGuidance = ({ lifePath, isVisible }: OccupationGuidanceProps) =>
           "Motivational Speaker",
           "Life Coach",
           "Political Leader",
-          "Religious Advisor"
+          "Religious Advisor",
+          "Inspirational Writer",
+          "Meditation Guide",
+          "Spiritual Counselor",
+          "Visionary Leader",
+          "Humanitarian Leader"
         ];
       case 22:
         return [
@@ -95,7 +148,12 @@ const OccupationGuidance = ({ lifePath, isVisible }: OccupationGuidanceProps) =>
           "Global Business Leader",
           "Innovative Engineer",
           "International Developer",
-          "Technology Pioneer"
+          "Technology Pioneer",
+          "World Leader",
+          "Philanthropist",
+          "Scientific Innovator",
+          "Global Project Manager",
+          "Revolutionary Inventor"
         ];
       case 33:
         return [
@@ -103,9 +161,15 @@ const OccupationGuidance = ({ lifePath, isVisible }: OccupationGuidanceProps) =>
           "Humanitarian Leader",
           "Global Education Director",
           "Peace Ambassador",
-          "Transformational Coach"
+          "Transformational Coach",
+          "World Healer",
+          "Spiritual Guide",
+          "Global Peace Worker",
+          "Universal Teacher",
+          "Enlightened Leader"
         ];
       default:
+        console.log("No occupations found for lifePath:", number);
         return [];
     }
   };
@@ -113,6 +177,7 @@ const OccupationGuidance = ({ lifePath, isVisible }: OccupationGuidanceProps) =>
   if (!isVisible) return null;
 
   const occupations = getOccupations(lifePath);
+  console.log("Retrieved occupations:", occupations);
 
   return (
     <motion.div
