@@ -23,9 +23,9 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
       animate={{ opacity: 1, y: 0 }}
       className="w-full mt-8"
     >
-      <div className="rounded-lg bg-white/5 border border-white/10">
+      <div className="rounded-lg bg-white/5 border border-white/10 max-w-[2000px] mx-auto">
         <ScrollArea className="w-full">
-          <div className="p-4 md:p-6 lg:p-8 w-full max-w-[1800px] mx-auto">
+          <div className="p-4 md:p-6 lg:p-8 w-full">
             <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] mb-8">
               Numerological Characteristics
             </h3>
