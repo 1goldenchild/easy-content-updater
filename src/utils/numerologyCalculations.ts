@@ -81,16 +81,19 @@ export const calculateSecretNumber = (date: Date): number => {
   console.log(`Day of year: ${dayOfYear}`);
 
   // Check for special master number days
-  if ([11, 20, 110, 101].includes(dayOfYear)) {
+  // Master number 11
+  if ([11, 110, 101, 20].includes(dayOfYear)) {
     console.log("Special case: Secret number 11");
     return 11;
   }
   
+  // Master number 22
   if ([22, 220, 202].includes(dayOfYear)) {
     console.log("Special case: Secret number 22");
     return 22;
   }
   
+  // Master number 33
   if ([33, 330, 303].includes(dayOfYear)) {
     console.log("Special case: Secret number 33");
     return 33;
