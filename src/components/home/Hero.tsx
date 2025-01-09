@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 
 const Hero = () => {
   return (
-    <section className="relative py-20 md:py-32 overflow-hidden">
+    <section className="relative py-20 md:py-32 overflow-hidden bg-gradient-to-b from-[#1A1F2C] to-transparent">
       <div className="container px-4 md:px-6">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -40,15 +40,7 @@ const Hero = () => {
         </motion.div>
       </div>
       <div 
-        className="absolute inset-0"
-        style={{
-          background: `linear-gradient(to bottom, 
-            rgba(26, 31, 44, 0.8) 0%,
-            rgba(26, 31, 44, 0.8) 80%,
-            rgba(26, 31, 44, 0.4) 90%,
-            rgba(26, 31, 44, 0) 100%
-          )`
-        }}
+        className="absolute inset-0 bg-gradient-to-b from-[#1A1F2C]/95 via-[#1A1F2C]/80 to-transparent pointer-events-none"
       />
     </section>
   )
