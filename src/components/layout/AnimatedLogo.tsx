@@ -15,17 +15,13 @@ const AnimatedLogo = () => {
   const word = "NUMEROLOGY"
   
   useEffect(() => {
-    // First show all numbers for 1 second
     const numbersTimer = setTimeout(() => {
-      // Start the letter transformation sequence
       setCurrentIndex(0)
       
-      // Set up interval to transform each letter
       const interval = setInterval(() => {
         setCurrentIndex(prev => {
           if (prev >= word.length - 1) {
             clearInterval(interval)
-            // Show 33 after last letter transforms
             setTimeout(() => setShow33(true), 300)
             return prev
           }
@@ -56,7 +52,7 @@ const AnimatedLogo = () => {
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.3 }}
-                className="inline-block"
+                className="inline-block font-serif"
               >
                 {letter}
               </motion.span>
@@ -66,7 +62,7 @@ const AnimatedLogo = () => {
                 initial={{ opacity: 1 }}
                 exit={{ y: 20, opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="inline-block text-[#00ff00]"
+                className="inline-block text-amber-600/80"
               >
                 {getGematriaValue(letter)}
               </motion.span>
@@ -80,7 +76,7 @@ const AnimatedLogo = () => {
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.3 }}
-            className="bg-gradient-to-r from-[#9b87f5] to-[#D946EF] bg-clip-text text-transparent ml-1"
+            className="bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-700 bg-clip-text text-transparent ml-1 font-serif"
           >
             33
           </motion.span>

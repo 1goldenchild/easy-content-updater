@@ -5,18 +5,6 @@ const FooterLinks = () => {
   return (
     <>
       <div>
-        <h4 className="text-sm font-semibold mb-4 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">Quick Links</h4>
-        <ul className="space-y-2">
-          <li>
-            <Link to="/" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Home</Link>
-          </li>
-          <li>
-            <Link to="/analysis" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Analysis</Link>
-          </li>
-        </ul>
-      </div>
-
-      <div>
         <h4 className="text-sm font-semibold mb-4 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">Legal & Support</h4>
         <ul className="space-y-2">
           <li>
