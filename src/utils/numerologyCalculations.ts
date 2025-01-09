@@ -109,28 +109,30 @@ export const calculateSecretNumber = (date: Date): number => {
 export const getChineseZodiac = (year: number): string => {
   console.log(`Calculating Chinese zodiac for year: ${year}`);
   
-  // Create a mapping of years to zodiac signs based on the provided list
   const zodiacMap: Record<number, string> = {
-    2042: 'Horse', 2041: 'Snake', 2040: 'Dragon', 2039: 'Rabbit',
-    2038: 'Tiger', 2037: 'Ox', 2036: 'Rat', 2035: 'Pig',
-    2034: 'Dog', 2033: 'Rooster', 2032: 'Monkey', 2031: 'Sheep',
-    2030: 'Horse', 2029: 'Snake', 2028: 'Dragon', 2027: 'Rabbit',
-    2026: 'Tiger', 2025: 'Ox', 2024: 'Rat', 2023: 'Pig',
-    2022: 'Dog', 2021: 'Rooster', 2020: 'Monkey', 2019: 'Sheep',
-    2018: 'Horse', 2017: 'Snake', 2016: 'Dragon', 2015: 'Rabbit',
-    2014: 'Tiger', 2013: 'Ox', 2012: 'Rat', 2011: 'Pig',
-    2010: 'Dog', 2009: 'Rooster', 2008: 'Monkey', 2007: 'Sheep',
-    2006: 'Horse', 2005: 'Snake', 2004: 'Dragon', 2003: 'Rabbit',
-    2002: 'Tiger', 2001: 'Ox', 2000: 'Rat', 1999: 'Pig',
-    1998: 'Dog', 1997: 'Rooster', 1996: 'Monkey', 1995: 'Sheep',
-    1994: 'Horse', 1993: 'Snake', 1992: 'Dragon', 1991: 'Rabbit',
-    1990: 'Tiger', 1989: 'Ox', 1988: 'Rat', 1987: 'Pig',
-    1986: 'Dog', 1985: 'Rooster', 1984: 'Monkey', 1983: 'Sheep',
-    1982: 'Horse', 1981: 'Snake', 1980: 'Dragon', 1979: 'Rabbit',
-    1978: 'Tiger', 1977: 'Ox', 1976: 'Rat', 1975: 'Pig',
-    1974: 'Dog', 1973: 'Rooster', 1972: 'Monkey', 1971: 'Sheep',
-    1970: 'Horse', 1969: 'Snake', 1968: 'Dragon', 1967: 'Rabbit',
-    1966: 'Tiger', 1965: 'Ox', 1964: 'Rat', 1963: 'Pig'
+    2028: 'Dragon', 2027: 'Snake', 2026: 'Horse', 2025: 'Goat',
+    2024: 'Monkey', 2023: 'Rooster', 2022: 'Dog', 2021: 'Ox',
+    2020: 'Rat', 2019: 'Pig', 2018: 'Dog', 2017: 'Rooster',
+    2016: 'Monkey', 2015: 'Goat', 2014: 'Horse', 2013: 'Snake',
+    2012: 'Dragon', 2011: 'Rabbit', 2010: 'Tiger', 2009: 'Ox',
+    2008: 'Rat', 2007: 'Pig', 2006: 'Dog', 2005: 'Rooster',
+    2004: 'Monkey', 2003: 'Goat', 2002: 'Horse', 2001: 'Snake',
+    2000: 'Dragon', 1999: 'Rabbit', 1998: 'Tiger', 1997: 'Ox',
+    1996: 'Rat', 1995: 'Pig', 1994: 'Dog', 1993: 'Rooster',
+    1992: 'Monkey', 1991: 'Goat', 1990: 'Horse', 1989: 'Snake',
+    1988: 'Dragon', 1987: 'Rabbit', 1986: 'Tiger', 1985: 'Ox',
+    1984: 'Rat', 1983: 'Pig', 1982: 'Dog', 1981: 'Rooster',
+    1980: 'Monkey', 1979: 'Goat', 1978: 'Horse', 1977: 'Snake',
+    1976: 'Dragon', 1975: 'Rabbit', 1974: 'Tiger', 1973: 'Ox',
+    1972: 'Rat', 1971: 'Pig', 1970: 'Dog', 1969: 'Rooster',
+    1968: 'Monkey', 1967: 'Goat', 1966: 'Horse', 1965: 'Snake',
+    1964: 'Dragon', 1963: 'Rabbit', 1962: 'Tiger', 1961: 'Ox',
+    1960: 'Rat', 1959: 'Pig', 1958: 'Dog', 1957: 'Rooster',
+    1956: 'Monkey', 1955: 'Goat', 1954: 'Horse', 1953: 'Snake',
+    1952: 'Dragon', 1951: 'Rabbit', 1950: 'Tiger', 1949: 'Ox',
+    1948: 'Rat', 1947: 'Pig', 1946: 'Dog', 1945: 'Rooster',
+    1944: 'Monkey', 1943: 'Goat', 1942: 'Horse', 1941: 'Snake',
+    1940: 'Dragon'
   };
 
   // If the year is in our map, return the exact zodiac sign
@@ -140,11 +142,11 @@ export const getChineseZodiac = (year: number): string => {
   }
 
   // For years outside our map, calculate based on the 12-year cycle
-  // We'll use 2024 (Rat year) as our reference point
+  // We'll use 2024 (Monkey year) as our reference point
   const baseYear = 2024;
   const zodiacCycle = [
-    'Rat', 'Ox', 'Tiger', 'Rabbit', 'Dragon', 'Snake',
-    'Horse', 'Sheep', 'Monkey', 'Rooster', 'Dog', 'Pig'
+    'Monkey', 'Rooster', 'Dog', 'Pig', 'Rat', 'Ox',
+    'Tiger', 'Rabbit', 'Dragon', 'Snake', 'Horse', 'Goat'
   ];
   
   let yearDiff = year - baseYear;
