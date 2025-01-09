@@ -58,18 +58,18 @@ const ProgressIndicator = () => {
   }
 
   return (
-    <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
-      <div className="relative px-4 py-2 bg-black/20 backdrop-blur-sm rounded-full">
-        <div className="flex items-center gap-8 relative">
-          {/* Progress line background */}
-          <div className="absolute left-0 right-0 h-[2px] bg-white/10" />
+    <div className="fixed left-8 top-1/2 -translate-y-1/2 z-50">
+      <div className="relative py-4 px-2 bg-black/20 backdrop-blur-sm rounded-full">
+        <div className="flex flex-col items-center gap-8 relative">
+          {/* Vertical progress line background */}
+          <div className="absolute top-0 bottom-0 w-[2px] bg-white/10" />
           
           {/* Animated progress line */}
           <motion.div 
-            className="absolute left-0 h-[2px] bg-gradient-to-r from-emerald-400 to-emerald-500"
-            initial={{ width: "0%" }}
+            className="absolute top-0 w-[2px] bg-gradient-to-b from-emerald-400 to-emerald-500"
+            initial={{ height: "0%" }}
             animate={{ 
-              width: `${(activeSection / (sections.length - 1)) * 100}%`
+              height: `${(activeSection / (sections.length - 1)) * 100}%`
             }}
             transition={{ duration: 0.3 }}
           />
@@ -79,8 +79,8 @@ const ProgressIndicator = () => {
               key={section}
               onClick={() => handleDotClick(index)}
               className="relative z-10 group"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
             >
               <div className="relative">
@@ -109,7 +109,7 @@ const ProgressIndicator = () => {
                 )}
               </div>
               
-              <div className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="pointer-events-none absolute left-full ml-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <span className="text-sm font-medium text-white/90 whitespace-nowrap bg-black/50 px-2 py-1 rounded-md backdrop-blur-sm">
                   {section}
                 </span>
