@@ -1,15 +1,44 @@
 import { motion } from "framer-motion";
 import { CarFront } from "lucide-react";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+
+interface CarBrand {
+  brand_name: string;
+  founding_year: number;
+  chinese_zodiac: string;
+}
 
 const CarCompatibilitySection = () => {
-  const cars = [
-    { name: "Tesla Model S", compatibility: 95, type: "good" },
-    { name: "BMW i8", compatibility: 88, type: "good" },
-    { name: "Porsche Taycan", compatibility: 82, type: "good" },
-    { name: "Ford F-150", compatibility: 45, type: "bad" },
-    { name: "Chevrolet Camaro", compatibility: 38, type: "bad" },
-    { name: "Dodge Challenger", compatibility: 32, type: "bad" }
-  ];
+  const [goodMatches, setGoodMatches] = useState<CarBrand[]>([]);
+  const [badMatches, setBadMatches] = useState<CarBrand[]>([]);
+
+  useEffect(() => {
+    const fetchSampleData = async () => {
+      try {
+        // Fetch some sample good matches (using Dragon zodiac as example)
+        const { data: goodData } = await supabase
+          .from('car_brands')
+          .select('*')
+          .eq('chinese_zodiac', 'Dragon')
+          .limit(3);
+
+        // Fetch some sample bad matches (using Dog zodiac as opposite to Dragon)
+        const { data: badData } = await supabase
+          .from('car_brands')
+          .select('*')
+          .eq('chinese_zodiac', 'Dog')
+          .limit(3);
+
+        setGoodMatches(goodData || []);
+        setBadMatches(badData || []);
+      } catch (error) {
+        console.error('Error fetching sample car data:', error);
+      }
+    };
+
+    fetchSampleData();
+  }, []);
 
   return (
     <div id="cars" className="rounded-xl bg-gradient-to-br from-[#8B5CF6]/30 to-[#0EA5E9]/30 p-4">
@@ -20,9 +49,9 @@ const CarCompatibilitySection = () => {
         <div>
           <h4 className="text-xs font-medium text-white/70 mb-2">Best Car Matches</h4>
           <div className="space-y-2">
-            {cars.filter(c => c.type === "good").map((car, index) => (
+            {goodMatches.map((car, index) => (
               <motion.div
-                key={car.name}
+                key={car.brand_name}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
@@ -30,12 +59,12 @@ const CarCompatibilitySection = () => {
               >
                 <div className="flex items-center gap-2 z-10">
                   <CarFront className="w-4 h-4 text-green-400" />
-                  <span className="text-sm text-white/80">{car.name}</span>
+                  <span className="text-sm text-white/80">{car.brand_name}</span>
                 </div>
-                <span className="text-sm font-medium text-green-300 z-10">{car.compatibility}%</span>
+                <span className="text-sm font-medium text-green-300 z-10">{car.founding_year}</span>
                 <motion.div 
                   initial={{ width: 0 }}
-                  animate={{ width: `${car.compatibility}%` }}
+                  animate={{ width: '100%' }}
                   transition={{ duration: 1, delay: index * 0.2 }}
                   className="absolute left-0 top-0 h-full bg-green-500/10"
                 />
@@ -48,9 +77,9 @@ const CarCompatibilitySection = () => {
         <div>
           <h4 className="text-xs font-medium text-white/70 mb-2">Challenging Car Matches</h4>
           <div className="space-y-2">
-            {cars.filter(c => c.type === "bad").map((car, index) => (
+            {badMatches.map((car, index) => (
               <motion.div
-                key={car.name}
+                key={car.brand_name}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
@@ -58,12 +87,12 @@ const CarCompatibilitySection = () => {
               >
                 <div className="flex items-center gap-2 z-10">
                   <CarFront className="w-4 h-4 text-red-400" />
-                  <span className="text-sm text-white/80">{car.name}</span>
+                  <span className="text-sm text-white/80">{car.brand_name}</span>
                 </div>
-                <span className="text-sm font-medium text-red-300 z-10">{car.compatibility}%</span>
+                <span className="text-sm font-medium text-red-300 z-10">{car.founding_year}</span>
                 <motion.div 
                   initial={{ width: 0 }}
-                  animate={{ width: `${car.compatibility}%` }}
+                  animate={{ width: '100%' }}
                   transition={{ duration: 1, delay: index * 0.2 }}
                   className="absolute left-0 top-0 h-full bg-red-500/10"
                 />

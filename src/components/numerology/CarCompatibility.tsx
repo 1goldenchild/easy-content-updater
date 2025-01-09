@@ -1,66 +1,90 @@
 import { motion } from "framer-motion";
 import { Car, CarFront } from "lucide-react";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface CarCompatibilityProps {
   chineseZodiac: string;
   isVisible: boolean;
 }
 
-const carCompatibility: Record<string, { best: string[], worst: string[] }> = {
-  "Rat": {
-    best: ["Tesla", "BMW", "Mercedes", "Porsche", "Audi"],
-    worst: ["Hummer", "Jeep", "RAM", "Ford F150", "GMC"]
-  },
-  "Ox": {
-    best: ["Volvo", "Toyota", "Honda", "Subaru", "Lexus"],
-    worst: ["Smart", "Mini", "Fiat", "Suzuki", "Dacia"]
-  },
-  "Tiger": {
-    best: ["Porsche", "Ferrari", "Lamborghini", "McLaren", "Bugatti"],
-    worst: ["Fiat", "Lada", "Tata", "Proton", "Chery"]
-  },
-  "Rabbit": {
-    best: ["Lexus", "Infiniti", "Genesis", "Acura", "Lincoln"],
-    worst: ["Dodge", "Chrysler", "Plymouth", "Pontiac", "Saturn"]
-  },
-  "Dragon": {
-    best: ["Ferrari", "Maserati", "Alfa Romeo", "Pagani", "Koenigsegg"],
-    worst: ["Nissan", "Mitsubishi", "Mazda", "Kia", "Hyundai"]
-  },
-  "Snake": {
-    best: ["Aston Martin", "Bentley", "Rolls Royce", "Maybach", "Lotus"],
-    worst: ["Mitsubishi", "Daihatsu", "Seat", "Skoda", "Opel"]
-  },
-  "Horse": {
-    best: ["Mustang", "Corvette", "Camaro", "Viper", "GT"],
-    worst: ["Chevrolet", "Buick", "Oldsmobile", "Mercury", "Geo"]
-  },
-  "Goat": {
-    best: ["Range Rover", "Land Rover", "Cadillac", "Lincoln", "Genesis"],
-    worst: ["Suzuki", "Isuzu", "Mahindra", "Great Wall", "Haval"]
-  },
-  "Monkey": {
-    best: ["BMW", "Audi", "Mercedes", "Porsche", "Volkswagen"],
-    worst: ["Dacia", "Renault", "Citroen", "Peugeot", "Vauxhall"]
-  },
-  "Rooster": {
-    best: ["Mercedes", "Maybach", "AMG", "Brabus", "Alpina"],
-    worst: ["Tata", "Maruti", "Holden", "Daewoo", "Scion"]
-  },
-  "Dog": {
-    best: ["Subaru", "Volvo", "Toyota", "Honda", "Mazda"],
-    worst: ["Lada", "UAZ", "GAZ", "ZAZ", "Moskvitch"]
-  },
-  "Pig": {
-    best: ["Bentley", "Rolls Royce", "Maybach", "Lexus", "Range Rover"],
-    worst: ["Yugo", "Trabant", "Wartburg", "FSO", "ARO"]
-  }
-};
+interface CarBrand {
+  brand_name: string;
+  founding_year: number;
+  chinese_zodiac: string;
+}
 
 const CarCompatibility = ({ chineseZodiac, isVisible }: CarCompatibilityProps) => {
-  if (!isVisible || !carCompatibility[chineseZodiac]) return null;
+  const [compatibleBrands, setCompatibleBrands] = useState<CarBrand[]>([]);
+  const [incompatibleBrands, setIncompatibleBrands] = useState<CarBrand[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const compatibility = carCompatibility[chineseZodiac];
+  useEffect(() => {
+    const fetchCarBrands = async () => {
+      try {
+        console.log('Fetching car brands for zodiac:', chineseZodiac);
+        
+        // Fetch compatible brands (same zodiac)
+        const { data: compatibleData, error: compatibleError } = await supabase
+          .from('car_brands')
+          .select('*')
+          .eq('chinese_zodiac', chineseZodiac)
+          .order('brand_name');
+
+        if (compatibleError) {
+          console.error('Error fetching compatible brands:', compatibleError);
+          return;
+        }
+
+        // Get opposite zodiac for incompatible matches
+        const oppositeZodiacs: Record<string, string> = {
+          'Rat': 'Horse',
+          'Horse': 'Rat',
+          'Ox': 'Goat',
+          'Goat': 'Ox',
+          'Tiger': 'Monkey',
+          'Monkey': 'Tiger',
+          'Rabbit': 'Rooster',
+          'Rooster': 'Rabbit',
+          'Dragon': 'Dog',
+          'Dog': 'Dragon',
+          'Snake': 'Pig',
+          'Pig': 'Snake'
+        };
+
+        const oppositeZodiac = oppositeZodiacs[chineseZodiac];
+        
+        // Fetch incompatible brands (opposite zodiac)
+        const { data: incompatibleData, error: incompatibleError } = await supabase
+          .from('car_brands')
+          .select('*')
+          .eq('chinese_zodiac', oppositeZodiac)
+          .order('brand_name')
+          .limit(5);
+
+        if (incompatibleError) {
+          console.error('Error fetching incompatible brands:', incompatibleError);
+          return;
+        }
+
+        console.log('Compatible brands:', compatibleData);
+        console.log('Incompatible brands:', incompatibleData);
+
+        setCompatibleBrands(compatibleData || []);
+        setIncompatibleBrands(incompatibleData || []);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error in fetchCarBrands:', error);
+        setIsLoading(false);
+      }
+    };
+
+    if (isVisible && chineseZodiac) {
+      fetchCarBrands();
+    }
+  }, [chineseZodiac, isVisible]);
+
+  if (!isVisible || !chineseZodiac || isLoading) return null;
 
   return (
     <motion.div
@@ -92,19 +116,24 @@ const CarCompatibility = ({ chineseZodiac, isVisible }: CarCompatibilityProps) =
               <h4 className="text-xl font-semibold text-green-400">Best Matches</h4>
             </div>
             <div className="space-y-3">
-              {compatibility.best.map((brand, index) => (
+              {compatibleBrands.map((brand, index) => (
                 <motion.div
-                  key={brand}
+                  key={brand.brand_name}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 * index }}
                   className="group relative"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-lg transform transition-all duration-300 group-hover:scale-105" />
-                  <div className="relative flex items-center gap-4 p-4 rounded-lg backdrop-blur-sm border border-green-500/20">
-                    <CarFront className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform" />
-                    <span className="text-lg font-medium text-white group-hover:text-green-400 transition-colors">
-                      {brand}
+                  <div className="relative flex items-center justify-between p-4 rounded-lg backdrop-blur-sm border border-green-500/20">
+                    <div className="flex items-center gap-4">
+                      <CarFront className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform" />
+                      <span className="text-lg font-medium text-white group-hover:text-green-400 transition-colors">
+                        {brand.brand_name}
+                      </span>
+                    </div>
+                    <span className="text-sm text-green-400/80">
+                      {brand.founding_year}
                     </span>
                   </div>
                 </motion.div>
@@ -112,7 +141,7 @@ const CarCompatibility = ({ chineseZodiac, isVisible }: CarCompatibilityProps) =
             </div>
           </motion.div>
 
-          {/* Worst Matches */}
+          {/* Challenging Matches */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -124,19 +153,24 @@ const CarCompatibility = ({ chineseZodiac, isVisible }: CarCompatibilityProps) =
               <h4 className="text-xl font-semibold text-red-400">Challenging Matches</h4>
             </div>
             <div className="space-y-3">
-              {compatibility.worst.map((brand, index) => (
+              {incompatibleBrands.map((brand, index) => (
                 <motion.div
-                  key={brand}
+                  key={brand.brand_name}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 * index }}
                   className="group relative"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-rose-500/20 rounded-lg transform transition-all duration-300 group-hover:scale-105" />
-                  <div className="relative flex items-center gap-4 p-4 rounded-lg backdrop-blur-sm border border-red-500/20">
-                    <CarFront className="w-6 h-6 text-red-400 group-hover:scale-110 transition-transform" />
-                    <span className="text-lg font-medium text-white group-hover:text-red-400 transition-colors">
-                      {brand}
+                  <div className="relative flex items-center justify-between p-4 rounded-lg backdrop-blur-sm border border-red-500/20">
+                    <div className="flex items-center gap-4">
+                      <CarFront className="w-6 h-6 text-red-400 group-hover:scale-110 transition-transform" />
+                      <span className="text-lg font-medium text-white group-hover:text-red-400 transition-colors">
+                        {brand.brand_name}
+                      </span>
+                    </div>
+                    <span className="text-sm text-red-400/80">
+                      {brand.founding_year}
                     </span>
                   </div>
                 </motion.div>
