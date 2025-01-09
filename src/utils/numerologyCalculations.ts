@@ -71,28 +71,34 @@ export const calculatePartialEnergy = (day: number): number => {
 };
 
 export const calculateSecretNumber = (date: Date): number => {
-  // Get the start of the year
-  const startOfYear = new Date(date.getFullYear(), 0, 1);
-  const diff = date.getTime() - startOfYear.getTime();
-  const oneDay = 1000 * 60 * 60 * 24;
-  const dayOfYear = Math.floor(diff / oneDay) + 1; // Adding 1 because we want Jan 1st to be day 1
+  const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  
+  // Adjust February for leap year
+  if (date.getFullYear() % 4 === 0) {
+    daysInMonth[1] = 29;
+  }
+  
+  // Calculate day of year by counting days in previous months plus current day
+  let dayOfYear = date.getDate(); // Start with the current day
+  for (let month = 0; month < date.getMonth(); month++) {
+    dayOfYear += daysInMonth[month];
+  }
 
-  console.log(`Date: ${date.toISOString()}`);
-  console.log(`Start of year: ${startOfYear.toISOString()}`);
+  console.log(`Date: ${date.toDateString()}`);
   console.log(`Day of year: ${dayOfYear}`);
 
   // Check for special master number days
-  if (dayOfYear === 11 || dayOfYear === 110 || dayOfYear === 101) {
+  if ([11, 20, 110, 101].includes(dayOfYear)) {
     console.log("Special case: Secret number 11");
     return 11;
   }
   
-  if (dayOfYear === 22 || dayOfYear === 220 || dayOfYear === 202) {
+  if ([22, 220, 202].includes(dayOfYear)) {
     console.log("Special case: Secret number 22");
     return 22;
   }
   
-  if (dayOfYear === 33 || dayOfYear === 330 || dayOfYear === 303) {
+  if ([33, 330, 303].includes(dayOfYear)) {
     console.log("Special case: Secret number 33");
     return 33;
   }
