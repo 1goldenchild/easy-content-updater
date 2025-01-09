@@ -7,80 +7,81 @@ interface CompatibilityData {
 
 export const numerologyCompatibility: Record<number, CompatibilityData> = {
   1: {
-    compatible: [3, 5, 9],
-    challenging: [4, 6, 8],
-    loveCompatible: [3, 5, 6],
-    loveDescription: "Best romantic matches are with numbers 3, 5, and 6. These combinations create a balanced and harmonious relationship."
+    compatible: [2, 9, 3],
+    challenging: [4, 6, 11],
+    loveCompatible: [9],
+    loveDescription: "Your strongest romantic connection is with Life Path 9. This pairing creates a deeply spiritual and transformative relationship."
   },
   2: {
-    compatible: [4, 6, 8],
-    challenging: [1, 7, 9],
-    loveCompatible: [4, 6, 8],
-    loveDescription: "Most compatible in love with numbers 4, 6, and 8. These partnerships bring stability and emotional understanding."
+    compatible: [1, 2, 4],
+    challenging: [9],
+    loveCompatible: [1],
+    loveDescription: "Your ideal romantic match is with Life Path 1. This combination brings balance between leadership and partnership."
   },
   3: {
-    compatible: [1, 5, 7],
-    challenging: [4, 8],
-    loveCompatible: [1, 5, 9],
-    loveDescription: "Finds greatest romantic harmony with numbers 1, 5, and 9. These relationships are filled with creativity and joy."
+    compatible: [1, 2, 3],
+    challenging: [4, 7],
+    loveCompatible: [3],
+    loveDescription: "You find greatest harmony with another Life Path 3. This creates a relationship full of creativity and joy."
   },
   4: {
-    compatible: [2, 8],
-    challenging: [1, 3, 7],
-    loveCompatible: [2, 7, 8],
-    loveDescription: "Best love matches are with numbers 2, 7, and 8. These connections provide security and long-term stability."
+    compatible: [7, 4, 6],
+    challenging: [5],
+    loveCompatible: [8],
+    loveDescription: "Your best romantic match is with Life Path 8. This partnership brings stability and material success."
   },
   5: {
-    compatible: [1, 3, 7],
-    challenging: [2, 4, 8],
-    loveCompatible: [1, 3, 7],
-    loveDescription: "Most compatible romantically with numbers 1, 3, and 7. These relationships bring adventure and excitement."
+    compatible: [5, 7, 33],
+    challenging: [8, 6],
+    loveCompatible: [5],
+    loveDescription: "You're most compatible with another Life Path 5. This creates an exciting and freedom-loving relationship."
   },
   6: {
-    compatible: [2, 8, 9],
-    challenging: [1, 5, 7],
-    loveCompatible: [2, 8, 9],
-    loveDescription: "Finds romantic harmony with numbers 2, 8, and 9. These partnerships are nurturing and balanced."
+    compatible: [5, 33, 3, 6],
+    challenging: [7],
+    loveCompatible: [5, 33],
+    loveDescription: "Your ideal matches are Life Paths 5 and 33. These relationships bring harmony and spiritual growth."
   },
   7: {
-    compatible: [3, 5, 9],
-    challenging: [2, 4, 6],
-    loveCompatible: [4, 5, 7],
-    loveDescription: "Best love matches are with numbers 4, 5, and 7. These relationships provide intellectual stimulation and depth."
+    compatible: [11],
+    challenging: [6],
+    loveCompatible: [11],
+    loveDescription: "Your soulmate connection is with Life Path 11. This creates a deeply spiritual and intellectual bond."
   },
   8: {
-    compatible: [2, 4, 6],
-    challenging: [1, 3, 5],
-    loveCompatible: [2, 4, 6],
-    loveDescription: "Most compatible in love with numbers 2, 4, and 6. These partnerships bring material and emotional security."
+    compatible: [4, 6, 1],
+    challenging: [5],
+    loveCompatible: [2],
+    loveDescription: "Your best romantic match is with Life Path 2. This brings balance between power and partnership."
   },
   9: {
-    compatible: [1, 6, 7],
-    challenging: [2, 4, 8],
-    loveCompatible: [3, 6, 9],
-    loveDescription: "Finds greatest romantic harmony with numbers 3, 6, and 9. These relationships are spiritually and emotionally fulfilling."
+    compatible: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    challenging: [11, 22, 33],
+    loveCompatible: [1, 7, 5],
+    loveDescription: "You find harmony with Life Paths 1, 7, and 5. These relationships bring spiritual growth and understanding."
   },
   11: {
-    compatible: [2, 4],
-    challenging: [6, 8],
-    loveCompatible: [2, 11, 22],
-    loveDescription: "Best matched with numbers 2, 11, and 22. These spiritual partnerships bring enlightenment and growth."
+    compatible: [33, 22, 11, 5, 7],
+    challenging: [9],
+    loveCompatible: [5],
+    loveDescription: "Your ideal romantic match is with Life Path 5. This brings excitement while maintaining spiritual depth."
   },
   22: {
-    compatible: [4, 8],
-    challenging: [1, 9],
-    loveCompatible: [11, 22, 33],
-    loveDescription: "Most compatible with numbers 11, 22, and 33. These master number combinations create powerful spiritual bonds."
+    compatible: [33, 22, 11, 4],
+    challenging: [9],
+    loveCompatible: [11, 22],
+    loveDescription: "You find greatest harmony with master numbers 11 and 22. These relationships amplify your spiritual potential."
   },
   33: {
-    compatible: [6, 9],
-    challenging: [2, 4],
+    compatible: [33, 22, 11, 5, 6, 7],
+    challenging: [9],
     loveCompatible: [22, 33],
-    loveDescription: "Finds harmony with numbers 22 and 33. These relationships focus on spiritual growth and humanitarian goals."
+    loveDescription: "Your ideal matches are master numbers 22 and 33. These relationships focus on spiritual growth and service to humanity."
   }
 };
 
 export const getNeutralNumbers = (compatibleNums: number[], challengingNums: number[]): number[] => {
-  const allNumbers = Array.from({ length: 9 }, (_, i) => i + 1);
+  // Include master numbers in the possible numbers array
+  const allNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33];
   return allNumbers.filter(num => !compatibleNums.includes(num) && !challengingNums.includes(num));
 };
