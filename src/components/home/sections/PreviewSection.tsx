@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PhoneShowcase from "../PhoneShowcase";
-import CTAButton from "../buttons/CTAButton";
+import { Button } from "@/components/ui/button";
 import { scrollToTop } from "../CallToAction";
 
 const PreviewSection = () => {
@@ -72,28 +72,34 @@ const PreviewSection = () => {
           </div>
         </motion.div>
       </div>
-
+      
       <PhoneShowcase />
       
-      {/* Updated CTA Button with new styling and margin */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="flex justify-center mt-4 mb-12" // Added mb-12 for more space below
+        className="flex justify-center mt-4 mb-12"
       >
-        <button
-          onClick={handleGetStarted}
-          className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-white transition-all bg-gradient-to-r from-violet-600 to-indigo-600 rounded-lg hover:from-violet-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2"
-        >
-          Unlock Your Reading
-          <motion.span
-            animate={{ x: [0, 4, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
+        <div className="relative group">
+          <div className="absolute -inset-1 bg-gradient-to-r from-[#2A2311] via-[#3B3015] to-[#2A2311] rounded-md blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+          <Button
+            onClick={handleGetStarted}
+            className="relative bg-gradient-to-r from-[#1A1508] via-[#2A2311] to-[#1A1508] hover:from-[#2A2311] hover:via-[#3B3015] hover:to-[#2A2311] text-amber-200/90 font-semibold shadow-[0_0_15px_rgba(251,191,36,0.1)] transition-all duration-500 hover:shadow-[0_0_20px_rgba(251,191,36,0.2)] border border-amber-900/30 rounded-md overflow-hidden"
           >
-            →
-          </motion.span>
-        </button>
+            <span className="relative z-10 flex items-center">
+              Unlock Your Reading
+              <motion.span
+                animate={{ x: [0, 4, 0] }}
+                transition={{ repeat: Infinity, duration: 1.5 }}
+                className="ml-2"
+              >
+                →
+              </motion.span>
+            </span>
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-900/10 to-transparent translate-x-[-200%] animate-shimmer" />
+          </Button>
+        </div>
       </motion.div>
     </div>
   );
