@@ -45,7 +45,7 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Radar Chart */}
-              <div className="aspect-square min-h-[400px] bg-white/5 rounded-lg border border-white/10 p-4">
+              <div className="aspect-square bg-white/5 rounded-lg border border-white/10 p-4">
                 <ResponsiveContainer width="100%" height="100%">
                   <RadarChart cx="50%" cy="50%" outerRadius="80%" data={numberedTraits}>
                     <PolarGrid stroke="rgba(255,255,255,0.1)" />
@@ -68,12 +68,14 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
               <div className="space-y-6">
                 <div>
                   <h4 className="text-lg font-semibold text-white/90 mb-4">Core Traits</h4>
-                  <div className="space-y-3">
+                  <div className="space-y-6">
                     {traits.map((trait, index) => (
-                      <div key={index} className="flex items-center gap-4">
-                        <span className="text-[#8B5CF6] font-bold min-w-[24px]">{index + 1}</span>
-                        <span className="text-white/70 flex-grow">{trait.trait}</span>
-                        <div className="w-32 h-2 bg-white/10 rounded-full overflow-hidden">
+                      <div key={index} className="space-y-2">
+                        <div className="flex items-center gap-4">
+                          <span className="text-[#8B5CF6] font-bold min-w-[24px]">{index + 1}</span>
+                          <span className="text-white/70">{trait.trait}</span>
+                        </div>
+                        <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
                           <div 
                             className="h-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full" 
                             style={{ width: `${(trait.value / 10) * 100}%` }}
