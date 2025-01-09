@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import { useLocation } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import { scrollToTop } from "../home/CallToAction"
 
 const ProgressIndicator = () => {
   const [activeSection, setActiveSection] = useState(0)
-  const location = useLocation()
+  const navigate = useNavigate()
 
   // Define sections based on their IDs and display names
   const sections = [
@@ -22,6 +23,8 @@ const ProgressIndicator = () => {
       const scrollPosition = window.scrollY
       const viewportHeight = window.innerHeight
       
+      console.log("Scroll position:", scrollPosition);
+      
       // First section is always visible at start
       if (scrollPosition === 0) {
         setActiveSection(0)
@@ -29,8 +32,9 @@ const ProgressIndicator = () => {
       }
 
       // Second section activates on first scroll
-      if (scrollPosition > 50) {
-        setActiveSection(Math.max(1, activeSection))
+      if (scrollPosition > 50 && activeSection < 1) {
+        console.log("Activating second section");
+        setActiveSection(1)
       }
 
       // Check sections by their data attributes
@@ -42,12 +46,22 @@ const ProgressIndicator = () => {
         cta: document.querySelector('[data-section="cta-heading"]')
       }
 
+      // Log which elements are found
+      Object.entries(sectionElements).forEach(([key, element]) => {
+        console.log(`Section ${key}:`, element ? 'found' : 'not found');
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          console.log(`${key} position:`, rect.top, rect.bottom);
+        }
+      });
+
       // Find the active section based on element visibility
       Object.entries(sectionElements).forEach(([key, element], index) => {
         if (element) {
           const rect = element.getBoundingClientRect()
           if (rect.top <= viewportHeight * 0.7 && rect.bottom >= 0) {
-            setActiveSection(index + 2) // +2 because we have two initial sections
+            console.log(`Setting active section to ${index + 2} for ${key}`);
+            setActiveSection(index + 2)
           }
         }
       })
@@ -71,7 +85,7 @@ const ProgressIndicator = () => {
         window.scrollTo({ top: 100, behavior: "smooth" })
         break
       default:
-        element = document.getElementById(section.id)
+        element = document.querySelector(`[data-section="${section.id}-heading"]`)
         if (element) {
           element.scrollIntoView({ behavior: "smooth" })
         }

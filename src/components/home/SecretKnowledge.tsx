@@ -42,7 +42,10 @@ const SecretKnowledge = () => {
         >
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <Star className="w-12 h-12 mx-auto text-purple-400 animate-pulse" />
-            <h2 className="text-3xl md:text-4xl font-bold">
+            <h2 
+              data-section="wisdom-heading"
+              className="text-3xl md:text-4xl font-bold"
+            >
               Restricted Wisdom Now at Your Fingertips
             </h2>
             <p className="text-lg text-white/80">

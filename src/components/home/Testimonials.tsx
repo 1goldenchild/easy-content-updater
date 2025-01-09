@@ -95,7 +95,10 @@ const Testimonials = () => {
     <section className="py-16 bg-gradient-to-b from-background to-background/80 overflow-hidden">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 relative">
+          <h2 
+            data-section="testimonials-heading"
+            className="text-3xl md:text-4xl font-bold mb-4 relative"
+          >
             <span className="bg-gradient-to-r from-white via-white/90 to-white/80 text-transparent bg-clip-text animate-shine relative inline-block bg-[length:200%_100%]">
               Transforming Lives Through Energy Insights
             </span>
