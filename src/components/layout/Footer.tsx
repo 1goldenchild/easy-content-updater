@@ -71,7 +71,7 @@ const Footer = () => {
             transition={{ delay: 0.2 }}
             className="mt-8 md:mt-12 pt-8 border-t border-purple-500/20 text-center text-sm text-muted-foreground"
           >
-            <p>&copy; {new Date().getFullYear()} Numerology Insights. All rights reserved.</p>
+            <p>&copy; 2025 Numerology 33. All rights reserved.</p>
           </motion.div>
         </div>
       </footer>

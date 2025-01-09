@@ -3,7 +3,6 @@ import Navbar from "@/components/layout/Navbar"
 import Footer from "@/components/layout/Footer"
 import Index from "@/pages/Index"
 import Analysis from "@/pages/Analysis"
-import Blog from "@/pages/Blog"
 import Sales from "@/pages/Sales"
 import Checkout from "@/pages/Checkout"
 import CollectInfo from "@/pages/CollectInfo"
@@ -25,7 +24,6 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/analysis" element={<Analysis />} />
-            <Route path="/blog" element={<Blog />} />
             <Route path="/sales" element={<Sales />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/collect-info" element={<CollectInfo />} />

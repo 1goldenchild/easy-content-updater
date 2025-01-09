@@ -13,7 +13,6 @@ const Navbar = () => {
   const menuItems = [
     { path: "/", label: "Home" },
     { path: "/sales", label: "Analysis" },
-    { path: "/blog", label: "Blog" },
   ]
 
   return (
