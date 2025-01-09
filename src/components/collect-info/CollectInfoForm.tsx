@@ -126,7 +126,6 @@ const CollectInfoForm = () => {
         <DateSelector 
           date={date}
           setDate={setDate}
-          onCalculate={() => {}}
         />
 
         <Button
