@@ -33,13 +33,13 @@ const ProgressIndicator = () => {
         setActiveSection(Math.max(1, activeSection))
       }
 
-      // Check other sections by their element positions
+      // Check sections by their data attributes
       const sectionElements = {
-        preview: document.querySelector("h3:contains('What's included in your analysis?')"),
-        "numerology-profile": document.querySelector("h2:contains('Unlock Your Complete Numerology Profile')"),
-        testimonials: document.querySelector("h2:contains('Transforming Lives Through Energy Insights')"),
-        "secret-knowledge": document.querySelector("h2:contains('Restricted Wisdom Now at Your Fingertips')"),
-        cta: document.querySelector("h2:contains('Get Your Personalized Numerology Analysis Today')")
+        preview: document.querySelector('[data-section="preview-heading"]'),
+        "numerology-profile": document.querySelector('[data-section="profile-heading"]'),
+        testimonials: document.querySelector('[data-section="testimonials-heading"]'),
+        "secret-knowledge": document.querySelector('[data-section="wisdom-heading"]'),
+        cta: document.querySelector('[data-section="cta-heading"]')
       }
 
       // Find the active section based on element visibility
@@ -80,7 +80,7 @@ const ProgressIndicator = () => {
 
   return (
     <div className="fixed left-0 top-1/2 -translate-y-1/2 z-50">
-      <div className="relative py-4 px-2 bg-black/20 backdrop-blur-sm">
+      <div className="relative py-4 bg-black/20 backdrop-blur-sm">
         <div className="flex flex-col items-center gap-8 relative">
           {/* Vertical progress line background */}
           <div className="absolute top-0 bottom-0 w-[2px] bg-white/10" />

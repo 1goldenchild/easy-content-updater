@@ -36,6 +36,7 @@ const PreviewSection = () => {
       >
         <div className="relative inline-block">
           <motion.h3 
+            data-section="preview-heading"
             className="text-2xl font-bold relative z-10 px-6 py-2"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -59,6 +60,7 @@ const PreviewSection = () => {
         >
           <div className="relative inline-block">
             <motion.h3 
+              data-section="preview-heading"
               className="text-3xl font-bold relative z-10 px-6 py-2"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}

@@ -16,6 +16,7 @@ const MainContentSection = () => {
   return (
     <div className="space-y-8">
       <motion.h2 
+        data-section="profile-heading"
         className="text-3xl md:text-4xl font-bold text-center relative"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
