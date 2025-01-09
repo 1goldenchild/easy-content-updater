@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import DateSelector from "@/components/numerology/DateSelector";
 
 const CollectInfoForm = () => {
   const navigate = useNavigate();
@@ -13,11 +14,19 @@ const CollectInfoForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    dateOfBirth: "",
   });
+  const [date, setDate] = useState<Date>();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!date) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Please select your date of birth.",
+      });
+      return;
+    }
     setIsLoading(true);
 
     try {
@@ -25,7 +34,7 @@ const CollectInfoForm = () => {
         {
           name: formData.name,
           email: formData.email,
-          date_of_birth: formData.dateOfBirth,
+          date_of_birth: date.toISOString().split('T')[0],
         },
       ]);
 
@@ -39,7 +48,7 @@ const CollectInfoForm = () => {
             data: {
               name: formData.name,
               email: formData.email,
-              dateOfBirth: formData.dateOfBirth,
+              dateOfBirth: date.toISOString().split('T')[0],
             },
           },
         }
@@ -114,24 +123,11 @@ const CollectInfoForm = () => {
           />
         </div>
 
-        <div>
-          <label
-            htmlFor="dob"
-            className="block text-sm font-medium text-white/70 mb-2"
-          >
-            Date of Birth
-          </label>
-          <Input
-            id="dob"
-            type="date"
-            required
-            value={formData.dateOfBirth}
-            onChange={(e) =>
-              setFormData({ ...formData, dateOfBirth: e.target.value })
-            }
-            className="w-full"
-          />
-        </div>
+        <DateSelector 
+          date={date}
+          setDate={setDate}
+          onCalculate={() => {}}
+        />
 
         <Button
           type="submit"

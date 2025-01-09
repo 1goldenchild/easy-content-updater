@@ -64,7 +64,10 @@ const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
       const dateObj = new Date(parseInt(year), parseInt(month) - 1, parseInt(day))
       if (!isNaN(dateObj.getTime())) {
         setDate(dateObj)
-        onCalculate()
+        // Only call onCalculate if it's provided
+        if (onCalculate) {
+          onCalculate()
+        }
       }
     }
   }
