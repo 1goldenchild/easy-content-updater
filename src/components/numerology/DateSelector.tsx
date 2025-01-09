@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 interface DateSelectorProps {
   date?: Date;
@@ -40,10 +41,6 @@ const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
       const dateObj = new Date(parseInt(newYear), parseInt(newMonth) - 1, parseInt(newDay));
       if (!isNaN(dateObj.getTime())) {
         setDate(dateObj);
-        // Only call onCalculate if it's provided
-        if (onCalculate) {
-          onCalculate();
-        }
       }
     }
   };
@@ -85,6 +82,14 @@ const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
           />
         </div>
       </div>
+      {onCalculate && (
+        <Button 
+          onClick={onCalculate}
+          className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C4DEF] hover:to-[#D042E8]"
+        >
+          Calculate
+        </Button>
+      )}
     </div>
   );
 };
