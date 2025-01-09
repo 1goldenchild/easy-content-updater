@@ -12,7 +12,7 @@ const SalesPitch = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="w-full max-w-2xl flex flex-col items-center"
+            className="w-full max-w-2xl flex flex-col items-center space-y-16" // Added space-y-16 for more vertical spacing
           >
             <PreviewSection />
             <MainContentSection />
