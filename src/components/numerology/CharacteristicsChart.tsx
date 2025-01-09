@@ -1,12 +1,21 @@
 import { motion } from "framer-motion";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, Radar } from 'recharts';
+import { characteristicsData } from "./types/characteristics";
 
 interface CharacteristicsChartProps {
   isVisible: boolean;
+  lifePath?: number;
 }
 
-const CharacteristicsChart = ({ isVisible }: CharacteristicsChartProps) => {
+const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartProps) => {
   if (!isVisible) return null;
+
+  const lifePathKey = lifePath.toString();
+  const traits = characteristicsData[lifePathKey] || characteristicsData["1"];
+
+  console.log("Rendering characteristics for life path:", lifePath);
+  console.log("Traits data:", traits);
 
   return (
     <motion.div 
@@ -22,11 +31,24 @@ const CharacteristicsChart = ({ isVisible }: CharacteristicsChartProps) => {
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Spider/Radar Chart will go here later */}
+              {/* Radar Chart */}
               <div className="aspect-square bg-white/5 rounded-lg border border-white/10 p-4">
-                <div className="w-full h-full flex items-center justify-center text-white/50">
-                  Characteristics Chart Coming Soon
-                </div>
+                <ResponsiveContainer width="100%" height="100%">
+                  <RadarChart cx="50%" cy="50%" outerRadius="80%" data={traits}>
+                    <PolarGrid stroke="rgba(255,255,255,0.1)" />
+                    <PolarAngleAxis
+                      dataKey="trait"
+                      tick={{ fill: 'rgba(255,255,255,0.7)', fontSize: 12 }}
+                    />
+                    <Radar
+                      name="Traits"
+                      dataKey="value"
+                      stroke="rgba(139,92,246,0.8)"
+                      fill="rgba(139,92,246,0.3)"
+                      strokeWidth={2}
+                    />
+                  </RadarChart>
+                </ResponsiveContainer>
               </div>
 
               {/* Characteristics List */}
@@ -34,36 +56,17 @@ const CharacteristicsChart = ({ isVisible }: CharacteristicsChartProps) => {
                 <div>
                   <h4 className="text-lg font-semibold text-white/90 mb-4">Core Traits</h4>
                   <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/70">Spiritual Connection</span>
-                      <div className="w-32 h-2 bg-white/10 rounded-full overflow-hidden">
-                        <div className="h-full w-3/4 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full" />
+                    {traits.map((trait, index) => (
+                      <div key={index} className="flex justify-between items-center">
+                        <span className="text-white/70">{trait.trait}</span>
+                        <div className="w-32 h-2 bg-white/10 rounded-full overflow-hidden">
+                          <div 
+                            className="h-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full" 
+                            style={{ width: `${(trait.value / 10) * 100}%` }}
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/70">Leadership</span>
-                      <div className="w-32 h-2 bg-white/10 rounded-full overflow-hidden">
-                        <div className="h-full w-4/5 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full" />
-                      </div>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/70">Creativity</span>
-                      <div className="w-32 h-2 bg-white/10 rounded-full overflow-hidden">
-                        <div className="h-full w-2/3 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full" />
-                      </div>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/70">Intuition</span>
-                      <div className="w-32 h-2 bg-white/10 rounded-full overflow-hidden">
-                        <div className="h-full w-1/2 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full" />
-                      </div>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/70">Material Success</span>
-                      <div className="w-32 h-2 bg-white/10 rounded-full overflow-hidden">
-                        <div className="h-full w-4/5 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full" />
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
 
