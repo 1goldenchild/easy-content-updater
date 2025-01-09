@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import Navbar from "@/components/layout/Navbar"
 import Footer from "@/components/layout/Footer"
 import Index from "@/pages/Index"
@@ -22,7 +22,8 @@ const App = () => {
         <Navbar />
         <main className="flex-1">
           <Routes>
-            <Route path="/" element={<Index />} />
+            <Route path="/" element={<Navigate to="/numerology-reading" replace />} />
+            <Route path="/numerology-reading" element={<Index />} />
             <Route path="/analysis" element={<Analysis />} />
             <Route path="/sales" element={<Sales />} />
             <Route path="/checkout" element={<Checkout />} />
