@@ -7,7 +7,8 @@ const BenefitsHeader = () => {
         {/* Background with theme-consistent gradients */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-black/90" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(251,191,36,0.1),rgba(0,0,0,0))]" />
+          {/* Adjusted the radial gradient to be more centered and contained */}
+          <div className="absolute inset-x-[10%] inset-y-0 bg-[radial-gradient(circle_at_center,rgba(251,191,36,0.1),rgba(0,0,0,0)_70%)]" />
         </div>
 
         {/* Shimmer effect */}
