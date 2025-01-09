@@ -75,12 +75,12 @@ const PreviewSection = () => {
 
       <PhoneShowcase />
       
-      {/* Updated CTA Button with new styling */}
+      {/* Updated CTA Button with new styling and margin */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="flex justify-center mt-4"
+        className="flex justify-center mt-4 mb-12" // Added mb-12 for more space below
       >
         <button
           onClick={handleGetStarted}
