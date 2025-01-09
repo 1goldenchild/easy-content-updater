@@ -37,6 +37,24 @@ const testimonials = [
     role: "Financial Advisor",
     text: "The precision of the readings is remarkable. It's become an integral part of my decision-making process.",
     rating: 5
+  },
+  {
+    name: "Mark Thompson",
+    role: "Teacher",
+    text: "I never realized how much the energy around me was influencing my decisions. Now I'm more in tune with my instincts and feel more balanced in my life.",
+    rating: 5
+  },
+  {
+    name: "Ethan Lee",
+    role: "Writer",
+    text: "I was really amazed at how the readings pinpointed my strengths and challenges. It's like having a clearer sense of purpose.",
+    rating: 5
+  },
+  {
+    name: "Jessica Turner",
+    role: "Community Organizer",
+    text: "The clarity I've gained has been incredible. It's like I've tapped into a new level of understanding about myself and how I work with others.",
+    rating: 5
   }
 ]
 
