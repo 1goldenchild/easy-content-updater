@@ -40,7 +40,7 @@ const Hero = () => {
         </motion.div>
       </div>
       <div 
-        className="absolute inset-0 bg-gradient-to-b from-purple-900/10 to-[#221F26] pointer-events-none"
+        className="absolute inset-0 bg-gradient-to-b from-purple-900/10 via-[#221F26] to-[#221F26] pointer-events-none"
       />
     </section>
   )
