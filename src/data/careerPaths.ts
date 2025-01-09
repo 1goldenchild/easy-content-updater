@@ -171,9 +171,9 @@ export const careerPaths = {
     "Financial Analyst",
     "Systems Administrator"
   ]
-} as const;
+};
 
-export const getRandomCareers = (careers: string[], count: number) => {
+export const getRandomCareers = (careers: string[], count: number): string[] => {
   const shuffled = [...careers].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, count);
 };
