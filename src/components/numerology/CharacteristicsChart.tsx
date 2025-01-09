@@ -25,20 +25,20 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
     >
       <div className="rounded-lg bg-white/5 border border-white/10">
         <ScrollArea className="w-full">
-          <div className="p-6 md:p-8">
+          <div className="p-8">
             <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] mb-8">
               Numerological Characteristics
             </h3>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Radar Chart - Optimized layout */}
-              <div className="aspect-square bg-white/5 rounded-lg border border-white/10 p-4">
-                <ResponsiveContainer width="100%" height="100%">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              {/* Radar Chart - Larger size */}
+              <div className="min-h-[400px] bg-white/5 rounded-lg border border-white/10 p-6">
+                <ResponsiveContainer width="100%" height={400}>
                   <RadarChart 
                     cx="50%" 
                     cy="50%" 
-                    outerRadius="55%" 
-                    margin={{ top: 35, right: 35, bottom: 35, left: 35 }}
+                    outerRadius="65%" 
+                    margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
                     data={traits}
                   >
                     <PolarGrid stroke="rgba(255,255,255,0.1)" />
@@ -46,10 +46,9 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
                       dataKey="trait"
                       tick={{ 
                         fill: 'rgba(255,255,255,0.7)', 
-                        fontSize: 10,
-                        dy: 3,
-                        width: 100,
-                        wordWrap: true
+                        fontSize: 12,
+                        dy: 4,
+                        width: 120
                       }}
                       tickLine={false}
                     />
@@ -64,21 +63,21 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
                 </ResponsiveContainer>
               </div>
 
-              {/* Characteristics List */}
-              <div className="space-y-6">
+              {/* Characteristics List - Enhanced layout */}
+              <div className="space-y-8">
                 <div>
-                  <h4 className="text-lg font-semibold text-white/90 mb-4">Core Traits</h4>
-                  <div className="space-y-3">
+                  <h4 className="text-xl font-semibold text-white/90 mb-6">Core Traits</h4>
+                  <div className="space-y-4">
                     {traits.map((trait, index) => (
-                      <div key={index} className="flex items-center gap-4">
-                        <span className="text-white/70 min-w-[120px]">{trait.trait}</span>
-                        <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
+                      <div key={index} className="flex items-center gap-6">
+                        <span className="text-white/70 text-lg min-w-[140px]">{trait.trait}</span>
+                        <div className="flex-1 h-3 bg-white/10 rounded-full overflow-hidden">
                           <div 
-                            className="h-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full" 
+                            className="h-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full transition-all duration-500 ease-out" 
                             style={{ width: `${(trait.value / 10) * 100}%` }}
                           />
                         </div>
-                        <span className="text-white/50 text-sm min-w-[30px] text-right">
+                        <span className="text-white/60 text-lg font-medium min-w-[50px] text-right">
                           {trait.value}/10
                         </span>
                       </div>
@@ -87,28 +86,28 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
                 </div>
 
                 <div>
-                  <h4 className="text-lg font-semibold text-white/90 mb-4">Compatibility</h4>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="p-4 rounded-lg bg-white/5 border border-white/10 relative overflow-hidden">
+                  <h4 className="text-xl font-semibold text-white/90 mb-6">Compatibility</h4>
+                  <div className="grid grid-cols-2 gap-6">
+                    <div className="p-6 rounded-lg bg-white/5 border border-white/10 relative overflow-hidden">
                       <div className="absolute inset-0 bg-emerald-500/5" />
                       <div className="absolute inset-0">
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-emerald-500/10 to-transparent animate-[shimmer_3s_linear_infinite]" />
                       </div>
                       <div className="relative">
-                        <h5 className="text-sm font-medium text-white/70 mb-2">Best Match</h5>
-                        <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-600">
+                        <h5 className="text-base font-medium text-white/70 mb-3">Best Match</h5>
+                        <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-600">
                           9
                         </div>
                       </div>
                     </div>
-                    <div className="p-4 rounded-lg bg-white/5 border border-white/10 relative overflow-hidden">
+                    <div className="p-6 rounded-lg bg-white/5 border border-white/10 relative overflow-hidden">
                       <div className="absolute inset-0 bg-red-500/5" />
                       <div className="absolute inset-0">
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-red-500/10 to-transparent animate-[shimmer_3s_linear_infinite]" />
                       </div>
                       <div className="relative">
-                        <h5 className="text-sm font-medium text-white/70 mb-2">Challenge</h5>
-                        <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-red-600">
+                        <h5 className="text-base font-medium text-white/70 mb-3">Challenge</h5>
+                        <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-red-600">
                           4
                         </div>
                       </div>
