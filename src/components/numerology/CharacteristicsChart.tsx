@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, Radar } from 'recharts';
 import { characteristicsData } from "./types/characteristics";
+import { numerologyCompatibility } from "@/utils/numerologyCompatibility";
 
 interface CharacteristicsChartProps {
   isVisible: boolean;
@@ -13,6 +14,7 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
 
   const lifePathKey = lifePath.toString();
   const traits = characteristicsData[lifePathKey] || characteristicsData["1"];
+  const compatibility = numerologyCompatibility[lifePath] || numerologyCompatibility[1];
 
   // Create numbered data for the radar chart
   const numberedTraits = traits.map((trait, index) => ({
@@ -64,9 +66,10 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
                   <div className="space-y-3">
                     {traits.map((trait, index) => (
                       <div key={index} className="flex justify-between items-center">
-                        <span className="text-white/70">
-                          {index + 1}. {trait.trait}
-                        </span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-white/70 min-w-[20px]">{index + 1}.</span>
+                          <span className="text-white/70">{trait.trait}</span>
+                        </div>
                         <div className="w-32 h-2 bg-white/10 rounded-full overflow-hidden">
                           <div 
                             className="h-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full" 
@@ -89,7 +92,7 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
                       <div className="relative">
                         <h5 className="text-sm font-medium text-white/70 mb-2">Best Match</h5>
                         <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-600">
-                          9
+                          {compatibility.loveCompatible[0]}
                         </div>
                       </div>
                     </div>
@@ -101,7 +104,7 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
                       <div className="relative">
                         <h5 className="text-sm font-medium text-white/70 mb-2">Challenge</h5>
                         <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-red-600">
-                          4
+                          {compatibility.challenging[0]}
                         </div>
                       </div>
                     </div>
