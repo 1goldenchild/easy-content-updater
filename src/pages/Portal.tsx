@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { toast } from "sonner"
-import { supabase } from "@/integrations/supabase/client"
 import NumerologyResults from "@/components/numerology/NumerologyResults"
 import CompatibilityChart from "@/components/numerology/CompatibilityChart"
 import CountryCompatibility from "@/components/numerology/CountryCompatibility"
@@ -31,7 +30,7 @@ const Portal = () => {
     window.scrollTo(0, 0)
   }, [])
 
-  const handleCalculate = async () => {
+  const handleCalculate = () => {
     if (!date) {
       toast.error("Please select your date of birth")
       return
@@ -51,31 +50,6 @@ const Portal = () => {
       chineseZodiac
     })
 
-    // Save results to Supabase
-    try {
-      const { error } = await supabase
-        .from('user_readings')
-        .insert([
-          {
-            date_of_birth: date.toISOString().split('T')[0],
-            name: 'Anonymous', // You might want to add a name input field later
-            email: 'anonymous@example.com', // You might want to add an email input field later
-          }
-        ])
-
-      if (error) {
-        console.error("Error saving to Supabase:", error)
-        toast.error("Failed to save your reading")
-        throw error
-      }
-
-      console.log("Successfully saved reading to database")
-      toast.success("Your reading has been saved!")
-    } catch (error) {
-      console.error("Error in save operation:", error)
-      // Continue showing results even if save fails
-    }
-
     setResults({
       lifePath,
       partialEnergy,
@@ -83,6 +57,7 @@ const Portal = () => {
       chineseZodiac
     })
     setShowResults(true)
+    toast.success("Calculation complete!")
   }
 
   return (

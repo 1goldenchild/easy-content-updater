@@ -103,30 +103,17 @@ const CountryCompatibility = ({ chineseZodiac, isVisible }: CountryCompatibility
       <div className="p-6 rounded-lg bg-gradient-to-br from-[#1a1f3c] to-[#2a2f4c] border border-white/10">
         <div className="flex items-center gap-2 mb-6">
           <Globe2 className="w-6 h-6 text-blue-400" />
-          <h3 className="text-2xl font-bold bg-clip-r from-[#4B9FFF] to-[#46B4FF]">
+          <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#4B9FFF] to-[#46B4FF]">
             Travel & Residence Compatibility
           </h3>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Interactive Globe Section */}
-          <div className="lg:col-span-1">
-            <div className="relative w-full aspect-square mb-4">
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#1A1F2C]/50 to-[#1A1F2C] z-10 rounded-2xl" />
-              <div className="w-full h-full relative rounded-2xl overflow-hidden">
-                <EarthGlobe />
-                <motion.div 
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/10 to-transparent"
-                  initial={{ x: '-100%' }}
-                  animate={{ x: '100%' }}
-                  transition={{ 
-                    duration: 2,
-                    repeat: Infinity,
-                    repeatType: "loop",
-                    ease: "linear",
-                  }}
-                />
-              </div>
+          {/* Earth Globe Section */}
+          <div className="lg:col-span-1 flex items-center justify-center">
+            <div className="relative">
+              <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full" />
+              <EarthGlobe />
             </div>
           </div>
 
@@ -141,20 +128,15 @@ const CountryCompatibility = ({ chineseZodiac, isVisible }: CountryCompatibility
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {compatibleCountries.map((country) => (
-                  <motion.div
+                  <div
                     key={country.country}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="p-3 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center gap-3 hover:bg-green-500/20 transition-colors group"
+                    className="p-3 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center gap-3 hover:bg-green-500/20 transition-colors"
                   >
-                    <span className="text-2xl group-hover:scale-110 transition-transform">
-                      {country.flag}
-                    </span>
+                    <span className="text-2xl">{country.flag}</span>
                     <div className="font-medium text-green-300">
                       {country.country}
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </div>
