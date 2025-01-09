@@ -74,7 +74,9 @@ const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
   return (
     <div className="w-full max-w-md mx-auto px-4">
       <div className="text-center">
-        <h2 className="text-2xl font-bold mb-4">What's your date of birth?</h2>
+        <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+          What's your date of birth?
+        </h2>
         <div className="flex items-center justify-center gap-2 mb-8">
           <div className="relative">
             <input
@@ -118,7 +120,7 @@ const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
             <Button
               onClick={handleSubmit}
               className={cn(
-                "ml-2 rounded-full w-10 h-10 p-0",
+                "ml-2 rounded-full w-14 h-14 p-0",
                 "bg-gradient-to-r from-purple-500 to-pink-500",
                 "hover:from-purple-600 hover:to-pink-600",
                 "transition-all duration-300"
