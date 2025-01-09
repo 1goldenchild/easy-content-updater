@@ -5,7 +5,6 @@ import CallToAction from "@/components/home/CallToAction"
 import SalesPitch from "@/components/home/SalesPitch"
 import ProgressIndicator from "@/components/numerology/ProgressIndicator"
 import Testimonials from "@/components/home/Testimonials"
-import BlogPreview from "@/components/home/BlogPreview"
 
 const Index = () => {
   return (
@@ -22,9 +21,6 @@ const Index = () => {
       </div>
       <div id="testimonials">
         <Testimonials />
-      </div>
-      <div id="blog">
-        <BlogPreview />
       </div>
       <div id="knowledge">
         <SecretKnowledge />
