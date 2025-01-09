@@ -60,7 +60,7 @@ const Benefits = () => {
 
   return (
     <section className="relative py-20 overflow-hidden" ref={containerRef}>
-      <div className="absolute inset-0 bg-gradient-to-b from-[#1A1F2C] via-[#1A1F2C]/95 to-[#221F26]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a21] via-[#1A1F2C]/95 to-[#221F26]" />
       
       <div className="relative max-w-7xl mx-auto px-3 md:px-4">
         <BenefitsHeader />
