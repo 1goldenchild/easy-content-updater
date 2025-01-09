@@ -25,20 +25,20 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
     >
       <div className="rounded-lg bg-white/5 border border-white/10">
         <ScrollArea className="w-full">
-          <div className="p-6 md:p-8 lg:p-12">
+          <div className="p-6 md:p-8">
             <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] mb-8">
               Numerological Characteristics
             </h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Radar Chart - Adjusted height and margins */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Radar Chart - Optimized layout */}
               <div className="aspect-square bg-white/5 rounded-lg border border-white/10 p-4">
                 <ResponsiveContainer width="100%" height="100%">
                   <RadarChart 
                     cx="50%" 
                     cy="50%" 
-                    outerRadius="60%" 
-                    margin={{ top: 30, right: 30, bottom: 30, left: 30 }}
+                    outerRadius="55%" 
+                    margin={{ top: 35, right: 35, bottom: 35, left: 35 }}
                     data={traits}
                   >
                     <PolarGrid stroke="rgba(255,255,255,0.1)" />
@@ -46,8 +46,10 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
                       dataKey="trait"
                       tick={{ 
                         fill: 'rgba(255,255,255,0.7)', 
-                        fontSize: 11,
-                        dy: 3 // Adjust text position
+                        fontSize: 10,
+                        dy: 3,
+                        width: 100,
+                        wordWrap: true
                       }}
                       tickLine={false}
                     />
@@ -68,14 +70,17 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
                   <h4 className="text-lg font-semibold text-white/90 mb-4">Core Traits</h4>
                   <div className="space-y-3">
                     {traits.map((trait, index) => (
-                      <div key={index} className="flex justify-between items-center">
-                        <span className="text-white/70">{trait.trait}</span>
-                        <div className="w-32 h-2 bg-white/10 rounded-full overflow-hidden">
+                      <div key={index} className="flex items-center gap-4">
+                        <span className="text-white/70 min-w-[120px]">{trait.trait}</span>
+                        <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
                           <div 
                             className="h-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full" 
                             style={{ width: `${(trait.value / 10) * 100}%` }}
                           />
                         </div>
+                        <span className="text-white/50 text-sm min-w-[30px] text-right">
+                          {trait.value}/10
+                        </span>
                       </div>
                     ))}
                   </div>
