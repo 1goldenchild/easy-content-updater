@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Globe2, MapPin, AlertTriangle } from "lucide-react";
+import { Globe2, MapPin } from "lucide-react";
 import EarthGlobe from "./EarthGlobe";
 
 interface CountryCompatibilityProps {
@@ -7,66 +7,92 @@ interface CountryCompatibilityProps {
   isVisible: boolean;
 }
 
-// This is a simplified list. In a real app, you'd want a more comprehensive database
-const countryFoundingDates: { country: string; year: number; continent: string; flag: string }[] = [
-  { country: "United States", year: 1776, continent: "North America", flag: "🇺🇸" },
-  { country: "Australia", year: 1901, continent: "Oceania", flag: "🇦🇺" },
-  { country: "Brazil", year: 1822, continent: "South America", flag: "🇧🇷" },
-  { country: "Canada", year: 1867, continent: "North America", flag: "🇨🇦" },
-  { country: "India", year: 1947, continent: "Asia", flag: "🇮🇳" },
-  { country: "Singapore", year: 1965, continent: "Asia", flag: "🇸🇬" },
-  { country: "South Africa", year: 1961, continent: "Africa", flag: "🇿🇦" },
-  { country: "New Zealand", year: 1907, continent: "Oceania", flag: "🇳🇿" },
-  { country: "Japan", year: 660, continent: "Asia", flag: "🇯🇵" },
-  { country: "Thailand", year: 1238, continent: "Asia", flag: "🇹🇭" },
-  { country: "Switzerland", year: 1291, continent: "Europe", flag: "🇨🇭" },
-  { country: "France", year: 843, continent: "Europe", flag: "🇫🇷" }
-];
-
-const getChineseZodiac = (year: number): string => {
-  const zodiacAnimals = [
-    "Rat", "Ox", "Tiger", "Cat", "Dragon", "Snake",
-    "Horse", "Goat", "Monkey", "Rooster", "Dog", "Pig"
-  ];
-  
-  const startYear = 1900; // Known Rat year
-  const cyclePosition = (year - startYear) % 12;
-  return zodiacAnimals[cyclePosition >= 0 ? cyclePosition : cyclePosition + 12];
-};
-
-const calculateCompatibility = (countryYear: number, userZodiac: string): "compatible" | "neutral" | "avoid" => {
-  const countryZodiac = getChineseZodiac(countryYear);
-  const zodiacCycle = [
-    "Rat", "Ox", "Tiger", "Cat", "Dragon", "Snake",
-    "Horse", "Goat", "Monkey", "Rooster", "Dog", "Pig"
-  ];
-
-  const userIndex = zodiacCycle.indexOf(userZodiac);
-  const countryIndex = zodiacCycle.indexOf(countryZodiac);
-  
-  // Calculate the shortest distance between signs in the cycle
-  const distance = Math.min(
-    Math.abs(userIndex - countryIndex),
-    12 - Math.abs(userIndex - countryIndex)
-  );
-
-  if (distance === 0) return "compatible";
-  if (distance === 6) return "avoid";
-  return "neutral";
+const zodiacCountries = {
+  "Rat": [
+    { country: "New Zealand", flag: "🇳🇿" },
+    { country: "Austria", flag: "🇦🇹" },
+    { country: "South Korea", flag: "🇰🇷" },
+    { country: "Chile", flag: "🇨🇱" },
+    { country: "Nepal", flag: "🇳🇵" }
+  ],
+  "Ox": [
+    { country: "Australia", flag: "🇦🇺" },
+    { country: "Italy", flag: "🇮🇹" },
+    { country: "The Bahamas", flag: "🇧🇸" },
+    { country: "Cayman Islands", flag: "🇰🇾" },
+    { country: "Trinidad and Tobago", flag: "🇹🇹" },
+    { country: "Armenia", flag: "🇦🇲" }
+  ],
+  "Tiger": [
+    { country: "Bora Bora", flag: "🇵🇫" },
+    { country: "Mexico", flag: "🇲🇽" },
+    { country: "Romania", flag: "🇷🇴" },
+    { country: "Sri Lanka", flag: "🇱🇰" }
+  ],
+  "Rabbit": [
+    { country: "Portugal", flag: "🇵🇹" },
+    { country: "Russia", flag: "🇷🇺" },
+    { country: "Poland", flag: "🇵🇱" },
+    { country: "Cyprus", flag: "🇨🇾" }
+  ],
+  "Dragon": [
+    { country: "Ireland", flag: "🇮🇪" },
+    { country: "Japan", flag: "🇯🇵" },
+    { country: "Ecuador", flag: "🇪🇨" },
+    { country: "Georgia", flag: "🇬🇪" }
+  ],
+  "Snake": [
+    { country: "Sweden", flag: "🇸🇪" },
+    { country: "Singapore", flag: "🇸🇬" },
+    { country: "Maldives", flag: "🇲🇻" },
+    { country: "Monaco", flag: "🇲🇨" },
+    { country: "Egypt", flag: "🇪🇬" },
+    { country: "Turkey", flag: "🇹🇷" },
+    { country: "Croatia", flag: "🇭🇷" }
+  ],
+  "Horse": [
+    { country: "Denmark", flag: "🇩🇰" },
+    { country: "Luxembourg", flag: "🇱🇺" },
+    { country: "Iceland", flag: "🇮🇸" },
+    { country: "Belgium", flag: "🇧🇪" },
+    { country: "Argentina", flag: "🇦🇷" },
+    { country: "Paraguay", flag: "🇵🇾" }
+  ],
+  "Goat": [
+    { country: "Switzerland", flag: "🇨🇭" },
+    { country: "Malaysia", flag: "🇲🇾" },
+    { country: "Taiwan", flag: "🇹🇼" },
+    { country: "Canada", flag: "🇨🇦" },
+    { country: "Peru", flag: "🇵🇪" },
+    { country: "Montenegro", flag: "🇲🇪" }
+  ],
+  "Monkey": [
+    { country: "United States", flag: "🇺🇸" },
+    { country: "Spain", flag: "🇪🇸" },
+    { country: "Kenya", flag: "🇰🇪" },
+    { country: "Malta", flag: "🇲🇹" },
+    { country: "Bulgaria", flag: "🇧🇬" }
+  ],
+  "Dog": [
+    { country: "Norway", flag: "🇳🇴" },
+    { country: "Thailand", flag: "🇹🇭" },
+    { country: "Brazil", flag: "🇧🇷" }
+  ],
+  "Pig": [
+    { country: "Netherlands", flag: "🇳🇱" },
+    { country: "Germany", flag: "🇩🇪" },
+    { country: "United Kingdom", flag: "🇬🇧" },
+    { country: "Slovakia", flag: "🇸🇰" }
+  ]
 };
 
 const CountryCompatibility = ({ chineseZodiac, isVisible }: CountryCompatibilityProps) => {
+  console.log("Current Chinese Zodiac:", chineseZodiac);
+  
   if (!isVisible) return null;
 
-  const categorizedCountries = countryFoundingDates.reduce((acc, country) => {
-    const compatibility = calculateCompatibility(country.year, chineseZodiac);
-    acc[compatibility].push(country);
-    return acc;
-  }, {
-    compatible: [] as typeof countryFoundingDates,
-    neutral: [] as typeof countryFoundingDates,
-    avoid: [] as typeof countryFoundingDates
-  });
+  const compatibleCountries = zodiacCountries[chineseZodiac as keyof typeof zodiacCountries] || [];
+  console.log("Compatible countries:", compatibleCountries);
 
   return (
     <motion.div
@@ -92,49 +118,23 @@ const CountryCompatibility = ({ chineseZodiac, isVisible }: CountryCompatibility
           </div>
 
           {/* Countries List Section */}
-          <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Compatible Countries */}
+          <div className="lg:col-span-2">
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <MapPin className="w-5 h-5 text-green-500" />
                 <h4 className="text-lg font-semibold text-white/80">
-                  Recommended Destinations
+                  Compatible Destinations for {chineseZodiac}
                 </h4>
               </div>
-              <div className="space-y-2">
-                {categorizedCountries.compatible.map((country) => (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {compatibleCountries.map((country) => (
                   <div
                     key={country.country}
-                    className="p-3 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center gap-3"
+                    className="p-3 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center gap-3 hover:bg-green-500/20 transition-colors"
                   >
                     <span className="text-2xl">{country.flag}</span>
-                    <div>
-                      <div className="font-medium text-green-300">{country.country}</div>
-                      <div className="text-sm text-green-300/70">{country.continent}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Countries to Avoid */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <AlertTriangle className="w-5 h-5 text-red-500" />
-                <h4 className="text-lg font-semibold text-white/80">
-                  Places to Avoid
-                </h4>
-              </div>
-              <div className="space-y-2">
-                {categorizedCountries.avoid.map((country) => (
-                  <div
-                    key={country.country}
-                    className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center gap-3"
-                  >
-                    <span className="text-2xl">{country.flag}</span>
-                    <div>
-                      <div className="font-medium text-red-300">{country.country}</div>
-                      <div className="text-sm text-red-300/70">{country.continent}</div>
+                    <div className="font-medium text-green-300">
+                      {country.country}
                     </div>
                   </div>
                 ))}
