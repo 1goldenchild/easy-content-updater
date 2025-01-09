@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Briefcase } from "lucide-react";
-import { careerPaths, getRandomCareers } from "@/data/careerPaths";
+import { careerPaths } from "@/data/careerPaths";
 import CareerCard from "./CareerCard";
 
 interface CareerCompatibilityProps {
@@ -10,19 +10,15 @@ interface CareerCompatibilityProps {
 }
 
 const CareerCompatibility = ({ lifePath, isVisible }: CareerCompatibilityProps) => {
-  const [recommendedCareers, setRecommendedCareers] = useState<string[]>([]);
+  const [careers, setCareers] = useState<string[]>([]);
   
   useEffect(() => {
-    console.log("Calculating career recommendations for lifePath:", lifePath);
-    // Get the careers for the specific life path, or empty array if not found
-    const careers = careerPaths[lifePath as keyof typeof careerPaths] || [];
-    console.log("Available careers for lifePath", lifePath, ":", careers);
+    console.log("Getting all careers for lifePath:", lifePath);
+    // Get all careers for the specific life path, or empty array if not found
+    const availableCareers = careerPaths[lifePath as keyof typeof careerPaths] || [];
+    console.log("Available careers for lifePath", lifePath, ":", availableCareers);
     
-    // Select 5 random careers from the available careers
-    const selectedCareers = getRandomCareers(careers, 5);
-    console.log("Selected careers:", selectedCareers);
-    
-    setRecommendedCareers(selectedCareers);
+    setCareers(availableCareers);
   }, [lifePath]);
 
   if (!isVisible) return null;
@@ -43,11 +39,11 @@ const CareerCompatibility = ({ lifePath, isVisible }: CareerCompatibilityProps) 
 
       <div className="space-y-4">
         <p className="text-white/70">
-          Based on your Life Path Number {lifePath}, here are your recommended career paths:
+          Based on your Life Path Number {lifePath}, here are all your compatible career paths:
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {recommendedCareers.map((career, index) => (
+          {careers.map((career, index) => (
             <CareerCard key={career} career={career} index={index} />
           ))}
         </div>
