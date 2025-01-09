@@ -42,17 +42,10 @@ const Hero = () => {
       <div 
         className="absolute inset-0"
         style={{
-          background: `
-            radial-gradient(circle at top left, rgba(155, 135, 245, 0.15), transparent 40%),
-            radial-gradient(circle at top right, rgba(249, 115, 22, 0.15), transparent 40%),
-            radial-gradient(circle at bottom left, rgba(126, 105, 171, 0.15), transparent 40%),
-            radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.15), transparent 40%),
-            linear-gradient(to bottom, 
-              rgba(155, 135, 245, 0.1), 
-              rgba(251, 191, 36, 0.1), 
+          background: `linear-gradient(to bottom, 
+              rgba(26, 31, 44, 0.8), 
               rgba(26, 31, 44, 0.8)
-            )
-          `
+            )`
         }}
       />
     </section>
