@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
@@ -8,7 +7,6 @@ import { Input } from "@/components/ui/input";
 import DateSelector from "@/components/numerology/DateSelector";
 
 const CollectInfoForm = () => {
-  const navigate = useNavigate();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -63,7 +61,9 @@ const CollectInfoForm = () => {
         description: "Your information has been submitted successfully.",
       });
 
-      navigate("/upsell");
+      // Redirect to Numerology33 checkout page
+      window.location.href = "https://www.numerology33.com/checkout";
+      
     } catch (error) {
       console.error("Error:", error);
       toast({
