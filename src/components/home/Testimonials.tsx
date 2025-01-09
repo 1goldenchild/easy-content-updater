@@ -60,7 +60,13 @@ const testimonials = [
 
 const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => (
   <div className="min-w-[300px] md:min-w-[400px] p-6 mx-4">
-    <div className="bg-emerald-400/5 backdrop-blur-sm border border-emerald-500/10 rounded-lg p-6 hover:border-emerald-500/20 transition-colors h-full">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+      className="bg-emerald-400/5 backdrop-blur-sm border border-emerald-500/10 rounded-lg p-6 hover:border-emerald-500/20 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/5 h-full"
+    >
       <div className="flex gap-1 mb-4">
         {[...Array(testimonial.rating)].map((_, i) => (
           <Star
@@ -78,7 +84,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
           {testimonial.role}
         </div>
       </footer>
-    </div>
+    </motion.div>
   </div>
 )
 
@@ -94,8 +100,10 @@ const Testimonials = () => {
               Transforming Lives Through Energy Insights
             </span>
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-lg text-muted-foreground flex items-center justify-center gap-2">
+            <Star className="w-5 h-5 fill-emerald-500 text-emerald-500" />
             Join over 1000 high-profile customers
+            <Star className="w-5 h-5 fill-emerald-500 text-emerald-500" />
           </p>
         </div>
         
