@@ -14,6 +14,12 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
   const lifePathKey = lifePath.toString();
   const traits = characteristicsData[lifePathKey] || characteristicsData["1"];
 
+  // Create numbered data for the radar chart
+  const numberedTraits = traits.map((trait, index) => ({
+    ...trait,
+    number: (index + 1).toString(),
+  }));
+
   console.log("Rendering characteristics for life path:", lifePath);
   console.log("Traits data:", traits);
 
@@ -34,10 +40,10 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
               {/* Radar Chart */}
               <div className="aspect-square bg-white/5 rounded-lg border border-white/10 p-4">
                 <ResponsiveContainer width="100%" height="100%">
-                  <RadarChart cx="50%" cy="50%" outerRadius="80%" data={traits}>
+                  <RadarChart cx="50%" cy="50%" outerRadius="80%" data={numberedTraits}>
                     <PolarGrid stroke="rgba(255,255,255,0.1)" />
                     <PolarAngleAxis
-                      dataKey="trait"
+                      dataKey="number"
                       tick={{ fill: 'rgba(255,255,255,0.7)', fontSize: 12 }}
                     />
                     <Radar
@@ -58,7 +64,9 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
                   <div className="space-y-3">
                     {traits.map((trait, index) => (
                       <div key={index} className="flex justify-between items-center">
-                        <span className="text-white/70">{trait.trait}</span>
+                        <span className="text-white/70">
+                          {index + 1}. {trait.trait}
+                        </span>
                         <div className="w-32 h-2 bg-white/10 rounded-full overflow-hidden">
                           <div 
                             className="h-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full" 
