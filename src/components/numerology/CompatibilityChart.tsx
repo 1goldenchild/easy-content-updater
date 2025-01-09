@@ -1,13 +1,8 @@
 import { motion } from "framer-motion";
-import {
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-  Legend,
-  Tooltip,
-} from 'recharts';
 import { numerologyCompatibility } from "@/utils/numerologyCompatibility";
+import PieChartDisplay from "./PieChartDisplay";
+import NumbersDisplay from "./NumbersDisplay";
+import { CompatibilityDataItem } from "./types";
 
 interface CompatibilityChartProps {
   lifePath: number;
@@ -72,30 +67,30 @@ const CompatibilityChart = ({ lifePath, isVisible }: CompatibilityChartProps) =>
   const loveNumbers = getLoveNumbers(lifePath);
   const neutralNumbers = getNeutralNumbers(compatibleNumbers, enemyNumbers, loveNumbers);
 
-  const compatibilityData = [
+  const compatibilityData: CompatibilityDataItem[] = [
     { 
       name: 'Love', 
       value: loveNumbers.length, 
       numbers: loveNumbers,
-      color: '#FF1493' // Deep pink for love
+      color: '#FF1493'
     },
     { 
       name: 'Compatible', 
       value: compatibleNumbers.length, 
       numbers: compatibleNumbers,
-      color: '#8B5CF6' // Vivid purple
+      color: '#8B5CF6'
     },
     { 
       name: 'Neutral', 
       value: neutralNumbers.length, 
       numbers: neutralNumbers,
-      color: '#0EA5E9' // Ocean blue
+      color: '#0EA5E9'
     },
     { 
       name: 'Challenging', 
       value: enemyNumbers.length, 
       numbers: enemyNumbers,
-      color: '#F97316' // Bright orange
+      color: '#F97316'
     }
   ];
 
@@ -111,99 +106,8 @@ const CompatibilityChart = ({ lifePath, isVisible }: CompatibilityChartProps) =>
       </h3>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="w-full h-[300px] md:h-[400px] relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-xl" />
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={compatibilityData}
-                cx="50%"
-                cy="50%"
-                innerRadius={60}
-                outerRadius={100}
-                paddingAngle={6}
-                dataKey="value"
-              >
-                {compatibilityData.map((entry, index) => (
-                  <Cell 
-                    key={`cell-${index}`} 
-                    fill={entry.color}
-                    stroke="rgba(255,255,255,0.1)"
-                    strokeWidth={2}
-                  />
-                ))}
-              </Pie>
-              <text
-                x="50%"
-                y="50%"
-                textAnchor="middle"
-                dominantBaseline="central"
-                className="fill-white/80 text-lg font-semibold"
-              >
-                {lifePath}
-              </text>
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: 'rgba(26, 31, 44, 0.95)',
-                  border: '1px solid rgba(139, 92, 246, 0.3)',
-                  borderRadius: '8px',
-                  backdropFilter: 'blur(8px)',
-                  color: 'rgba(255, 255, 255, 0.9)',
-                  padding: '12px'
-                }}
-                formatter={(value, name) => [`${value} numbers`, name]}
-              />
-              <Legend 
-                verticalAlign="bottom"
-                height={36}
-                formatter={(value) => (
-                  <span className="text-sm font-medium whitespace-nowrap text-white/80">
-                    {value}
-                  </span>
-                )}
-              />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
-
-        <div className="space-y-6">
-          {compatibilityData.map((category, index) => (
-            <motion.div
-              key={category.name}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <h4 className="text-lg font-semibold text-white/90 mb-3 flex items-center gap-2">
-                <div 
-                  className="w-3 h-3 rounded-full" 
-                  style={{ backgroundColor: category.color }} 
-                />
-                {category.name} Numbers
-              </h4>
-              <div className="flex flex-wrap gap-3">
-                {category.numbers.map((num) => (
-                  <motion.div
-                    key={`${category.name}-${num}`}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="relative group"
-                  >
-                    <div 
-                      className="absolute inset-0 rounded-lg blur-sm opacity-50 group-hover:opacity-100 transition-opacity"
-                      style={{ backgroundColor: category.color }}
-                    />
-                    <div className="relative px-4 py-2 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm flex items-center justify-center min-w-[40px]">
-                      <span className="text-lg font-bold text-white/90">
-                        {num}
-                      </span>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        <PieChartDisplay compatibilityData={compatibilityData} lifePath={lifePath} />
+        <NumbersDisplay compatibilityData={compatibilityData} />
       </div>
     </motion.div>
   );
