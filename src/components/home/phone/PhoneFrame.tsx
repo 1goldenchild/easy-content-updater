@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import PreviewOverlay from "./PreviewOverlay";
 
 interface PhoneFrameProps {
@@ -8,21 +8,24 @@ interface PhoneFrameProps {
   onSectionChange: (id: string) => void;
 }
 
-const sections = [
-  { id: "lifepath", label: "Life Path" },
-  { id: "partial", label: "Partial Energy" },
-  { id: "secret", label: "Secret Number" },
-  { id: "zodiac", label: "Chinese Zodiac" },
-  { id: "traits", label: "Core Traits" },
-  { id: "compatibility", label: "Matches" },
-  { id: "career", label: "Career" },
-  { id: "car-compatibility", label: "Car Match" },
-  { id: "career-compatibility", label: "Career Match" },
-  { id: "countries", label: "Countries" },
-  { id: "forecast", label: "Forecast" }
-];
+const PhoneFrame = ({ children }: PhoneFrameProps) => {
+  const [scrollProgress, setScrollProgress] = useState(0);
 
-const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProps) => {
+  useEffect(() => {
+    const handleScroll = (e: Event) => {
+      const container = e.target as HTMLElement;
+      const scrollPercentage = (container.scrollTop / (container.scrollHeight - container.clientHeight)) * 100;
+      setScrollProgress(scrollPercentage);
+      console.log("Phone scroll progress:", scrollPercentage);
+    };
+
+    const container = document.querySelector('.scrollbar-hide');
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
+      return () => container.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -37,27 +40,57 @@ const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProp
         {/* Notch */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-7 bg-black rounded-b-3xl z-20" />
         
-        {/* Navigation Dots */}
-        <div className="absolute right-2 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-4">
-          {sections.map((section) => (
-            <button
-              key={section.id}
-              onClick={() => onSectionChange(section.id)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                activeSection === section.id 
-                  ? "bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] scale-150" 
-                  : "bg-white/20 hover:bg-white/40"
-              }`}
-              aria-label={section.label}
+        {/* Progress Bar */}
+        <div className="absolute right-2 top-1/2 -translate-y-1/2 z-30 h-[90%] w-1">
+          <div className="relative h-full w-full">
+            {/* Background line */}
+            <div className="absolute inset-0 w-full h-full bg-white/5 rounded-full" />
+            
+            {/* Progress line */}
+            <motion.div 
+              className="absolute bottom-0 w-full rounded-full bg-gradient-to-t from-[#8B5CF6] via-[#D946EF] to-[#F97316]"
+              style={{ 
+                height: `${scrollProgress}%`,
+                filter: 'blur(4px)',
+                opacity: 0.6
+              }}
             />
-          ))}
+            
+            {/* Solid progress line */}
+            <motion.div 
+              className="absolute bottom-0 w-full rounded-full bg-gradient-to-t from-[#8B5CF6] via-[#D946EF] to-[#F97316]"
+              style={{ height: `${scrollProgress}%` }}
+            />
+
+            {/* Animated particles */}
+            <div className="absolute inset-0 overflow-hidden">
+              {[...Array(5)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-1 h-1 bg-white rounded-full"
+                  animate={{
+                    y: ["0%", "100%"],
+                    opacity: [0, 1, 0],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    delay: i * 0.4,
+                    ease: "linear",
+                  }}
+                  style={{
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                  }}
+                />
+              ))}
+            </div>
+          </div>
         </div>
         
         {/* Screen Content */}
         <div className="absolute inset-0 overflow-y-auto overflow-x-hidden scrollbar-hide">
-          <div className="w-full space-y-6 p-4">
-            {children}
-          </div>
+          {children}
         </div>
 
         {/* Reflection Effect */}
