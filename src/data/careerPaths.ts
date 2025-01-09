@@ -36,16 +36,19 @@ export const careerPaths = {
     "Comedian"
   ],
   4: [
-    "Engineer",
+    "Policeman",
+    "Lawyer",
+    "Firefighter",
+    "CEO",
+    "Construction Worker",
+    "Secret Spy",
     "Architect",
-    "Financial Analyst",
-    "Systems Administrator",
-    "Construction Manager",
-    "Project Manager",
-    "Accountant",
-    "Database Administrator",
-    "Quality Assurance Manager",
-    "Operations Manager"
+    "Military",
+    "Detective",
+    "Cybersecurity",
+    "Bodybuilder",
+    "Politics",
+    "Coach"
   ],
   5: [
     "Flight Attendant",

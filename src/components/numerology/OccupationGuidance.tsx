@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Briefcase } from "lucide-react";
-import { getOccupations } from "@/data/occupationsByLifePath";
+import { careerPaths } from "@/data/careerPaths";
 import CareerPathCard from "./CareerPathCard";
 
 interface OccupationGuidanceProps {
@@ -13,8 +13,8 @@ const OccupationGuidance = ({ lifePath, isVisible }: OccupationGuidanceProps) =>
   
   if (!isVisible) return null;
 
-  const occupations = getOccupations(lifePath);
-  console.log("Retrieved occupations:", occupations);
+  const careers = careerPaths[lifePath as keyof typeof careerPaths] || [];
+  console.log("Retrieved careers for lifePath", lifePath, ":", careers);
 
   return (
     <motion.div
@@ -35,10 +35,10 @@ const OccupationGuidance = ({ lifePath, isVisible }: OccupationGuidanceProps) =>
           </div>
 
           <div className="grid gap-4">
-            {occupations.map((occupation, index) => (
+            {careers.map((career, index) => (
               <CareerPathCard 
-                key={occupation} 
-                occupation={occupation} 
+                key={career} 
+                occupation={career} 
                 index={index} 
               />
             ))}
