@@ -8,6 +8,7 @@ import CarCompatibility from "@/components/numerology/CarCompatibility"
 import OccupationGuidance from "@/components/numerology/OccupationGuidance"
 import DateSelector from "@/components/numerology/DateSelector"
 import ProgressIndicator from "@/components/numerology/ProgressIndicator"
+import LoveCompatibility from "@/components/numerology/LoveCompatibility"
 import { 
   calculateLifePath, 
   calculatePartialEnergy, 
@@ -98,15 +99,27 @@ const Portal = () => {
 
             {showResults && (
               <>
+                <div id="compatibility" className="space-y-8">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="w-full bg-white/5 p-8 rounded-xl backdrop-blur-sm border border-white/10"
+                  >
+                    <h3 className="text-2xl font-bold text-white/90 mb-6">Compatibility Analysis</h3>
+                    <div className="space-y-8">
+                      <CompatibilityChart 
+                        lifePath={results.lifePath}
+                        isVisible={showResults}
+                      />
+                      <LoveCompatibility
+                        lifePathNumber={results.lifePath}
+                      />
+                    </div>
+                  </motion.div>
+                </div>
+
                 <div id="occupation">
                   <OccupationGuidance
-                    lifePath={results.lifePath}
-                    isVisible={showResults}
-                  />
-                </div>
-                
-                <div id="compatibility">
-                  <CompatibilityChart 
                     lifePath={results.lifePath}
                     isVisible={showResults}
                   />
