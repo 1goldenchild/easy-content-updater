@@ -73,7 +73,7 @@ const FeatureList = () => {
       {features.map((feature, index) => {
         const progress = useTransform(
           scrollYProgress,
-          [index * 0.15, (index + 1) * 0.15],
+          [Math.max(0, index * 0.1), Math.min(1, (index + 1) * 0.1)],
           [0, 1]
         );
 
@@ -82,13 +82,18 @@ const FeatureList = () => {
             key={index}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ 
+              duration: 0.5,
+              delay: index * 0.1,
+              ease: "easeOut"
+            }}
             className="relative group"
           >
             <motion.div
               style={{ opacity: progress }}
               className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.1)] to-transparent"
+              transition={{ duration: 0.3 }}
             />
             <motion.div
               style={{
@@ -96,10 +101,9 @@ const FeatureList = () => {
                 boxShadow: `0 0 10px 1px ${feature.neonColor}, 
                            0 0 20px 2px ${feature.neonColor}`
               }}
-              className="absolute -inset-0.5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              className="absolute -inset-0.5 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300"
             />
             <div className="relative h-full p-6 rounded-2xl bg-black/40 backdrop-blur-sm border border-white/10">
-              {/* Number and Icon */}
               <div className="flex items-center gap-4 mb-4">
                 <motion.div 
                   className="relative w-8 h-8"
@@ -117,12 +121,13 @@ const FeatureList = () => {
                     boxShadow: `0 0 5px 1px ${feature.neonColor}, 
                                0 0 10px 2px ${feature.neonColor}`
                   }}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <feature.icon className="w-full h-full text-white" />
                 </motion.div>
               </div>
               
-              {/* Title */}
               <motion.h3 
                 className={`text-xl font-bold mb-2 bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}
                 style={{ opacity: progress }}
@@ -130,7 +135,6 @@ const FeatureList = () => {
                 {feature.title}
               </motion.h3>
               
-              {/* Description */}
               <motion.p 
                 className="text-white/70 text-sm leading-relaxed"
                 style={{ opacity: progress }}
