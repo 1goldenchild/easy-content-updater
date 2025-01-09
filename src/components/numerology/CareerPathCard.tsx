@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Award, Star } from "lucide-react";
 
 interface CareerPathCardProps {
   occupation: string;
@@ -9,22 +8,18 @@ interface CareerPathCardProps {
 const CareerPathCard = ({ occupation, index }: CareerPathCardProps) => {
   return (
     <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: index * 0.1 }}
-      className="group relative flex items-center gap-4 p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-white/5"
+      whileHover={{ scale: 1.02 }}
+      className="p-4 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm relative overflow-hidden group"
     >
-      <div className="flex items-center justify-center w-10 h-10 rounded-full bg-purple-500/10 group-hover:bg-purple-500/20 transition-colors">
-        {index === 0 ? (
-          <Award className="w-5 h-5 text-purple-400" />
-        ) : (
-          <Star className="w-5 h-5 text-purple-400" />
-        )}
+      {/* Animated gradient background on hover */}
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      
+      <div className="relative flex items-center gap-4">
+        <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-purple-500/20 text-purple-400">
+          {index + 1}
+        </div>
+        <p className="text-lg text-white/90 font-medium">{occupation}</p>
       </div>
-      <span className="text-white/90 group-hover:text-white transition-colors">
-        {occupation}
-      </span>
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
     </motion.div>
   );
 };
