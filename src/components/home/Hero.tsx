@@ -23,11 +23,11 @@ const Hero = () => {
             Discover the secrets the 1% and elite class have kept hidden—and how this powerful knowledge can transform your life, enhance your relationships, and even elevate your finances.
           </p>
           <div className="w-full max-w-[280px] relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-amber-500 via-purple-500 to-amber-500 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+            <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 rounded-lg blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
             <Link to="/collect-info" className="w-full block relative">
               <Button 
                 size="lg" 
-                className="w-full bg-gradient-to-r from-[#9b87f5] via-amber-500 to-[#7E69AB] hover:from-amber-500 hover:via-[#9b87f5] hover:to-amber-500 text-white shadow-xl transition-all duration-500 bg-[length:200%_auto] hover:bg-right-top"
+                className="w-full bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 hover:from-amber-500 hover:via-yellow-400 hover:to-amber-600 text-black font-semibold shadow-[0_0_20px_rgba(251,191,36,0.3)] transition-all duration-500 bg-[length:200%_auto] hover:bg-right-top hover:shadow-[0_0_25px_rgba(251,191,36,0.5)] border border-amber-400/30"
               >
                 Get Your Analysis Now
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
