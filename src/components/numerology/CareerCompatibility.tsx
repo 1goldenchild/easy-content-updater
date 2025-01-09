@@ -14,9 +14,14 @@ const CareerCompatibility = ({ lifePath, isVisible }: CareerCompatibilityProps) 
   
   useEffect(() => {
     console.log("Calculating career recommendations for lifePath:", lifePath);
+    // Get the careers for the specific life path, or empty array if not found
     const careers = careerPaths[lifePath as keyof typeof careerPaths] || [];
-    const selectedCareers = getRandomCareers([...careers], 5);
+    console.log("Available careers for lifePath", lifePath, ":", careers);
+    
+    // Select 5 random careers from the available careers
+    const selectedCareers = getRandomCareers(careers, 5);
     console.log("Selected careers:", selectedCareers);
+    
     setRecommendedCareers(selectedCareers);
   }, [lifePath]);
 
