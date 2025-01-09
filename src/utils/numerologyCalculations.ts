@@ -71,14 +71,17 @@ export const calculatePartialEnergy = (day: number): number => {
 };
 
 export const calculateSecretNumber = (date: Date): number => {
-  // Get day of year, adding 1 because getTime() starts counting from 0
-  const start = new Date(date.getFullYear(), 0, 0);
-  const diff = date.getTime() - start.getTime();
-  const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24)) + 1;
-  
-  console.log("Day of year:", dayOfYear);
+  // Get the start of the year
+  const startOfYear = new Date(date.getFullYear(), 0, 1);
+  const diff = date.getTime() - startOfYear.getTime();
+  const oneDay = 1000 * 60 * 60 * 24;
+  const dayOfYear = Math.floor(diff / oneDay) + 1; // Adding 1 because we want Jan 1st to be day 1
 
-  // Special cases for master numbers based on day of year
+  console.log(`Date: ${date.toISOString()}`);
+  console.log(`Start of year: ${startOfYear.toISOString()}`);
+  console.log(`Day of year: ${dayOfYear}`);
+
+  // Check for special master number days
   if (dayOfYear === 11 || dayOfYear === 110 || dayOfYear === 101) {
     console.log("Special case: Secret number 11");
     return 11;
@@ -95,14 +98,11 @@ export const calculateSecretNumber = (date: Date): number => {
   }
 
   // For all other days, reduce to single digit
-  const secretNumber = dayOfYear.toString()
-    .split('')
-    .reduce((sum, digit) => sum + parseInt(digit), 0);
-    
-  console.log("Initial sum:", secretNumber);
+  console.log(`Reducing day ${dayOfYear} to single digit`);
+  const secretNumber = reduceToSingleDigit(dayOfYear);
+  console.log(`Final secret number: ${secretNumber}`);
   
-  // If not a special case, reduce to single digit
-  return reduceToSingleDigit(secretNumber);
+  return secretNumber;
 };
 
 export const getChineseZodiac = (year: number): string => {
