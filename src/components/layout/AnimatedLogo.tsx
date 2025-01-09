@@ -1,89 +1,92 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
 
-const getGematriaValue = (letter: string): string => {
-  const gematriaMap: { [key: string]: number } = {
-    'N': 14, 'U': 21, 'M': 13, 'E': 5, 'R': 18, 'O': 15, 'L': 12, 'G': 7, 'Y': 25
-  }
-  return gematriaMap[letter.toUpperCase()]?.toString() || letter
-}
-
 const AnimatedLogo = () => {
-  const [currentIndex, setCurrentIndex] = useState(-1)
-  const [showNumbers, setShowNumbers] = useState(true)
-  const [show33, setShow33] = useState(false)
-  const word = "NUMEROLOGY"
+  const [isAnimating, setIsAnimating] = useState(false);
   
   useEffect(() => {
-    const numbersTimer = setTimeout(() => {
-      setCurrentIndex(0)
-      
-      const interval = setInterval(() => {
-        setCurrentIndex(prev => {
-          if (prev >= word.length - 1) {
-            clearInterval(interval)
-            setTimeout(() => setShow33(true), 300)
-            return prev
-          }
-          return prev + 1
-        })
-      }, 100)
-
-      return () => clearInterval(interval)
-    }, 1000)
-
-    return () => clearTimeout(numbersTimer)
-  }, [])
+    // Start animation after a brief delay
+    const timer = setTimeout(() => setIsAnimating(true), 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <div className="flex items-center">
-      {word.split('').map((letter, index) => (
-        <motion.div
-          key={index}
-          className="inline-block relative font-bold text-2xl"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3, delay: index * 0.05 }}
+    <div className="flex items-center gap-1">
+      {/* Main Logo Text */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="relative"
+      >
+        <motion.span 
+          className="font-serif text-2xl tracking-wide"
+          style={{ textShadow: '0 0 20px rgba(251, 191, 36, 0.1)' }}
         >
-          <AnimatePresence mode="wait">
-            {index <= currentIndex ? (
-              <motion.span
-                key="letter"
-                initial={{ y: -20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.3 }}
-                className="inline-block font-serif"
-              >
-                {letter}
-              </motion.span>
-            ) : (
-              <motion.span
-                key="number"
-                initial={{ opacity: 1 }}
-                exit={{ y: 20, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="inline-block text-amber-600/80"
-              >
-                {getGematriaValue(letter)}
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </motion.div>
-      ))}
+          {/* Animated letters with gradient */}
+          {'NUMEROLOGY'.split('').map((letter, index) => (
+            <motion.span
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ 
+                opacity: isAnimating ? 1 : 0, 
+                y: isAnimating ? 0 : 20 
+              }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.1,
+                ease: "easeOut"
+              }}
+              className="inline-block font-serif"
+              style={{
+                background: `linear-gradient(to bottom right, 
+                  ${index % 2 === 0 ? '#2A2311' : '#3B3015'}, 
+                  ${index % 2 === 0 ? '#1A1508' : '#2A2311'})`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                textShadow: '0 0 15px rgba(251, 191, 36, 0.15)'
+              }}
+            >
+              {letter}
+            </motion.span>
+          ))}
+        </motion.span>
+
+        {/* Decorative line under the text */}
+        <motion.div
+          initial={{ scaleX: 0, opacity: 0 }}
+          animate={{ 
+            scaleX: isAnimating ? 1 : 0, 
+            opacity: isAnimating ? 1 : 0 
+          }}
+          transition={{ 
+            duration: 0.8, 
+            delay: 1.3,
+            ease: "easeOut"
+          }}
+          className="absolute -bottom-1 left-0 right-0 h-[1px] bg-gradient-to-r from-amber-900/30 via-amber-600/30 to-amber-900/30"
+        />
+      </motion.div>
+
+      {/* Animated number */}
       <AnimatePresence>
-        {show33 && (
+        {isAnimating && (
           <motion.span
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3 }}
-            className="bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-700 bg-clip-text text-transparent ml-1 font-serif"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ 
+              duration: 0.5,
+              delay: 1.5,
+              ease: "easeOut"
+            }}
+            className="text-lg font-serif bg-gradient-to-br from-amber-700 to-amber-900 bg-clip-text text-transparent"
           >
             33
           </motion.span>
         )}
       </AnimatePresence>
     </div>
-  )
-}
+  );
+};
 
-export default AnimatedLogo
+export default AnimatedLogo;
