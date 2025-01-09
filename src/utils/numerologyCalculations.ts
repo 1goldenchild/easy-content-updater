@@ -71,18 +71,11 @@ export const calculatePartialEnergy = (day: number): number => {
 };
 
 export const calculateSecretNumber = (date: Date): number => {
-  const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  
-  // Adjust February for leap year
-  if (date.getFullYear() % 4 === 0) {
-    daysInMonth[1] = 29;
-  }
-  
-  // Calculate day of year by counting days in previous months plus current day
-  let dayOfYear = date.getDate(); // Start with the current day
-  for (let month = 0; month < date.getMonth(); month++) {
-    dayOfYear += daysInMonth[month];
-  }
+  // Calculate the day of the year (1-366)
+  const start = new Date(date.getFullYear(), 0, 0);
+  const diff = date.getTime() - start.getTime();
+  const oneDay = 1000 * 60 * 60 * 24;
+  const dayOfYear = Math.floor(diff / oneDay);
 
   console.log(`Date: ${date.toDateString()}`);
   console.log(`Day of year: ${dayOfYear}`);
