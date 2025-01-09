@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
@@ -12,11 +12,14 @@ const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
+  const monthInputRef = useRef<HTMLInputElement>(null);
+  const yearInputRef = useRef<HTMLInputElement>(null);
 
   const handleDateChange = (
     value: string,
     setter: (value: string) => void,
-    maxLength: number
+    maxLength: number,
+    nextRef?: React.RefObject<HTMLInputElement>
   ) => {
     const numericValue = value.replace(/\D/g, "");
     if (numericValue.length <= maxLength) {
@@ -26,6 +29,11 @@ const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
         setter === setMonth ? numericValue : month,
         setter === setYear ? numericValue : year
       );
+      
+      // Auto-focus next input when current input is filled
+      if (numericValue.length === maxLength && nextRef?.current) {
+        nextRef.current.focus();
+      }
     }
   };
 
@@ -56,23 +64,25 @@ const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
             type="text"
             placeholder="DD"
             value={day}
-            onChange={(e) => handleDateChange(e.target.value, setDay, 2)}
+            onChange={(e) => handleDateChange(e.target.value, setDay, 2, monthInputRef)}
             className="w-20"
             maxLength={2}
           />
         </div>
         <div>
           <Input
+            ref={monthInputRef}
             type="text"
             placeholder="MM"
             value={month}
-            onChange={(e) => handleDateChange(e.target.value, setMonth, 2)}
+            onChange={(e) => handleDateChange(e.target.value, setMonth, 2, yearInputRef)}
             className="w-20"
             maxLength={2}
           />
         </div>
         <div>
           <Input
+            ref={yearInputRef}
             type="text"
             placeholder="YYYY"
             value={year}
