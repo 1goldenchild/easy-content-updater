@@ -1,4 +1,4 @@
-export const MASTER_NUMBERS = [33, 29, 22, 20, 11];
+export const MASTER_NUMBERS = [33, 22, 11];
 
 export const reduceToSingleDigit = (num: number): number => {
   // Convert to string to process individual digits
@@ -12,6 +12,7 @@ export const reduceToSingleDigit = (num: number): number => {
   
   // Check for master numbers before reducing further
   if (MASTER_NUMBERS.includes(currentSum)) {
+    console.log(`Found master number: ${currentSum}`);
     return currentSum;
   }
 
@@ -19,6 +20,7 @@ export const reduceToSingleDigit = (num: number): number => {
   while (currentSum > 9) {
     currentSum = sumDigits(currentSum);
     if (MASTER_NUMBERS.includes(currentSum)) {
+      console.log(`Found master number after reduction: ${currentSum}`);
       return currentSum;
     }
   }
@@ -31,11 +33,30 @@ export const calculateLifePath = (date: Date): number => {
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
 
-  // Add all digits individually
-  const allDigits = `${day}${month}${year}`.split('').map(Number);
-  const sum = allDigits.reduce((a, b) => a + b, 0);
+  console.log(`Calculating lifepath for date: ${day}/${month}/${year}`);
 
-  return reduceToSingleDigit(sum);
+  // Split each component into individual digits and sum them
+  const daySum = day.toString().split('').reduce((sum, digit) => sum + parseInt(digit), 0);
+  const monthSum = month.toString().split('').reduce((sum, digit) => sum + parseInt(digit), 0);
+  const yearSum = year.toString().split('').reduce((sum, digit) => sum + parseInt(digit), 0);
+
+  console.log(`Individual sums - Day: ${daySum}, Month: ${monthSum}, Year: ${yearSum}`);
+
+  // Add all the sums together
+  const totalSum = daySum + monthSum + yearSum;
+  console.log(`Total sum before reduction: ${totalSum}`);
+
+  // Check if total sum is a master number
+  if (MASTER_NUMBERS.includes(totalSum)) {
+    console.log(`Found master number in total sum: ${totalSum}`);
+    return totalSum;
+  }
+
+  // If not a master number, reduce to single digit
+  const lifePath = reduceToSingleDigit(totalSum);
+  console.log(`Final lifepath number: ${lifePath}`);
+
+  return lifePath;
 };
 
 export const calculatePartialEnergy = (day: number): number => {
