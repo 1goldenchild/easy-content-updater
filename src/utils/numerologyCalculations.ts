@@ -77,37 +77,32 @@ export const calculateSecretNumber = (date: Date): number => {
   const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24)) + 1;
   
   console.log("Day of year:", dayOfYear);
+
+  // Special cases for master numbers based on day of year
+  if (dayOfYear === 11 || dayOfYear === 110 || dayOfYear === 101) {
+    console.log("Special case: Secret number 11");
+    return 11;
+  }
   
-  // Get initial sum of the day of year digits
-  const initialSum = dayOfYear.toString()
+  if (dayOfYear === 22 || dayOfYear === 220 || dayOfYear === 202) {
+    console.log("Special case: Secret number 22");
+    return 22;
+  }
+  
+  if (dayOfYear === 33 || dayOfYear === 330 || dayOfYear === 303) {
+    console.log("Special case: Secret number 33");
+    return 33;
+  }
+
+  // For all other days, reduce to single digit
+  const secretNumber = dayOfYear.toString()
     .split('')
     .reduce((sum, digit) => sum + parseInt(digit), 0);
     
-  console.log("Initial sum:", initialSum);
+  console.log("Initial sum:", secretNumber);
   
-  // Check if initial sum is a master number
-  if (MASTER_NUMBERS.includes(initialSum)) {
-    console.log("Found master number in initial sum:", initialSum);
-    return initialSum;
-  }
-  
-  // If not, reduce to single digit or until we find a master number
-  let currentSum = initialSum;
-  while (currentSum > 9) {
-    currentSum = currentSum.toString()
-      .split('')
-      .reduce((sum, digit) => sum + parseInt(digit), 0);
-    console.log("Reduced to:", currentSum);
-    
-    // Check if reduced sum is a master number
-    if (MASTER_NUMBERS.includes(currentSum)) {
-      console.log("Found master number after reduction:", currentSum);
-      return currentSum;
-    }
-  }
-  
-  console.log("Final number:", currentSum);
-  return currentSum;
+  // If not a special case, reduce to single digit
+  return reduceToSingleDigit(secretNumber);
 };
 
 export const getChineseZodiac = (year: number): string => {
