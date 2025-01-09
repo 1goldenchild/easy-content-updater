@@ -25,7 +25,7 @@ const CharacteristicsChart = ({ isVisible, lifePath = 1 }: CharacteristicsChartP
     >
       <div className="rounded-lg bg-white/5 border border-white/10">
         <ScrollArea className="w-full">
-          <div className="p-4 md:p-6 lg:p-8 max-w-[1400px] mx-auto">
+          <div className="p-4 md:p-6 lg:p-8 w-full max-w-[1800px] mx-auto">
             <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] mb-8">
               Numerological Characteristics
             </h3>
