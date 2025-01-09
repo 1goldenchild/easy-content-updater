@@ -1,23 +1,95 @@
 import { motion } from "framer-motion";
 import { Briefcase } from "lucide-react";
+import { useMemo } from "react";
 
 interface CareerCompatibilityProps {
   lifePath: string;
   isVisible: boolean;
 }
 
-const careerCompatibility: Record<string, { best: string[], worst: string[] }> = {
-  "7": {
-    best: ["Research Scientist", "Data Analyst", "Philosophy Professor", "Writer", "Software Engineer"],
-    worst: ["Sales Representative", "Public Relations", "Event Planner", "Real Estate Agent", "Performer"]
-  },
-  // Add more life paths if needed
+const allCareerPaths: Record<string, string[]> = {
+  "1": [
+    "CEO", "Coach", "Professional Athlete", "Secret Spy", "Military",
+    "Executive", "Lawyer", "Judge", "Construction", "Influencer"
+  ],
+  "2": [
+    "Doctor", "Charity Work", "Journalism", "Human Resources", "Veterinarian",
+    "Therapist", "Athlete", "Trainer", "Artist"
+  ],
+  "3": [
+    "Radio Host", "Sales", "Blogger", "Writer", "Podcaster",
+    "Actor", "Negotiator", "Therapist", "Artist", "Nomad Entrepreneur", "Comedian"
+  ],
+  "4": [
+    "Policeman", "Lawyer", "Firefighter", "CEO", "Construction Worker",
+    "Secret Spy", "Architect", "Military", "Detective", "Cybersecurity",
+    "Bodybuilder", "Politics", "Coach"
+  ],
+  "5": [
+    "Flight Attendant", "Pilot", "Internet Influencer", "YouTuber", "Model",
+    "Nomad Entrepreneur", "E-commerce", "Crypto", "Affiliate Marketing",
+    "Blogger", "Actor", "Freedom Fighter", "Truck Owner Operator", "Eco Researcher"
+  ],
+  "6": [
+    "Doctor", "Therapist", "Charity Work", "Investor", "Chef",
+    "Restaurant Owner", "CEO", "Child Care Provider", "Nurse"
+  ],
+  "7": [
+    "Scientist", "Preacher", "Inventor", "Programmer", "Astrophysicist",
+    "Rocket Scientist", "Teacher", "Researcher", "Doctor", "Philosopher",
+    "Cybersecurity", "Financial Analyst", "Systems Administrator"
+  ],
+  "8": [
+    "Banker", "Entrepreneur", "CEO", "Executive", "Insurance",
+    "E-commerce", "Investor", "Sergeant", "Construction Worker", "Pilot",
+    "Politics", "Preacher", "Scientist", "Judge", "Attorney", "Politician",
+    "Financial Analyst"
+  ],
+  "9": [
+    "Entrepreneur", "Philosopher", "Pilot", "Technology", "Crypto",
+    "E-commerce", "Detective", "Real Estate Developer", "Investor", "Executive",
+    "Cybersecurity", "Influencer", "Artist", "Astrophysicist", "Systems Administrator"
+  ],
+  "11": [
+    "Sales", "TV", "Social Media", "CEO", "Executive",
+    "Entrepreneur", "Philosopher", "Preacher", "Therapist", "Politics", "Influencer"
+  ],
+  "22": [
+    "Sergeant", "Owner Operator", "Architect", "Executive", "CEO",
+    "Construction Manager", "Real Estate Developer", "Engineer", "Bodybuilder", "Crypto"
+  ],
+  "33": [
+    "Inventor", "Teacher", "Sales", "CEO", "Artist",
+    "Singer", "Podcaster", "YouTuber", "Researcher", "E-commerce",
+    "Crypto", "Politics", "Influencer", "Trainer", "Preacher",
+    "Astrophysicist", "Financial Analyst", "Systems Administrator"
+  ]
+};
+
+const getRandomCareers = (careers: string[], count: number = 5): string[] => {
+  const shuffled = [...careers].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count);
 };
 
 const CareerCompatibility = ({ lifePath, isVisible }: CareerCompatibilityProps) => {
-  if (!isVisible || !careerCompatibility[lifePath]) return null;
+  const careers = useMemo(() => {
+    if (!allCareerPaths[lifePath]) return null;
+    
+    const allCareers = allCareerPaths[lifePath];
+    const recommended = getRandomCareers(allCareers, 5);
+    
+    // Get challenging careers from other life paths
+    const otherPaths = Object.keys(allCareerPaths).filter(path => path !== lifePath);
+    const randomPath = otherPaths[Math.floor(Math.random() * otherPaths.length)];
+    const challenging = getRandomCareers(allCareerPaths[randomPath], 5);
+    
+    return {
+      best: recommended,
+      worst: challenging
+    };
+  }, [lifePath]);
 
-  const compatibility = careerCompatibility[lifePath];
+  if (!isVisible || !careers) return null;
 
   return (
     <motion.div
@@ -49,7 +121,7 @@ const CareerCompatibility = ({ lifePath, isVisible }: CareerCompatibilityProps) 
               <h4 className="text-xl font-semibold text-green-400">Recommended Careers</h4>
             </div>
             <div className="space-y-3">
-              {compatibility.best.map((career, index) => (
+              {careers.best.map((career, index) => (
                 <motion.div
                   key={career}
                   initial={{ opacity: 0, x: -20 }}
@@ -81,7 +153,7 @@ const CareerCompatibility = ({ lifePath, isVisible }: CareerCompatibilityProps) 
               <h4 className="text-xl font-semibold text-red-400">Challenging Careers</h4>
             </div>
             <div className="space-y-3">
-              {compatibility.worst.map((career, index) => (
+              {careers.worst.map((career, index) => (
                 <motion.div
                   key={career}
                   initial={{ opacity: 0, x: 20 }}
