@@ -3,7 +3,6 @@ import SecretKnowledge from "@/components/home/SecretKnowledge"
 import Benefits from "@/components/home/Benefits"
 import CallToAction from "@/components/home/CallToAction"
 import SalesPitch from "@/components/home/SalesPitch"
-import ProgressIndicator from "@/components/numerology/ProgressIndicator"
 import Testimonials from "@/components/home/Testimonials"
 
 const Index = () => {
@@ -12,7 +11,6 @@ const Index = () => {
       <div id="hero">
         <Hero />
       </div>
-      <ProgressIndicator />
       <div id="benefits">
         <Benefits />
       </div>
@@ -29,7 +27,7 @@ const Index = () => {
         <CallToAction />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Index
+export default Index;
