@@ -71,7 +71,7 @@ const Portal = () => {
               animate={{ opacity: 1, y: 0 }}
               className="w-full bg-white/5 p-8 rounded-xl backdrop-blur-sm border border-white/10"
             >
-              <div className="text-center">
+              <div>
                 <h2 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
                   Portal Access
                 </h2>
@@ -141,7 +141,7 @@ const Portal = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Portal
+export default Portal;
