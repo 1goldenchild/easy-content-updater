@@ -38,7 +38,8 @@ const CollectInfoForm = () => {
 
       if (error) throw error;
 
-      const { error: functionError } = await supabase.functions.invoke(
+      // Schedule welcome email immediately
+      const { error: welcomeError } = await supabase.functions.invoke(
         "schedule-email",
         {
           body: {
@@ -52,8 +53,29 @@ const CollectInfoForm = () => {
         }
       );
 
-      if (functionError) {
-        console.error("Error scheduling email:", functionError);
+      if (welcomeError) {
+        console.error("Error scheduling welcome email:", welcomeError);
+      }
+
+      // Schedule preview email for 3 minutes later
+      const previewEmailTime = new Date(Date.now() + 3 * 60 * 1000).toISOString();
+      
+      const { error: previewError } = await supabase.functions.invoke(
+        "schedule-email",
+        {
+          body: {
+            type: "preview",
+            data: {
+              name: formData.name,
+              email: formData.email,
+              sendAt: previewEmailTime,
+            },
+          },
+        }
+      );
+
+      if (previewError) {
+        console.error("Error scheduling preview email:", previewError);
       }
 
       toast({
