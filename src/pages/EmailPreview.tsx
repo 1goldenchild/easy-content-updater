@@ -1,11 +1,11 @@
 import { getWelcomeTemplate } from "../../supabase/functions/send-styled-email/templates/welcome";
 import { getAnalysisTemplate } from "../../supabase/functions/send-styled-email/templates/analysis";
-import { getPreviewTemplate } from "../../supabase/functions/send-styled-email/templates/preview";
+import { previewTemplate } from "../../supabase/functions/send-styled-email/templates/preview";
 
 const EmailPreview = () => {
   const welcomeHtml = getWelcomeTemplate("Sarah Johnson");
   const analysisHtml = getAnalysisTemplate("Sarah Johnson", "1990-01-01");
-  const previewHtml = getPreviewTemplate({ name: "Sarah Johnson" });
+  const previewHtml = previewTemplate({ name: "Sarah Johnson" });
 
   return (
     <div className="container mx-auto p-4 space-y-8">
