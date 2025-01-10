@@ -1,9 +1,11 @@
 import { getWelcomeTemplate } from "../../supabase/functions/send-styled-email/templates/welcome";
 import { getAnalysisTemplate } from "../../supabase/functions/send-styled-email/templates/analysis";
+import { getPreviewTemplate } from "../../supabase/functions/send-styled-email/templates/preview";
 
 const EmailPreview = () => {
   const welcomeHtml = getWelcomeTemplate("Sarah Johnson");
   const analysisHtml = getAnalysisTemplate("Sarah Johnson", "1990-01-01");
+  const previewHtml = getPreviewTemplate({ name: "Sarah Johnson" });
 
   return (
     <div className="container mx-auto p-4 space-y-8">
@@ -23,6 +25,14 @@ const EmailPreview = () => {
           <div 
             className="border rounded-lg p-4 bg-[#1a1f2c]"
             dangerouslySetInnerHTML={{ __html: analysisHtml }} 
+          />
+        </div>
+
+        <div>
+          <h2 className="text-xl font-semibold mb-2">Preview Email</h2>
+          <div 
+            className="border rounded-lg p-4 bg-[#1a1f2c]"
+            dangerouslySetInnerHTML={{ __html: previewHtml }} 
           />
         </div>
       </div>
