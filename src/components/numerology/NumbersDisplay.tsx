@@ -6,12 +6,15 @@ interface NumbersDisplayProps {
 }
 
 const NumbersDisplay = ({ compatibilityData }: NumbersDisplayProps) => {
-  // Filter out the 'Love' category
-  const displayData = compatibilityData.filter(category => category.name !== 'Love');
+  // Sort the data to ensure consistent order
+  const sortedData = [...compatibilityData].sort((a, b) => {
+    const order = ['Love', 'Compatible', 'Neutral', 'Challenging'];
+    return order.indexOf(a.name) - order.indexOf(b.name);
+  });
   
   return (
     <div className="space-y-6">
-      {displayData.map((category, index) => (
+      {sortedData.map((category, index) => (
         <motion.div
           key={category.name}
           initial={{ opacity: 0, x: -20 }}
@@ -26,7 +29,7 @@ const NumbersDisplay = ({ compatibilityData }: NumbersDisplayProps) => {
             {category.name} Numbers
           </h4>
           <div className="flex flex-wrap gap-3">
-            {category.numbers.map((num) => (
+            {category.numbers.sort((a, b) => a - b).map((num) => (
               <motion.div
                 key={`${category.name}-${num}`}
                 whileHover={{ scale: 1.05 }}
