@@ -74,21 +74,21 @@ export const numerologyCompatibility: Record<number, CompatibilityData> = {
     compatible: [33, 22, 11, 5, 7],
     challenging: [9],
     loveCompatible: [5],
-    neutral: [1, 2, 3, 4, 6, 8, 10],
+    neutral: [1, 2, 3, 4, 6, 8, 10, 22, 33],
     loveDescription: "Your ideal romantic match is with Life Path 5. This brings excitement while maintaining spiritual depth."
   },
   22: {
     compatible: [33, 22, 11, 4],
     challenging: [9],
     loveCompatible: [6, 11, 3],
-    neutral: [1, 2, 5, 7, 8, 10],
+    neutral: [1, 2, 5, 7, 8, 10, 33],
     loveDescription: "Your strongest connections are with Life Paths 6, 11, and 3. These relationships amplify your spiritual potential."
   },
   33: {
     compatible: [33, 22, 11, 5, 6, 7],
     challenging: [9],
     loveCompatible: [33, 11],
-    neutral: [1, 2, 3, 4, 8, 10],
+    neutral: [1, 2, 3, 4, 8, 10, 22],
     loveDescription: "Your ideal matches are master numbers 33 and 11. These relationships focus on spiritual growth and service to humanity."
   }
 };
