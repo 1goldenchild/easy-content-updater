@@ -1,40 +1,34 @@
-import { getWelcomeTemplate } from "../../supabase/functions/send-styled-email/templates/welcome";
-import { getAnalysisTemplate } from "../../supabase/functions/send-styled-email/templates/analysis";
+import { welcomeTemplate } from "../../supabase/functions/send-styled-email/templates/welcome";
+import { analysisTemplate } from "../../supabase/functions/send-styled-email/templates/analysis";
 import { previewTemplate } from "../../supabase/functions/send-styled-email/templates/preview";
 
 const EmailPreview = () => {
-  const welcomeHtml = getWelcomeTemplate("Sarah Johnson");
-  const analysisHtml = getAnalysisTemplate("Sarah Johnson", "1990-01-01");
-  const previewHtml = previewTemplate({ name: "Sarah Johnson" });
+  const sampleUserData = {
+    name: "John Doe",
+    dateOfBirth: "1990-01-01"
+  };
 
   return (
     <div className="container mx-auto p-4 space-y-8">
-      <h1 className="text-2xl font-bold mb-4">Email Template Previews</h1>
-      
-      <div className="space-y-8">
-        <div>
-          <h2 className="text-xl font-semibold mb-2">Welcome Email</h2>
-          <div 
-            className="border rounded-lg p-4 bg-[#1a1f2c]"
-            dangerouslySetInnerHTML={{ __html: welcomeHtml }} 
-          />
-        </div>
+      <div className="space-y-4">
+        <h2 className="text-2xl font-bold">Welcome Email Template</h2>
+        <div className="border p-4 rounded-lg" 
+          dangerouslySetInnerHTML={{ __html: welcomeTemplate(sampleUserData) }} 
+        />
+      </div>
 
-        <div>
-          <h2 className="text-xl font-semibold mb-2">Analysis Email</h2>
-          <div 
-            className="border rounded-lg p-4 bg-[#1a1f2c]"
-            dangerouslySetInnerHTML={{ __html: analysisHtml }} 
-          />
-        </div>
+      <div className="space-y-4">
+        <h2 className="text-2xl font-bold">Analysis Email Template</h2>
+        <div className="border p-4 rounded-lg" 
+          dangerouslySetInnerHTML={{ __html: analysisTemplate(sampleUserData) }} 
+        />
+      </div>
 
-        <div>
-          <h2 className="text-xl font-semibold mb-2">Preview Email</h2>
-          <div 
-            className="border rounded-lg p-4 bg-[#1a1f2c]"
-            dangerouslySetInnerHTML={{ __html: previewHtml }} 
-          />
-        </div>
+      <div className="space-y-4">
+        <h2 className="text-2xl font-bold">Preview Email Template</h2>
+        <div className="border p-4 rounded-lg" 
+          dangerouslySetInnerHTML={{ __html: previewTemplate(sampleUserData) }} 
+        />
       </div>
     </div>
   );
