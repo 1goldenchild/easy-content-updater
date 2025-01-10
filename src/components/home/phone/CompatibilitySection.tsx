@@ -1,22 +1,15 @@
 import { motion } from "framer-motion";
-import { numerologyCompatibility } from "@/utils/numerologyCompatibility";
 
-interface CompatibilitySectionProps {
-  lifePath: number;
-}
-
-const CompatibilitySection = ({ lifePath }: CompatibilitySectionProps) => {
-  const compatibility = numerologyCompatibility[lifePath];
-
-  if (!compatibility) return null;
-
-  const { compatible, neutral, challenging, loveCompatible } = compatibility;
+const CompatibilitySection = () => {
+  const compatibleNumbers = [1, 5, 7, 11];
+  const neutralNumbers = [2, 3, 4, 22];
+  const challengingNumbers = [6, 8, 9, 33];
 
   // Calculate percentages for the donut chart
-  const total = compatible.length + neutral.length + challenging.length;
-  const compatiblePercentage = (compatible.length / total) * 100;
-  const neutralPercentage = (neutral.length / total) * 100;
-  const challengingPercentage = (challenging.length / total) * 100;
+  const total = compatibleNumbers.length + neutralNumbers.length + challengingNumbers.length;
+  const compatiblePercentage = (compatibleNumbers.length / total) * 100;
+  const neutralPercentage = (neutralNumbers.length / total) * 100;
+  const challengingPercentage = (challengingNumbers.length / total) * 100;
 
   return (
     <div id="compatibility" className="rounded-xl bg-gradient-to-br from-[#8B5CF6]/30 to-[#0EA5E9]/30 p-4">
@@ -107,7 +100,7 @@ const CompatibilitySection = ({ lifePath }: CompatibilitySectionProps) => {
             <span className="text-xs text-white/70">Compatible</span>
           </div>
           <div className="flex gap-2 flex-wrap">
-            {compatible.map((num) => (
+            {compatibleNumbers.map((num) => (
               <motion.div
                 key={num}
                 whileHover={{ scale: 1.05 }}
@@ -125,7 +118,7 @@ const CompatibilitySection = ({ lifePath }: CompatibilitySectionProps) => {
             <span className="text-xs text-white/70">Neutral</span>
           </div>
           <div className="flex gap-2 flex-wrap">
-            {neutral.map((num) => (
+            {neutralNumbers.map((num) => (
               <motion.div
                 key={num}
                 whileHover={{ scale: 1.05 }}
@@ -143,7 +136,7 @@ const CompatibilitySection = ({ lifePath }: CompatibilitySectionProps) => {
             <span className="text-xs text-white/70">Challenging</span>
           </div>
           <div className="flex gap-2 flex-wrap">
-            {challenging.map((num) => (
+            {challengingNumbers.map((num) => (
               <motion.div
                 key={num}
                 whileHover={{ scale: 1.05 }}

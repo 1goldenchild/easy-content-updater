@@ -56,7 +56,7 @@ const PhoneShowcase = () => {
       <div className="w-full space-y-6 p-4">
         <NumberSections />
         <CoreTraits />
-        <CompatibilitySection lifePath={lifePathNumber} />
+        <CompatibilitySection />
         <LoveCompatibility lifePathNumber={lifePathNumber} />
         <CareerPaths />
         <CountryCompatibility />
