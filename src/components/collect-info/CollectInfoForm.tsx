@@ -27,12 +27,11 @@ const CollectInfoForm = () => {
     setIsLoading(true);
 
     try {
-      const { error } = await supabase.from("user_readings").insert([
-        {
-          name: formData.name,
-          date_of_birth: date.toISOString().split('T')[0],
-        },
-      ]);
+      const { error } = await supabase.from("user_readings").insert({
+        name: formData.name,
+        email: `temp_${Date.now()}@example.com`, // Temporary email to satisfy DB requirements
+        date_of_birth: date.toISOString().split('T')[0],
+      });
 
       if (error) throw error;
 
