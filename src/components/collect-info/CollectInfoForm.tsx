@@ -11,7 +11,6 @@ const CollectInfoForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
   });
   const [date, setDate] = useState<Date>();
 
@@ -31,7 +30,6 @@ const CollectInfoForm = () => {
       const { error } = await supabase.from("user_readings").insert([
         {
           name: formData.name,
-          email: formData.email,
           date_of_birth: date.toISOString().split('T')[0],
         },
       ]);
@@ -82,26 +80,6 @@ const CollectInfoForm = () => {
             }
             className="w-full"
             placeholder="Enter your full name"
-          />
-        </div>
-
-        <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-white/70 mb-2"
-          >
-            Email
-          </label>
-          <Input
-            id="email"
-            type="email"
-            required
-            value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
-            className="w-full"
-            placeholder="Enter your email"
           />
         </div>
 
