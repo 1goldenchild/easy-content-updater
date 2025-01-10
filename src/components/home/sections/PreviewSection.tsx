@@ -90,7 +90,7 @@ const PreviewSection = () => {
             className="relative bg-gradient-to-r from-[#1A1508] via-[#2A2311] to-[#1A1508] hover:from-[#2A2311] hover:via-[#3B3015] hover:to-[#2A2311] text-amber-200/90 font-semibold shadow-[0_0_15px_rgba(251,191,36,0.1)] transition-all duration-500 hover:shadow-[0_0_20px_rgba(251,191,36,0.2)] border border-amber-900/30 rounded-md overflow-hidden"
           >
             <span className="relative z-10 flex items-center">
-              Unlock Your Reading
+              Unlock Your Analysis
               <motion.span
                 animate={{ x: [0, 4, 0] }}
                 transition={{ repeat: Infinity, duration: 1.5 }}
