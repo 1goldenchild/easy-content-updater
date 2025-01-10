@@ -4,6 +4,7 @@ import Footer from "@/components/layout/Footer"
 import Index from "@/pages/Index"
 import Sales from "@/pages/Sales"
 import CollectInfo from "@/pages/CollectInfo"
+import EmailPreview from "@/pages/EmailPreview"
 import Portal from "@/pages/Portal"
 import Terms from "@/pages/Terms"
 import Privacy from "@/pages/Privacy"
@@ -21,6 +22,7 @@ const App = () => {
             <Route path="/numerology-reading" element={<Index />} />
             <Route path="/sales" element={<Sales />} />
             <Route path="/collect-info" element={<CollectInfo />} />
+            <Route path="/email-preview" element={<EmailPreview />} />
             <Route path="/portal" element={<Portal />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />

@@ -11,6 +11,7 @@ const CollectInfoForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
+    email: "",
   });
   const [date, setDate] = useState<Date>();
 
@@ -27,13 +28,55 @@ const CollectInfoForm = () => {
     setIsLoading(true);
 
     try {
-      const { error } = await supabase.from("user_readings").insert({
-        name: formData.name,
-        email: `temp_${Date.now()}@example.com`, // Temporary email to satisfy DB requirements
-        date_of_birth: date.toISOString().split('T')[0],
-      });
+      const { error } = await supabase.from("user_readings").insert([
+        {
+          name: formData.name,
+          email: formData.email,
+          date_of_birth: date.toISOString().split('T')[0],
+        },
+      ]);
 
       if (error) throw error;
+
+      // Schedule welcome email immediately
+      const { error: welcomeError } = await supabase.functions.invoke(
+        "schedule-email",
+        {
+          body: {
+            type: "welcome",
+            data: {
+              name: formData.name,
+              email: formData.email,
+              dateOfBirth: date.toISOString().split('T')[0],
+            },
+          },
+        }
+      );
+
+      if (welcomeError) {
+        console.error("Error scheduling welcome email:", welcomeError);
+      }
+
+      // Schedule preview email for 3 minutes later
+      const previewEmailTime = new Date(Date.now() + 3 * 60 * 1000).toISOString();
+      
+      const { error: previewError } = await supabase.functions.invoke(
+        "schedule-email",
+        {
+          body: {
+            type: "preview",
+            data: {
+              name: formData.name,
+              email: formData.email,
+              sendAt: previewEmailTime,
+            },
+          },
+        }
+      );
+
+      if (previewError) {
+        console.error("Error scheduling preview email:", previewError);
+      }
 
       toast({
         title: "Success!",
@@ -79,6 +122,26 @@ const CollectInfoForm = () => {
             }
             className="w-full"
             placeholder="Enter your full name"
+          />
+        </div>
+
+        <div>
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-white/70 mb-2"
+          >
+            Email
+          </label>
+          <Input
+            id="email"
+            type="email"
+            required
+            value={formData.email}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
+            className="w-full"
+            placeholder="Enter your email"
           />
         </div>
 
