@@ -1,5 +1,5 @@
-import { welcomeTemplate } from "../../supabase/functions/send-styled-email/templates/welcome";
-import { analysisTemplate } from "../../supabase/functions/send-styled-email/templates/analysis";
+import { getWelcomeTemplate } from "../../supabase/functions/send-styled-email/templates/welcome";
+import { getAnalysisTemplate } from "../../supabase/functions/send-styled-email/templates/analysis";
 import { previewTemplate } from "../../supabase/functions/send-styled-email/templates/preview";
 
 const EmailPreview = () => {
@@ -13,14 +13,14 @@ const EmailPreview = () => {
       <div className="space-y-4">
         <h2 className="text-2xl font-bold">Welcome Email Template</h2>
         <div className="border p-4 rounded-lg" 
-          dangerouslySetInnerHTML={{ __html: welcomeTemplate(sampleUserData) }} 
+          dangerouslySetInnerHTML={{ __html: getWelcomeTemplate(sampleUserData.name) }} 
         />
       </div>
 
       <div className="space-y-4">
         <h2 className="text-2xl font-bold">Analysis Email Template</h2>
         <div className="border p-4 rounded-lg" 
-          dangerouslySetInnerHTML={{ __html: analysisTemplate(sampleUserData) }} 
+          dangerouslySetInnerHTML={{ __html: getAnalysisTemplate(sampleUserData.name, sampleUserData.dateOfBirth) }} 
         />
       </div>
 
