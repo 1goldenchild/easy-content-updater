@@ -41,9 +41,9 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
           className="flex flex-col items-center space-y-4 text-center relative z-10"
         >
-          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none bg-gradient-to-r from-white via-[#534363] to-white bg-[length:200%_auto] animate-shine bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none bg-gradient-to-r from-white via-amber-200 to-white bg-[length:200%_auto] animate-shine bg-clip-text text-transparent">
             Reach the next level with{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#534363] to-[#534363]/80">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-200 to-amber-400">
               Numerology
             </span>
           </h1>
@@ -51,17 +51,17 @@ const Hero = () => {
             Discover the secrets the 1% and elite class have kept hidden—and how this powerful knowledge can transform your life, enhance your relationships, and even elevate your finances.
           </p>
           <div className="w-full max-w-[280px] relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-[#2A2311] via-[#3B3015] to-[#2A2311] rounded-md blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+            <div className="absolute -inset-1 bg-gradient-to-r from-[#534363] via-[#534363] to-[#534363] rounded-md blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
             <Link to="/collect-info" className="w-full block relative">
               <Button 
                 size="lg" 
-                className="w-full bg-gradient-to-r from-[#1A1508] via-[#2A2311] to-[#1A1508] hover:from-[#2A2311] hover:via-[#3B3015] hover:to-[#2A2311] text-[#534363] font-semibold shadow-[0_0_15px_rgba(83,67,99,0.1)] transition-all duration-500 bg-[length:200%_auto] hover:bg-right-top hover:shadow-[0_0_20px_rgba(83,67,99,0.2)] border border-[#534363]/30 rounded-md relative overflow-hidden"
+                className="w-full bg-gradient-to-r from-[#534363] via-[#534363] to-[#534363] hover:from-[#534363] hover:via-[#534363] hover:to-[#534363] text-amber-200/90 font-semibold shadow-[0_0_15px_rgba(251,191,36,0.1)] transition-all duration-500 bg-[length:200%_auto] hover:bg-right-top hover:shadow-[0_0_20px_rgba(251,191,36,0.2)] border border-amber-900/30 rounded-md relative overflow-hidden"
               >
                 <span className="relative z-10 flex items-center">
                   Get Started
                   <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#534363]/10 to-transparent translate-x-[-200%] animate-shimmer" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-900/10 to-transparent translate-x-[-200%] animate-shimmer" />
               </Button>
             </Link>
           </div>
