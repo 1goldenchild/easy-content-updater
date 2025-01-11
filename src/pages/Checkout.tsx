@@ -111,22 +111,28 @@ const Checkout = () => {
               <div className="absolute left-1/4 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-purple-500/10 blur-3xl" />
             </div>
             
-            {/* Main heading with animated gradient border */}
-            <motion.div
-              initial={{ scale: 0.95 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="relative"
-            >
-              <h1 className="text-4xl font-bold inline-block relative p-1">
-                <span className="relative z-10 bg-gradient-to-r from-amber-200 via-amber-300 to-amber-200 bg-clip-text text-transparent">
-                  Complete Your Order
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-amber-200/50 via-amber-300/50 to-amber-200/50 blur-lg opacity-50 animate-pulse" />
-              </h1>
-            </motion.div>
+            {/* New design for main heading */}
+            <div className="relative">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="relative z-10"
+              >
+                <h1 className="text-4xl font-bold">
+                  <span className="relative inline-block">
+                    <span className="relative z-10 px-8 py-2 rounded-lg bg-gradient-to-br from-amber-200/20 to-purple-500/20 backdrop-blur-sm border border-amber-200/30">
+                      <span className="bg-gradient-to-r from-amber-100 via-amber-300 to-amber-100 bg-clip-text text-transparent animate-shine">
+                        Complete Your Order
+                      </span>
+                    </span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-amber-200/20 to-purple-500/20 blur-xl opacity-50 rounded-lg transform scale-110" />
+                  </span>
+                </h1>
+              </motion.div>
+            </div>
 
-            {/* Subtitle with floating animation */}
+            {/* Updated subtitle with new text */}
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -135,25 +141,9 @@ const Checkout = () => {
             >
               <span className="relative z-10 px-6 py-2 rounded-full bg-gradient-to-r from-purple-900/20 via-purple-800/20 to-purple-900/20 backdrop-blur-sm border border-purple-500/20">
                 <span className="bg-gradient-to-r from-amber-100 via-amber-200 to-amber-100 bg-clip-text text-transparent">
-                  You're just moments away from unlocking your numerological destiny
+                  You're just moments away from discovering your numerological DNA
                 </span>
               </span>
-              
-              {/* Floating stars decoration */}
-              <motion.span
-                className="absolute -right-4 -top-4 text-amber-200"
-                animate={{ y: [-4, 4, -4], rotate: [0, 15, 0] }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                ✨
-              </motion.span>
-              <motion.span
-                className="absolute -left-4 -bottom-4 text-amber-200"
-                animate={{ y: [4, -4, 4], rotate: [0, -15, 0] }}
-                transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
-              >
-                ✨
-              </motion.span>
             </motion.p>
           </div>
 
