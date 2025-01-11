@@ -4,34 +4,36 @@ import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
 
 const Hero = () => {
+  // Lighter purple shades (15% lighter)
   const purpleShades = [
-    '#9b87f5',
-    '#7E69AB',
-    '#6E59A5',
-    '#D6BCFA',
-    '#E5DEFF',
-    '#8B5CF6',
+    '#b09df7',
+    '#9580bd',
+    '#8570b7',
+    '#deccfb',
+    '#eae5ff',
+    '#a173f7',
   ];
 
+  // Lighter gold shades (15% lighter)
   const goldShades = [
-    '#FFD700',
-    '#FFC125',
-    '#FFB90F',
-    '#DAA520',
-    '#B8860B',
-    '#CD950C',
+    '#ffdf33',
+    '#ffcd51',
+    '#ffc642',
+    '#e1b449',
+    '#c49d39',
+    '#d4aa3d',
   ];
 
   return (
     <section className="relative min-h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden">
       {/* Stars Background - Purple Stars */}
       <div className="absolute inset-0 z-0 will-change-transform" style={{ transform: 'translateZ(0)' }}>
-        {[...Array(75)].map((_, i) => {
+        {[...Array(90)].map((_, i) => {
           const color = purpleShades[Math.floor(Math.random() * purpleShades.length)];
           return (
             <div
               key={`purple-${i}`}
-              className="absolute w-0.5 h-0.5 rounded-full animate-twinkle will-change-transform"
+              className="absolute w-[0.375px] h-[0.375px] rounded-full animate-twinkle will-change-transform"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -45,12 +47,12 @@ const Hero = () => {
           );
         })}
         {/* Golden Stars */}
-        {[...Array(75)].map((_, i) => {
+        {[...Array(90)].map((_, i) => {
           const color = goldShades[Math.floor(Math.random() * goldShades.length)];
           return (
             <div
               key={`gold-${i}`}
-              className="absolute w-0.5 h-0.5 rounded-full animate-twinkle will-change-transform"
+              className="absolute w-[0.375px] h-[0.375px] rounded-full animate-twinkle will-change-transform"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
