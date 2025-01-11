@@ -3,17 +3,17 @@ import { motion } from "framer-motion";
 const BenefitsHeader = () => {
   return (
     <div className="text-center mb-8 md:mb-12">
-      <div className="relative py-12 md:py-16">
+      <div className="relative py-12 md:py-16 overflow-hidden">
         {/* Background with theme-consistent gradients */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-black/90" />
+          <div className="absolute inset-0 bg-black/90 rounded-lg" />
           {/* Further constrained the gradient and adjusted its spread */}
           <div className="absolute inset-x-[20%] top-[10%] bottom-[10%] bg-[radial-gradient(circle_at_center,rgba(251,191,36,0.1)_0%,rgba(0,0,0,0)_60%)]" />
         </div>
 
         {/* Shimmer effect */}
         <motion.div 
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-500/10 to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-500/10 to-transparent rounded-lg"
           initial={{ x: '-100%' }}
           animate={{ x: '100%' }}
           transition={{ 
