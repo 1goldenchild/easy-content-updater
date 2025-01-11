@@ -9,12 +9,14 @@ import { loadStripe } from "@stripe/stripe-js"
 import StripeElements from "@/components/checkout/StripeElements"
 import { toast } from "sonner"
 import { supabase } from "@/integrations/supabase/client"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 // Initialize Stripe with the publishable key
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '')
 console.log('Stripe initialization:', import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY ? 'Key present' : 'Key missing')
 
 const Checkout = () => {
+  const isMobile = useIsMobile()
   const [isProcessing, setIsProcessing] = useState(false)
   const [selectedPackage, setSelectedPackage] = useState("supreme")
   const [isVip, setIsVip] = useState(false)
@@ -102,16 +104,16 @@ const Checkout = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="space-y-8"
+          className="space-y-12 sm:space-y-16" // Increased spacing between elements
         >
-          <div className="text-center space-y-6 relative">
+          <div className="text-center space-y-8 sm:space-y-10 relative"> {/* Increased spacing for mobile */}
             {/* Decorative elements */}
             <div className="absolute inset-0 -z-10 overflow-hidden">
               <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-amber-500/10 blur-3xl" />
               <div className="absolute left-1/4 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-purple-500/10 blur-3xl" />
             </div>
             
-            {/* New design for main heading */}
+            {/* New design for main heading - mobile optimized */}
             <div className="relative">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -119,10 +121,10 @@ const Checkout = () => {
                 transition={{ duration: 0.5 }}
                 className="relative z-10"
               >
-                <h1 className="text-4xl font-bold">
+                <h1 className={`${isMobile ? 'text-3xl' : 'text-4xl'} font-bold px-4`}>
                   <span className="relative inline-block">
-                    <span className="relative z-10 px-8 py-2 rounded-lg bg-gradient-to-br from-amber-200/20 to-purple-500/20 backdrop-blur-sm border border-amber-200/30">
-                      <span className="bg-gradient-to-r from-amber-100 via-amber-300 to-amber-100 bg-clip-text text-transparent animate-shine">
+                    <span className="relative z-10 px-6 sm:px-8 py-2 rounded-lg bg-gradient-to-br from-amber-200/20 to-purple-500/20 backdrop-blur-sm border border-amber-200/30">
+                      <span className="bg-gradient-to-r from-amber-100 via-amber-300 to-amber-100 bg-clip-text text-transparent animate-shine whitespace-nowrap">
                         Complete Your Order
                       </span>
                     </span>
@@ -132,22 +134,22 @@ const Checkout = () => {
               </motion.div>
             </div>
 
-            {/* Updated subtitle with new text */}
+            {/* Updated subtitle with new text and DNA emoji - mobile optimized */}
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-lg relative inline-block"
+              className={`${isMobile ? 'text-base px-2' : 'text-lg px-4'} relative inline-block`}
             >
-              <span className="relative z-10 px-6 py-2 rounded-full bg-gradient-to-r from-purple-900/20 via-purple-800/20 to-purple-900/20 backdrop-blur-sm border border-purple-500/20">
-                <span className="bg-gradient-to-r from-amber-100 via-amber-200 to-amber-100 bg-clip-text text-transparent">
-                  You're just moments away from discovering your numerological DNA
+              <span className="relative z-10 px-4 sm:px-6 py-2 rounded-full bg-gradient-to-r from-purple-900/20 via-purple-800/20 to-purple-900/20 backdrop-blur-sm border border-purple-500/20">
+                <span className="bg-gradient-to-r from-amber-100 via-amber-200 to-amber-100 bg-clip-text text-transparent whitespace-normal">
+                  You're just moments away from discovering your numerological DNA 🧬
                 </span>
               </span>
             </motion.p>
           </div>
 
-          <div className="space-y-6 bg-[#1A1508]/30 p-6 rounded-lg border border-amber-900/30 shadow-[0_0_15px_rgba(251,191,36,0.1)]">
+          <div className="space-y-6 bg-[#1A1508]/30 p-4 sm:p-6 rounded-lg border border-amber-900/30 shadow-[0_0_15px_rgba(251,191,36,0.1)]">
             <PackageSelection
               selectedPackage={selectedPackage}
               onPackageChange={setSelectedPackage}
