@@ -52,9 +52,9 @@ const Hero = () => {
             <Link to="/collect-info" className="w-full block relative">
               <Button 
                 size="lg" 
-                className="w-full bg-gradient-to-br from-[#615b52] to-[#534463] bg-[length:300%_300%] bg-[100%_100%] text-[#E5DDB2] font-medium px-8 py-6 text-lg h-auto rounded-2xl shadow-lg transition-all duration-300 border border-[#efe5bc]/20 hover:border-[#efe5bc]/30 hover:shadow-xl"
+                className="w-full bg-gradient-to-br from-[#615b52] to-[#534463] bg-[length:300%_300%] bg-[100%_100%] text-[#E5DDB2] font-medium px-8 py-6 text-lg h-auto rounded-2xl shadow-lg transition-all duration-300 border border-[#8f8164]/20 hover:border-[#8f8164]/30 hover:shadow-xl"
                 style={{
-                  backgroundImage: 'linear-gradient(135deg, #615b52 15%, #534463 85%)'
+                  backgroundImage: 'linear-gradient(135deg, #615b52 35%, #534463 65%)'
                 }}
               >
                 <span className="relative z-10 flex items-center">
