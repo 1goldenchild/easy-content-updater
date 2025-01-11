@@ -67,9 +67,9 @@ const Benefits = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-6 relative">
           {benefits.map((benefit, index) => {
-            // Reduce the stagger delay between cards
-            const startTrigger = 0.1 + (index * 0.08); // Reduced from 0.2 + (index * 0.15)
-            const endTrigger = startTrigger + 0.1;
+            // Increase the delay between cards and start later in the scroll
+            const startTrigger = 0.3 + (index * 0.12); // Increased from 0.1 + (index * 0.08)
+            const endTrigger = startTrigger + 0.15; // Increased animation window
 
             const cardProgress = useTransform(
               scrollYProgress,
