@@ -79,12 +79,12 @@ const SecretKnowledge = () => {
                     For centuries, this powerful knowledge was hidden—reserved only for the world's wealthiest and most successful individuals. Kept secret under NDAs and passed down to a privileged few, it gave them a competitive edge that most could never access.
                   </p>
                   <div className="h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />
-                  <p className="text-lg text-white/90 leading-relaxed">
+                  <p className="text-lg leading-relaxed" style={{ color: '#9b87f5' }}>
                     Now, that same exclusive knowledge is available to you.
                   </p>
                   <div className="h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />
-                  <p className="text-lg text-white/90 leading-relaxed">
-                    Unlock the secrets that have shaped the fortunes of the elite. Gain the insights that have been guarded for generations—and use them to transform your life, accelerate your success, and create the future you've always desired.
+                  <p className="text-lg leading-relaxed" style={{ color: '#F1F0FB' }}>
+                    Discover how numerology can revolutionize your understanding of yourself and the world, and unlock its transformative benefits.
                   </p>
                 </div>
               </div>
