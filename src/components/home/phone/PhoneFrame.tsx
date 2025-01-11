@@ -37,13 +37,17 @@ const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProp
         <PreviewOverlay />
         
         {/* Dynamic Island */}
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-[84px] h-[25px] bg-black rounded-[20px] z-20 flex items-center justify-center">
-          <div className="w-[60px] h-[16px] bg-black rounded-[20px] relative" />
-        </div>
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-[84px] h-[25px] bg-black rounded-[20px] z-20" />
         
-        {/* Screen Content */}
-        <div className="absolute inset-0 overflow-y-auto overflow-x-hidden scrollbar-hide">
-          {children}
+        {/* Screen Content with Scroll Container */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 overflow-y-auto overflow-x-hidden scrollbar-hide scroll-smooth">
+            <div className="relative min-h-full">
+              <div className="pt-12 pb-12">
+                {children}
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Frosted Glass Overlay */}
