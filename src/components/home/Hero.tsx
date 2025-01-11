@@ -50,11 +50,10 @@ const Hero = () => {
             Discover the secrets the 1% and elite class have kept hidden—and how this powerful knowledge can transform your life, enhance your relationships, and even elevate your finances.
           </p>
           <div className="w-full max-w-[280px] relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/20 via-purple-600/20 to-purple-500/20 rounded-md blur-xl opacity-75 group-hover:opacity-100 transition duration-300"></div>
+            <div className="absolute -inset-1 bg-gradient-to-r from-amber-200/20 via-purple-500/20 to-amber-200/20 rounded-md blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
             <Link to="/collect-info" className="w-full block relative">
               <Button 
-                variant="gradient"
-                className="w-full relative z-10 font-semibold text-base"
+                className="relative px-4 sm:px-8 py-2 rounded-lg bg-gradient-to-br from-amber-200/20 to-purple-500/20 backdrop-blur-sm border border-amber-200/30 text-amber-100 hover:text-amber-50 transition-colors overflow-hidden w-full"
               >
                 <span className="relative z-10 flex items-center">
                   Get Started
