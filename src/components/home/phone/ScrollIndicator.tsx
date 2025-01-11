@@ -12,7 +12,7 @@ const ScrollIndicator = ({ hasScrolled }: ScrollIndicatorProps) => {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 10 }}
-      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none"
+      className="absolute top-1/2 left-[45%] transform -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none"
     >
       <motion.div
         animate={{ y: [0, 12, 0] }}
@@ -26,7 +26,7 @@ const ScrollIndicator = ({ hasScrolled }: ScrollIndicatorProps) => {
         <motion.img 
           src="/lovable-uploads/a48b0ec0-c027-4d4a-a992-435a3c309b00.png"
           alt="Scroll gesture"
-          className="w-16 h-16"
+          className="w-20 h-20"
           animate={{ y: [0, 8, 0] }}
           transition={{
             duration: 1.5,
