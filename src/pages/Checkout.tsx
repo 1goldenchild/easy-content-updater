@@ -95,34 +95,42 @@ const Checkout = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#1A1508] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="space-y-8"
         >
-          <div className="text-center">
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-amber-200 via-amber-300 to-amber-200 bg-clip-text text-transparent">
+          <div className="text-center relative">
+            <div className="absolute inset-0 flex items-center justify-center -z-10 opacity-20">
+              <div className="w-96 h-96 bg-gradient-to-r from-amber-200 via-purple-500 to-amber-200 rounded-full blur-3xl" />
+            </div>
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-amber-200 via-amber-300 to-amber-200 bg-clip-text text-transparent">
               Complete Your Order
             </h1>
-            <p className="mt-2 text-gray-400">
+            <p className="mt-2 text-gray-400 text-lg">
               You're just moments away from unlocking your numerological destiny
             </p>
           </div>
 
-          <div className="space-y-6 bg-[#1A1508]/30 p-6 rounded-lg border border-amber-900/30 shadow-[0_0_15px_rgba(251,191,36,0.1)]">
-            <PackageSelection
-              selectedPackage={selectedPackage}
-              onPackageChange={setSelectedPackage}
-            />
+          <div className="space-y-6 bg-[#1A1508]/30 p-8 rounded-xl border border-amber-900/30 shadow-[0_0_25px_rgba(251,191,36,0.15)] backdrop-blur-sm">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-amber-500/5 to-purple-500/5 rounded-xl" />
+              <PackageSelection
+                selectedPackage={selectedPackage}
+                onPackageChange={setSelectedPackage}
+              />
+            </div>
 
-            <VIPOption
-              isVip={isVip}
-              onVipChange={setIsVip}
-            />
+            <div className="relative mt-8">
+              <VIPOption
+                isVip={isVip}
+                onVipChange={setIsVip}
+              />
+            </div>
 
-            <div className="pt-6 border-t border-gray-700">
+            <div className="pt-8 border-t border-amber-900/20">
               <ContactInfo
                 firstName={formData.firstName}
                 lastName={formData.lastName}
@@ -131,7 +139,7 @@ const Checkout = () => {
               />
             </div>
 
-            <div className="pt-6 border-t border-gray-700">
+            <div className="pt-8 border-t border-amber-900/20">
               <BillingInfo
                 address={formData.address}
                 apartment={formData.apartment}
@@ -143,20 +151,24 @@ const Checkout = () => {
               />
             </div>
 
-            <div className="pt-6 border-t border-gray-700">
-              <h2 className="text-lg font-semibold mb-4 text-gray-200">PAYMENT INFORMATION</h2>
-              <Elements stripe={stripePromise}>
-                <StripeElements
-                  onSubmit={handleSubmit}
-                  isProcessing={isProcessing}
-                />
-              </Elements>
+            <div className="pt-8 border-t border-amber-900/20">
+              <h2 className="text-xl font-semibold mb-6 text-amber-200">PAYMENT INFORMATION</h2>
+              <div className="bg-[#2A1F1D] rounded-xl p-6 shadow-lg border border-amber-900/30">
+                <Elements stripe={stripePromise}>
+                  <StripeElements
+                    onSubmit={handleSubmit}
+                    isProcessing={isProcessing}
+                  />
+                </Elements>
+              </div>
             </div>
 
-            <div className="pt-6 border-t border-gray-700">
-              <div className="flex justify-between items-center text-lg">
-                <span className="text-gray-300">Total:</span>
-                <span className="font-bold text-amber-200">${calculateTotal().toFixed(2)}</span>
+            <div className="pt-8 border-t border-amber-900/20">
+              <div className="flex justify-between items-center text-xl p-4 bg-gradient-to-r from-purple-500/10 via-amber-500/10 to-purple-500/10 rounded-xl">
+                <span className="text-amber-100">Total:</span>
+                <span className="font-bold text-2xl bg-gradient-to-r from-amber-200 via-amber-300 to-amber-200 bg-clip-text text-transparent">
+                  ${calculateTotal().toFixed(2)}
+                </span>
               </div>
             </div>
           </div>
