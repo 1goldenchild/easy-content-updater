@@ -142,7 +142,7 @@ const Checkout = () => {
               className="flex justify-center px-2 sm:px-4"
             >
               <p className={`${isMobile ? 'text-xs sm:text-sm max-w-[300px] sm:max-w-none' : 'text-base'} relative inline-block`}>
-                <span className="relative z-10 px-3 sm:px-6 py-2 rounded-full bg-gradient-to-r from-purple-900/20 via-purple-800/20 to-purple-900/20 backdrop-blur-sm border border-purple-500/20">
+                <span className="relative z-10">
                   <span className="bg-gradient-to-r from-amber-100 via-amber-200 to-amber-100 bg-clip-text text-transparent">
                     Moments away from discovering your numerological DNA 🧬
                   </span>
@@ -200,6 +200,7 @@ const Checkout = () => {
               </div>
             </div>
           </div>
+
         </motion.div>
       </div>
     </div>
