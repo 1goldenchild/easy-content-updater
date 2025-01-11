@@ -12,6 +12,7 @@ export const scrollToTop = () => {
 const CallToAction = () => {
   const navigate = useNavigate();
 
+  // Handle navigation with scroll reset
   const handleNavigate = () => {
     navigate('/collect-info');
     scrollToTop();
@@ -98,10 +99,9 @@ const CallToAction = () => {
                 <Button 
                   onClick={handleNavigate}
                   size="lg" 
-                  className="w-full px-8 py-3 rounded-lg bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#8B5CF6] bg-[length:200%_auto] text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] border border-purple-500/20 relative overflow-hidden group"
+                  className="w-full relative bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold text-base md:text-lg shadow-xl hover:shadow-2xl transition-all duration-200"
                 >
-                  <span className="relative z-10">Get Your Numerology Analysis</span>
-                  <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 animate-shine" />
+                  Get Your Personalized Analysis
                 </Button>
               </div>
             </div>

@@ -22,8 +22,16 @@ const CTAButton = ({ onClick, text, icon = "arrow" }: CTAButtonProps) => {
           <Sparkles className="w-5 h-5 transition-transform group-hover:rotate-12" />
         )}
       </span>
-      <div 
-        className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 animate-shine"
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-br from-amber-200/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity"
+        animate={{
+          backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          ease: "linear"
+        }}
       />
     </Button>
   );

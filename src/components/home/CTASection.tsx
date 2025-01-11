@@ -104,10 +104,21 @@ const CTASection = () => {
         <Button
           onClick={handleGetStarted}
           size="lg"
-          className="px-8 py-3 rounded-lg bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#8B5CF6] bg-[length:200%_auto] text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] border border-purple-500/20 relative overflow-hidden group"
+          className="bg-gradient-to-r from-[#0466c8] to-[#023e8a] hover:from-[#0353a4] hover:to-[#012a70] text-white font-semibold px-8 py-6 text-lg h-auto relative overflow-hidden group"
         >
-          <span className="relative z-10">Unlock Your Analysis</span>
-          <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 animate-shine" />
+          <span className="relative z-10">Start Your Analysis</span>
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+            animate={{
+              x: ['-100%', '200%'],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "linear",
+              repeatDelay: 1
+            }}
+          />
         </Button>
       </div>
     </motion.div>
