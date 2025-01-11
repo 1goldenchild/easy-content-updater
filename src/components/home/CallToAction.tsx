@@ -90,16 +90,19 @@ const CallToAction = () => {
             </p>
 
             <div className="flex justify-center">
+
               <div className="w-full max-w-[280px] relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/20 via-purple-600/20 to-purple-500/20 rounded-md blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
                 <Button 
                   onClick={handleNavigate}
-                  className="w-full block relative px-4 sm:px-8 py-2 rounded-lg bg-gradient-to-br from-amber-200/20 to-purple-500/20 backdrop-blur-sm border border-amber-200/30 text-amber-100 hover:text-amber-50 transition-colors"
+                  variant="gradient"
+                  className="w-full"
                 >
                   <span className="relative z-10">Get Your Personalized Analysis</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] animate-shimmer" />
                 </Button>
               </div>
+
             </div>
           </div>
           
@@ -155,3 +158,4 @@ const CallToAction = () => {
 }
 
 export default CallToAction
+
