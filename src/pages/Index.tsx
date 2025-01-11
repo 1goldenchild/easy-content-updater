@@ -1,7 +1,6 @@
 import Hero from "@/components/home/Hero"
 import SecretKnowledge from "@/components/home/SecretKnowledge"
 import Benefits from "@/components/home/Benefits"
-import CallToAction from "@/components/home/CallToAction"
 import SalesPitch from "@/components/home/SalesPitch"
 import Testimonials from "@/components/home/Testimonials"
 
@@ -22,9 +21,6 @@ const Index = () => {
       </div>
       <div id="knowledge">
         <SecretKnowledge />
-      </div>
-      <div id="cta">
-        <CallToAction />
       </div>
     </div>
   );
