@@ -45,7 +45,7 @@ const MainContentSection = () => {
             className="relative bg-gradient-to-r from-[#1A1508] via-[#2A2311] to-[#1A1508] hover:from-[#2A2311] hover:via-[#3B3015] hover:to-[#2A2311] text-amber-200/90 font-semibold shadow-[0_0_15px_rgba(251,191,36,0.1)] transition-all duration-500 hover:shadow-[0_0_20px_rgba(251,191,36,0.2)] border border-amber-900/30 rounded-md overflow-hidden"
           >
             <span className="relative z-10 flex items-center gap-2">
-              Start Your Journey Now
+              Get Your Analysis
               <Sparkles className="w-4 h-4" />
             </span>
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-900/10 to-transparent translate-x-[-200%] animate-shimmer" />
@@ -56,4 +56,4 @@ const MainContentSection = () => {
   );
 };
 
-export default MainContentSection;
+export default MainContentSection
