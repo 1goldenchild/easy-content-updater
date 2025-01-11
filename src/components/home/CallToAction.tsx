@@ -21,41 +21,7 @@ const CallToAction = () => {
   return (
     <section className="py-12 md:py-20 relative overflow-hidden">
       {/* Stars Background */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[#1A1F2C]">
-          <svg className="w-full h-full opacity-70" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <radialGradient id="starGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                <stop offset="0%" stopColor="white" stopOpacity="0.3" />
-                <stop offset="100%" stopColor="transparent" stopOpacity="0" />
-              </radialGradient>
-            </defs>
-            {[...Array(100)].map((_, i) => {
-              const size = Math.random() * 2 + 1;
-              const x = Math.random() * 100;
-              const y = Math.random() * 100;
-              const delay = Math.random() * 3;
-              const duration = Math.random() * 3 + 2;
-              
-              return (
-                <circle
-                  key={i}
-                  cx={`${x}%`}
-                  cy={`${y}%`}
-                  r={size}
-                  fill="url(#starGlow)"
-                  className="animate-[twinkle_3s_ease-in-out_infinite]"
-                  style={{
-                    animationDelay: `${delay}s`,
-                    animationDuration: `${duration}s`
-                  }}
-                />
-              );
-            })}
-          </svg>
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1A1F2C]/95 via-[#1A1F2C]/80 to-[#1A1F2C]" />
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#1A1F2C]/95 via-[#1A1F2C]/80 to-[#1A1F2C]" />
 
       <div className="container px-4 md:px-6">
         <motion.div
