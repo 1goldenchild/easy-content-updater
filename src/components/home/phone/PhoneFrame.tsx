@@ -38,10 +38,7 @@ const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProp
         
         {/* Dynamic Island */}
         <div className="absolute top-2 left-1/2 -translate-x-1/2 w-[84px] h-[25px] bg-black rounded-[20px] z-20 flex items-center justify-center">
-          <div className="w-[60px] h-[16px] bg-black rounded-[20px] relative">
-            {/* Camera/Sensors dot */}
-            <div className="absolute right-2 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#262626] ring-1 ring-[#404040]" />
-          </div>
+          <div className="w-[60px] h-[16px] bg-black rounded-[20px] relative" />
         </div>
         
         {/* Screen Content */}
