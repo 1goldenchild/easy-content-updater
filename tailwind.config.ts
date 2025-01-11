@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
@@ -53,6 +53,11 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -63,8 +68,7 @@ const config = {
           to: { height: "0" },
         },
         shine: {
-          "0%": { backgroundPosition: "200% 0" },
-          "100%": { backgroundPosition: "-200% 0" }
+          "100%": { left: "125%" }
         },
         shimmer: {
           "100%": { transform: "translateX(100%)" }
@@ -74,13 +78,13 @@ const config = {
             opacity: "0",
           },
           "10%": {
-            opacity: "0.3",
+            opacity: "0.8",
           },
           "80%, 90%": {
             opacity: "0",
           },
           "85%": {
-            opacity: "0.5",
+            opacity: "0.9",
           }
         }
       },
@@ -89,11 +93,11 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "shine": "shine 8s linear infinite",
         "shimmer": "shimmer 2s infinite",
-        "lightning": "lightning 7s ease-in infinite"
+        "lightning": "lightning 5s ease-in infinite"
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
-export default config
+export default config;
