@@ -50,13 +50,13 @@ const SecretKnowledge = () => {
           <div className="max-w-3xl mx-auto">
             {/* Header section */}
             <div className="text-center space-y-6 relative">
-              <div className="relative inline-block">
+              <div className="relative inline-flex justify-center items-center w-16 h-16">
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                   className="absolute inset-0 bg-gradient-to-r from-purple-500 via-fuchsia-500 to-purple-500 rounded-full blur-xl opacity-30"
                 />
-                <div className="relative bg-gradient-to-r from-[#1A1F2C] to-[#221F26] p-4 rounded-full border border-purple-500/20">
+                <div className="relative bg-gradient-to-r from-[#1A1F2C] to-[#221F26] p-4 rounded-full border border-purple-500/20 w-full h-full flex items-center justify-center">
                   <Star className="w-8 h-8 text-purple-400" />
                 </div>
               </div>
