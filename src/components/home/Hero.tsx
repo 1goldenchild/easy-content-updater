@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
 
 const Hero = () => {
-  // Array of purple shades from our color palette
   const purpleShades = [
     '#9b87f5',  // Primary Purple
     '#7E69AB',  // Secondary Purple
@@ -16,7 +15,6 @@ const Hero = () => {
 
   return (
     <section className="relative py-20 md:py-32 overflow-hidden">
-      {/* Stars Background - Added will-change-transform and translateZ for better performance */}
       <div className="absolute inset-0 z-0 will-change-transform" style={{ transform: 'translateZ(0)' }}>
         {[...Array(50)].map((_, i) => (
           <div
@@ -50,18 +48,16 @@ const Hero = () => {
           <p className="mx-auto max-w-[700px] text-white/90 md:text-xl dark:text-white/90">
             Discover the secrets the 1% and elite class have kept hidden—and how this powerful knowledge can transform your life, enhance your relationships, and even elevate your finances.
           </p>
-          <div className="w-full max-w-[280px] relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-[#2A2311] via-[#3B3015] to-[#2A2311] rounded-md blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+          <div className="w-full max-w-[280px] relative">
             <Link to="/collect-info" className="w-full block relative">
               <Button 
                 size="lg" 
-                className="w-full bg-gradient-to-r from-[#1A1508] via-[#2A2311] to-[#1A1508] hover:from-[#2A2311] hover:via-[#3B3015] hover:to-[#2A2311] text-amber-200/90 font-semibold shadow-[0_0_15px_rgba(251,191,36,0.1)] transition-all duration-500 bg-[length:200%_auto] hover:bg-right-top hover:shadow-[0_0_20px_rgba(251,191,36,0.2)] border border-amber-900/30 rounded-md relative overflow-hidden"
+                className="w-full bg-gradient-to-br from-[#2A2F3C] to-[#1A1D24] hover:from-[#32384A] hover:to-[#1E2128] text-[#E5DDB2] font-medium px-8 py-6 text-lg h-auto rounded-2xl shadow-lg transition-all duration-300"
               >
                 <span className="relative z-10 flex items-center">
                   Get Your Analysis
                   <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-900/10 to-transparent translate-x-[-200%] animate-shimmer" />
               </Button>
             </Link>
           </div>
