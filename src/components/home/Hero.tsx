@@ -53,7 +53,7 @@ const Hero = () => {
             <Link to="/collect-info" className="w-full block relative">
               <Button 
                 size="lg" 
-                className="w-full px-4 sm:px-8 py-2 rounded-lg bg-gradient-to-br from-amber-200/20 to-purple-500/20 backdrop-blur-sm border border-amber-200/30 text-amber-100 hover:text-amber-50 transition-colors group relative overflow-hidden"
+                className="w-full px-8 py-3 rounded-lg bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#8B5CF6] bg-[length:200%_auto] text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] border border-purple-500/20 relative overflow-hidden group"
               >
                 <span className="relative z-10 flex items-center">
                   Get Started
