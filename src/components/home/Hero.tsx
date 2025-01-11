@@ -8,6 +8,12 @@ const Hero = () => {
       {/* Lightning effect overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-purple-600/30 via-transparent to-transparent animate-lightning pointer-events-none z-10" />
       
+      {/* Additional lightning flashes */}
+      <div className="absolute inset-0 bg-white/5 animate-lightning pointer-events-none z-20" 
+        style={{ animationDelay: '0.5s' }} />
+      <div className="absolute inset-0 bg-purple-400/10 animate-lightning pointer-events-none z-20" 
+        style={{ animationDelay: '1.5s' }} />
+      
       <div className="container px-4 md:px-6">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
