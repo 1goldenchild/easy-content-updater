@@ -84,10 +84,10 @@ const PreviewSection = () => {
         className="flex justify-center mt-4 mb-12"
       >
         <div className="relative group">
-          <div className="absolute -inset-1 bg-gradient-to-r from-[#2A2311] via-[#3B3015] to-[#2A2311] rounded-md blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+          <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/20 via-purple-600/20 to-purple-500/20 rounded-md blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
           <Button
             onClick={handleGetStarted}
-            className="relative bg-gradient-to-r from-[#1A1508] via-[#2A2311] to-[#1A1508] hover:from-[#2A2311] hover:via-[#3B3015] hover:to-[#2A2311] text-amber-200/90 font-semibold shadow-[0_0_15px_rgba(251,191,36,0.1)] transition-all duration-500 hover:shadow-[0_0_20px_rgba(251,191,36,0.2)] border border-amber-900/30 rounded-md overflow-hidden"
+            className="relative px-6 py-3 rounded-lg bg-gradient-to-r from-purple-500 via-purple-600 to-purple-500 text-white font-semibold shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 border border-purple-400/50 hover:border-purple-400/80 transform hover:scale-[1.02] transition-all duration-200 overflow-hidden"
           >
             <span className="relative z-10 flex items-center">
               Unlock Your Analysis
@@ -99,7 +99,7 @@ const PreviewSection = () => {
                 →
               </motion.span>
             </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-900/10 to-transparent translate-x-[-200%] animate-shimmer" />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] animate-shimmer" />
           </Button>
         </div>
       </motion.div>
