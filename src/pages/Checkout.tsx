@@ -134,14 +134,14 @@ const Checkout = () => {
               </motion.div>
             </div>
 
-            {/* Subtitle - with reduced text size */}
+            {/* Subtitle - with increased text size */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
               className="flex justify-center px-2 sm:px-4"
             >
-              <p className={`${isMobile ? 'text-xs sm:text-sm max-w-[300px] sm:max-w-none' : 'text-base'} relative inline-block`}>
+              <p className={`${isMobile ? 'text-sm sm:text-base max-w-[300px] sm:max-w-none' : 'text-lg'} relative inline-block`}>
                 <span className="relative z-10">
                   <span className="bg-gradient-to-r from-amber-100 via-amber-200 to-amber-100 bg-clip-text text-transparent">
                     Moments away from discovering your numerological DNA 🧬
