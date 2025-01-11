@@ -25,7 +25,7 @@ const benefits = [
     borderColor: "border-purple-500/20",
     burnGradient: "from-purple-400/0 via-purple-400/10 to-pink-500/5",
     glowColor: "purple",
-    neonColor: "rgba(168, 85, 247, 0.5)" // Purple neon
+    neonColor: "rgba(168, 85, 247, 0.5)"
   },
   {
     icon: Sparkles,
@@ -36,7 +36,7 @@ const benefits = [
     borderColor: "border-amber-500/20",
     burnGradient: "from-amber-400/0 via-amber-400/10 to-orange-500/5",
     glowColor: "amber",
-    neonColor: "rgba(251, 191, 36, 0.5)" // Amber neon
+    neonColor: "rgba(251, 191, 36, 0.5)"
   },
   {
     icon: Target,
@@ -47,7 +47,7 @@ const benefits = [
     borderColor: "border-emerald-500/20",
     burnGradient: "from-emerald-400/0 via-emerald-400/10 to-teal-500/5",
     glowColor: "emerald",
-    neonColor: "rgba(52, 211, 153, 0.5)" // Emerald neon
+    neonColor: "rgba(52, 211, 153, 0.5)"
   }
 ];
 
@@ -67,9 +67,9 @@ const Benefits = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-6 relative">
           {benefits.map((benefit, index) => {
-            // Calculate when each card should start animating
-            const startTrigger = 0.2 + (index * 0.15); // Stagger the start trigger points
-            const endTrigger = startTrigger + 0.1; // Small window for the animation
+            // Reduce the stagger delay between cards
+            const startTrigger = 0.1 + (index * 0.08); // Reduced from 0.2 + (index * 0.15)
+            const endTrigger = startTrigger + 0.1;
 
             const cardProgress = useTransform(
               scrollYProgress,
@@ -83,7 +83,7 @@ const Benefits = () => {
                 {...benefit}
                 progress={cardProgress}
                 index={index}
-                alwaysLit={true} // New prop to keep cards lit after animation
+                alwaysLit={true}
               />
             );
           })}
