@@ -66,52 +66,24 @@ const Benefits = () => {
         <BenefitsHeader />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-6 relative">
-          {/* Connecting lines */}
-          <div className="absolute inset-0 pointer-events-none">
-            <svg className="w-full h-full">
-              <motion.path
-                d="M 20,20 L 80,80 M 80,20 L 20,80"
-                stroke="url(#gradient-line)"
-                strokeWidth="2"
-                fill="none"
-                className="opacity-30"
-                style={{
-                  pathLength: scrollYProgress
-                }}
-              />
-              <defs>
-                <linearGradient id="gradient-line" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#8B5CF6" />
-                  <stop offset="50%" stopColor="#EC4899" />
-                  <stop offset="100%" stopColor="#6EE7B7" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-
           {benefits.map((benefit, index) => {
-            // Adjust the timing by reducing the multiplier and offset
-            const progress = useTransform(
+            // Calculate when each card should start animating
+            const startTrigger = 0.2 + (index * 0.15); // Stagger the start trigger points
+            const endTrigger = startTrigger + 0.1; // Small window for the animation
+
+            const cardProgress = useTransform(
               scrollYProgress,
-              [index * 0.15, Math.min(0.85, (index + 1) * 0.15)], // Reduced from 0.2 to 0.15 and capped at 0.85
+              [startTrigger, endTrigger],
               [0, 1]
             );
-
-            const nextProgress = index < benefits.length - 1 
-              ? useTransform(
-                  scrollYProgress,
-                  [(index + 1) * 0.15, Math.min(0.85, (index + 2) * 0.15)],
-                  [0, 1]
-                )
-              : null;
 
             return (
               <BenefitCard
                 key={index}
                 {...benefit}
-                progress={progress}
-                nextProgress={nextProgress}
+                progress={cardProgress}
                 index={index}
+                alwaysLit={true} // New prop to keep cards lit after animation
               />
             );
           })}
