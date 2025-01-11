@@ -24,8 +24,11 @@ const CTAButton = ({ onClick, text, icon = "arrow" }: CTAButtonProps) => {
       </span>
       <motion.div
         className="absolute inset-0 bg-gradient-to-br from-amber-200/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity"
+        style={{
+          backgroundSize: '200% 100%',
+        }}
         animate={{
-          backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+          backgroundPosition: ['0% 0%', '100% 0%', '0% 0%'],
         }}
         transition={{
           duration: 5,
