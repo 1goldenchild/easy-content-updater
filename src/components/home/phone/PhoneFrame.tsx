@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { ReactNode, useState, useEffect } from "react";
-import { ChevronDown } from "lucide-react";
 import PreviewOverlay from "./PreviewOverlay";
 
 interface PhoneFrameProps {
@@ -54,17 +53,30 @@ const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProp
             className="absolute bottom-16 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center"
           >
             <motion.div
-              animate={{ y: [0, 8, 0] }}
+              animate={{ y: [0, 12, 0] }}
               transition={{ 
                 duration: 1.5,
                 repeat: Infinity,
                 repeatType: "reverse",
                 ease: "easeInOut"
               }}
+              className="relative"
             >
-              <ChevronDown className="w-6 h-6 text-amber-200/90" />
+              {/* Thumb/Swipe Gesture Icon */}
+              <div className="w-8 h-12 rounded-full border-2 border-amber-200/90 relative">
+                <motion.div 
+                  className="absolute w-3 h-3 bg-amber-200/90 rounded-full left-1/2 -translate-x-1/2 top-2"
+                  animate={{ y: [0, 4, 0] }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                    ease: "easeInOut"
+                  }}
+                />
+              </div>
             </motion.div>
-            <span className="text-xs text-amber-200/70 mt-1">Scroll to explore</span>
+            <span className="text-xs text-amber-200/70 mt-3">Scroll to explore</span>
           </motion.div>
         )}
 
