@@ -3,6 +3,7 @@ import { TrendingUp, Target, Sparkles, Users } from "lucide-react";
 import { useRef } from "react";
 import BenefitsHeader from "./benefits/BenefitsHeader";
 import BenefitCard from "./benefits/BenefitCard";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const benefits = [
   {
@@ -53,6 +54,8 @@ const benefits = [
 
 const Benefits = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
+  
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
@@ -67,17 +70,21 @@ const Benefits = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-6 relative">
           {benefits.map((benefit, index) => {
+            // Adjust animation timing based on screen size
+            const startProgress = isMobile ? index * 0.15 : index * 0.25;
+            const endProgress = isMobile ? Math.min(1, (index + 1) * 0.15) : Math.min(1, (index + 1) * 0.25);
+            
             const progress = useTransform(
               scrollYProgress,
-              [Math.max(0, index * 0.25), Math.min(1, (index + 1) * 0.25)],
-              [0, 1]
+              [startProgress, (startProgress + endProgress) / 2, endProgress],
+              [0, 1, 1]
             );
 
             const nextProgress = index < benefits.length - 1 
               ? useTransform(
                   scrollYProgress,
-                  [Math.max(0, (index + 1) * 0.25), Math.min(1, (index + 2) * 0.25)],
-                  [0, 1]
+                  [endProgress, Math.min(1, endProgress + 0.1)],
+                  [1, 0]
                 )
               : null;
 
@@ -88,6 +95,7 @@ const Benefits = () => {
                 progress={progress}
                 nextProgress={nextProgress}
                 index={index}
+                isMobile={isMobile}
               />
             );
           })}
