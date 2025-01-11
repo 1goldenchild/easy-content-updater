@@ -15,48 +15,48 @@ const features = [
     icon: Fingerprint,
     title: "Personalize Analysis",
     description: "Unlock deeper insights into yourself with this personalized analysis",
-    gradient: "from-blue-500 to-purple-500",
-    neonColor: "rgb(147, 51, 234)",
+    gradient: "from-[#9b87f5] to-[#D6BCFA]",
+    neonColor: "rgb(214, 188, 250)",
     number: 1
   },
   {
     icon: ChartPieIcon,
     title: "Interactive Charts",
     description: "Visualize your numerological characteristics through dynamic, interactive charts",
-    gradient: "from-purple-500 to-pink-500",
-    neonColor: "rgb(236, 72, 153)",
+    gradient: "from-[#7E69AB] to-[#9b87f5]",
+    neonColor: "rgb(155, 135, 245)",
     number: 2
   },
   {
     icon: Globe2,
     title: "Global Compatibility",
     description: "Find the best countries and locations aligned with your numerological profile",
-    gradient: "from-pink-500 to-red-500",
-    neonColor: "rgb(239, 68, 68)",
+    gradient: "from-[#6E59A5] to-[#7E69AB]",
+    neonColor: "rgb(126, 105, 171)",
     number: 3
   },
   {
     icon: Car,
     title: "Vehicle Compatibility",
     description: "Learn which vehicles resonate best with your energy patterns",
-    gradient: "from-red-500 to-orange-500",
-    neonColor: "rgb(249, 115, 22)",
+    gradient: "from-[#534363] to-[#6E59A5]",
+    neonColor: "rgb(110, 89, 165)",
     number: 4
   },
   {
     icon: HeartHandshake,
     title: "Relationship Insights",
     description: "Understand compatibility patterns in your personal and professional relationships",
-    gradient: "from-orange-500 to-yellow-500",
-    neonColor: "rgb(234, 179, 8)",
+    gradient: "from-[#E5DEFF] to-[#D6BCFA]",
+    neonColor: "rgb(229, 222, 255)",
     number: 5
   },
   {
     icon: Briefcase,
     title: "Career Guidance",
     description: "Get tailored career recommendations based on your numerological profile",
-    gradient: "from-yellow-500 to-green-500",
-    neonColor: "rgb(34, 197, 94)",
+    gradient: "from-[#D6BCFA] to-[#9b87f5]",
+    neonColor: "rgb(214, 188, 250)",
     number: 6
   }
 ];
@@ -92,7 +92,7 @@ const FeatureList = () => {
           >
             <motion.div
               style={{ opacity: progress }}
-              className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.1)] to-transparent"
+              className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-transparent via-[rgba(155,135,245,0.1)] to-transparent"
               transition={{ duration: 0.3 }}
             />
             <motion.div
@@ -103,14 +103,14 @@ const FeatureList = () => {
               }}
               className="absolute -inset-0.5 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300"
             />
-            <div className="relative h-full p-6 rounded-2xl bg-black/40 backdrop-blur-sm border border-white/10">
+            <div className="relative h-full p-6 rounded-2xl bg-[#1A1F2C]/40 backdrop-blur-sm border border-[#534363]/10">
               <div className="flex items-center gap-4 mb-4">
                 <motion.div 
                   className="relative w-8 h-8"
                   style={{ opacity: progress }}
                 >
-                  <Circle className="w-8 h-8 text-white/50" />
-                  <span className="absolute inset-0 flex items-center justify-center text-white font-bold">
+                  <Circle className="w-8 h-8 text-[#F1F0FB]/50" />
+                  <span className="absolute inset-0 flex items-center justify-center text-[#F1F0FB] font-bold">
                     {feature.number}
                   </span>
                 </motion.div>
@@ -136,7 +136,7 @@ const FeatureList = () => {
               </motion.h3>
               
               <motion.p 
-                className="text-white/70 text-sm leading-relaxed"
+                className="text-[#F1F0FB]/70 text-sm leading-relaxed"
                 style={{ opacity: progress }}
               >
                 {feature.description}

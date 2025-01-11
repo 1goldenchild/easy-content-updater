@@ -23,8 +23,8 @@ const MainContentSection = () => {
         viewport={{ once: true }}
       >
         <span className="relative inline-block">
-          <span className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500 opacity-50 blur-lg animate-pulse" />
-          <span className="relative bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500 bg-clip-text text-transparent animate-shine">
+          <span className="absolute inset-0 bg-gradient-to-r from-[#534363] via-[#7E69AB] to-[#6E59A5] opacity-50 blur-lg animate-pulse" />
+          <span className="relative bg-gradient-to-r from-[#9b87f5] via-[#D6BCFA] to-[#E5DEFF] bg-clip-text text-transparent">
             Unlock Your Complete Numerology Profile
           </span>
         </span>
@@ -32,6 +32,7 @@ const MainContentSection = () => {
       
       <FeatureList />
 
+      {/* Keeping the existing button unchanged */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -44,9 +45,15 @@ const MainContentSection = () => {
             onClick={handleGetStarted}
             className="w-full bg-gradient-to-r from-[#534363] to-[#a39356] hover:from-[#534363] hover:to-[#a39356] text-amber-200/90 font-normal tracking-wider shadow-[0_0_15px_rgba(251,191,36,0.1)] transition-all duration-500 bg-[length:200%_auto] hover:bg-right-top hover:shadow-[0_0_20px_rgba(251,191,36,0.2)] border border-[#86736f] rounded-md relative overflow-hidden"
           >
-            <span className="relative z-10 flex items-center gap-2">
+            <span className="relative z-10 flex items-center">
               Start Your Journey Now
-              <Sparkles className="w-4 h-4" />
+              <motion.span
+                animate={{ x: [0, 4, 0] }}
+                transition={{ repeat: Infinity, duration: 1.5 }}
+                className="ml-2"
+              >
+                →
+              </motion.span>
             </span>
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-900/10 to-transparent translate-x-[-200%] animate-shimmer" />
           </Button>
