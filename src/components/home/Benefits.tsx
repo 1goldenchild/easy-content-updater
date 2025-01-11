@@ -3,7 +3,6 @@ import { TrendingUp, Target, Sparkles, Users } from "lucide-react";
 import { useRef } from "react";
 import BenefitsHeader from "./benefits/BenefitsHeader";
 import BenefitCard from "./benefits/BenefitCard";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 const benefits = [
   {
@@ -13,7 +12,7 @@ const benefits = [
     bgGradient: "from-blue-400/10 via-blue-500/5 to-purple-500/10",
     iconColor: "text-blue-400",
     borderColor: "border-blue-500/20",
-    burnGradient: "from-blue-400/0 via-blue-400/30 to-blue-500/20",
+    burnGradient: "from-blue-400/0 via-blue-400/10 to-purple-500/5",
     glowColor: "blue",
     neonColor: "rgba(59, 130, 246, 0.5)"
   },
@@ -24,9 +23,9 @@ const benefits = [
     bgGradient: "from-purple-400/10 via-pink-500/5 to-red-500/10",
     iconColor: "text-purple-400",
     borderColor: "border-purple-500/20",
-    burnGradient: "from-purple-400/0 via-purple-400/30 to-purple-500/20",
+    burnGradient: "from-purple-400/0 via-purple-400/10 to-pink-500/5",
     glowColor: "purple",
-    neonColor: "rgba(168, 85, 247, 0.5)"
+    neonColor: "rgba(168, 85, 247, 0.5)" // Purple neon
   },
   {
     icon: Sparkles,
@@ -35,9 +34,9 @@ const benefits = [
     bgGradient: "from-amber-400/10 via-orange-500/5 to-red-500/10",
     iconColor: "text-amber-400",
     borderColor: "border-amber-500/20",
-    burnGradient: "from-amber-400/0 via-amber-400/30 to-amber-500/20",
+    burnGradient: "from-amber-400/0 via-amber-400/10 to-orange-500/5",
     glowColor: "amber",
-    neonColor: "rgba(251, 191, 36, 0.5)"
+    neonColor: "rgba(251, 191, 36, 0.5)" // Amber neon
   },
   {
     icon: Target,
@@ -46,16 +45,14 @@ const benefits = [
     bgGradient: "from-emerald-400/10 via-teal-500/5 to-cyan-500/10",
     iconColor: "text-emerald-400",
     borderColor: "border-emerald-500/20",
-    burnGradient: "from-emerald-400/0 via-emerald-400/30 to-emerald-500/20",
+    burnGradient: "from-emerald-400/0 via-emerald-400/10 to-teal-500/5",
     glowColor: "emerald",
-    neonColor: "rgba(52, 211, 153, 0.5)"
+    neonColor: "rgba(52, 211, 153, 0.5)" // Emerald neon
   }
 ];
 
 const Benefits = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
-  
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
@@ -69,22 +66,42 @@ const Benefits = () => {
         <BenefitsHeader />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-6 relative">
+          {/* Connecting lines */}
+          <div className="absolute inset-0 pointer-events-none">
+            <svg className="w-full h-full">
+              <motion.path
+                d="M 20,20 L 80,80 M 80,20 L 20,80"
+                stroke="url(#gradient-line)"
+                strokeWidth="2"
+                fill="none"
+                className="opacity-30"
+                style={{
+                  pathLength: scrollYProgress
+                }}
+              />
+              <defs>
+                <linearGradient id="gradient-line" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#8B5CF6" />
+                  <stop offset="50%" stopColor="#EC4899" />
+                  <stop offset="100%" stopColor="#6EE7B7" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
           {benefits.map((benefit, index) => {
-            // Adjust animation timing based on screen size
-            const startProgress = isMobile ? index * 0.15 : index * 0.25;
-            const endProgress = isMobile ? Math.min(1, (index + 1) * 0.15) : Math.min(1, (index + 1) * 0.25);
-            
+            // Adjust the timing by reducing the multiplier and offset
             const progress = useTransform(
               scrollYProgress,
-              [startProgress, (startProgress + endProgress) / 2, endProgress],
-              [0, 1, 1]
+              [index * 0.15, Math.min(0.85, (index + 1) * 0.15)], // Reduced from 0.2 to 0.15 and capped at 0.85
+              [0, 1]
             );
 
             const nextProgress = index < benefits.length - 1 
               ? useTransform(
                   scrollYProgress,
-                  [endProgress, Math.min(1, endProgress + 0.1)],
-                  [1, 0]
+                  [(index + 1) * 0.15, Math.min(0.85, (index + 2) * 0.15)],
+                  [0, 1]
                 )
               : null;
 
@@ -95,7 +112,6 @@ const Benefits = () => {
                 progress={progress}
                 nextProgress={nextProgress}
                 index={index}
-                isMobile={isMobile}
               />
             );
           })}

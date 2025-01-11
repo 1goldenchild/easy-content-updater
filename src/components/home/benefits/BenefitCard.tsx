@@ -14,7 +14,6 @@ interface BenefitCardProps {
   progress: any;
   nextProgress: any | null;
   index: number;
-  isMobile: boolean;
 }
 
 const BenefitCard = ({
@@ -29,44 +28,31 @@ const BenefitCard = ({
   progress,
   nextProgress,
   index,
-  isMobile,
 }: BenefitCardProps) => {
-  const sectionOpacity = useTransform(progress, [0, 0.2, 0.8, 1], [0, 1, 1, nextProgress ? 0.3 : 1]);
-  const sectionScale = useTransform(progress, [0, 1], [0.8, 1]);
-  const sectionX = useTransform(progress, [0, 1], [isMobile ? 0 : (index % 2 === 0 ? -20 : 20), 0]);
-  const sectionY = useTransform(progress, [0, 1], [20, 0]);
-  
+  const sectionOpacity = useTransform(progress, [0, 0.5, 1], [0, 1, nextProgress ? 0 : 1]);
+
   return (
     <motion.div
       style={{
-        opacity: sectionOpacity,
-        scale: sectionScale,
-        x: sectionX,
-        y: sectionY,
+        opacity: progress,
+        scale: useTransform(progress, [0, 1], [0.8, 1])
       }}
-      className="relative group"
-      initial={{ opacity: 0, scale: 0.8, y: 20 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ 
-        duration: 0.6,
-        delay: index * 0.1,
-        ease: [0.23, 1, 0.32, 1]
-      }}
+      className="relative"
     >
       <motion.div
-        className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r transition duration-300"
+        className="absolute -inset-0.5 rounded-2xl transition-opacity duration-500"
         style={{
-          opacity: useTransform(progress, [0, 0.5, 1], [0, 1, nextProgress ? 0 : 1]),
-          boxShadow: `0 0 20px ${neonColor}, 0 0 40px ${neonColor}`,
+          opacity: sectionOpacity,
+          boxShadow: `0 0 15px 2px ${neonColor}, 0 0 30px 4px ${neonColor}`,
         }}
       />
       
-      <div className={`relative rounded-2xl p-4 sm:p-6 lg:p-6 border ${borderColor} 
-                      bg-gradient-to-br ${bgGradient} backdrop-blur-sm transition-all duration-500 
+      <div className={`group relative rounded-2xl p-4 sm:p-6 lg:p-6 border ${borderColor} 
+                      bg-gradient-to-br ${bgGradient} backdrop-blur-sm transition-all duration-300 
                       ease-out overflow-hidden hover:scale-[1.02]`}>
-        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] to-transparent rounded-2xl" />
+        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.04] to-transparent rounded-2xl" />
         <div className={`absolute inset-0 bg-gradient-to-t ${burnGradient} rounded-2xl 
-                        opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                        opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-shine`} />
         
         <div className="relative space-y-3 sm:space-y-4">
           <motion.div 
@@ -74,15 +60,14 @@ const BenefitCard = ({
                        p-2 sm:p-2.5 ring-2 ring-white/10 group-hover:ring-white/20 
                        transition-all duration-300 relative`}
             style={{
-              scale: useTransform(progress, [0, 1], [0.8, 1]),
-              filter: useTransform(progress, [0, 1], ["brightness(0.7)", "brightness(1.2)"])
+              filter: useTransform(progress, [0, 1], ["brightness(0.5)", "brightness(1.2)"])
             }}
           >
             <div 
               className="absolute inset-0 rounded-xl transition-opacity duration-500 
                          opacity-0 group-hover:opacity-100"
               style={{
-                boxShadow: `0 0 10px ${neonColor}, 0 0 20px ${neonColor}`,
+                boxShadow: `0 0 5px 1px ${neonColor}, 0 0 10px 2px ${neonColor}`,
               }}
             />
             <Icon className="w-full h-full relative z-10" />
