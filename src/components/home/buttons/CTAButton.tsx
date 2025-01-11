@@ -24,16 +24,19 @@ const CTAButton = ({ onClick, text, icon = "arrow" }: CTAButtonProps) => {
       </span>
       <motion.div
         className="absolute inset-0 bg-gradient-to-br from-amber-200/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity"
-        style={{
-          backgroundSize: '200% 100%',
-        }}
+        initial={{ backgroundPosition: "0% 0%" }}
         animate={{
-          backgroundPosition: ['0% 0%', '100% 0%', '0% 0%'],
+          backgroundPosition: ["0% 0%", "100% 0%"],
         }}
         transition={{
-          duration: 5,
+          duration: 3,
           repeat: Infinity,
+          repeatType: "reverse",
           ease: "linear"
+        }}
+        style={{
+          backgroundSize: "200% 100%",
+          backgroundRepeat: "no-repeat"
         }}
       />
     </Button>
