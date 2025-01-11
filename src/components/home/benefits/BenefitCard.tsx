@@ -31,7 +31,7 @@ const BenefitCard = ({
   return (
     <motion.div
       style={{
-        opacity: progress,
+        opacity: useTransform(progress, [0, 1], [0, 1]),
         scale: useTransform(progress, [0, 1], [0.95, 1]),
       }}
       className="relative"
@@ -39,7 +39,7 @@ const BenefitCard = ({
       <motion.div
         className="absolute -inset-0.5 rounded-2xl transition duration-700"
         style={{
-          opacity: progress,
+          opacity: useTransform(progress, [0, 1], [0, 1]),
           boxShadow: `0 0 15px 2px ${neonColor}, 0 0 30px 4px ${neonColor}`,
         }}
       />
@@ -65,7 +65,7 @@ const BenefitCard = ({
             <div 
               className="absolute inset-0 rounded-xl transition-opacity duration-700"
               style={{
-                opacity: progress,
+                opacity: useTransform(progress, [0, 1], [0, 1]),
                 boxShadow: `0 0 5px 1px ${neonColor}, 0 0 10px 2px ${neonColor}`,
               }}
             />
