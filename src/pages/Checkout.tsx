@@ -106,7 +106,7 @@ const Checkout = () => {
           animate={{ opacity: 1, y: 0 }}
           className="space-y-12 sm:space-y-16"
         >
-          <div className="text-center space-y-8 sm:space-y-10 relative">
+          <div className="text-center space-y-4 sm:space-y-6 relative"> {/* Reduced from space-y-8 sm:space-y-10 */}
             {/* Decorative elements */}
             <div className="absolute inset-0 -z-10 overflow-hidden">
               <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-amber-500/10 blur-3xl" />
