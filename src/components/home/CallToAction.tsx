@@ -95,13 +95,14 @@ const CallToAction = () => {
 
             {/* Centered Button with Fixed Width */}
             <div className="flex justify-center">
-              <div className="w-full max-w-[280px]">
+              <div className="w-full max-w-[280px] relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-amber-200/20 via-purple-500/20 to-amber-200/20 rounded-md blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
                 <Button 
                   onClick={handleNavigate}
-                  size="lg" 
-                  className="w-full relative bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold text-base md:text-lg shadow-xl hover:shadow-2xl transition-all duration-200"
+                  className="w-full relative px-4 sm:px-8 py-2 rounded-lg bg-gradient-to-br from-amber-200/20 to-purple-500/20 backdrop-blur-sm border border-amber-200/30 text-amber-100 hover:text-amber-50 transition-colors overflow-hidden"
                 >
-                  Get Your Personalized Analysis
+                  <span className="relative z-10">Get Your Personalized Analysis</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-900/10 to-transparent translate-x-[-200%] animate-shimmer" />
                 </Button>
               </div>
             </div>
