@@ -9,9 +9,17 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center justify-between">
         <Link to="/" className="flex items-center space-x-2">
-          <span className="text-2xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-br from-amber-200/80 via-purple-500/60 to-amber-200/80">
-            Numerology 33
-          </span>
+          <div className="relative w-10 h-10">
+            {/* Circle background with gradient border */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#9b87f5] via-[#7E69AB] to-[#6E59A5] animate-pulse"></div>
+            {/* Inner circle with slight padding */}
+            <div className="absolute inset-[2px] rounded-full bg-[#1A1F2C] flex items-center justify-center">
+              {/* The "33" text with gradient */}
+              <span className="text-xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-br from-amber-200/80 via-purple-500/60 to-amber-200/80">
+                33
+              </span>
+            </div>
+          </div>
         </Link>
 
         {/* Mobile Navigation */}
