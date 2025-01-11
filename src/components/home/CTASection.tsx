@@ -1,17 +1,8 @@
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
-import { scrollToTop } from "./CallToAction";
+import CTAButton from "./cta/CTAButton";
 
 const CTASection = () => {
-  const navigate = useNavigate();
-
-  const handleGetStarted = () => {
-    navigate('/collect-info');
-    scrollToTop();
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
@@ -101,25 +92,7 @@ const CTASection = () => {
           Get your personalized numerology reading today and unlock the secrets of your life's journey.
         </p>
         
-        <Button
-          onClick={handleGetStarted}
-          size="lg"
-          className="bg-gradient-to-r from-[#0466c8] to-[#023e8a] hover:from-[#0353a4] hover:to-[#012a70] text-white font-semibold px-8 py-6 text-lg h-auto relative overflow-hidden group"
-        >
-          <span className="relative z-10">Start Your Analysis</span>
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
-            animate={{
-              x: ['-100%', '200%'],
-            }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              ease: "linear",
-              repeatDelay: 1
-            }}
-          />
-        </Button>
+        <CTAButton />
       </div>
     </motion.div>
   );
