@@ -28,6 +28,8 @@ const CollectInfoForm = () => {
     setIsLoading(true);
 
     try {
+      console.log("Submitting form data:", { ...formData, date_of_birth: date });
+      
       const { error } = await supabase.from("user_readings").insert([
         {
           name: formData.name,
@@ -36,18 +38,21 @@ const CollectInfoForm = () => {
         },
       ]);
 
-      if (error) throw error;
+      if (error) {
+        console.error("Supabase error:", error);
+        throw error;
+      }
 
       toast({
         title: "Success!",
         description: "Your information has been submitted successfully.",
       });
 
-      // Redirect to Numerology33 checkout page
-      window.location.href = "https://www.numerology33.com/checkout";
+      // Use window.location.replace for better navigation handling
+      window.location.replace("https://www.numerology33.com/checkout");
       
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error submitting form:", error);
       toast({
         variant: "destructive",
         title: "Error",
