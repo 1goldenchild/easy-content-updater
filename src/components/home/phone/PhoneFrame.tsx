@@ -49,7 +49,7 @@ const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProp
           <motion.div
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 backdrop-blur-sm bg-white/10 z-20"
+            className="absolute inset-0 backdrop-blur-sm bg-white/10 z-20 pointer-events-none"
           />
         )}
 
@@ -59,7 +59,7 @@ const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProp
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 flex flex-col items-center"
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none"
           >
             <motion.div
               animate={{ y: [0, 12, 0] }}
@@ -69,13 +69,12 @@ const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProp
                 repeatType: "reverse",
                 ease: "easeInOut"
               }}
-              className="relative"
             >
               {/* Scroll Gesture Icon */}
               <motion.img 
                 src="/lovable-uploads/a48b0ec0-c027-4d4a-a992-435a3c309b00.png"
                 alt="Scroll gesture"
-                className="w-12 h-12 text-amber-200"
+                className="w-16 h-16"
                 animate={{ y: [0, 8, 0] }}
                 transition={{
                   duration: 1.5,
@@ -85,7 +84,6 @@ const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProp
                 }}
               />
             </motion.div>
-            <span className="text-xs text-amber-200/70 mt-3">Scroll to explore</span>
           </motion.div>
         )}
 
