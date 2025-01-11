@@ -12,7 +12,7 @@ const ScrollIndicator = ({ hasScrolled }: ScrollIndicatorProps) => {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 10 }}
-      className="absolute top-1/2 left-[40%] transform -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none"
+      className="absolute top-1/2 left-[45%] transform -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none"
     >
       <motion.div
         animate={{ y: [0, 12, 0] }}
