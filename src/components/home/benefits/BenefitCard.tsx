@@ -23,63 +23,68 @@ const BenefitCard = ({
   bgGradient,
   iconColor,
   borderColor,
-  burnGradient,
-  neonColor,
   progress,
-  nextProgress,
   index,
 }: BenefitCardProps) => {
-  const sectionOpacity = useTransform(progress, [0, 0.5, 1], [0, 1, nextProgress ? 0 : 1]);
+  // Transform values for smooth animations
+  const opacity = useTransform(progress, [0, 0.5, 1], [0.3, 1, 0.3]);
+  const scale = useTransform(progress, [0, 0.5, 1], [0.8, 1, 0.8]);
+  const x = useTransform(
+    progress,
+    [0, 0.5, 1],
+    [index % 2 === 0 ? -50 : 50, 0, index % 2 === 0 ? -50 : 50]
+  );
 
   return (
     <motion.div
       style={{
-        opacity: progress,
-        scale: useTransform(progress, [0, 1], [0.8, 1])
+        opacity,
+        scale,
+        x,
       }}
-      className="relative"
+      className="relative group"
     >
-      <motion.div
-        className="absolute -inset-0.5 rounded-2xl transition-opacity duration-500"
-        style={{
-          opacity: sectionOpacity,
-          boxShadow: `0 0 15px 2px ${neonColor}, 0 0 30px 4px ${neonColor}`,
-        }}
-      />
-      
-      <div className={`group relative rounded-2xl p-4 sm:p-6 lg:p-6 border ${borderColor} 
-                      bg-gradient-to-br ${bgGradient} backdrop-blur-sm transition-all duration-300 
-                      ease-out overflow-hidden hover:scale-[1.02]`}>
-        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.04] to-transparent rounded-2xl" />
-        <div className={`absolute inset-0 bg-gradient-to-t ${burnGradient} rounded-2xl 
-                        opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-shine`} />
+      <div className={`
+        relative rounded-xl p-6 
+        backdrop-blur-xl backdrop-filter
+        border border-white/10
+        bg-gradient-to-br from-white/5 to-white/[0.02]
+        overflow-hidden transition-all duration-500
+        hover:border-white/20 hover:shadow-2xl
+        hover:shadow-purple-500/20
+      `}>
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         
-        <div className="relative space-y-3 sm:space-y-4">
-          <motion.div 
-            className={`${iconColor} w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 
-                       p-2 sm:p-2.5 ring-2 ring-white/10 group-hover:ring-white/20 
-                       transition-all duration-300 relative`}
-            style={{
-              filter: useTransform(progress, [0, 1], ["brightness(0.5)", "brightness(1.2)"])
-            }}
-          >
-            <div 
-              className="absolute inset-0 rounded-xl transition-opacity duration-500 
-                         opacity-0 group-hover:opacity-100"
-              style={{
-                boxShadow: `0 0 5px 1px ${neonColor}, 0 0 10px 2px ${neonColor}`,
-              }}
-            />
+        {/* Glow effect */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 blur-xl" />
+        
+        <div className="relative space-y-4">
+          {/* Icon container with glow effect */}
+          <div className={`
+            ${iconColor} w-12 h-12 rounded-lg 
+            bg-gradient-to-br from-white/10 to-white/[0.02]
+            p-2.5 relative group-hover:scale-110 
+            transition-all duration-300 ease-out
+          `}>
+            <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 blur-sm" />
             <Icon className="w-full h-full relative z-10" />
-          </motion.div>
-          <h3 className="text-xl sm:text-2xl font-semibold bg-clip-text text-transparent 
-                         bg-gradient-to-br from-white to-white/80">
+          </div>
+
+          {/* Title with gradient text */}
+          <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white/90 to-white/80">
             {title}
           </h3>
-          <p className="text-white/60 pr-2 line-clamp-4">
+
+          {/* Description with improved readability */}
+          <p className="text-white/70 leading-relaxed">
             {description}
           </p>
         </div>
+
+        {/* Interactive hover lines */}
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+        <div className="absolute inset-y-0 right-0 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent transform scale-y-0 group-hover:scale-y-100 transition-transform duration-500" />
       </div>
     </motion.div>
   );
