@@ -17,14 +17,14 @@ const Hero = () => {
   return (
     <section className="relative py-20 md:py-32 overflow-hidden">
       {/* Stars Background */}
-      <div className="absolute inset-0 h-[125%]"> {/* Increased height to 125% */}
-        {[...Array(63)].map((_, i) => ( // Increased from 50 to 63 stars
+      <div className="absolute inset-0">
+        {[...Array(50)].map((_, i) => (
           <div
             key={i}
             className="absolute w-1 h-1 rounded-full animate-twinkle"
             style={{
               left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 125}%`, // Increased range to 125%
+              top: `${Math.random() * 100}%`,
               animationDelay: `${Math.random() * 3}s`,
               opacity: Math.random() * 0.7 + 0.3,
               backgroundColor: purpleShades[Math.floor(Math.random() * purpleShades.length)]
