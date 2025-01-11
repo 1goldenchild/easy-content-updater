@@ -79,7 +79,15 @@ const SecretKnowledge = () => {
                     For centuries, this powerful knowledge was hidden—reserved only for the world's wealthiest and most successful individuals. Kept secret under NDAs and passed down to a privileged few, it gave them a competitive edge that most could never access.
                   </p>
                   <div className="h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />
-                  <p className="text-lg leading-relaxed" style={{ color: '#FEF7CD' }}>
+                  <p 
+                    className="text-lg leading-relaxed bg-clip-text animate-text-shimmer"
+                    style={{
+                      background: 'linear-gradient(to right, #FFD700, #FFC000, #FFD700)',
+                      WebkitBackgroundClip: 'text',
+                      backgroundSize: '200% auto',
+                      color: 'transparent'
+                    }}
+                  >
                     Now, that same exclusive knowledge is available to you.
                   </p>
                   <div className="h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />

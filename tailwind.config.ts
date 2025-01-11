@@ -72,6 +72,14 @@ const config = {
         twinkle: {
           "0%, 100%": { opacity: "0.2" },
           "50%": { opacity: "1" }
+        },
+        "text-shimmer": {
+          "0%": {
+            "background-position": "-200% center"
+          },
+          "100%": {
+            "background-position": "200% center"
+          }
         }
       },
       animation: {
@@ -79,7 +87,8 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "shine": "shine 8s linear infinite",
         "shimmer": "shimmer 2s infinite",
-        "twinkle": "twinkle 3s ease-in-out infinite"
+        "twinkle": "twinkle 3s ease-in-out infinite",
+        "text-shimmer": "text-shimmer 3s ease-in-out infinite"
       },
     },
   },
