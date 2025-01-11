@@ -32,7 +32,7 @@ const Navbar = () => {
                 className="w-full block relative px-4 sm:px-8 py-2 rounded-lg bg-gradient-to-br from-amber-200/20 to-purple-500/20 backdrop-blur-sm border border-amber-200/30 text-amber-100 hover:text-amber-50 transition-colors"
               >
                 <span className="relative z-10 flex items-center">
-                  Get Started
+                  Get Your Analysis
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-900/10 to-transparent translate-x-[-200%] animate-shimmer" />
               </Link>
