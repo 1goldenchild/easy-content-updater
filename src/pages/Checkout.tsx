@@ -104,13 +104,57 @@ const Checkout = () => {
           animate={{ opacity: 1, y: 0 }}
           className="space-y-8"
         >
-          <div className="text-center">
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-amber-200 via-amber-300 to-amber-200 bg-clip-text text-transparent">
-              Complete Your Order
-            </h1>
-            <p className="mt-2 text-gray-400">
-              You're just moments away from unlocking your numerological destiny
-            </p>
+          <div className="text-center space-y-6 relative">
+            {/* Decorative elements */}
+            <div className="absolute inset-0 -z-10 overflow-hidden">
+              <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-amber-500/10 blur-3xl" />
+              <div className="absolute left-1/4 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-purple-500/10 blur-3xl" />
+            </div>
+            
+            {/* Main heading with animated gradient border */}
+            <motion.div
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="relative"
+            >
+              <h1 className="text-4xl font-bold inline-block relative p-1">
+                <span className="relative z-10 bg-gradient-to-r from-amber-200 via-amber-300 to-amber-200 bg-clip-text text-transparent">
+                  Complete Your Order
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-amber-200/50 via-amber-300/50 to-amber-200/50 blur-lg opacity-50 animate-pulse" />
+              </h1>
+            </motion.div>
+
+            {/* Subtitle with floating animation */}
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-lg relative inline-block"
+            >
+              <span className="relative z-10 px-6 py-2 rounded-full bg-gradient-to-r from-purple-900/20 via-purple-800/20 to-purple-900/20 backdrop-blur-sm border border-purple-500/20">
+                <span className="bg-gradient-to-r from-amber-100 via-amber-200 to-amber-100 bg-clip-text text-transparent">
+                  You're just moments away from unlocking your numerological destiny
+                </span>
+              </span>
+              
+              {/* Floating stars decoration */}
+              <motion.span
+                className="absolute -right-4 -top-4 text-amber-200"
+                animate={{ y: [-4, 4, -4], rotate: [0, 15, 0] }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
+                ✨
+              </motion.span>
+              <motion.span
+                className="absolute -left-4 -bottom-4 text-amber-200"
+                animate={{ y: [4, -4, 4], rotate: [0, -15, 0] }}
+                transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
+              >
+                ✨
+              </motion.span>
+            </motion.p>
           </div>
 
           <div className="space-y-6 bg-[#1A1508]/30 p-6 rounded-lg border border-amber-900/30 shadow-[0_0_15px_rgba(251,191,36,0.1)]">
