@@ -16,18 +16,19 @@ const Hero = () => {
 
   return (
     <section className="relative py-20 md:py-32 overflow-hidden">
-      {/* Stars Background */}
-      <div className="absolute inset-0">
+      {/* Stars Background - Added will-change-transform and translateZ for better performance */}
+      <div className="absolute inset-0 z-0 will-change-transform" style={{ transform: 'translateZ(0)' }}>
         {[...Array(50)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 rounded-full animate-twinkle"
+            className="absolute w-1 h-1 rounded-full animate-twinkle will-change-transform"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               animationDelay: `${Math.random() * 3}s`,
               opacity: Math.random() * 0.7 + 0.3,
-              backgroundColor: purpleShades[Math.floor(Math.random() * purpleShades.length)]
+              backgroundColor: purpleShades[Math.floor(Math.random() * purpleShades.length)],
+              transform: 'translateZ(0)'
             }}
           />
         ))}
@@ -57,7 +58,7 @@ const Hero = () => {
                 className="w-full bg-gradient-to-r from-[#1A1508] via-[#2A2311] to-[#1A1508] hover:from-[#2A2311] hover:via-[#3B3015] hover:to-[#2A2311] text-amber-200/90 font-semibold shadow-[0_0_15px_rgba(251,191,36,0.1)] transition-all duration-500 bg-[length:200%_auto] hover:bg-right-top hover:shadow-[0_0_20px_rgba(251,191,36,0.2)] border border-amber-900/30 rounded-md relative overflow-hidden"
               >
                 <span className="relative z-10 flex items-center">
-                  Get Your Analysis Now
+                  Get Started
                   <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-900/10 to-transparent translate-x-[-200%] animate-shimmer" />
@@ -68,6 +69,7 @@ const Hero = () => {
       </div>
       <div 
         className="absolute inset-0 bg-gradient-to-b from-purple-900/10 via-[#1a1a21] to-[#1a1a21] pointer-events-none"
+        style={{ transform: 'translateZ(0)' }}
       />
     </section>
   )
