@@ -90,19 +90,17 @@ const CallToAction = () => {
             </p>
 
             <div className="flex justify-center">
-
               <div className="w-full max-w-[280px] relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/20 via-purple-600/20 to-purple-500/20 rounded-md blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/20 via-purple-600/20 to-purple-500/20 rounded-md blur-xl opacity-75 group-hover:opacity-100 transition duration-300"></div>
                 <Button 
                   onClick={handleNavigate}
                   variant="gradient"
-                  className="w-full"
+                  className="w-full relative z-10 font-semibold text-base"
                 >
                   <span className="relative z-10">Get Your Personalized Analysis</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] animate-shimmer" />
                 </Button>
               </div>
-
             </div>
           </div>
           
@@ -154,8 +152,7 @@ const CallToAction = () => {
         </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default CallToAction
-
+export default CallToAction;

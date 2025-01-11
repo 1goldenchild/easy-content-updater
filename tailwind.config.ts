@@ -72,6 +72,11 @@ const config = {
         twinkle: {
           "0%, 100%": { opacity: "0.2" },
           "50%": { opacity: "1" }
+        },
+        gradient: {
+          "0%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "0% 50%" }
         }
       },
       animation: {
@@ -79,7 +84,8 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "shine": "shine 8s linear infinite",
         "shimmer": "shimmer 2s infinite",
-        "twinkle": "twinkle 3s ease-in-out infinite"
+        "twinkle": "twinkle 3s ease-in-out infinite",
+        "gradient": "gradient 3s ease infinite"
       },
     },
   },
