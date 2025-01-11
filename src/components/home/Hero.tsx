@@ -4,19 +4,18 @@ import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
 
 const Hero = () => {
-  // Array of purple shades from our color palette
   const purpleShades = [
-    '#9b87f5',  // Primary Purple
-    '#7E69AB',  // Secondary Purple
-    '#6E59A5',  // Tertiary Purple
-    '#D6BCFA',  // Light Purple
-    '#E5DEFF',  // Soft Purple
-    '#8B5CF6',  // Vivid Purple
+    '#9b87f5',
+    '#7E69AB',
+    '#6E59A5',
+    '#D6BCFA',
+    '#E5DEFF',
+    '#8B5CF6',
   ];
 
   return (
-    <section className="relative py-20 md:py-32 overflow-hidden">
-      {/* Stars Background - Added will-change-transform and translateZ for better performance */}
+    <section className="relative min-h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden">
+      {/* Stars Background */}
       <div className="absolute inset-0 z-0 will-change-transform" style={{ transform: 'translateZ(0)' }}>
         {[...Array(50)].map((_, i) => (
           <div
@@ -39,7 +38,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="flex flex-col items-center space-y-4 text-center relative z-10"
+          className="flex flex-col items-center space-y-8 text-center relative z-10"
         >
           <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none bg-gradient-to-r from-white via-amber-200 to-white bg-[length:200%_auto] animate-shine bg-clip-text text-transparent">
             Reach the next level with{" "}
