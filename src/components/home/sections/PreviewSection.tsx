@@ -26,24 +26,7 @@ const PreviewSection = () => {
   }, []);
 
   return (
-    <div className="space-y-8 relative">
-      {/* Stars Background */}
-      <div className="absolute inset-0 h-[125%]">
-        {[...Array(63)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 rounded-full animate-twinkle"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              opacity: Math.random() * 0.7 + 0.3,
-              backgroundColor: '#10B981' // emerald-500 color
-            }}
-          />
-        ))}
-      </div>
-
+    <div className="space-y-8">
       {/* Preview Heading - Visible on mobile */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
