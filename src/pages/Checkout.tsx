@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import ContactInfo from "@/components/checkout/ContactInfo"
-import PackageSelection from "@/components/checkout/PackageSelection"
+import PackageSelection, { packages } from "@/components/checkout/PackageSelection"
 import BillingInfo from "@/components/checkout/BillingInfo"
 import VIPOption from "@/components/checkout/VIPOption"
 import { Elements } from "@stripe/react-stripe-js"
@@ -10,7 +10,9 @@ import StripeElements from "@/components/checkout/StripeElements"
 import { toast } from "sonner"
 import { supabase } from "@/integrations/supabase/client"
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
+// Initialize Stripe with the publishable key
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '')
+console.log('Stripe initialization:', import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY ? 'Key present' : 'Key missing')
 
 const Checkout = () => {
   const [isProcessing, setIsProcessing] = useState(false)
