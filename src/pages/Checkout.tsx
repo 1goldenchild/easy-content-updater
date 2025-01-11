@@ -144,7 +144,7 @@ const Checkout = () => {
               <p className={`${isMobile ? 'text-sm sm:text-base max-w-[300px] sm:max-w-none' : 'text-lg'} relative inline-block`}>
                 <span className="relative z-10 px-3 sm:px-6 py-2 rounded-full bg-gradient-to-r from-purple-900/20 via-purple-800/20 to-purple-900/20 backdrop-blur-sm border border-purple-500/20">
                   <span className="bg-gradient-to-r from-amber-100 via-amber-200 to-amber-100 bg-clip-text text-transparent">
-                    You're just moments away from discovering your numerological DNA 🧬
+                    Moments away from discovering your numerological DNA 🧬
                   </span>
                 </span>
               </p>
