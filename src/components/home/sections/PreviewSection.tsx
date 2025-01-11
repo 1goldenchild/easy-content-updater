@@ -43,7 +43,7 @@ const PreviewSection = () => {
             transition={{ duration: 0.5 }}
           >
             <span className="bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] bg-clip-text text-transparent relative">
-              What's included in your analysis?
+              What's Included in Your Analysis?
             </span>
             <div className="absolute -inset-1 bg-gradient-to-r from-[#8B5CF6]/20 via-[#D946EF]/20 to-[#F97316]/20 rounded-lg blur-xl animate-pulse" />
           </motion.h3>
@@ -67,7 +67,7 @@ const PreviewSection = () => {
               transition={{ duration: 0.5 }}
             >
               <span className="bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] bg-clip-text text-transparent">
-                What's included in your analysis?
+                What's Included in Your Analysis?
               </span>
               <div className="absolute -inset-1 bg-gradient-to-r from-[#8B5CF6]/20 via-[#D946EF]/20 to-[#F97316]/20 rounded-lg blur-xl animate-pulse" />
             </motion.h3>
