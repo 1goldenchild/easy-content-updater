@@ -30,8 +30,6 @@ const BenefitCard = ({
   progress,
   alwaysLit = false,
 }: BenefitCardProps) => {
-  const isVisible = useTransform(progress, value => value > 0.1);
-  
   return (
     <motion.div
       style={{
@@ -48,22 +46,11 @@ const BenefitCard = ({
         }}
       />
       
-      <motion.div 
+      <div 
         className={`relative rounded-2xl p-6 lg:p-8 border ${borderColor} 
                     bg-gradient-to-br ${bgGradient} backdrop-blur-xl
                     transition-all duration-700 ease-out overflow-hidden
-                    h-[240px] flex flex-col justify-between`}
-        style={{
-          scale: useTransform(
-            progress,
-            value => value > 0.1 ? 1 : 0.95
-          ),
-          transition: "scale 0.3s ease-out"
-        }}
-        whileHover={{
-          scale: isVisible.get() ? 1.02 : 1,
-          transition: { duration: 0.3 }
-        }}
+                    hover:scale-[1.02] hover:shadow-2xl h-[240px] flex flex-col justify-between`}
       >
         <div className="absolute inset-0 bg-gradient-to-br from-white/[0.07] to-transparent rounded-2xl" />
         <div className={`absolute inset-0 bg-gradient-to-t ${burnGradient} rounded-2xl 
@@ -101,7 +88,7 @@ const BenefitCard = ({
             </p>
           </div>
         </div>
-      </motion.div>
+      </div>
     </motion.div>
   );
 };
