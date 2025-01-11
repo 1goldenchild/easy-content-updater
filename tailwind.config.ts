@@ -68,13 +68,18 @@ const config = {
         },
         shimmer: {
           "100%": { transform: "translateX(100%)" }
+        },
+        twinkle: {
+          "0%, 100%": { opacity: "0.2" },
+          "50%": { opacity: "1" }
         }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "shine": "shine 8s linear infinite",
-        "shimmer": "shimmer 2s infinite"
+        "shimmer": "shimmer 2s infinite",
+        "twinkle": "twinkle 3s ease-in-out infinite"
       },
     },
   },
