@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
 import { toast } from "sonner"
 import NumerologyResults from "@/components/numerology/NumerologyResults"
-import CompatibilityChart from "@/components/numerology/CompatibilityChart"
 import CountryCompatibility from "@/components/numerology/CountryCompatibility"
 import CarCompatibility from "@/components/numerology/CarCompatibility"
 import OccupationGuidance from "@/components/numerology/OccupationGuidance"
 import DateSelector from "@/components/numerology/DateSelector"
 import ProgressIndicator from "@/components/numerology/ProgressIndicator"
-import LoveCompatibility from "@/components/numerology/LoveCompatibility"
+import PortalHeader from "@/components/portal/PortalHeader"
+import CompatibilitySection from "@/components/portal/CompatibilitySection"
 import { 
   calculateLifePath, 
   calculatePartialEnergy, 
@@ -66,53 +65,31 @@ const Portal = () => {
         <div className="flex flex-col items-center">
           {showResults && <ProgressIndicator />}
           <div className="w-full space-y-8">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="w-full bg-white/5 p-8 rounded-xl backdrop-blur-sm border border-white/10"
-            >
-              <div>
-                <h2 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
-                  Portal Access
-                </h2>
-              </div>
+            <PortalHeader />
 
-              <DateSelector 
-                date={date}
-                setDate={setDate}
-                onCalculate={handleCalculate}
+            <DateSelector 
+              date={date}
+              setDate={setDate}
+              onCalculate={handleCalculate}
+            />
+
+            <div id="results">
+              <NumerologyResults 
+                lifePath={results.lifePath}
+                partialEnergy={results.partialEnergy}
+                secretNumber={results.secretNumber}
+                chineseZodiac={results.chineseZodiac}
+                isVisible={showResults}
               />
-
-              <div id="results">
-                <NumerologyResults 
-                  lifePath={results.lifePath}
-                  partialEnergy={results.partialEnergy}
-                  secretNumber={results.secretNumber}
-                  chineseZodiac={results.chineseZodiac}
-                  isVisible={showResults}
-                />
-              </div>
-            </motion.div>
+            </div>
 
             {showResults && (
               <>
-                <div id="compatibility" className="space-y-8">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="w-full bg-white/5 p-8 rounded-xl backdrop-blur-sm border border-white/10"
-                  >
-                    <h3 className="text-2xl font-bold text-white/90 mb-6">Compatibility Analysis</h3>
-                    <div className="space-y-8">
-                      <CompatibilityChart 
-                        lifePath={results.lifePath}
-                        isVisible={showResults}
-                      />
-                      <LoveCompatibility
-                        lifePathNumber={results.lifePath}
-                      />
-                    </div>
-                  </motion.div>
+                <div id="compatibility">
+                  <CompatibilitySection
+                    lifePath={results.lifePath}
+                    isVisible={showResults}
+                  />
                 </div>
 
                 <div id="occupation">
