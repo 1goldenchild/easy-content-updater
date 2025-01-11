@@ -59,9 +59,10 @@ const SecretKnowledge = () => {
               <Button 
                 onClick={handleNavigate}
                 size="lg"
-                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold px-8"
+                className="px-4 sm:px-8 py-2 rounded-lg bg-gradient-to-br from-amber-200/20 to-purple-500/20 backdrop-blur-sm border border-amber-200/30 text-amber-100 hover:text-amber-50 transition-colors group relative overflow-hidden"
               >
-                Get Your Numerology Analysis
+                <span className="relative z-10">Get Your Numerology Analysis</span>
+                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 animate-shine" />
               </Button>
             </div>
           </div>

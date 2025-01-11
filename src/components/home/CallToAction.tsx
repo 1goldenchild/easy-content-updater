@@ -12,7 +12,6 @@ export const scrollToTop = () => {
 const CallToAction = () => {
   const navigate = useNavigate();
 
-  // Handle navigation with scroll reset
   const handleNavigate = () => {
     navigate('/collect-info');
     scrollToTop();
@@ -99,9 +98,10 @@ const CallToAction = () => {
                 <Button 
                   onClick={handleNavigate}
                   size="lg" 
-                  className="w-full relative bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold text-base md:text-lg shadow-xl hover:shadow-2xl transition-all duration-200"
+                  className="w-full px-4 sm:px-8 py-2 rounded-lg bg-gradient-to-br from-amber-200/20 to-purple-500/20 backdrop-blur-sm border border-amber-200/30 text-amber-100 hover:text-amber-50 transition-colors group relative overflow-hidden"
                 >
-                  Get Your Personalized Analysis
+                  <span className="relative z-10">Get Your Personalized Analysis</span>
+                  <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 animate-shine" />
                 </Button>
               </div>
             </div>
