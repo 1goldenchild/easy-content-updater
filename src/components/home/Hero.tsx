@@ -4,6 +4,16 @@ import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
 
 const Hero = () => {
+  // Array of purple shades from our color palette
+  const purpleShades = [
+    '#9b87f5',  // Primary Purple
+    '#7E69AB',  // Secondary Purple
+    '#6E59A5',  // Tertiary Purple
+    '#D6BCFA',  // Light Purple
+    '#E5DEFF',  // Soft Purple
+    '#8B5CF6',  // Vivid Purple
+  ];
+
   return (
     <section className="relative py-20 md:py-32 overflow-hidden">
       {/* Stars Background */}
@@ -11,12 +21,13 @@ const Hero = () => {
         {[...Array(50)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-white rounded-full animate-twinkle"
+            className="absolute w-1 h-1 rounded-full animate-twinkle"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               animationDelay: `${Math.random() * 3}s`,
-              opacity: Math.random() * 0.7 + 0.3
+              opacity: Math.random() * 0.7 + 0.3,
+              backgroundColor: purpleShades[Math.floor(Math.random() * purpleShades.length)]
             }}
           />
         ))}
