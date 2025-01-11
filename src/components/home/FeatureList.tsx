@@ -13,8 +13,8 @@ import { useRef } from "react";
 const features = [
   {
     icon: Fingerprint,
-    title: "Personal Life Path Analysis",
-    description: "Discover your core numbers and their profound meaning in your life journey",
+    title: "Personalize Analysis",
+    description: "Unlock deeper insights into yourself with this personalized analysis",
     gradient: "from-blue-500 to-purple-500",
     neonColor: "rgb(147, 51, 234)",
     number: 1
@@ -37,7 +37,7 @@ const features = [
   },
   {
     icon: Car,
-    title: "Vehicle Harmony",
+    title: "Vehicle Compatibility",
     description: "Learn which vehicles resonate best with your energy patterns",
     gradient: "from-red-500 to-orange-500",
     neonColor: "rgb(249, 115, 22)",
