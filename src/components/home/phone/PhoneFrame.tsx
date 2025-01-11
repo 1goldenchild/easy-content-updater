@@ -32,7 +32,7 @@ const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProp
       transition={{ duration: 0.5 }}
       className="relative w-full max-w-[300px] mx-auto mb-12"
     >
-      <div className="relative w-full aspect-[9/19.5] bg-[#1A1F2C] rounded-[3rem] border-4 border-gray-800 shadow-2xl overflow-hidden">
+      <div className="relative w-full aspect-[9/19.5] bg-[#1A1F2C] rounded-[3rem] border-4 border-[#F3D06A] shadow-[0_0_15px_rgba(243,208,106,0.15)] overflow-hidden">
         {/* Preview Overlay */}
         <PreviewOverlay />
         
@@ -88,7 +88,7 @@ const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProp
         )}
 
         {/* Reflection Effect */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-[#F3D06A]/5 to-transparent pointer-events-none" />
         
         {/* Scroll Fade Overlays */}
         <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[#1A1F2C] to-transparent pointer-events-none z-10" />
@@ -100,13 +100,13 @@ const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProp
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.3 }}
-        className="absolute -left-8 -bottom-8 w-24 h-24 bg-gradient-to-r from-[#8B5CF6]/30 to-[#D946EF]/30 rounded-full blur-xl"
+        className="absolute -left-8 -bottom-8 w-24 h-24 bg-gradient-to-r from-[#F3D06A]/30 to-[#FFE5B4]/30 rounded-full blur-xl"
       />
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.4 }}
-        className="absolute -right-8 -top-8 w-24 h-24 bg-gradient-to-r from-[#0EA5E9]/30 to-[#8B5CF6]/30 rounded-full blur-xl"
+        className="absolute -right-8 -top-8 w-24 h-24 bg-gradient-to-r from-[#FFE5B4]/30 to-[#F3D06A]/30 rounded-full blur-xl"
       />
     </motion.div>
   );
