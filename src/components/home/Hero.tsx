@@ -6,6 +6,9 @@ import { Link } from "react-router-dom"
 const Hero = () => {
   return (
     <section className="relative py-20 md:py-32 overflow-hidden">
+      {/* Lightning effect overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-purple-600/5 via-transparent to-transparent animate-lightning pointer-events-none" />
+      
       <div className="container px-4 md:px-6">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

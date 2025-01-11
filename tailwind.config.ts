@@ -68,13 +68,28 @@ const config = {
         },
         shimmer: {
           "100%": { transform: "translateX(100%)" }
+        },
+        lightning: {
+          "0%, 9%, 11%, 100%": {
+            opacity: "0",
+          },
+          "10%": {
+            opacity: "0.3",
+          },
+          "80%, 90%": {
+            opacity: "0",
+          },
+          "85%": {
+            opacity: "0.5",
+          }
         }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "shine": "shine 8s linear infinite",
-        "shimmer": "shimmer 2s infinite"
+        "shimmer": "shimmer 2s infinite",
+        "lightning": "lightning 7s ease-in infinite"
       },
     },
   },
