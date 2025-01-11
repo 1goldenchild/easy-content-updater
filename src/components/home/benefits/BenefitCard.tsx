@@ -1,4 +1,4 @@
-import { motion, MotionValue } from "framer-motion";
+import { motion, useTransform, MotionValue } from "framer-motion";
 import { LucideIcon } from "lucide-react";
 
 interface BenefitCardProps {
@@ -59,7 +59,7 @@ const BenefitCard = ({
                        p-2 sm:p-2.5 ring-2 ring-white/10 group-hover:ring-white/20 
                        transition-all duration-700 relative`}
             style={{
-              filter: useTransform(progress, [0, 1], ["brightness(0.5)", "brightness(1.2)"])
+              filter: useTransform(progress, [0, 1], ["brightness(0.5)", "brightness(1.2)"]) as any
             }}
           >
             <div 
