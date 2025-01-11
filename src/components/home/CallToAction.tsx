@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Link, useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 
+// Add this at the top level of your file, outside any component
 export const scrollToTop = () => {
   window.scrollTo(0, 0);
 };
@@ -11,6 +12,7 @@ export const scrollToTop = () => {
 const CallToAction = () => {
   const navigate = useNavigate();
 
+  // Handle navigation with scroll reset
   const handleNavigate = () => {
     navigate('/collect-info');
     scrollToTop();
@@ -18,6 +20,7 @@ const CallToAction = () => {
 
   return (
     <section className="py-12 md:py-20 relative overflow-hidden">
+      {/* Stars Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[#1A1F2C]">
           <svg className="w-full h-full opacity-70" xmlns="http://www.w3.org/2000/svg">
@@ -63,6 +66,7 @@ const CallToAction = () => {
           className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-purple-900/90 to-pink-900/90 p-6 md:p-12"
         >
           <div className="relative z-10 text-center space-y-4 md:space-y-6">
+            {/* Animated Icon */}
             <motion.div
               animate={{
                 y: [0, -10, 0],
@@ -89,21 +93,21 @@ const CallToAction = () => {
               living a life that aligns with your true purpose.
             </p>
 
+            {/* Centered Button with Fixed Width */}
             <div className="flex justify-center">
-              <div className="w-full max-w-[280px] relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/20 via-purple-600/20 to-purple-500/20 rounded-md blur-xl opacity-75 group-hover:opacity-100 transition duration-300"></div>
+              <div className="w-full max-w-[280px]">
                 <Button 
                   onClick={handleNavigate}
-                  variant="gradient"
-                  className="w-full relative z-10 font-semibold text-base"
+                  size="lg" 
+                  className="w-full relative bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold text-base md:text-lg shadow-xl hover:shadow-2xl transition-all duration-200"
                 >
-                  <span className="relative z-10">Get Your Personalized Analysis</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] animate-shimmer" />
+                  Get Your Personalized Analysis
                 </Button>
               </div>
             </div>
           </div>
           
+          {/* Background Effects */}
           {[...Array(5)].map((_, i) => (
             <motion.div
               key={i}
@@ -152,7 +156,7 @@ const CallToAction = () => {
         </motion.div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default CallToAction;
+export default CallToAction

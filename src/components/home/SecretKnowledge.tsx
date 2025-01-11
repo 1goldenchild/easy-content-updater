@@ -56,16 +56,13 @@ const SecretKnowledge = () => {
               Unlock the secrets that have shaped the fortunes of the elite. Gain the insights that have been guarded for generations—and use them to transform your life, accelerate your success, and create the future you've always desired.
             </p>
             <div className="pt-6">
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-amber-200/20 via-purple-500/20 to-amber-200/20 rounded-md blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
-                <Button 
-                  onClick={handleNavigate}
-                  className="relative px-4 sm:px-8 py-2 rounded-lg bg-gradient-to-br from-amber-200/20 to-purple-500/20 backdrop-blur-sm border border-amber-200/30 text-amber-100 hover:text-amber-50 transition-colors overflow-hidden"
-                >
-                  <span className="relative z-10">Get Your Numerology Analysis</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-900/10 to-transparent translate-x-[-200%] animate-shimmer" />
-                </Button>
-              </div>
+              <Button 
+                onClick={handleNavigate}
+                size="lg"
+                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold px-8"
+              >
+                Get Your Numerology Analysis
+              </Button>
             </div>
           </div>
         </motion.div>
