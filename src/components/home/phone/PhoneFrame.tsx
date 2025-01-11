@@ -44,13 +44,22 @@ const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProp
           {children}
         </div>
 
+        {/* Frosted Glass Overlay */}
+        {!hasScrolled && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 backdrop-blur-sm bg-white/10 z-20"
+          />
+        )}
+
         {/* Scroll Indicator */}
         {!hasScrolled && (
           <motion.div 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            className="absolute bottom-16 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 flex flex-col items-center"
           >
             <motion.div
               animate={{ y: [0, 12, 0] }}
@@ -62,19 +71,19 @@ const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProp
               }}
               className="relative"
             >
-              {/* Thumb/Swipe Gesture Icon */}
-              <div className="w-8 h-12 rounded-full border-2 border-amber-200/90 relative">
-                <motion.div 
-                  className="absolute w-3 h-3 bg-amber-200/90 rounded-full left-1/2 -translate-x-1/2 top-2"
-                  animate={{ y: [0, 4, 0] }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                    ease: "easeInOut"
-                  }}
-                />
-              </div>
+              {/* Scroll Gesture Icon */}
+              <motion.img 
+                src="/lovable-uploads/a48b0ec0-c027-4d4a-a992-435a3c309b00.png"
+                alt="Scroll gesture"
+                className="w-12 h-12 text-amber-200"
+                animate={{ y: [0, 8, 0] }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  ease: "easeInOut"
+                }}
+              />
             </motion.div>
             <span className="text-xs text-amber-200/70 mt-3">Scroll to explore</span>
           </motion.div>
