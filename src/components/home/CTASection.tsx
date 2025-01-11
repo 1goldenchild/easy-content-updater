@@ -105,7 +105,7 @@ const CTASection = () => {
           <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/20 via-purple-600/20 to-purple-500/20 rounded-md blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
           <Button
             onClick={handleGetStarted}
-            className="relative px-6 py-3 rounded-lg bg-gradient-to-r from-purple-500 via-purple-600 to-purple-500 text-white font-semibold shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 border border-purple-400/50 hover:border-purple-400/80 transform hover:scale-[1.02] transition-all duration-200 overflow-hidden"
+            className="w-full block relative px-4 sm:px-8 py-2 rounded-lg bg-gradient-to-br from-amber-200/20 to-purple-500/20 backdrop-blur-sm border border-amber-200/30 text-amber-100 hover:text-amber-50 transition-colors"
           >
             <span className="relative z-10">Start Your Analysis</span>
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] animate-shimmer" />
