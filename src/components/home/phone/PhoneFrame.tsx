@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { ReactNode, useState, useEffect } from "react";
+import { ChevronDown } from "lucide-react";
 import PreviewOverlay from "./PreviewOverlay";
 
 interface PhoneFrameProps {
@@ -9,6 +10,22 @@ interface PhoneFrameProps {
 }
 
 const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProps) => {
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!hasScrolled) {
+        setHasScrolled(true);
+      }
+    };
+
+    const container = document.querySelector('.scrollbar-hide');
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
+      return () => container.removeEventListener('scroll', handleScroll);
+    }
+  }, [hasScrolled]);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -27,6 +44,29 @@ const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProp
         <div className="absolute inset-0 overflow-y-auto overflow-x-hidden scrollbar-hide">
           {children}
         </div>
+
+        {/* Scroll Indicator */}
+        {!hasScrolled && (
+          <motion.div 
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            className="absolute bottom-16 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center"
+          >
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ 
+                duration: 1.5,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut"
+              }}
+            >
+              <ChevronDown className="w-6 h-6 text-amber-200/90" />
+            </motion.div>
+            <span className="text-xs text-amber-200/70 mt-1">Scroll to explore</span>
+          </motion.div>
+        )}
 
         {/* Reflection Effect */}
         <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none" />
