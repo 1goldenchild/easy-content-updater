@@ -16,8 +16,8 @@ const Hero = () => {
 
   return (
     <section className="relative py-20 md:py-32 overflow-hidden">
-      {/* Stars Background */}
-      <div className="absolute inset-0">
+      {/* Stars Background - Added will-change-transform to optimize performance */}
+      <div className="absolute inset-0 z-0 will-change-transform">
         {[...Array(50)].map((_, i) => (
           <div
             key={i}
@@ -27,7 +27,9 @@ const Hero = () => {
               top: `${Math.random() * 100}%`,
               animationDelay: `${Math.random() * 3}s`,
               opacity: Math.random() * 0.7 + 0.3,
-              backgroundColor: purpleShades[Math.floor(Math.random() * purpleShades.length)]
+              backgroundColor: purpleShades[Math.floor(Math.random() * purpleShades.length)],
+              willChange: 'opacity',
+              transform: 'translateZ(0)'
             }}
           />
         ))}
@@ -67,7 +69,7 @@ const Hero = () => {
         </motion.div>
       </div>
       <div 
-        className="absolute inset-0 bg-gradient-to-b from-purple-900/10 via-[#1a1a21] to-[#1a1a21] pointer-events-none"
+        className="absolute inset-0 bg-gradient-to-b from-purple-900/10 via-[#1a1a21] to-[#1a1a21] pointer-events-none z-[1]"
       />
     </section>
   )
