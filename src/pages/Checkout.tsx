@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import ContactInfo from "@/components/checkout/ContactInfo"
-import PackageSelection, { packages } from "@/components/checkout/PackageSelection"
+import PackageSelection from "@/components/checkout/PackageSelection"
 import BillingInfo from "@/components/checkout/BillingInfo"
 import VIPOption from "@/components/checkout/VIPOption"
 import { Elements } from "@stripe/react-stripe-js"
