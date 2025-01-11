@@ -26,35 +26,43 @@ const Hero = () => {
     <section className="relative min-h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden">
       {/* Stars Background - Purple Stars */}
       <div className="absolute inset-0 z-0 will-change-transform" style={{ transform: 'translateZ(0)' }}>
-        {[...Array(50)].map((_, i) => (
-          <div
-            key={`purple-${i}`}
-            className="absolute w-1 h-1 rounded-full animate-twinkle will-change-transform"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              opacity: Math.random() * 0.7 + 0.3,
-              backgroundColor: purpleShades[Math.floor(Math.random() * purpleShades.length)],
-              transform: 'translateZ(0)'
-            }}
-          />
-        ))}
+        {[...Array(75)].map((_, i) => {
+          const color = purpleShades[Math.floor(Math.random() * purpleShades.length)];
+          return (
+            <div
+              key={`purple-${i}`}
+              className="absolute w-0.5 h-0.5 rounded-full animate-twinkle will-change-transform"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                opacity: Math.random() * 0.7 + 0.3,
+                backgroundColor: color,
+                boxShadow: `0 0 3px 1px ${color}`,
+                transform: 'translateZ(0)'
+              }}
+            />
+          );
+        })}
         {/* Golden Stars */}
-        {[...Array(50)].map((_, i) => (
-          <div
-            key={`gold-${i}`}
-            className="absolute w-1 h-1 rounded-full animate-twinkle will-change-transform"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              opacity: Math.random() * 0.7 + 0.3,
-              backgroundColor: goldShades[Math.floor(Math.random() * goldShades.length)],
-              transform: 'translateZ(0)'
-            }}
-          />
-        ))}
+        {[...Array(75)].map((_, i) => {
+          const color = goldShades[Math.floor(Math.random() * goldShades.length)];
+          return (
+            <div
+              key={`gold-${i}`}
+              className="absolute w-0.5 h-0.5 rounded-full animate-twinkle will-change-transform"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                opacity: Math.random() * 0.7 + 0.3,
+                backgroundColor: color,
+                boxShadow: `0 0 3px 1px ${color}`,
+                transform: 'translateZ(0)'
+              }}
+            />
+          );
+        })}
       </div>
 
       <div className="container px-4 md:px-6">
