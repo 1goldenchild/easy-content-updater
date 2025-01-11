@@ -55,11 +55,11 @@ const Benefits = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "start start"]  // Changed this line to make benefits appear sooner
+    offset: ["start end", "start start"]
   });
 
   return (
-    <section className="relative -mt-20 py-20 overflow-hidden" ref={containerRef}>
+    <section className="relative -mt-10 py-20 overflow-hidden" ref={containerRef}>
       <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a21] via-[#1A1F2C]/95 to-[#221F26]" />
       
       <div className="relative max-w-7xl mx-auto px-3 md:px-4">
@@ -67,7 +67,7 @@ const Benefits = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-6 relative">
           {benefits.map((benefit, index) => {
-            const startTrigger = 0.1 + (index * 0.08); // Reduced delay for earlier appearance
+            const startTrigger = 0.1 + (index * 0.08);
             const endTrigger = startTrigger + 0.15;
 
             const cardProgress = useTransform(
