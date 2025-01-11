@@ -83,7 +83,7 @@ const BenefitCard = ({
               {title}
             </h3>
             
-            <p className="text-base text-white/70 leading-relaxed line-clamp-3">
+            <p className="text-base text-white/70 leading-relaxed line-clamp-4">
               {description}
             </p>
           </div>
