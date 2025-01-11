@@ -79,11 +79,11 @@ const BenefitCard = ({
           
           <div className="flex-1">
             <h3 className="text-2xl sm:text-3xl font-bold bg-clip-text text-transparent 
-                         bg-gradient-to-br from-white to-white/80 mb-3">
+                         bg-gradient-to-br from-white to-white/80 mb-2">
               {title}
             </h3>
             
-            <p className="text-base text-white/70 leading-relaxed line-clamp-5 pb-4">
+            <p className="text-base text-white/70 leading-relaxed line-clamp-4 mb-4">
               {description}
             </p>
           </div>
