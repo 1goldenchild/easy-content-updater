@@ -50,7 +50,7 @@ const BenefitCard = ({
         className={`relative rounded-2xl p-6 lg:p-8 border ${borderColor} 
                     bg-gradient-to-br ${bgGradient} backdrop-blur-xl
                     transition-all duration-700 ease-out overflow-hidden
-                    hover:scale-[1.02] hover:shadow-2xl h-[200px] flex flex-col justify-between`}
+                    hover:scale-[1.02] hover:shadow-2xl h-[220px] flex flex-col justify-between`}
       >
         <div className="absolute inset-0 bg-gradient-to-br from-white/[0.07] to-transparent rounded-2xl" />
         <div className={`absolute inset-0 bg-gradient-to-t ${burnGradient} rounded-2xl 
@@ -83,7 +83,7 @@ const BenefitCard = ({
               {title}
             </h3>
             
-            <p className="text-base text-white/70 leading-relaxed line-clamp-4">
+            <p className="text-base text-white/70 leading-relaxed line-clamp-5">
               {description}
             </p>
           </div>
