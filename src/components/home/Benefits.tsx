@@ -12,7 +12,7 @@ const benefits = [
     bgGradient: "from-blue-400/10 via-blue-500/5 to-purple-500/10",
     iconColor: "text-blue-400",
     borderColor: "border-blue-500/20",
-    burnGradient: "from-blue-400/0 via-blue-400/10 to-purple-500/5",
+    burnGradient: "from-blue-400/0 via-blue-400/30 to-blue-500/20",
     glowColor: "blue",
     neonColor: "rgba(59, 130, 246, 0.5)"
   },
@@ -23,9 +23,9 @@ const benefits = [
     bgGradient: "from-purple-400/10 via-pink-500/5 to-red-500/10",
     iconColor: "text-purple-400",
     borderColor: "border-purple-500/20",
-    burnGradient: "from-purple-400/0 via-purple-400/10 to-pink-500/5",
+    burnGradient: "from-purple-400/0 via-purple-400/30 to-purple-500/20",
     glowColor: "purple",
-    neonColor: "rgba(168, 85, 247, 0.5)" // Purple neon
+    neonColor: "rgba(168, 85, 247, 0.5)"
   },
   {
     icon: Sparkles,
@@ -34,9 +34,9 @@ const benefits = [
     bgGradient: "from-amber-400/10 via-orange-500/5 to-red-500/10",
     iconColor: "text-amber-400",
     borderColor: "border-amber-500/20",
-    burnGradient: "from-amber-400/0 via-amber-400/10 to-orange-500/5",
+    burnGradient: "from-amber-400/0 via-amber-400/30 to-amber-500/20",
     glowColor: "amber",
-    neonColor: "rgba(251, 191, 36, 0.5)" // Amber neon
+    neonColor: "rgba(251, 191, 36, 0.5)"
   },
   {
     icon: Target,
@@ -45,9 +45,9 @@ const benefits = [
     bgGradient: "from-emerald-400/10 via-teal-500/5 to-cyan-500/10",
     iconColor: "text-emerald-400",
     borderColor: "border-emerald-500/20",
-    burnGradient: "from-emerald-400/0 via-emerald-400/10 to-teal-500/5",
+    burnGradient: "from-emerald-400/0 via-emerald-400/30 to-emerald-500/20",
     glowColor: "emerald",
-    neonColor: "rgba(52, 211, 153, 0.5)" // Emerald neon
+    neonColor: "rgba(52, 211, 153, 0.5)"
   }
 ];
 
@@ -90,17 +90,16 @@ const Benefits = () => {
           </div>
 
           {benefits.map((benefit, index) => {
-            // Adjust the timing by reducing the multiplier and offset
             const progress = useTransform(
               scrollYProgress,
-              [index * 0.15, Math.min(0.85, (index + 1) * 0.15)], // Reduced from 0.2 to 0.15 and capped at 0.85
+              [index * 0.2, Math.min(0.85, (index + 1) * 0.2)],
               [0, 1]
             );
 
             const nextProgress = index < benefits.length - 1 
               ? useTransform(
                   scrollYProgress,
-                  [(index + 1) * 0.15, Math.min(0.85, (index + 2) * 0.15)],
+                  [(index + 1) * 0.2, Math.min(0.85, (index + 2) * 0.2)],
                   [0, 1]
                 )
               : null;
