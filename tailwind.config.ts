@@ -74,17 +74,23 @@ const config = {
           "100%": { transform: "translateX(100%)" }
         },
         lightning: {
-          "0%, 9%, 11%, 100%": {
+          "0%, 5%, 100%": {
             opacity: "0",
           },
-          "10%": {
-            opacity: "0.8",
+          "2%, 4%": {
+            opacity: "1",
           },
-          "80%, 90%": {
+          "3%": {
+            opacity: "0.6",
+          },
+          "50%, 60%": {
             opacity: "0",
           },
-          "85%": {
+          "54%": {
             opacity: "0.9",
+          },
+          "55%": {
+            opacity: "0.4",
           }
         }
       },
@@ -93,7 +99,7 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "shine": "shine 8s linear infinite",
         "shimmer": "shimmer 2s infinite",
-        "lightning": "lightning 5s ease-in infinite"
+        "lightning": "lightning 7s ease-in infinite"
       },
     },
   },
