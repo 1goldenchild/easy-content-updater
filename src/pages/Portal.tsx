@@ -1,63 +1,53 @@
-import { useState, useEffect } from "react"
-import { toast } from "sonner"
-import NumerologyResults from "@/components/numerology/NumerologyResults"
-import CountryCompatibility from "@/components/numerology/CountryCompatibility"
-import CarCompatibility from "@/components/numerology/CarCompatibility"
-import OccupationGuidance from "@/components/numerology/OccupationGuidance"
-import DateSelector from "@/components/numerology/DateSelector"
-import ProgressIndicator from "@/components/numerology/ProgressIndicator"
-import PortalHeader from "@/components/portal/PortalHeader"
-import CompatibilitySection from "@/components/portal/CompatibilitySection"
+import { useState, useEffect } from "react";
+import { toast } from "sonner";
+import PortalHeader from "@/components/portal/PortalHeader";
+import DateInputSection from "@/components/portal/DateInputSection";
+import ResultsSection from "@/components/portal/ResultsSection";
+import ProgressIndicator from "@/components/numerology/ProgressIndicator";
 import { 
   calculateLifePath, 
   calculatePartialEnergy, 
   calculateSecretNumber, 
   getChineseZodiac 
-} from "@/utils/numerologyCalculations"
+} from "@/utils/numerologyCalculations";
 
 const Portal = () => {
-  const [date, setDate] = useState<Date>()
-  const [showResults, setShowResults] = useState(false)
+  const [showResults, setShowResults] = useState(false);
   const [results, setResults] = useState({
     lifePath: 0,
     partialEnergy: 0,
     secretNumber: 0,
     chineseZodiac: ""
-  })
+  });
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
-  const handleCalculate = () => {
-    if (!date) {
-      toast.error("Please select your date of birth")
-      return
-    }
-
-    console.log("Calculating numerology for date:", date)
+  const handleCalculate = (date: Date) => {
+    console.log("Calculating numerology for date:", date);
     
-    const lifePath = calculateLifePath(date)
-    const partialEnergy = calculatePartialEnergy(date.getDate())
-    const secretNumber = calculateSecretNumber(date)
-    const chineseZodiac = getChineseZodiac(date.getFullYear())
+    const lifePath = calculateLifePath(date);
+    const partialEnergy = calculatePartialEnergy(date.getDate());
+    const secretNumber = calculateSecretNumber(date);
+    const chineseZodiac = getChineseZodiac(date.getFullYear());
 
     console.log("Calculation results:", {
       lifePath,
       partialEnergy,
       secretNumber,
       chineseZodiac
-    })
+    });
 
     setResults({
       lifePath,
       partialEnergy,
       secretNumber,
       chineseZodiac
-    })
-    setShowResults(true)
-    toast.success("Calculation complete!")
-  }
+    });
+    setShowResults(true);
+    toast.success("Calculation complete!");
+  };
 
   return (
     <div className="min-h-screen w-full overflow-x-hidden">
@@ -66,54 +56,11 @@ const Portal = () => {
           {showResults && <ProgressIndicator />}
           <div className="w-full space-y-8">
             <PortalHeader />
-
-            <DateSelector 
-              date={date}
-              setDate={setDate}
-              onCalculate={handleCalculate}
+            <DateInputSection onCalculate={handleCalculate} />
+            <ResultsSection 
+              results={results}
+              isVisible={showResults}
             />
-
-            <div id="results">
-              <NumerologyResults 
-                lifePath={results.lifePath}
-                partialEnergy={results.partialEnergy}
-                secretNumber={results.secretNumber}
-                chineseZodiac={results.chineseZodiac}
-                isVisible={showResults}
-              />
-            </div>
-
-            {showResults && (
-              <>
-                <div id="compatibility">
-                  <CompatibilitySection
-                    lifePath={results.lifePath}
-                    isVisible={showResults}
-                  />
-                </div>
-
-                <div id="occupation">
-                  <OccupationGuidance
-                    lifePath={results.lifePath}
-                    isVisible={showResults}
-                  />
-                </div>
-
-                <div id="country">
-                  <CountryCompatibility
-                    chineseZodiac={results.chineseZodiac}
-                    isVisible={showResults}
-                  />
-                </div>
-
-                <div id="car">
-                  <CarCompatibility
-                    chineseZodiac={results.chineseZodiac}
-                    isVisible={showResults}
-                  />
-                </div>
-              </>
-            )}
           </div>
         </div>
       </div>
