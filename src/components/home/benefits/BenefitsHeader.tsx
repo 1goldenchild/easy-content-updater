@@ -37,7 +37,7 @@ const BenefitsHeader = () => {
             
             {/* Title */}
             <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 bg-clip-text text-transparent animate-shine bg-[length:200%_auto]">
-              Unlock Your Hidden Potential
+              Activate Your Hidden Potential
             </h2>
 
             {/* Subtitle */}
@@ -48,8 +48,8 @@ const BenefitsHeader = () => {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="text-base md:text-lg text-amber-300/90 font-medium max-w-2xl mx-auto"
             >
-              Discover how numerology can transform your understanding of yourself 
-              and the world around you.
+              Discover how numerology can revolutionize your understanding of yourself 
+              and the world, and unlock its transformative benefits.
             </motion.p>
           </motion.div>
         </div>

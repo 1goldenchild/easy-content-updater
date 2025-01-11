@@ -79,7 +79,7 @@ export const previewTemplate = (userData: { name: string }) => `
 <body>
   <div class="container">
     <div class="header">
-      <h1 class="title">What's included in your analysis?</h1>
+      <h1 class="title">What's Included in Your Analysis?</h1>
     </div>
     
     <div class="preview-section">
