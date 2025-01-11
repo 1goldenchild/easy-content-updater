@@ -11,6 +11,7 @@ interface BenefitCardProps {
   burnGradient: string;
   glowColor: string;
   neonColor: string;
+  iconBg: string;
   progress: MotionValue<number>;
   index: number;
   alwaysLit?: boolean;
@@ -25,6 +26,7 @@ const BenefitCard = ({
   borderColor,
   burnGradient,
   neonColor,
+  iconBg,
   progress,
   alwaysLit = false,
 }: BenefitCardProps) => {
@@ -56,10 +58,11 @@ const BenefitCard = ({
         
         <div className="relative flex items-start space-x-6">
           <motion.div 
-            className={`${iconColor} w-12 h-12 sm:w-14 sm:h-14 rounded-xl 
-                       bg-white/10 p-3 ring-2 ring-white/20 
-                       group-hover:ring-white/30 transition-all duration-700 
-                       relative backdrop-blur-xl flex-shrink-0`}
+            className={`${iconColor} ${iconBg} w-12 h-12 sm:w-14 sm:h-14 rounded-xl 
+                       p-3 ring-2 ring-white/30 
+                       group-hover:ring-white/50 transition-all duration-700 
+                       relative backdrop-blur-xl flex-shrink-0
+                       shadow-lg`}
             style={{
               filter: useTransform(progress, [0, 1], ["brightness(0.5)", "brightness(1.2)"]) as any
             }}

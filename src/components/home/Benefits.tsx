@@ -10,44 +10,48 @@ const benefits = [
     title: "Understand People Better",
     description: "Use numerology to gain deep insights into yourself and others. Understand the motivations behind people's actions, discover why they behave the way they do, and unlock the hidden dynamics of your relationships.",
     bgGradient: "from-[#FEC6A1] via-[#D946EF]/20 to-[#9b87f5]/30",
-    iconColor: "text-[#FEC6A1]",
+    iconColor: "text-white",
     borderColor: "border-[#FEC6A1]/20",
     burnGradient: "from-[#FEC6A1]/0 via-[#FEC6A1]/20 to-[#D946EF]/10",
     glowColor: "amber",
-    neonColor: "rgba(254, 198, 161, 0.5)"
+    neonColor: "rgba(254, 198, 161, 0.5)",
+    iconBg: "bg-gradient-to-br from-[#FEC6A1] to-[#D946EF]"
   },
   {
     icon: TrendingUp,
     title: "Find Your True Path",
     description: "Discover the opportunities meant for you by aligning your actions with your natural path. When you understand your true purpose, you can move with confidence and clarity, making decisions that resonate with your inner strengths.",
     bgGradient: "from-[#9b87f5] via-[#7E69AB]/20 to-[#D946EF]/30",
-    iconColor: "text-[#9b87f5]",
+    iconColor: "text-white",
     borderColor: "border-[#9b87f5]/20",
     burnGradient: "from-[#9b87f5]/0 via-[#9b87f5]/20 to-[#7E69AB]/10",
     glowColor: "purple",
-    neonColor: "rgba(155, 135, 245, 0.5)"
+    neonColor: "rgba(155, 135, 245, 0.5)",
+    iconBg: "bg-gradient-to-br from-[#9b87f5] to-[#7E69AB]"
   },
   {
     icon: Sparkles,
     title: "Unlock Abundance",
     description: "Tap into the powerful numbers that unlock prosperity and guide you toward smarter financial decisions. Use the precision of numerology to identify the most profitable opportunities and align your actions with abundance.",
     bgGradient: "from-[#D946EF] via-[#9b87f5]/20 to-[#FEC6A1]/30",
-    iconColor: "text-[#D946EF]",
+    iconColor: "text-white",
     borderColor: "border-[#D946EF]/20",
     burnGradient: "from-[#D946EF]/0 via-[#D946EF]/20 to-[#9b87f5]/10",
     glowColor: "pink",
-    neonColor: "rgba(217, 70, 239, 0.5)"
+    neonColor: "rgba(217, 70, 239, 0.5)",
+    iconBg: "bg-gradient-to-br from-[#D946EF] to-[#9b87f5]"
   },
   {
     icon: Target,
     title: "Discover Your Truth",
     description: "The truth about your numbers will reveal powerful insights into who you really are—illuminating the reasons behind your behaviors, choices, and patterns in life. Numerology teaches you to understand not just your strengths and potential.",
     bgGradient: "from-[#7E69AB] via-[#D946EF]/20 to-[#9b87f5]/30",
-    iconColor: "text-[#7E69AB]",
+    iconColor: "text-white",
     borderColor: "border-[#7E69AB]/20",
     burnGradient: "from-[#7E69AB]/0 via-[#7E69AB]/20 to-[#D946EF]/10",
     glowColor: "purple",
-    neonColor: "rgba(126, 105, 171, 0.5)"
+    neonColor: "rgba(126, 105, 171, 0.5)",
+    iconBg: "bg-gradient-to-br from-[#7E69AB] to-[#D946EF]"
   }
 ];
 
