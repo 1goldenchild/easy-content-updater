@@ -55,7 +55,7 @@ const Benefits = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"]
+    offset: ["start end", "center center"] // Changed to trigger at center viewport
   });
 
   return (
@@ -66,41 +66,18 @@ const Benefits = () => {
         <BenefitsHeader />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-6 relative">
-          {/* Connecting lines */}
-          <div className="absolute inset-0 pointer-events-none">
-            <svg className="w-full h-full">
-              <motion.path
-                d="M 20,20 L 80,80 M 80,20 L 20,80"
-                stroke="url(#gradient-line)"
-                strokeWidth="2"
-                fill="none"
-                className="opacity-30"
-                style={{
-                  pathLength: scrollYProgress
-                }}
-              />
-              <defs>
-                <linearGradient id="gradient-line" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#8B5CF6" />
-                  <stop offset="50%" stopColor="#EC4899" />
-                  <stop offset="100%" stopColor="#6EE7B7" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-
           {benefits.map((benefit, index) => {
-            // Adjust the timing by reducing the multiplier and offset
+            // Adjust timing for smoother sequential animations
             const progress = useTransform(
               scrollYProgress,
-              [index * 0.15, Math.min(0.85, (index + 1) * 0.15)], // Reduced from 0.2 to 0.15 and capped at 0.85
+              [0.3 + index * 0.1, 0.5 + index * 0.1], // Start earlier, end at 50% + offset
               [0, 1]
             );
 
             const nextProgress = index < benefits.length - 1 
               ? useTransform(
                   scrollYProgress,
-                  [(index + 1) * 0.15, Math.min(0.85, (index + 2) * 0.15)],
+                  [0.3 + (index + 1) * 0.1, 0.5 + (index + 1) * 0.1],
                   [0, 1]
                 )
               : null;
