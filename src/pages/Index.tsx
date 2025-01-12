@@ -3,6 +3,7 @@ import SecretKnowledge from "@/components/home/SecretKnowledge"
 import Benefits from "@/components/home/Benefits"
 import SalesPitch from "@/components/home/SalesPitch"
 import Testimonials from "@/components/home/Testimonials"
+import BlogSection from "@/components/home/sections/BlogSection"
 
 const Index = () => {
   return (
@@ -18,6 +19,9 @@ const Index = () => {
       </div>
       <div id="testimonials">
         <Testimonials />
+      </div>
+      <div id="blog">
+        <BlogSection />
       </div>
       <div id="knowledge">
         <SecretKnowledge />
