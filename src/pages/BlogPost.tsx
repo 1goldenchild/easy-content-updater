@@ -12,7 +12,7 @@ const blogPosts = {
 
         <div class="relative h-[400px] w-full mb-8 rounded-lg overflow-hidden">
           <img src="/lovable-uploads/73da4848-4fc6-412c-b1a9-0efc609335e3.png" alt="Steve Jobs presenting with Apple logo" class="absolute inset-0 w-full h-full object-cover" />
-          <div class="absolute inset-0 bg-gradient-to-b from-transparent to-background/80" />
+          <div class="absolute inset-0 bg-gradient-to-b from-transparent to-background/80"></div>
         </div>
 
         <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">Steve Jobs' Journey to India and learning the Power of Numbers</h2>
@@ -51,7 +51,7 @@ const blogPosts = {
           <p class="text-xl font-semibold text-center mb-4">Ready to discover your numerological path to success?</p>
           <p class="text-lg text-center mb-6">Get your personal numerology analysis today and unlock the power of numbers in your life.</p>
           <div class="flex justify-center">
-            <Link to="/" className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-gradient-to-r from-[#86736f] to-[#c4b5b1] rounded-lg hover:opacity-90 transition-opacity">
+            <Link to="/numerology-reading" className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-gradient-to-r from-[#86736f] to-[#c4b5b1] rounded-lg hover:opacity-90 transition-opacity">
               Get Your Reading Now
             </Link>
           </div>
@@ -100,7 +100,7 @@ const blogPosts = {
           <p class="text-xl font-semibold text-center mb-4">Ready to discover your numerological path to success?</p>
           <p class="text-lg text-center mb-6">Get your personal numerology analysis today and unlock the power of numbers in your life.</p>
           <div class="flex justify-center">
-            <Link to="/" className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-gradient-to-r from-[#86736f] to-[#c4b5b1] rounded-lg hover:opacity-90 transition-opacity">
+            <Link to="/numerology-reading" className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-gradient-to-r from-[#86736f] to-[#c4b5b1] rounded-lg hover:opacity-90 transition-opacity">
               Get Your Reading Now
             </Link>
           </div>
@@ -159,7 +159,7 @@ const blogPosts = {
           <p class="text-xl font-semibold text-center mb-4">Ready to Discover Your Numerological Path to Success?</p>
           <p class="text-lg text-center mb-6">If you're inspired by the idea of using numerology to attract success and wealth, why not discover how the numbers in your own life align with your goals? Get your personal numerology analysis and learn how the power of numbers can guide you toward financial prosperity and personal achievement.</p>
           <div class="flex justify-center">
-            <Link to="/" className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-gradient-to-r from-[#86736f] to-[#c4b5b1] rounded-lg hover:opacity-90 transition-opacity">
+            <Link to="/numerology-reading" className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-gradient-to-r from-[#86736f] to-[#c4b5b1] rounded-lg hover:opacity-90 transition-opacity">
               Get Your Reading Now
             </Link>
           </div>
@@ -238,7 +238,7 @@ const BlogPost = () => {
     <div className="min-h-screen bg-background">
       <div className="container max-w-4xl px-4 py-8">
         <Link 
-          to="/" 
+          to="/numerology-reading" 
           className="inline-flex items-center text-[#86736f] hover:text-[#a39490] mb-8 transition-colors"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
