@@ -4,6 +4,61 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const blogPosts = {
+  "jim-carrey-numerology": {
+    title: "How Jim Carrey Uses Numerology to Shape His Life and Career",
+    content: `
+      <div class="space-y-6">
+        <p class="text-lg leading-relaxed">Jim Carrey, the legendary actor and comedian, is known for his larger-than-life personality, unhinged humor, and, of course, his unforgettable roles in films like Ace Ventura, The Truman Show, and The Mask. But behind the humor and the manic energy, Carrey's life is influenced by something far deeper: numerology.</p>
+
+        <div class="relative h-[400px] w-full mb-8 rounded-lg overflow-hidden">
+          <img src="/lovable-uploads/fbe09605-e28e-4bb2-98d1-5266c9efa916.png" alt="Jim Carrey in a dramatic scene" class="absolute inset-0 w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-b from-transparent to-background/80"></div>
+        </div>
+
+        <p class="text-lg leading-relaxed">While it's no secret that Carrey has always had a unique perspective on life, his fascination with numbers became especially apparent while filming the movie The Number 23 in 2007. The film, in which Carrey's character becomes obsessed with the number 23, sparked a genuine interest in numerology that has stayed with him ever since.</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">The Number 23: Jim Carrey's Fascination and the Cosmic Meaning Behind It</h2>
+        <p class="text-lg leading-relaxed">It all began with the number 23, a number that Carrey has repeatedly mentioned in interviews and public talks. According to Carrey, he became intrigued by the number while making The Number 23, a thriller where his character spirals into obsession with the number. But what's more interesting is how 23 kept appearing in his life outside of the film. It was as if the universe was sending him a message.</p>
+
+        <div class="bg-card/50 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-6 my-8">
+          <ul class="list-disc list-inside space-y-3 text-lg">
+            <li><span class="text-[#a39490]">Earth's Axial Tilt:</span> The Earth's axial tilt is 23 degrees, influencing our seasons</li>
+            <li><span class="text-[#a39490]">Blood Circulation:</span> Blood circulates through the human body in 23 seconds</li>
+            <li><span class="text-[#a39490]">Birth Time:</span> Born at 2:30 AM (2 + 3 = 5 in numerology)</li>
+            <li><span class="text-[#a39490]">Production Company:</span> Named his company JC23 Entertainment</li>
+          </ul>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">JC23 Entertainment: A Numerological Decision</h2>
+        <p class="text-lg leading-relaxed">Carrey's fascination with the number 23 wasn't just a passing interest—it became an integral part of his career. He even went as far as to rename his production company to JC23 Entertainment, cementing his connection to this number. By using the 23 he was tapping into the cosmic energy that had personal and professional significance.</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">33 Vertebrae and Beyond</h2>
+        <p class="text-lg leading-relaxed">While 23 may have been the number that first grabbed Carrey's attention, he has also explored the spiritual significance of 33, which has deep resonance in numerology and various religious traditions.</p>
+
+        <div class="bg-card/50 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-6 my-8">
+          <ul class="list-disc list-inside space-y-3 text-lg">
+            <li><span class="text-[#a39490]">Spiritual Alignment:</span> Humans have 33 vertebrae in their spine</li>
+            <li><span class="text-[#a39490]">Religious Significance:</span> Jesus Christ's age at his death</li>
+            <li><span class="text-[#a39490]">Islamic Tradition:</span> The perfect age in heaven according to Islamic belief</li>
+            <li><span class="text-[#a39490]">Master Number:</span> 33 represents higher levels of consciousness</li>
+          </ul>
+        </div>
+
+        <div class="bg-gradient-to-r from-[#86736f]/10 via-[#a39490]/10 to-[#c4b5b1]/10 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-8 my-8">
+          <p class="text-xl font-semibold text-center mb-4">Ready to discover your numerological path to success?</p>
+          <p class="text-lg text-center mb-6">Get your personal numerology analysis today and unlock the power of numbers in your life.</p>
+          <div class="flex justify-center">
+            <Link to="/numerology-reading" className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-gradient-to-r from-[#86736f] to-[#c4b5b1] rounded-lg hover:opacity-90 transition-opacity">
+              Get Your Reading Now
+            </Link>
+          </div>
+        </div>
+      </div>
+    `,
+    image: "/lovable-uploads/fbe09605-e28e-4bb2-98d1-5266c9efa916.png",
+    date: "March 28, 2024",
+    readTime: "8 min read"
+  },
   "michael-jackson-numerology": {
     title: "How Michael Jackson used the Power of Numerology: The Influence of the Number 7 on His Career",
     content: `

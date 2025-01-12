@@ -5,6 +5,14 @@ import { Link } from "react-router-dom";
 
 const blogPosts = [
   {
+    title: "How Jim Carrey Uses Numerology to Shape His Life and Career",
+    description: "Discover how the legendary actor's fascination with numbers, particularly 23 and 33, has influenced his career choices and spiritual journey in Hollywood.",
+    date: "March 28, 2024",
+    readTime: "8 min read",
+    mainImage: "/lovable-uploads/fbe09605-e28e-4bb2-98d1-5266c9efa916.png",
+    slug: "jim-carrey-numerology"
+  },
+  {
     title: "How Michael Jackson used the Power of Numerology: The Influence of the Number 7 on His Career",
     description: "Discover how the King of Pop strategically used numerology, particularly the number 7, to shape his artistic vision and create a lasting legacy that changed music forever.",
     date: "March 27, 2024",
