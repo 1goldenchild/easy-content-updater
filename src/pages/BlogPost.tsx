@@ -76,13 +76,13 @@ const BlogPost = () => {
             So, why does Rolex showcase the number 28 in the images of their watches? The answer lies in subtle numerological influence. In Rolex marketing photos, the date window often highlights the 28th day of the month—and it's no accident. By showcasing this number, Rolex is tapping in the number 28 and showing it to you which also drives you to making purchases.
           </p>
 
-          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8 mb-8 bg-black/40 p-4 md:p-8 rounded-lg backdrop-blur-sm">
+          <div className="flex justify-center items-center gap-6 mb-8 bg-black/40 p-4 md:p-8 rounded-lg backdrop-blur-sm">
             {displayWatchImages.map((watch, idx) => (
               <img
                 key={idx}
                 src={watch}
                 alt={`Rolex Watch ${idx + 1}`}
-                className="w-40 h-40 md:w-48 md:h-48 object-contain"
+                className="w-52 h-52 md:w-56 md:h-56 object-contain"
               />
             ))}
           </div>
