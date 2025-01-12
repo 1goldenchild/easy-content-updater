@@ -17,7 +17,10 @@ const CollectInfoForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("Form submission started");
+    
     if (!date) {
+      console.log("Date validation failed - no date selected");
       toast({
         variant: "destructive",
         title: "Error",
@@ -25,23 +28,42 @@ const CollectInfoForm = () => {
       });
       return;
     }
+
+    if (!formData.name || !formData.email) {
+      console.log("Form validation failed - missing name or email");
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Please fill in all required fields.",
+      });
+      return;
+    }
+
     setIsLoading(true);
+    console.log("Setting loading state to true");
 
     try {
-      console.log("Submitting form data:", { ...formData, date_of_birth: date });
+      const formattedDate = date.toISOString().split('T')[0];
+      console.log("Attempting to save data:", {
+        name: formData.name,
+        email: formData.email,
+        date_of_birth: formattedDate,
+      });
       
-      const { error } = await supabase.from("user_readings").insert([
+      const { data, error } = await supabase.from("user_readings").insert([
         {
           name: formData.name,
           email: formData.email,
-          date_of_birth: date.toISOString().split('T')[0],
+          date_of_birth: formattedDate,
         },
-      ]);
+      ]).select();
 
       if (error) {
         console.error("Supabase error:", error);
         throw error;
       }
+
+      console.log("Data saved successfully:", data);
 
       toast({
         title: "Success!",
@@ -56,9 +78,10 @@ const CollectInfoForm = () => {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "There was a problem submitting your information.",
+        description: "There was a problem submitting your information. Please try again.",
       });
     } finally {
+      console.log("Setting loading state to false");
       setIsLoading(false);
     }
   };
