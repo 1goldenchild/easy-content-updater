@@ -59,6 +59,12 @@ const blogPosts = {
       <div class="space-y-6">
         <p class="text-lg leading-relaxed">In the world of luxury timepieces, Rolex stands as an undisputed titan of precision and prestige. But beneath the surface of their impeccable craftsmanship lies a fascinating secret: the strategic use of numerology in their marketing and design, particularly through the numbers 28 and 10:11.</p>
 
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+          <img src="/lovable-uploads/69e9446c-9b3d-44b9-87f5-db9647e25dcf.png" alt="Rolex Watch 1" class="rounded-lg shadow-lg w-full" />
+          <img src="/lovable-uploads/712974a5-ebed-4c39-a091-d7927ca6ba90.png" alt="Rolex Watch 2" class="rounded-lg shadow-lg w-full" />
+          <img src="/lovable-uploads/7b6f1b10-9fc5-45a7-980d-feb95125b3ff.png" alt="Rolex Watch 3" class="rounded-lg shadow-lg w-full hidden md:block" />
+        </div>
+
         <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">The Power of 28 in Rolex's Legacy</h2>
         <p class="text-lg leading-relaxed">Founded in 1905, Rolex has long understood the power of numbers in creating brand mystique. The number 28, which represents both material abundance and perfect balance in numerology, appears consistently throughout Rolex's history and marketing materials.</p>
         
