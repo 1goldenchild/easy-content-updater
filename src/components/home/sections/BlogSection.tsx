@@ -17,7 +17,7 @@ const blogPosts = [
     description: "Explore how Bill Gates leveraged numerology, particularly the number 28, in building Microsoft and making strategic business decisions that shaped the tech industry.",
     date: "March 30, 2024",
     readTime: "10 min read",
-    mainImage: "/lovable-uploads/b30ccbfc-50cd-455d-a03d-bd742e6d77da.png",
+    mainImage: "/lovable-uploads/20c580ea-6bb0-4ee6-b9b9-a65bfbd4c503.png",
     slug: "bill-gates-numerology"
   },
   {
@@ -27,6 +27,14 @@ const blogPosts = [
     readTime: "8 min read",
     mainImage: "/lovable-uploads/fbe09605-e28e-4bb2-98d1-5266c9efa916.png",
     slug: "jim-carrey-numerology"
+  },
+  {
+    title: "How China Uses Numerology to Power Success: The 2008 Beijing Olympics and Beyond",
+    description: "Discover how China strategically used the power of the number 8, particularly during the 2008 Olympics opening ceremony at 8:08 PM on 8/8/2008, to fuel their meteoric rise.",
+    date: "March 29, 2024",
+    readTime: "8 min read",
+    mainImage: "/lovable-uploads/a15fb902-5972-4403-b638-89b8760626e1.png",
+    slug: "china-numerology"
   },
   {
     title: "How Michael Jackson used the Power of Numerology: The Influence of the Number 7 on His Career",
@@ -59,41 +67,6 @@ const blogPosts = [
     readTime: "8 min read",
     mainImage: "/lovable-uploads/492894b9-a7c3-4389-a6d0-fbeb51868764.png",
     slug: "rolex-numerology"
-  },
-  {
-    title: "Understanding Your Personal Year Number",
-    description: "Learn how to calculate and interpret your personal year number for better decision-making.",
-    date: "March 12, 2024",
-    readTime: "4 min read",
-    image: "/lovable-uploads/a48b0ec0-c027-4d4a-a992-435a3c309b00.png"
-  },
-  {
-    title: "Numerology in Relationships",
-    description: "Explore how numerology can help you understand and improve your relationships.",
-    date: "March 10, 2024",
-    readTime: "6 min read",
-    image: "/lovable-uploads/fa5950c8-545a-4644-8d15-7796497be16d.png"
-  },
-  {
-    title: "Career Choices Through Numbers",
-    description: "Using numerology to guide your professional path and make better career decisions.",
-    date: "March 8, 2024",
-    readTime: "5 min read",
-    image: "/lovable-uploads/d1990443-8db4-4e9b-94aa-997289290dda.png"
-  },
-  {
-    title: "The Significance of Master Numbers",
-    description: "Deep dive into master numbers 11, 22, and 33 and their spiritual significance.",
-    date: "March 5, 2024",
-    readTime: "7 min read",
-    image: "/lovable-uploads/3f848f16-f163-4093-a327-4b4170e4a729.png"
-  },
-  {
-    title: "Monthly Numerology Forecast",
-    description: "Learn how to calculate and interpret your monthly numerology forecast.",
-    date: "March 1, 2024",
-    readTime: "4 min read",
-    image: "/lovable-uploads/a48b0ec0-c027-4d4a-a992-435a3c309b00.png"
   }
 ];
 
