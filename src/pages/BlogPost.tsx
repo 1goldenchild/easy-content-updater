@@ -12,9 +12,9 @@ const BlogPost = () => {
     readTime: "8 min read",
     mainImage: "/lovable-uploads/492894b9-a7c3-4389-a6d0-fbeb51868764.png",
     watchImages: [
-      "/lovable-uploads/7b6f1b10-9fc5-45a7-980d-feb95125b3ff.png",
-      "/lovable-uploads/aa38a106-ad38-4810-ada5-a5f887118c74.png",
-      "/lovable-uploads/f9ca91c6-36a9-481c-94cd-b70ede463f06.png"
+      "/lovable-uploads/287d7ed6-e0c3-41de-b01e-f3d5a61d3ffb.png",
+      "/lovable-uploads/2a1499db-c536-44fc-9609-843c064c0e76.png",
+      "/lovable-uploads/69e9446c-9b3d-44b9-87f5-db9647e25dcf.png"
     ]
   }
 
@@ -49,17 +49,6 @@ const BlogPost = () => {
           />
         </div>
 
-        <div className="flex justify-between items-center gap-4 mb-8 bg-black/40 p-4 rounded-lg backdrop-blur-sm">
-          {post.watchImages.map((watch, idx) => (
-            <img
-              key={idx}
-              src={watch}
-              alt={`Rolex Watch ${idx + 1}`}
-              className="w-32 h-32 object-contain"
-            />
-          ))}
-        </div>
-
         <div className="space-y-6 text-gray-300">
           <p>
             When it comes to luxury and prestige, few brands resonate with success like Rolex. Beyond its impeccable craftsmanship and status as the ultimate symbol of achievement, Rolex uses a secret that many may not know about—numerology. In fact, Rolex has embedded certain numbers into their watches in a way that subtly aligns with wealth and prosperity.
@@ -92,6 +81,17 @@ const BlogPost = () => {
           <p>
             But it doesn't stop there. Bill Gates, the richest man of the previous decade, was also born on October 28, 1955. Gates co-founded Microsoft and became a pioneer in the tech industry. The success of both Musk and Gates reflects the numerological force of the number 28.
           </p>
+
+          <div className="flex justify-between items-center gap-4 mb-8 bg-black/40 p-4 rounded-lg backdrop-blur-sm">
+            {post.watchImages.map((watch, idx) => (
+              <img
+                key={idx}
+                src={watch}
+                alt={`Rolex Watch ${idx + 1}`}
+                className="w-32 h-32 object-contain"
+              />
+            ))}
+          </div>
 
           <h2 className="text-2xl font-bold mt-8 mb-4 text-[#a39490]">
             More Wealthy Entities Linked to the Number 28
