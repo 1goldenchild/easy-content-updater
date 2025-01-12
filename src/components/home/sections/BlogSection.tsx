@@ -67,7 +67,7 @@ const BlogSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogPosts.map((post, index) => (
             <motion.div
               key={index}
@@ -76,9 +76,9 @@ const BlogSection = () => {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card className="group h-full bg-card/50 backdrop-blur-sm border border-[#86736f]/20 hover:border-[#86736f]/40 transition-all duration-300">
+              <Card className="group h-full bg-card/50 backdrop-blur-sm border border-[#8B5CF6]/20 hover:border-[#8B5CF6]/40 transition-all duration-300">
                 <CardHeader className="p-0">
-                  <div className="relative h-32 sm:h-48 w-full overflow-hidden rounded-t-lg">
+                  <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
                     <img
                       src={post.image}
                       alt={post.title}
@@ -86,19 +86,19 @@ const BlogSection = () => {
                     />
                   </div>
                 </CardHeader>
-                <CardContent className="p-4 sm:p-6">
-                  <div className="flex items-center gap-4 text-sm text-[#86736f] mb-3">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-4 text-sm text-[#8B5CF6] mb-3">
                     <span>{post.date}</span>
                     <span>•</span>
                     <span>{post.readTime}</span>
                   </div>
-                  <CardTitle className="text-base sm:text-xl mb-2 group-hover:text-white/90 transition-colors">
+                  <CardTitle className="text-xl mb-2 group-hover:text-white/90 transition-colors">
                     {post.title}
                   </CardTitle>
-                  <CardDescription className="text-muted-foreground mb-4 text-sm sm:text-base">
+                  <CardDescription className="text-muted-foreground mb-4">
                     {post.description}
                   </CardDescription>
-                  <div className="flex items-center text-sm text-[#86736f] group-hover:text-[#86736f] transition-colors">
+                  <div className="flex items-center text-sm text-[#8B5CF6] group-hover:text-[#9b87f5] transition-colors">
                     Read More
                     <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                   </div>
