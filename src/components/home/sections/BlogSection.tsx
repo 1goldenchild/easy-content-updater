@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 
 const blogPosts = [
   {
-    title: "How Bill Gates Uses Numerology to Shape His Success: A Look Into His Wealth, Companies, and Rivalry with Steve Jobs",
-    description: "Discover how Microsoft's co-founder strategically used numerology, particularly the number 28, to build his $100 billion fortune and make key decisions like skipping Windows 9.",
-    date: "March 30, 2024",
-    readTime: "10 min read",
-    mainImage: "/lovable-uploads/bc46eaf5-772c-48e1-8dd7-fdfd1952a3ae.png",
-    slug: "bill-gates-numerology"
+    title: "The Kardashian Empire: How They Used Numerology to Power Their Success",
+    description: "Discover how the Kardashian-Jenner family used numerology, particularly the numbers 8, 11, and 22, to build their multi-billion dollar empire and global influence.",
+    date: "April 1, 2024",
+    readTime: "8 min read",
+    mainImage: "/lovable-uploads/c62b9e91-15ac-4a47-b3af-580cc17a3756.png",
+    slug: "kardashian-numerology"
   },
   {
     title: "How Jim Carrey Uses Numerology to Shape His Life and Career",

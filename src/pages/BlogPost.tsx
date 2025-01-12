@@ -4,6 +4,68 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const blogPosts = {
+  "kardashian-numerology": {
+    title: "The Kardashian Empire: How They Used Numerology to Power Their Success",
+    content: `
+      <div class="space-y-6">
+        <p class="text-lg leading-relaxed">The Kardashian-Jenner family isn't just famous for their reality TV show or their social media empires—they are masters of numerology, using it as a key tool in creating their multi-billion dollar empire. From their Life Path numbers to their names, everything about them has been meticulously aligned with the energetic properties of numbers.</p>
+
+        <p class="text-lg leading-relaxed">In this article, we'll explore how the Kardashian-Jenner clan uses numerology to their advantage, why certain numbers and letters play a pivotal role in their lives, and how they've tapped into the vibrational power of numbers like 11, 22, 33, and 8 to build their brand and influence.</p>
+
+        <div class="relative h-[400px] w-full mb-8 rounded-lg overflow-hidden">
+          <img src="/lovable-uploads/c62b9e91-15ac-4a47-b3af-580cc17a3756.png" alt="Kardashian-Jenner family in neutral tones" class="absolute inset-0 w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-b from-transparent to-background/80"></div>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">The Numerology Behind the Kardashian-Jenner Family</h2>
+        <p class="text-lg leading-relaxed">Each member of the Kardashian-Jenner family has a unique Life Path number that influences their decisions, shapes their personality, and has been an essential part of their rise to global stardom. Let's take a closer look at their Life Path numbers and what they reveal about them:</p>
+
+        <div class="bg-card/50 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-6 my-8">
+          <ul class="list-disc list-inside space-y-3 text-lg">
+            <li><span class="text-[#a39490]">Kim Kardashian (Life Path 22):</span> The most famous of the Kardashian clan, with the Master Number 22</li>
+            <li><span class="text-[#a39490]">Kylie Jenner (Life Path 8):</span> Amassed a fortune over $1 billion, carries the powerful money frequency</li>
+            <li><span class="text-[#a39490]">Kris Jenner (Life Path 28):</span> The matriarch with The Wealth Number</li>
+            <li><span class="text-[#a39490]">Kendall Jenner (Life Path 11):</span> The supermodel with the Master Number of vision</li>
+            <li><span class="text-[#a39490]">Caitlyn Jenner (Life Path 33):</span> Born on the 28th, combining powerful numbers</li>
+          </ul>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+          <div class="relative h-[300px] rounded-lg overflow-hidden">
+            <img src="/lovable-uploads/f570fe28-0186-421f-8479-0176848678d5.png" alt="Team wearing jerseys with number 8" class="absolute inset-0 w-full h-full object-cover" />
+          </div>
+          <div class="relative h-[300px] rounded-lg overflow-hidden">
+            <img src="/lovable-uploads/6c088c00-5135-4c6e-8c3f-840339f617a1.png" alt="Decorative number 8 sculpture" class="absolute inset-0 w-full h-full object-cover" />
+          </div>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">Numerology and the Power of the Letter "K"</h2>
+        <p class="text-lg leading-relaxed">One of the most fascinating aspects of the Kardashian-Jenner family's numerological strategy is their consistent use of the letter K in their names. But there's more to it than just a letter—it's the vibrational energy that the letter carries.</p>
+
+        <p class="text-lg leading-relaxed">In numerology, K is the 11th letter of the alphabet, and it resonates with the Master Number 11 which is a powerful source of intuition, and emotional depth. By using the letter K in their names—Kim Kardashian, Kylie Jenner, Kris Jenner, Kendall Jenner—they are intentionally tapping into this potent 11 energy, infusing their brand with its power.</p>
+
+        <p class="text-lg leading-relaxed">The letter K in their names acts like a magnetic force, attracting attention, emotion, and intensity. When you say the letter K, you are unconsciously activating the energy of 11—a number that vibrates with creative vision and a deep sense of purpose. By embedding this energy into their personal and professional identities, the Kardashians have made 11 an integral part of their empire.</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">The Number 8: The Symbol of Wealth and Abundance</h2>
+        <p class="text-lg leading-relaxed">In addition to their Life Path numbers, the Kardashian-Jenner family often incorporates the number 8—a number associated with abundance, wealth, and success—into their branding, jersey numbers, decorations, and even their homes.</p>
+
+        <p class="text-lg leading-relaxed">For instance, you'll find that many of their promotional images, home decor, and even jewelry feature the infinity symbol (which resembles the number 8) to represent the endless flow of abundance. The use of 8 energy is a powerful reminder that they are constantly in a cycle of growth and prosperity. By intentionally infusing this number into their lives, they are reinforcing the money frequency and the idea that wealth is limitless.</p>
+
+        <div class="bg-gradient-to-r from-[#86736f]/10 via-[#a39490]/10 to-[#c4b5b1]/10 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-8 my-8">
+          <p class="text-xl font-semibold text-center mb-4">Ready to discover your numerological path to success?</p>
+          <p class="text-lg text-center mb-6">Get your personal numerology analysis today and unlock the power of numbers in your life.</p>
+          <div class="flex justify-center">
+            <Link to="/numerology-reading" className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-gradient-to-r from-[#86736f] to-[#c4b5b1] rounded-lg hover:opacity-90 transition-opacity">
+              Get Your Reading Now
+            </Link>
+          </div>
+        </div>
+      </div>
+    `,
+    image: "/lovable-uploads/c62b9e91-15ac-4a47-b3af-580cc17a3756.png",
+    date: "April 1, 2024",
+    readTime: "8 min read"
+  },
   "bill-gates-numerology": {
     title: "How Bill Gates Uses Numerology to Shape His Success: A Look Into His Wealth, Companies, and Rivalry with Steve Jobs",
     content: `
@@ -506,4 +568,3 @@ const BlogPost = () => {
 };
 
 export default BlogPost;
-
