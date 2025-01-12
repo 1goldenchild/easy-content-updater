@@ -5,6 +5,14 @@ import { Link } from "react-router-dom";
 
 const blogPosts = [
   {
+    title: "How China Uses Numerology to Power Success: The 2008 Beijing Olympics and Beyond",
+    description: "Discover how China strategically used the number 8 during the 2008 Olympics and throughout history to fuel its meteoric rise from the 15th to 2nd largest economy in the world.",
+    date: "March 29, 2024",
+    readTime: "8 min read",
+    mainImage: "/lovable-uploads/1e3f4b34-6805-4822-a03b-71cee7add12f.png",
+    slug: "china-numerology"
+  },
+  {
     title: "How Jim Carrey Uses Numerology to Shape His Life and Career",
     description: "Discover how the legendary actor's fascination with numbers, particularly 23 and 33, has influenced his career choices and spiritual journey in Hollywood.",
     date: "March 28, 2024",

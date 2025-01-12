@@ -4,6 +4,63 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const blogPosts = {
+  "china-numerology": {
+    title: "How China Uses Numerology to Power Success: The 2008 Beijing Olympics and Beyond",
+    content: `
+      <div class="space-y-6">
+        <p class="text-lg leading-relaxed">China's remarkable transformation over the past few decades is nothing short of extraordinary. From being the 15th largest economy in the world to becoming the 2nd largest in a matter of years, China's rise to global prominence has been driven by a combination of economic reforms, strategic vision, and—believe it or not—numerology.</p>
+
+        <div class="relative h-[400px] w-full mb-8 rounded-lg overflow-hidden">
+          <img src="/lovable-uploads/1e3f4b34-6805-4822-a03b-71cee7add12f.png" alt="Beijing Olympics opening ceremony" class="absolute inset-0 w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-b from-transparent to-background/80"></div>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">The Power of the Number 8: Why China Chose 8:08 PM on 8/8/2008</h2>
+        <p class="text-lg leading-relaxed">China's use of numerology during the 2008 Beijing Olympics is one of the most striking examples of how deeply ingrained numerology is in their culture. The Beijing Olympics were set to begin on August 8, 2008, at exactly 8:08 PM. The 8th day of the 8th month of 2008 at 8pm and 8 minutes.</p>
+
+        <div class="bg-card/50 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-6 my-8">
+          <ul class="list-disc list-inside space-y-3 text-lg">
+            <li><span class="text-[#a39490]">Number 8 Significance:</span> Associated with wealth, prosperity, and good fortune</li>
+            <li><span class="text-[#a39490]">Pronunciation:</span> Sounds like "fa" (發) meaning "wealth" and "prosper" in Mandarin</li>
+            <li><span class="text-[#a39490]">Strategic Timing:</span> 8:08 PM on 8/8/2008 for maximum prosperity energy</li>
+            <li><span class="text-[#a39490]">Global Impact:</span> Marked China's emergence as a global superpower</li>
+          </ul>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">The Result: China's Meteoric Rise</h2>
+        <p class="text-lg leading-relaxed">The 2008 Olympics was not just a sporting event—it was a symbol of China's global ascent. Just a few years after hosting the Olympics, China went from being the 15th largest economy in the world to becoming the 2nd largest—and that meteoric rise was, in part, propelled by its deep connection to numerology and the power of the number 8.</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">China's Long History of Numerology and Success</h2>
+        <p class="text-lg leading-relaxed">China has a long-standing history of using numerology to influence everything from political decisions to military strategy. For thousands of years, Chinese leaders have understood the power of numbers and how they shape the energy of events. In the Qin Dynasty, for example, Emperor Qin Shi Huang used numerology and astrology to time his military campaigns and political reforms.</p>
+
+        <div class="bg-card/50 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-6 my-8">
+          <h3 class="text-xl font-semibold mb-4">Modern Applications of the Number 8</h3>
+          <ul class="list-disc list-inside space-y-3 text-lg">
+            <li><span class="text-[#a39490]">Business Launches:</span> Choosing auspicious dates with 8</li>
+            <li><span class="text-[#a39490]">Phone Numbers:</span> Premium pricing for numbers with 8</li>
+            <li><span class="text-[#a39490]">Real Estate:</span> Properties with 8 in address command higher prices</li>
+            <li><span class="text-[#a39490]">Bank Accounts:</span> Lucky account numbers incorporating 8</li>
+          </ul>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">Numerology and China's Future</h2>
+        <p class="text-lg leading-relaxed">Since the 2008 Olympics, the number 8 has continued to play an important role in China's continued rise. The number 8 is still a symbol of wealth, prosperity, and success in modern Chinese society. Chinese businesses and individuals regularly align their ventures and decisions with this lucky number.</p>
+
+        <div class="bg-gradient-to-r from-[#86736f]/10 via-[#a39490]/10 to-[#c4b5b1]/10 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-8 my-8">
+          <p class="text-xl font-semibold text-center mb-4">Ready to discover your numerological path to success?</p>
+          <p class="text-lg text-center mb-6">Get your personal numerology analysis today and unlock the power of numbers in your life.</p>
+          <div class="flex justify-center">
+            <Link to="/numerology-reading" className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-gradient-to-r from-[#86736f] to-[#c4b5b1] rounded-lg hover:opacity-90 transition-opacity">
+              Get Your Reading Now
+            </Link>
+          </div>
+        </div>
+      </div>
+    `,
+    image: "/lovable-uploads/1e3f4b34-6805-4822-a03b-71cee7add12f.png",
+    date: "March 29, 2024",
+    readTime: "8 min read"
+  },
   "jim-carrey-numerology": {
     title: "How Jim Carrey Uses Numerology to Shape His Life and Career",
     content: `
