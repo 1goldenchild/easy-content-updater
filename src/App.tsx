@@ -10,6 +10,7 @@ import Privacy from "@/pages/Privacy"
 import Refund from "@/pages/Refund"
 import Support from "@/pages/Support"
 import Checkout from "@/pages/Checkout"
+import BlogPost from "@/pages/BlogPost"
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/refund" element={<Refund />} />
             <Route path="/support" element={<Support />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
           </Routes>
         </main>
         <Footer />

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const blogPosts = [
   {
@@ -13,7 +14,8 @@ const blogPosts = [
       "/lovable-uploads/7b6f1b10-9fc5-45a7-980d-feb95125b3ff.png",
       "/lovable-uploads/aa38a106-ad38-4810-ada5-a5f887118c74.png",
       "/lovable-uploads/f9ca91c6-36a9-481c-94cd-b70ede463f06.png"
-    ]
+    ],
+    slug: "rolex-numerology"
   },
   {
     title: "Understanding Your Personal Year Number",
@@ -82,46 +84,48 @@ const BlogSection = () => {
               transition={{ delay: index * 0.1 }}
               className="h-full"
             >
-              <Card className="group h-full bg-card/50 backdrop-blur-sm border border-[#86736f]/20 hover:border-[#86736f]/40 transition-all duration-300">
-                <CardHeader className="p-0">
-                  <div className="relative h-64 w-full overflow-hidden rounded-t-lg">
-                    <img
-                      src={post.mainImage}
-                      alt={post.title}
-                      className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  {post.watchImages && (
-                    <div className="flex justify-between items-center p-4 bg-black/40 backdrop-blur-sm">
-                      {post.watchImages.map((watch, idx) => (
-                        <img
-                          key={idx}
-                          src={watch}
-                          alt={`Watch ${idx + 1}`}
-                          className="w-24 h-24 object-contain"
-                        />
-                      ))}
+              <Link to={`/blog/${post.slug}`}>
+                <Card className="group h-full bg-card/50 backdrop-blur-sm border border-[#86736f]/20 hover:border-[#86736f]/40 transition-all duration-300">
+                  <CardHeader className="p-0">
+                    <div className="relative h-64 w-full overflow-hidden rounded-t-lg">
+                      <img
+                        src={post.mainImage}
+                        alt={post.title}
+                        className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-300"
+                      />
                     </div>
-                  )}
-                </CardHeader>
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-4 text-sm text-[#86736f] mb-3">
-                    <span>{post.date}</span>
-                    <span>•</span>
-                    <span>{post.readTime}</span>
-                  </div>
-                  <CardTitle className="text-xl mb-2 group-hover:text-white/90 transition-colors">
-                    {post.title}
-                  </CardTitle>
-                  <CardDescription className="text-muted-foreground mb-4">
-                    {post.description}
-                  </CardDescription>
-                  <div className="flex items-center text-sm text-[#86736f] group-hover:text-[#a39490] transition-colors">
-                    Read More
-                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </CardContent>
-              </Card>
+                    {post.watchImages && (
+                      <div className="flex justify-between items-center p-4 bg-black/40 backdrop-blur-sm">
+                        {post.watchImages.map((watch, idx) => (
+                          <img
+                            key={idx}
+                            src={watch}
+                            alt={`Watch ${idx + 1}`}
+                            className="w-24 h-24 object-contain"
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-4 text-sm text-[#86736f] mb-3">
+                      <span>{post.date}</span>
+                      <span>•</span>
+                      <span>{post.readTime}</span>
+                    </div>
+                    <CardTitle className="text-xl mb-2 group-hover:text-white/90 transition-colors">
+                      {post.title}
+                    </CardTitle>
+                    <CardDescription className="text-muted-foreground mb-4">
+                      {post.description}
+                    </CardDescription>
+                    <div className="flex items-center text-sm text-[#86736f] group-hover:text-[#a39490] transition-colors">
+                      Read More
+                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             </motion.div>
           ))}
         </div>
