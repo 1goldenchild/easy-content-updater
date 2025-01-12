@@ -9,7 +9,7 @@ const blogPosts = [
     description: "Discover how China strategically used the number 8 during the 2008 Olympics and throughout history to fuel its meteoric rise from the 15th to 2nd largest economy in the world.",
     date: "March 29, 2024",
     readTime: "8 min read",
-    mainImage: "/lovable-uploads/1e3f4b34-6805-4822-a03b-71cee7add12f.png",
+    mainImage: "/lovable-uploads/a15fb902-5972-4403-b638-89b8760626e1.png",
     slug: "china-numerology"
   },
   {
