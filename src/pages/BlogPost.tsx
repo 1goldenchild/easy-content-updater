@@ -11,7 +11,7 @@ const blogPosts = {
         <p class="text-lg leading-relaxed">China's remarkable transformation over the past few decades is nothing short of extraordinary. From being the 15th largest economy in the world to becoming the 2nd largest in a matter of years, China's rise to global prominence has been driven by a combination of economic reforms, strategic vision, and—believe it or not—numerology.</p>
 
         <div class="relative h-[400px] w-full mb-8 rounded-lg overflow-hidden">
-          <img src="/lovable-uploads/1e3f4b34-6805-4822-a03b-71cee7add12f.png" alt="Beijing Olympics opening ceremony" class="absolute inset-0 w-full h-full object-cover" />
+          <img src="/lovable-uploads/a15fb902-5972-4403-b638-89b8760626e1.png" alt="Beijing Olympics 2008 logo" class="absolute inset-0 w-full h-full object-cover" />
           <div class="absolute inset-0 bg-gradient-to-b from-transparent to-background/80"></div>
         </div>
 
@@ -57,10 +57,11 @@ const blogPosts = {
         </div>
       </div>
     `,
-    image: "/lovable-uploads/1e3f4b34-6805-4822-a03b-71cee7add12f.png",
+    image: "/lovable-uploads/a15fb902-5972-4403-b638-89b8760626e1.png",
     date: "March 29, 2024",
     readTime: "8 min read"
   },
+  
   "jim-carrey-numerology": {
     title: "How Jim Carrey Uses Numerology to Shape His Life and Career",
     content: `
