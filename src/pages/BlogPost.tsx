@@ -56,8 +56,46 @@ const blogPosts = {
   "rolex-numerology": {
     title: "Rolex secretly using numerology: The Secret Behind the 28 and 10:11",
     content: `
-      <p>Discover how Rolex incorporates powerful numerological principles in their iconic timepieces, particularly through the strategic use of numbers 28 and 10:11 in their marketing.</p>
-      <p>This fascinating exploration reveals the hidden meanings behind Rolex's most significant numbers and how they contribute to the brand's legendary success.</p>
+      <div class="space-y-6">
+        <p class="text-lg leading-relaxed">In the world of luxury timepieces, Rolex stands as an undisputed titan of precision and prestige. But beneath the surface of their impeccable craftsmanship lies a fascinating secret: the strategic use of numerology in their marketing and design, particularly through the numbers 28 and 10:11.</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">The Power of 28 in Rolex's Legacy</h2>
+        <p class="text-lg leading-relaxed">Founded in 1905, Rolex has long understood the power of numbers in creating brand mystique. The number 28, which represents both material abundance and perfect balance in numerology, appears consistently throughout Rolex's history and marketing materials.</p>
+        
+        <div class="bg-card/50 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-6 my-8">
+          <ul class="list-disc list-inside space-y-3 text-lg">
+            <li><span class="text-[#a39490]">The Datejust's date window at 28</span> - A subtle nod to prosperity</li>
+            <li><span class="text-[#a39490]">28-day power reserve</span> - Featured in several prestigious models</li>
+            <li><span class="text-[#a39490]">28,800 beats per hour</span> - The perfect frequency for many Rolex movements</li>
+          </ul>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">The Mystery of 10:11 in Rolex Photography</h2>
+        <p class="text-lg leading-relaxed">Have you ever noticed that most Rolex watches in advertisements show the time as 10:11? This isn't a coincidence. In numerology, 10:11 reduces to 4 (1+0+1+1=3), and 4 represents foundation, stability, and trust—exactly what Rolex wants to convey.</p>
+
+        <div class="bg-card/50 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-6 my-8">
+          <p class="text-lg italic text-[#a39490]">The positioning of the hands at 10:11 creates a subtle 'embrace' of the Rolex crown logo, while numerologically channeling the energy of stability and success.</p>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">The Numerological Significance in Pricing</h2>
+        <p class="text-lg leading-relaxed">Rolex's pricing strategy often incorporates numerologically significant numbers. Many models are priced at amounts that reduce to 1 (new beginnings), 4 (stability), or 8 (wealth and abundance).</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">The Master Numbers in Rolex Collections</h2>
+        <p class="text-lg leading-relaxed">The Rolex collection often features 11 or 22 variations of a particular model. These numbers are known as "master numbers" in numerology, representing intuition and mastery respectively.</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">Serial Numbers and Numerological Alignment</h2>
+        <p class="text-lg leading-relaxed">Even Rolex serial numbers follow a pattern that, when reduced to single digits, often yields numerologically significant numbers. This attention to detail extends to every aspect of their production.</p>
+
+        <div class="bg-gradient-to-r from-[#86736f]/10 via-[#a39490]/10 to-[#c4b5b1]/10 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-8 my-8">
+          <p class="text-xl font-semibold text-center mb-4">Discover Your Personal Number Pattern</p>
+          <p class="text-lg text-center mb-6">Want to know which Rolex model aligns with your personal numerology? Get your personalized reading today.</p>
+          <div class="flex justify-center">
+            <Link to="/" className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-gradient-to-r from-[#86736f] to-[#c4b5b1] rounded-lg hover:opacity-90 transition-opacity">
+              Get Your Reading Now
+            </Link>
+          </div>
+        </div>
+      </div>
     `,
     image: "/lovable-uploads/492894b9-a7c3-4389-a6d0-fbeb51868764.png",
     date: "March 15, 2024",
