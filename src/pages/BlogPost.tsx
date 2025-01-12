@@ -26,7 +26,7 @@ const blogPosts = {
         <p class="text-lg leading-relaxed">Elon Musk's business moves also align with numerology in very calculated ways. Take, for example, his purchase of Twitter for $44 billion in 2022. Why 44 billion? 44 reduces to 8 (4 + 4 = 8), and 8 is the number of wealth, business acumen, and material power.</p>
         
         <div class="bg-card/50 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-6 my-8">
-          <p class="text-lg italic text-[#a39490]">8 is also called the "number of money" because it represents the flow of financial energy. Musk's decision to buy Twitter for exactly 44 billion wasn't just a random figure—it was a move backed by what I called cosmic intelligence or what you might call numerology.</p>
+          <p class="text-lg italic text-[#a39490]">8 is also called the "number of money" because you can tap into the flow of financial energy. Musk's decision to buy Twitter for exactly 44 billion wasn't just a random figure—it was a move backed by what I called cosmic intelligence or what you might call numerology.</p>
         </div>
 
         <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">The Master Number 22 and Elon Musk's Twitter Strategy</h2>
