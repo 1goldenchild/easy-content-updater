@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 
 const blogPosts = [
   {
-    title: "How China Uses Numerology to Power Success: The 2008 Beijing Olympics and Beyond",
-    description: "Discover how China strategically used the number 8 during the 2008 Olympics and throughout history to fuel its meteoric rise from the 15th to 2nd largest economy in the world.",
-    date: "March 29, 2024",
-    readTime: "8 min read",
-    mainImage: "/lovable-uploads/a15fb902-5972-4403-b638-89b8760626e1.png",
-    slug: "china-numerology"
+    title: "How Bill Gates Uses Numerology to Shape His Success: A Look Into His Wealth, Companies, and Rivalry with Steve Jobs",
+    description: "Discover how Microsoft's co-founder strategically used numerology, particularly the number 28, to build his $100 billion fortune and make key decisions like skipping Windows 9.",
+    date: "March 30, 2024",
+    readTime: "10 min read",
+    mainImage: "/lovable-uploads/bc46eaf5-772c-48e1-8dd7-fdfd1952a3ae.png",
+    slug: "bill-gates-numerology"
   },
   {
     title: "How Jim Carrey Uses Numerology to Shape His Life and Career",

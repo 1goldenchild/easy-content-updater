@@ -4,6 +4,60 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const blogPosts = {
+  "bill-gates-numerology": {
+    title: "How Bill Gates Uses Numerology to Shape His Success: A Look Into His Wealth, Companies, and Rivalry with Steve Jobs",
+    content: `
+      <div class="space-y-6">
+        <p class="text-lg leading-relaxed">When we think of the world's most successful and influential tech giants, Bill Gates is undoubtedly one of the first names that come to mind. The co-founder of Microsoft revolutionized the technology industry and amassed an unimaginable fortune over the decades. But what if we told you that Bill Gates' success wasn't just due to his business acumen and relentless drive?</p>
+
+        <div class="relative h-[400px] w-full mb-8 rounded-lg overflow-hidden">
+          <img src="/lovable-uploads/bc46eaf5-772c-48e1-8dd7-fdfd1952a3ae.png" alt="Bill Gates with Microsoft Surface display" class="absolute inset-0 w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-b from-transparent to-background/80"></div>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">Bill Gates and the Number 28: The Key to His Wealth</h2>
+        <p class="text-lg leading-relaxed">One of the most fascinating aspects of Bill Gates' numerology is the number 28, which plays a critical role in his life path and his wealth. Gates was born on October 28, 1955. In numerology, 28 is the number of wealth, success, and power. The number is connected to individuals who are destined for financial prosperity and significant accomplishments.</p>
+
+        <div class="bg-card/50 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-6 my-8">
+          <ul class="list-disc list-inside space-y-3 text-lg">
+            <li><span class="text-[#a39490]">Birth Date:</span> October 28, 1955 - The power of 28</li>
+            <li><span class="text-[#a39490]">Net Worth:</span> Over $100 billion</li>
+            <li><span class="text-[#a39490]">Company:</span> Microsoft's strategic decisions</li>
+            <li><span class="text-[#a39490]">Product Strategy:</span> Skipping Windows 9</li>
+          </ul>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">Bill Gates and Steve Jobs: The Rivalry and Numerology Connection</h2>
+        <p class="text-lg leading-relaxed">Bill Gates' biggest competitor in the tech world was none other than Steve Jobs, the iconic co-founder of Apple. While their rivalry is well-known in the business world, what's less commonly known is that both Gates and Jobs were deeply influenced by numerology in their respective careers.</p>
+
+        <div class="bg-card/50 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-6 my-8">
+          <h3 class="text-xl font-semibold mb-4">The Number 9 Connection</h3>
+          <ul class="list-disc list-inside space-y-3 text-lg">
+            <li><span class="text-[#a39490]">Microsoft:</span> Skipped Windows 9</li>
+            <li><span class="text-[#a39490]">Apple:</span> Later skipped iPhone 9</li>
+            <li><span class="text-[#a39490]">Significance:</span> 9 represents completion and endings</li>
+            <li><span class="text-[#a39490]">Strategy:</span> Both avoided the completion energy</li>
+          </ul>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">The Power of Strategic Numerology</h2>
+        <p class="text-lg leading-relaxed">When we look at the numbers behind Gates' massive success, it's clear that 28 has been his guiding force. The wealth and success Gates has amassed through Microsoft and his various investments align perfectly with the energetic properties of 28.</p>
+
+        <div class="bg-gradient-to-r from-[#86736f]/10 via-[#a39490]/10 to-[#c4b5b1]/10 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-8 my-8">
+          <p class="text-xl font-semibold text-center mb-4">Ready to discover your numerological path to success?</p>
+          <p class="text-lg text-center mb-6">Get your personal numerology analysis today and unlock the power of numbers in your life.</p>
+          <div class="flex justify-center">
+            <Link to="/numerology-reading" className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-gradient-to-r from-[#86736f] to-[#c4b5b1] rounded-lg hover:opacity-90 transition-opacity">
+              Get Your Reading Now
+            </Link>
+          </div>
+        </div>
+      </div>
+    `,
+    image: "/lovable-uploads/bc46eaf5-772c-48e1-8dd7-fdfd1952a3ae.png",
+    date: "March 30, 2024",
+    readTime: "10 min read"
+  },
   "china-numerology": {
     title: "How China Uses Numerology to Power Success: The 2008 Beijing Olympics and Beyond",
     content: `
@@ -61,7 +115,6 @@ const blogPosts = {
     date: "March 29, 2024",
     readTime: "8 min read"
   },
-  
   "jim-carrey-numerology": {
     title: "How Jim Carrey Uses Numerology to Shape His Life and Career",
     content: `
