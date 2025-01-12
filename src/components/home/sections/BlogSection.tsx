@@ -5,6 +5,14 @@ import { Link } from "react-router-dom";
 
 const blogPosts = [
   {
+    title: "How Steve Jobs Used Numerology to Shape His Success: The Power of 28, 9, and Apple's Legacy",
+    description: "Discover how Apple's co-founder strategically used numerology, particularly the numbers 28 and 9, to build the world's most valuable company worth $3.5 trillion.",
+    date: "March 25, 2024",
+    readTime: "12 min read",
+    mainImage: "/lovable-uploads/73da4848-4fc6-412c-b1a9-0efc609335e3.png",
+    slug: "steve-jobs-numerology"
+  },
+  {
     title: "How Elon Musk Uses Numerology to Get Rich: The Power of 8 and 28",
     description: "Discover how the world's richest man strategically uses numerology, particularly the numbers 8 and 28, to build his fortune through Tesla, SpaceX, and Twitter.",
     date: "March 20, 2024",

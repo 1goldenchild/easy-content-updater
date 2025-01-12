@@ -4,6 +4,64 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const blogPosts = {
+  "steve-jobs-numerology": {
+    title: "How Steve Jobs Used Numerology to Shape His Success: The Power of 28, 9, and Apple's Legacy",
+    content: `
+      <div class="space-y-6">
+        <p class="text-lg leading-relaxed">Steve Jobs, the co-founder of Apple, needs no introduction. His vision transformed the world of technology and consumer electronics, leading Apple to become the largest company in the world, now valued at a staggering $3.5 trillion. However, what many may not know is that he used numerology as a driving force. From his early days of exploration into astrology and numerology in India right before the creation of the world's most valuable company, Jobs used numerology as an unseen guiding force. Let's dive into how Steve Job's used numerology to drive his journey to success.</p>
+
+        <div class="relative h-[400px] w-full mb-8 rounded-lg overflow-hidden">
+          <img src="/lovable-uploads/73da4848-4fc6-412c-b1a9-0efc609335e3.png" alt="Steve Jobs presenting with Apple logo" class="absolute inset-0 w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-b from-transparent to-background/80" />
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">Steve Jobs' Journey to India and learning the Power of Numbers</h2>
+        <p class="text-lg leading-relaxed">Before Steve Jobs became the tech icon we know today, he embarked on a life-changing journey to India. This trip, inspired by his interest in numerology and astrology, helped shape his view of the world and the way he approached business decisions. In India, Jobs delved deep into these ancient systems, and it was there that he discovered his Compound Life Path Number 28.</p>
+        
+        <p class="text-lg leading-relaxed">Jobs identified himself as a 28 Life Path, a potent number of wealth, power, and abundance. For Jobs, the number 28 was a gold mine, and it became a core part of his personal and business philosophy. But what makes this number so important, and how did it influence Apple's rise?</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">Apple and the Power of 28</h2>
+        <p class="text-lg leading-relaxed">Jobs' belief in the power of numerology manifested throughout Apple's history, from its inception to the launch of its most iconic products. Let's break down how the 28 energy played a key role in the company's rise:</p>
+
+        <div class="bg-card/50 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-6 my-8">
+          <ul class="list-disc list-inside space-y-3 text-lg">
+            <li><span class="text-[#a39490]">Apple's founding date:</span> January 3, 1977 – When you add up the digits (1 + 3 + 1 + 9 + 7 + 7), you get 28.</li>
+            <li><span class="text-[#a39490]">Apple's official incorporation:</span> April 1, 1976 – Again, adding up the digits (4 + 1 + 1 + 9 + 7 + 6) gives you 28.</li>
+            <li><span class="text-[#a39490]">Jobs' birthdate:</span> February 24, 1955 also adds up to 28 (2 + 2 + 4 + 1 + 9 + 5 + 5 = 28).</li>
+          </ul>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">The iPhone Launch: 28 Energy at Play</h2>
+        <p class="text-lg leading-relaxed">Apple's breakthrough product, the iPhone, launched on June 29, 2007, was another moment where numerology seemed to play a role. Adding the digits of the launch date (6 + 2 + 9 + 2 + 0 + 0 + 7) equals 28 once again. This pattern isn't just a coincidence. He is directly tapping into the 28 with precision.</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">Why Apple Skips the iPhone 9: The Significance of Number 9</h2>
+        <p class="text-lg leading-relaxed">One of the most interesting moves in Apple's history was the decision to skip the iPhone 9 entirely. Instead, after the iPhone 8, Apple went straight to the iPhone X (pronounced "iPhone Ten"). Why? According to numerology, 9 is considered the number of completion—a number that signifies the end of a cycle. By skipping the iPhone 9, Jobs avoided the energy of completion and instead embraced the transformative and innovative energy of the 10 (or X), which represents a new beginning, a new level of advancement.</p>
+
+        <div class="bg-card/50 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-6 my-8">
+          <p class="text-lg italic text-[#a39490]">Interestingly, Bill Gates, the co-founder of Microsoft. Gates, who is also born on the 28th, made the same decision when he skipped Windows 9. Instead of releasing Windows 9, Microsoft went directly to Windows 10 to avoid the completion energy of the number 9. Both Jobs and Gates, aware of the power of numerology, understood that 9 signified the end of a cycle—and they wanted to avoid that energy in favor of innovation, growth, and new beginnings.</p>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">Apple's Legacy: The $3.5 Trillion Empire</h2>
+        <p class="text-lg leading-relaxed">Today, Apple is the largest company in the world, valued at $3.5 trillion. The journey from its humble beginnings in a garage to global dominance has been fueled by a combination of visionary thinking, innovation, and a deep understanding of the unseen forces that shape success. For Jobs, numerology was one of these forces.</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">Final Thoughts: The Role of Numerology in Business Success</h2>
+        <p class="text-lg leading-relaxed">Steve Jobs' success wasn't just about innovation—it was about understanding and using the hidden energies of numerology to shape his destiny. Whether it was choosing product launch dates that aligned with 28, skipping the iPhone 9 to avoid the energy of completion, or using the power of numbers to fuel Apple's growth, Jobs was a true believer in the power of numerology.</p>
+
+        <div class="bg-gradient-to-r from-[#86736f]/10 via-[#a39490]/10 to-[#c4b5b1]/10 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-8 my-8">
+          <p class="text-xl font-semibold text-center mb-4">Ready to discover your numerological path to success?</p>
+          <p class="text-lg text-center mb-6">Get your personal numerology analysis today and unlock the power of numbers in your life.</p>
+          <div class="flex justify-center">
+            <Link to="/" className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-gradient-to-r from-[#86736f] to-[#c4b5b1] rounded-lg hover:opacity-90 transition-opacity">
+              Get Your Reading Now
+            </Link>
+          </div>
+        </div>
+      </div>
+    `,
+    image: "/lovable-uploads/73da4848-4fc6-412c-b1a9-0efc609335e3.png",
+    date: "March 25, 2024",
+    readTime: "12 min read"
+  },
   "elon-musk-numerology": {
     title: "How Elon Musk Uses Numerology to Get Rich: The Power of 8 and 28",
     content: `
