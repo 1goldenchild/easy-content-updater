@@ -1,9 +1,11 @@
 import { useParams } from "react-router-dom"
 import { motion } from "framer-motion"
 import { Calendar, Clock } from "lucide-react"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 const BlogPost = () => {
   const { slug } = useParams()
+  const isMobile = useIsMobile()
 
   // For now we'll hardcode the Rolex post content
   const post = {
@@ -17,6 +19,10 @@ const BlogPost = () => {
       "/lovable-uploads/69e9446c-9b3d-44b9-87f5-db9647e25dcf.png"
     ]
   }
+
+  const displayWatchImages = isMobile 
+    ? post.watchImages.slice(0, 2) 
+    : post.watchImages
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
@@ -71,12 +77,12 @@ const BlogPost = () => {
           </p>
 
           <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8 mb-8 bg-black/40 p-4 md:p-8 rounded-lg backdrop-blur-sm">
-            {post.watchImages.map((watch, idx) => (
+            {displayWatchImages.map((watch, idx) => (
               <img
                 key={idx}
                 src={watch}
                 alt={`Rolex Watch ${idx + 1}`}
-                className="w-32 h-32 md:w-40 md:h-40 object-contain"
+                className="w-40 h-40 md:w-48 md:h-48 object-contain"
               />
             ))}
           </div>
@@ -119,7 +125,7 @@ const BlogPost = () => {
         </div>
       </motion.article>
     </div>
-  )
-}
+  );
+};
 
-export default BlogPost
+export default BlogPost;
