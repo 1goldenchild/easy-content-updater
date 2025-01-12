@@ -4,8 +4,63 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const blogPosts = {
+  "michael-jackson-numerology": {
+    title: "How Michael Jackson used the Power of Numerology: The Influence of the Number 7 on His Career",
+    content: `
+      <div class="space-y-6">
+        <p class="text-lg leading-relaxed">Michael Jackson, the King of Pop, forever changed the world with his groundbreaking music, unparalleled performances, and revolutionary style. But beyond his global fame and musical genius, Jackson's connection to numerology and his fascination with certain numbers played a unique role in his rise to superstardom. One number in particular—7—appears over and over again in his life, from his name to his performances, to the very way he presented himself to the world.</p>
+
+        <div class="relative h-[400px] w-full mb-8 rounded-lg overflow-hidden">
+          <img src="/lovable-uploads/787349e3-6668-40c9-90db-3dd2d0f8d6ef.png" alt="Michael Jackson in iconic military-style jacket" class="absolute inset-0 w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-b from-transparent to-background/80"></div>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">The Significance of 7 in Michael Jackson's Life and Career</h2>
+        <p class="text-lg leading-relaxed">Michael Jackson was more than just a music icon; he was also deeply influenced by numerology, a system to read energies and force thru numbers. The number 7 is especially significant, and it showed up in countless ways throughout Jackson's career. Why 7? It's a spiritual number, with wisdom, spiritual awakening, and intelligence. These qualities match perfectly with Jackson's artistic vision, which was to not only entertain but to inspire and uplift.</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">7 in Michael Jackson's Name: A Personal Connection</h2>
+        <p class="text-lg leading-relaxed">First, let's look at Michael Jackson's name itself. There are exactly 7 letters in both Michael and Jackson—The first aspect of the number 7 in his life.</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">7 Everywhere: Michael Jackson's Love Affair with the Number</h2>
+        <p class="text-lg leading-relaxed">Jackson's connection to the number 7 wasn't limited to his name; it appeared all over his music, his performances, and even his fashion choices. It was almost as if he was using the energy of this number to fuel his creativity and success.</p>
+
+        <div class="bg-card/50 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-6 my-8">
+          <ul class="list-disc list-inside space-y-3 text-lg">
+            <li><span class="text-[#a39490]">'Scream' Music Video:</span> Michael Jackson wore the number 7 prominently on his top in the 'Scream' music video.</li>
+            <li><span class="text-[#a39490]">'Dangerous' Album Cover:</span> The number 7 appears on a hat in the album cover.</li>
+            <li><span class="text-[#a39490]">HIStory World Tour:</span> Michael had 7 embossed on each leg guard.</li>
+            <li><span class="text-[#a39490]">HIStory Album Statue:</span> Features 777 on his arm.</li>
+            <li><span class="text-[#a39490]">HIStory Promotional Video:</span> The 777 symbol appears on his jacket.</li>
+            <li><span class="text-[#a39490]">Plasters on His Fingers:</span> Left his seventh finger free.</li>
+            <li><span class="text-[#a39490]">'Blood On The Dance Floor' Album:</span> His body forms a number 7.</li>
+          </ul>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">The Power of 7 in Numerology</h2>
+        <p class="text-lg leading-relaxed">In numerology, the number 7 is a deeply spiritual number linked to introspection, wisdom, and intelligence. It is considered the "number of the seeker," often associated with those who possess a desire for spiritual enlightenment and deeper understanding. It's not just a number of creativity but also of balance and healing.</p>
+
+        <p class="text-lg leading-relaxed">This connection to 7 perfectly mirrors Jackson's approach to music. His songs weren't just about entertainment; they were about creating change, healing, and uniting people. Whether it was through his message of peace in "Heal the World" or his call for social justice in "Black or White," Michael Jackson's music had a way of speaking to people on a deeply emotional and spiritual level—much like the energy of the number 7 itself.</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">The Spiritual Power of 7 in Michael Jackson's Legacy</h2>
+        <p class="text-lg leading-relaxed">From the number 7 woven into his name to the 777 on his clothing and album covers, Michael Jackson's life was full of numerological significance. He didn't just create music—he crafted spiritual anthems, designed to heal, uplift, and unite people of all backgrounds.</p>
+
+        <div class="bg-gradient-to-r from-[#86736f]/10 via-[#a39490]/10 to-[#c4b5b1]/10 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-8 my-8">
+          <p class="text-xl font-semibold text-center mb-4">Ready to discover your numerological path to success?</p>
+          <p class="text-lg text-center mb-6">Get your personal numerology analysis today and unlock the power of numbers in your life.</p>
+          <div class="flex justify-center">
+            <Link to="/numerology-reading" className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-gradient-to-r from-[#86736f] to-[#c4b5b1] rounded-lg hover:opacity-90 transition-opacity">
+              Get Your Reading Now
+            </Link>
+          </div>
+        </div>
+      </div>
+    `,
+    image: "/lovable-uploads/787349e3-6668-40c9-90db-3dd2d0f8d6ef.png",
+    date: "March 27, 2024",
+    readTime: "10 min read"
+  },
   "steve-jobs-numerology": {
-    title: "How Steve Jobs Used Numerology to Shape His Success: The Power of the number 28, 9, and Apple's Trillion-Dollar Legacy",
+    title: "How Steve Jobs Used Numerology to Shape His Success: The Power of 28, 9, and Apple's Legacy",
     content: `
       <div class="space-y-6">
         <p class="text-lg leading-relaxed">Steve Jobs, the co-founder of Apple, needs no introduction. His vision transformed the world of technology and consumer electronics, leading Apple to become the largest company in the world, now valued at a staggering $3.5 trillion. However, what many may not know is that he used numerology as a driving force. From his early days of exploration into astrology and numerology in India right before the creation of the world's most valuable company, Jobs used numerology as an unseen guiding force. Let's dive into how Steve Job's used numerology to drive his journey to success.</p>

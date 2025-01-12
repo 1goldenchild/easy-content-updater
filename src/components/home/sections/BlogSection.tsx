@@ -5,6 +5,14 @@ import { Link } from "react-router-dom";
 
 const blogPosts = [
   {
+    title: "How Michael Jackson used the Power of Numerology: The Influence of the Number 7 on His Career",
+    description: "Discover how the King of Pop strategically used numerology, particularly the number 7, to shape his artistic vision and create a lasting legacy that changed music forever.",
+    date: "March 27, 2024",
+    readTime: "10 min read",
+    mainImage: "/lovable-uploads/787349e3-6668-40c9-90db-3dd2d0f8d6ef.png",
+    slug: "michael-jackson-numerology"
+  },
+  {
     title: "How Steve Jobs Used Numerology to Shape His Success: The Power of 28, 9, and Apple's Legacy",
     description: "Discover how Apple's co-founder strategically used numerology, particularly the numbers 28 and 9, to build the world's most valuable company worth $3.5 trillion.",
     date: "March 25, 2024",
