@@ -3,57 +3,57 @@ import { Star } from "lucide-react"
 
 const testimonials = [
   {
-    name: "Sarah Johnson",
-    role: "Entrepreneur",
-    text: "The energy forecast was incredibly accurate. It helped me time major business decisions perfectly.",
-    rating: 5
-  },
-  {
     name: "Michael Chen",
     role: "Creative Director",
-    text: "I was skeptical at first, but the insights provided were remarkably precise. It's become an essential tool for my personal growth.",
-    rating: 5
-  },
-  {
-    name: "Emma Thompson",
-    role: "Life Coach",
-    text: "As someone who works with personal development, I'm amazed by the depth and accuracy of these readings.",
-    rating: 5
-  },
-  {
-    name: "David Rodriguez",
-    role: "Tech Executive",
-    text: "The career guidance was spot-on. It helped me make a crucial career move at exactly the right time.",
-    rating: 5
-  },
-  {
-    name: "Lisa Anderson",
-    role: "Artist",
-    text: "The insights about my creative cycles have transformed how I approach my work. Truly invaluable.",
-    rating: 5
-  },
-  {
-    name: "James Wilson",
-    role: "Financial Advisor",
-    text: "The precision of the readings is remarkable. It's become an integral part of my decision-making process.",
-    rating: 5
-  },
-  {
-    name: "Mark Thompson",
-    role: "Teacher",
-    text: "I never realized how much the energy around me was influencing my decisions. Now I'm more in tune with my instincts and feel more balanced in my life.",
-    rating: 5
-  },
-  {
-    name: "Ethan Lee",
-    role: "Writer",
-    text: "I was really amazed at how the readings pinpointed my strengths and challenges. It's like having a clearer sense of purpose.",
+    text: "I never got a more accurate analysis than with these guys. They got it down to a science and offered it in a visually appealing and easily digestible content and It's freaking incredible.",
     rating: 5
   },
   {
     name: "Jessica Turner",
     role: "Community Organizer",
-    text: "The clarity I've gained has been incredible. It's like I've tapped into a new level of understanding about myself and how I work with others.",
+    text: "I loved the reading and it was super incentive but the precision of it all is what really surprised me with things that i didn't even think were possible with numerology.",
+    rating: 5
+  },
+  {
+    name: "James Wilson",
+    role: "Owner Operator",
+    text: "I bought a ton of different analyses but you guys are the only ones providing charts and graphics and it just lets us have a different vision and perspective so thanks to the numerology 33 team.",
+    rating: 5
+  },
+  {
+    name: "Lisa Anderson",
+    role: "Dentist",
+    text: "This is the 3rd numerology reading that I've gotten and for the first time I don't feel like I'm reading some fortune cookie BS. This one felt extremely accurate and valuable with some crazy new things that I discovered about myself so thanks a lot!",
+    rating: 5
+  },
+  {
+    name: "Sarah Johnson",
+    role: "Medical Assistant",
+    text: "I never realized how much the energy around me was influencing my decisions. Now I'm already feeling more in tune with my inner me :)",
+    rating: 5
+  },
+  {
+    name: "Mark Thompson",
+    role: "Kindergarten Teacher",
+    text: "I teach 8 years old and every year I order new reading for my new class. It's the first time with you guys and I must say the information in there is simply amazing. The level that you guys operate at is incredible and I'm looking forward to seeing what is available to us in the future.",
+    rating: 5
+  },
+  {
+    name: "Emma Thompson",
+    role: "Flooring Contractor",
+    text: "It's just amazing that we can use numerology to pinpoint our strengths and challenges. It's literally like having a cheat code that a few people know...",
+    rating: 5
+  },
+  {
+    name: "Ethan Lee",
+    role: "Corporate Sales",
+    text: "This is crazy. I just got out of a 13 year marriage and the analysis literally told me that I was married to my enemy number and it makes so much sense. Highly recommended if you guys have never done it.",
+    rating: 5
+  },
+  {
+    name: "David Rodriguez",
+    role: "Tech Executive",
+    text: "I was strictly interested in numerology to know the money secret tricks and I was stunned by it but I think the best was with my personality and I react in certain ways when I'm in stressful environments. This deepness of this value is really something so thanks to Numerology33.com!",
     rating: 5
   }
 ]
