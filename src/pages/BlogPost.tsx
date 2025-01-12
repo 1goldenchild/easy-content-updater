@@ -59,12 +59,6 @@ const blogPosts = {
       <div class="space-y-6">
         <p class="text-lg leading-relaxed">When it comes to luxury and prestige, few brands resonate with success like Rolex. Beyond its impeccable craftsmanship and status as the ultimate symbol of achievement, Rolex uses a secret that many may not know about—numerology. In fact, Rolex has embedded certain numbers into their watches in a way that subtly aligns with wealth and prosperity.</p>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
-          <img src="/lovable-uploads/69e9446c-9b3d-44b9-87f5-db9647e25dcf.png" alt="Rolex Watch 1" class="rounded-lg shadow-lg w-full" />
-          <img src="/lovable-uploads/712974a5-ebed-4c39-a091-d7927ca6ba90.png" alt="Rolex Watch 2" class="rounded-lg shadow-lg w-full" />
-          <img src="/lovable-uploads/7b6f1b10-9fc5-45a7-980d-feb95125b3ff.png" alt="Rolex Watch 3" class="rounded-lg shadow-lg w-full hidden md:block" />
-        </div>
-
         <p class="text-lg leading-relaxed">Let's take a deeper look at how Rolex incorporates numerology into their timepieces, especially through the strategic use of the number 28 in their marketing, and the powerful 10:11 on the dial—two numbers linked to abundance and success.</p>
 
         <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">Why the Number 28? The Numerology of Wealth</h2>
@@ -79,6 +73,12 @@ const blogPosts = {
         </div>
 
         <p class="text-lg leading-relaxed">So, why does Rolex showcase the number 28 in the images of their watches? The answer lies in subtle numerological influence. In Rolex marketing photos, the date window often highlights the 28th day of the month—and it's no accident. By showcasing this number, Rolex is tapping in the number 28 and showing it to you which also drives you to making purchases.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+          <img src="/lovable-uploads/91a23eb6-35ae-4850-a089-cc3e2438b65e.png" alt="Gold Rolex Watch" class="rounded-lg shadow-lg w-full" />
+          <img src="/lovable-uploads/ec0bf53a-a535-42fa-a475-9a3588d1bb5c.png" alt="Two-Tone Rolex Watch" class="rounded-lg shadow-lg w-full" />
+          <img src="/lovable-uploads/a6781e11-aee4-40d3-bca0-dcd105340118.png" alt="Black Rolex Watch" class="rounded-lg shadow-lg w-full hidden md:block" />
+        </div>
 
         <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">The Power of 28 in the World of Wealth</h2>
         <p class="text-lg leading-relaxed">Some of the wealthiest figures of our time were born on the 28th of the month. Take Elon Musk, born on June 28, 1971, who is currently the richest person in the world, with a net worth frequently surpassing $416 billion. His immense wealth and groundbreaking companies, including Tesla and SpaceX, align perfectly with the numerological energy of the number 28.</p>
