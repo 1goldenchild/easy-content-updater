@@ -70,6 +70,17 @@ const BlogPost = () => {
             So, why does Rolex showcase the number 28 in the images of their watches? The answer lies in subtle numerological influence. In Rolex marketing photos, the date window often highlights the 28th day of the month—and it's no accident. By showcasing this number, Rolex is tapping in the number 28 and showing it to you which also drives you to making purchases.
           </p>
 
+          <div className="flex justify-between items-center gap-8 mb-8 bg-black/40 p-8 rounded-lg backdrop-blur-sm px-16">
+            {post.watchImages.map((watch, idx) => (
+              <img
+                key={idx}
+                src={watch}
+                alt={`Rolex Watch ${idx + 1}`}
+                className="w-40 h-40 object-contain"
+              />
+            ))}
+          </div>
+
           <h2 className="text-2xl font-bold mt-8 mb-4 text-[#a39490]">
             The Power of 28 in the World of Wealth
           </h2>
@@ -81,17 +92,6 @@ const BlogPost = () => {
           <p>
             But it doesn't stop there. Bill Gates, the richest man of the previous decade, was also born on October 28, 1955. Gates co-founded Microsoft and became a pioneer in the tech industry. The success of both Musk and Gates reflects the numerological force of the number 28.
           </p>
-
-          <div className="flex justify-between items-center gap-8 mb-8 bg-black/40 p-6 rounded-lg backdrop-blur-sm px-12">
-            {post.watchImages.map((watch, idx) => (
-              <img
-                key={idx}
-                src={watch}
-                alt={`Rolex Watch ${idx + 1}`}
-                className="w-40 h-40 object-contain"
-              />
-            ))}
-          </div>
 
           <h2 className="text-2xl font-bold mt-8 mb-4 text-[#a39490]">
             More Wealthy Entities Linked to the Number 28
