@@ -82,13 +82,13 @@ const BlogPost = () => {
             But it doesn't stop there. Bill Gates, the richest man of the previous decade, was also born on October 28, 1955. Gates co-founded Microsoft and became a pioneer in the tech industry. The success of both Musk and Gates reflects the numerological force of the number 28.
           </p>
 
-          <div className="flex justify-between items-center gap-4 mb-8 bg-black/40 p-4 rounded-lg backdrop-blur-sm">
+          <div className="flex justify-between items-center gap-8 mb-8 bg-black/40 p-6 rounded-lg backdrop-blur-sm px-12">
             {post.watchImages.map((watch, idx) => (
               <img
                 key={idx}
                 src={watch}
                 alt={`Rolex Watch ${idx + 1}`}
-                className="w-32 h-32 object-contain"
+                className="w-40 h-40 object-contain"
               />
             ))}
           </div>
