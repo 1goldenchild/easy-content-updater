@@ -12,7 +12,7 @@ import { supabase } from "@/integrations/supabase/client"
 import { useIsMobile } from "@/hooks/use-mobile"
 
 // Initialize Stripe with the publishable key
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '')
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
 console.log('Stripe initialization:', import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY ? 'Key present' : 'Key missing')
 
 const Checkout = () => {
