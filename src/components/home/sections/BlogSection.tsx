@@ -57,9 +57,9 @@ const BlogSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-white via-white/90 to-white/80 text-transparent bg-clip-text animate-text-shimmer relative inline-block">
-              Latest Insights & Guidance
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <span className="bg-gradient-to-r from-[#8B5CF6] via-[#9b87f5] to-[#D6BCFA] text-transparent bg-clip-text animate-text-shimmer inline-block">
+              Latest Numerology Blogs
             </span>
           </h2>
           <p className="text-lg text-muted-foreground">
@@ -76,7 +76,7 @@ const BlogSection = () => {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card className="group h-full bg-card/50 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300">
+              <Card className="group h-full bg-card/50 backdrop-blur-sm border border-[#8B5CF6]/20 hover:border-[#8B5CF6]/40 transition-all duration-300">
                 <CardHeader className="p-0">
                   <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
                     <img
@@ -87,7 +87,7 @@ const BlogSection = () => {
                   </div>
                 </CardHeader>
                 <CardContent className="p-6">
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
+                  <div className="flex items-center gap-4 text-sm text-[#8B5CF6] mb-3">
                     <span>{post.date}</span>
                     <span>•</span>
                     <span>{post.readTime}</span>
@@ -98,7 +98,7 @@ const BlogSection = () => {
                   <CardDescription className="text-muted-foreground mb-4">
                     {post.description}
                   </CardDescription>
-                  <div className="flex items-center text-sm text-white/70 group-hover:text-white/90 transition-colors">
+                  <div className="flex items-center text-sm text-[#8B5CF6] group-hover:text-[#9b87f5] transition-colors">
                     Read More
                     <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                   </div>
