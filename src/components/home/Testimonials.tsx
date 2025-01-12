@@ -46,7 +46,7 @@ const testimonials = [
     image: "/lovable-uploads/d66893a4-4810-4ad2-822b-eaa0a0063c22.png"
   },
   {
-    name: "Emma Thompson",
+    name: "Chris Thompson",
     role: "Flooring Contractor",
     text: "It's just amazing that we can use numerology to pinpoint our strengths and challenges. It's literally like having a cheat code that a few people know...",
     rating: 5,
