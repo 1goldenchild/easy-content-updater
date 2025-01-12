@@ -105,7 +105,7 @@ const BlogSection = () => {
                   <CardHeader className="p-0">
                     <div className="relative h-64 w-full overflow-hidden rounded-t-lg">
                       <img
-                        src={post.mainImage || post.image}
+                        src={post.mainImage}
                         alt={post.title}
                         className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-300"
                       />
