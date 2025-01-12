@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const blogPosts = {
   "steve-jobs-numerology": {
-    title: "How Steve Jobs Used Numerology to Shape His Success: The Power of 28, 9, and Apple's Legacy",
+    title: "How Steve Jobs Used Numerology to Shape His Success: The Power of the number 28, 9, and Apple's Trillion-Dollar Legacy",
     content: `
       <div class="space-y-6">
         <p class="text-lg leading-relaxed">Steve Jobs, the co-founder of Apple, needs no introduction. His vision transformed the world of technology and consumer electronics, leading Apple to become the largest company in the world, now valued at a staggering $3.5 trillion. However, what many may not know is that he used numerology as a driving force. From his early days of exploration into astrology and numerology in India right before the creation of the world's most valuable company, Jobs used numerology as an unseen guiding force. Let's dive into how Steve Job's used numerology to drive his journey to success.</p>
@@ -259,15 +259,6 @@ const BlogPost = () => {
             <span>{post.date}</span>
             <span>•</span>
             <span>{post.readTime}</span>
-          </div>
-
-          <div className="relative h-[400px] md:h-[500px] w-full mb-8 rounded-lg overflow-hidden">
-            <img
-              src={post.image}
-              alt={post.title}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/80" />
           </div>
 
           <div 
