@@ -10,6 +10,8 @@ const blogPosts = {
       <div class="space-y-6">
         <p class="text-lg leading-relaxed">When we think of the world's most successful and influential tech giants, Bill Gates is undoubtedly one of the first names that come to mind. The co-founder of Microsoft revolutionized the technology industry and amassed an unimaginable fortune over the decades. But what if we told you that Bill Gates' success wasn't just due to his business acumen and relentless drive?</p>
 
+        <p class="text-lg leading-relaxed">In this blog, we'll go over how Bill Gates used numerology to influence his business decisions, and how his keen understanding of numbers have even been the key to some of his most significant moves. We'll also explore his rivalry with Steve Jobs, another numerology enthusiast, and how both of these tech titans made strategic decisions based on numerology.</p>
+
         <div class="relative h-[400px] w-full mb-8 rounded-lg overflow-hidden">
           <img src="/lovable-uploads/bc46eaf5-772c-48e1-8dd7-fdfd1952a3ae.png" alt="Bill Gates with Microsoft Surface display" class="absolute inset-0 w-full h-full object-cover" />
           <div class="absolute inset-0 bg-gradient-to-b from-transparent to-background/80"></div>
@@ -17,6 +19,10 @@ const blogPosts = {
 
         <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">Bill Gates and the Number 28: The Key to His Wealth</h2>
         <p class="text-lg leading-relaxed">One of the most fascinating aspects of Bill Gates' numerology is the number 28, which plays a critical role in his life path and his wealth. Gates was born on October 28, 1955. In numerology, 28 is the number of wealth, success, and power. The number is connected to individuals who are destined for financial prosperity and significant accomplishments.</p>
+
+        <p class="text-lg leading-relaxed">When we look at the numbers behind Gates' massive success, it's clear that 28 has been his guiding force. The wealth and success Gates has amassed through Microsoft and his various investments align perfectly with the energetic properties of 28.</p>
+
+        <p class="text-lg leading-relaxed">As of now, Bill Gates has an estimated net worth of over $100 billion, making him one of the wealthiest individuals on the planet. The impact of 28 can't be understated here—his company, Microsoft, and his investments all seem to fall in line with the numerological power of the number.</p>
 
         <div class="bg-card/50 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-6 my-8">
           <ul class="list-disc list-inside space-y-3 text-lg">
@@ -28,7 +34,12 @@ const blogPosts = {
         </div>
 
         <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">Bill Gates and Steve Jobs: The Rivalry and Numerology Connection</h2>
-        <p class="text-lg leading-relaxed">Bill Gates' biggest competitor in the tech world was none other than Steve Jobs, the iconic co-founder of Apple. While their rivalry is well-known in the business world, what's less commonly known is that both Gates and Jobs were deeply influenced by numerology in their respective careers.</p>
+        <p class="text-lg leading-relaxed">Bill Gates' biggest competitor in the tech world was none other than Steve Jobs, the iconic co-founder of Apple. (Apple was also founded in 28 day.) While their rivalry is well-known in the business world, what's less commonly known is that both Gates and Jobs were deeply influenced by numerology in their respective careers.</p>
+
+        <h3 class="text-xl font-bold mt-6 mb-3 text-[#a39490]">Steve Jobs' Numerological Beliefs</h3>
+        <p class="text-lg leading-relaxed">Steve Jobs, like Gates, had an interest in the powers of numerology. In fact, Jobs went to India to learn more about numerology and astrology, which he integrated into his decisions throughout his career. One of the most telling examples of Jobs' numerological understanding came when he made the decision to skip the number 9 in Apple's iPhone lineup. He released the iPhone 8 and then jumped straight to the iPhone X, skipping over 9 entirely.</p>
+
+        <p class="text-lg leading-relaxed">Why did he do this? The Number 9 is the number of completion. It creates the end of a cycle and is associated with perfection and finality. Jobs knew that the number 9 represented the final chapter, and as a result, he chose to skip it in favor of a new beginning—iPhone X, symbolizing a new era for Apple.</p>
 
         <div class="bg-card/50 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-6 my-8">
           <h3 class="text-xl font-semibold mb-4">The Number 9 Connection</h3>
@@ -40,8 +51,10 @@ const blogPosts = {
           </ul>
         </div>
 
-        <h2 class="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">The Power of Strategic Numerology</h2>
-        <p class="text-lg leading-relaxed">When we look at the numbers behind Gates' massive success, it's clear that 28 has been his guiding force. The wealth and success Gates has amassed through Microsoft and his various investments align perfectly with the energetic properties of 28.</p>
+        <h3 class="text-xl font-bold mt-6 mb-3 text-[#a39490]">Bill Gates Does the Same Thing—Two Years Earlier</h3>
+        <p class="text-lg leading-relaxed">What's fascinating is that Bill Gates made a similar move years earlier, demonstrating that both men shared a deep understanding of numerology and used it in their decision-making processes. In fact Microsoft skipped over Windows 9. Instead of calling it Windows 9, Gates went straight from Windows 8 to Windows 10.</p>
+
+        <p class="text-lg leading-relaxed">This move was even before Jobs' move with Apple, as both tech moguls seemed to understand that 9 represented completion, and they wanted to avoid that finality energy in their product launches.</p>
 
         <div class="bg-gradient-to-r from-[#86736f]/10 via-[#a39490]/10 to-[#c4b5b1]/10 backdrop-blur-sm border border-[#86736f]/20 rounded-lg p-8 my-8">
           <p class="text-xl font-semibold text-center mb-4">Ready to discover your numerological path to success?</p>
@@ -493,3 +506,4 @@ const BlogPost = () => {
 };
 
 export default BlogPost;
+
