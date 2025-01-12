@@ -36,7 +36,7 @@ const testimonials = [
     role: "Medical Assistant",
     text: "I never realized how much the energy around me was influencing my decisions. Now I'm already feeling more in tune with my inner me :)",
     rating: 5,
-    image: "/lovable-uploads/ddcf7f13-8161-4035-8bf0-380df27a4222.png"
+    image: "/lovable-uploads/1e3f4b34-6805-4822-a03b-71cee7add12f.png"
   },
   {
     name: "Mark Thompson",
@@ -50,7 +50,7 @@ const testimonials = [
     role: "Flooring Contractor",
     text: "It's just amazing that we can use numerology to pinpoint our strengths and challenges. It's literally like having a cheat code that a few people know...",
     rating: 5,
-    image: "/lovable-uploads/3f848f16-f163-4093-a327-4b4170e4a729.png"
+    image: "/lovable-uploads/984813d9-700a-4057-a369-08ae4035507b.png"
   },
   {
     name: "Ethan Lee",
