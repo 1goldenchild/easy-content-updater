@@ -81,7 +81,7 @@ const PreviewSection = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="flex justify-center mt-4 mb-12"
+        className="flex justify-center mt-4 mb-24" // Changed mb-12 to mb-24 to add more margin
       >
         <div className="relative group">
           <div className="absolute -inset-1 bg-gradient-to-r from-[#534363] via-[#534363] to-[#534363] rounded-md blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
