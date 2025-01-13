@@ -15,6 +15,7 @@ import CarCompatibility from "./CarCompatibility";
 import CountryCompatibility from "./CountryCompatibility";
 import ColorCompatibility from "./ColorCompatibility";
 import CrystalAnalysis from "./CrystalAnalysis";
+import CompatibilityChart from "./CompatibilityChart";
 
 interface NumerologyResultsProps {
   lifePath: number;
@@ -90,6 +91,7 @@ const NumerologyResults = ({
       <AstrologyAnalysis chineseZodiac={chineseZodiac} isVisible={isVisible} />
       <CycleAnalysis isVisible={isVisible} />
       <EnergyAnalysis isVisible={isVisible} />
+      <CompatibilityChart lifePath={lifePath} isVisible={isVisible} />
       <LoveCompatibility lifePathNumber={lifePath} />
       <OccupationGuidance lifePath={lifePath} isVisible={isVisible} />
       <HousingAnalysis lifePath={lifePath} isVisible={isVisible} />
