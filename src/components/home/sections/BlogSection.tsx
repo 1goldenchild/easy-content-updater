@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
+import BlogCard from "./blog/BlogCard";
+import BlogHeader from "./blog/BlogHeader";
 
 const blogPosts = [
   {
@@ -48,63 +49,11 @@ const BlogSection = () => {
     <section className="py-16 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background"></div>
       <div className="container px-4 md:px-6 relative">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-[#E5B8A6] via-[#D4A391] to-[#C38E7C] text-transparent bg-clip-text animate-text-shimmer inline-block">
-              Latest Numerology Blogs
-            </span>
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Explore our latest articles on numerology and spiritual growth
-          </p>
-        </motion.div>
-
+        <BlogHeader />
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {visiblePosts.map((post, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <Link to={`/blog/${post.slug}`}>
-                <Card className="group h-full overflow-hidden bg-card/50 backdrop-blur-sm border border-[#E5B8A6]/20 hover:border-[#E5B8A6]/40 transition-all duration-300 hover:shadow-lg hover:shadow-[#E5B8A6]/5">
-                  <CardHeader className="p-0">
-                    <div className="relative h-64 w-full overflow-hidden rounded-t-lg">
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
-                      <img
-                        src={post.mainImage}
-                        alt={post.title}
-                        className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                  </CardHeader>
-                  <CardContent className="p-6 relative">
-                    <div className="flex items-center gap-4 text-sm text-[#E5B8A6] mb-3">
-                      <span>{post.date}</span>
-                      <span>•</span>
-                      <span>{post.readTime}</span>
-                    </div>
-                    <CardTitle className="text-xl mb-2 group-hover:text-[#E5B8A6] transition-colors duration-300">
-                      {post.title}
-                    </CardTitle>
-                    <CardDescription className="text-muted-foreground mb-4 line-clamp-2">
-                      {post.description}
-                    </CardDescription>
-                    <div className="flex items-center text-sm text-[#E5B8A6] group-hover:text-[#D4A391] transition-colors">
-                      Read More
-                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            </motion.div>
+            <BlogCard key={post.slug} post={post} index={index} />
           ))}
         </div>
         
