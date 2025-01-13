@@ -6,6 +6,7 @@ import CarCompatibility from "@/components/numerology/CarCompatibility";
 import ColorCompatibility from "@/components/numerology/ColorCompatibility";
 import TechCompatibility from "@/components/numerology/TechCompatibility";
 import HousingAnalysis from "@/components/numerology/HousingAnalysis";
+import CrystalAnalysis from "@/components/numerology/CrystalAnalysis";
 
 interface ResultsSectionProps {
   results: {
@@ -41,6 +42,13 @@ const ResultsSection = ({ results, isVisible }: ResultsSectionProps) => {
 
       <div id="housing" className="mt-8">
         <HousingAnalysis
+          lifePath={results.lifePath}
+          isVisible={isVisible}
+        />
+      </div>
+
+      <div id="crystals">
+        <CrystalAnalysis
           lifePath={results.lifePath}
           isVisible={isVisible}
         />
