@@ -1,6 +1,9 @@
 import { motion } from "framer-motion"
 import { Star } from "lucide-react"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
+import { useNavigate } from "react-router-dom"
+import { scrollToTop } from "./CallToAction"
 
 const testimonials = [
   {
@@ -105,7 +108,13 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
 )
 
 const Testimonials = () => {
+  const navigate = useNavigate();
   const doubledTestimonials = [...testimonials, ...testimonials]
+
+  const handleGetStarted = () => {
+    navigate('/collect-info');
+    scrollToTop();
+  };
 
   return (
     <section className="py-16 bg-gradient-to-b from-background to-background/80 overflow-hidden">
@@ -136,6 +145,28 @@ const Testimonials = () => {
                 <TestimonialCard key={`${testimonial.name}-${index}`} testimonial={testimonial} />
               ))}
             </div>
+          </div>
+        </div>
+
+        <div className="mt-16 flex justify-center">
+          <div className="relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 via-emerald-500/20 to-emerald-500/20 rounded-md blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+            <Button 
+              onClick={handleGetStarted}
+              className="w-full bg-gradient-to-r from-emerald-500/20 to-emerald-500/30 hover:from-emerald-500/30 hover:to-emerald-500/40 text-white font-normal tracking-wider shadow-[0_0_15px_rgba(16,185,129,0.1)] transition-all duration-500 bg-[length:200%_auto] hover:bg-right-top hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] border border-emerald-500/20 rounded-md relative overflow-hidden"
+            >
+              <span className="relative z-10 flex items-center">
+                Start Your Journey Now
+                <motion.span
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.5 }}
+                  className="ml-2"
+                >
+                  →
+                </motion.span>
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-emerald-500/10 to-transparent translate-x-[-200%] animate-shimmer" />
+            </Button>
           </div>
         </div>
       </div>
