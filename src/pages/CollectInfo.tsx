@@ -26,7 +26,7 @@ const CollectInfo = () => {
             <CollectInfoForm />
           </div>
 
-          {/* Preview Section - Only visible on desktop */}
+          {/* Preview Section */}
           <div className="hidden lg:block">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
