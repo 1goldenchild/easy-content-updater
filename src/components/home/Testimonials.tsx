@@ -7,6 +7,20 @@ import { scrollToTop } from "./CallToAction"
 
 const testimonials = [
   {
+    name: "Candace Gladstone",
+    role: "Medical Care",
+    text: "I didn't even know that I was a secret number 33, and now I'm shocked because my wife is also a 33 herself, our son is a Life Path 11, and my daughter was born on the 22nd.",
+    rating: 5,
+    image: "/lovable-uploads/a58a32b8-8b25-4fe0-832e-cf4443499deb.png"
+  },
+  {
+    name: "Julia Coulombe",
+    role: "Nurse",
+    text: "You guys are the only ones giving us the actual truth about the number 9, and believe me when I say that I searched for a long time. Again, I'm just completely mind-blown. So, thanks a lot for not gatekeeping this information.",
+    rating: 5,
+    image: "/lovable-uploads/a1cec482-1125-4106-a659-f54ee1eeacde.png"
+  },
+  {
     name: "Michael Chen",
     role: "Creative Director",
     text: "I never got a more accurate analysis than with these guys. They got it down to a science and offered it in a visually appealing and easily digestible content and It's freaking incredible.",
@@ -69,20 +83,6 @@ const testimonials = [
     rating: 5,
     image: "/lovable-uploads/ddcf7f13-8161-4035-8bf0-380df27a4222.png"
   },
-  {
-    name: "Candace Gladstone",
-    role: "Medical Care",
-    text: "I didn't even know that I was a secret number 33, and now I'm shocked because my wife is also a 33 herself, our son is a Life Path 11, and my daughter was born on the 22nd.",
-    rating: 5,
-    image: "/lovable-uploads/e9d07c43-6f8a-4bd4-be65-892e1853841a.png"
-  },
-  {
-    name: "Julia Coulombe",
-    role: "Nurse",
-    text: "You guys are the only ones giving us the actual truth about the number 9, and believe me when I say that I searched for a long time. Again, I'm just completely mind-blown. So, thanks a lot for not gatekeeping this information.",
-    rating: 5,
-    image: "/lovable-uploads/a1cec482-1125-4106-a659-f54ee1eeacde.png"
-  }
 ];
 
 const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => (
