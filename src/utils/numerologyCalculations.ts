@@ -1,54 +1,84 @@
+// Master numbers that are preserved and not reduced further
 export const MASTER_NUMBERS = [33, 22, 11];
 
+// Check if the number is a master number (11, 22, 33)
 const isMasterNumber = (num: number): boolean => {
   return MASTER_NUMBERS.includes(num);
 };
 
+// Sum the digits of a number
 const sumDigits = (num: number): number => {
   return num
-    .toString()
-    .split('')
-    .map(Number)
-    .reduce((a, b) => a + b, 0);
+    .toString() // Convert number to string to split it
+    .split('') // Split each digit into an array
+    .map(Number) // Convert the split string back into numbers
+    .reduce((a, b) => a + b, 0); // Sum all the digits
 };
 
-// Only reduce to single digit if not a master number
-const reduceNumber = (num: number): number => {
-  // First check if the initial number is a master number
+// Reduce the number to a single digit, unless it's a Master Number
+export const reduceToSingleDigit = (num: number): number => {
   if (isMasterNumber(num)) {
-    console.log(`Found master number: ${num}, preserving it`);
-    return num;
+    console.log(`Number ${num} is a master number, returning as is`);
+    return num; // If it's a master number, return it as is
   }
-  
-  // If not a master number, reduce to single digit
+
   let result = num;
+
+  // Keep reducing the number until it becomes a single digit (between 1-9)
   while (result > 9) {
     result = sumDigits(result);
+    // If a Master Number is encountered during reduction, return it
+    if (isMasterNumber(result)) {
+      console.log(`Found master number during reduction: ${result}`);
+      return result; // Return the Master Number
+    }
   }
-  return result;
+
+  return result; // Return the final reduced number
 };
 
+// Check if a number should be treated as a Life Path 11 (20, 29, 38)
+const checkSpecialCase = (num: number): number => {
+  if ([20, 29, 38].includes(num)) {
+    console.log(`Number ${num} is a special case, treating as Life Path 11`);
+    return 11; // Treat 20, 29, or 38 as Life Path 11
+  }
+  return num;
+};
+
+// Calculate Life Path Number from a given date
 export const calculateLifePath = (date: Date): number => {
   const day = date.getDate();
-  const month = date.getMonth() + 1;
+  const month = date.getMonth() + 1; // Months are 0-indexed in JavaScript, so add 1
   const year = date.getFullYear();
 
   console.log(`Calculating Life Path for date: ${month}/${day}/${year}`);
 
-  // Convert all components to strings and concatenate all digits
-  const allDigits = day.toString() + month.toString() + year.toString();
-  console.log(`All digits combined: ${allDigits}`);
+  // Calculate individual sums for day, month, and year
+  const daySum = sumDigits(day); // Sum digits of the day
+  const monthSum = sumDigits(month); // Sum digits of the month
+  const yearSum = sumDigits(year); // Sum digits of the year
 
-  // Sum all individual digits without checking for master numbers
-  const totalSum = allDigits
-    .split('')
-    .map(Number)
-    .reduce((a, b) => a + b, 0);
+  console.log(`Day sum: ${daySum}, Month sum: ${monthSum}, Year sum: ${yearSum}`);
 
-  console.log(`Sum of all individual digits: ${totalSum}`);
+  // Get the total sum of all individual sums
+  let totalSum = daySum + monthSum + yearSum;
+  console.log(`Total sum before reduction: ${totalSum}`);
 
-  // Only check for master number at the final compound number
-  return reduceNumber(totalSum);
+  // Check if the total sum is a special case (20, 29, 38)
+  totalSum = checkSpecialCase(totalSum);
+
+  // If the total sum is already a Master Number, return it immediately
+  if (isMasterNumber(totalSum)) {
+    console.log(`Total sum ${totalSum} is a master number`);
+    return totalSum;
+  }
+
+  // If the total sum is not a Master Number, reduce it to a single digit
+  const lifePath = reduceToSingleDigit(totalSum);
+  console.log(`Final Life Path number: ${lifePath}`);
+
+  return lifePath;
 };
 
 export const calculatePartialEnergy = (day: number): number => {
