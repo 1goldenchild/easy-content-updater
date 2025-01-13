@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import LifepathAnalysis from "./LifepathAnalysis";
+import PartialEnergyAnalysis from "./PartialEnergyAnalysis";
 import AstrologyAnalysis from "./AstrologyAnalysis";
 import CharacteristicsChart from "./CharacteristicsChart";
 import GematriaAnalysis from "./GematriaAnalysis";
 import CycleAnalysis from "./CycleAnalysis";
 import EnergyAnalysis from "./EnergyAnalysis";
+import SecretAnalysis from "./SecretAnalysis";
 import LoveCompatibility from "./LoveCompatibility";
 import OccupationGuidance from "./OccupationGuidance";
 import HousingAnalysis from "./HousingAnalysis";
@@ -17,12 +19,16 @@ import CompatibilityChart from "./CompatibilityChart";
 
 interface NumerologyResultsProps {
   lifePath: number;
+  partialEnergy: number;
+  secretNumber: number;
   chineseZodiac: string;
   isVisible: boolean;
 }
 
 const NumerologyResults = ({ 
-  lifePath,
+  lifePath, 
+  partialEnergy, 
+  secretNumber, 
   chineseZodiac,
   isVisible 
 }: NumerologyResultsProps) => {
@@ -39,12 +45,28 @@ const NumerologyResults = ({
           <h3 className="text-2xl font-bold text-white/90">Your Numerology Profile</h3>
         </div>
         
-        <div className="grid grid-cols-2 gap-4 pt-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
           {/* Life Path Number */}
           <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
             <p className="text-sm text-white/70">Life Path Number</p>
             <p className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
               {lifePath}
+            </p>
+          </div>
+
+          {/* Partial Energy */}
+          <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
+            <p className="text-sm text-white/70">Partial Energy</p>
+            <p className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
+              {partialEnergy}
+            </p>
+          </div>
+
+          {/* Lucky Number */}
+          <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
+            <p className="text-sm text-white/70">Lucky Number</p>
+            <p className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
+              7
             </p>
           </div>
 
@@ -63,7 +85,9 @@ const NumerologyResults = ({
 
       <CharacteristicsChart isVisible={isVisible} lifePath={lifePath} />
       <LifepathAnalysis lifePath={lifePath} isVisible={isVisible} />
+      <PartialEnergyAnalysis partialEnergy={partialEnergy} isVisible={isVisible} />
       <GematriaAnalysis lifePath={lifePath} isVisible={isVisible} />
+      <SecretAnalysis secretNumber={secretNumber} isVisible={isVisible} />
       <AstrologyAnalysis chineseZodiac={chineseZodiac} isVisible={isVisible} />
       <CycleAnalysis isVisible={isVisible} />
       <EnergyAnalysis isVisible={isVisible} />
