@@ -3,6 +3,8 @@ import CompatibilitySection from "@/components/portal/CompatibilitySection";
 import OccupationGuidance from "@/components/numerology/OccupationGuidance";
 import CountryCompatibility from "@/components/numerology/CountryCompatibility";
 import CarCompatibility from "@/components/numerology/CarCompatibility";
+import ColorCompatibility from "@/components/numerology/ColorCompatibility";
+import TechCompatibility from "@/components/numerology/TechCompatibility";
 
 interface ResultsSectionProps {
   results: {
@@ -36,16 +38,30 @@ const ResultsSection = ({ results, isVisible }: ResultsSectionProps) => {
         />
       </div>
 
-      <div id="occupation">
-        <OccupationGuidance
+      <div id="country">
+        <CountryCompatibility
+          chineseZodiac={results.chineseZodiac}
+          isVisible={isVisible}
+        />
+      </div>
+
+      <div id="colors">
+        <ColorCompatibility
           lifePath={results.lifePath}
           isVisible={isVisible}
         />
       </div>
 
-      <div id="country">
-        <CountryCompatibility
-          chineseZodiac={results.chineseZodiac}
+      <div id="tech">
+        <TechCompatibility
+          lifePath={results.lifePath}
+          isVisible={isVisible}
+        />
+      </div>
+
+      <div id="occupation">
+        <OccupationGuidance
+          lifePath={results.lifePath}
           isVisible={isVisible}
         />
       </div>
