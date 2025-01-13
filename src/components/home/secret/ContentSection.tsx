@@ -44,7 +44,7 @@ const ContentSection = () => {
             onClick={handleNavigate}
             className="relative w-full sm:w-auto bg-gradient-to-r from-[#534363] to-[#a39356] hover:from-[#534363] hover:to-[#a39356] text-amber-200/90 font-normal tracking-wider shadow-[0_0_15px_rgba(251,191,36,0.1)] transition-all duration-500 bg-[length:200%_auto] hover:bg-right-top hover:shadow-[0_0_20px_rgba(251,191,36,0.2)] border border-[#86736f] rounded-md overflow-hidden px-8 py-6"
           >
-            <span className="relative z-10 flex items-center gap-2 text-lg">
+            <span className="relative z-10 flex items-center gap-2 text-base">
               Get Your Numerology Analysis
               <Sparkles className="w-5 h-5" />
             </span>
