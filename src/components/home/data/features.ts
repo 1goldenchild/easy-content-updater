@@ -53,8 +53,8 @@ export const features: Feature[] = [
   },
   {
     icon: Star,
-    title: "Daily Numbers",
-    description: "Receive daily numerological guidance and lucky numbers for optimal decision-making.",
+    title: "Energy of your environment",
+    description: "From which car to drive, to which color to wear, to which mobile device to use—numerology can guide your every choice.",
     gradient: "from-violet-500 to-purple-500",
     neonColor: "rgba(139, 92, 246, 0.5)",
     number: 6
