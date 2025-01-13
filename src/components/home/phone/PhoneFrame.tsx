@@ -16,9 +16,8 @@ const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProp
   useEffect(() => {
     const handleScroll = (e: Event) => {
       const container = e.target as HTMLElement;
-      if (container.scrollTop > 10 && !hasScrolled) {
+      if (container.scrollTop > 0) {
         setHasScrolled(true);
-        console.log("Scroll detected, setting hasScrolled to true");
       }
     };
 
@@ -27,7 +26,7 @@ const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProp
       container.addEventListener('scroll', handleScroll);
       return () => container.removeEventListener('scroll', handleScroll);
     }
-  }, [hasScrolled]);
+  }, []);
 
   return (
     <motion.div

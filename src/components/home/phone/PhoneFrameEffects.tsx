@@ -5,8 +5,6 @@ interface PhoneFrameEffectsProps {
 }
 
 const PhoneFrameEffects = ({ hasScrolled }: PhoneFrameEffectsProps) => {
-  console.log("PhoneFrameEffects rendered, hasScrolled:", hasScrolled);
-  
   return (
     <>
       {/* Decorative Elements */}
@@ -24,14 +22,12 @@ const PhoneFrameEffects = ({ hasScrolled }: PhoneFrameEffectsProps) => {
       />
 
       {/* Frosted Glass Overlay */}
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {!hasScrolled && (
           <motion.div
-            key="frosted-glass"
             initial={{ opacity: 1 }}
-            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
+            transition={{ duration: 0.2 }}
             className="absolute inset-0 backdrop-blur-sm bg-white/10 z-20 pointer-events-none"
           />
         )}
