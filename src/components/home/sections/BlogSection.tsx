@@ -45,8 +45,9 @@ const BlogSection = () => {
   const hasMorePosts = blogPosts.length > visiblePosts.length;
 
   return (
-    <section className="py-16 bg-gradient-to-b from-background/80 to-background">
-      <div className="container px-4 md:px-6">
+    <section className="py-16 relative">
+      <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background"></div>
+      <div className="container px-4 md:px-6 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -54,11 +55,11 @@ const BlogSection = () => {
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text animate-text-shimmer inline-block">
+            <span className="bg-gradient-to-r from-[#E5B8A6] via-[#D4A391] to-[#C38E7C] text-transparent bg-clip-text animate-text-shimmer inline-block">
               Latest Numerology Blogs
             </span>
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Explore our latest articles on numerology and spiritual growth
           </p>
         </motion.div>
@@ -73,31 +74,32 @@ const BlogSection = () => {
               transition={{ delay: index * 0.1 }}
             >
               <Link to={`/blog/${post.slug}`}>
-                <Card className="group h-full bg-card/50 backdrop-blur-sm border border-[#86736f]/20 hover:border-[#86736f]/40 transition-all duration-300">
+                <Card className="group h-full overflow-hidden bg-card/50 backdrop-blur-sm border border-[#E5B8A6]/20 hover:border-[#E5B8A6]/40 transition-all duration-300 hover:shadow-lg hover:shadow-[#E5B8A6]/5">
                   <CardHeader className="p-0">
                     <div className="relative h-64 w-full overflow-hidden rounded-t-lg">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
                       <img
                         src={post.mainImage}
                         alt={post.title}
-                        className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-300"
+                        className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
                   </CardHeader>
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-4 text-sm text-[#86736f] mb-3">
+                  <CardContent className="p-6 relative">
+                    <div className="flex items-center gap-4 text-sm text-[#E5B8A6] mb-3">
                       <span>{post.date}</span>
                       <span>•</span>
                       <span>{post.readTime}</span>
                     </div>
-                    <CardTitle className="text-xl mb-2 group-hover:text-white/90 transition-colors">
+                    <CardTitle className="text-xl mb-2 group-hover:text-[#E5B8A6] transition-colors duration-300">
                       {post.title}
                     </CardTitle>
-                    <CardDescription className="text-muted-foreground mb-4">
+                    <CardDescription className="text-muted-foreground mb-4 line-clamp-2">
                       {post.description}
                     </CardDescription>
-                    <div className="flex items-center text-sm text-[#86736f] group-hover:text-[#a39490] transition-colors">
+                    <div className="flex items-center text-sm text-[#E5B8A6] group-hover:text-[#D4A391] transition-colors">
                       Read More
-                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
                     </div>
                   </CardContent>
                 </Card>
@@ -107,15 +109,20 @@ const BlogSection = () => {
         </div>
         
         {hasMorePosts && (
-          <div className="text-center mt-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mt-12"
+          >
             <Link 
               to="/blog"
-              className="inline-flex items-center text-[#86736f] hover:text-[#a39490] transition-colors"
+              className="inline-flex items-center px-6 py-3 rounded-full bg-[#E5B8A6]/10 hover:bg-[#E5B8A6]/20 text-[#E5B8A6] hover:text-white transition-all duration-300"
             >
               View All Articles
-              <ArrowRight className="w-4 h-4 ml-1" />
+              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
             </Link>
-          </div>
+          </motion.div>
         )}
       </div>
     </section>
