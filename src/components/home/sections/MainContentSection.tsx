@@ -17,6 +17,17 @@ const MainContentSection = () => {
             Unlock Your Complete Numerology Profile
           </span>
         </span>
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="text-lg mt-2"
+        >
+          <span className="relative bg-gradient-to-r from-[#9b87f5] via-[#D6BCFA] to-[#E5DEFF] bg-clip-text text-transparent opacity-80">
+            And more
+          </span>
+        </motion.div>
       </motion.h2>
       
       <FeatureList />

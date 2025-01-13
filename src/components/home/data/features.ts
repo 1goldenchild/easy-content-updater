@@ -14,7 +14,7 @@ export const features: Feature[] = [
   {
     icon: Sparkles,
     title: "Personalized Insights",
-    description: "Get deep, personalized numerological insights based on your unique birth date and name.",
+    description: "Get deep, personalized numerological insights based on your unique birth date.",
     gradient: "from-purple-500 to-indigo-500",
     neonColor: "rgba(147, 51, 234, 0.5)",
     number: 1
