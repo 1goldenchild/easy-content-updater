@@ -150,10 +150,10 @@ const Testimonials = () => {
 
         <div className="mt-16 flex justify-center">
           <div className="relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 via-emerald-500/20 to-emerald-500/20 rounded-md blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+            <div className="absolute -inset-1 bg-gradient-to-r from-emerald-600 via-emerald-600 to-emerald-600 rounded-md blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
             <Button 
               onClick={handleGetStarted}
-              className="w-full bg-gradient-to-r from-emerald-500/20 to-emerald-500/30 hover:from-emerald-500/30 hover:to-emerald-500/40 text-white font-normal tracking-wider shadow-[0_0_15px_rgba(16,185,129,0.1)] transition-all duration-500 bg-[length:200%_auto] hover:bg-right-top hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] border border-emerald-500/20 rounded-md relative overflow-hidden"
+              className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-normal tracking-wider shadow-[0_0_15px_rgba(16,185,129,0.1)] transition-all duration-500 bg-[length:200%_auto] hover:bg-right-top hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] border border-emerald-600 rounded-md relative overflow-hidden"
             >
               <span className="relative z-10 flex items-center">
                 Start Your Journey Now
