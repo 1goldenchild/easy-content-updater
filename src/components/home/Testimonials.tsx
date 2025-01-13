@@ -123,7 +123,6 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
 
 const Testimonials = () => {
   const navigate = useNavigate();
-  // Triple the testimonials to ensure smooth infinite scroll
   const tripleTestimonials = [...testimonials, ...testimonials, ...testimonials]
 
   const handleGetStarted = () => {
@@ -140,7 +139,7 @@ const Testimonials = () => {
             className="text-3xl md:text-4xl font-bold mb-4 relative"
           >
             <span className="bg-gradient-to-r from-white via-white/90 to-white/80 text-transparent bg-clip-text animate-shine relative inline-block bg-[length:200%_100%]">
-              Transforming Lives Through Energy Insights
+              Change Your Life Through Cosmic Intelligence
             </span>
           </h2>
           <p className="text-lg text-muted-foreground flex items-center justify-center gap-2">
