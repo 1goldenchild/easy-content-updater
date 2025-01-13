@@ -12,8 +12,15 @@ const sumDigits = (num: number): number => {
     .reduce((a, b) => a + b, 0);
 };
 
-// Always reduce to single digit first, only check for master numbers at final sum
-const reduceToSingleDigit = (num: number): number => {
+// Only reduce to single digit if not a master number
+const reduceNumber = (num: number): number => {
+  // First check if the initial number is a master number
+  if (isMasterNumber(num)) {
+    console.log(`Found master number: ${num}, preserving it`);
+    return num;
+  }
+  
+  // If not a master number, reduce to single digit
   let result = num;
   while (result > 9) {
     result = sumDigits(result);
@@ -32,7 +39,7 @@ export const calculateLifePath = (date: Date): number => {
   const allDigits = day.toString() + month.toString() + year.toString();
   console.log(`All digits combined: ${allDigits}`);
 
-  // Sum all individual digits
+  // Sum all individual digits without checking for master numbers
   const totalSum = allDigits
     .split('')
     .map(Number)
@@ -40,29 +47,17 @@ export const calculateLifePath = (date: Date): number => {
 
   console.log(`Sum of all individual digits: ${totalSum}`);
 
-  // Check if the total sum is a master number
-  if (isMasterNumber(totalSum)) {
-    console.log(`Final sum ${totalSum} is a master number, preserving it`);
-    return totalSum;
-  }
-
-  // If not a master number, reduce to single digit
-  const lifePath = reduceToSingleDigit(totalSum);
-  console.log(`Final Life Path number: ${lifePath}`);
-
-  return lifePath;
+  // Only check for master number at the final compound number
+  return reduceNumber(totalSum);
 };
 
-// Keep other utility functions
 export const calculatePartialEnergy = (day: number): number => {
-  // Special cases for master numbers in day
-  if (isMasterNumber(day)) {
-    console.log(`Found master number in day: ${day}`);
-    return day;
+  // Simply reduce the day to a single digit, no master number check
+  let result = day;
+  while (result > 9) {
+    result = sumDigits(result);
   }
-  
-  // For all other days, reduce to single digit
-  return reduceToSingleDigit(day);
+  return result;
 };
 
 export const calculateSecretNumber = (date: Date): number => {
@@ -75,28 +70,14 @@ export const calculateSecretNumber = (date: Date): number => {
   console.log(`Date: ${date.toDateString()}`);
   console.log(`Day of year: ${dayOfYear}`);
 
-  // Check for special master number days
-  if ([11, 20, 110, 101].includes(dayOfYear)) {
-    console.log("Special case: Secret number 11");
-    return 11;
+  // Simply reduce to single digit, no special cases
+  let result = dayOfYear;
+  while (result > 9) {
+    result = sumDigits(result);
   }
   
-  if ([22, 220, 202].includes(dayOfYear)) {
-    console.log("Special case: Secret number 22");
-    return 22;
-  }
-  
-  if ([33, 330, 303].includes(dayOfYear)) {
-    console.log("Special case: Secret number 33");
-    return 33;
-  }
-
-  // For all other days, reduce to single digit
-  console.log(`Reducing day ${dayOfYear} to single digit`);
-  const secretNumber = reduceToSingleDigit(dayOfYear);
-  console.log(`Final secret number: ${secretNumber}`);
-  
-  return secretNumber;
+  console.log(`Final secret number: ${result}`);
+  return result;
 };
 
 export const getChineseZodiac = (year: number): string => {
