@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Brain } from "lucide-react";
+import { PieChart, Pie, Cell } from 'recharts';
 
 const CoreTraits = () => {
   const traits = [
@@ -12,36 +13,37 @@ const CoreTraits = () => {
     { name: "Material Success", value: 82 }
   ];
 
+  // Data for the pie chart
+  const data = [
+    { name: 'Group A', value: 400 },
+    { name: 'Group B', value: 300 },
+    { name: 'Group C', value: 300 },
+    { name: 'Group D', value: 200 },
+  ];
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+
   return (
     <div id="traits" className="rounded-xl bg-gradient-to-br from-[#0EA5E9]/30 to-[#8B5CF6]/30 p-4">
       <div className="relative mb-6">
         <div className="aspect-square bg-white/5 rounded-lg border border-white/10 p-4 mb-4">
-          <motion.div 
-            className="w-16 h-16 mx-auto bg-gradient-to-r from-[#0EA5E9] to-[#8B5CF6] rounded-full flex items-center justify-center"
-            animate={{
-              scale: [1, 1.1, 1],
-              opacity: [0.7, 1, 0.7],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            <Brain className="w-8 h-8 text-white" />
-            <motion.div
-              className="absolute inset-0 rounded-full bg-gradient-to-r from-[#0EA5E9] to-[#8B5CF6]"
-              animate={{
-                scale: [1, 1.4, 1],
-                opacity: [0.3, 0, 0.3],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          </motion.div>
+          <div className="w-full h-full flex items-center justify-center">
+            <PieChart width={160} height={160}>
+              <Pie
+                data={data}
+                cx={80}
+                cy={80}
+                innerRadius={40}
+                outerRadius={60}
+                fill="#8884d8"
+                paddingAngle={5}
+                dataKey="value"
+              >
+                {data.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+            </PieChart>
+          </div>
         </div>
       </div>
       
