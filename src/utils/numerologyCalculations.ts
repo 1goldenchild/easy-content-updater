@@ -1,86 +1,70 @@
-// Master numbers that are preserved and not reduced further
-export const MASTER_NUMBERS = [33, 22, 11];
+// Master numbers and special numbers that map to 11
+const MASTER_NUMBERS = [11, 22, 33];
+const NUMBERS_TO_ELEVEN = [20, 29, 38];
 
-// Check if the number is a master number (11, 22, 33)
-const isMasterNumber = (num: number): boolean => {
-  return MASTER_NUMBERS.includes(num);
+// Sum all digits in a number individually (e.g., 29 becomes 2+9=11)
+const sumIndividualDigits = (dateString: string): number => {
+  // Convert the date string to an array of individual digits and sum them
+  const sum = dateString
+    .split('')
+    .filter(char => char !== '/') // Remove any date separators
+    .map(Number)
+    .reduce((acc, digit) => acc + digit, 0);
+    
+  console.log(`Sum of individual digits: ${sum}`);
+  return sum;
 };
 
-// Sum the digits of a number
-const sumDigits = (num: number): number => {
-  return num
-    .toString() // Convert number to string to split it
-    .split('') // Split each digit into an array
-    .map(Number) // Convert the split string back into numbers
-    .reduce((a, b) => a + b, 0); // Sum all the digits
+// Check if a number is special (maps to 11) or is a master number
+const isSpecialNumber = (num: number): boolean => {
+  return NUMBERS_TO_ELEVEN.includes(num) || MASTER_NUMBERS.includes(num);
 };
 
-// Reduce the number to a single digit, unless it's a Master Number
-export const reduceToSingleDigit = (num: number): number => {
-  if (isMasterNumber(num)) {
-    console.log(`Number ${num} is a master number, returning as is`);
-    return num; // If it's a master number, return it as is
+// Get the final life path number based on the rules
+const getFinalLifePathNumber = (sum: number): number => {
+  // If it's a special number that maps to 11 or is 22 or 33, return it as is
+  if (NUMBERS_TO_ELEVEN.includes(sum)) {
+    console.log(`${sum} is a special number that maps to 11`);
+    return 11;
   }
-
-  let result = num;
-
-  // Keep reducing the number until it becomes a single digit (between 1-9)
-  while (result > 9) {
-    result = sumDigits(result);
-    // If a Master Number is encountered during reduction, return it
-    if (isMasterNumber(result)) {
-      console.log(`Found master number during reduction: ${result}`);
-      return result; // Return the Master Number
-    }
+  
+  if (MASTER_NUMBERS.includes(sum)) {
+    console.log(`${sum} is a master number, keeping as is`);
+    return sum;
   }
-
-  return result; // Return the final reduced number
-};
-
-// Check if a number should be treated as a Life Path 11 (20, 29, 38)
-const checkSpecialCase = (num: number): number => {
-  if ([20, 29, 38].includes(num)) {
-    console.log(`Number ${num} is a special case, treating as Life Path 11`);
-    return 11; // Treat 20, 29, or 38 as Life Path 11
+  
+  // If it's a double digit that's not special, reduce to single digit
+  if (sum > 9) {
+    const reducedNumber = sumIndividualDigits(sum.toString());
+    console.log(`Reduced ${sum} to ${reducedNumber}`);
+    return reducedNumber;
   }
-  return num;
+  
+  return sum;
 };
 
 // Calculate Life Path Number from a given date
 export const calculateLifePath = (date: Date): number => {
   const day = date.getDate();
-  const month = date.getMonth() + 1; // Months are 0-indexed in JavaScript, so add 1
+  const month = date.getMonth() + 1; // Months are 0-indexed in JavaScript
   const year = date.getFullYear();
-
-  console.log(`Calculating Life Path for date: ${month}/${day}/${year}`);
-
-  // Calculate individual sums for day, month, and year
-  const daySum = sumDigits(day); // Sum digits of the day
-  const monthSum = sumDigits(month); // Sum digits of the month
-  const yearSum = sumDigits(year); // Sum digits of the year
-
-  console.log(`Day sum: ${daySum}, Month sum: ${monthSum}, Year sum: ${yearSum}`);
-
-  // Get the total sum of all individual sums
-  let totalSum = daySum + monthSum + yearSum;
-  console.log(`Total sum before reduction: ${totalSum}`);
-
-  // Check if the total sum is a special case (20, 29, 38)
-  totalSum = checkSpecialCase(totalSum);
-
-  // If the total sum is already a Master Number, return it immediately
-  if (isMasterNumber(totalSum)) {
-    console.log(`Total sum ${totalSum} is a master number`);
-    return totalSum;
-  }
-
-  // If the total sum is not a Master Number, reduce it to a single digit
-  const lifePath = reduceToSingleDigit(totalSum);
-  console.log(`Final Life Path number: ${lifePath}`);
-
+  
+  // Convert the date to a string format that we can process
+  const dateString = `${day}${month}${year}`;
+  console.log(`Calculating life path for: ${month}/${day}/${year}`);
+  
+  // Sum all individual digits
+  const sum = sumIndividualDigits(dateString);
+  console.log(`Initial sum of all digits: ${sum}`);
+  
+  // Get the final life path number based on the rules
+  const lifePath = getFinalLifePathNumber(sum);
+  console.log(`Final life path number: ${lifePath}`);
+  
   return lifePath;
 };
 
+// Calculate Partial Energy from day of birth
 export const calculatePartialEnergy = (day: number): number => {
   // Simply reduce the day to a single digit, no master number check
   let result = day;
@@ -90,26 +74,7 @@ export const calculatePartialEnergy = (day: number): number => {
   return result;
 };
 
-export const calculateSecretNumber = (date: Date): number => {
-  // Calculate the day of the year (1-366)
-  const start = new Date(date.getFullYear(), 0, 0);
-  const diff = date.getTime() - start.getTime();
-  const oneDay = 1000 * 60 * 60 * 24;
-  const dayOfYear = Math.floor(diff / oneDay);
-
-  console.log(`Date: ${date.toDateString()}`);
-  console.log(`Day of year: ${dayOfYear}`);
-
-  // Simply reduce to single digit, no special cases
-  let result = dayOfYear;
-  while (result > 9) {
-    result = sumDigits(result);
-  }
-  
-  console.log(`Final secret number: ${result}`);
-  return result;
-};
-
+// Calculate Chinese Zodiac sign from year
 export const getChineseZodiac = (year: number): string => {
   console.log(`Calculating Chinese zodiac for year: ${year}`);
   
@@ -162,4 +127,25 @@ export const getChineseZodiac = (year: number): string => {
   
   console.log(`Calculated zodiac sign for year ${year}: ${zodiacSign}`);
   return zodiacSign;
+};
+
+// Calculate Secret Number from date
+export const calculateSecretNumber = (date: Date): number => {
+  // Calculate the day of the year (1-366)
+  const start = new Date(date.getFullYear(), 0, 0);
+  const diff = date.getTime() - start.getTime();
+  const oneDay = 1000 * 60 * 60 * 24;
+  const dayOfYear = Math.floor(diff / oneDay);
+
+  console.log(`Date: ${date.toDateString()}`);
+  console.log(`Day of year: ${dayOfYear}`);
+
+  // Simply reduce to single digit, no special cases
+  let result = dayOfYear;
+  while (result > 9) {
+    result = sumIndividualDigits(result.toString());
+  }
+  
+  console.log(`Final secret number: ${result}`);
+  return result;
 };
