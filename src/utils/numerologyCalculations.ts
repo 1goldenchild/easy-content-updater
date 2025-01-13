@@ -10,19 +10,9 @@ export const reduceToSingleDigit = (num: number): number => {
 
   let currentSum = sumDigits(num);
   
-  // Check for master numbers before reducing further
-  if (MASTER_NUMBERS.includes(num)) {
-    console.log(`Found master number in original input: ${num}`);
-    return num;
-  }
-
-  // Keep reducing until we get a single digit or master number
-  while (currentSum > 9) {
+  // Keep reducing until we get a single digit
+  while (currentSum > 9 && !MASTER_NUMBERS.includes(currentSum)) {
     currentSum = sumDigits(currentSum);
-    if (MASTER_NUMBERS.includes(currentSum)) {
-      console.log(`Found master number after reduction: ${currentSum}`);
-      return currentSum;
-    }
   }
 
   return currentSum;
@@ -46,14 +36,16 @@ export const calculateLifePath = (date: Date): number => {
 
   console.log(`Compound Life Path number: ${compoundLifePath}`);
 
-  // First check if compound number is a master number
+  // If compound number is a master number, return it
   if (MASTER_NUMBERS.includes(compoundLifePath)) {
     console.log(`Found master number in compound: ${compoundLifePath}`);
     return compoundLifePath;
   }
 
-  // Then check if compound number reduces to a master number
+  // Special handling for numbers that reduce to master numbers
   const reducedNumber = reduceToSingleDigit(compoundLifePath);
+  
+  // If reduced number is a master number, return it
   if (MASTER_NUMBERS.includes(reducedNumber)) {
     console.log(`Found master number after reduction: ${reducedNumber}`);
     return reducedNumber;
