@@ -14,9 +14,11 @@ const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProp
   const [hasScrolled, setHasScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (!hasScrolled) {
+    const handleScroll = (e: Event) => {
+      const container = e.target as HTMLElement;
+      if (container.scrollTop > 10 && !hasScrolled) {
         setHasScrolled(true);
+        console.log("Scroll detected, setting hasScrolled to true");
       }
     };
 
