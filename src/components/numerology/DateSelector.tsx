@@ -95,7 +95,7 @@ const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
       {onCalculate && (
         <Button 
           onClick={onCalculate}
-          className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C4DEF] hover:to-[#D042E8]"
+          className="w-full bg-gradient-to-r from-[#0EA5E9] to-[#1EAEDB] hover:from-[#0C8BC7] hover:to-[#1A9AC2]"
         >
           Calculate
         </Button>
