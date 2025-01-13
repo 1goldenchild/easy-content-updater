@@ -69,7 +69,7 @@ export const calculatePartialEnergy = (day: number): number => {
   // Simply reduce the day to a single digit, no master number check
   let result = day;
   while (result > 9) {
-    result = sumDigits(result);
+    result = sumIndividualDigits(result.toString());
   }
   return result;
 };
