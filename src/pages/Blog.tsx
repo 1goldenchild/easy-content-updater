@@ -35,12 +35,44 @@ const blogPosts = [
     readTime: "8 min read",
     mainImage: "/lovable-uploads/a15fb902-5972-4403-b638-89b8760626e1.png",
     slug: "china-numerology"
+  },
+  {
+    title: "How Michael Jackson used the Power of Numerology: The Influence of the Number 7 on His Career",
+    description: "Discover how the King of Pop strategically used numerology, particularly the number 7, to shape his artistic vision and create a lasting legacy that changed music forever.",
+    date: "March 27, 2024",
+    readTime: "10 min read",
+    mainImage: "/lovable-uploads/787349e3-6668-40c9-90db-3dd2d0f8d6ef.png",
+    slug: "michael-jackson-numerology"
+  },
+  {
+    title: "How Steve Jobs Used Numerology to Shape His Success: The Power of 28, 9, and Apple's Legacy",
+    description: "Discover how Apple's co-founder strategically used numerology, particularly the numbers 28 and 9, to build the world's most valuable company worth $3.5 trillion.",
+    date: "March 25, 2024",
+    readTime: "12 min read",
+    mainImage: "/lovable-uploads/73da4848-4fc6-412c-b1a9-0efc609335e3.png",
+    slug: "steve-jobs-numerology"
+  },
+  {
+    title: "How Elon Musk Uses Numerology to Get Rich: The Power of 8 and 28",
+    description: "Discover how the world's richest man strategically uses numerology, particularly the numbers 8 and 28, to build his fortune through Tesla, SpaceX, and Twitter.",
+    date: "March 20, 2024",
+    readTime: "10 min read",
+    mainImage: "/lovable-uploads/4c2bf36a-524f-4700-86f4-fcb7d217d5fd.png",
+    slug: "elon-musk-numerology"
+  },
+  {
+    title: "Rolex secretly using numerology: The Secret Behind the 28 and 10:11",
+    description: "Discover how Rolex incorporates powerful numerological principles in their iconic timepieces, particularly through the strategic use of numbers 28 and 10:11 in their marketing.",
+    date: "March 15, 2024",
+    readTime: "8 min read",
+    mainImage: "/lovable-uploads/492894b9-a7c3-4389-a6d0-fbeb51868764.png",
+    slug: "rolex-numerology"
   }
 ];
 
-const BlogSection = () => {
+const Blog = () => {
   return (
-    <section className="py-16 bg-gradient-to-b from-background/80 to-background">
+    <div className="py-16 bg-gradient-to-b from-background/80 to-background">
       <div className="container px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -48,11 +80,11 @@ const BlogSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text animate-text-shimmer inline-block">
-              Latest Numerology Blogs
+              Numerology Blog
             </span>
-          </h2>
+          </h1>
           <p className="text-lg text-muted-foreground">
             Explore our latest articles on numerology and spiritual growth
           </p>
@@ -100,19 +132,9 @@ const BlogSection = () => {
             </motion.div>
           ))}
         </div>
-        
-        <div className="text-center mt-8">
-          <Link 
-            to="/blog"
-            className="inline-flex items-center text-[#86736f] hover:text-[#a39490] transition-colors"
-          >
-            View All Articles
-            <ArrowRight className="w-4 h-4 ml-1" />
-          </Link>
-        </div>
       </div>
-    </section>
+    </div>
   );
 };
 
-export default BlogSection;
+export default Blog;

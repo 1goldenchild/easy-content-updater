@@ -11,6 +11,7 @@ import Refund from "@/pages/Refund"
 import Support from "@/pages/Support"
 import Checkout from "@/pages/Checkout"
 import BlogPost from "@/pages/BlogPost"
+import Blog from "@/pages/Blog"
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/refund" element={<Refund />} />
             <Route path="/support" element={<Support />} />
+            <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
           </Routes>
         </main>
