@@ -38,7 +38,7 @@ const FeatureList = () => {
         transition={{ delay: 0.2 }}
         className="text-center"
       >
-        <span className="relative bg-gradient-to-r from-[#9b87f5] via-[#D6BCFA] to-[#E5DEFF] bg-clip-text text-transparent text-lg opacity-80">
+        <span className="relative inline-block px-6 py-2 rounded-full bg-gradient-to-r from-[#9b87f5] via-[#D6BCFA] to-[#E5DEFF] text-transparent bg-clip-text text-lg font-medium hover:opacity-90 transition-opacity animate-text-shimmer cursor-default border border-[#9b87f5]/20">
           And more
         </span>
       </motion.div>

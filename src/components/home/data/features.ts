@@ -22,7 +22,7 @@ export const features: Feature[] = [
   {
     icon: Brain,
     title: "Complete Energetic Property Analysis",
-    description: "Discover your Lifepath, Partial Number, Secret Number and Personal Year. Understand your Cycle Year and Lucky Number. Learn how these energies connect and influence your life path.",
+    description: "Discover your Lifepath, Partial Number and Secret Number. Understand your Cycle Year and Lucky Number. Learn how these energies influence your path.",
     gradient: "from-blue-500 to-cyan-500",
     neonColor: "rgba(59, 130, 246, 0.5)",
     number: 2
