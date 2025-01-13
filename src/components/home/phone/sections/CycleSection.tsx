@@ -9,6 +9,12 @@ const CycleSection = () => {
         <Infinity className="w-4 h-4 text-blue-400" />
         <h3 className="text-sm font-semibold text-white">Cycle Analysis</h3>
       </div>
+      
+      <div className="mb-4">
+        <div className="text-2xl font-bold text-white mb-1">8</div>
+        <p className="text-xs text-white/70">Your Current Cycle Number</p>
+      </div>
+
       <Button
         disabled
         variant="secondary"

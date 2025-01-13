@@ -9,6 +9,12 @@ const EnergySection = () => {
         <Zap className="w-4 h-4 text-emerald-400" />
         <h3 className="text-sm font-semibold text-white">2025 Energy Analysis</h3>
       </div>
+
+      <div className="mb-4">
+        <div className="text-2xl font-bold text-white mb-1">9</div>
+        <p className="text-xs text-white/70">Your 2025 Energy Number</p>
+      </div>
+
       <Button
         disabled
         variant="secondary"

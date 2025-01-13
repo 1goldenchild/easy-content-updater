@@ -9,6 +9,12 @@ const SecretSection = () => {
         <Sparkles className="w-4 h-4 text-amber-400" />
         <h3 className="text-sm font-semibold text-white">Secret Number Analysis</h3>
       </div>
+
+      <div className="mb-4">
+        <div className="text-2xl font-bold bg-gradient-to-r from-amber-200 to-purple-400 bg-clip-text text-transparent">33</div>
+        <p className="text-xs text-amber-200/80">Master Teacher Number</p>
+      </div>
+
       <motion.div
         whileHover={{ scale: 1.02 }}
         className="relative"
