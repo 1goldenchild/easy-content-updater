@@ -12,7 +12,7 @@ const CollectInfo = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mb-8 text-center"
+              className="mb-8 text-center lg:text-left"
             >
               <h1 className="text-3xl md:text-4xl font-bold">
                 <span className="relative inline-block">
@@ -27,16 +27,14 @@ const CollectInfo = () => {
           </div>
 
           {/* Preview Section */}
-          <div className="hidden lg:block">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="scale-75 origin-top"
-            >
-              <PhoneShowcase />
-            </motion.div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="hidden lg:block"
+          >
+            <PhoneShowcase />
+          </motion.div>
         </div>
       </div>
     </div>
