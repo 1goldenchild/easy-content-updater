@@ -15,6 +15,7 @@ import GematriaSection from "./phone/sections/GematriaSection";
 import CycleSection from "./phone/sections/CycleSection";
 import EnergySection from "./phone/sections/EnergySection";
 import SecretSection from "./phone/sections/SecretSection";
+import ColorCompatibility from "@/components/numerology/ColorCompatibility";
 
 const PhoneShowcase = () => {
   const [activeSection, setActiveSection] = useState("lifepath");
@@ -37,6 +38,7 @@ const PhoneShowcase = () => {
         <NumberSections />
         <CoreTraits />
         <CompatibilitySection />
+        <ColorCompatibility lifePath={lifePathNumber} isVisible={true} />
         <GematriaSection />
         <CycleSection />
         <EnergySection />
