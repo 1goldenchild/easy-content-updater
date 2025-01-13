@@ -35,28 +35,35 @@ export const calculateLifePath = (date: Date): number => {
 
   console.log(`Calculating lifepath for date: ${day}/${month}/${year}`);
 
-  // Handle master numbers in day and month separately
-  const dayNum = MASTER_NUMBERS.includes(day) ? day : reduceToSingleDigit(day);
-  const monthNum = MASTER_NUMBERS.includes(month) ? month : reduceToSingleDigit(month);
-  
-  // Calculate year sum
-  const yearNum = reduceToSingleDigit(year);
+  // Convert each component to string and split into individual digits
+  const dayDigits = day.toString().split('').map(Number);
+  const monthDigits = month.toString().split('').map(Number);
+  const yearDigits = year.toString().split('').map(Number);
 
-  console.log(`Processed numbers - Day: ${dayNum}, Month: ${monthNum}, Year: ${yearNum}`);
-  
-  // Sum all components
-  const sum = dayNum + monthNum + yearNum;
-  console.log(`Total sum before final reduction: ${sum}`);
+  // Sum all individual digits
+  const allDigits = [...dayDigits, ...monthDigits, ...yearDigits];
+  const compoundLifePath = allDigits.reduce((sum, digit) => sum + digit, 0);
 
-  // Check if final sum is a master number
-  if (MASTER_NUMBERS.includes(sum)) {
-    console.log(`Found master number in final sum: ${sum}`);
-    return sum;
+  console.log(`Compound Life Path number: ${compoundLifePath}`);
+
+  // Check for special master numbers first
+  if (compoundLifePath === 11 || 
+      compoundLifePath === 22 || 
+      compoundLifePath === 33 || 
+      compoundLifePath === 20 || 
+      compoundLifePath === 29 || 
+      compoundLifePath === 38) {
+    if (compoundLifePath === 20 || compoundLifePath === 29 || compoundLifePath === 38) {
+      console.log(`Found special number that reduces to 11`);
+      return 11;
+    }
+    console.log(`Found master number: ${compoundLifePath}`);
+    return compoundLifePath;
   }
 
   // If not a master number, reduce to single digit
-  const lifePath = reduceToSingleDigit(sum);
-  console.log(`Final lifepath number: ${lifePath}`);
+  const lifePath = reduceToSingleDigit(compoundLifePath);
+  console.log(`Final reduced life path number: ${lifePath}`);
 
   return lifePath;
 };
