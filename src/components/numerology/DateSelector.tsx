@@ -1,6 +1,13 @@
-import { useState, useRef } from "react";
-import { Input } from "@/components/ui/input";
+import { useState, useEffect } from "react";
+import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface DateSelectorProps {
   date?: Date;
@@ -9,87 +16,95 @@ interface DateSelectorProps {
 }
 
 const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
-  const [day, setDay] = useState("");
-  const [month, setMonth] = useState("");
-  const [year, setYear] = useState("");
-  const monthInputRef = useRef<HTMLInputElement>(null);
-  const yearInputRef = useRef<HTMLInputElement>(null);
+  const [day, setDay] = useState<string>("");
+  const [month, setMonth] = useState<string>("");
+  const [year, setYear] = useState<string>("");
 
-  const handleDateChange = (
-    value: string,
-    setter: (value: string) => void,
-    maxLength: number,
-    nextRef?: React.RefObject<HTMLInputElement>
-  ) => {
-    const numericValue = value.replace(/\D/g, "");
-    if (numericValue.length <= maxLength) {
-      setter(numericValue);
-      updateDate(
-        setter === setDay ? numericValue : day,
-        setter === setMonth ? numericValue : month,
-        setter === setYear ? numericValue : year
+  // Generate arrays for days, months, and years
+  const days = Array.from({ length: 31 }, (_, i) => (i + 1).toString().padStart(2, '0'));
+  const months = Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, '0'));
+  const currentYear = new Date().getFullYear();
+  const years = Array.from(
+    { length: 100 },
+    (_, i) => (currentYear - 99 + i).toString()
+  );
+
+  const updateDate = (newDay: string, newMonth: string, newYear: string) => {
+    if (newDay && newMonth && newYear) {
+      const dateObj = new Date(
+        parseInt(newYear),
+        parseInt(newMonth) - 1,
+        parseInt(newDay)
       );
-      
-      // Auto-focus next input when current input is filled
-      if (numericValue.length === maxLength && nextRef?.current) {
-        nextRef.current.focus();
-      }
-    }
-  };
-
-  const updateDate = (
-    newDay: string,
-    newMonth: string,
-    newYear: string
-  ) => {
-    if (newDay && newMonth && newYear && 
-        newYear.length === 4 && 
-        newMonth.length >= 1 && 
-        newDay.length >= 1) {
-      const dateObj = new Date(parseInt(newYear), parseInt(newMonth) - 1, parseInt(newDay));
       if (!isNaN(dateObj.getTime())) {
+        console.log("Setting new date:", dateObj);
         setDate(dateObj);
       }
     }
   };
 
+  // Update date whenever day, month, or year changes
+  useEffect(() => {
+    updateDate(day, month, year);
+  }, [day, month, year]);
+
+  // Adjust days based on selected month and year
+  const getDaysInMonth = (month: string, year: string): string[] => {
+    if (!month || !year) return days;
+    const daysInMonth = new Date(parseInt(year), parseInt(month), 0).getDate();
+    return Array.from(
+      { length: daysInMonth },
+      (_, i) => (i + 1).toString().padStart(2, '0')
+    );
+  };
+
   return (
     <div className="space-y-4">
-      <label className="block text-sm font-medium text-white/70">
+      <Label className="block text-sm font-medium text-white/70">
         Date of Birth
-      </label>
-      <div className="flex gap-4">
-        <div>
-          <Input
-            type="text"
-            placeholder="DD"
-            value={day}
-            onChange={(e) => handleDateChange(e.target.value, setDay, 2, monthInputRef)}
-            className="w-20"
-            maxLength={2}
-          />
+      </Label>
+      <div className="flex flex-col sm:flex-row gap-4">
+        <div className="w-full sm:w-1/3">
+          <Select value={month} onValueChange={setMonth}>
+            <SelectTrigger>
+              <SelectValue placeholder="Month" />
+            </SelectTrigger>
+            <SelectContent>
+              {months.map((m) => (
+                <SelectItem key={m} value={m}>
+                  {new Date(2000, parseInt(m) - 1, 1).toLocaleString('default', { month: 'long' })}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
-        <div>
-          <Input
-            ref={monthInputRef}
-            type="text"
-            placeholder="MM"
-            value={month}
-            onChange={(e) => handleDateChange(e.target.value, setMonth, 2, yearInputRef)}
-            className="w-20"
-            maxLength={2}
-          />
+        <div className="w-full sm:w-1/3">
+          <Select value={day} onValueChange={setDay}>
+            <SelectTrigger>
+              <SelectValue placeholder="Day" />
+            </SelectTrigger>
+            <SelectContent>
+              {getDaysInMonth(month, year).map((d) => (
+                <SelectItem key={d} value={d}>
+                  {d}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
-        <div>
-          <Input
-            ref={yearInputRef}
-            type="text"
-            placeholder="YYYY"
-            value={year}
-            onChange={(e) => handleDateChange(e.target.value, setYear, 4)}
-            className="w-28"
-            maxLength={4}
-          />
+        <div className="w-full sm:w-1/3">
+          <Select value={year} onValueChange={setYear}>
+            <SelectTrigger>
+              <SelectValue placeholder="Year" />
+            </SelectTrigger>
+            <SelectContent>
+              {years.map((y) => (
+                <SelectItem key={y} value={y}>
+                  {y}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </div>
       {onCalculate && (
