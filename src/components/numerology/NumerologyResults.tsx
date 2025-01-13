@@ -127,10 +127,10 @@ const NumerologyResults = ({
       <LifepathAnalysis lifePath={lifePath} isVisible={isVisible} />
       <PartialEnergyAnalysis partialEnergy={partialEnergy} isVisible={isVisible} />
       <GematriaAnalysis lifePath={lifePath} isVisible={isVisible} />
-      <CycleAnalysis isVisible={isVisible} />
-      <EnergyAnalysis isVisible={isVisible} />
       <SecretAnalysis secretNumber={secretNumber} isVisible={isVisible} />
       <AstrologyAnalysis chineseZodiac={chineseZodiac} isVisible={isVisible} />
+      <CycleAnalysis isVisible={isVisible} />
+      <EnergyAnalysis isVisible={isVisible} />
     </motion.div>
   );
 };
