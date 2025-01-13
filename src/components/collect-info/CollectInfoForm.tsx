@@ -70,8 +70,8 @@ const CollectInfoForm = () => {
         description: "Your information has been submitted successfully.",
       });
 
-      // Use window.location.replace for better navigation handling
-      window.location.replace("https://www.numerology33.com/checkout");
+      // Updated redirect URL
+      window.location.replace("https://checkout.numerology33.com/checkout");
       
     } catch (error) {
       console.error("Error submitting form:", error);
