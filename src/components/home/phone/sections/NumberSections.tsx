@@ -16,23 +16,45 @@ const NumberSections = () => {
     <>
       <div className="space-y-4">
         <div className="grid grid-cols-2 gap-3">
-          <NumberSection
-            id="lifepath"
-            title="Life Path Number"
-            number="8"
-            subtitle="The Powerhouse"
-            gradientFrom="[#8B5CF6]"
-            gradientTo="[#D946EF]"
-          />
+          <div className="space-y-3">
+            <NumberSection
+              id="lifepath"
+              title="Life Path Number"
+              number="8"
+              subtitle="The Powerhouse"
+              gradientFrom="[#8B5CF6]"
+              gradientTo="[#D946EF]"
+            />
 
-          <NumberSection
-            id="partial"
-            title="Partial Energy"
-            number="4"
-            subtitle="The Builder"
-            gradientFrom="[#E5DEFF]"
-            gradientTo="[#D6BCFA]"
-          />
+            <NumberSection
+              id="cycle"
+              title="Cycle Number"
+              number="3"
+              subtitle="The Creator"
+              gradientFrom="[#F59E0B]"
+              gradientTo="[#EF4444]"
+            />
+          </div>
+
+          <div className="space-y-3">
+            <NumberSection
+              id="partial"
+              title="Partial Energy"
+              number="4"
+              subtitle="The Builder"
+              gradientFrom="[#E5DEFF]"
+              gradientTo="[#D6BCFA]"
+            />
+
+            <NumberSection
+              id="energy2025"
+              title="2025 Energy"
+              number="9"
+              subtitle="The Achiever"
+              gradientFrom="[#10B981]"
+              gradientTo="[#3B82F6]"
+            />
+          </div>
 
           <NumberSection
             id="lucky"
@@ -50,24 +72,6 @@ const NumberSections = () => {
             subtitle="Year of the Goat"
             gradientFrom="[#0EA5E9]"
             gradientTo="[#8B5CF6]"
-          />
-
-          <NumberSection
-            id="cycle"
-            title="Cycle Number"
-            number="3"
-            subtitle="The Creator"
-            gradientFrom="[#F59E0B]"
-            gradientTo="[#EF4444]"
-          />
-
-          <NumberSection
-            id="energy2025"
-            title="2025 Energy"
-            number="9"
-            subtitle="The Achiever"
-            gradientFrom="[#10B981]"
-            gradientTo="[#3B82F6]"
           />
         </div>
 
