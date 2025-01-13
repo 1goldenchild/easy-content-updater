@@ -11,6 +11,10 @@ import TechCompatibilitySection from "./phone/sections/TechCompatibilitySection"
 import LoveCompatibility from "./phone/sections/LoveCompatibility";
 import MysteryBonus from "./phone/sections/MysteryBonus";
 import ScrollHandler from "./phone/ScrollHandler";
+import GematriaSection from "./phone/sections/GematriaSection";
+import CycleSection from "./phone/sections/CycleSection";
+import EnergySection from "./phone/sections/EnergySection";
+import SecretSection from "./phone/sections/SecretSection";
 
 const PhoneShowcase = () => {
   const [activeSection, setActiveSection] = useState("lifepath");
@@ -33,6 +37,10 @@ const PhoneShowcase = () => {
         <NumberSections />
         <CoreTraits />
         <CompatibilitySection />
+        <GematriaSection />
+        <CycleSection />
+        <EnergySection />
+        <SecretSection />
         <LoveCompatibility lifePathNumber={lifePathNumber} />
         <CareerPaths />
         <CountryCompatibility />
