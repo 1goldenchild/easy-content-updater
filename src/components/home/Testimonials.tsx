@@ -109,7 +109,8 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
 
 const Testimonials = () => {
   const navigate = useNavigate();
-  const doubledTestimonials = [...testimonials, ...testimonials]
+  // Triple the testimonials to ensure smooth infinite scroll
+  const tripleTestimonials = [...testimonials, ...testimonials, ...testimonials]
 
   const handleGetStarted = () => {
     navigate('/collect-info');
@@ -140,8 +141,14 @@ const Testimonials = () => {
           <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-background to-transparent z-10" />
           
           <div className="overflow-hidden mask-edges">
-            <div className="carousel-scroll">
-              {doubledTestimonials.map((testimonial, index) => (
+            <div 
+              className="carousel-scroll infinite-scroll"
+              style={{
+                animation: 'scroll 60s linear infinite',
+                willChange: 'transform'
+              }}
+            >
+              {tripleTestimonials.map((testimonial, index) => (
                 <TestimonialCard key={`${testimonial.name}-${index}`} testimonial={testimonial} />
               ))}
             </div>
@@ -170,6 +177,26 @@ const Testimonials = () => {
           </div>
         </div>
       </div>
+
+      <style jsx global>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-33.33%);
+          }
+        }
+        
+        .infinite-scroll {
+          display: flex;
+          width: fit-content;
+        }
+        
+        .infinite-scroll:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
   )
 }
