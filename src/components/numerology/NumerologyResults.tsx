@@ -9,7 +9,6 @@ import CycleAnalysis from "./CycleAnalysis";
 import EnergyAnalysis from "./EnergyAnalysis";
 import SecretAnalysis from "./SecretAnalysis";
 import CareerCompatibility from "./CareerCompatibility";
-import LoveCompatibility from "./LoveCompatibility";
 
 interface NumerologyResultsProps {
   lifePath: number;
@@ -131,7 +130,6 @@ const NumerologyResults = ({
       <GematriaAnalysis lifePath={lifePath} isVisible={isVisible} />
       <SecretAnalysis secretNumber={secretNumber} isVisible={isVisible} />
       <AstrologyAnalysis chineseZodiac={chineseZodiac} isVisible={isVisible} />
-      <LoveCompatibility lifePathNumber={lifePath} />
       <CareerCompatibility lifePath={lifePath} isVisible={isVisible} />
       <CycleAnalysis isVisible={isVisible} />
       <EnergyAnalysis isVisible={isVisible} />
