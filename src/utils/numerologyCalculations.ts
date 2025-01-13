@@ -5,27 +5,35 @@ const isMasterNumber = (num: number): boolean => {
 };
 
 const sumDigits = (num: number): number => {
-  return num.toString()
+  return num
+    .toString()
     .split('')
     .map(Number)
     .reduce((a, b) => a + b, 0);
 };
 
+// Reduce a number to a single digit while preserving master numbers
 export const reduceToSingleDigit = (num: number): number => {
-  // If it's already a master number, return it
+  // First check if the initial number is a master number
   if (isMasterNumber(num)) {
-    console.log(`Number ${num} is a master number, returning as is`);
+    console.log(`Initial number ${num} is a master number, preserving it`);
     return num;
   }
 
   let result = num;
   
-  while (result > 9) {
+  // Only reduce if it's not already a single digit
+  if (result > 9) {
     result = sumDigits(result);
-    // Check if the reduced number is a master number
+    // Check if the first reduction gives us a master number
     if (isMasterNumber(result)) {
-      console.log(`Found master number during reduction: ${result}`);
+      console.log(`Found master number ${result} after first reduction`);
       return result;
+    }
+    
+    // If not a master number and still > 9, reduce to single digit
+    while (result > 9) {
+      result = sumDigits(result);
     }
   }
 
@@ -39,30 +47,46 @@ export const calculateLifePath = (date: Date): number => {
 
   console.log(`Calculating Life Path for date: ${month}/${day}/${year}`);
 
-  // Calculate individual sums for day, month, and year
-  const daySum = sumDigits(day);
-  const monthSum = sumDigits(month);
-  const yearSum = sumDigits(year);
+  // First, reduce the day number while preserving master numbers
+  let daySum = day;
+  if (day > 9) {
+    daySum = sumDigits(day);
+    if (isMasterNumber(daySum)) {
+      console.log(`Day ${day} reduces to master number ${daySum}`);
+    } else {
+      daySum = reduceToSingleDigit(day);
+    }
+  }
 
-  console.log(`Day sum: ${daySum}, Month sum: ${monthSum}, Year sum: ${yearSum}`);
+  // Reduce month (usually not needed as months are 1-12)
+  const monthSum = month > 9 ? sumDigits(month) : month;
 
-  // Get total of all sums
+  // Reduce year
+  let yearSum = sumDigits(year);
+  if (yearSum > 9) {
+    yearSum = reduceToSingleDigit(yearSum);
+  }
+
+  console.log(`Components: Day=${daySum}, Month=${monthSum}, Year=${yearSum}`);
+
+  // Calculate total sum
   const totalSum = daySum + monthSum + yearSum;
-  console.log(`Total sum before reduction: ${totalSum}`);
+  console.log(`Total sum before final reduction: ${totalSum}`);
 
-  // Check if total sum is a master number
+  // Check if the total sum is a master number
   if (isMasterNumber(totalSum)) {
-    console.log(`Total sum ${totalSum} is a master number`);
+    console.log(`Final sum ${totalSum} is a master number, preserving it`);
     return totalSum;
   }
 
-  // If not a master number, reduce while checking for master numbers at each step
+  // If not a master number, perform final reduction
   const lifePath = reduceToSingleDigit(totalSum);
   console.log(`Final Life Path number: ${lifePath}`);
 
   return lifePath;
 };
 
+// Keep other utility functions
 export const calculatePartialEnergy = (day: number): number => {
   // Special cases for master numbers in day
   if (isMasterNumber(day)) {
