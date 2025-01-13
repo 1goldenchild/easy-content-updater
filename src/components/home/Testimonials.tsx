@@ -66,15 +66,15 @@ const testimonials = [
     rating: 5,
     image: "/lovable-uploads/ddcf7f13-8161-4035-8bf0-380df27a4222.png"
   }
-]
+];
 
 const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => (
   <div className="min-w-[300px] md:min-w-[400px] p-6 mx-4">
     <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
       className="bg-emerald-400/5 backdrop-blur-sm border border-emerald-500/10 rounded-lg p-6 hover:border-emerald-500/20 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/5 h-full"
     >
       <div className="flex items-center gap-4 mb-6">
@@ -127,11 +127,9 @@ const Testimonials = () => {
         </div>
         
         <div className="relative w-full">
-          {/* Gradient masks for smooth fade effect */}
           <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-background to-transparent z-10" />
           <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-background to-transparent z-10" />
           
-          {/* Scrolling container */}
           <div className="overflow-hidden mask-edges">
             <div className="carousel-scroll">
               {doubledTestimonials.map((testimonial, index) => (

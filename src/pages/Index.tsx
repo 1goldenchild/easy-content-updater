@@ -17,14 +17,14 @@ const Index = () => {
       <div id="sales">
         <SalesPitch />
       </div>
+      <div id="knowledge">
+        <SecretKnowledge />
+      </div>
       <div id="testimonials">
         <Testimonials />
       </div>
       <div id="blog">
         <BlogSection />
-      </div>
-      <div id="knowledge">
-        <SecretKnowledge />
       </div>
     </div>
   );
