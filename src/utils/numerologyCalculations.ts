@@ -28,16 +28,17 @@ export const calculateLifePath = (date: Date): number => {
 
   console.log(`Calculating Life Path for date: ${month}/${day}/${year}`);
 
-  // First reduce each component to a single digit
-  const daySum = reduceToSingleDigit(day);
-  const monthSum = reduceToSingleDigit(month);
-  const yearSum = reduceToSingleDigit(year);
+  // Convert all components to strings and concatenate all digits
+  const allDigits = day.toString() + month.toString() + year.toString();
+  console.log(`All digits combined: ${allDigits}`);
 
-  console.log(`Components: Day=${daySum}, Month=${monthSum}, Year=${yearSum}`);
+  // Sum all individual digits
+  const totalSum = allDigits
+    .split('')
+    .map(Number)
+    .reduce((a, b) => a + b, 0);
 
-  // Calculate total sum
-  const totalSum = daySum + monthSum + yearSum;
-  console.log(`Total sum before final reduction: ${totalSum}`);
+  console.log(`Sum of all individual digits: ${totalSum}`);
 
   // Check if the total sum is a master number
   if (isMasterNumber(totalSum)) {
