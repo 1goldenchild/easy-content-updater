@@ -8,8 +8,8 @@ import GematriaAnalysis from "./GematriaAnalysis";
 import CycleAnalysis from "./CycleAnalysis";
 import EnergyAnalysis from "./EnergyAnalysis";
 import SecretAnalysis from "./SecretAnalysis";
-import CareerCompatibility from "./CareerCompatibility";
 import LoveCompatibility from "./LoveCompatibility";
+import OccupationGuidance from "./OccupationGuidance";
 import HousingAnalysis from "./HousingAnalysis";
 import CarCompatibility from "./CarCompatibility";
 import CountryCompatibility from "./CountryCompatibility";
@@ -80,40 +80,9 @@ const NumerologyResults = ({
             </div>
           </div>
         </div>
-
-        {/* Secret Number Section */}
-        <div className="mt-6 p-6 rounded-xl bg-gradient-to-br from-amber-500/20 to-purple-500/20 border border-amber-500/30">
-          <div className="flex items-center justify-between">
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-amber-400" />
-                <h4 className="text-lg font-semibold text-white/90">Secret Number</h4>
-              </div>
-              <p className="text-sm text-white/70">
-                Your exclusive Secret Number reveals hidden talents and destiny
-              </p>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="inline-flex items-center px-4 py-2 rounded-lg bg-amber-500/20 border border-amber-500/30"
-              >
-                <span className="text-2xl font-bold bg-gradient-to-r from-amber-200 to-purple-400 bg-clip-text text-transparent">
-                  {secretNumber}
-                </span>
-                <span className="ml-2 text-sm text-amber-200/80">Master Teacher</span>
-              </motion.div>
-            </div>
-            <motion.div
-              initial={{ rotate: 0 }}
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="w-16 h-16 rounded-full bg-gradient-to-r from-amber-500/20 to-purple-500/20 flex items-center justify-center"
-            >
-              <span className="text-3xl text-amber-200">✧</span>
-            </motion.div>
-          </div>
-        </div>
       </div>
 
+      <CharacteristicsChart isVisible={isVisible} />
       <LifepathAnalysis lifePath={lifePath} isVisible={isVisible} />
       <PartialEnergyAnalysis partialEnergy={partialEnergy} isVisible={isVisible} />
       <GematriaAnalysis lifePath={lifePath} isVisible={isVisible} />
@@ -121,9 +90,8 @@ const NumerologyResults = ({
       <AstrologyAnalysis chineseZodiac={chineseZodiac} isVisible={isVisible} />
       <CycleAnalysis isVisible={isVisible} />
       <EnergyAnalysis isVisible={isVisible} />
-      <CharacteristicsChart isVisible={isVisible} />
       <LoveCompatibility lifePathNumber={lifePath} />
-      <CareerCompatibility lifePath={lifePath} isVisible={isVisible} />
+      <OccupationGuidance lifePath={lifePath} isVisible={isVisible} />
       <HousingAnalysis lifePath={lifePath} isVisible={isVisible} />
       <CarCompatibility chineseZodiac={chineseZodiac} isVisible={isVisible} />
       <CountryCompatibility chineseZodiac={chineseZodiac} isVisible={isVisible} />
