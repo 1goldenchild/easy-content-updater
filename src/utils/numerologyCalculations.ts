@@ -42,21 +42,21 @@ export const calculateLifePath = (date: Date): number => {
 
   console.log(`Calculating lifepath for date: ${day}/${month}/${year}`);
 
-  // Convert all components to strings and split into individual digits
-  const allDigits = `${day}${month}${year}`.split('').map(Number);
-  
-  // Sum all digits together to get the compound number
-  const compoundNumber = allDigits.reduce((sum, digit) => sum + digit, 0);
-  
-  console.log(`Initial compound number from all digits: ${compoundNumber}`);
+  // Convert all components to strings and concatenate all digits
+  const dateString = `${day}${month}${year}`;
+  console.log(`All digits combined: ${dateString}`);
 
-  // If compound number is a master number, return it directly
+  // Sum all individual digits to get the compound number
+  const compoundNumber = dateString.split('').reduce((sum, digit) => sum + parseInt(digit), 0);
+  console.log(`Initial sum of all digits: ${compoundNumber}`);
+
+  // Check if the compound number is a master number
   if (MASTER_NUMBERS.includes(compoundNumber)) {
-    console.log(`Compound number is a master number: ${compoundNumber}`);
+    console.log(`Found master number in compound sum: ${compoundNumber}`);
     return compoundNumber;
   }
 
-  // Get the final reduced number
+  // If not a master number, reduce to single digit while checking for master numbers
   const finalNumber = reduceToSingleDigit(compoundNumber);
   console.log(`Final life path number: ${finalNumber}`);
   
