@@ -82,7 +82,7 @@ const NumerologyResults = ({
         </div>
       </div>
 
-      <CharacteristicsChart isVisible={isVisible} />
+      <CharacteristicsChart isVisible={isVisible} lifePath={lifePath} />
       <LifepathAnalysis lifePath={lifePath} isVisible={isVisible} />
       <PartialEnergyAnalysis partialEnergy={partialEnergy} isVisible={isVisible} />
       <GematriaAnalysis lifePath={lifePath} isVisible={isVisible} />
