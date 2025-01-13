@@ -12,7 +12,7 @@ const EnergySection = () => {
 
       <div className="mb-4">
         <div className="text-2xl font-bold text-white mb-1">9</div>
-        <p className="text-xs text-white/70">Your 2025 Energy Number</p>
+        <p className="text-xs text-white/70">2025 energetic property</p>
       </div>
 
       <Button
