@@ -8,13 +8,9 @@ export const reduceToSingleDigit = (num: number): number => {
   }
 
   // Convert to string to process individual digits
-  const sumDigits = (n: number): number => {
-    return n.toString()
-      .split('')
-      .reduce((sum, digit) => sum + parseInt(digit), 0);
-  };
-
-  let currentSum = sumDigits(num);
+  let currentSum = num.toString()
+    .split('')
+    .reduce((sum, digit) => sum + parseInt(digit), 0);
   
   // If the sum is a master number, return it
   if (MASTER_NUMBERS.includes(currentSum)) {
@@ -22,9 +18,12 @@ export const reduceToSingleDigit = (num: number): number => {
     return currentSum;
   }
   
-  // Keep reducing until we get a single digit
+  // Keep reducing until we get a single digit or master number
   while (currentSum > 9) {
-    currentSum = sumDigits(currentSum);
+    currentSum = currentSum.toString()
+      .split('')
+      .reduce((sum, digit) => sum + parseInt(digit), 0);
+      
     // Check each reduction for master numbers
     if (MASTER_NUMBERS.includes(currentSum)) {
       console.log(`Found master number during reduction: ${currentSum}`);
@@ -40,25 +39,24 @@ export const calculateLifePath = (date: Date): number => {
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
 
-  console.log(`Calculating lifepath for date: ${day}/${month}/${year}`);
+  console.log(`Calculating Life Path for: ${month}/${day}/${year}`);
 
-  // Convert all components to strings and concatenate all digits
-  const dateString = `${day}${month}${year}`;
-  console.log(`All digits combined: ${dateString}`);
+  // First, combine all individual digits into a single string
+  const allDigits = `${day}${month}${year}`.split('');
+  
+  // Sum each digit individually
+  const initialSum = allDigits.reduce((sum, digit) => sum + parseInt(digit), 0);
+  console.log(`Initial sum of all individual digits: ${initialSum}`);
 
-  // Sum all individual digits to get the compound number
-  const compoundNumber = dateString.split('').reduce((sum, digit) => sum + parseInt(digit), 0);
-  console.log(`Initial sum of all digits: ${compoundNumber}`);
-
-  // Check if the compound number is a master number
-  if (MASTER_NUMBERS.includes(compoundNumber)) {
-    console.log(`Found master number in compound sum: ${compoundNumber}`);
-    return compoundNumber;
+  // Check if initial sum is a master number
+  if (MASTER_NUMBERS.includes(initialSum)) {
+    console.log(`Found master number in initial sum: ${initialSum}`);
+    return initialSum;
   }
 
-  // If not a master number, reduce to single digit while checking for master numbers
-  const finalNumber = reduceToSingleDigit(compoundNumber);
-  console.log(`Final life path number: ${finalNumber}`);
+  // If not a master number, continue reduction while checking for master numbers
+  const finalNumber = reduceToSingleDigit(initialSum);
+  console.log(`Final Life Path number: ${finalNumber}`);
   
   return finalNumber;
 };
