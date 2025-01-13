@@ -17,7 +17,7 @@ export const benefits: Benefit[] = [
   {
     icon: TrendingUp,
     title: "Find Your True Path",
-    description: "Discover the opportunities meant for you by aligning your actions with your natural path. When you understand your true purpose, you can move with confidence and clarity, making decisions that resonate with your inner strengths. Your journey becomes clearer with each step forward.",
+    description: "Discover the opportunities meant for you by aligning your actions with your natural path. When you understand your energetic properties, you can move with confidence and clarity, making decisions that resonate with your inner strengths. Your journey becomes clearer with each step forward.",
     bgGradient: "from-[#9b87f5] via-[#7E69AB]/20 to-[#D946EF]/30",
     iconColor: "text-white",
     borderColor: "border-[#9b87f5]/20",
