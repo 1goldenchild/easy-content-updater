@@ -40,10 +40,10 @@ const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProp
         <PreviewOverlay />
         
         {/* Dynamic Island */}
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-[84px] h-[25px] bg-black rounded-[20px] z-20" />
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-[84px] h-[25px] bg-black rounded-[20px] z-50" />
         
         {/* Screen Content with Scroll Container */}
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 z-10">
           <div className="absolute inset-0 overflow-y-auto overflow-x-hidden scrollbar-hide scroll-smooth">
             <div className="relative min-h-full">
               <div className="pt-12 pb-12">

@@ -29,17 +29,17 @@ const PhoneFrameEffects = ({ hasScrolled }: PhoneFrameEffectsProps) => {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute inset-0 backdrop-blur-sm bg-white/10 z-20 pointer-events-none"
+            className="absolute inset-0 backdrop-blur-sm bg-white/10 z-40 pointer-events-none"
           />
         )}
       </AnimatePresence>
 
       {/* Reflection Effect */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none z-20" />
       
       {/* Scroll Fade Overlays */}
-      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[#1A1F2C] to-transparent pointer-events-none z-10" />
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#1A1F2C] to-transparent pointer-events-none z-10" />
+      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[#1A1F2C] to-transparent pointer-events-none z-30" />
+      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#1A1F2C] to-transparent pointer-events-none z-30" />
     </>
   );
 };
