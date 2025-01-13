@@ -70,7 +70,7 @@ const NumerologyResults = ({
           </div>
 
           {/* Cycle Number */}
-          <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10 md:col-start-2">
+          <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10 md:col-start-1 md:col-span-2">
             <p className="text-sm text-white/70">Cycle Number</p>
             <p className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#F59E0B] to-[#EF4444]">
               3
@@ -78,7 +78,7 @@ const NumerologyResults = ({
           </div>
 
           {/* 2025 Energy */}
-          <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10 md:col-start-4">
+          <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10 md:col-start-3">
             <p className="text-sm text-white/70">2025 Energy</p>
             <p className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#10B981] to-[#3B82F6]">
               9
