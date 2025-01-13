@@ -1,6 +1,12 @@
 export const MASTER_NUMBERS = [33, 22, 11];
 
 export const reduceToSingleDigit = (num: number): number => {
+  // If the input is already a master number, return it
+  if (MASTER_NUMBERS.includes(num)) {
+    console.log(`Input is a master number: ${num}`);
+    return num;
+  }
+
   // Convert to string to process individual digits
   const sumDigits = (n: number): number => {
     return n.toString()
@@ -10,9 +16,20 @@ export const reduceToSingleDigit = (num: number): number => {
 
   let currentSum = sumDigits(num);
   
+  // If the sum is a master number, return it
+  if (MASTER_NUMBERS.includes(currentSum)) {
+    console.log(`Sum is a master number: ${currentSum}`);
+    return currentSum;
+  }
+  
   // Keep reducing until we get a single digit
-  while (currentSum > 9 && !MASTER_NUMBERS.includes(currentSum)) {
+  while (currentSum > 9) {
     currentSum = sumDigits(currentSum);
+    // Check each reduction for master numbers
+    if (MASTER_NUMBERS.includes(currentSum)) {
+      console.log(`Found master number during reduction: ${currentSum}`);
+      return currentSum;
+    }
   }
 
   return currentSum;
@@ -25,35 +42,28 @@ export const calculateLifePath = (date: Date): number => {
 
   console.log(`Calculating lifepath for date: ${day}/${month}/${year}`);
 
-  // Convert each component to string and split into individual digits
-  const dayDigits = day.toString().split('').map(Number);
-  const monthDigits = month.toString().split('').map(Number);
-  const yearDigits = year.toString().split('').map(Number);
+  // Calculate individual sums first
+  const daySum = reduceToSingleDigit(day);
+  const monthSum = reduceToSingleDigit(month);
+  const yearSum = reduceToSingleDigit(year);
 
-  // Sum all individual digits to get compound number
-  const allDigits = [...dayDigits, ...monthDigits, ...yearDigits];
-  const compoundLifePath = allDigits.reduce((sum, digit) => sum + digit, 0);
+  console.log(`Day sum: ${daySum}, Month sum: ${monthSum}, Year sum: ${yearSum}`);
 
-  console.log(`Compound Life Path number: ${compoundLifePath}`);
+  // Calculate compound number by adding the reduced numbers
+  const compoundNumber = daySum + monthSum + yearSum;
+  console.log(`Initial compound number: ${compoundNumber}`);
 
-  // If compound number is a master number, return it
-  if (MASTER_NUMBERS.includes(compoundLifePath)) {
-    console.log(`Found master number in compound: ${compoundLifePath}`);
-    return compoundLifePath;
+  // If compound number is a master number, return it directly
+  if (MASTER_NUMBERS.includes(compoundNumber)) {
+    console.log(`Compound number is a master number: ${compoundNumber}`);
+    return compoundNumber;
   }
 
-  // Special handling for numbers that reduce to master numbers
-  const reducedNumber = reduceToSingleDigit(compoundLifePath);
+  // Get the final reduced number
+  const finalNumber = reduceToSingleDigit(compoundNumber);
+  console.log(`Final life path number: ${finalNumber}`);
   
-  // If reduced number is a master number, return it
-  if (MASTER_NUMBERS.includes(reducedNumber)) {
-    console.log(`Found master number after reduction: ${reducedNumber}`);
-    return reducedNumber;
-  }
-
-  // For all other numbers, return the reduced single digit
-  console.log(`Final reduced life path number: ${reducedNumber}`);
-  return reducedNumber;
+  return finalNumber;
 };
 
 export const calculatePartialEnergy = (day: number): number => {
