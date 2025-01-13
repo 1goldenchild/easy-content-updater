@@ -24,7 +24,7 @@ const SecretSection = () => {
           variant="secondary"
           className="w-full bg-gradient-to-r from-amber-500/20 to-purple-500/20 hover:from-amber-500/30 hover:to-purple-500/30 text-amber-200/80 border border-amber-500/30"
         >
-          Unlock Full Analysis →
+          Read Full Analysis →
         </Button>
         <motion.div
           initial={{ rotate: 0 }}
