@@ -81,35 +81,7 @@ export const calculateLifePath = (date: Date): number => {
   return lifePath;
 };
 
-export const calculatePartialEnergy = (day: number): number => {
-  // Simply reduce the day to a single digit, no master number check
-  let result = day;
-  while (result > 9) {
-    result = sumDigits(result);
-  }
-  return result;
-};
-
-export const calculateSecretNumber = (date: Date): number => {
-  // Calculate the day of the year (1-366)
-  const start = new Date(date.getFullYear(), 0, 0);
-  const diff = date.getTime() - start.getTime();
-  const oneDay = 1000 * 60 * 60 * 24;
-  const dayOfYear = Math.floor(diff / oneDay);
-
-  console.log(`Date: ${date.toDateString()}`);
-  console.log(`Day of year: ${dayOfYear}`);
-
-  // Simply reduce to single digit, no special cases
-  let result = dayOfYear;
-  while (result > 9) {
-    result = sumDigits(result);
-  }
-  
-  console.log(`Final secret number: ${result}`);
-  return result;
-};
-
+// For Chinese Zodiac calculation
 export const getChineseZodiac = (year: number): string => {
   console.log(`Calculating Chinese zodiac for year: ${year}`);
   

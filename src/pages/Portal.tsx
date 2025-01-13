@@ -5,9 +5,7 @@ import DateInputSection from "@/components/portal/DateInputSection";
 import ResultsSection from "@/components/portal/ResultsSection";
 import ProgressIndicator from "@/components/numerology/ProgressIndicator";
 import { 
-  calculateLifePath, 
-  calculatePartialEnergy, 
-  calculateSecretNumber, 
+  calculateLifePath,
   getChineseZodiac 
 } from "@/utils/numerologyCalculations";
 
@@ -15,8 +13,6 @@ const Portal = () => {
   const [showResults, setShowResults] = useState(false);
   const [results, setResults] = useState({
     lifePath: 0,
-    partialEnergy: 0,
-    secretNumber: 0,
     chineseZodiac: ""
   });
 
@@ -28,21 +24,15 @@ const Portal = () => {
     console.log("Calculating numerology for date:", date);
     
     const lifePath = calculateLifePath(date);
-    const partialEnergy = calculatePartialEnergy(date.getDate());
-    const secretNumber = calculateSecretNumber(date);
     const chineseZodiac = getChineseZodiac(date.getFullYear());
 
     console.log("Calculation results:", {
       lifePath,
-      partialEnergy,
-      secretNumber,
       chineseZodiac
     });
 
     setResults({
       lifePath,
-      partialEnergy,
-      secretNumber,
       chineseZodiac
     });
     setShowResults(true);
