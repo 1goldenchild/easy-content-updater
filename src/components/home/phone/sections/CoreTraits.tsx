@@ -15,32 +15,34 @@ const CoreTraits = () => {
   return (
     <div id="traits" className="rounded-xl bg-gradient-to-br from-[#0EA5E9]/30 to-[#8B5CF6]/30 p-4">
       <div className="relative mb-6">
-        <motion.div 
-          className="w-16 h-16 mx-auto bg-gradient-to-r from-[#0EA5E9] to-[#8B5CF6] rounded-full flex items-center justify-center"
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.7, 1, 0.7],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        >
-          <Brain className="w-8 h-8 text-white" />
-          <motion.div
-            className="absolute inset-0 rounded-full bg-gradient-to-r from-[#0EA5E9] to-[#8B5CF6]"
+        <div className="aspect-square bg-white/5 rounded-lg border border-white/10 p-4 mb-4">
+          <motion.div 
+            className="w-16 h-16 mx-auto bg-gradient-to-r from-[#0EA5E9] to-[#8B5CF6] rounded-full flex items-center justify-center"
             animate={{
-              scale: [1, 1.4, 1],
-              opacity: [0.3, 0, 0.3],
+              scale: [1, 1.1, 1],
+              opacity: [0.7, 1, 0.7],
             }}
             transition={{
               duration: 3,
               repeat: Infinity,
               ease: "easeInOut",
             }}
-          />
-        </motion.div>
+          >
+            <Brain className="w-8 h-8 text-white" />
+            <motion.div
+              className="absolute inset-0 rounded-full bg-gradient-to-r from-[#0EA5E9] to-[#8B5CF6]"
+              animate={{
+                scale: [1, 1.4, 1],
+                opacity: [0.3, 0, 0.3],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          </motion.div>
+        </div>
       </div>
       
       <h3 className="text-sm font-semibold text-white/90 mb-3 text-center">Core Traits</h3>

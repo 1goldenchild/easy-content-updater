@@ -38,13 +38,13 @@ const PhoneShowcase = () => {
         <NumberSections />
         <CoreTraits />
         <CompatibilitySection />
+        <CareerPaths />
         <ColorCompatibility lifePath={lifePathNumber} isVisible={true} />
         <GematriaSection />
         <CycleSection />
         <EnergySection />
         <SecretSection />
         <LoveCompatibility lifePathNumber={lifePathNumber} />
-        <CareerPaths />
         <CountryCompatibility />
         <CarCompatibilitySection />
         <TechCompatibilitySection />
