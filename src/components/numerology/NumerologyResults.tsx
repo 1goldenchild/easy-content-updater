@@ -34,24 +34,31 @@ const NumerologyResults = ({
         </div>
         
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
+          {/* Life Path Number */}
           <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
             <p className="text-sm text-white/70">Life Path Number</p>
             <p className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
               {lifePath}
             </p>
           </div>
+
+          {/* Partial Energy */}
           <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
             <p className="text-sm text-white/70">Partial Energy</p>
             <p className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
               {partialEnergy}
             </p>
           </div>
+
+          {/* Lucky Number */}
           <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
             <p className="text-sm text-white/70">Lucky Number</p>
             <p className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
               7
             </p>
           </div>
+
+          {/* Chinese Zodiac */}
           <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
             <p className="text-sm text-white/70">Chinese Zodiac</p>
             <div className="flex flex-col items-center">
@@ -61,13 +68,17 @@ const NumerologyResults = ({
               <p className="text-xs text-white/50 mt-1">Year of the {chineseZodiac}</p>
             </div>
           </div>
-          <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
+
+          {/* Cycle Number */}
+          <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10 md:col-start-2">
             <p className="text-sm text-white/70">Cycle Number</p>
             <p className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#F59E0B] to-[#EF4444]">
               3
             </p>
           </div>
-          <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
+
+          {/* 2025 Energy */}
+          <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10 md:col-start-4">
             <p className="text-sm text-white/70">2025 Energy</p>
             <p className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#10B981] to-[#3B82F6]">
               9
@@ -75,6 +86,7 @@ const NumerologyResults = ({
           </div>
         </div>
 
+        {/* Secret Number Section */}
         <div className="mt-6 p-6 rounded-xl bg-gradient-to-br from-amber-500/20 to-purple-500/20 border border-amber-500/30">
           <div className="flex items-center justify-between">
             <div className="space-y-2">
