@@ -37,18 +37,6 @@ const CollectInfo = () => {
               <PhoneShowcase />
             </motion.div>
           </div>
-
-          {/* Preview Section - Only visible on mobile */}
-          <div className="block lg:hidden">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="scale-75 origin-top"
-            >
-              <PhoneShowcase />
-            </motion.div>
-          </div>
         </div>
       </div>
     </div>
