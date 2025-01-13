@@ -145,7 +145,9 @@ const Testimonials = () => {
               className="carousel-scroll infinite-scroll"
               style={{
                 animation: 'scroll 60s linear infinite',
-                willChange: 'transform'
+                willChange: 'transform',
+                display: 'flex',
+                width: 'fit-content'
               }}
             >
               {tripleTestimonials.map((testimonial, index) => (
@@ -178,25 +180,22 @@ const Testimonials = () => {
         </div>
       </div>
 
-      <style jsx global>{`
-        @keyframes scroll {
-          0% {
-            transform: translateX(0);
+      <style>
+        {`
+          @keyframes scroll {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-33.33%);
+            }
           }
-          100% {
-            transform: translateX(-33.33%);
+          
+          .infinite-scroll:hover {
+            animation-play-state: paused;
           }
-        }
-        
-        .infinite-scroll {
-          display: flex;
-          width: fit-content;
-        }
-        
-        .infinite-scroll:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
+        `}
+      </style>
     </section>
   )
 }
