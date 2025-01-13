@@ -42,16 +42,13 @@ export const calculateLifePath = (date: Date): number => {
 
   console.log(`Calculating lifepath for date: ${day}/${month}/${year}`);
 
-  // Calculate individual sums first
-  const daySum = reduceToSingleDigit(day);
-  const monthSum = reduceToSingleDigit(month);
-  const yearSum = reduceToSingleDigit(year);
-
-  console.log(`Day sum: ${daySum}, Month sum: ${monthSum}, Year sum: ${yearSum}`);
-
-  // Calculate compound number by adding the reduced numbers
-  const compoundNumber = daySum + monthSum + yearSum;
-  console.log(`Initial compound number: ${compoundNumber}`);
+  // Convert all components to strings and split into individual digits
+  const allDigits = `${day}${month}${year}`.split('').map(Number);
+  
+  // Sum all digits together to get the compound number
+  const compoundNumber = allDigits.reduce((sum, digit) => sum + digit, 0);
+  
+  console.log(`Initial compound number from all digits: ${compoundNumber}`);
 
   // If compound number is a master number, return it directly
   if (MASTER_NUMBERS.includes(compoundNumber)) {
