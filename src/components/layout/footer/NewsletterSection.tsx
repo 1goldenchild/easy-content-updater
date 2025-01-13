@@ -1,22 +1,29 @@
-import React from 'react';
+import { Mail } from "lucide-react"
 
 const NewsletterSection = () => {
   return (
-    <div className="col-span-2 md:col-span-1">
-      <h4 className="text-sm font-semibold mb-4 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">Newsletter</h4>
-      <p className="text-sm text-muted-foreground mb-4">
+    <div className="space-y-4">
+      <h4 className="text-sm font-semibold bg-gradient-to-r from-amber-200 to-purple-500 bg-clip-text text-transparent">
+        Stay Connected
+      </h4>
+      <p className="text-sm text-muted-foreground">
         Subscribe to receive numerology insights and updates.
       </p>
-      <div className="relative">
-        <input
-          type="email"
-          placeholder="Enter your email"
-          className="w-full px-4 py-2 text-sm border rounded-lg bg-background/50 backdrop-blur-sm border-purple-500/20 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
-        />
-        <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] opacity-0 hover:opacity-10 transition-opacity pointer-events-none" />
+      <div className="relative group">
+        <div className="absolute -inset-1 bg-gradient-to-r from-amber-200/20 via-purple-500/20 to-amber-200/20 rounded-lg blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200" />
+        <div className="relative flex">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            className="flex-1 px-4 py-2 text-sm rounded-l-lg bg-secondary border border-r-0 border-amber-200/20 focus:border-amber-200/40 focus:ring-2 focus:ring-amber-200/20 transition-all"
+          />
+          <button className="px-4 py-2 rounded-r-lg bg-gradient-to-br from-amber-200/20 to-purple-500/20 backdrop-blur-sm border border-amber-200/30 text-amber-100 hover:text-amber-50 transition-colors">
+            <Mail className="w-4 h-4" />
+          </button>
+        </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default NewsletterSection;
+export default NewsletterSection

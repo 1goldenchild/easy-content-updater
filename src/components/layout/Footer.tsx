@@ -1,14 +1,14 @@
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
-import { Mail, Youtube, Instagram } from "lucide-react"
-import TikTokIcon from "../icons/TikTokIcon"
+import FooterSocialLinks from "./footer/FooterSocialLinks"
+import NewsletterSection from "./footer/NewsletterSection"
+import FooterLinks from "./footer/FooterLinks"
 
 const Footer = () => {
   return (
     <footer className="relative border-t border-purple-500/20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/80" />
       
-      {/* Main Footer Content */}
       <div className="container relative py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
           {/* Brand Section */}
@@ -28,39 +28,7 @@ const Footer = () => {
               Unlock the secrets of your life path through ancient numerological wisdom.
             </p>
             
-            {/* Social Links */}
-            <div className="flex items-center space-x-4">
-              <a
-                href="https://www.tiktok.com/@numerology_33"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-200/20 to-purple-500/20 p-[1px] hover:scale-110 transition-transform group"
-              >
-                <div className="w-full h-full rounded-full bg-background flex items-center justify-center group-hover:bg-amber-950/50 transition-colors">
-                  <TikTokIcon className="w-4 h-4 text-amber-200/90" />
-                </div>
-              </a>
-              <a
-                href="https://www.youtube.com/@numerology-33"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-200/20 to-purple-500/20 p-[1px] hover:scale-110 transition-transform group"
-              >
-                <div className="w-full h-full rounded-full bg-background flex items-center justify-center group-hover:bg-amber-950/50 transition-colors">
-                  <Youtube className="w-4 h-4 text-amber-200/90" />
-                </div>
-              </a>
-              <a
-                href="https://www.instagram.com/33.numerology33"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-200/20 to-purple-500/20 p-[1px] hover:scale-110 transition-transform group"
-              >
-                <div className="w-full h-full rounded-full bg-background flex items-center justify-center group-hover:bg-amber-950/50 transition-colors">
-                  <Instagram className="w-4 h-4 text-amber-200/90" />
-                </div>
-              </a>
-            </div>
+            <FooterSocialLinks />
           </div>
 
           {/* Quick Links */}
@@ -84,49 +52,8 @@ const Footer = () => {
             </nav>
           </div>
 
-          {/* Legal */}
-          <div className="space-y-4">
-            <h4 className="text-sm font-semibold bg-gradient-to-r from-amber-200 to-purple-500 bg-clip-text text-transparent">
-              Legal
-            </h4>
-            <nav className="flex flex-col space-y-2">
-              <Link to="/terms" className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors">
-                Terms & Conditions
-              </Link>
-              <Link to="/privacy" className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors">
-                Privacy Policy
-              </Link>
-              <Link to="/refund" className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors">
-                Refund Policy
-              </Link>
-              <a href="/sitemap.xml" className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors">
-                Sitemap
-              </a>
-            </nav>
-          </div>
-
-          {/* Newsletter */}
-          <div className="space-y-4">
-            <h4 className="text-sm font-semibold bg-gradient-to-r from-amber-200 to-purple-500 bg-clip-text text-transparent">
-              Stay Connected
-            </h4>
-            <p className="text-sm text-muted-foreground">
-              Subscribe to receive numerology insights and updates.
-            </p>
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-amber-200/20 via-purple-500/20 to-amber-200/20 rounded-lg blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200" />
-              <div className="relative flex">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-2 text-sm rounded-l-lg bg-secondary border border-r-0 border-amber-200/20 focus:border-amber-200/40 focus:ring-2 focus:ring-amber-200/20 transition-all"
-                />
-                <button className="px-4 py-2 rounded-r-lg bg-gradient-to-br from-amber-200/20 to-purple-500/20 backdrop-blur-sm border border-amber-200/30 text-amber-100 hover:text-amber-50 transition-colors">
-                  <Mail className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          </div>
+          <FooterLinks />
+          <NewsletterSection />
         </div>
 
         {/* Copyright */}
