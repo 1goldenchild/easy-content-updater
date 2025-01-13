@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const blogPosts = [
   {
@@ -39,6 +40,10 @@ const blogPosts = [
 ];
 
 const BlogSection = () => {
+  const isMobile = useIsMobile();
+  const visiblePosts = isMobile ? blogPosts.slice(0, 3) : blogPosts.slice(0, 6);
+  const hasMorePosts = blogPosts.length > visiblePosts.length;
+
   return (
     <section className="py-16 bg-gradient-to-b from-background/80 to-background">
       <div className="container px-4 md:px-6">
@@ -59,7 +64,7 @@ const BlogSection = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {blogPosts.map((post, index) => (
+          {visiblePosts.map((post, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
@@ -101,15 +106,17 @@ const BlogSection = () => {
           ))}
         </div>
         
-        <div className="text-center mt-8">
-          <Link 
-            to="/blog"
-            className="inline-flex items-center text-[#86736f] hover:text-[#a39490] transition-colors"
-          >
-            View All Articles
-            <ArrowRight className="w-4 h-4 ml-1" />
-          </Link>
-        </div>
+        {hasMorePosts && (
+          <div className="text-center mt-8">
+            <Link 
+              to="/blog"
+              className="inline-flex items-center text-[#86736f] hover:text-[#a39490] transition-colors"
+            >
+              View All Articles
+              <ArrowRight className="w-4 h-4 ml-1" />
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );
