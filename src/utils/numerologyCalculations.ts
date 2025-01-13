@@ -46,34 +46,22 @@ export const calculateLifePath = (date: Date): number => {
 
   console.log(`Compound Life Path number: ${compoundLifePath}`);
 
-  // Check for master numbers (11, 22, 33) in compound number
-  if ([11, 22, 33].includes(compoundLifePath)) {
+  // First check if compound number is a master number
+  if (MASTER_NUMBERS.includes(compoundLifePath)) {
     console.log(`Found master number in compound: ${compoundLifePath}`);
     return compoundLifePath;
   }
 
-  // Check for numbers that reduce to 11 (20, 29, 38)
-  if ([20, 29, 38].includes(compoundLifePath)) {
-    console.log(`Found number that reduces to 11: ${compoundLifePath}`);
-    return 11;
+  // Then check if compound number reduces to a master number
+  const reducedNumber = reduceToSingleDigit(compoundLifePath);
+  if (MASTER_NUMBERS.includes(reducedNumber)) {
+    console.log(`Found master number after reduction: ${reducedNumber}`);
+    return reducedNumber;
   }
 
-  // Special handling for compound numbers that should be 22
-  // This includes checking if the sum equals 22 before reduction
-  const firstReduction = reduceToSingleDigit(compoundLifePath);
-  if (compoundLifePath === 22 || 
-      (compoundLifePath === 40) || // Common pattern for Life Path 22
-      (firstReduction === 4 && compoundLifePath > 22)) {
-    console.log(`Found Life Path 22 pattern from compound ${compoundLifePath}`);
-    return 22;
-  }
-
-  // For all other numbers, reduce to single digit
-  console.log(`Reducing compound ${compoundLifePath} to single digit`);
-  const lifePath = reduceToSingleDigit(compoundLifePath);
-  console.log(`Final reduced life path number: ${lifePath}`);
-
-  return lifePath;
+  // For all other numbers, return the reduced single digit
+  console.log(`Final reduced life path number: ${reducedNumber}`);
+  return reducedNumber;
 };
 
 export const calculatePartialEnergy = (day: number): number => {
