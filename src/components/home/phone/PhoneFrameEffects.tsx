@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface PhoneFrameEffectsProps {
   hasScrolled: boolean;
@@ -22,13 +22,17 @@ const PhoneFrameEffects = ({ hasScrolled }: PhoneFrameEffectsProps) => {
       />
 
       {/* Frosted Glass Overlay */}
-      {!hasScrolled && (
-        <motion.div
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="absolute inset-0 backdrop-blur-sm bg-white/10 z-20 pointer-events-none"
-        />
-      )}
+      <AnimatePresence>
+        {!hasScrolled && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="absolute inset-0 backdrop-blur-sm bg-white/10 z-20 pointer-events-none"
+          />
+        )}
+      </AnimatePresence>
 
       {/* Reflection Effect */}
       <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none" />
