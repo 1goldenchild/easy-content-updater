@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Sparkles } from "lucide-react";
 import LifepathAnalysis from "./LifepathAnalysis";
 import PartialEnergyAnalysis from "./PartialEnergyAnalysis";
 import AstrologyAnalysis from "./AstrologyAnalysis";
@@ -46,9 +47,9 @@ const NumerologyResults = ({
             </p>
           </div>
           <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
-            <p className="text-sm text-white/70">Secret Number</p>
+            <p className="text-sm text-white/70">Lucky Number</p>
             <p className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
-              {secretNumber}
+              7
             </p>
           </div>
           <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
@@ -59,6 +60,49 @@ const NumerologyResults = ({
               </p>
               <p className="text-xs text-white/50 mt-1">Year of the {chineseZodiac}</p>
             </div>
+          </div>
+          <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
+            <p className="text-sm text-white/70">Cycle Number</p>
+            <p className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#F59E0B] to-[#EF4444]">
+              3
+            </p>
+          </div>
+          <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
+            <p className="text-sm text-white/70">2025 Energy</p>
+            <p className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#10B981] to-[#3B82F6]">
+              9
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-6 p-6 rounded-xl bg-gradient-to-br from-amber-500/20 to-purple-500/20 border border-amber-500/30">
+          <div className="flex items-center justify-between">
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-amber-400" />
+                <h4 className="text-lg font-semibold text-white/90">Secret Number</h4>
+              </div>
+              <p className="text-sm text-white/70">
+                Your exclusive Secret Number reveals hidden talents and destiny
+              </p>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="inline-flex items-center px-4 py-2 rounded-lg bg-amber-500/20 border border-amber-500/30"
+              >
+                <span className="text-2xl font-bold bg-gradient-to-r from-amber-200 to-purple-400 bg-clip-text text-transparent">
+                  {secretNumber}
+                </span>
+                <span className="ml-2 text-sm text-amber-200/80">Master Teacher</span>
+              </motion.div>
+            </div>
+            <motion.div
+              initial={{ rotate: 0 }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="w-16 h-16 rounded-full bg-gradient-to-r from-amber-500/20 to-purple-500/20 flex items-center justify-center"
+            >
+              <span className="text-3xl text-amber-200">✧</span>
+            </motion.div>
           </div>
         </div>
       </div>
