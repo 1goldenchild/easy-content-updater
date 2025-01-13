@@ -5,6 +5,9 @@ import PartialEnergyAnalysis from "./PartialEnergyAnalysis";
 import AstrologyAnalysis from "./AstrologyAnalysis";
 import CharacteristicsChart from "./CharacteristicsChart";
 import GematriaAnalysis from "./GematriaAnalysis";
+import CycleAnalysis from "./CycleAnalysis";
+import EnergyAnalysis from "./EnergyAnalysis";
+import SecretAnalysis from "./SecretAnalysis";
 
 interface NumerologyResultsProps {
   lifePath: number;
@@ -124,6 +127,9 @@ const NumerologyResults = ({
       <LifepathAnalysis lifePath={lifePath} isVisible={isVisible} />
       <PartialEnergyAnalysis partialEnergy={partialEnergy} isVisible={isVisible} />
       <GematriaAnalysis lifePath={lifePath} isVisible={isVisible} />
+      <CycleAnalysis isVisible={isVisible} />
+      <EnergyAnalysis isVisible={isVisible} />
+      <SecretAnalysis secretNumber={secretNumber} isVisible={isVisible} />
       <AstrologyAnalysis chineseZodiac={chineseZodiac} isVisible={isVisible} />
     </motion.div>
   );
