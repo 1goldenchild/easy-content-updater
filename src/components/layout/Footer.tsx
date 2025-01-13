@@ -99,6 +99,9 @@ const Footer = () => {
               <Link to="/refund" className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors">
                 Refund Policy
               </Link>
+              <a href="/sitemap.xml" className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors">
+                Sitemap
+              </a>
             </nav>
           </div>
 
