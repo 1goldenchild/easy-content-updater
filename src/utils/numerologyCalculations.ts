@@ -12,31 +12,12 @@ const sumDigits = (num: number): number => {
     .reduce((a, b) => a + b, 0);
 };
 
-// Reduce a number to a single digit while preserving master numbers
-export const reduceToSingleDigit = (num: number): number => {
-  // First check if the initial number is a master number
-  if (isMasterNumber(num)) {
-    console.log(`Initial number ${num} is a master number, preserving it`);
-    return num;
-  }
-
+// Always reduce to single digit first, only check for master numbers at final sum
+const reduceToSingleDigit = (num: number): number => {
   let result = num;
-  
-  // Only reduce if it's not already a single digit
-  if (result > 9) {
+  while (result > 9) {
     result = sumDigits(result);
-    // Check if the first reduction gives us a master number
-    if (isMasterNumber(result)) {
-      console.log(`Found master number ${result} after first reduction`);
-      return result;
-    }
-    
-    // If not a master number and still > 9, reduce to single digit
-    while (result > 9) {
-      result = sumDigits(result);
-    }
   }
-
   return result;
 };
 
@@ -47,25 +28,10 @@ export const calculateLifePath = (date: Date): number => {
 
   console.log(`Calculating Life Path for date: ${month}/${day}/${year}`);
 
-  // First, reduce the day number while preserving master numbers
-  let daySum = day;
-  if (day > 9) {
-    daySum = sumDigits(day);
-    if (isMasterNumber(daySum)) {
-      console.log(`Day ${day} reduces to master number ${daySum}`);
-    } else {
-      daySum = reduceToSingleDigit(day);
-    }
-  }
-
-  // Reduce month (usually not needed as months are 1-12)
-  const monthSum = month > 9 ? sumDigits(month) : month;
-
-  // Reduce year
-  let yearSum = sumDigits(year);
-  if (yearSum > 9) {
-    yearSum = reduceToSingleDigit(yearSum);
-  }
+  // First reduce each component to a single digit
+  const daySum = reduceToSingleDigit(day);
+  const monthSum = reduceToSingleDigit(month);
+  const yearSum = reduceToSingleDigit(year);
 
   console.log(`Components: Day=${daySum}, Month=${monthSum}, Year=${yearSum}`);
 
@@ -79,7 +45,7 @@ export const calculateLifePath = (date: Date): number => {
     return totalSum;
   }
 
-  // If not a master number, perform final reduction
+  // If not a master number, reduce to single digit
   const lifePath = reduceToSingleDigit(totalSum);
   console.log(`Final Life Path number: ${lifePath}`);
 
