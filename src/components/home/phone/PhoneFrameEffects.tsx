@@ -22,12 +22,13 @@ const PhoneFrameEffects = ({ hasScrolled }: PhoneFrameEffectsProps) => {
       />
 
       {/* Frosted Glass Overlay */}
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {!hasScrolled && (
           <motion.div
+            key="frosted-glass"
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
             className="absolute inset-0 backdrop-blur-sm bg-white/10 z-20 pointer-events-none"
           />
         )}

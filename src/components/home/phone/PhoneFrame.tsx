@@ -14,9 +14,9 @@ const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProp
   const [hasScrolled, setHasScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = (e: Event) => {
-      const container = e.target as HTMLElement;
-      if (container.scrollTop > 0) {
+    const handleScroll = () => {
+      const container = document.querySelector('.scrollbar-hide');
+      if (container && container.scrollTop > 0) {
         setHasScrolled(true);
       }
     };
