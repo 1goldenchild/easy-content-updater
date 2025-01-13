@@ -1,28 +1,32 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 const FooterLinks = () => {
   return (
-    <>
-      <div>
-        <h4 className="text-sm font-semibold mb-4 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">Legal & Support</h4>
-        <ul className="space-y-2">
-          <li>
-            <Link to="/terms" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Terms & Conditions</Link>
-          </li>
-          <li>
-            <Link to="/privacy" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Privacy Policy</Link>
-          </li>
-          <li>
-            <Link to="/refund" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Refund Policy</Link>
-          </li>
-          <li>
-            <Link to="/support" className="text-sm text-muted-foreground hover:text-[#8B5CF6] transition-colors">Support</Link>
-          </li>
-        </ul>
-      </div>
-    </>
-  );
-};
+    <div className="space-y-4">
+      <h4 className="text-sm font-semibold bg-gradient-to-r from-amber-200 to-purple-500 bg-clip-text text-transparent">
+        Legal
+      </h4>
+      <nav className="flex flex-col space-y-2">
+        <Link to="/terms" className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors">
+          Terms & Conditions
+        </Link>
+        <Link to="/privacy" className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors">
+          Privacy Policy
+        </Link>
+        <Link to="/refund" className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors">
+          Refund Policy
+        </Link>
+        <a 
+          href="/sitemap.xml" 
+          className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Sitemap
+        </a>
+      </nav>
+    </div>
+  )
+}
 
-export default FooterLinks;
+export default FooterLinks
