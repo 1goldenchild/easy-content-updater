@@ -21,8 +21,8 @@ export const features: Feature[] = [
   },
   {
     icon: Brain,
-    title: "Life Path Analysis",
-    description: "Discover your life path number and understand your core personality traits and life purpose.",
+    title: "Complete Energetic Property Analysis",
+    description: "Get a complete energetic property analysis, where a ton of information will be provided on your Lifepath, Partial Number, Secret Number, Cycle Year, Personal Year, Lucky Number, and how everything connects together.",
     gradient: "from-blue-500 to-cyan-500",
     neonColor: "rgba(59, 130, 246, 0.5)",
     number: 2

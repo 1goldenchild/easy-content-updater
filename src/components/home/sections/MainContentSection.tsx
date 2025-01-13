@@ -11,23 +11,10 @@ const MainContentSection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
-        <span className="relative inline-block">
-          <span className="absolute inset-0 bg-gradient-to-r from-[#534363] via-[#7E69AB] to-[#6E59A5] opacity-50 blur-lg animate-pulse" />
-          <span className="relative bg-gradient-to-r from-[#9b87f5] via-[#D6BCFA] to-[#E5DEFF] bg-clip-text text-transparent">
-            Unlock Your Complete Numerology Profile
-          </span>
+        <span className="absolute inset-0 bg-gradient-to-r from-[#534363] via-[#7E69AB] to-[#6E59A5] opacity-50 blur-lg animate-pulse" />
+        <span className="relative bg-gradient-to-r from-[#9b87f5] via-[#D6BCFA] to-[#E5DEFF] bg-clip-text text-transparent">
+          Unlock Your Complete Numerology Profile
         </span>
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="text-lg mt-2"
-        >
-          <span className="relative bg-gradient-to-r from-[#9b87f5] via-[#D6BCFA] to-[#E5DEFF] bg-clip-text text-transparent opacity-80">
-            And more
-          </span>
-        </motion.div>
       </motion.h2>
       
       <FeatureList />
