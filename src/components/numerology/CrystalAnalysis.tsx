@@ -58,87 +58,10 @@ const getCrystalRecommendations = (lifePath: number) => {
   return crystalMap[lifePath] || crystalMap[1];
 };
 
-const getCrystalColor = (crystalName: string): { gradient: string, color: string } => {
-  const colorMap: { [key: string]: { gradient: string, color: string } } = {
-    "Ruby": {
-      gradient: "from-red-400 to-pink-500",
-      color: "#ef4444"
-    },
-    "Moonstone": {
-      gradient: "from-blue-200 to-indigo-300",
-      color: "#93c5fd"
-    },
-    "Yellow Topaz": {
-      gradient: "from-yellow-300 to-amber-400",
-      color: "#fcd34d"
-    },
-    "Green Jade": {
-      gradient: "from-green-400 to-emerald-500",
-      color: "#4ade80"
-    },
-    "Aquamarine": {
-      gradient: "from-cyan-300 to-blue-400",
-      color: "#67e8f9"
-    },
-    "Pink Tourmaline": {
-      gradient: "from-pink-300 to-rose-400",
-      color: "#f9a8d4"
-    },
-    "Amethyst": {
-      gradient: "from-purple-400 to-violet-500",
-      color: "#c084fc"
-    },
-    "Diamond": {
-      gradient: "from-blue-100 to-slate-200",
-      color: "#e2e8f0"
-    },
-    "Lapis Lazuli": {
-      gradient: "from-blue-500 to-indigo-600",
-      color: "#3b82f6"
-    }
-  };
-
-  return colorMap[crystalName] || colorMap["Diamond"];
-};
-
-const CrystalShape = ({ color, gradient }: { color: string; gradient: string }) => {
-  return (
-    <div className="relative w-32 h-32 mx-auto mb-4">
-      <motion.svg
-        viewBox="0 0 100 100"
-        className={`w-full h-full transform rotate-45 bg-gradient-to-br ${gradient}`}
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <motion.path
-          d="M50 10 L90 50 L50 90 L10 50 Z"
-          className="stroke-white/20"
-          strokeWidth="2"
-          fill="currentColor"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
-        />
-        <motion.circle
-          cx="50"
-          cy="50"
-          r="5"
-          className="fill-white/30"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.5, duration: 0.3 }}
-        />
-      </motion.svg>
-    </div>
-  );
-};
-
 const CrystalAnalysis = ({ lifePath, isVisible }: CrystalAnalysisProps) => {
   if (!isVisible) return null;
 
   const crystalInfo = getCrystalRecommendations(lifePath);
-  const { gradient, color } = getCrystalColor(crystalInfo.primary);
 
   return (
     <motion.div
@@ -157,7 +80,6 @@ const CrystalAnalysis = ({ lifePath, isVisible }: CrystalAnalysisProps) => {
         <div className="space-y-4">
           <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-6">
             <h3 className="text-lg font-medium text-purple-400 mb-2">Primary Crystal</h3>
-            <CrystalShape color={color} gradient={gradient} />
             <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               {crystalInfo.primary}
             </div>
