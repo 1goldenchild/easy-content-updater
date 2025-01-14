@@ -11,7 +11,7 @@ import { toast } from "sonner"
 import { supabase } from "@/integrations/supabase/client"
 import { useIsMobile } from "@/hooks/use-mobile"
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '')
 
 const Checkout = () => {
   const isMobile = useIsMobile()
@@ -49,7 +49,7 @@ const Checkout = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#1A1F2C] py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-purple-900/20 to-[#1A1F2C] py-8 px-4">
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -61,11 +61,11 @@ const Checkout = () => {
             <motion.h1
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className={`${isMobile ? 'text-3xl' : 'text-4xl'} font-bold text-white mb-4`}
+              className={`${isMobile ? 'text-3xl' : 'text-4xl'} font-bold bg-gradient-to-r from-purple-300 via-purple-400 to-purple-300 bg-clip-text text-transparent mb-4`}
             >
               Complete Your Order
             </motion.h1>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            <p className="text-purple-200/80 text-lg max-w-2xl mx-auto">
               You're moments away from unlocking the secrets of your numerological DNA
             </p>
           </div>
@@ -73,7 +73,7 @@ const Checkout = () => {
           {/* Main Content */}
           <div className="grid gap-8">
             {/* Package Selection Section */}
-            <div className="bg-[#1A1508]/30 p-6 rounded-xl border border-amber-900/30">
+            <div className="bg-gradient-to-br from-purple-900/30 to-purple-800/20 p-6 rounded-xl border border-purple-500/30 shadow-lg shadow-purple-500/10">
               <PackageSelection
                 selectedPackage={selectedPackage}
                 onPackageChange={setSelectedPackage}
@@ -81,7 +81,7 @@ const Checkout = () => {
             </div>
 
             {/* VIP Option */}
-            <div className="bg-[#1A1508]/30 p-6 rounded-xl border border-amber-900/30">
+            <div className="bg-gradient-to-br from-purple-900/30 to-purple-800/20 p-6 rounded-xl border border-purple-500/30 shadow-lg shadow-purple-500/10">
               <VIPOption
                 isVip={isVip}
                 onVipChange={setIsVip}
@@ -89,7 +89,7 @@ const Checkout = () => {
             </div>
 
             {/* Contact & Billing Info */}
-            <div className="bg-[#1A1508]/30 p-6 rounded-xl border border-amber-900/30">
+            <div className="bg-gradient-to-br from-purple-900/30 to-purple-800/20 p-6 rounded-xl border border-purple-500/30 shadow-lg shadow-purple-500/10">
               <div className="space-y-8">
                 <ContactInfo
                   firstName={formData.firstName}
@@ -98,7 +98,7 @@ const Checkout = () => {
                   onFieldChange={handleFieldChange}
                 />
 
-                <div className="border-t border-gray-700 pt-8">
+                <div className="border-t border-purple-500/30 pt-8">
                   <BillingInfo
                     address={formData.address}
                     apartment={formData.apartment}
@@ -113,8 +113,8 @@ const Checkout = () => {
             </div>
 
             {/* Payment Section */}
-            <div className="bg-[#1A1508]/30 p-6 rounded-xl border border-amber-900/30">
-              <h2 className="text-lg font-semibold mb-4 text-gray-200">PAYMENT INFORMATION</h2>
+            <div className="bg-gradient-to-br from-purple-900/30 to-purple-800/20 p-6 rounded-xl border border-purple-500/30 shadow-lg shadow-purple-500/10">
+              <h2 className="text-lg font-semibold mb-4 text-purple-200">PAYMENT INFORMATION</h2>
               <Elements stripe={stripePromise}>
                 <StripeElements
                   onSubmit={handleSubmit}
@@ -123,10 +123,10 @@ const Checkout = () => {
               </Elements>
 
               {/* Order Total */}
-              <div className="mt-6 pt-6 border-t border-gray-700">
+              <div className="mt-6 pt-6 border-t border-purple-500/30">
                 <div className="flex justify-between items-center text-lg">
-                  <span className="text-gray-300">Total:</span>
-                  <span className="font-bold text-purple-400">${calculateTotal().toFixed(2)}</span>
+                  <span className="text-purple-200">Total:</span>
+                  <span className="font-bold text-purple-300">${calculateTotal().toFixed(2)}</span>
                 </div>
               </div>
             </div>
