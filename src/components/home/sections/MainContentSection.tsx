@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
-import FeatureList from "../FeatureList";
 
 const MainContentSection = () => {
   return (
-    <div className="space-y-24"> {/* Increased from space-y-12 to space-y-24 for much more spacing */}
+    <div className="space-y-24">
       <motion.h2 
         data-section="profile-heading"
         className="text-3xl md:text-4xl font-bold text-center relative"
@@ -16,8 +15,6 @@ const MainContentSection = () => {
           Unlock Your Complete Numerology Profile
         </span>
       </motion.h2>
-      
-      <FeatureList />
     </div>
   );
 };
