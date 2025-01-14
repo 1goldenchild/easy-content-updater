@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Home } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface HousingAnalysisProps {
   chineseZodiac: string;
@@ -32,30 +33,21 @@ const HousingAnalysis = ({ chineseZodiac, isVisible }: HousingAnalysisProps) => 
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="space-y-6 p-6 bg-card rounded-lg border"
+      className="mt-8 space-y-6 p-6 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-lg border border-purple-500/20"
     >
-      <h2 className="text-2xl font-semibold flex items-center gap-2">
-        <Home className="w-6 h-6" />
-        Energetic Properties of Houses
-      </h2>
-      
-      <div className="text-left space-y-4">
-        <p className="text-muted-foreground">
-          Based on your Chinese zodiac sign ({chineseZodiac}), here are insights about your ideal living space:
-        </p>
-        <p className="text-sm leading-relaxed">
-          {getHousingAnalysis(chineseZodiac)}
-        </p>
-        <div className="space-y-2">
-          <h3 className="font-medium">General Housing Tips:</h3>
-          <ul className="list-disc pl-5 text-sm space-y-1">
-            <li>Consider the direction your main door faces</li>
-            <li>Pay attention to the flow of natural light</li>
-            <li>Balance the five elements in your living space</li>
-            <li>Create harmony between work and rest areas</li>
-          </ul>
-        </div>
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-semibold flex items-center gap-2 text-white">
+          <Home className="w-6 h-6 text-purple-400" />
+          Energetic Properties of Houses
+        </h2>
       </div>
+
+      <Button 
+        variant="outline" 
+        className="w-full bg-purple-500/20 border-purple-500/30 text-purple-200 hover:bg-purple-500/30"
+      >
+        Read More
+      </Button>
     </motion.div>
   );
 };

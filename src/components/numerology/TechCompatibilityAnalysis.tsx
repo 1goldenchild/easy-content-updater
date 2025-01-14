@@ -43,7 +43,7 @@ const TechCompatibilityAnalysis = ({ chineseZodiac, isVisible }: TechCompatibili
                 key={company.name}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="relative flex items-center justify-between p-4 rounded-lg bg-white/5 overflow-hidden"
+                className="relative flex items-center p-4 rounded-lg bg-white/5 overflow-hidden"
               >
                 <div className="flex items-center gap-3">
                   <Smartphone className="w-5 h-5 text-green-400" />
@@ -52,13 +52,6 @@ const TechCompatibilityAnalysis = ({ chineseZodiac, isVisible }: TechCompatibili
                     <p className="text-sm text-white/60">{company.zodiac} ({company.year})</p>
                   </div>
                 </div>
-                <span className="text-green-400 font-medium">{company.compatibility}%</span>
-                <motion.div 
-                  initial={{ width: 0 }}
-                  animate={{ width: `${company.compatibility}%` }}
-                  transition={{ duration: 1 }}
-                  className="absolute left-0 top-0 h-full bg-green-500/10 -z-10"
-                />
               </motion.div>
             ))}
           </div>
@@ -73,7 +66,7 @@ const TechCompatibilityAnalysis = ({ chineseZodiac, isVisible }: TechCompatibili
                 key={company.name}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="relative flex items-center justify-between p-4 rounded-lg bg-white/5 overflow-hidden"
+                className="relative flex items-center p-4 rounded-lg bg-white/5 overflow-hidden"
               >
                 <div className="flex items-center gap-3">
                   <Smartphone className="w-5 h-5 text-red-400" />
@@ -82,13 +75,6 @@ const TechCompatibilityAnalysis = ({ chineseZodiac, isVisible }: TechCompatibili
                     <p className="text-sm text-white/60">{company.zodiac} ({company.year})</p>
                   </div>
                 </div>
-                <span className="text-red-400 font-medium">{company.compatibility}%</span>
-                <motion.div 
-                  initial={{ width: 0 }}
-                  animate={{ width: `${company.compatibility}%` }}
-                  transition={{ duration: 1 }}
-                  className="absolute left-0 top-0 h-full bg-red-500/10 -z-10"
-                />
               </motion.div>
             ))}
           </div>
