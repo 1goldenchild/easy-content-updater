@@ -3,7 +3,6 @@ import LifepathAnalysis from "./LifepathAnalysis";
 import PartialEnergyAnalysis from "./PartialEnergyAnalysis";
 import AstrologyAnalysis from "./AstrologyAnalysis";
 import CharacteristicsChart from "./CharacteristicsChart";
-import GematriaAnalysis from "./GematriaAnalysis";
 import CycleAnalysis from "./CycleAnalysis";
 import EnergyAnalysis from "./EnergyAnalysis";
 import SecretAnalysis from "./SecretAnalysis";
@@ -93,7 +92,6 @@ const NumerologyResults = ({
       <CharacteristicsChart lifePath={lifePath} isVisible={isVisible} />
       <LifepathAnalysis lifePath={lifePath} isVisible={isVisible} />
       <PartialEnergyAnalysis partialEnergy={partialEnergy} isVisible={isVisible} />
-      <GematriaAnalysis lifePath={lifePath} isVisible={isVisible} />
       <CycleAnalysis dateOfBirth={dateOfBirth} isVisible={isVisible} />
       <EnergyAnalysis isVisible={isVisible} />
       <SecretAnalysis secretNumber={secretNumber} isVisible={isVisible} />
