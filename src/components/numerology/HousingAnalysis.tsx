@@ -29,58 +29,58 @@ const HousingAnalysis = ({ chineseZodiac, isVisible }: HousingAnalysisProps) => 
   };
 
   const getCompatibleYears = (zodiac: string) => {
-    const compatibilities: Record<string, { good: string[], challenging: string[] }> = {
+    const yearRanges: Record<string, { good: number[], challenging: number[] }> = {
       Rat: {
-        good: ["Dragon", "Monkey", "Ox"],
-        challenging: ["Horse", "Rabbit", "Goat"]
+        good: [1960, 1972, 1984, 1996, 2008, 2020],
+        challenging: [1966, 1978, 1990, 2002, 2014, 2026]
       },
       Ox: {
-        good: ["Snake", "Rooster", "Rat"],
-        challenging: ["Goat", "Horse", "Dragon"]
+        good: [1961, 1973, 1985, 1997, 2009, 2021],
+        challenging: [1967, 1979, 1991, 2003, 2015, 2027]
       },
       Tiger: {
-        good: ["Horse", "Dog", "Pig"],
-        challenging: ["Monkey", "Snake", "Tiger"]
+        good: [1962, 1974, 1986, 1998, 2010, 2022],
+        challenging: [1968, 1980, 1992, 2004, 2016, 2028]
       },
       Rabbit: {
-        good: ["Goat", "Pig", "Dog"],
-        challenging: ["Rooster", "Dragon", "Rat"]
+        good: [1963, 1975, 1987, 1999, 2011, 2023],
+        challenging: [1969, 1981, 1993, 2005, 2017, 2029]
       },
       Dragon: {
-        good: ["Rat", "Monkey", "Rooster"],
-        challenging: ["Dog", "Rabbit", "Dragon"]
+        good: [1964, 1976, 1988, 2000, 2012, 2024],
+        challenging: [1970, 1982, 1994, 2006, 2018, 2030]
       },
       Snake: {
-        good: ["Ox", "Rooster", "Monkey"],
-        challenging: ["Tiger", "Pig", "Snake"]
+        good: [1965, 1977, 1989, 2001, 2013, 2025],
+        challenging: [1971, 1983, 1995, 2007, 2019, 2031]
       },
       Horse: {
-        good: ["Tiger", "Dog", "Goat"],
-        challenging: ["Rat", "Ox", "Horse"]
+        good: [1966, 1978, 1990, 2002, 2014, 2026],
+        challenging: [1972, 1984, 1996, 2008, 2020, 2032]
       },
       Goat: {
-        good: ["Rabbit", "Horse", "Pig"],
-        challenging: ["Ox", "Dog", "Dragon"]
+        good: [1967, 1979, 1991, 2003, 2015, 2027],
+        challenging: [1973, 1985, 1997, 2009, 2021, 2033]
       },
       Monkey: {
-        good: ["Rat", "Dragon", "Snake"],
-        challenging: ["Tiger", "Pig", "Monkey"]
+        good: [1968, 1980, 1992, 2004, 2016, 2028],
+        challenging: [1974, 1986, 1998, 2010, 2022, 2034]
       },
       Rooster: {
-        good: ["Ox", "Snake", "Dragon"],
-        challenging: ["Rat", "Rabbit", "Horse"]
+        good: [1969, 1981, 1993, 2005, 2017, 2029],
+        challenging: [1975, 1987, 1999, 2011, 2023, 2035]
       },
       Dog: {
-        good: ["Tiger", "Horse", "Rabbit"],
-        challenging: ["Dragon", "Goat", "Ox"]
+        good: [1970, 1982, 1994, 2006, 2018, 2030],
+        challenging: [1976, 1988, 2000, 2012, 2024, 2036]
       },
       Pig: {
-        good: ["Tiger", "Rabbit", "Goat"],
-        challenging: ["Snake", "Monkey", "Pig"]
+        good: [1971, 1983, 1995, 2007, 2019, 2031],
+        challenging: [1977, 1989, 2001, 2013, 2025, 2037]
       }
     };
 
-    return compatibilities[zodiac] || { good: [], challenging: [] };
+    return yearRanges[zodiac] || { good: [], challenging: [] };
   };
 
   const compatibility = getCompatibleYears(chineseZodiac);
@@ -108,14 +108,14 @@ const HousingAnalysis = ({ chineseZodiac, isVisible }: HousingAnalysisProps) => 
 
         <div className="space-y-4">
           <div className="space-y-2">
-            <h3 className="font-medium text-purple-200">Compatible Signs:</h3>
+            <h3 className="font-medium text-purple-200">Good Years for Housing Changes:</h3>
             <p className="text-sm text-purple-100">
               {compatibility.good.join(", ")}
             </p>
           </div>
           
           <div className="space-y-2">
-            <h3 className="font-medium text-purple-200">Challenging Signs:</h3>
+            <h3 className="font-medium text-purple-200">Challenging Years for Housing Changes:</h3>
             <p className="text-sm text-purple-100">
               {compatibility.challenging.join(", ")}
             </p>
