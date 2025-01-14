@@ -7,6 +7,7 @@ import GematriaAnalysis from "./GematriaAnalysis";
 import CycleAnalysis from "./CycleAnalysis";
 import EnergyAnalysis from "./EnergyAnalysis";
 import SecretAnalysis from "./SecretAnalysis";
+import LuckyNumberAnalysis from "./LuckyNumberAnalysis";
 import LoveCompatibility from "./LoveCompatibility";
 import OccupationGuidance from "./OccupationGuidance";
 import HousingAnalysis from "./HousingAnalysis";
@@ -88,7 +89,7 @@ const NumerologyResults = ({
           </div>
         </div>
       </div>
-
+      
       <CharacteristicsChart lifePath={lifePath} isVisible={isVisible} />
       <LifepathAnalysis lifePath={lifePath} isVisible={isVisible} />
       <PartialEnergyAnalysis partialEnergy={partialEnergy} isVisible={isVisible} />
@@ -96,6 +97,7 @@ const NumerologyResults = ({
       <CycleAnalysis dateOfBirth={dateOfBirth} isVisible={isVisible} />
       <EnergyAnalysis isVisible={isVisible} />
       <SecretAnalysis secretNumber={secretNumber} isVisible={isVisible} />
+      <LuckyNumberAnalysis lifePath={lifePath} isVisible={isVisible} />
       <CompatibilityChart lifePath={lifePath} isVisible={isVisible} />
       <LoveCompatibility lifePathNumber={lifePath} />
       <OccupationGuidance lifePath={lifePath} isVisible={isVisible} />
