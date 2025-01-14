@@ -57,7 +57,7 @@ const CollectInfoPreview = () => {
             <div className="px-4 py-1.5 rounded-full bg-gradient-to-r from-violet-500/80 to-fuchsia-500/80 backdrop-blur-sm border border-white/30 shadow-lg shadow-purple-500/20">
               <p className="text-xs font-semibold text-white flex items-center gap-1">
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                On average, 2500 words
+                On average, 3500 words
               </p>
             </div>
             {/* Shine effect */}
