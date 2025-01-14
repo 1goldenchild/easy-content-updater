@@ -37,6 +37,22 @@ const blogPosts = [
     readTime: "8 min read",
     mainImage: "/lovable-uploads/a15fb902-5972-4403-b638-89b8760626e1.png",
     slug: "china-numerology"
+  },
+  {
+    title: "The Power of Numbers: How Steve Jobs Used Numerology to Build Apple",
+    description: "An in-depth look at how Steve Jobs utilized numerological principles in product launches, pricing strategies, and major business decisions at Apple.",
+    date: "March 27, 2024",
+    readTime: "9 min read",
+    mainImage: "/lovable-uploads/73da4848-4fc6-412c-b1a9-0efc609335e3.png",
+    slug: "steve-jobs-numerology"
+  },
+  {
+    title: "Tesla's Secret Numbers: Nikola Tesla's Obsession with 3, 6, and 9",
+    description: "Explore how Nikola Tesla's fascination with these specific numbers influenced his inventions and theories about the universe's mathematical nature.",
+    date: "March 26, 2024",
+    readTime: "7 min read",
+    mainImage: "/lovable-uploads/69e9446c-9b3d-44b9-87f5-db9647e25dcf.png",
+    slug: "tesla-numerology"
   }
 ];
 
