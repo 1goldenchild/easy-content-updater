@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import PhoneShowcase from "@/components/home/PhoneShowcase";
 import CollectInfoForm from "@/components/collect-info/CollectInfoForm";
+import CollectInfoPreview from "@/components/collect-info/CollectInfoPreview";
 
 const CollectInfo = () => {
   return (
@@ -33,9 +33,7 @@ const CollectInfo = () => {
             transition={{ delay: 0.2 }}
             className="hidden lg:block sticky top-8"
           >
-            <div className="relative z-10 min-h-[600px]">
-              <PhoneShowcase />
-            </div>
+            <CollectInfoPreview />
           </motion.div>
         </div>
       </div>
