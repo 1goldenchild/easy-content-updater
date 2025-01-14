@@ -15,6 +15,8 @@ import CycleSection from "./phone/sections/CycleSection";
 import EnergySection from "./phone/sections/EnergySection";
 import SecretSection from "./phone/sections/SecretSection";
 import ColorCompatibility from "@/components/numerology/ColorCompatibility";
+import CrystalAnalysis from "@/components/numerology/CrystalAnalysis";
+import HousingAnalysis from "@/components/numerology/HousingAnalysis";
 
 const PhoneShowcase = () => {
   const [activeSection, setActiveSection] = useState("lifepath");
@@ -30,6 +32,7 @@ const PhoneShowcase = () => {
   // For demo purposes, using a hardcoded life path number and date
   const lifePathNumber = 1;
   const demoDate = new Date(2000, 0, 1); // January 1, 2000
+  const chineseZodiac = "Goat"; // Demo value
 
   return (
     <PhoneFrame activeSection={activeSection} onSectionChange={scrollToSection}>
@@ -40,6 +43,8 @@ const PhoneShowcase = () => {
         <CompatibilitySection />
         <CareerPaths />
         <ColorCompatibility lifePath={lifePathNumber} isVisible={true} />
+        <CrystalAnalysis lifePath={lifePathNumber} isVisible={true} />
+        <HousingAnalysis chineseZodiac={chineseZodiac} isVisible={true} />
         <CycleSection dateOfBirth={demoDate} />
         <EnergySection />
         <SecretSection />
