@@ -64,7 +64,7 @@ export const calculateLifePath = (date: Date): number => {
   return lifePath;
 };
 
-// Calculate Partial Energy from day of birth - NEW IMPLEMENTATION
+// Calculate Partial Energy from day of birth
 export const calculatePartialEnergy = (day: number): number => {
   console.log(`Calculating partial energy for day: ${day}`);
 
@@ -92,7 +92,7 @@ export const calculatePartialEnergy = (day: number): number => {
   return reducedNumber;
 };
 
-// Calculate Secret Number from date - NEW IMPLEMENTATION
+// Calculate Secret Number from date
 export const calculateSecretNumber = (date: Date): number => {
   // Calculate the day of the year (1-366)
   const start = new Date(date.getFullYear(), 0, 0);
@@ -129,6 +129,31 @@ export const calculateSecretNumber = (date: Date): number => {
   
   console.log(`Final secret number: ${result}`);
   return result;
+};
+
+// Calculate Cycle Number from date of birth and current year
+export const calculateCycleNumber = (date: Date): number => {
+  const day = date.getDate();
+  const month = date.getMonth() + 1; // Months are 0-indexed in JavaScript
+  const currentYear = new Date().getFullYear();
+  
+  console.log(`Calculating cycle number for birth date ${month}/${day} in year ${currentYear}`);
+  
+  // Convert day, month, and current year to string and concatenate
+  const cycleString = `${day}${month}${currentYear}`;
+  console.log(`Cycle string: ${cycleString}`);
+  
+  // Sum all digits
+  let cycleNumber = sumIndividualDigits(cycleString);
+  
+  // Reduce to single digit if necessary
+  while (cycleNumber > 9) {
+    console.log(`Reducing cycle number ${cycleNumber} further`);
+    cycleNumber = sumIndividualDigits(cycleNumber.toString());
+  }
+  
+  console.log(`Final cycle number: ${cycleNumber}`);
+  return cycleNumber;
 };
 
 // Calculate Chinese Zodiac sign from year
