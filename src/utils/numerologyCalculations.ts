@@ -143,12 +143,16 @@ export const calculateSecretNumber = (date: Date): number => {
     return 11;
   }
 
-  // For all other days, reduce to single digit
-  let result = dayOfYear;
-  while (result > 9) {
+  // For all other days, use the day of month directly
+  const dayOfMonth = date.getDate();
+  let result = dayOfMonth;
+  
+  // If it's a double digit, reduce to single digit
+  while (result > 9 && !MASTER_NUMBERS.includes(result)) {
     result = sumIndividualDigits(result.toString());
   }
   
+  console.log(`Using day of month: ${dayOfMonth}`);
   console.log(`Final secret number: ${result}`);
   return result;
 };
