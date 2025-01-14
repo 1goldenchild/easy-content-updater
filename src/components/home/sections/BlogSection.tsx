@@ -37,12 +37,28 @@ const blogPosts = [
     readTime: "8 min read",
     mainImage: "/lovable-uploads/a15fb902-5972-4403-b638-89b8760626e1.png",
     slug: "china-numerology"
+  },
+  {
+    title: "The Hidden Numerology Behind Taylor Swift's Success",
+    description: "Uncover how Taylor Swift's birth numbers and strategic use of numerology have contributed to her unprecedented success in the music industry.",
+    date: "March 27, 2024",
+    readTime: "9 min read",
+    mainImage: "/lovable-uploads/73da4848-4fc6-412c-b1a9-0efc609335e3.png",
+    slug: "taylor-swift-numerology"
+  },
+  {
+    title: "Elon Musk's Numerological Blueprint: The Science Behind His Ventures",
+    description: "Explore how Elon Musk's life path number and personal year cycles align with his major business decisions and technological breakthroughs.",
+    date: "March 26, 2024",
+    readTime: "11 min read",
+    mainImage: "/lovable-uploads/69e9446c-9b3d-44b9-87f5-db9647e25dcf.png",
+    slug: "elon-musk-numerology"
   }
 ];
 
 const BlogSection = () => {
   const isMobile = useIsMobile();
-  const visiblePosts = isMobile ? blogPosts.slice(0, 3) : blogPosts.slice(0, 6);
+  const visiblePosts = isMobile ? blogPosts.slice(0, 3) : blogPosts;
   const hasMorePosts = blogPosts.length > visiblePosts.length;
 
   return (
