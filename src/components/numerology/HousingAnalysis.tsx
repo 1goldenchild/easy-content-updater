@@ -63,14 +63,14 @@ const HousingAnalysis = ({ chineseZodiac, isVisible }: HousingAnalysisProps) => 
     >
       <h2 className="text-2xl font-semibold flex items-center gap-2">
         <Home className="w-6 h-6" />
-        Housing Years Analysis
+        Energetic Properties of Houses
       </h2>
       
       <div className="grid md:grid-cols-2 gap-6">
         <div className="space-y-4">
           <h3 className="text-lg font-medium text-green-400 flex items-center gap-2">
             <Home className="w-5 h-5" />
-            Best Years for Housing
+            Best Years
           </h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {goodYears.map(({ year }) => (
