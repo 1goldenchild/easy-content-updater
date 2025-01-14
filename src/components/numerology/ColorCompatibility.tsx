@@ -13,47 +13,47 @@ const ColorCompatibility = ({ lifePath, isVisible }: ColorCompatibilityProps) =>
   const getColorRecommendations = (lifePath: number) => {
     const recommendations = {
       1: {
-        color: "#40E0D0", // Turquoise
+        colors: ["#40E0D0"], // Turquoise
         description: "Turquoise enhances your natural leadership energy and brings balance"
       },
       3: {
-        color: "#FFA500", // Orange
+        colors: ["#FFA500"], // Orange
         description: "Orange amplifies your creative expression and communication abilities"
       },
       4: {
-        color: "#4CAF50", // Green
+        colors: ["#4CAF50", "#0000FF", "#4B0082", "#C0C0C0", "#FFD700"], // Green, Blue, Indigo, Silver, White gold
         description: "Green, blue, indigo, silver, and white gold support your practical nature"
       },
       5: {
-        color: "#FF69B4", // Pink
+        colors: ["#FF69B4", "#FFB6C1"], // Pink, Rose gold
         description: "Pink and rose gold colors match your dynamic and adventurous spirit"
       },
       6: {
-        color: "#808080", // Gray
+        colors: ["#808080"], // Gray
         description: "Gray tones enhance your nurturing and balanced nature"
       },
       7: {
-        color: "#800080", // Purple
+        colors: ["#800080"], // Purple
         description: "Purple deepens your mystical and analytical qualities"
       },
       8: {
-        color: "#800080", // Purple
+        colors: ["#800080"], // Purple
         description: "Purple amplifies your power and success energy"
       },
       9: {
-        color: "#FF0000", // Red
+        colors: ["#FF0000", "#800080", "#8B4513", "#E6E6FA"], // Red, Purple, Brown, Lavender
         description: "Red, purple, brown, and lavender enhance your humanitarian nature"
       },
       11: {
-        color: "#FFD700", // Gold
+        colors: ["#FFD700", "#FFFFFF", "#000000", "#FFD700"], // Yellow, White, Black, Gold
         description: "Yellow, white, black, and gold amplify your intuitive powers"
       },
       22: {
-        color: "#4B0082", // Universal - represented as deep indigo
+        colors: ["#4B0082"], // Universal - represented as deep indigo
         description: "Universal colors support your master builder abilities"
       },
       33: {
-        color: "#FFA500", // Orange
+        colors: ["#FFA500"], // Orange
         description: "Orange enhances your spiritual teaching abilities"
       }
     };
@@ -88,19 +88,23 @@ const ColorCompatibility = ({ lifePath, isVisible }: ColorCompatibilityProps) =>
             {colors.description}
           </p>
 
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="p-4 rounded-lg bg-black/20 border border-white/5 flex flex-col items-center gap-2"
-          >
-            <div 
-              className="w-8 h-8 rounded-full ring-2 ring-white/10 shadow-lg" 
-              style={{ backgroundColor: colors.color }} 
-            />
-            <div className="text-center">
-              <p className="text-xs font-medium text-white/80">Primary</p>
-              <p className="text-[10px] text-white/50 font-mono">{colors.color}</p>
-            </div>
-          </motion.div>
+          <div className="grid grid-cols-3 gap-3">
+            {colors.colors.map((color, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.02 }}
+                className="p-4 rounded-lg bg-black/20 border border-white/5 flex flex-col items-center gap-2"
+              >
+                <div 
+                  className="w-8 h-8 rounded-full ring-2 ring-white/10 shadow-lg" 
+                  style={{ backgroundColor: color }} 
+                />
+                <div className="text-center">
+                  <p className="text-[10px] text-white/50 font-mono">{color}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </motion.div>
