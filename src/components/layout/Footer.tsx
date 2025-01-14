@@ -37,16 +37,36 @@ const Footer = () => {
               Quick Links
             </h4>
             <nav className="flex flex-col space-y-2">
-              <Link to="/collect-info" className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors">
+              <Link 
+                to="/numerology/analysis" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors"
+              >
                 Analysis
               </Link>
-              <Link to="/blog" className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors">
+              <Link 
+                to="/blog" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors"
+              >
                 Blog
               </Link>
-              <Link to="/support" className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors">
+              <Link 
+                to="/support" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors"
+              >
                 Support
               </Link>
-              <Link to="/portal" className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors">
+              <Link 
+                to="/portal" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors"
+              >
                 Portal
               </Link>
             </nav>

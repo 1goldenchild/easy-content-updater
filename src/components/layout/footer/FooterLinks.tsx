@@ -7,20 +7,35 @@ const FooterLinks = () => {
         Legal
       </h4>
       <nav className="flex flex-col space-y-2">
-        <Link to="/terms" className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors">
+        <Link 
+          to="/terms" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors"
+        >
           Terms & Conditions
         </Link>
-        <Link to="/privacy" className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors">
+        <Link 
+          to="/privacy" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors"
+        >
           Privacy Policy
         </Link>
-        <Link to="/refund" className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors">
+        <Link 
+          to="/refund" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors"
+        >
           Refund Policy
         </Link>
         <a 
           href="/sitemap.xml" 
-          className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors"
-          target="_blank"
+          target="_blank" 
           rel="noopener noreferrer"
+          className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors"
         >
           Sitemap
         </a>
