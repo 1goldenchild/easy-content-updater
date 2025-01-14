@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Gem } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { crystalsByLifePath } from "./data/crystalData";
 
 interface CrystalAnalysisProps {
@@ -28,12 +27,30 @@ const CrystalAnalysis = ({ lifePath, isVisible }: CrystalAnalysisProps) => {
         </h2>
       </div>
 
-      <Button 
-        variant="outline" 
-        className="w-full bg-purple-500/20 border-purple-500/30 text-purple-200 hover:bg-purple-500/30"
-      >
-        Read More
-      </Button>
+      <div className="space-y-4">
+        <div className="space-y-2">
+          <h3 className="text-lg font-medium text-purple-200">Primary Crystals:</h3>
+          <ul className="list-disc pl-5 text-purple-100">
+            {crystalInfo.primary.map((crystal, index) => (
+              <li key={index}>{crystal}</li>
+            ))}
+          </ul>
+        </div>
+        
+        <div className="text-sm text-purple-200">
+          <p>{crystalInfo.description}</p>
+        </div>
+
+        <div className="space-y-2">
+          <h3 className="text-lg font-medium text-purple-200">Crystal Benefits:</h3>
+          <ul className="list-disc pl-5 text-sm space-y-1 text-purple-100">
+            <li>Enhanced energy alignment</li>
+            <li>Spiritual protection</li>
+            <li>Mental clarity and focus</li>
+            <li>Emotional balance</li>
+          </ul>
+        </div>
+      </div>
     </motion.div>
   );
 };

@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Home } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 interface HousingAnalysisProps {
   chineseZodiac: string;
@@ -42,12 +41,23 @@ const HousingAnalysis = ({ chineseZodiac, isVisible }: HousingAnalysisProps) => 
         </h2>
       </div>
 
-      <Button 
-        variant="outline" 
-        className="w-full bg-purple-500/20 border-purple-500/30 text-purple-200 hover:bg-purple-500/30"
-      >
-        Read More
-      </Button>
+      <div className="text-left space-y-4">
+        <p className="text-purple-200">
+          Based on your Chinese zodiac sign ({chineseZodiac}), here are insights about your ideal living space:
+        </p>
+        <p className="text-sm leading-relaxed text-purple-100">
+          {getHousingAnalysis(chineseZodiac)}
+        </p>
+        <div className="space-y-2">
+          <h3 className="font-medium text-purple-200">General Housing Tips:</h3>
+          <ul className="list-disc pl-5 text-sm space-y-1 text-purple-100">
+            <li>Consider the direction your main door faces</li>
+            <li>Pay attention to the flow of natural light</li>
+            <li>Balance the five elements in your living space</li>
+            <li>Create harmony between work and rest areas</li>
+          </ul>
+        </div>
+      </div>
     </motion.div>
   );
 };
