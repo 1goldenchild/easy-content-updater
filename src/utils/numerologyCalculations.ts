@@ -64,13 +64,52 @@ export const calculateLifePath = (date: Date): number => {
   return lifePath;
 };
 
-// Calculate Partial Energy from day of birth
+// Calculate Partial Energy from day of birth - NEW IMPLEMENTATION
 export const calculatePartialEnergy = (day: number): number => {
-  // Simply reduce the day to a single digit, no master number check
-  let result = day;
+  console.log(`Calculating partial energy for day: ${day}`);
+
+  // Handle single digit days (1-9)
+  if (day <= 9) {
+    console.log(`Single digit day ${day}, returning as is`);
+    return day;
+  }
+
+  // Handle special cases for partial energy 11
+  if (day === 11 || day === 20 || day === 29) {
+    console.log(`Special day ${day}, returning partial energy 11`);
+    return 11;
+  }
+
+  // Handle special case for partial energy 22
+  if (day === 22) {
+    console.log(`Special day ${day}, returning partial energy 22`);
+    return 22;
+  }
+
+  // For all other double digit days, reduce to single digit
+  const reducedNumber = sumIndividualDigits(day.toString());
+  console.log(`Reduced day ${day} to partial energy ${reducedNumber}`);
+  return reducedNumber;
+};
+
+// Calculate Secret Number from date
+export const calculateSecretNumber = (date: Date): number => {
+  // Calculate the day of the year (1-366)
+  const start = new Date(date.getFullYear(), 0, 0);
+  const diff = date.getTime() - start.getTime();
+  const oneDay = 1000 * 60 * 60 * 24;
+  const dayOfYear = Math.floor(diff / oneDay);
+
+  console.log(`Date: ${date.toDateString()}`);
+  console.log(`Day of year: ${dayOfYear}`);
+
+  // Simply reduce to single digit, no special cases
+  let result = dayOfYear;
   while (result > 9) {
     result = sumIndividualDigits(result.toString());
   }
+  
+  console.log(`Final secret number: ${result}`);
   return result;
 };
 
@@ -127,25 +166,4 @@ export const getChineseZodiac = (year: number): string => {
   
   console.log(`Calculated zodiac sign for year ${year}: ${zodiacSign}`);
   return zodiacSign;
-};
-
-// Calculate Secret Number from date
-export const calculateSecretNumber = (date: Date): number => {
-  // Calculate the day of the year (1-366)
-  const start = new Date(date.getFullYear(), 0, 0);
-  const diff = date.getTime() - start.getTime();
-  const oneDay = 1000 * 60 * 60 * 24;
-  const dayOfYear = Math.floor(diff / oneDay);
-
-  console.log(`Date: ${date.toDateString()}`);
-  console.log(`Day of year: ${dayOfYear}`);
-
-  // Simply reduce to single digit, no special cases
-  let result = dayOfYear;
-  while (result > 9) {
-    result = sumIndividualDigits(result.toString());
-  }
-  
-  console.log(`Final secret number: ${result}`);
-  return result;
 };
