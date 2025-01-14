@@ -24,9 +24,40 @@ const EnergyAnalysis = ({ isVisible }: EnergyAnalysisProps) => {
             </div>
             
             <div className="prose prose-invert max-w-none">
-              <p className="text-white/70 text-lg">
-                Your 2025 Energy analysis will appear here. This section will reveal how the universal energy of 2025 will influence your personal journey and growth.
+              <h4 className="text-xl font-semibold text-white/90 mb-4">Universal Year 2025: A Universal 9 Year</h4>
+              
+              <p className="text-white/70 mb-6">
+                2025 is a Universal 9 Year — a time of completion, transformation, and spiritual growth. 
+                This year invites us to wrap up old chapters, heal emotional wounds, and release what no longer serves us.
               </p>
+
+              <div className="space-y-6">
+                <div>
+                  <h5 className="text-lg font-semibold text-white/90 mb-2">Endings & New Beginnings</h5>
+                  <p className="text-white/70">
+                    The 9 is about closure. Situations, relationships, or projects that have reached their end 
+                    will naturally fall away. It's a year to reflect, let go, and honor the past.
+                  </p>
+                </div>
+
+                <div>
+                  <h5 className="text-lg font-semibold text-white/90 mb-2">Healing & Transformation</h5>
+                  <p className="text-white/70">
+                    Focus on personal healing and spiritual growth. It's a time to forgive, release emotional 
+                    baggage, and create space for new beginnings.
+                  </p>
+                </div>
+
+                <div>
+                  <h5 className="text-lg font-semibold text-white/90 mb-2">Ego Work</h5>
+                  <p className="text-white/70">
+                    The 9 year calls for introspection on the ego. You may be asked to face your pride, 
+                    arrogance, or self-centeredness. This is a great year to shed the excess baggage of 
+                    the ego and align more with your higher self. Let go of any illusions of control, as 
+                    this year will challenge you to release the need for external validation.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </ScrollArea>
