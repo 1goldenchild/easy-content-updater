@@ -41,6 +41,13 @@ const Checkout = () => {
     return total
   }
 
+  const handleSubmit = async (e: React.FormEvent, paymentMethod: string): Promise<void> => {
+    e.preventDefault()
+    console.log('Demo checkout - no payment processing')
+    toast.success("This is a demo checkout - no payment will be processed")
+    return Promise.resolve()
+  }
+
   return (
     <div className="min-h-screen bg-[#1A1F2C] py-8 px-4">
       <div className="max-w-5xl mx-auto">
@@ -110,10 +117,7 @@ const Checkout = () => {
               <h2 className="text-lg font-semibold mb-4 text-gray-200">PAYMENT INFORMATION</h2>
               <Elements stripe={stripePromise}>
                 <StripeElements
-                  onSubmit={(e) => {
-                    e.preventDefault()
-                    toast.success("This is a demo checkout - no payment will be processed")
-                  }}
+                  onSubmit={handleSubmit}
                   isProcessing={isProcessing}
                 />
               </Elements>
