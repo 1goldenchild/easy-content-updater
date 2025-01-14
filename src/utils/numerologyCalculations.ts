@@ -92,7 +92,7 @@ export const calculatePartialEnergy = (day: number): number => {
   return reducedNumber;
 };
 
-// Calculate Secret Number from date
+// Calculate Secret Number from date - NEW IMPLEMENTATION
 export const calculateSecretNumber = (date: Date): number => {
   // Calculate the day of the year (1-366)
   const start = new Date(date.getFullYear(), 0, 0);
@@ -103,7 +103,25 @@ export const calculateSecretNumber = (date: Date): number => {
   console.log(`Date: ${date.toDateString()}`);
   console.log(`Day of year: ${dayOfYear}`);
 
-  // Simply reduce to single digit, no special cases
+  // Check for special number 33
+  if ([33, 303, 330, 333].includes(dayOfYear)) {
+    console.log(`Day ${dayOfYear} is a special day, returning secret number 33`);
+    return 33;
+  }
+
+  // Check for special number 22
+  if ([22, 202, 220, 222].includes(dayOfYear)) {
+    console.log(`Day ${dayOfYear} is a special day, returning secret number 22`);
+    return 22;
+  }
+
+  // Check for special number 11
+  if ([11, 101, 110, 111].includes(dayOfYear)) {
+    console.log(`Day ${dayOfYear} is a special day, returning secret number 11`);
+    return 11;
+  }
+
+  // For all other days, reduce to single digit
   let result = dayOfYear;
   while (result > 9) {
     result = sumIndividualDigits(result.toString());
