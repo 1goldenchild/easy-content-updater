@@ -1,12 +1,17 @@
 import { motion } from "framer-motion";
 import { Home, ThumbsUp, ThumbsDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 interface HousingAnalysisProps {
   chineseZodiac: string;
   isVisible: boolean;
+  isPreview?: boolean;
 }
 
-const HousingAnalysis = ({ chineseZodiac, isVisible }: HousingAnalysisProps) => {
+const HousingAnalysis = ({ chineseZodiac, isVisible, isPreview = false }: HousingAnalysisProps) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  
   if (!isVisible) return null;
 
   const getHousingAnalysis = (zodiac: string) => {
@@ -85,6 +90,65 @@ const HousingAnalysis = ({ chineseZodiac, isVisible }: HousingAnalysisProps) => 
 
   const compatibility = getCompatibleYears(chineseZodiac);
 
+  const Content = () => (
+    <div className="text-left space-y-4">
+      <p className="text-purple-200">
+        Based on your Chinese zodiac sign ({chineseZodiac}), here are insights about your ideal living space:
+      </p>
+      <p className="text-sm leading-relaxed text-purple-100">
+        {getHousingAnalysis(chineseZodiac)}
+      </p>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+        {/* Good Years */}
+        <div className="space-y-3">
+          <div className="flex items-center gap-2">
+            <ThumbsUp className="w-5 h-5 text-green-400" />
+            <h3 className="font-medium text-purple-200">Good Years for Housing Changes</h3>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            {compatibility.good.map((year) => (
+              <div
+                key={year}
+                className="bg-green-500/10 border border-green-500/20 rounded-lg p-2 text-center"
+              >
+                <span className="text-green-300 font-medium">{year}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Challenging Years */}
+        <div className="space-y-3">
+          <div className="flex items-center gap-2">
+            <ThumbsDown className="w-5 h-5 text-red-400" />
+            <h3 className="font-medium text-purple-200">Challenging Years</h3>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            {compatibility.challenging.map((year) => (
+              <div
+                key={year}
+                className="bg-red-500/10 border border-red-500/20 rounded-lg p-2 text-center"
+              >
+                <span className="text-red-300 font-medium">{year}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="space-y-2 mt-6">
+        <h3 className="font-medium text-purple-200">General Housing Tips:</h3>
+        <ul className="list-disc pl-5 text-sm space-y-1 text-purple-100">
+          <li>Consider the direction your main door faces</li>
+          <li>Pay attention to the flow of natural light</li>
+          <li>Balance the five elements in your living space</li>
+          <li>Create harmony between work and rest areas</li>
+        </ul>
+      </div>
+    </div>
+  );
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -98,62 +162,20 @@ const HousingAnalysis = ({ chineseZodiac, isVisible }: HousingAnalysisProps) => 
         </h2>
       </div>
 
-      <div className="text-left space-y-4">
-        <p className="text-purple-200">
-          Based on your Chinese zodiac sign ({chineseZodiac}), here are insights about your ideal living space:
-        </p>
-        <p className="text-sm leading-relaxed text-purple-100">
-          {getHousingAnalysis(chineseZodiac)}
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-          {/* Good Years */}
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <ThumbsUp className="w-5 h-5 text-green-400" />
-              <h3 className="font-medium text-purple-200">Good Years for Housing Changes</h3>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              {compatibility.good.map((year) => (
-                <div
-                  key={year}
-                  className="bg-green-500/10 border border-green-500/20 rounded-lg p-2 text-center"
-                >
-                  <span className="text-green-300 font-medium">{year}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Challenging Years */}
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <ThumbsDown className="w-5 h-5 text-red-400" />
-              <h3 className="font-medium text-purple-200">Challenging Years</h3>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              {compatibility.challenging.map((year) => (
-                <div
-                  key={year}
-                  className="bg-red-500/10 border border-red-500/20 rounded-lg p-2 text-center"
-                >
-                  <span className="text-red-300 font-medium">{year}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="space-y-2 mt-6">
-          <h3 className="font-medium text-purple-200">General Housing Tips:</h3>
-          <ul className="list-disc pl-5 text-sm space-y-1 text-purple-100">
-            <li>Consider the direction your main door faces</li>
-            <li>Pay attention to the flow of natural light</li>
-            <li>Balance the five elements in your living space</li>
-            <li>Create harmony between work and rest areas</li>
-          </ul>
-        </div>
-      </div>
+      {isPreview ? (
+        isExpanded ? (
+          <Content />
+        ) : (
+          <Button
+            onClick={() => setIsExpanded(true)}
+            className="w-full bg-purple-500/20 hover:bg-purple-500/30 text-purple-100"
+          >
+            Read More
+          </Button>
+        )
+      ) : (
+        <Content />
+      )}
     </motion.div>
   );
 };

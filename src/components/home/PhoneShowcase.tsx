@@ -44,7 +44,7 @@ const PhoneShowcase = () => {
         <CareerPaths />
         <ColorCompatibility lifePath={lifePathNumber} isVisible={true} />
         <CrystalAnalysis lifePath={lifePathNumber} isVisible={true} />
-        <HousingAnalysis chineseZodiac={chineseZodiac} isVisible={true} />
+        <HousingAnalysis chineseZodiac={chineseZodiac} isVisible={true} isPreview={true} />
         <CycleSection dateOfBirth={demoDate} />
         <EnergySection />
         <SecretSection />

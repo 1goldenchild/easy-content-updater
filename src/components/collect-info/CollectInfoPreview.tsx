@@ -64,7 +64,7 @@ const CollectInfoPreview = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shine rounded-full" />
           </motion.div>
         </motion.div>
-
+        
         {/* Screen Content */}
         <div className="absolute inset-0 z-10 overflow-y-auto scrollbar-hide">
           <div className="pt-32 pb-12 px-4 space-y-6">
@@ -73,7 +73,7 @@ const CollectInfoPreview = () => {
             <CareerPaths />
             <ColorCompatibility lifePath={lifePathNumber} isVisible={true} />
             <CrystalAnalysis lifePath={lifePathNumber} isVisible={true} />
-            <HousingAnalysis chineseZodiac={chineseZodiac} isVisible={true} />
+            <HousingAnalysis chineseZodiac={chineseZodiac} isVisible={true} isPreview={true} />
             <CycleSection dateOfBirth={demoDate} />
             <EnergySection />
             <SecretSection />
