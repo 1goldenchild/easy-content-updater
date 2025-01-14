@@ -67,36 +67,46 @@ const Portal = () => {
               />
             )}
             
-            {/* eBooks Section */}
-            <div className="mt-16 p-8 rounded-lg bg-gradient-to-r from-[#2A2F3C] to-[#221F26] border border-[#FFD700]/20 relative overflow-hidden shadow-[0_0_15px_rgba(255,215,0,0.15)]">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FFD700]/10 to-transparent animate-shine"></div>
-              
-              <h2 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-[#FFD700] to-[#FDB931] bg-clip-text text-transparent animate-text-shimmer">
-                Offered Numerology eBooks
-              </h2>
-              
-              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <a 
-                  href="https://numerology33.com/portal"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#3A3F4C] to-[#2A2F3C] hover:from-[#FFD700]/20 hover:to-[#FDB931]/20 transition-all duration-300 text-white/90 hover:text-[#FFD700] flex items-center gap-2 group border border-[#FFD700]/20 hover:border-[#FFD700]/40"
-                >
-                  <span className="text-lg">📚</span>
-                  The Golden Numerology eBook
-                </a>
+            {/* eBooks Section - Only show after results */}
+            {showResults && (
+              <div className="mt-16 p-8 rounded-lg bg-gradient-to-r from-[#2A2F3C] to-[#221F26] border border-[#FFD700]/20 relative overflow-hidden shadow-[0_0_15px_rgba(255,215,0,0.15)]">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FFD700]/10 to-transparent animate-shine"></div>
                 
-                <a 
-                  href="https://d2saw6je89goi1.cloudfront.net/uploads/digital_asset/file/1195755/get-rich-using-numerology-ebook-2023-editon.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#3A3F4C] to-[#2A2F3C] hover:from-[#FFD700]/20 hover:to-[#FDB931]/20 transition-all duration-300 text-white/90 hover:text-[#FFD700] flex items-center gap-2 group border border-[#FFD700]/20 hover:border-[#FFD700]/40"
-                >
-                  <span className="text-lg">💰</span>
-                  Get Rich Using Numerology
-                </a>
+                <h2 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-[#FFD700] to-[#FDB931] bg-clip-text text-transparent animate-text-shimmer">
+                  Offered Numerology eBooks
+                </h2>
+                
+                <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                  <a 
+                    href="https://numerology33.com/portal"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#3A3F4C] to-[#2A2F3C] hover:from-[#FFD700]/20 hover:to-[#FDB931]/20 transition-all duration-300 text-white/90 hover:text-[#FFD700] flex items-center gap-2 group border border-[#FFD700]/20 hover:border-[#FFD700]/40"
+                    onClick={() => {
+                      console.log("Opening Golden Numerology eBook");
+                      window.open("https://numerology33.com/portal", "_blank");
+                    }}
+                  >
+                    <span className="text-lg">📚</span>
+                    The Golden Numerology eBook
+                  </a>
+                  
+                  <a 
+                    href="https://d2saw6je89goi1.cloudfront.net/uploads/digital_asset/file/1195755/get-rich-using-numerology-ebook-2023-editon.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#3A3F4C] to-[#2A2F3C] hover:from-[#FFD700]/20 hover:to-[#FDB931]/20 transition-all duration-300 text-white/90 hover:text-[#FFD700] flex items-center gap-2 group border border-[#FFD700]/20 hover:border-[#FFD700]/40"
+                    onClick={() => {
+                      console.log("Opening Get Rich Using Numerology eBook");
+                      window.open("https://d2saw6je89goi1.cloudfront.net/uploads/digital_asset/file/1195755/get-rich-using-numerology-ebook-2023-editon.pdf", "_blank");
+                    }}
+                  >
+                    <span className="text-lg">💰</span>
+                    Get Rich Using Numerology
+                  </a>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
