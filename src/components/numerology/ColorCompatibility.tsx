@@ -13,76 +13,70 @@ const ColorCompatibility = ({ lifePath, isVisible }: ColorCompatibilityProps) =>
   const getColorRecommendations = (lifePath: number) => {
     const recommendations = {
       1: {
-        primary: "#FF6B6B",
-        secondary: "#4ECDC4",
-        accent: "#FFE66D",
-        description: "Bold reds and vibrant yellows enhance your natural leadership energy"
-      },
-      2: {
-        primary: "#A8E6CF",
-        secondary: "#DCEDC1",
-        accent: "#FFD3B6",
-        description: "Soft blues and gentle greens promote your diplomatic nature"
+        primary: "#40E0D0", // Turquoise
+        secondary: "#30B0A0",
+        accent: "#50FFE0",
+        description: "Turquoise enhances your natural leadership energy and brings balance"
       },
       3: {
-        primary: "#FF9A8B",
-        secondary: "#FF6A88",
-        accent: "#FF99AC",
-        description: "Creative pinks and expressive corals amplify your artistic spirit"
+        primary: "#FFA500", // Orange
+        secondary: "#FF8C00",
+        accent: "#FFB732",
+        description: "Orange amplifies your creative expression and communication abilities"
       },
       4: {
-        primary: "#4A90E2",
-        secondary: "#5C6BC0",
-        accent: "#7986CB",
-        description: "Stable blues and grounding earth tones support your practical nature"
+        primary: "#4CAF50", // Green
+        secondary: "#1E90FF", // Blue
+        accent: "#C0C0C0", // Silver
+        description: "Green, blue, indigo, silver, and white gold support your practical nature"
       },
       5: {
-        primary: "#FF61D2",
-        secondary: "#FE90AF",
-        accent: "#FF9CEE",
-        description: "Dynamic purples and adventurous pinks match your free spirit"
+        primary: "#FF69B4", // Pink
+        secondary: "#FFB6C1", // Light pink
+        accent: "#DDA0DD", // Rose gold approximation
+        description: "Pink and rose gold colors match your dynamic and adventurous spirit"
       },
       6: {
-        primary: "#9B87F5",
-        secondary: "#7E69AB",
-        accent: "#D6BCFA",
-        description: "Nurturing purples and harmonious lavenders enhance your caring nature"
+        primary: "#808080", // Gray
+        secondary: "#A9A9A9",
+        accent: "#D3D3D3",
+        description: "Gray tones enhance your nurturing and balanced nature"
       },
       7: {
-        primary: "#2C3E50",
-        secondary: "#34495E",
-        accent: "#95A5A6",
-        description: "Deep indigos and mysterious navy blues deepen your analytical mind"
+        primary: "#800080", // Purple
+        secondary: "#9932CC",
+        accent: "#BA55D3",
+        description: "Purple deepens your mystical and analytical qualities"
       },
       8: {
-        primary: "#DAA520",
-        secondary: "#B8860B",
-        accent: "#FFD700",
-        description: "Rich golds and powerful deep purples amplify your success energy"
+        primary: "#800080", // Purple
+        secondary: "#9932CC",
+        accent: "#BA55D3",
+        description: "Purple amplifies your power and success energy"
       },
       9: {
-        primary: "#FF7F50",
-        secondary: "#FF6347",
-        accent: "#FFA07A",
-        description: "Universal coral and compassionate peach colors enhance your humanitarian nature"
+        primary: "#FF0000", // Red
+        secondary: "#800080", // Purple
+        accent: "#DDA0DD", // Lavender
+        description: "Red, purple, brown, and lavender enhance your humanitarian nature"
       },
       11: {
-        primary: "#E5DEFF",
-        secondary: "#D6BCFA",
-        accent: "#9B87F5",
-        description: "Spiritual whites and enlightening violets amplify your intuitive powers"
+        primary: "#FFD700", // Gold
+        secondary: "#FFFFFF", // White
+        accent: "#000000", // Black
+        description: "Yellow, white, black, and gold amplify your intuitive powers"
       },
       22: {
-        primary: "#FFD700",
-        secondary: "#FFA500",
-        accent: "#FF8C00",
-        description: "Masterful golds and powerful oranges support your visionary nature"
+        primary: "#4B0082", // Universal - represented as deep indigo
+        secondary: "#483D8B",
+        accent: "#6A5ACD",
+        description: "Universal colors support your master builder abilities"
       },
       33: {
-        primary: "#F0F8FF",
-        secondary: "#E6E6FA",
-        accent: "#B0E0E6",
-        description: "Pure whites and celestial blues enhance your spiritual teaching abilities"
+        primary: "#FFA500", // Orange
+        secondary: "#FF8C00",
+        accent: "#FFB732",
+        description: "Orange enhances your spiritual teaching abilities"
       }
     };
     return recommendations[lifePath as keyof typeof recommendations] || recommendations[9];
