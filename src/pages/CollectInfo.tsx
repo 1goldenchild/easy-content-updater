@@ -33,7 +33,7 @@ const CollectInfo = () => {
             transition={{ delay: 0.2 }}
             className="hidden lg:block sticky top-8"
           >
-            <div className="relative z-10">
+            <div className="relative z-10 h-full">
               <PhoneShowcase />
             </div>
           </motion.div>
