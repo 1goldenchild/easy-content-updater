@@ -2,7 +2,29 @@
 const MASTER_NUMBERS = [11, 22, 33];
 const NUMBERS_TO_ELEVEN = [20, 29, 38];
 
-// Sum all digits in a number individually (e.g., 29 becomes 2+9=11)
+// Calculate Lucky Number from date
+export const calculateLuckyNumber = (date: Date): number => {
+  const month = date.getMonth() + 1; // Months are 0-indexed in JavaScript
+  const year = date.getFullYear();
+  
+  console.log(`Calculating lucky number for date: ${date}`);
+  
+  // Get first digit of month
+  const firstDigitOfMonth = parseInt(month.toString()[0]);
+  
+  // Get last digit of year
+  const lastDigitOfYear = parseInt(year.toString().slice(-1));
+  
+  // Combine the digits
+  const luckyNumber = parseInt(`${firstDigitOfMonth}${lastDigitOfYear}`);
+  
+  console.log(`First digit of month (${month}): ${firstDigitOfMonth}`);
+  console.log(`Last digit of year (${year}): ${lastDigitOfYear}`);
+  console.log(`Lucky number: ${luckyNumber}`);
+  
+  return luckyNumber;
+};
+
 const sumIndividualDigits = (dateString: string): number => {
   // Convert the date string to an array of individual digits and sum them
   const sum = dateString

@@ -97,7 +97,7 @@ const NumerologyResults = ({
       <CycleAnalysis dateOfBirth={dateOfBirth} isVisible={isVisible} />
       <EnergyAnalysis isVisible={isVisible} />
       <SecretAnalysis secretNumber={secretNumber} isVisible={isVisible} />
-      <LuckyNumberAnalysis lifePath={lifePath} isVisible={isVisible} />
+      <LuckyNumberAnalysis dateOfBirth={dateOfBirth} isVisible={isVisible} />
       <CompatibilityChart lifePath={lifePath} isVisible={isVisible} />
       <LoveCompatibility lifePathNumber={lifePath} />
       <OccupationGuidance lifePath={lifePath} isVisible={isVisible} />

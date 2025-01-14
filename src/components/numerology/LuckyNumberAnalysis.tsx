@@ -1,26 +1,17 @@
 import { motion } from "framer-motion";
 import { Clover } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { calculateLuckyNumber } from "@/utils/numerologyCalculations";
 
 interface LuckyNumberAnalysisProps {
-  lifePath: number;
+  dateOfBirth: Date;
   isVisible: boolean;
 }
 
-const LuckyNumberAnalysis = ({ lifePath, isVisible }: LuckyNumberAnalysisProps) => {
+const LuckyNumberAnalysis = ({ dateOfBirth, isVisible }: LuckyNumberAnalysisProps) => {
   if (!isVisible) return null;
 
-  // Calculate lucky number based on life path
-  const getLuckyNumber = (lifePath: number): number => {
-    // Simple algorithm: multiply life path by 3 and reduce to single digit
-    let lucky = lifePath * 3;
-    while (lucky > 9) {
-      lucky = lucky.toString().split('').reduce((acc, digit) => acc + parseInt(digit), 0);
-    }
-    return lucky;
-  };
-
-  const luckyNumber = getLuckyNumber(lifePath);
+  const luckyNumber = calculateLuckyNumber(dateOfBirth);
 
   return (
     <motion.div 
