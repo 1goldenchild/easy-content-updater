@@ -127,33 +127,29 @@ export const calculateSecretNumber = (date: Date): number => {
 
   // Check for special number 33
   if ([33, 303, 330, 333].includes(dayOfYear)) {
-    console.log(`Day ${dayOfYear} is a special day, returning secret number 33`);
+    console.log(`Day ${dayOfYear} maps to special number 33`);
     return 33;
   }
 
   // Check for special number 22
   if ([22, 202, 220, 222].includes(dayOfYear)) {
-    console.log(`Day ${dayOfYear} is a special day, returning secret number 22`);
+    console.log(`Day ${dayOfYear} maps to special number 22`);
     return 22;
   }
 
   // Check for special number 11
   if ([11, 101, 110, 111].includes(dayOfYear)) {
-    console.log(`Day ${dayOfYear} is a special day, returning secret number 11`);
+    console.log(`Day ${dayOfYear} maps to special number 11`);
     return 11;
   }
 
-  // For all other days, use the day of month directly
-  const dayOfMonth = date.getDate();
-  let result = dayOfMonth;
-  
-  // If it's a double digit, reduce to single digit
-  while (result > 9 && !MASTER_NUMBERS.includes(result)) {
+  // For all other days, reduce the day of year to a single digit
+  let result = dayOfYear;
+  while (result > 9) {
     result = sumIndividualDigits(result.toString());
+    console.log(`Reduced ${dayOfYear} to ${result}`);
   }
   
-  console.log(`Using day of month: ${dayOfMonth}`);
-  console.log(`Final secret number: ${result}`);
   return result;
 };
 
