@@ -51,6 +51,12 @@ const Portal = () => {
     toast.success("Calculation complete!");
   };
 
+  const handleEbookClick = (url: string, name: string) => {
+    console.log(`Opening ${name}`);
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+    if (newWindow) newWindow.opener = null;
+  };
+
   return (
     <div className="min-h-screen w-full overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 py-8">
@@ -77,33 +83,27 @@ const Portal = () => {
                 </h2>
                 
                 <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                  <a 
-                    href="https://numerology33.com/portal"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button 
+                    onClick={() => handleEbookClick(
+                      "https://numerology33.com/portal",
+                      "Golden Numerology eBook"
+                    )}
                     className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#3A3F4C] to-[#2A2F3C] hover:from-[#FFD700]/20 hover:to-[#FDB931]/20 transition-all duration-300 text-white/90 hover:text-[#FFD700] flex items-center gap-2 group border border-[#FFD700]/20 hover:border-[#FFD700]/40"
-                    onClick={() => {
-                      console.log("Opening Golden Numerology eBook");
-                      window.open("https://numerology33.com/portal", "_blank");
-                    }}
                   >
                     <span className="text-lg">📚</span>
                     The Golden Numerology eBook
-                  </a>
+                  </button>
                   
-                  <a 
-                    href="https://d2saw6je89goi1.cloudfront.net/uploads/digital_asset/file/1195755/get-rich-using-numerology-ebook-2023-editon.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button 
+                    onClick={() => handleEbookClick(
+                      "https://d2saw6je89goi1.cloudfront.net/uploads/digital_asset/file/1195755/get-rich-using-numerology-ebook-2023-editon.pdf",
+                      "Get Rich Using Numerology eBook"
+                    )}
                     className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#3A3F4C] to-[#2A2F3C] hover:from-[#FFD700]/20 hover:to-[#FDB931]/20 transition-all duration-300 text-white/90 hover:text-[#FFD700] flex items-center gap-2 group border border-[#FFD700]/20 hover:border-[#FFD700]/40"
-                    onClick={() => {
-                      console.log("Opening Get Rich Using Numerology eBook");
-                      window.open("https://d2saw6je89goi1.cloudfront.net/uploads/digital_asset/file/1195755/get-rich-using-numerology-ebook-2023-editon.pdf", "_blank");
-                    }}
                   >
                     <span className="text-lg">💰</span>
                     Get Rich Using Numerology
-                  </a>
+                  </button>
                 </div>
               </div>
             )}
