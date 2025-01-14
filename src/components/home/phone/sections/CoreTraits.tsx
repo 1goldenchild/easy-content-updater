@@ -3,13 +3,13 @@ import { RadarChart, PolarGrid, PolarAngleAxis, Radar } from 'recharts';
 
 const CoreTraits = () => {
   const traits = [
-    { trait: "Intelligence", value: 2, number: "1" },
+    { trait: "Intelligence", value: 9, number: "1" },
     { trait: "Creativity", value: 5, number: "2" },
     { trait: "Leadership", value: 7, number: "3" },
     { trait: "Assertiveness", value: 7, number: "4" },
     { trait: "Receptiveness", value: 6, number: "5" },
     { trait: "Conscientiousness", value: 9, number: "6" },
-    { trait: "Financial Prosperity", value: 7, number: "7" }
+    { trait: "Financial Prosperity", value: 9, number: "7" }
   ];
 
   return (
