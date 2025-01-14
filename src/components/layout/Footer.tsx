@@ -38,7 +38,7 @@ const Footer = () => {
             </h4>
             <nav className="flex flex-col space-y-2">
               <Link to="/collect-info" className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors">
-                Get Reading
+                Analysis
               </Link>
               <Link to="/blog" className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors">
                 Blog
