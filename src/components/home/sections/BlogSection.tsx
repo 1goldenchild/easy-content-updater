@@ -35,7 +35,7 @@ const blogPosts = [
     description: "Explore how Rolex strategically uses numerology in their pricing, model numbers, and launch dates to maintain their status as the world's most prestigious watch brand.",
     date: "March 29, 2024",
     readTime: "8 min read",
-    mainImage: "/lovable-uploads/984813d9-700a-4057-a369-08ae4035507b.png",
+    mainImage: "/lovable-uploads/841cc51b-3942-436f-a692-be30a0b5b243.png",
     slug: "rolex-numerology"
   },
   {
