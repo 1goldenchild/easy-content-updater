@@ -26,12 +26,12 @@ const CollectInfo = () => {
             <CollectInfoForm />
           </div>
 
-          {/* Preview Section */}
+          {/* Preview Section - Now visible on all screens */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="hidden lg:block sticky top-8"
+            className="lg:sticky lg:top-8"
           >
             <CollectInfoPreview />
           </motion.div>
