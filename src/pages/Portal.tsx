@@ -51,10 +51,8 @@ const Portal = () => {
     toast.success("Calculation complete!");
   };
 
-  const handleEbookClick = (url: string, name: string) => {
-    console.log(`Opening ${name}`);
-    const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
-    if (newWindow) newWindow.opener = null;
+  const handleEbookDownload = (url: string) => {
+    window.open(url, '_blank');
   };
 
   return (
@@ -73,35 +71,26 @@ const Portal = () => {
               />
             )}
             
-            {/* eBooks Section - Only show after results */}
             {showResults && (
-              <div className="mt-16 p-8 rounded-lg bg-gradient-to-r from-[#2A2F3C] to-[#221F26] border border-[#FFD700]/20 relative overflow-hidden shadow-[0_0_15px_rgba(255,215,0,0.15)]">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FFD700]/10 to-transparent animate-shine"></div>
-                
-                <h2 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-[#FFD700] to-[#FDB931] bg-clip-text text-transparent animate-text-shimmer">
+              <div className="mt-16 p-8 rounded-lg bg-gradient-to-r from-[#2A2F3C] to-[#221F26] border border-[#FFD700]/20">
+                <h2 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-[#FFD700] to-[#FDB931] bg-clip-text text-transparent">
                   Offered Numerology eBooks
                 </h2>
                 
                 <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                   <button 
-                    onClick={() => handleEbookClick(
-                      "https://numerology33.com/portal",
-                      "Golden Numerology eBook"
-                    )}
-                    className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#3A3F4C] to-[#2A2F3C] hover:from-[#FFD700]/20 hover:to-[#FDB931]/20 transition-all duration-300 text-white/90 hover:text-[#FFD700] flex items-center gap-2 group border border-[#FFD700]/20 hover:border-[#FFD700]/40"
+                    onClick={() => handleEbookDownload("https://d2saw6je89goi1.cloudfront.net/uploads/digital_asset/file/1195754/the-golden-numerology-guide-2023-edition..pdf")}
+                    className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#3A3F4C] to-[#2A2F3C] hover:from-[#FFD700]/20 hover:to-[#FDB931]/20 transition-all duration-300 text-white/90 hover:text-[#FFD700] border border-[#FFD700]/20 hover:border-[#FFD700]/40 flex items-center gap-2"
                   >
-                    <span className="text-lg">📚</span>
-                    The Golden Numerology eBook
+                    <span>📚</span>
+                    The Golden Numerology Guide
                   </button>
                   
                   <button 
-                    onClick={() => handleEbookClick(
-                      "https://d2saw6je89goi1.cloudfront.net/uploads/digital_asset/file/1195755/get-rich-using-numerology-ebook-2023-editon.pdf",
-                      "Get Rich Using Numerology eBook"
-                    )}
-                    className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#3A3F4C] to-[#2A2F3C] hover:from-[#FFD700]/20 hover:to-[#FDB931]/20 transition-all duration-300 text-white/90 hover:text-[#FFD700] flex items-center gap-2 group border border-[#FFD700]/20 hover:border-[#FFD700]/40"
+                    onClick={() => handleEbookDownload("https://d2saw6je89goi1.cloudfront.net/uploads/digital_asset/file/1195755/get-rich-using-numerology-ebook-2023-editon.pdf")}
+                    className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#3A3F4C] to-[#2A2F3C] hover:from-[#FFD700]/20 hover:to-[#FDB931]/20 transition-all duration-300 text-white/90 hover:text-[#FFD700] border border-[#FFD700]/20 hover:border-[#FFD700]/40 flex items-center gap-2"
                   >
-                    <span className="text-lg">💰</span>
+                    <span>💰</span>
                     Get Rich Using Numerology
                   </button>
                 </div>
