@@ -28,8 +28,8 @@ const NumberSections = () => {
           <NumberSection
             id="partial"
             title="Partial Energy"
-            number="4"
-            subtitle="The Builder"
+            number="7"
+            subtitle="The Genius"
             gradientFrom="violet-400"
             gradientTo="purple-400"
           />
@@ -55,8 +55,8 @@ const NumberSections = () => {
           <NumberSection
             id="lucky"
             title="Lucky Number"
-            number="7"
-            subtitle="The Mystic"
+            number="13"
+            subtitle=""
             gradientFrom="cyan-500"
             gradientTo="purple-500"
           />

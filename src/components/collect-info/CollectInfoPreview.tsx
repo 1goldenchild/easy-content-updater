@@ -89,8 +89,6 @@ const CollectInfoPreview = () => {
         {/* Scroll Fade Overlays */}
         <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[#1A1F2C] to-transparent pointer-events-none z-20" />
         <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#1A1F2C] to-transparent pointer-events-none z-20" />
-
-        {/* Remove the decorative elements that were causing the weird color in the corner */}
       </motion.div>
     </div>
   );
