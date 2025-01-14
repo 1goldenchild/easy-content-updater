@@ -50,15 +50,9 @@ const LuckyNumberAnalysis = ({ dateOfBirth, isVisible }: LuckyNumberAnalysisProp
                 </div>
                 
                 <div className="prose prose-invert max-w-none">
-                  <p className="text-white/70 text-lg mb-4">
+                  <p className="text-white/70 text-lg">
                     This is your lucky number! It's the perfect number to use for any significant moment—whether it's choosing a wedding date, starting a business, buying a new car, or anything else that requires a little extra luck.
                   </p>
-                  <ul className="text-white/70 space-y-2">
-                    <li>Use this number when making important choices</li>
-                    <li>Look for this number in addresses, phone numbers, or dates</li>
-                    <li>Consider incorporating it into your daily routines</li>
-                    <li>Pay attention when you see this number repeatedly</li>
-                  </ul>
                 </div>
               </motion.div>
             </div>
