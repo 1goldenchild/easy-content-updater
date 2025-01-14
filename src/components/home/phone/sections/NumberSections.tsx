@@ -21,8 +21,8 @@ const NumberSections = () => {
             title="Life Path Number"
             number="8"
             subtitle="The Powerhouse"
-            gradientFrom="[#8B5CF6]"
-            gradientTo="[#D946EF]"
+            gradientFrom="purple-500"
+            gradientTo="fuchsia-500"
           />
 
           <NumberSection
@@ -30,8 +30,8 @@ const NumberSections = () => {
             title="Partial Energy"
             number="4"
             subtitle="The Builder"
-            gradientFrom="[#E5DEFF]"
-            gradientTo="[#D6BCFA]"
+            gradientFrom="violet-400"
+            gradientTo="purple-400"
           />
 
           <NumberSection
@@ -39,8 +39,8 @@ const NumberSections = () => {
             title="Cycle Number"
             number="3"
             subtitle="The Creator"
-            gradientFrom="[#F59E0B]"
-            gradientTo="[#EF4444]"
+            gradientFrom="amber-500"
+            gradientTo="red-500"
           />
 
           <NumberSection
@@ -48,8 +48,8 @@ const NumberSections = () => {
             title="2025 Energy"
             number="9"
             subtitle="The Achiever"
-            gradientFrom="[#10B981]"
-            gradientTo="[#3B82F6]"
+            gradientFrom="emerald-500"
+            gradientTo="blue-500"
           />
 
           <NumberSection
@@ -57,8 +57,8 @@ const NumberSections = () => {
             title="Lucky Number"
             number="7"
             subtitle="The Mystic"
-            gradientFrom="[#0EA5E9]"
-            gradientTo="[#8B5CF6]"
+            gradientFrom="cyan-500"
+            gradientTo="purple-500"
           />
 
           <NumberSection
@@ -66,13 +66,13 @@ const NumberSections = () => {
             title="Chinese Zodiac"
             number="羊"
             subtitle="Year of the Goat"
-            gradientFrom="[#0EA5E9]"
-            gradientTo="[#8B5CF6]"
+            gradientFrom="cyan-500"
+            gradientTo="purple-500"
           />
         </div>
 
         <div id="secret-number" className="rounded-xl bg-gradient-to-br from-amber-500/30 to-purple-500/30 p-4">
-          <h3 className="text-sm font-semibold text-white/90 mb-3 flex items-center gap-2">
+          <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-amber-400" />
             Secret Number
           </h3>
@@ -89,7 +89,7 @@ const NumberSections = () => {
                 <span className="text-xl font-bold bg-gradient-to-r from-amber-200 to-purple-400 bg-clip-text text-transparent">
                   33
                 </span>
-                <span className="ml-2 text-xs text-amber-200/80">Master Teacher</span>
+                <span className="ml-2 text-xs text-amber-200">Master Teacher</span>
               </motion.div>
             </div>
             <motion.div
@@ -105,7 +105,7 @@ const NumberSections = () => {
 
         <button
           disabled
-          className="relative w-full py-2 px-4 rounded-lg bg-gradient-to-r from-[#8B5CF6]/20 to-[#D946EF]/20 border border-white/10 text-white/50 cursor-not-allowed text-sm overflow-hidden"
+          className="relative w-full py-2 px-4 rounded-lg bg-gradient-to-r from-purple-500/20 to-fuchsia-500/20 border border-white/10 text-white/50 cursor-not-allowed text-sm overflow-hidden"
         >
           <span className="relative z-10">Read Full Analysis →</span>
           <motion.div

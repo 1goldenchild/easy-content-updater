@@ -27,7 +27,7 @@ const CollectInfoPreview = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative w-full aspect-[9/19.5] bg-[#1A1F2C] rounded-[3rem] border-4 border-gray-800 shadow-2xl overflow-hidden backdrop-blur-xl bg-white/5"
+        className="relative w-full aspect-[9/19.5] bg-[#1A1F2C] rounded-[3rem] border-4 border-gray-800 shadow-2xl overflow-hidden backdrop-blur-xl"
       >
         {/* Dynamic Island */}
         <div className="absolute top-2 left-1/2 -translate-x-1/2 w-[84px] h-[25px] bg-black rounded-[20px] z-50" />
@@ -40,7 +40,7 @@ const CollectInfoPreview = () => {
         >
           <div className="relative">
             <div className="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
-              <p className="text-xs font-medium text-white/90">Preview Analysis</p>
+              <p className="text-xs font-medium text-white">Preview Analysis</p>
             </div>
             {/* Decorative elements */}
             <div className="absolute -left-6 top-1/2 -translate-y-1/2 w-4 h-[1px] bg-gradient-to-r from-transparent to-white/30" />
@@ -87,22 +87,10 @@ const CollectInfoPreview = () => {
         </div>
 
         {/* Scroll Fade Overlays */}
-        <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[#1A1F2C] to-transparent pointer-events-none z-30" />
-        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#1A1F2C] to-transparent pointer-events-none z-30" />
+        <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[#1A1F2C] to-transparent pointer-events-none z-20" />
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#1A1F2C] to-transparent pointer-events-none z-20" />
 
-        {/* Decorative Elements */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3 }}
-          className="absolute -left-8 -bottom-8 w-24 h-24 bg-gradient-to-r from-[#8B5CF6]/30 to-[#D946EF]/30 rounded-full blur-xl"
-        />
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.4 }}
-          className="absolute -right-8 -top-8 w-24 h-24 bg-gradient-to-r from-[#0EA5E9]/30 to-[#8B5CF6]/30 rounded-full blur-xl"
-        />
+        {/* Remove the decorative elements that were causing the weird color in the corner */}
       </motion.div>
     </div>
   );
