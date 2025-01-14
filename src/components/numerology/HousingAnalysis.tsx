@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Home } from "lucide-react";
+import { Home, ThumbsUp, ThumbsDown } from "lucide-react";
 
 interface HousingAnalysisProps {
   chineseZodiac: string;
@@ -106,23 +106,45 @@ const HousingAnalysis = ({ chineseZodiac, isVisible }: HousingAnalysisProps) => 
           {getHousingAnalysis(chineseZodiac)}
         </p>
 
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <h3 className="font-medium text-purple-200">Good Years for Housing Changes:</h3>
-            <p className="text-sm text-purple-100">
-              {compatibility.good.join(", ")}
-            </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+          {/* Good Years */}
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <ThumbsUp className="w-5 h-5 text-green-400" />
+              <h3 className="font-medium text-purple-200">Good Years for Housing Changes</h3>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              {compatibility.good.map((year) => (
+                <div
+                  key={year}
+                  className="bg-green-500/10 border border-green-500/20 rounded-lg p-2 text-center"
+                >
+                  <span className="text-green-300 font-medium">{year}</span>
+                </div>
+              ))}
+            </div>
           </div>
-          
-          <div className="space-y-2">
-            <h3 className="font-medium text-purple-200">Challenging Years for Housing Changes:</h3>
-            <p className="text-sm text-purple-100">
-              {compatibility.challenging.join(", ")}
-            </p>
+
+          {/* Challenging Years */}
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <ThumbsDown className="w-5 h-5 text-red-400" />
+              <h3 className="font-medium text-purple-200">Challenging Years</h3>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              {compatibility.challenging.map((year) => (
+                <div
+                  key={year}
+                  className="bg-red-500/10 border border-red-500/20 rounded-lg p-2 text-center"
+                >
+                  <span className="text-red-300 font-medium">{year}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-2 mt-6">
           <h3 className="font-medium text-purple-200">General Housing Tips:</h3>
           <ul className="list-disc pl-5 text-sm space-y-1 text-purple-100">
             <li>Consider the direction your main door faces</li>
