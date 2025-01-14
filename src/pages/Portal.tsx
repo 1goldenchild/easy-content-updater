@@ -13,6 +13,7 @@ import {
 
 const Portal = () => {
   const [showResults, setShowResults] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Date>();
   const [results, setResults] = useState({
     lifePath: 0,
     partialEnergy: 0,
@@ -26,6 +27,7 @@ const Portal = () => {
 
   const handleCalculate = (date: Date) => {
     console.log("Calculating numerology for date:", date);
+    setSelectedDate(date);
     
     const lifePath = calculateLifePath(date);
     const partialEnergy = calculatePartialEnergy(date.getDate());
@@ -57,10 +59,13 @@ const Portal = () => {
           <div className="w-full space-y-8">
             <PortalHeader />
             <DateInputSection onCalculate={handleCalculate} />
-            <ResultsSection 
-              results={results}
-              isVisible={showResults}
-            />
+            {selectedDate && (
+              <ResultsSection 
+                results={results}
+                dateOfBirth={selectedDate}
+                isVisible={showResults}
+              />
+            )}
           </div>
         </div>
       </div>
