@@ -2,32 +2,56 @@ import { motion } from "framer-motion";
 import { Home, XCircle } from "lucide-react";
 
 interface HousingAnalysisProps {
-  lifePath: number;
+  chineseZodiac: string;
   isVisible: boolean;
 }
 
-const getHousingYears = (lifePath: number) => {
+const ZODIAC_CYCLE = [
+  'Rat', 'Ox', 'Tiger', 'Rabbit', 'Dragon', 'Snake',
+  'Horse', 'Goat', 'Monkey', 'Rooster', 'Dog', 'Pig'
+];
+
+const getOppositeZodiac = (zodiac: string): string => {
+  const currentIndex = ZODIAC_CYCLE.indexOf(zodiac);
+  // Get the sign 6 positions away (opposite)
+  const oppositeIndex = (currentIndex + 6) % 12;
+  return ZODIAC_CYCLE[oppositeIndex];
+};
+
+const getHousingYears = (zodiac: string) => {
+  console.log("Analyzing housing years for zodiac:", zodiac);
+  
   const currentYear = new Date().getFullYear();
   const years = [];
+  const oppositeZodiac = getOppositeZodiac(zodiac);
   
-  // Generate next 10 years
-  for (let i = 0; i < 10; i++) {
-    const year = currentYear + i;
-    const yearSum = year.toString().split('').reduce((acc, digit) => acc + parseInt(digit), 0);
-    const reducedYear = yearSum > 9 ? yearSum.toString().split('').reduce((acc, digit) => acc + parseInt(digit), 0) : yearSum;
+  console.log("Opposite zodiac sign:", oppositeZodiac);
+  
+  // Generate years from 1925 to current year + 1
+  for (let year = 1925; year <= currentYear + 1; year++) {
+    const yearZodiac = getChineseZodiacForYear(year);
+    const isGood = yearZodiac === zodiac;
+    const isBad = yearZodiac === oppositeZodiac;
     
-    // Check compatibility with life path
-    const isGood = (reducedYear + lifePath) % 3 === 0;
-    years.push({ year, isGood });
+    if (isGood || isBad) {
+      years.push({ year, isGood });
+    }
   }
   
   return years;
 };
 
-const HousingAnalysis = ({ lifePath, isVisible }: HousingAnalysisProps) => {
+const getChineseZodiacForYear = (year: number): string => {
+  // Starting from 1924 (Rat year)
+  const startYear = 1924;
+  const zodiacIndex = (year - startYear) % 12;
+  return ZODIAC_CYCLE[zodiacIndex];
+};
+
+const HousingAnalysis = ({ chineseZodiac, isVisible }: HousingAnalysisProps) => {
   if (!isVisible) return null;
 
-  const housingYears = getHousingYears(lifePath);
+  const housingYears = getHousingYears(chineseZodiac);
   const goodYears = housingYears.filter(y => y.isGood);
   const badYears = housingYears.filter(y => !y.isGood);
 
@@ -46,7 +70,7 @@ const HousingAnalysis = ({ lifePath, isVisible }: HousingAnalysisProps) => {
         <div className="space-y-4">
           <h3 className="text-lg font-medium text-green-400 flex items-center gap-2">
             <Home className="w-5 h-5" />
-            Best Years to Move
+            Best Years for Housing
           </h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {goodYears.map(({ year }) => (
@@ -63,7 +87,7 @@ const HousingAnalysis = ({ lifePath, isVisible }: HousingAnalysisProps) => {
         <div className="space-y-4">
           <h3 className="text-lg font-medium text-red-400 flex items-center gap-2">
             <XCircle className="w-5 h-5" />
-            Years to Avoid Moving
+            Years to Avoid
           </h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {badYears.map(({ year }) => (
@@ -79,8 +103,8 @@ const HousingAnalysis = ({ lifePath, isVisible }: HousingAnalysisProps) => {
       </div>
 
       <p className="text-sm text-muted-foreground">
-        Based on your Life Path Number {lifePath}, these years are calculated using numerological principles 
-        and their vibrational compatibility with your personal energy.
+        Based on your Chinese zodiac sign ({chineseZodiac}), these years represent the most harmonious 
+        and challenging periods for housing decisions, according to Chinese astrology.
       </p>
     </motion.div>
   );

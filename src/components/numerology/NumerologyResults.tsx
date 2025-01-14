@@ -101,7 +101,7 @@ const NumerologyResults = ({
       <CompatibilityChart lifePath={lifePath} isVisible={isVisible} />
       <LoveCompatibility lifePathNumber={lifePath} />
       <OccupationGuidance lifePath={lifePath} isVisible={isVisible} />
-      <HousingAnalysis lifePath={lifePath} isVisible={isVisible} />
+      <HousingAnalysis chineseZodiac={chineseZodiac} isVisible={isVisible} />
       <CarCompatibility chineseZodiac={chineseZodiac} isVisible={isVisible} />
       <CountryCompatibility chineseZodiac={chineseZodiac} isVisible={isVisible} />
       <ColorCompatibility lifePath={lifePath} isVisible={isVisible} />
