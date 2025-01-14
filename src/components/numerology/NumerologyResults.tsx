@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Sparkles } from "lucide-react";
 import LifepathAnalysis from "./LifepathAnalysis";
 import PartialEnergyAnalysis from "./PartialEnergyAnalysis";
 import AstrologyAnalysis from "./AstrologyAnalysis";
@@ -22,6 +21,7 @@ interface NumerologyResultsProps {
   partialEnergy: number;
   secretNumber: number;
   chineseZodiac: string;
+  dateOfBirth: Date;
   isVisible: boolean;
 }
 
@@ -30,6 +30,7 @@ const NumerologyResults = ({
   partialEnergy, 
   secretNumber, 
   chineseZodiac,
+  dateOfBirth,
   isVisible 
 }: NumerologyResultsProps) => {
   if (!isVisible) return null;
@@ -82,14 +83,14 @@ const NumerologyResults = ({
           </div>
         </div>
       </div>
-
+      
       <CharacteristicsChart isVisible={isVisible} lifePath={lifePath} />
       <LifepathAnalysis lifePath={lifePath} isVisible={isVisible} />
       <PartialEnergyAnalysis partialEnergy={partialEnergy} isVisible={isVisible} />
       <GematriaAnalysis lifePath={lifePath} isVisible={isVisible} />
       <SecretAnalysis secretNumber={secretNumber} isVisible={isVisible} />
       <AstrologyAnalysis chineseZodiac={chineseZodiac} isVisible={isVisible} />
-      <CycleAnalysis isVisible={isVisible} />
+      <CycleAnalysis dateOfBirth={dateOfBirth} isVisible={isVisible} />
       <EnergyAnalysis isVisible={isVisible} />
       <CompatibilityChart lifePath={lifePath} isVisible={isVisible} />
       <LoveCompatibility lifePathNumber={lifePath} />
