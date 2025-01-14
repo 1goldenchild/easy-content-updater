@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Key } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { secretNumberDescriptions } from "@/utils/secretNumberDescriptions";
 
 interface SecretAnalysisProps {
   secretNumber: number;
@@ -9,6 +10,8 @@ interface SecretAnalysisProps {
 
 const SecretAnalysis = ({ secretNumber, isVisible }: SecretAnalysisProps) => {
   if (!isVisible) return null;
+
+  const description = secretNumberDescriptions[secretNumber] || "Description not found.";
 
   return (
     <motion.div 
@@ -47,8 +50,8 @@ const SecretAnalysis = ({ secretNumber, isVisible }: SecretAnalysisProps) => {
                 </div>
                 
                 <div className="prose prose-invert max-w-none">
-                  <p className="text-white/70 text-lg">
-                    Your Secret Number analysis will appear here. This exclusive section will unveil the hidden meanings and profound influences of your Secret Number.
+                  <p className="text-white/70 text-lg whitespace-pre-line">
+                    {description}
                   </p>
                 </div>
               </motion.div>
