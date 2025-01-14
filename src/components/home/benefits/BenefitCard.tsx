@@ -86,7 +86,7 @@ const BenefitCard = ({
             </div>
           </div>
           
-          <p className="text-base md:text-base text-white/80 leading-relaxed md:-mt-2">
+          <p className="text-lg md:text-lg text-white/80 leading-relaxed md:-mt-2">
             {description}
           </p>
         </div>
