@@ -101,11 +101,6 @@ const HousingAnalysis = ({ chineseZodiac, isVisible }: HousingAnalysisProps) => 
           </div>
         </div>
       </div>
-
-      <p className="text-sm text-muted-foreground">
-        Based on your Chinese zodiac sign ({chineseZodiac}), these years represent the most harmonious 
-        and challenging periods for housing decisions, according to Chinese astrology.
-      </p>
     </motion.div>
   );
 };
