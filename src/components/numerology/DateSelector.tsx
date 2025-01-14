@@ -26,8 +26,8 @@ const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
   const currentYear = new Date().getFullYear();
   const years = Array.from(
     { length: 100 },
-    (_, i) => (currentYear - 99 + i).toString()
-  );
+    (_, i) => (currentYear - i + 1).toString()
+  ).reverse();
 
   const updateDate = (newDay: string, newMonth: string, newYear: string) => {
     if (newDay && newMonth && newYear) {
@@ -69,7 +69,7 @@ const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
             <SelectTrigger>
               <SelectValue placeholder="Month" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="max-h-[300px]" onPointerDownOutside={(e) => e.preventDefault()}>
               {months.map((m) => (
                 <SelectItem key={m} value={m}>
                   {new Date(2000, parseInt(m) - 1, 1).toLocaleString('default', { month: 'long' })}
@@ -83,7 +83,7 @@ const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
             <SelectTrigger>
               <SelectValue placeholder="Day" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="max-h-[300px]" onPointerDownOutside={(e) => e.preventDefault()}>
               {getDaysInMonth(month, year).map((d) => (
                 <SelectItem key={d} value={d}>
                   {d}
@@ -97,7 +97,7 @@ const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
             <SelectTrigger>
               <SelectValue placeholder="Year" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="max-h-[300px]" onPointerDownOutside={(e) => e.preventDefault()}>
               {years.map((y) => (
                 <SelectItem key={y} value={y}>
                   {y}
