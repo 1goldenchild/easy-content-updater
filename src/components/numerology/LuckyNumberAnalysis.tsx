@@ -51,8 +51,7 @@ const LuckyNumberAnalysis = ({ dateOfBirth, isVisible }: LuckyNumberAnalysisProp
                 
                 <div className="prose prose-invert max-w-none">
                   <p className="text-white/70 text-lg mb-4">
-                    Your Lucky Number {luckyNumber} resonates with positive energy and fortunate circumstances. 
-                    This number can be used to enhance your daily life and decision-making.
+                    This is your lucky number! It's the perfect number to use for any significant moment—whether it's choosing a wedding date, starting a business, buying a new car, or anything else that requires a little extra luck.
                   </p>
                   <ul className="text-white/70 space-y-2">
                     <li>Use this number when making important choices</li>
