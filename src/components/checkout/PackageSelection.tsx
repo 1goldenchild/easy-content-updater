@@ -1,6 +1,6 @@
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Package, Sparkles, Brain, Star, Heart, Target, Rocket } from "lucide-react"
+import { Package, Sparkles, Brain, Star, Heart, Target, Rocket, Crown } from "lucide-react"
 
 export const packages = [
   {
@@ -97,7 +97,12 @@ export const packages = [
         title: "Best Technologies",
         description: "Unlock the tech tools for your highest frequency"
       }
-    ]
+    ],
+    bonus: {
+      icon: Crown,
+      title: "VIP Energy Mastery Bonus",
+      description: "Exclusive access to advanced manifestation techniques and personalized energy alignment strategies"
+    }
   }
 ]
 
@@ -114,25 +119,27 @@ const PackageSelection = ({ selectedPackage, onPackageChange }: PackageSelection
         {packages.map((pkg) => (
           <div 
             key={pkg.id}
-            className={`p-6 rounded-xl transition-all ${
+            className={`relative p-6 rounded-xl transition-all ${
               pkg.isBestSelling 
-                ? 'bg-gradient-to-br from-purple-900/50 to-purple-600/30 border-2 border-purple-500/50 shadow-lg shadow-purple-500/20' 
-                : 'bg-[#2A2F3C]/50 border border-gray-700 hover:border-purple-500/30'
+                ? 'bg-gradient-to-br from-[#1A1F2C] to-[#2A2F3C] border-2 border-[#9b87f5]/30 shadow-lg shadow-[#7E69AB]/20' 
+                : 'bg-[#1A1F2C] border border-[#403E43] hover:border-[#7E69AB]/30'
             }`}
           >
+            {pkg.isBestSelling && (
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-[#9b87f5] via-[#7E69AB] to-[#6E59A5] rounded-full text-white text-sm font-medium shadow-lg">
+                Most Popular
+              </div>
+            )}
             <div className="flex items-start mb-4">
-              <Package className={`w-5 h-5 ${pkg.isBestSelling ? 'text-purple-400' : 'text-gray-400'} mr-2 mt-1`} />
+              <Package className={`w-5 h-5 ${pkg.isBestSelling ? 'text-[#9b87f5]' : 'text-[#8E9196]'} mr-2 mt-1`} />
               <div>
-                <h3 className={`font-semibold ${pkg.isBestSelling ? 'text-purple-200' : 'text-gray-200'}`}>
+                <h3 className={`font-semibold ${pkg.isBestSelling ? 'text-[#D6BCFA]' : 'text-[#C8C8C9]'}`}>
                   {pkg.name}
                 </h3>
-                {pkg.isBestSelling && (
-                  <span className="text-sm text-purple-400">Most Popular Choice</span>
-                )}
               </div>
             </div>
             
-            <p className="text-sm text-gray-400 mb-4">{pkg.description}</p>
+            <p className="text-sm text-[#9F9EA1] mb-4">{pkg.description}</p>
             
             <div className="space-y-4 mb-6">
               {pkg.features.map((feature, index) => {
@@ -141,26 +148,39 @@ const PackageSelection = ({ selectedPackage, onPackageChange }: PackageSelection
                   <div 
                     key={index} 
                     className={`flex items-start ${
-                      pkg.isBestSelling ? 'text-purple-100' : 'text-gray-300'
+                      pkg.isBestSelling ? 'text-[#D6BCFA]' : 'text-[#C8C8C9]'
                     }`}
                   >
-                    <Icon className={`w-4 h-4 ${pkg.isBestSelling ? 'text-purple-400' : 'text-gray-400'} mr-2 mt-1 flex-shrink-0`} />
+                    <Icon className={`w-4 h-4 ${pkg.isBestSelling ? 'text-[#9b87f5]' : 'text-[#8E9196]'} mr-2 mt-1 flex-shrink-0`} />
                     <div className="text-sm">
                       <div className="font-medium">{feature.title}</div>
-                      <div className="text-gray-400 text-xs">{feature.description}</div>
+                      <div className="text-[#8A898C] text-xs">{feature.description}</div>
                     </div>
                   </div>
                 )
               })}
             </div>
 
-            <div className="text-right mt-auto">
+            {pkg.bonus && (
+              <div className="mt-6 p-4 rounded-lg bg-gradient-to-r from-[#9b87f5]/10 via-[#7E69AB]/10 to-[#6E59A5]/10 border border-[#9b87f5]/20 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shine" />
+                <div className="flex items-start">
+                  <pkg.bonus.icon className="w-5 h-5 text-[#9b87f5] mr-2 mt-1 flex-shrink-0" />
+                  <div>
+                    <div className="font-medium text-[#D6BCFA]">{pkg.bonus.title}</div>
+                    <div className="text-xs text-[#9F9EA1]">{pkg.bonus.description}</div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className="text-right mt-6">
               {pkg.originalPrice && (
-                <span className="text-sm line-through text-gray-400 mr-2">
+                <span className="text-sm line-through text-[#8A898C] mr-2">
                   ${pkg.originalPrice.toFixed(2)}
                 </span>
               )}
-              <span className={`text-xl font-bold ${pkg.isBestSelling ? 'text-purple-400' : 'text-white'}`}>
+              <span className={`text-xl font-bold ${pkg.isBestSelling ? 'text-[#9b87f5]' : 'text-white'}`}>
                 ${pkg.price.toFixed(2)}
               </span>
             </div>
@@ -179,8 +199,8 @@ const PackageSelection = ({ selectedPackage, onPackageChange }: PackageSelection
             key={pkg.id}
             className={`flex items-center justify-between p-4 rounded-lg transition-all ${
               pkg.isBestSelling 
-                ? 'bg-gradient-to-r from-purple-900/50 to-purple-600/30 border border-purple-500'
-                : 'hover:bg-[#2A2F3C]'
+                ? 'bg-gradient-to-r from-[#1A1F2C] to-[#2A2F3C] border border-[#9b87f5]/30'
+                : 'hover:bg-[#1A1F2C] border border-transparent hover:border-[#403E43]'
             }`}
           >
             <div className="flex items-center space-x-2">
@@ -188,7 +208,7 @@ const PackageSelection = ({ selectedPackage, onPackageChange }: PackageSelection
               <Label htmlFor={pkg.id} className="cursor-pointer">
                 <div>
                   {pkg.isBestSelling && (
-                    <span className="text-sm text-purple-400 block">BEST VALUE</span>
+                    <span className="text-sm text-[#9b87f5] block">BEST VALUE</span>
                   )}
                   {pkg.name}
                 </div>
@@ -196,11 +216,11 @@ const PackageSelection = ({ selectedPackage, onPackageChange }: PackageSelection
             </div>
             <div className="text-right">
               {pkg.originalPrice && (
-                <span className="text-sm line-through text-gray-400 mr-2">
+                <span className="text-sm line-through text-[#8A898C] mr-2">
                   ${pkg.originalPrice.toFixed(2)}
                 </span>
               )}
-              <span className={`font-semibold ${pkg.isBestSelling ? 'text-purple-400' : 'text-white'}`}>
+              <span className={`font-semibold ${pkg.isBestSelling ? 'text-[#9b87f5]' : 'text-white'}`}>
                 ${pkg.price.toFixed(2)}
               </span>
             </div>
