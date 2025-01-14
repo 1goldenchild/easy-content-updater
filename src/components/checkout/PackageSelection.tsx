@@ -6,43 +6,45 @@ import { Info } from "lucide-react"
 export const packages = [
   {
     id: "starter",
-    name: "Numerology Analysis Starter Package",
+    name: "Core Energy Blueprint Package",
     price: 33.00,
     priceId: "price_1QepZTCibdAmag3ruLEDrHWO",
     productId: "prod_RXvQl1kJWmE0lK",
     features: [
-      "Basic Life Path Number Analysis",
-      "Core Numbers Interpretation",
-      "Personal Year Calculation"
+      "Lifepath Number Analysis",
+      "Partial Energy Reading",
+      "Cycle Number Interpretation",
+      "Lucky Number Discovery"
     ]
   },
   {
     id: "premium",
-    name: "Numerology Analysis Premium Package",
+    name: "Premium Energy Alignment Package",
     price: 44.00,
     priceId: "price_1QepaQCibdAmag3rICiD03Go",
     productId: "prod_RXvRf8GHWMsvcf",
     features: [
-      "Everything in Starter Package",
-      "Detailed Personality Profile",
-      "Career Path Guidance",
-      "Love & Relationships Insights"
+      "Everything in Core Energy Blueprint",
+      "Numerological Compatibility",
+      "Love Compatibility Analysis",
+      "Career Path Insights",
+      "Secret Number Revelation"
     ]
   },
   {
     id: "supreme",
-    name: "Numerology Analysis Supreme Package",
+    name: "Supreme Mastery Package",
     price: 49.40,
     originalPrice: 71.00,
     priceId: "price_1QepbECibdAmag3rm3LbVCvQ",
     productId: "prod_RXvSZbsFsu67jS",
     isBestSelling: true,
     features: [
-      "Everything in Premium Package",
-      "Advanced Compatibility Analysis",
-      "Future Trend Predictions",
-      "Personal Year Cycles",
-      "Monthly & Daily Numerology Forecasts"
+      "Everything in Premium Energy Alignment",
+      "Environment Energy Control",
+      "Best Locations, Houses & Cars",
+      "Color & Crystal Guidance",
+      "Best Technologies Alignment"
     ]
   }
 ]
@@ -52,14 +54,18 @@ const PackageEducationSection = () => (
     {packages.map((pkg) => (
       <div 
         key={pkg.id}
-        className={`p-6 rounded-xl bg-[#2A2F3C]/50 border ${
-          pkg.isBestSelling ? 'border-purple-500' : 'border-gray-700'
+        className={`p-6 rounded-xl ${
+          pkg.isBestSelling 
+            ? 'bg-gradient-to-br from-purple-900/50 to-purple-600/30 border-2 border-purple-500/50 shadow-lg shadow-purple-500/20' 
+            : 'bg-[#2A2F3C]/50 border border-gray-700'
         }`}
       >
         <div className="flex items-start mb-4">
-          <Package className="w-5 h-5 text-purple-400 mr-2 mt-1" />
+          <Package className={`w-5 h-5 ${pkg.isBestSelling ? 'text-purple-400' : 'text-gray-400'} mr-2 mt-1`} />
           <div>
-            <h3 className="font-semibold text-gray-200">{pkg.name}</h3>
+            <h3 className={`font-semibold ${pkg.isBestSelling ? 'text-purple-200' : 'text-gray-200'}`}>
+              {pkg.name}
+            </h3>
             {pkg.isBestSelling && (
               <span className="text-sm text-purple-400">Most Popular Choice</span>
             )}
@@ -67,8 +73,13 @@ const PackageEducationSection = () => (
         </div>
         <ul className="space-y-2">
           {pkg.features.map((feature, index) => (
-            <li key={index} className="flex items-start text-sm text-gray-300">
-              <Info className="w-4 h-4 text-purple-400 mr-2 mt-0.5 flex-shrink-0" />
+            <li 
+              key={index} 
+              className={`flex items-start text-sm ${
+                pkg.isBestSelling ? 'text-purple-100' : 'text-gray-300'
+              }`}
+            >
+              <Info className={`w-4 h-4 ${pkg.isBestSelling ? 'text-purple-400' : 'text-gray-400'} mr-2 mt-0.5 flex-shrink-0`} />
               {feature}
             </li>
           ))}
@@ -101,7 +112,9 @@ const PackageSelection = ({ selectedPackage, onPackageChange }: PackageSelection
           <div
             key={pkg.id}
             className={`flex items-center justify-between p-4 rounded-lg transition-all ${
-              pkg.isBestSelling ? 'bg-[#2A2F3C] border border-purple-500' : 'hover:bg-[#2A2F3C]'
+              pkg.isBestSelling 
+                ? 'bg-gradient-to-r from-purple-900/50 to-purple-600/30 border border-purple-500'
+                : 'hover:bg-[#2A2F3C]'
             }`}
           >
             <div className="flex items-center space-x-2">
@@ -121,7 +134,7 @@ const PackageSelection = ({ selectedPackage, onPackageChange }: PackageSelection
                   ${pkg.originalPrice.toFixed(2)}
                 </span>
               )}
-              <span className="text-white font-semibold">
+              <span className={`font-semibold ${pkg.isBestSelling ? 'text-purple-400' : 'text-white'}`}>
                 ${pkg.price.toFixed(2)}
               </span>
             </div>
