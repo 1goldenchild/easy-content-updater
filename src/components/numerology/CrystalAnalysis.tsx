@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Gem } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { crystalsByLifePath } from "./data/crystalData";
 
 interface CrystalAnalysisProps {
@@ -27,35 +28,12 @@ const CrystalAnalysis = ({ lifePath, isVisible }: CrystalAnalysisProps) => {
         </h2>
       </div>
 
-      <div className="grid gap-6">
-        <div className="space-y-4">
-          <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-6">
-            <h3 className="text-lg font-medium text-purple-400 mb-4">Recommended Crystals</h3>
-            <div className="flex flex-wrap gap-3">
-              {crystalInfo.primary.map((crystal, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{ scale: 1.05 }}
-                  className="px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30"
-                >
-                  <span className="text-lg font-semibold bg-gradient-to-r from-purple-200 to-pink-200 bg-clip-text text-transparent">
-                    {crystal}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <p className="text-white/80">
-              {crystalInfo.description}
-            </p>
-            <p className="text-sm text-white/60 mt-4">
-              These crystals are specifically aligned with your Life Path Number {lifePath} to enhance your natural abilities and support your spiritual journey.
-            </p>
-          </div>
-        </div>
-      </div>
+      <Button 
+        variant="outline" 
+        className="w-full bg-purple-500/20 border-purple-500/30 text-purple-200 hover:bg-purple-500/30"
+      >
+        Read More
+      </Button>
     </motion.div>
   );
 };
