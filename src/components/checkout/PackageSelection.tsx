@@ -126,7 +126,7 @@ const PackageSelection = ({ selectedPackage, onPackageChange }: PackageSelection
             }`}
           >
             {pkg.isBestSelling && (
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-[#9b87f5] via-[#7E69AB] to-[#6E59A5] rounded-full text-white text-sm font-medium shadow-lg">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-[#9b87f5] via-[#7E69AB] to-[#6E59A5] rounded-full text-white text-sm font-medium shadow-lg animate-pulse">
                 Most Popular
               </div>
             )}
@@ -162,12 +162,16 @@ const PackageSelection = ({ selectedPackage, onPackageChange }: PackageSelection
             </div>
 
             {pkg.bonus && (
-              <div className="mt-6 p-4 rounded-lg bg-gradient-to-r from-[#9b87f5]/10 via-[#7E69AB]/10 to-[#6E59A5]/10 border border-[#9b87f5]/20 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shine" />
-                <div className="flex items-start">
-                  <pkg.bonus.icon className="w-5 h-5 text-[#9b87f5] mr-2 mt-1 flex-shrink-0" />
+              <div className="mt-6 p-4 rounded-lg bg-gradient-to-r from-[#9b87f5]/10 via-[#7E69AB]/10 to-[#6E59A5]/10 border border-[#9b87f5]/20 relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shine" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#9b87f5]/5 to-[#6E59A5]/5 group-hover:opacity-100 opacity-0 transition-opacity duration-500" />
+                <div className="absolute -inset-1 bg-gradient-to-r from-[#9b87f5] via-[#7E69AB] to-[#6E59A5] opacity-20 blur-sm group-hover:opacity-30 transition-opacity duration-500" />
+                <div className="relative flex items-start">
+                  <pkg.bonus.icon className="w-5 h-5 text-[#9b87f5] mr-2 mt-1 flex-shrink-0 animate-pulse" />
                   <div>
-                    <div className="font-medium text-[#D6BCFA]">{pkg.bonus.title}</div>
+                    <div className="font-medium text-[#D6BCFA] animate-text-shimmer bg-clip-text text-transparent bg-[linear-gradient(110deg,#9b87f5,45%,#D6BCFA,55%,#9b87f5)] bg-[length:250%_100%]">
+                      {pkg.bonus.title}
+                    </div>
                     <div className="text-xs text-[#9F9EA1]">{pkg.bonus.description}</div>
                   </div>
                 </div>
@@ -180,7 +184,7 @@ const PackageSelection = ({ selectedPackage, onPackageChange }: PackageSelection
                   ${pkg.originalPrice.toFixed(2)}
                 </span>
               )}
-              <span className={`text-xl font-bold ${pkg.isBestSelling ? 'text-[#9b87f5]' : 'text-white'}`}>
+              <span className={`text-xl font-bold ${pkg.isBestSelling ? 'text-[#9b87f5] animate-text-shimmer bg-clip-text text-transparent bg-[linear-gradient(110deg,#9b87f5,45%,#D6BCFA,55%,#9b87f5)] bg-[length:250%_100%]' : 'text-white'}`}>
                 ${pkg.price.toFixed(2)}
               </span>
             </div>
