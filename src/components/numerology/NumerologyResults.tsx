@@ -15,6 +15,7 @@ import CountryCompatibility from "./CountryCompatibility";
 import ColorCompatibility from "./ColorCompatibility";
 import CrystalAnalysis from "./CrystalAnalysis";
 import CompatibilityChart from "./CompatibilityChart";
+import TechCompatibilityAnalysis from "./TechCompatibilityAnalysis";
 
 interface NumerologyResultsProps {
   lifePath: number;
@@ -104,6 +105,7 @@ const NumerologyResults = ({
       <CountryCompatibility chineseZodiac={chineseZodiac} isVisible={isVisible} />
       <ColorCompatibility lifePath={lifePath} isVisible={isVisible} />
       <CrystalAnalysis lifePath={lifePath} isVisible={isVisible} />
+      <TechCompatibilityAnalysis chineseZodiac={chineseZodiac} isVisible={isVisible} />
     </motion.div>
   );
 };
