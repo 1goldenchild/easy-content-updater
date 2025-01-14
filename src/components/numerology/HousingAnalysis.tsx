@@ -28,6 +28,63 @@ const HousingAnalysis = ({ chineseZodiac, isVisible }: HousingAnalysisProps) => 
     return analyses[zodiac as keyof typeof analyses] || "Your ideal living space combines comfort with functionality.";
   };
 
+  const getCompatibleYears = (zodiac: string) => {
+    const compatibilities: Record<string, { good: string[], challenging: string[] }> = {
+      Rat: {
+        good: ["Dragon", "Monkey", "Ox"],
+        challenging: ["Horse", "Rabbit", "Goat"]
+      },
+      Ox: {
+        good: ["Snake", "Rooster", "Rat"],
+        challenging: ["Goat", "Horse", "Dragon"]
+      },
+      Tiger: {
+        good: ["Horse", "Dog", "Pig"],
+        challenging: ["Monkey", "Snake", "Tiger"]
+      },
+      Rabbit: {
+        good: ["Goat", "Pig", "Dog"],
+        challenging: ["Rooster", "Dragon", "Rat"]
+      },
+      Dragon: {
+        good: ["Rat", "Monkey", "Rooster"],
+        challenging: ["Dog", "Rabbit", "Dragon"]
+      },
+      Snake: {
+        good: ["Ox", "Rooster", "Monkey"],
+        challenging: ["Tiger", "Pig", "Snake"]
+      },
+      Horse: {
+        good: ["Tiger", "Dog", "Goat"],
+        challenging: ["Rat", "Ox", "Horse"]
+      },
+      Goat: {
+        good: ["Rabbit", "Horse", "Pig"],
+        challenging: ["Ox", "Dog", "Dragon"]
+      },
+      Monkey: {
+        good: ["Rat", "Dragon", "Snake"],
+        challenging: ["Tiger", "Pig", "Monkey"]
+      },
+      Rooster: {
+        good: ["Ox", "Snake", "Dragon"],
+        challenging: ["Rat", "Rabbit", "Horse"]
+      },
+      Dog: {
+        good: ["Tiger", "Horse", "Rabbit"],
+        challenging: ["Dragon", "Goat", "Ox"]
+      },
+      Pig: {
+        good: ["Tiger", "Rabbit", "Goat"],
+        challenging: ["Snake", "Monkey", "Pig"]
+      }
+    };
+
+    return compatibilities[zodiac] || { good: [], challenging: [] };
+  };
+
+  const compatibility = getCompatibleYears(chineseZodiac);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -48,6 +105,23 @@ const HousingAnalysis = ({ chineseZodiac, isVisible }: HousingAnalysisProps) => 
         <p className="text-sm leading-relaxed text-purple-100">
           {getHousingAnalysis(chineseZodiac)}
         </p>
+
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <h3 className="font-medium text-purple-200">Compatible Signs:</h3>
+            <p className="text-sm text-purple-100">
+              {compatibility.good.join(", ")}
+            </p>
+          </div>
+          
+          <div className="space-y-2">
+            <h3 className="font-medium text-purple-200">Challenging Signs:</h3>
+            <p className="text-sm text-purple-100">
+              {compatibility.challenging.join(", ")}
+            </p>
+          </div>
+        </div>
+
         <div className="space-y-2">
           <h3 className="font-medium text-purple-200">General Housing Tips:</h3>
           <ul className="list-disc pl-5 text-sm space-y-1 text-purple-100">
