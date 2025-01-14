@@ -31,12 +31,12 @@ const blogPosts = [
     slug: "jim-carrey-numerology"
   },
   {
-    title: "How China Uses Numerology to Power Success: The 2008 Beijing Olympics and Beyond",
-    description: "Discover how China strategically used the power of the number 8, particularly during the 2008 Olympics opening ceremony at 8:08 PM on 8/8/2008, to fuel their meteoric rise.",
+    title: "The Secret Behind Rolex's Success: A Numerological Analysis",
+    description: "Explore how Rolex strategically uses numerology in their pricing, model numbers, and launch dates to maintain their status as the world's most prestigious watch brand.",
     date: "March 29, 2024",
     readTime: "8 min read",
-    mainImage: "/lovable-uploads/a15fb902-5972-4403-b638-89b8760626e1.png",
-    slug: "china-numerology"
+    mainImage: "/lovable-uploads/984813d9-700a-4057-a369-08ae4035507b.png",
+    slug: "rolex-numerology"
   },
   {
     title: "How Michael Jackson used the Power of Numerology: The Influence of the Number 7 on His Career",

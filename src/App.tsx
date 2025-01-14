@@ -33,8 +33,8 @@ const App = () => {
         <Navbar />
         <main className="flex-1">
           <Routes>
-            <Route path="/" element={<Navigate to="/numerology-reading" replace />} />
-            <Route path="/numerology-reading" element={<Index />} />
+            <Route path="/" element={<Navigate to="/numerology/analysis" replace />} />
+            <Route path="/numerology/analysis" element={<Index />} />
             <Route path="/sales" element={<Sales />} />
             <Route path="/collect-info" element={<CollectInfo />} />
             <Route path="/checkout" element={<Checkout />} />
