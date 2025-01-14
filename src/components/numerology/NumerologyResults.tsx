@@ -35,6 +35,14 @@ const NumerologyResults = ({
 }: NumerologyResultsProps) => {
   if (!isVisible) return null;
 
+  console.log("Rendering NumerologyResults with:", {
+    lifePath,
+    partialEnergy,
+    secretNumber,
+    chineseZodiac,
+    dateOfBirth
+  });
+
   return (
     <motion.div 
       initial={{ opacity: 0 }}
@@ -63,35 +71,31 @@ const NumerologyResults = ({
             </p>
           </div>
 
-          {/* Lucky Number */}
+          {/* Secret Number */}
           <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
-            <p className="text-sm text-white/70">Lucky Number</p>
+            <p className="text-sm text-white/70">Secret Number</p>
             <p className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
-              7
+              {secretNumber}
             </p>
           </div>
 
           {/* Chinese Zodiac */}
           <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
             <p className="text-sm text-white/70">Chinese Zodiac</p>
-            <div className="flex flex-col items-center">
-              <p className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
-                {chineseZodiac}
-              </p>
-              <p className="text-xs text-white/50 mt-1">Year of the {chineseZodiac}</p>
-            </div>
+            <p className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">
+              {chineseZodiac}
+            </p>
           </div>
         </div>
       </div>
-      
-      <CharacteristicsChart isVisible={isVisible} lifePath={lifePath} />
+
+      <CharacteristicsChart lifePath={lifePath} isVisible={isVisible} />
       <LifepathAnalysis lifePath={lifePath} isVisible={isVisible} />
       <PartialEnergyAnalysis partialEnergy={partialEnergy} isVisible={isVisible} />
       <GematriaAnalysis lifePath={lifePath} isVisible={isVisible} />
-      <SecretAnalysis secretNumber={secretNumber} isVisible={isVisible} />
-      <AstrologyAnalysis chineseZodiac={chineseZodiac} isVisible={isVisible} />
       <CycleAnalysis dateOfBirth={dateOfBirth} isVisible={isVisible} />
       <EnergyAnalysis isVisible={isVisible} />
+      <SecretAnalysis secretNumber={secretNumber} isVisible={isVisible} />
       <CompatibilityChart lifePath={lifePath} isVisible={isVisible} />
       <LoveCompatibility lifePathNumber={lifePath} />
       <OccupationGuidance lifePath={lifePath} isVisible={isVisible} />

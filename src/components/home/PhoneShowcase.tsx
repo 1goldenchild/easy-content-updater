@@ -28,8 +28,9 @@ const PhoneShowcase = () => {
     }
   };
 
-  // For demo purposes, using a hardcoded life path number
+  // For demo purposes, using a hardcoded life path number and date
   const lifePathNumber = 1;
+  const demoDate = new Date(2000, 0, 1); // January 1, 2000
 
   return (
     <PhoneFrame activeSection={activeSection} onSectionChange={scrollToSection}>
@@ -41,7 +42,7 @@ const PhoneShowcase = () => {
         <CareerPaths />
         <ColorCompatibility lifePath={lifePathNumber} isVisible={true} />
         <GematriaSection />
-        <CycleSection />
+        <CycleSection dateOfBirth={demoDate} />
         <EnergySection />
         <SecretSection />
         <LoveCompatibility lifePathNumber={lifePathNumber} />

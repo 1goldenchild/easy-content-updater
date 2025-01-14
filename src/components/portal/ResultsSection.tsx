@@ -7,10 +7,11 @@ interface ResultsSectionProps {
     secretNumber: number;
     chineseZodiac: string;
   };
+  dateOfBirth: Date;
   isVisible: boolean;
 }
 
-const ResultsSection = ({ results, isVisible }: ResultsSectionProps) => {
+const ResultsSection = ({ results, dateOfBirth, isVisible }: ResultsSectionProps) => {
   if (!isVisible) return null;
 
   return (
@@ -20,6 +21,7 @@ const ResultsSection = ({ results, isVisible }: ResultsSectionProps) => {
         partialEnergy={results.partialEnergy}
         secretNumber={results.secretNumber}
         chineseZodiac={results.chineseZodiac}
+        dateOfBirth={dateOfBirth}
         isVisible={isVisible}
       />
     </div>
