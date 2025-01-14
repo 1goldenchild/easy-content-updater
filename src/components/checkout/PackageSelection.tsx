@@ -8,8 +8,6 @@ export const packages = [
     id: "starter",
     name: "Core Energy Blueprint Package",
     price: 33.00,
-    priceId: "price_1QepZTCibdAmag3ruLEDrHWO",
-    productId: "prod_RXvQl1kJWmE0lK",
     features: [
       "Lifepath Number Analysis",
       "Partial Energy Reading",
@@ -21,8 +19,6 @@ export const packages = [
     id: "premium",
     name: "Premium Energy Alignment Package",
     price: 44.00,
-    priceId: "price_1QepaQCibdAmag3rICiD03Go",
-    productId: "prod_RXvRf8GHWMsvcf",
     features: [
       "Everything in Core Energy Blueprint",
       "Numerological Compatibility",
@@ -36,8 +32,6 @@ export const packages = [
     name: "Supreme Mastery Package",
     price: 49.40,
     originalPrice: 71.00,
-    priceId: "price_1QepbECibdAmag3rm3LbVCvQ",
-    productId: "prod_RXvSZbsFsu67jS",
     isBestSelling: true,
     features: [
       "Everything in Premium Energy Alignment",

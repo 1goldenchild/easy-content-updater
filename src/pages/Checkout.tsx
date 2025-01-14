@@ -4,18 +4,11 @@ import ContactInfo from "@/components/checkout/ContactInfo"
 import PackageSelection, { packages } from "@/components/checkout/PackageSelection"
 import BillingInfo from "@/components/checkout/BillingInfo"
 import VIPOption from "@/components/checkout/VIPOption"
-import { Elements } from "@stripe/react-stripe-js"
-import { loadStripe } from "@stripe/stripe-js"
-import StripeElements from "@/components/checkout/StripeElements"
 import { toast } from "sonner"
-import { supabase } from "@/integrations/supabase/client"
 import { useIsMobile } from "@/hooks/use-mobile"
-
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '')
 
 const Checkout = () => {
   const isMobile = useIsMobile()
-  const [isProcessing, setIsProcessing] = useState(false)
   const [selectedPackage, setSelectedPackage] = useState("supreme")
   const [isVip, setIsVip] = useState(false)
   const [formData, setFormData] = useState({
@@ -41,7 +34,7 @@ const Checkout = () => {
     return total
   }
 
-  const handleSubmit = async (e: React.FormEvent, paymentMethod: string): Promise<void> => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     console.log('Demo checkout - no payment processing')
     toast.success("This is a demo checkout - no payment will be processed")
@@ -72,7 +65,7 @@ const Checkout = () => {
 
           {/* Main Content */}
           <div className="grid gap-8">
-            {/* Package Selection Section */}
+            {/* Package Information and Selection Section */}
             <div className="bg-gradient-to-br from-purple-900/30 to-purple-800/20 p-6 rounded-xl border border-purple-500/30 shadow-lg shadow-purple-500/10">
               <PackageSelection
                 selectedPackage={selectedPackage}
@@ -112,23 +105,18 @@ const Checkout = () => {
               </div>
             </div>
 
-            {/* Payment Section */}
+            {/* Order Summary */}
             <div className="bg-gradient-to-br from-purple-900/30 to-purple-800/20 p-6 rounded-xl border border-purple-500/30 shadow-lg shadow-purple-500/10">
-              <h2 className="text-lg font-semibold mb-4 text-purple-200">PAYMENT INFORMATION</h2>
-              <Elements stripe={stripePromise}>
-                <StripeElements
-                  onSubmit={handleSubmit}
-                  isProcessing={isProcessing}
-                />
-              </Elements>
-
-              {/* Order Total */}
-              <div className="mt-6 pt-6 border-t border-purple-500/30">
-                <div className="flex justify-between items-center text-lg">
-                  <span className="text-purple-200">Total:</span>
-                  <span className="font-bold text-purple-300">${calculateTotal().toFixed(2)}</span>
-                </div>
+              <div className="flex justify-between items-center text-lg">
+                <span className="text-purple-200">Total:</span>
+                <span className="font-bold text-purple-300">${calculateTotal().toFixed(2)}</span>
               </div>
+              <button 
+                onClick={handleSubmit}
+                className="w-full mt-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+              >
+                Complete Order
+              </button>
             </div>
           </div>
         </motion.div>
