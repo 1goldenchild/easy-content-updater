@@ -39,20 +39,20 @@ const blogPosts = [
     slug: "china-numerology"
   },
   {
-    title: "The Power of Numbers: How Steve Jobs Used Numerology to Build Apple",
-    description: "An in-depth look at how Steve Jobs utilized numerological principles in product launches, pricing strategies, and major business decisions at Apple.",
+    title: "How Michael Jackson used the Power of Numerology: The Influence of the Number 7 on His Career",
+    description: "Discover how the King of Pop strategically used numerology, particularly the number 7, to shape his artistic vision and create a lasting legacy that changed music forever.",
     date: "March 27, 2024",
-    readTime: "9 min read",
-    mainImage: "/lovable-uploads/73da4848-4fc6-412c-b1a9-0efc609335e3.png",
-    slug: "steve-jobs-numerology"
+    readTime: "10 min read",
+    mainImage: "/lovable-uploads/787349e3-6668-40c9-90db-3dd2d0f8d6ef.png",
+    slug: "michael-jackson-numerology"
   },
   {
-    title: "Tesla's Secret Numbers: Nikola Tesla's Obsession with 3, 6, and 9",
-    description: "Explore how Nikola Tesla's fascination with these specific numbers influenced his inventions and theories about the universe's mathematical nature.",
-    date: "March 26, 2024",
-    readTime: "7 min read",
-    mainImage: "/lovable-uploads/69e9446c-9b3d-44b9-87f5-db9647e25dcf.png",
-    slug: "tesla-numerology"
+    title: "How Elon Musk Uses Numerology to Get Rich: The Power of 8 and 28",
+    description: "Discover how the world's richest man strategically uses numerology, particularly the numbers 8 and 28, to build his fortune through Tesla, SpaceX, and Twitter.",
+    date: "March 20, 2024",
+    readTime: "10 min read",
+    mainImage: "/lovable-uploads/4c2bf36a-524f-4700-86f4-fcb7d217d5fd.png",
+    slug: "elon-musk-numerology"
   }
 ];
 
