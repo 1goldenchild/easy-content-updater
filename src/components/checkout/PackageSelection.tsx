@@ -5,8 +5,8 @@ import { Package, Sparkles, Brain, Star, Heart, Target, Rocket, Crown } from "lu
 export const packages = [
   {
     id: "starter",
-    name: "Core Energy Blueprint Package",
-    price: 33.00,
+    name: "(Core) Energy Blueprint Package",
+    price: 44.00,
     description: "Start your journey with a deep dive into your unique energy.",
     features: [
       {
@@ -33,8 +33,8 @@ export const packages = [
   },
   {
     id: "premium",
-    name: "Premium Energy Alignment Package",
-    price: 44.00,
+    name: "(Premium) Energy Alignment Package",
+    price: 58.00,
     description: "Step up your transformation with our all-inclusive guide to mastering your personal energy.",
     features: [
       {
@@ -66,9 +66,9 @@ export const packages = [
   },
   {
     id: "supreme",
-    name: "Supreme Mastery Package",
-    price: 49.40,
-    originalPrice: 71.00,
+    name: "(Supreme) Mastery Package",
+    price: 71.00,
+    originalPrice: 107.00,
     description: "Become the ultimate creator of your life's energy by mastering your environment.",
     isBestSelling: true,
     features: [
