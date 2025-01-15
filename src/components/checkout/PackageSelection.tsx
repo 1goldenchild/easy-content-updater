@@ -194,46 +194,6 @@ const PackageSelection = ({ selectedPackage, onPackageChange }: PackageSelection
           </div>
         ))}
       </div>
-
-      {/* Package Selection */}
-      <RadioGroup
-        value={selectedPackage}
-        onValueChange={onPackageChange}
-        className="space-y-3"
-      >
-        {packages.map((pkg) => (
-          <div
-            key={pkg.id}
-            className={`flex items-center justify-between p-4 rounded-lg transition-all ${
-              pkg.isBestSelling 
-                ? 'bg-gradient-to-r from-[#1A1F2C] to-[#2A2F3C] border border-[#9b87f5]/30 shadow-lg'
-                : 'hover:bg-[#1A1F2C] border border-transparent hover:border-[#403E43]'
-            }`}
-          >
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value={pkg.id} id={pkg.id} />
-              <Label htmlFor={pkg.id} className="cursor-pointer">
-                <div>
-                  {pkg.isBestSelling && (
-                    <span className="text-sm text-[#9b87f5] block">BEST VALUE</span>
-                  )}
-                  {pkg.name}
-                </div>
-              </Label>
-            </div>
-            <div className="text-right">
-              {pkg.originalPrice && (
-                <span className="text-sm line-through text-[#8A898C] mr-2">
-                  ${pkg.originalPrice.toFixed(2)}
-                </span>
-              )}
-              <span className={`font-semibold ${pkg.isBestSelling ? 'text-[#9b87f5]' : 'text-white'}`}>
-                ${pkg.price.toFixed(2)}
-              </span>
-            </div>
-          </div>
-        ))}
-      </RadioGroup>
     </div>
   )
 }
