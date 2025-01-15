@@ -7,10 +7,10 @@ interface VIPOptionProps {
 
 const VIPOption = ({ isVip, onVipChange }: VIPOptionProps) => {
   return (
-    <div className="border border-[#B7A080] rounded-lg p-4 bg-[#2A2F3C]/50">
+    <div className="border border-purple-500 rounded-lg p-4 bg-[#2A2F3C]/50">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="font-semibold text-[#B7A080]">⭐VIP CUSTOMER⭐</h3>
+          <h3 className="font-semibold text-purple-400">⭐VIP CUSTOMER⭐</h3>
           <p className="text-sm text-gray-400">By Joining The VIP List You Get to Skip The Line And Receive Your Analysis Sooner!</p>
         </div>
         <div className="text-right">
@@ -18,7 +18,7 @@ const VIPOption = ({ isVip, onVipChange }: VIPOptionProps) => {
           <Button
             type="button"
             variant="outline"
-            className={`border-[#B7A080] ${isVip ? 'bg-[#B7A080] text-white' : 'text-[#B7A080]'}`}
+            className={`border-purple-500 ${isVip ? 'bg-purple-500 text-white' : 'text-purple-500'}`}
             onClick={() => onVipChange(!isVip)}
           >
             {isVip ? '- Remove' : '+ Add'}
