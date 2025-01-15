@@ -1,5 +1,11 @@
 import { Package, Sparkles, Brain, Star, Heart, Target, Rocket, Crown } from "lucide-react"
 
+// Define the interface for the component props
+interface PackageSelectionProps {
+  selectedPackage: string
+  onPackageChange: (packageId: string) => void
+}
+
 export const packages = [
   {
     id: "starter",
