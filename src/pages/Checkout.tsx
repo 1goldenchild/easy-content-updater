@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { motion } from "framer-motion"
 import PackageSelection from "@/components/checkout/PackageSelection"
 import { toast } from "sonner"
 import { useIsMobile } from "@/hooks/use-mobile"
@@ -16,29 +15,21 @@ const Checkout = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#1A1F2C] py-8 px-4">
-      <div className="max-w-5xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="space-y-8"
-        >
+    <div className="min-h-screen bg-[#1A1F2C]">
+      <div className="max-w-[1600px] mx-auto px-6 py-12">
+        <div className="space-y-10">
           {/* Header Section */}
-          <div className="text-center space-y-4">
-            <motion.h1
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className={`${isMobile ? 'text-3xl' : 'text-4xl'} font-bold text-white mb-4`}
-            >
-              Choose Your Numerology Package
-            </motion.h1>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              Unlock the secrets of your numerological DNA and transform your life with our comprehensive analysis packages
+          <div className="text-center space-y-4 mb-12">
+            <h1 className={`${isMobile ? 'text-3xl' : 'text-4xl'} font-bold text-white`}>
+              Select Your Package
+            </h1>
+            <p className="text-[#9F9EA1] text-lg max-w-2xl mx-auto">
+              Choose the analysis package that best suits your needs
             </p>
           </div>
 
           {/* Package Selection */}
-          <div className="bg-[#2A2F3C] p-6 rounded-xl border border-[#403E43] shadow-lg">
+          <div className="bg-[#2A2F3C] p-8 rounded-xl border border-[#403E43]">
             <PackageSelection
               selectedPackage={selectedPackage}
               onPackageChange={setSelectedPackage}
@@ -49,12 +40,12 @@ const Checkout = () => {
           <div className="max-w-md mx-auto">
             <button 
               onClick={handleSubmit}
-              className="w-full bg-[#B7A080] hover:bg-[#8A795F] text-white font-semibold py-4 px-8 rounded-lg transition-colors shadow-lg"
+              className="w-full bg-[#B7A080] hover:bg-[#8A795F] text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-200"
             >
-              Begin Your Journey
+              Complete Purchase
             </button>
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   )

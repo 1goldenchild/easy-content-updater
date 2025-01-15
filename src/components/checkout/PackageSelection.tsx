@@ -104,35 +104,30 @@ export const packages = [
   }
 ]
 
-interface PackageSelectionProps {
-  selectedPackage: string
-  onPackageChange: (value: string) => void
-}
-
 const PackageSelection = ({ selectedPackage, onPackageChange }: PackageSelectionProps) => {
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {packages.map((pkg) => (
           <div 
             key={pkg.id}
-            className={`relative p-8 rounded-xl transition-all transform hover:scale-[1.02] duration-300 ${
-              pkg.isBestSelling 
-                ? 'bg-gradient-to-br from-[#1A1F2C]/95 to-[#2A2F3C]/95 border-2 border-[#B7A080]/30 shadow-xl shadow-[#1A1F2C]/40' 
-                : 'bg-[#1A1F2C]/90 border border-[#403E43] hover:border-[#B7A080]/30 hover:shadow-lg hover:shadow-[#1A1F2C]/20'
+            onClick={() => onPackageChange(pkg.id)}
+            className={`relative p-8 rounded-xl cursor-pointer transition-colors duration-200 ${
+              selectedPackage === pkg.id
+                ? 'bg-[#1A1F2C] border-2 border-[#B7A080]' 
+                : 'bg-[#1A1F2C] border border-[#403E43] hover:border-[#B7A080]/30'
             }`}
           >
             {pkg.isBestSelling && (
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-gradient-to-r from-[#B7A080] via-[#8A795F] to-[#665C48] rounded-full text-white text-sm font-semibold shadow-lg">
-                <span className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shine" />
-                <span className="relative">Most Popular</span>
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-[#B7A080] rounded-full text-white text-sm font-medium">
+                Most Popular
               </div>
             )}
             
             <div className="flex items-start mb-8">
-              <Package className={`w-8 h-8 ${pkg.isBestSelling ? 'text-[#B7A080]' : 'text-[#8E9196]'} mr-4 mt-1`} />
+              <Package className={`w-8 h-8 ${selectedPackage === pkg.id ? 'text-[#B7A080]' : 'text-[#8E9196]'} mr-4 mt-1`} />
               <div>
-                <h3 className={`text-2xl font-bold tracking-tight ${pkg.isBestSelling ? 'bg-gradient-to-r from-[#B7A080] via-[#8A795F] to-[#665C48] bg-clip-text text-transparent' : 'text-[#E5E5E6]'}`}>
+                <h3 className={`text-2xl font-bold ${selectedPackage === pkg.id ? 'text-[#B7A080]' : 'text-[#E5E5E6]'}`}>
                   {pkg.name}
                 </h3>
               </div>
@@ -146,14 +141,12 @@ const PackageSelection = ({ selectedPackage, onPackageChange }: PackageSelection
                 return (
                   <div 
                     key={index} 
-                    className={`flex items-start group hover:transform hover:translate-x-1 transition-transform duration-200 ${
-                      pkg.isBestSelling ? 'text-[#E5E5E6]' : 'text-[#C8C8C9]'
-                    }`}
+                    className="flex items-start text-[#C8C8C9]"
                   >
-                    <Icon className={`w-6 h-6 ${pkg.isBestSelling ? 'text-[#B7A080] group-hover:text-[#8A795F]' : 'text-[#8E9196] group-hover:text-[#9F9EA1]'} mr-4 mt-1 flex-shrink-0 transition-colors duration-200`} />
+                    <Icon className={`w-6 h-6 ${selectedPackage === pkg.id ? 'text-[#B7A080]' : 'text-[#8E9196]'} mr-4 mt-1 flex-shrink-0`} />
                     <div>
                       <div className="font-medium text-xl mb-1">{feature.title}</div>
-                      <div className="text-lg text-[#8A898C] group-hover:text-[#9F9EA1] transition-colors duration-200">{feature.description}</div>
+                      <div className="text-lg text-[#8A898C]">{feature.description}</div>
                     </div>
                   </div>
                 )
@@ -161,15 +154,11 @@ const PackageSelection = ({ selectedPackage, onPackageChange }: PackageSelection
             </div>
 
             {pkg.bonus && (
-              <div className="mt-10 p-6 rounded-lg bg-gradient-to-br from-[#1A1F2C] to-[#2A2F3C] border border-[#B7A080]/20 relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shine" />
-                <div className="absolute inset-0 bg-gradient-to-br from-[#B7A080]/5 to-[#8A795F]/5 group-hover:opacity-100 opacity-0 transition-opacity duration-500" />
-                <div className="absolute -inset-1 bg-gradient-to-r from-[#B7A080] via-[#8A795F] to-[#665C48] opacity-20 blur-sm group-hover:opacity-30 transition-opacity duration-500" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(183,160,128,0.1),transparent_70%)]" />
-                <div className="relative flex items-start">
-                  <pkg.bonus.icon className="w-7 h-7 text-[#B7A080] mr-4 mt-1 flex-shrink-0 animate-pulse" />
+              <div className="mt-10 p-6 rounded-lg bg-[#1A1F2C] border border-[#B7A080]/20">
+                <div className="flex items-start">
+                  <pkg.bonus.icon className="w-7 h-7 text-[#B7A080] mr-4 mt-1 flex-shrink-0" />
                   <div>
-                    <div className="font-semibold text-xl animate-text-shimmer bg-clip-text text-transparent bg-[linear-gradient(110deg,#B7A080,45%,#8A795F,55%,#665C48)] bg-[length:250%_100%]">
+                    <div className="font-semibold text-xl text-[#B7A080]">
                       {pkg.bonus.title}
                     </div>
                     <div className="text-lg text-[#9F9EA1] mt-2">{pkg.bonus.description}</div>
@@ -184,7 +173,7 @@ const PackageSelection = ({ selectedPackage, onPackageChange }: PackageSelection
                   ${pkg.originalPrice.toFixed(2)}
                 </span>
               )}
-              <span className={`text-4xl font-bold ${pkg.isBestSelling ? 'animate-text-shimmer bg-clip-text text-transparent bg-[linear-gradient(110deg,#B7A080,45%,#8A795F,55%,#665C48)] bg-[length:250%_100%]' : 'text-white'}`}>
+              <span className={`text-4xl font-bold ${selectedPackage === pkg.id ? 'text-[#B7A080]' : 'text-white'}`}>
                 ${pkg.price.toFixed(2)}
               </span>
             </div>
