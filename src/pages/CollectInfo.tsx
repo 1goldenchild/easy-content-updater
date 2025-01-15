@@ -15,11 +15,8 @@ const CollectInfo = () => {
               className="mb-8 text-center lg:text-left"
             >
               <h1 className="text-3xl md:text-4xl font-bold">
-                <span className="relative inline-block">
-                  <span className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500 opacity-50 blur-lg animate-pulse" />
-                  <span className="relative bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500 bg-clip-text text-transparent animate-shine">
-                    Unlock Your Complete Numerology Profile
-                  </span>
+                <span className="bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500 bg-clip-text text-transparent animate-shine">
+                  Unlock Your Complete Numerology Profile
                 </span>
               </h1>
             </motion.div>
