@@ -8,11 +8,11 @@ const CollectInfo = () => {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           {/* Form Section with Title */}
-          <div className="flex flex-col items-center">
+          <div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mb-8 text-center"
+              className="mb-8 text-center lg:text-left"
             >
               <h1 className="text-3xl md:text-4xl font-bold">
                 <span className="relative inline-block">
