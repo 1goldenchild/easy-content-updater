@@ -1,20 +1,30 @@
 import { motion } from "framer-motion";
+import { Eye, Star, Circle, Square, Brain, Heart, Sparkles, Infinity } from "lucide-react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const LifePathNine = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-[#2A0E61] to-[#1B0B3B]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="space-y-8"
         >
           {/* Header Section */}
-          <div className="text-center">
+          <div className="text-center mb-16">
+            <motion.div 
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 260, damping: 20 }}
+              className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 flex items-center justify-center"
+            >
+              <span className="text-5xl font-bold text-white">9</span>
+            </motion.div>
             <motion.h1 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-200 to-purple-400"
+              className="text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500"
             >
               Life Path Number 9
             </motion.h1>
@@ -24,124 +34,152 @@ const LifePathNine = () => {
               transition={{ delay: 0.2 }}
               className="mt-4 text-xl text-purple-200"
             >
-              The Number of Completion & Transcendence
+              The Number of Completion & Universal Love
             </motion.p>
           </div>
 
-          {/* Main Content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Introduction Section */}
+          {/* Main Content Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Spiritual Nature Card */}
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
+              className="col-span-1 md:col-span-2 lg:col-span-3 bg-white/5 backdrop-blur-lg rounded-xl p-8 border border-white/10"
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="p-3 rounded-full bg-purple-500/20">
+                  <Star className="w-8 h-8 text-purple-400" />
+                </div>
+                <h2 className="text-2xl font-bold text-white">Spiritual Significance</h2>
+              </div>
+              <p className="text-lg text-white/80 leading-relaxed">
+                9 is one of the most misunderstood numbers out here; it's an extremely important number in the matrix. 9 is the number of completion and ending, but not only that, when something comes to a 9, either it ends right there, or it gets transcended to the next level into a better version.
+              </p>
+            </motion.div>
+
+            {/* Reality & Illusion Card */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="bg-white/5 backdrop-blur-lg rounded-xl p-8 border border-white/10"
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="p-3 rounded-full bg-blue-500/20">
+                  <Eye className="w-8 h-8 text-blue-400" />
+                </div>
+                <h2 className="text-2xl font-bold text-white">Reality & Illusion</h2>
+              </div>
+              <p className="text-lg text-white/80 leading-relaxed">
+                9 is the number of reality and illusion. Reality starts with "R," which is the 18th letter, and illusion starts with "I," which is the 9th letter. Everything is an illusion; nothing is really there. That table you see is not actually hard; the energy is just moving extremely slow to a point where you think it's solid.
+              </p>
+            </motion.div>
+
+            {/* Geometric Connection Card */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20"
+              className="bg-white/5 backdrop-blur-lg rounded-xl p-8 border border-white/10"
             >
-              <h2 className="text-2xl font-semibold text-purple-200 mb-4">Understanding the 9</h2>
-              <p className="text-white/90 leading-relaxed">
-                So you're a Life Path 9. 9 is one of the most misunderstood numbers out here; it's an extremely important number in the matrix. 9 is the number of completion and ending, but not only that, when something comes to a 9, either it ends right there, or it gets transcended to the next level into a better version.
-              </p>
-              <p className="text-white/90 leading-relaxed mt-4">
-                9 is the number of reality and illusion. Reality starts with "R," which is the 18th letter, and illusion starts with "I," which is the 9th letter. Because reality is not really the realm we live in. Everything is an illusion; nothing is really there. That table you see is not actually hard; the energy is just moving extremely slowly to a point where you think it's solid, but solid matter is not actually real.
+              <div className="flex items-center gap-4 mb-6">
+                <div className="p-3 rounded-full bg-green-500/20">
+                  <Square className="w-8 h-8 text-green-400" />
+                </div>
+                <h2 className="text-2xl font-bold text-white">Geometric Harmony</h2>
+              </div>
+              <p className="text-lg text-white/80 leading-relaxed">
+                Every shape connects to 9. A circle has 360 degrees (3+6=9). A square's angles: 90×4=360 (3+6=9). This universal pattern shows 9's fundamental role in geometry and nature's design. The number 9 appears in all regular geometric forms, revealing its deep connection to physical reality.
               </p>
             </motion.div>
 
-            {/* Manifestation Section */}
+            {/* Intelligence & Spirituality Card */}
             <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20"
+              className="bg-white/5 backdrop-blur-lg rounded-xl p-8 border border-white/10"
             >
-              <h2 className="text-2xl font-semibold text-purple-200 mb-4">Manifestation & Spirituality</h2>
-              <p className="text-white/90 leading-relaxed">
-                When I said number 9 is the number manifestation, not necessarily that 9s are the richest because they are not, although they could be. 9 thrives in society when it's based on spirituality. If it's not based on spirituality, they have a hard time finding their purpose.
-              </p>
-              <p className="text-white/90 leading-relaxed mt-4">
-                Every single thing around you is a 9. Don't believe me? If it's physical, it has a shape by definition. Just look at all the shapes. Let's say a circle, it has 360 degrees. 3+6=9. Or a square; 1 angle has 90 degrees, 2 angles is 180, which is 9, 3 has 270, which is 9, all four angles have 360 degrees, which is 9. You're starting to understand?
-              </p>
-            </motion.div>
-
-            {/* Spiritual Nature */}
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5 }}
-              className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20"
-            >
-              <h2 className="text-2xl font-semibold text-purple-200 mb-4">The Spiritual Journey</h2>
-              <p className="text-white/90 leading-relaxed">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="p-3 rounded-full bg-pink-500/20">
+                  <Brain className="w-8 h-8 text-pink-400" />
+                </div>
+                <h2 className="text-2xl font-bold text-white">Intelligence & Spirituality</h2>
+              </div>
+              <p className="text-lg text-white/80 leading-relaxed">
                 9s are extremely spiritual and usually rebellious; they don't fit well in the box; they like to live outside the box. They are also one of the smartest numbers, but a lot of them are complete failures. 9 used to be widely respected in multiple ancient civilizations; in other numerology systems, they don't even include the 9 because they have too much respect for it.
               </p>
-              <p className="text-white/90 leading-relaxed mt-4">
-                But the more this new world evolves with all technologies and especially the elite controlling us and blocking our spiritual ability, 9s have become kind of obsolete. That's why a lot of them are addicted to drugs. If you want a good example, just look at the "Wolf of Wall Street"; everyone likes this movie, right? Well, it was based on Jordan Belfort, who was born on the 9th; he was doing drug cocktails and mixing them for different periods of the day.
-              </p>
             </motion.div>
 
-            {/* Challenges & Evolution */}
+            {/* Modern Challenges Card */}
             <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6 }}
-              className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="bg-white/5 backdrop-blur-lg rounded-xl p-8 border border-white/10"
             >
-              <h2 className="text-2xl font-semibold text-purple-200 mb-4">Challenges & Evolution</h2>
-              <p className="text-white/90 leading-relaxed">
-                So taking substances is one thing that all 9s should be very careful with because they have an addictive personality as it's hard for them to live in this era. But there are some evolved 9s. You're reading this, so you're probably an evolved 9 yourself; I'm an evolved 9. 9 also has the biggest ego. If you look at gematria, ego equals 9, and an ego is a superpower as long as you work hard to enjoy it.
-              </p>
-              <p className="text-white/90 leading-relaxed mt-4">
-                A reason 9s fall into drugs is because they think they are the best but don't actually do the job to justify it. So they can't cope with it and get addicted to substances. When talking about the ego, it's normal that 9s have the biggest ego.
+              <div className="flex items-center gap-4 mb-6">
+                <div className="p-3 rounded-full bg-red-500/20">
+                  <Heart className="w-8 h-8 text-red-400" />
+                </div>
+                <h2 className="text-2xl font-bold text-white">Modern Challenges</h2>
+              </div>
+              <p className="text-lg text-white/80 leading-relaxed">
+                In this modern world with its technologies and societal controls blocking spiritual abilities, 9s often struggle to find their place. This can lead to challenges with substances and addictive behaviors. However, evolved 9s can transcend these challenges and reach their full potential.
               </p>
             </motion.div>
 
-            {/* Universal Connection */}
+            {/* Universal Connection Card */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="bg-white/5 backdrop-blur-lg rounded-xl p-8 border border-white/10"
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="p-3 rounded-full bg-yellow-500/20">
+                  <Infinity className="w-8 h-8 text-yellow-400" />
+                </div>
+                <h2 className="text-2xl font-bold text-white">Universal Connection</h2>
+              </div>
+              <p className="text-lg text-white/80 leading-relaxed">
+                9 is all around us; everything always comes back to 9. Multiply 9 by any number and add the digits of the result - it always reduces to 9. This mathematical magic shows 9's role as a number of completion and universal connection.
+              </p>
+            </motion.div>
+
+            {/* Eye Connection Card */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
-              className="md:col-span-2 bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20"
+              className="col-span-1 md:col-span-2 lg:col-span-3 bg-white/5 backdrop-blur-lg rounded-xl p-8 border border-white/10"
             >
-              <h2 className="text-2xl font-semibold text-purple-200 mb-4">Universal Connection</h2>
-              <p className="text-white/90 leading-relaxed">
-                9 is all around you; everything always comes back to 9; 9x2 is 18, 1+8 is 9, and you can do so with any number. That's also why they are very adaptable; they can adapt to every situation. That is one of your gifts; you're extremely smart. The illusion and reality are dictated by the 9; without 9, reality is not full; it dictates what ends and what revolves to the next level.
-              </p>
-              <p className="text-white/90 leading-relaxed mt-4">
-                9s are one of the smartest; one of the most spiritually advanced. Now I'm gonna drop some big secrets right now, and don't forget where you heard it from. Numerology 33… 9 is connected to the eye. 👁️ The letter "I" is the 9th letter; pronounce "eye" and "I," same thing right? The frequency you use when saying it is the exact same, even in Arabic, the 18th letter when you say it is the same.
+              <div className="flex items-center gap-4 mb-6">
+                <div className="p-3 rounded-full bg-indigo-500/20">
+                  <Eye className="w-8 h-8 text-indigo-400" />
+                </div>
+                <h2 className="text-2xl font-bold text-white">The Eye Connection</h2>
+              </div>
+              <p className="text-lg text-white/80 leading-relaxed">
+                9 has a profound connection to vision and perception. The letter "I" is the 9th letter, sharing the same sound as "eye". This connection extends to spiritual vision - many 9s develop enhanced intuition and spiritual sight, especially if they've experienced physical vision challenges. This spiritual compensation often leads to heightened awareness and deeper understanding.
               </p>
             </motion.div>
 
-            {/* Eye Connection & Spiritual Advancement */}
+            {/* Compatibility Section */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
-              className="md:col-span-2 bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20"
+              className="col-span-1 md:col-span-2 lg:col-span-3 bg-white/5 backdrop-blur-lg rounded-xl p-8 border border-white/10"
             >
-              <h2 className="text-2xl font-semibold text-purple-200 mb-4">The Eye Connection</h2>
-              <p className="text-white/90 leading-relaxed">
-                A lot of 9s with karmic debt have eye problems; the elite gotta tell you everything; they told us in the movie "Jack Sparrow" with Johnny Depp. He's born on the 9th; he wore a patch on his eye, and in real life, he's actually close to being blind in one eye and has another problem in his other eye. What I think is one of the reasons 9s are so spiritually advanced is that because the 9 is connected with the eye and often has eye problems, the other senses get stronger.
-              </p>
-              <p className="text-white/90 leading-relaxed mt-4">
-                9 is also strongly linked to the number 2, which is the feminine, extremely intuitive. Just look at the word "femi(nine)"; you can't say it without the 9 in there. 9s are also energy suckers; they suck energy out of the numbers like a black hole. If you draw a 9 starting from the bottom and continue the motion, you will actually make a continuous spiral.
-              </p>
-            </motion.div>
-
-            {/* Final Secrets & Compatibility */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9 }}
-              className="md:col-span-2 bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20"
-            >
-              <h2 className="text-2xl font-semibold text-purple-200 mb-4">Hidden Secrets & Compatibility</h2>
-              <p className="text-white/90 leading-relaxed">
-                Look at the pie; the pattern of the pie, whose first vowel is 1, the 9th letter. Now, I'm saying too much, ahah... On another note, I got another secret for you and the 9. There was a city called Nineveh built by non-elites who were close to overpowering the elite, but they lost and were destroyed; you should really look into that.
-              </p>
-              <p className="text-white/90 leading-relaxed mt-4">
-                One thing for sure is that if there is ever utopia on earth, 9 will be one of the major reasons behind it. 9 is also the most useful energy if you want to open your third eye. When I said that 9s are energy suckers, that is why usually 9s are the enemies of the master numbers because they have a lot of energy and it gets sucked right in.
-              </p>
-              <p className="text-white/90 leading-relaxed mt-4">
-                So to end about the 9, the friendly numbers of the number 9 are the 1-9, and the enemies are the 11-22 and the 33.
+              <div className="flex items-center gap-4 mb-6">
+                <div className="p-3 rounded-full bg-purple-500/20">
+                  <Sparkles className="w-8 h-8 text-purple-400" />
+                </div>
+                <h2 className="text-2xl font-bold text-white">Number Compatibility</h2>
+              </div>
+              <p className="text-lg text-white/80 leading-relaxed">
+                The friendly numbers of the number 9 are 1-9, while the master numbers (11, 22, and 33) can create challenging dynamics. 9s are energy absorbers, which can create complex relationships with these powerful numbers. Understanding these dynamics is crucial for 9s in both personal and professional relationships.
               </p>
             </motion.div>
           </div>
