@@ -1,56 +1,36 @@
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom"
-import { useEffect } from "react"
-import Navbar from "@/components/layout/Navbar"
-import Footer from "@/components/layout/Footer"
-import Index from "@/pages/Index"
-import Sales from "@/pages/Sales"
-import CollectInfo from "@/pages/CollectInfo"
-import Portal from "@/pages/Portal"
-import Terms from "@/pages/Terms"
-import Privacy from "@/pages/Privacy"
-import Refund from "@/pages/Refund"
-import Support from "@/pages/Support"
-import Checkout from "@/pages/Checkout"
-import BlogPost from "@/pages/BlogPost"
-import Blog from "@/pages/Blog"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-// ScrollToTop component to handle scroll behavior
-const ScrollToTop = () => {
-  const { pathname } = useLocation()
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import Numerology from "./pages/Numerology";
+import LifePathNine from "./pages/LifePathNine";
 
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [pathname])
+const queryClient = new QueryClient();
 
-  return null
-}
-
-const App = () => {
+function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="flex-1">
-          <Routes>
-            <Route path="/" element={<Navigate to="/numerology/analysis" replace />} />
-            <Route path="/numerology/analysis" element={<Index />} />
-            <Route path="/sales" element={<Sales />} />
-            <Route path="/collect-info" element={<CollectInfo />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/portal" element={<Portal />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/refund" element={<Refund />} />
-            <Route path="/support" element={<Support />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
-  )
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/numerology" element={<Numerology />} />
+          <Route path="/lifepath-number-9" element={<LifePathNine />} />
+        </Routes>
+      </Router>
+      <Toaster position="bottom-right" />
+      <Analytics />
+      <SpeedInsights />
+    </QueryClientProvider>
+  );
 }
 
-export default App
+export default App;
