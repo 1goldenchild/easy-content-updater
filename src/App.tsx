@@ -27,6 +27,8 @@ const ScrollToTop = () => {
 }
 
 const App = () => {
+  console.log("App component rendering"); // Added for debugging
+
   return (
     <Router>
       <ScrollToTop />
@@ -34,7 +36,7 @@ const App = () => {
         <Navbar />
         <main className="flex-1">
           <Routes>
-            <Route path="/" element={<Navigate to="/numerology/analysis" replace />} />
+            <Route path="/" element={<Index />} />
             <Route path="/numerology/analysis" element={<Index />} />
             <Route path="/sales" element={<Sales />} />
             <Route path="/collect-info" element={<CollectInfo />} />
