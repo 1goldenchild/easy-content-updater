@@ -100,7 +100,15 @@ const Portal = () => {
           </div>
         </div>
       </div>
-      {showResults && <ExportButton />}
+      {showResults && selectedDate && (
+        <ExportButton 
+          lifePath={results.lifePath}
+          partialEnergy={results.partialEnergy}
+          secretNumber={results.secretNumber}
+          chineseZodiac={results.chineseZodiac}
+          dateOfBirth={selectedDate}
+        />
+      )}
     </div>
   );
 };
