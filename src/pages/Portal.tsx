@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
-import { Share2 } from "lucide-react";
 import PortalHeader from "@/components/portal/PortalHeader";
 import DateInputSection from "@/components/portal/DateInputSection";
 import ResultsSection from "@/components/portal/ResultsSection";
 import ProgressIndicator from "@/components/numerology/ProgressIndicator";
-import ExportButton from "@/components/numerology/ExportButton";
-import { Button } from "@/components/ui/button";
 import { 
   calculateLifePath, 
   calculatePartialEnergy, 
@@ -54,61 +51,49 @@ const Portal = () => {
     toast.success("Calculation complete!");
   };
 
-  const handleShare = async () => {
-    try {
-      if (navigator.share) {
-        await navigator.share({
-          title: 'My Numerology Analysis',
-          text: `Life Path: ${results.lifePath}\nPartial Energy: ${results.partialEnergy}\nSecret Number: ${results.secretNumber}\nChinese Zodiac: ${results.chineseZodiac}`,
-          url: window.location.href
-        });
-        toast.success("Analysis shared successfully!");
-      } else {
-        // Fallback for browsers that don't support the Web Share API
-        await navigator.clipboard.writeText(window.location.href);
-        toast.success("Link copied to clipboard!");
-      }
-    } catch (error) {
-      console.error("Error sharing:", error);
-      toast.error("Could not share the analysis");
-    }
+  const handleEbookDownload = (url: string) => {
+    window.open(url, '_blank');
   };
 
   return (
-    <div className="min-h-screen w-full overflow-x-hidden bg-[#221F26]">
-      <div id="portal-content" className="max-w-7xl mx-auto px-4 py-8">
+    <div className="min-h-screen w-full overflow-x-hidden">
+      <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col items-center">
           {showResults && <ProgressIndicator />}
           <div className="w-full space-y-8">
             <PortalHeader />
             <DateInputSection onCalculate={handleCalculate} />
-            
             {selectedDate && (
-              <div className="space-y-6">
-                <ResultsSection 
-                  results={results}
-                  dateOfBirth={selectedDate}
-                  isVisible={showResults}
-                />
+              <ResultsSection 
+                results={results}
+                dateOfBirth={selectedDate}
+                isVisible={showResults}
+              />
+            )}
+            
+            {showResults && (
+              <div className="mt-16 p-8 rounded-lg bg-gradient-to-r from-[#2A2F3C] to-[#221F26] border border-[#FFD700]/20">
+                <h2 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-[#FFD700] to-[#FDB931] bg-clip-text text-transparent">
+                  Offered Numerology eBooks
+                </h2>
                 
-                {showResults && (
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
-                    <ExportButton 
-                      lifePath={results.lifePath}
-                      partialEnergy={results.partialEnergy}
-                      secretNumber={results.secretNumber}
-                      chineseZodiac={results.chineseZodiac}
-                      dateOfBirth={selectedDate}
-                    />
-                    <Button
-                      onClick={handleShare}
-                      className="bg-purple-600 hover:bg-purple-700 text-white flex items-center gap-2"
-                    >
-                      <Share2 className="w-4 h-4" />
-                      Share Analysis
-                    </Button>
-                  </div>
-                )}
+                <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                  <button 
+                    onClick={() => handleEbookDownload("https://d2saw6je89goi1.cloudfront.net/uploads/digital_asset/file/1195754/the-golden-numerology-guide-2023-edition..pdf")}
+                    className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#3A3F4C] to-[#2A2F3C] hover:from-[#FFD700]/20 hover:to-[#FDB931]/20 transition-all duration-300 text-white/90 hover:text-[#FFD700] border border-[#FFD700]/20 hover:border-[#FFD700]/40 flex items-center gap-2"
+                  >
+                    <span>📚</span>
+                    The Golden Numerology Guide
+                  </button>
+                  
+                  <button 
+                    onClick={() => handleEbookDownload("https://d2saw6je89goi1.cloudfront.net/uploads/digital_asset/file/1195755/get-rich-using-numerology-ebook-2023-editon.pdf")}
+                    className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#3A3F4C] to-[#2A2F3C] hover:from-[#FFD700]/20 hover:to-[#FDB931]/20 transition-all duration-300 text-white/90 hover:text-[#FFD700] border border-[#FFD700]/20 hover:border-[#FFD700]/40 flex items-center gap-2"
+                  >
+                    <span>💰</span>
+                    Get Rich Using Numerology
+                  </button>
+                </div>
               </div>
             )}
           </div>

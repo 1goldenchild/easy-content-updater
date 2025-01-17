@@ -1,194 +1,173 @@
+import { useState } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import { toast } from "sonner";
 
-interface ExportButtonProps {
-  lifePath: number;
-  partialEnergy: number;
-  secretNumber: number;
-  chineseZodiac: string;
-  dateOfBirth: Date;
-}
+const ExportButton = () => {
+  const [isExporting, setIsExporting] = useState(false);
 
-const ExportButton = ({
-  lifePath,
-  partialEnergy,
-  secretNumber,
-  chineseZodiac,
-  dateOfBirth,
-}: ExportButtonProps) => {
-  const generateHTML = () => {
-    const formattedDate = new Date().toLocaleDateString();
-    const birthDate = new Date(dateOfBirth).toLocaleDateString();
+  const exportToPDF = async () => {
+    try {
+      setIsExporting(true);
+      toast.info("Preparing your PDF...");
 
-    const html = `
-      <!DOCTYPE html>
-      <html lang="en">
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Your Numerology Analysis</title>
-          <style>
-            body {
-              font-family: system-ui, -apple-system, sans-serif;
-              line-height: 1.5;
-              max-width: 800px;
-              margin: 0 auto;
-              padding: 2rem;
-              background: #1a1a2e;
-              color: #fff;
-            }
-            .header {
-              background: linear-gradient(to right, #8B5CF6, #D946EF);
-              padding: 2rem;
-              border-radius: 1rem;
-              margin-bottom: 2rem;
-              text-align: center;
-            }
-            .date {
-              color: rgba(255,255,255,0.7);
-              font-size: 0.875rem;
-              margin-bottom: 1rem;
-            }
-            .section {
-              background: rgba(255,255,255,0.1);
-              border-radius: 1rem;
-              padding: 1.5rem;
-              margin-bottom: 1.5rem;
-            }
-            .grid {
-              display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-              gap: 1rem;
-              margin-top: 1.5rem;
-            }
-            .number-card {
-              background: rgba(139, 92, 246, 0.1);
-              border: 1px solid rgba(139, 92, 246, 0.2);
-              padding: 1rem;
-              border-radius: 0.5rem;
-            }
-            .number-value {
-              font-size: 2rem;
-              font-weight: bold;
-              background: linear-gradient(to right, #8B5CF6, #D946EF);
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
-              margin-bottom: 0.5rem;
-            }
-            .label {
-              color: rgba(255,255,255,0.7);
-              font-size: 0.875rem;
-            }
-            @media print {
-              body {
-                background: white;
-                color: black;
+      // Get the content container
+      const contentElement = document.getElementById("portal-content");
+      if (!contentElement) {
+        throw new Error("Content element not found");
+      }
+
+      // Temporarily modify scrollable elements to show full content
+      const scrollAreas = contentElement.querySelectorAll('[class*="scroll"]');
+      const originalStyles: { element: HTMLElement; style: string }[] = [];
+
+      scrollAreas.forEach((area) => {
+        const element = area as HTMLElement;
+        originalStyles.push({ element, style: element.style.cssText });
+        element.style.height = 'auto';
+        element.style.maxHeight = 'none';
+        element.style.overflow = 'visible';
+      });
+
+      // Create canvas from the content with improved settings
+      const canvas = await html2canvas(contentElement, {
+        scale: 2, // Higher quality
+        useCORS: true, // Handle cross-origin images
+        logging: true, // Enable logging for debugging
+        backgroundColor: "#1a1f2c", // Set dark background
+        windowWidth: contentElement.scrollWidth,
+        windowHeight: contentElement.scrollHeight,
+        onclone: (clonedDoc) => {
+          // Process all elements to ensure visibility
+          const elements = clonedDoc.getElementsByTagName('*');
+          for (let i = 0; i < elements.length; i++) {
+            const el = elements[i] as HTMLElement;
+            const style = window.getComputedStyle(el);
+            
+            // Handle gradient text
+            if (style.backgroundClip === 'text' || style.webkitBackgroundClip === 'text') {
+              if (style.backgroundImage.includes('gradient')) {
+                el.style.color = '#8B5CF6'; // Use a solid color instead of gradient
               }
-              .header {
-                background: #f3f4f6;
-                color: black;
-              }
-              .section {
-                background: #f9fafb;
-                border: 1px solid #e5e7eb;
-              }
-              .number-card {
-                background: #f3f4f6;
-                border: 1px solid #e5e7eb;
-              }
-              .number-value {
-                color: #8B5CF6;
-                -webkit-text-fill-color: initial;
-              }
+              el.style.backgroundClip = 'unset';
+              el.style.webkitBackgroundClip = 'unset';
+              el.style.backgroundImage = 'none';
             }
-          </style>
-        </head>
-        <body>
-          <div class="header">
-            <div class="date">Generated on: ${formattedDate}</div>
-            <h1>Your Numerology Analysis</h1>
-          </div>
 
-          <div class="section">
-            <div class="label">Date of Birth</div>
-            <div class="number-value">${birthDate}</div>
-          </div>
+            // Ensure text contrast
+            if (style.color === 'rgba(0, 0, 0, 0)' || style.color === 'transparent') {
+              el.style.color = '#FFFFFF';
+            }
 
-          <div class="grid">
-            <div class="number-card">
-              <div class="label">Life Path Number</div>
-              <div class="number-value">${lifePath}</div>
-            </div>
+            // Convert semi-transparent whites to solid white
+            if (style.color.includes('rgba(255, 255, 255,')) {
+              el.style.color = '#FFFFFF';
+            }
 
-            <div class="number-card">
-              <div class="label">Partial Energy</div>
-              <div class="number-value">${partialEnergy}</div>
-            </div>
+            // Handle fixed positioning
+            if (style.position === 'fixed') {
+              el.style.position = 'absolute';
+            }
 
-            <div class="number-card">
-              <div class="label">Secret Number</div>
-              <div class="number-value">${secretNumber}</div>
-            </div>
+            // Ensure backgrounds are preserved
+            if (style.backgroundColor && style.backgroundColor !== 'rgba(0, 0, 0, 0)') {
+              el.style.backgroundColor = style.backgroundColor;
+            }
 
-            <div class="number-card">
-              <div class="label">Chinese Zodiac</div>
-              <div class="number-value">${chineseZodiac}</div>
-            </div>
-          </div>
-        </body>
-      </html>
-    `;
+            // Preserve borders
+            if (style.border) {
+              el.style.border = style.border;
+            }
 
-    const newWindow = window.open();
-    if (newWindow) {
-      newWindow.document.write(html);
-      newWindow.document.close();
-      toast.success("Analysis opened in new window - You can now print or save it");
-    } else {
-      toast.error("Please allow pop-ups to view your analysis");
+            // Make all content visible
+            el.style.overflow = 'visible';
+            if (el.style.maxHeight) {
+              el.style.maxHeight = 'none';
+            }
+          }
+
+          // Set background color for the content
+          clonedDoc.body.style.backgroundColor = '#1a1f2c';
+          contentElement.style.backgroundColor = '#1a1f2c';
+        }
+      });
+
+      console.log("Canvas created with dimensions:", canvas.width, "x", canvas.height);
+
+      // Calculate dimensions to maintain aspect ratio
+      const imgWidth = 595.28; // A4 width in points (72 dpi)
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+      // Initialize PDF with A4 size
+      const pdf = new jsPDF({
+        orientation: imgHeight > imgWidth ? "portrait" : "landscape",
+        unit: "pt",
+        format: "a4",
+        compress: true
+      });
+
+      // Add the canvas as an image
+      pdf.addImage(
+        canvas.toDataURL("image/png", 1.0),
+        "PNG",
+        0,
+        0,
+        imgWidth,
+        imgHeight,
+        undefined,
+        'FAST'
+      );
+
+      // Handle multiple pages if content is longer
+      let heightLeft = imgHeight;
+      let position = 0;
+      const pageHeight = pdf.internal.pageSize.getHeight();
+
+      while (heightLeft >= pageHeight) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(
+          canvas.toDataURL("image/png", 1.0),
+          "PNG",
+          0,
+          position,
+          imgWidth,
+          imgHeight,
+          undefined,
+          'FAST'
+        );
+        heightLeft -= pageHeight;
+      }
+
+      // Save the PDF with a timestamp
+      const timestamp = new Date().toISOString().split('T')[0];
+      pdf.save(`numerology-reading-${timestamp}.pdf`);
+      toast.success("PDF exported successfully!");
+
+      // Restore original scroll area styles
+      originalStyles.forEach(({ element, style }) => {
+        element.style.cssText = style;
+      });
+    } catch (error) {
+      console.error("PDF export error:", error);
+      toast.error("Failed to export PDF. Please try again.");
+    } finally {
+      setIsExporting(false);
     }
   };
 
-  const exportToCSV = () => {
-    const data = [
-      ["Date Generated", new Date().toLocaleDateString()],
-      ["Date of Birth", new Date(dateOfBirth).toLocaleDateString()],
-      ["Life Path Number", lifePath],
-      ["Partial Energy", partialEnergy],
-      ["Secret Number", secretNumber],
-      ["Chinese Zodiac", chineseZodiac],
-    ];
-
-    const csvContent = data.map(row => row.join(",")).join("\n");
-    const blob = new Blob([csvContent], { type: "text/csv" });
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", `numerology-analysis-${new Date().toISOString().split("T")[0]}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    toast.success("CSV file downloaded successfully");
-  };
-
   return (
-    <div className="flex flex-col sm:flex-row gap-4">
-      <Button
-        onClick={generateHTML}
-        className="bg-purple-600 hover:bg-purple-700 text-white flex items-center gap-2"
-      >
-        <Download className="w-4 h-4" />
-        View Full Report
-      </Button>
-      <Button
-        onClick={exportToCSV}
-        variant="outline"
-        className="border-purple-500/20 hover:bg-purple-500/10"
-      >
-        Download as CSV
-      </Button>
-    </div>
+    <Button
+      onClick={exportToPDF}
+      disabled={isExporting}
+      className="fixed bottom-20 right-8 z-50 shadow-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+      size="lg"
+    >
+      <Download className="mr-2 h-4 w-4" />
+      {isExporting ? "Exporting..." : "Export as PDF"}
+    </Button>
   );
 };
 
