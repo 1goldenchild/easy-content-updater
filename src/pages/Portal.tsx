@@ -4,6 +4,7 @@ import PortalHeader from "@/components/portal/PortalHeader";
 import DateInputSection from "@/components/portal/DateInputSection";
 import ResultsSection from "@/components/portal/ResultsSection";
 import ProgressIndicator from "@/components/numerology/ProgressIndicator";
+import ExportButton from "@/components/numerology/ExportButton";
 import { 
   calculateLifePath, 
   calculatePartialEnergy, 
@@ -57,7 +58,7 @@ const Portal = () => {
 
   return (
     <div className="min-h-screen w-full overflow-x-hidden">
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div id="portal-content" className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col items-center">
           {showResults && <ProgressIndicator />}
           <div className="w-full space-y-8">
@@ -99,6 +100,7 @@ const Portal = () => {
           </div>
         </div>
       </div>
+      {showResults && <ExportButton />}
     </div>
   );
 };
