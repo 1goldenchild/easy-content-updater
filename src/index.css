@@ -50,23 +50,6 @@
   }
 }
 
-/* Auth UI Styles */
-.auth-container [data-supabase-auth-token-response] {
-  @apply text-foreground;
-}
-
-.auth-container [data-supabase-auth-token-error] {
-  @apply text-destructive;
-}
-
-.auth-container input {
-  @apply bg-[#2A2F3C] border-gray-700 text-white placeholder-gray-400;
-}
-
-.auth-container button {
-  @apply bg-purple-600 hover:bg-purple-700 text-white;
-}
-
 .stripe-element-container {
   background: #2A2F3C;
   padding: 12px;
