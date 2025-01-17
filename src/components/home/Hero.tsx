@@ -19,27 +19,27 @@ const Hero = () => {
           className="space-y-8"
         >
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white">
-            Discover Your Life Path Through{" "}
+            Unlock Your Full Potential with{" "}
             <span className="bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text">
               Numerology
             </span>
           </h1>
           
           <p className="text-xl sm:text-2xl text-gray-200 max-w-2xl mx-auto">
-            Unlock the secrets of your life path number and discover what the universe has in store for you
+            Discover the hidden patterns in your life and transform your future with our advanced numerology analysis.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             {!session ? (
               <>
                 <CTAButton
-                  onClick={() => navigate("/numerology/analysis")}
-                  text="Get Started"
+                  onClick={() => navigate("/auth")}
+                  text="Create Free Account"
                   icon="sparkles"
                 />
                 <CTAButton
-                  onClick={() => navigate("/auth")}
-                  text="Sign In"
+                  onClick={() => navigate("/numerology/analysis")}
+                  text="Try Free Analysis"
                 />
               </>
             ) : (
