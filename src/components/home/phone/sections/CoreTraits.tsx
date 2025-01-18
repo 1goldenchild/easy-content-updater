@@ -3,13 +3,13 @@ import { RadarChart, PolarGrid, PolarAngleAxis, Radar } from 'recharts';
 
 const CoreTraits = () => {
   const traits = [
-    { trait: "Intelligence", value: 9, number: "1" },
-    { trait: "Creativity", value: 5, number: "2" },
-    { trait: "Leadership", value: 7, number: "3" },
-    { trait: "Assertiveness", value: 7, number: "4" },
-    { trait: "Receptiveness", value: 6, number: "5" },
-    { trait: "Conscientiousness", value: 9, number: "6" },
-    { trait: "Financial Prosperity", value: 9, number: "7" }
+    { trait: "IQ", value: 85, number: "1" },
+    { trait: "EQ", value: 92, number: "2" },
+    { trait: "Spiritual", value: 88, number: "3" },
+    { trait: "Leadership", value: 78, number: "4" },
+    { trait: "Creativity", value: 95, number: "5" },
+    { trait: "Intuition", value: 89, number: "6" },
+    { trait: "Success", value: 82, number: "7" }
   ];
 
   return (
@@ -48,7 +48,7 @@ const CoreTraits = () => {
             </div>
             <motion.div 
               initial={{ width: "0%" }}
-              animate={{ width: `${trait.value * 10}%` }}
+              animate={{ width: `${trait.value}%` }}
               transition={{ duration: 1, delay: index * 0.2 }}
               className="h-2 bg-gradient-to-r from-[#0EA5E9] to-[#8B5CF6] rounded-full"
             />

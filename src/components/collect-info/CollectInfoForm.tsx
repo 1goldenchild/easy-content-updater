@@ -59,12 +59,7 @@ const CollectInfoForm = () => {
       ]).select();
 
       if (error) {
-        console.error("Supabase error details:", {
-          message: error.message,
-          details: error.details,
-          hint: error.hint,
-          code: error.code
-        });
+        console.error("Supabase error:", error);
         throw error;
       }
 
@@ -79,7 +74,7 @@ const CollectInfoForm = () => {
       window.location.replace("https://checkout.numerology33.com/checkout");
       
     } catch (error) {
-      console.error("Detailed error when submitting form:", error);
+      console.error("Error submitting form:", error);
       toast({
         variant: "destructive",
         title: "Error",
