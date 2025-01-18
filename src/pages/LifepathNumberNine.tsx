@@ -4,6 +4,8 @@ import PhoneShowcase from "@/components/home/PhoneShowcase";
 import CTAButton from "@/components/home/buttons/CTAButton";
 import { useNavigate } from "react-router-dom";
 import { scrollToTop } from "@/components/home/CallToAction";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 const LifepathNumberNine = () => {
   const navigate = useNavigate();
@@ -14,9 +16,11 @@ const LifepathNumberNine = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900/20 to-pink-900/20">
-      <div className="container mx-auto px-4 py-12">
-        {/* Hero Section */}
+    <>
+      <Navbar />
+      <div className="min-h-screen bg-gradient-to-br from-purple-900/20 to-pink-900/20">
+        <div className="container mx-auto px-4 py-12">
+          {/* Hero Section */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -30,8 +34,8 @@ const LifepathNumberNine = () => {
           </p>
         </motion.div>
 
-        <div className="space-y-8">
-          {/* Introduction Section */}
+          <div className="space-y-8">
+            {/* Introduction Section */}
           <motion.section 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -49,7 +53,7 @@ const LifepathNumberNine = () => {
             </p>
           </motion.section>
 
-          {/* Reality & Illusion Section */}
+            {/* Reality & Illusion Section */}
           <motion.section 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -73,7 +77,7 @@ const LifepathNumberNine = () => {
             </div>
           </motion.section>
 
-          {/* Sacred Geometry Section */}
+            {/* Sacred Geometry Section */}
             <motion.section 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -99,7 +103,7 @@ const LifepathNumberNine = () => {
               </div>
             </motion.section>
 
-          {/* Spiritual Nature Section */}
+            {/* Spiritual Nature Section */}
             <motion.section 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -123,7 +127,7 @@ const LifepathNumberNine = () => {
               </div>
             </motion.section>
 
-          {/* Modern Challenges Section */}
+            {/* Modern Challenges Section */}
             <motion.section 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -149,7 +153,7 @@ const LifepathNumberNine = () => {
               </div>
             </motion.section>
 
-          {/* Ego & Power Section */}
+            {/* Ego & Power Section */}
             <motion.section 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -172,7 +176,7 @@ const LifepathNumberNine = () => {
               </div>
             </motion.section>
 
-          {/* Mystical Secrets Section */}
+            {/* Mystical Secrets Section */}
             <motion.section 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -201,7 +205,7 @@ const LifepathNumberNine = () => {
               </div>
             </motion.section>
 
-          {/* Compatibility Section */}
+            {/* Compatibility Section */}
             <motion.section 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -229,31 +233,33 @@ const LifepathNumberNine = () => {
               </div>
             </motion.section>
 
-          {/* Phone Showcase Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-20"
-          >
-            <PhoneShowcase />
-            
-            <motion.div 
+            {/* Phone Showcase Section */}
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="flex justify-center mt-8 mb-20"
+              className="mt-20"
             >
-              <CTAButton 
-                onClick={handleGetStarted}
-                text="Unlock Your Analysis"
-                icon="sparkles"
-              />
+              <PhoneShowcase />
+              
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="flex justify-center mt-8 mb-20"
+              >
+                <CTAButton 
+                  onClick={handleGetStarted}
+                  text="Unlock Your Analysis"
+                  icon="sparkles"
+                />
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
