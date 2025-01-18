@@ -6,37 +6,18 @@ import { calculateLifePath, calculatePartialEnergy, calculateSecretNumber, getCh
 import DateSelector from "@/components/numerology/DateSelector";
 
 interface DateInputSectionProps {
-  onResultsCalculated: (results: {
-    lifePath: number;
-    partialEnergy: number;
-    secretNumber: number;
-    chineseZodiac: string;
-  }, date: Date) => void;
+  onEmailSubmit: (email: string) => Promise<void>;
   isLoading?: boolean;
 }
 
-const DateInputSection = ({ onResultsCalculated, isLoading = false }: DateInputSectionProps) => {
+const DateInputSection = ({ onEmailSubmit, isLoading = false }: DateInputSectionProps) => {
   const [email, setEmail] = useState("");
   const [date, setDate] = useState<Date>();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !date) return;
-
-    const lifePath = calculateLifePath(date);
-    const partialEnergy = calculatePartialEnergy(date.getDate());
-    const secretNumber = calculateSecretNumber(date);
-    const chineseZodiac = getChineseZodiac(date.getFullYear());
-
-    onResultsCalculated(
-      {
-        lifePath,
-        partialEnergy,
-        secretNumber,
-        chineseZodiac,
-      },
-      date
-    );
+    if (!email) return;
+    await onEmailSubmit(email);
   };
 
   return (
