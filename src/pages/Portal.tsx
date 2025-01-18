@@ -4,6 +4,7 @@ import PortalHeader from "@/components/portal/PortalHeader";
 import DateInputSection from "@/components/portal/DateInputSection";
 import ResultsSection from "@/components/portal/ResultsSection";
 import ProgressIndicator from "@/components/numerology/ProgressIndicator";
+import { supabase } from "@/integrations/supabase/client";
 import { 
   calculateLifePath, 
   calculatePartialEnergy, 
@@ -14,6 +15,8 @@ import {
 const Portal = () => {
   const [showResults, setShowResults] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date>();
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState({
     lifePath: 0,
     partialEnergy: 0,
@@ -24,6 +27,42 @@ const Portal = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleEmailSubmit = async (submittedEmail: string) => {
+    setIsLoading(true);
+    console.log("Checking access for email:", submittedEmail);
+
+    try {
+      const { data: readings, error } = await supabase
+        .from('user_readings')
+        .select('*')
+        .eq('email', submittedEmail)
+        .single();
+
+      if (error) {
+        console.error("Error fetching reading:", error);
+        toast.error("Unable to find your reading. Please check your email or contact support.");
+        setIsLoading(false);
+        return;
+      }
+
+      if (!readings) {
+        toast.error("No reading found for this email.");
+        setIsLoading(false);
+        return;
+      }
+
+      console.log("Found reading:", readings);
+      setEmail(submittedEmail);
+      const birthDate = new Date(readings.date_of_birth);
+      handleCalculate(birthDate);
+    } catch (err) {
+      console.error("Error:", err);
+      toast.error("An error occurred. Please try again later.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleCalculate = (date: Date) => {
     console.log("Calculating numerology for date:", date);
@@ -48,11 +87,7 @@ const Portal = () => {
       chineseZodiac
     });
     setShowResults(true);
-    toast.success("Calculation complete!");
-  };
-
-  const handleEbookDownload = (url: string) => {
-    window.open(url, '_blank');
+    toast.success("Your numerology reading is ready!");
   };
 
   return (
@@ -62,39 +97,18 @@ const Portal = () => {
           {showResults && <ProgressIndicator />}
           <div className="w-full space-y-8">
             <PortalHeader />
-            <DateInputSection onCalculate={handleCalculate} />
+            {!showResults && (
+              <DateInputSection 
+                onEmailSubmit={handleEmailSubmit} 
+                isLoading={isLoading}
+              />
+            )}
             {selectedDate && (
               <ResultsSection 
                 results={results}
                 dateOfBirth={selectedDate}
                 isVisible={showResults}
               />
-            )}
-            
-            {showResults && (
-              <div className="mt-16 p-8 rounded-lg bg-gradient-to-r from-[#2A2F3C] to-[#221F26] border border-[#FFD700]/20">
-                <h2 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-[#FFD700] to-[#FDB931] bg-clip-text text-transparent">
-                  Offered Numerology eBooks
-                </h2>
-                
-                <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                  <button 
-                    onClick={() => handleEbookDownload("https://d2saw6je89goi1.cloudfront.net/uploads/digital_asset/file/1195754/the-golden-numerology-guide-2023-edition..pdf")}
-                    className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#3A3F4C] to-[#2A2F3C] hover:from-[#FFD700]/20 hover:to-[#FDB931]/20 transition-all duration-300 text-white/90 hover:text-[#FFD700] border border-[#FFD700]/20 hover:border-[#FFD700]/40 flex items-center gap-2"
-                  >
-                    <span>📚</span>
-                    The Golden Numerology Guide
-                  </button>
-                  
-                  <button 
-                    onClick={() => handleEbookDownload("https://d2saw6je89goi1.cloudfront.net/uploads/digital_asset/file/1195755/get-rich-using-numerology-ebook-2023-editon.pdf")}
-                    className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#3A3F4C] to-[#2A2F3C] hover:from-[#FFD700]/20 hover:to-[#FDB931]/20 transition-all duration-300 text-white/90 hover:text-[#FFD700] border border-[#FFD700]/20 hover:border-[#FFD700]/40 flex items-center gap-2"
-                  >
-                    <span>💰</span>
-                    Get Rich Using Numerology
-                  </button>
-                </div>
-              </div>
             )}
           </div>
         </div>
