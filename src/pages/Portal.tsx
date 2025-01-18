@@ -1,8 +1,8 @@
-import { useState } from "react"
-import PortalHeader from "@/components/portal/PortalHeader"
-import ResultsSection from "@/components/portal/ResultsSection"
-import CompatibilitySection from "@/components/portal/CompatibilitySection"
-import DateInputSection from "@/components/portal/DateInputSection"
+import { useState } from "react";
+import PortalHeader from "@/components/portal/PortalHeader";
+import ResultsSection from "@/components/portal/ResultsSection";
+import CompatibilitySection from "@/components/portal/CompatibilitySection";
+import DateInputSection from "@/components/portal/DateInputSection";
 
 const Portal = () => {
   const [results, setResults] = useState({
@@ -10,9 +10,9 @@ const Portal = () => {
     partialEnergy: 0,
     secretNumber: 0,
     chineseZodiac: "",
-  })
-  const [dateOfBirth, setDateOfBirth] = useState<Date | null>(null)
-  const [showResults, setShowResults] = useState(false)
+  });
+  const [dateOfBirth, setDateOfBirth] = useState<Date | null>(null);
+  const [showResults, setShowResults] = useState(false);
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-gray-900 to-gray-800">
@@ -20,9 +20,9 @@ const Portal = () => {
         <PortalHeader />
         <DateInputSection
           onResultsCalculated={(calculatedResults, selectedDate) => {
-            setResults(calculatedResults)
-            setDateOfBirth(selectedDate)
-            setShowResults(true)
+            setResults(calculatedResults);
+            setDateOfBirth(selectedDate);
+            setShowResults(true);
           }}
         />
         {dateOfBirth && (
@@ -40,7 +40,7 @@ const Portal = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Portal
+export default Portal;

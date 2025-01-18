@@ -2,19 +2,41 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ReloadIcon } from "@radix-ui/react-icons";
+import { calculateLifePath, calculatePartialEnergy, calculateSecretNumber, getChineseZodiac } from "@/utils/numerologyCalculations";
+import DateSelector from "@/components/numerology/DateSelector";
 
 interface DateInputSectionProps {
-  onEmailSubmit: (email: string) => void;
-  isLoading: boolean;
+  onResultsCalculated: (results: {
+    lifePath: number;
+    partialEnergy: number;
+    secretNumber: number;
+    chineseZodiac: string;
+  }, date: Date) => void;
+  isLoading?: boolean;
 }
 
-const DateInputSection = ({ onEmailSubmit, isLoading }: DateInputSectionProps) => {
+const DateInputSection = ({ onResultsCalculated, isLoading = false }: DateInputSectionProps) => {
   const [email, setEmail] = useState("");
+  const [date, setDate] = useState<Date>();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
-    onEmailSubmit(email);
+    if (!email || !date) return;
+
+    const lifePath = calculateLifePath(date);
+    const partialEnergy = calculatePartialEnergy(date.getDate());
+    const secretNumber = calculateSecretNumber(date);
+    const chineseZodiac = getChineseZodiac(date.getFullYear());
+
+    onResultsCalculated(
+      {
+        lifePath,
+        partialEnergy,
+        secretNumber,
+        chineseZodiac,
+      },
+      date
+    );
   };
 
   return (
@@ -34,10 +56,11 @@ const DateInputSection = ({ onEmailSubmit, isLoading }: DateInputSectionProps) =
               required
             />
           </div>
+          <DateSelector date={date} setDate={setDate} />
           <Button 
             type="submit" 
             className="w-full"
-            disabled={isLoading}
+            disabled={isLoading || !date}
           >
             {isLoading ? (
               <>
