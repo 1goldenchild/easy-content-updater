@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Eye, Infinity, Shapes, Brain, Sparkles, AlertTriangle } from "lucide-react";
 
 const LifepathNumberNine = () => {
@@ -20,51 +19,49 @@ const LifepathNumberNine = () => {
           </p>
         </motion.div>
 
-        <ScrollArea className="h-[calc(100vh-200px)] pr-4">
-          <div className="space-y-8">
-            {/* Introduction Section */}
-            <motion.section 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-purple-500/20"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <Infinity className="w-6 h-6 text-purple-400" />
-                <h2 className="text-2xl font-semibold text-white">The Matrix Number</h2>
-              </div>
-              <p className="text-white/80 leading-relaxed">
-                9 is one of the most misunderstood numbers out here; it's an extremely important number in the matrix. 
-                It represents completion and ending, but when something comes to a 9, either it ends right there, or it 
-                gets transcended to the next level into a better version.
+        <div className="space-y-8">
+          {/* Introduction Section */}
+          <motion.section 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-purple-500/20"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <Infinity className="w-6 h-6 text-purple-400" />
+              <h2 className="text-2xl font-semibold text-white">The Matrix Number</h2>
+            </div>
+            <p className="text-white/80 leading-relaxed">
+              9 is one of the most misunderstood numbers out here; it's an extremely important number in the matrix. 
+              It represents completion and ending, but when something comes to a 9, either it ends right there, or it 
+              gets transcended to the next level into a better version.
+            </p>
+          </motion.section>
+
+          {/* Reality & Illusion Section */}
+          <motion.section 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-pink-500/20"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <Eye className="w-6 h-6 text-pink-400" />
+              <h2 className="text-2xl font-semibold text-white">Reality & Illusion</h2>
+            </div>
+            <div className="space-y-4 text-white/80 leading-relaxed">
+              <p>
+                9 is the number of reality and illusion. Reality starts with "R," which is the 18th letter, 
+                and illusion starts with "I," which is the 9th letter. Because reality is not really the realm we live in.
               </p>
-            </motion.section>
+              <p>
+                Everything is an illusion; nothing is really there. That table you see is not actually hard; 
+                the energy is just moving extremely slowly to a point where you think it's solid, but solid matter 
+                is not actually real.
+              </p>
+            </div>
+          </motion.section>
 
-            {/* Reality & Illusion Section */}
-            <motion.section 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-pink-500/20"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <Eye className="w-6 h-6 text-pink-400" />
-                <h2 className="text-2xl font-semibold text-white">Reality & Illusion</h2>
-              </div>
-              <div className="space-y-4 text-white/80 leading-relaxed">
-                <p>
-                  9 is the number of reality and illusion. Reality starts with "R," which is the 18th letter, 
-                  and illusion starts with "I," which is the 9th letter. Because reality is not really the realm we live in.
-                </p>
-                <p>
-                  Everything is an illusion; nothing is really there. That table you see is not actually hard; 
-                  the energy is just moving extremely slowly to a point where you think it's solid, but solid matter 
-                  is not actually real.
-                </p>
-              </div>
-            </motion.section>
-
-            {/* Geometry Section */}
             <motion.section 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -219,8 +216,7 @@ const LifepathNumberNine = () => {
                 </div>
               </div>
             </motion.section>
-          </div>
-        </ScrollArea>
+        </div>
       </div>
     </div>
   );
