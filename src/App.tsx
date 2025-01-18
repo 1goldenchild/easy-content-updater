@@ -13,8 +13,6 @@ import Support from "@/pages/Support"
 import Checkout from "@/pages/Checkout"
 import BlogPost from "@/pages/BlogPost"
 import Blog from "@/pages/Blog"
-import LifePathNine from "@/pages/LifePathNine"
-import NumerologyAccess from "@/pages/NumerologyAccess"
 
 // ScrollToTop component to handle scroll behavior
 const ScrollToTop = () => {
@@ -28,8 +26,6 @@ const ScrollToTop = () => {
 }
 
 const App = () => {
-  console.log("App component rendering"); // Added for debugging
-
   return (
     <Router>
       <ScrollToTop />
@@ -37,7 +33,7 @@ const App = () => {
         <Navbar />
         <main className="flex-1">
           <Routes>
-            <Route path="/" element={<Index />} />
+            <Route path="/" element={<Navigate to="/numerology/analysis" replace />} />
             <Route path="/numerology/analysis" element={<Index />} />
             <Route path="/sales" element={<Sales />} />
             <Route path="/collect-info" element={<CollectInfo />} />
@@ -49,8 +45,6 @@ const App = () => {
             <Route path="/support" element={<Support />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/lifepath-number-9" element={<LifePathNine />} />
-            <Route path="/numerology/access" element={<NumerologyAccess />} />
           </Routes>
         </main>
         <Footer />

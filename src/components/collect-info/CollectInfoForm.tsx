@@ -75,8 +75,8 @@ const CollectInfoForm = () => {
         description: "Your information has been submitted successfully.",
       });
 
-      // Redirect to ClickFunnels checkout page
-      window.location.href = "https://checkout.numerology33.com/checkout";
+      // Updated redirect URL
+      window.location.replace("https://checkout.numerology33.com/checkout");
       
     } catch (error) {
       console.error("Detailed error when submitting form:", error);

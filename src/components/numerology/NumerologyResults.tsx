@@ -48,9 +48,9 @@ const NumerologyResults = ({
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen pb-20"
+      className="space-y-4"
     >
-      <div className="p-4 rounded-lg bg-white/5 border border-white/10 mb-8">
+      <div className="p-4 rounded-lg bg-white/5 border border-white/10">
         <div className="text-center">
           <h3 className="text-2xl font-bold text-white/90">Your Numerology Profile</h3>
         </div>
@@ -90,29 +90,22 @@ const NumerologyResults = ({
         </div>
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="space-y-8">
-          <CharacteristicsChart lifePath={lifePath} isVisible={isVisible} />
-          <LifepathAnalysis lifePath={lifePath} isVisible={isVisible} />
-          <PartialEnergyAnalysis partialEnergy={partialEnergy} isVisible={isVisible} />
-          <CycleAnalysis dateOfBirth={dateOfBirth} isVisible={isVisible} />
-          <EnergyAnalysis isVisible={isVisible} />
-          <SecretAnalysis secretNumber={secretNumber} isVisible={isVisible} />
-          <LuckyNumberAnalysis dateOfBirth={dateOfBirth} isVisible={isVisible} />
-          <CompatibilityChart lifePath={lifePath} isVisible={isVisible} />
-        </div>
-        
-        <div className="space-y-8">
-          <LoveCompatibility lifePathNumber={lifePath} />
-          <OccupationGuidance lifePath={lifePath} isVisible={isVisible} />
-          <HousingAnalysis chineseZodiac={chineseZodiac} isVisible={isVisible} />
-          <CarCompatibility chineseZodiac={chineseZodiac} isVisible={isVisible} />
-          <CountryCompatibility chineseZodiac={chineseZodiac} isVisible={isVisible} />
-          <ColorCompatibility lifePath={lifePath} isVisible={isVisible} />
-          <CrystalAnalysis lifePath={lifePath} isVisible={isVisible} />
-          <TechCompatibilityAnalysis chineseZodiac={chineseZodiac} isVisible={isVisible} />
-        </div>
-      </div>
+      <CharacteristicsChart lifePath={lifePath} isVisible={isVisible} />
+      <LifepathAnalysis lifePath={lifePath} isVisible={isVisible} />
+      <PartialEnergyAnalysis partialEnergy={partialEnergy} isVisible={isVisible} />
+      <CycleAnalysis dateOfBirth={dateOfBirth} isVisible={isVisible} />
+      <EnergyAnalysis isVisible={isVisible} />
+      <SecretAnalysis secretNumber={secretNumber} isVisible={isVisible} />
+      <LuckyNumberAnalysis dateOfBirth={dateOfBirth} isVisible={isVisible} />
+      <CompatibilityChart lifePath={lifePath} isVisible={isVisible} />
+      <LoveCompatibility lifePathNumber={lifePath} />
+      <OccupationGuidance lifePath={lifePath} isVisible={isVisible} />
+      <HousingAnalysis chineseZodiac={chineseZodiac} isVisible={isVisible} />
+      <CarCompatibility chineseZodiac={chineseZodiac} isVisible={isVisible} />
+      <CountryCompatibility chineseZodiac={chineseZodiac} isVisible={isVisible} />
+      <ColorCompatibility lifePath={lifePath} isVisible={isVisible} />
+      <CrystalAnalysis lifePath={lifePath} isVisible={isVisible} />
+      <TechCompatibilityAnalysis chineseZodiac={chineseZodiac} isVisible={isVisible} />
     </motion.div>
   );
 };
