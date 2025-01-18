@@ -10,11 +10,11 @@ interface CTAButtonProps {
 const CTAButton = ({ onClick, text, icon = "arrow" }: CTAButtonProps) => {
   return (
     <div className="w-full max-w-[280px] relative group">
-      <div className="absolute -inset-1 bg-gradient-to-r from-amber-200/30 via-purple-500/30 to-amber-200/30 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
+      <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/50 via-violet-600/50 to-purple-500/50 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
       <Button 
         onClick={onClick}
         size="lg"
-        className="w-full block relative px-4 sm:px-8 py-2 rounded-lg bg-gradient-to-br from-amber-200/30 to-purple-500/30 backdrop-blur-sm border border-amber-200/50 text-amber-200 hover:text-amber-100 transition-colors"
+        className="w-full block relative px-4 sm:px-8 py-2 rounded-lg bg-gradient-to-br from-purple-500/80 to-violet-600/80 backdrop-blur-sm border border-purple-400/50 text-white font-semibold hover:text-purple-100 transition-colors"
       >
         <span className="relative z-10 flex items-center justify-center gap-2 font-semibold text-lg">
           {text}
