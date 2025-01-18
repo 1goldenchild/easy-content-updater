@@ -13,7 +13,6 @@ import Support from "@/pages/Support"
 import Checkout from "@/pages/Checkout"
 import BlogPost from "@/pages/BlogPost"
 import Blog from "@/pages/Blog"
-import LifePathNine from "@/pages/LifePathNine"
 
 // ScrollToTop component to handle scroll behavior
 const ScrollToTop = () => {
@@ -46,7 +45,6 @@ const App = () => {
             <Route path="/support" element={<Support />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/lifepath-number-9" element={<LifePathNine />} />
           </Routes>
         </main>
         <Footer />

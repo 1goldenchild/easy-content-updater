@@ -44,7 +44,7 @@ const PhoneFrame = ({ children, activeSection, onSectionChange }: PhoneFrameProp
         
         {/* Screen Content with Scroll Container */}
         <div className="absolute inset-0 z-10">
-          <div className="absolute inset-0 overflow-y-auto overflow-x-hidden scrollbar-hide">
+          <div className="absolute inset-0 overflow-y-auto overflow-x-hidden scrollbar-hide scroll-smooth">
             <div className="relative min-h-full">
               <div className="pt-12 pb-12">
                 {children}
