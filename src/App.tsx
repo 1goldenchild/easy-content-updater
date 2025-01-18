@@ -14,6 +14,7 @@ import Checkout from "@/pages/Checkout"
 import BlogPost from "@/pages/BlogPost"
 import Blog from "@/pages/Blog"
 import LifePathNine from "@/pages/LifePathNine"
+import NumerologyAccess from "@/pages/NumerologyAccess"
 
 // ScrollToTop component to handle scroll behavior
 const ScrollToTop = () => {
@@ -49,6 +50,7 @@ const App = () => {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/lifepath-number-9" element={<LifePathNine />} />
+            <Route path="/numerology/access" element={<NumerologyAccess />} />
           </Routes>
         </main>
         <Footer />
