@@ -63,6 +63,36 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          chinese_zodiac: string | null
+          created_at: string
+          date_of_birth: string | null
+          id: string
+          life_path: number | null
+          partial_energy: number | null
+          secret_number: number | null
+        }
+        Insert: {
+          chinese_zodiac?: string | null
+          created_at?: string
+          date_of_birth?: string | null
+          id: string
+          life_path?: number | null
+          partial_energy?: number | null
+          secret_number?: number | null
+        }
+        Update: {
+          chinese_zodiac?: string | null
+          created_at?: string
+          date_of_birth?: string | null
+          id?: string
+          life_path?: number | null
+          partial_energy?: number | null
+          secret_number?: number | null
+        }
+        Relationships: []
+      }
       user_readings: {
         Row: {
           created_at: string
