@@ -49,9 +49,9 @@ const CollectInfo = () => {
                   transition={{ delay: 0.4 }}
                   className="inline-block"
                 >
-                  <div className="px-4 py-2 rounded-full bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 backdrop-blur-sm">
-                    <p className="text-sm font-medium text-indigo-300 flex items-center gap-2">
-                      <span className="inline-block w-2 h-2 rounded-full bg-indigo-400 animate-twinkle" />
+                  <div className="px-4 py-2 rounded-full bg-gradient-to-r from-fuchsia-500/20 via-purple-500/20 to-pink-500/20 border border-fuchsia-500/30 backdrop-blur-sm shadow-lg shadow-fuchsia-500/10">
+                    <p className="text-sm font-medium text-fuchsia-300 flex items-center gap-2">
+                      <span className="inline-block w-2 h-2 rounded-full bg-fuchsia-400 animate-text-shimmer bg-gradient-to-r from-fuchsia-400 via-purple-400 to-pink-400" />
                       Get ready to access cutting edge numerology knowledge
                     </p>
                   </div>
