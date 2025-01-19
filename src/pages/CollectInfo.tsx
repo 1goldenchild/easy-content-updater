@@ -37,7 +37,7 @@ const CollectInfo = () => {
                   <div className="px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 backdrop-blur-sm">
                     <p className="text-sm font-medium text-emerald-300 flex items-center gap-2">
                       <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                      Your analysis will be instantly delivered virtually
+                      Your analysis will be instantly delivered
                     </p>
                   </div>
                 </motion.div>
