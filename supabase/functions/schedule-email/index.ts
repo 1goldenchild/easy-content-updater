@@ -45,8 +45,9 @@ const handler = async (req: Request): Promise<Response> => {
     // Create a unique job name using the email and timestamp
     const jobName = `send-${templateName}-${to}-${Date.now()}`
 
-    // Construct the function URL properly
-    const functionUrl = new URL("/functions/v1/send-styled-email", supabaseUrl).toString()
+    // Construct the function URL properly - remove any trailing slashes and ensure proper URL format
+    const baseUrl = supabaseUrl.replace(/\/$/, '')
+    const functionUrl = `${baseUrl}/functions/v1/send-styled-email`
     console.log("Function URL constructed:", functionUrl)
 
     const command = {
