@@ -13,7 +13,7 @@ interface EmailRequest {
   }
 }
 
-const getEmailTemplate = (templateName: string, userData: EmailRequest["userData"]) => {
+const getEmailTemplate = (templateName: string) => {
   const templates: Record<string, { title: string, content: string }> = {
     rolex: {
       title: "The Secret Behind Rolex's Success: A Numerological Analysis",
@@ -272,39 +272,82 @@ Master Number: 33 represents higher levels of consciousness`
           body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #E5E7EB;
+          }
+          .container {
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
+            background-color: #1A1F2C;
+          }
+          .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem 0;
+            background: linear-gradient(to right, #86736f, #a39490, #c4b5b1);
+            border-radius: 8px;
+          }
+          .title {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 1rem;
+            padding: 0 20px;
           }
           .content {
             margin-bottom: 32px;
+            padding: 20px;
+            background-color: rgba(134, 115, 111, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(134, 115, 111, 0.2);
+          }
+          .content p {
+            color: #E5E7EB;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 1rem;
           }
           .cta-button {
-            background: linear-gradient(to right, #8B5CF6, #D946EF);
+            background: linear-gradient(to right, #86736f, #a39490);
             color: white;
-            padding: 12px 24px;
+            padding: 16px 32px;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 8px;
             display: inline-block;
+            font-weight: bold;
+            margin-top: 20px;
           }
-          h2 {
-            color: #8B5CF6;
-            margin-top: 24px;
-            margin-bottom: 16px;
+          .footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(134, 115, 111, 0.2);
+            color: #9CA3AF;
           }
         </style>
       </head>
       <body>
-        <div class="content">
-          <h2>${template.title}</h2>
-          <p>${template.content}</p>
-        </div>
-
-        <div style="text-align: center;">
-          <a href="https://numerology33.com/numerology-reading" class="cta-button">
-            Discover Your Numerological Path to Success
-          </a>
+        <div class="container">
+          <div class="header">
+            <h1 class="title">${template.title}</h1>
+          </div>
+          
+          <div class="content">
+            ${template.content.split('\n\n').map(paragraph => `<p>${paragraph}</p>`).join('')}
+            
+            <div style="text-align: center;">
+              <a href="https://numerology33.com/numerology-reading" class="cta-button">
+                Discover Your Numerological Path to Success
+              </a>
+            </div>
+          </div>
+          
+          <div class="footer">
+            <p>© 2024 Numerology Insights. All rights reserved.</p>
+          </div>
         </div>
       </body>
     </html>
@@ -325,7 +368,7 @@ const handler = async (req: Request): Promise<Response> => {
     const { to, templateName, userData }: EmailRequest = await req.json()
     console.log("Received email request:", { to, templateName, userData })
 
-    const html = getEmailTemplate(templateName, userData)
+    const html = getEmailTemplate(templateName)
     const templates = {
       rolex: "The Secret Behind Rolex's Success: A Numerological Analysis",
       kardashian: "The Kardashian Empire: How They Used Numerology",
