@@ -43,7 +43,7 @@ const getEmailTemplate = (templateName: string) => {
 
                 <!-- Boutique Image -->
                 <div style="margin: 30px 0;">
-                  <img src="https://example.com/rolex-boutique.jpg" alt="Luxurious Rolex boutique with emerald green walls and display cases" style="width: 100%; border-radius: 8px;">
+                  <img src="/lovable-uploads/841cc51b-3942-436f-a692-be30a0b5b243.png" alt="Luxurious Rolex boutique with emerald green walls and display cases" style="width: 100%; border-radius: 8px;">
                 </div>
 
                 <h2 style="color: #a39490; font-size: 24px; margin: 30px 0 20px;">Why the Number 28? The Numerology of Wealth</h2>
@@ -62,9 +62,9 @@ const getEmailTemplate = (templateName: string) => {
 
                 <!-- Watch Images Grid -->
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 30px 0;">
-                  <img src="https://example.com/gold-rolex.jpg" alt="Gold Rolex Watch" style="width: 100%; border-radius: 8px;">
-                  <img src="https://example.com/two-tone-rolex.jpg" alt="Two-Tone Rolex Watch" style="width: 100%; border-radius: 8px;">
-                  <img src="https://example.com/black-rolex.jpg" alt="Black Rolex Watch" style="width: 100%; border-radius: 8px;">
+                  <img src="/lovable-uploads/91a23eb6-35ae-4850-a089-cc3e2438b65e.png" alt="Gold Rolex Watch" style="width: 100%; border-radius: 8px;">
+                  <img src="/lovable-uploads/ec0bf53a-a535-42fa-a475-9a3588d1bb5c.png" alt="Two-Tone Rolex Watch" style="width: 100%; border-radius: 8px;">
+                  <img src="/lovable-uploads/a6781e11-aee4-40d3-bca0-dcd105340118.png" alt="Black Rolex Watch" style="width: 100%; border-radius: 8px;">
                 </div>
 
                 <h2 style="color: #a39490; font-size: 24px; margin: 30px 0 20px;">The Power of 28 in the World of Wealth</h2>
