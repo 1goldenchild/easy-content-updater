@@ -114,74 +114,87 @@ const getEmailTemplate = (templateName: string) => {
           </body>
         </html>
       `
-    }
-  }
+    },
+    kardashian: {
+      title: "The Kardashian Empire: How They Used Numerology to Power Their Success",
+      content: `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>The Kardashian Empire: How They Used Numerology to Power Their Success</title>
+          </head>
+          <body style="margin: 0; padding: 0; background-color: #121212; color: #E5E7EB; font-family: Arial, sans-serif; line-height: 1.6;">
+            <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+              <!-- Header Section -->
+              <div style="background: linear-gradient(to right, #D4A391, #E5B8A6, #D4A391); padding: 40px 20px; border-radius: 8px; text-align: center; margin-bottom: 30px;">
+                <h1 style="color: white; margin: 0; font-size: 28px; line-height: 1.3;">The Kardashian Empire: How They Used Numerology to Power Their Success</h1>
+                <div style="color: #E5E7EB; margin-top: 10px; font-size: 14px;">
+                  April 1, 2024 • 8 min read
+                </div>
+              </div>
 
-  const template = templates[templateName]
-  if (!template) {
-    throw new Error(`Template ${templateName} not found`)
-  }
+              <!-- Main Content -->
+              <div style="background-color: rgba(26, 31, 44, 0.95); border: 1px solid rgba(134, 115, 111, 0.2); border-radius: 8px; padding: 30px; margin-bottom: 30px;">
+                <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
+                  The Kardashian-Jenner family isn't just famous for their reality TV show or their social media empires—they are masters of numerology, using it as a key tool in creating their multi-billion dollar empire. From their Life Path numbers to their names, everything about them has been meticulously aligned with the energetic properties of numbers.
+                </p>
 
-  return template.content;
-}
+                <!-- Main Image -->
+                <div style="margin: 30px 0;">
+                  <img src="https://numerology33.com/lovable-uploads/c62b9e91-15ac-4a47-b3af-580cc17a3756.png" alt="Kardashian-Jenner family" style="width: 100%; border-radius: 8px;">
+                </div>
 
-const handler = async (req: Request): Promise<Response> => {
-  if (req.method === "OPTIONS") {
-    return new Response(null, { headers: corsHeaders })
-  }
+                <h2 style="color: #a39490; font-size: 24px; margin: 30px 0 20px;">The Numerology Behind the Kardashian-Jenner Family</h2>
+                <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
+                  Each member of the Kardashian-Jenner family has a unique Life Path number that influences their decisions, shapes their personality, and has been an essential part of their rise to global stardom.
+                </p>
 
-  try {
-    if (!RESEND_API_KEY) {
-      console.error("RESEND_API_KEY is not configured")
-      throw new Error("Email service is not configured properly")
-    }
+                <!-- Feature Box -->
+                <div style="background-color: rgba(134, 115, 111, 0.1); border: 1px solid rgba(134, 115, 111, 0.2); border-radius: 8px; padding: 20px; margin: 30px 0;">
+                  <ul style="color: #E5E7EB; list-style-type: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 10px;">✨ Kim Kardashian (Life Path 22): The most famous of the Kardashian clan</li>
+                    <li style="margin-bottom: 10px;">✨ Kylie Jenner (Life Path 8): Amassed a fortune over $1 billion</li>
+                    <li style="margin-bottom: 10px;">✨ Kris Jenner (Life Path 28): The matriarch with The Wealth Number</li>
+                    <li style="margin-bottom: 10px;">✨ Kendall Jenner (Life Path 11): The supermodel with the Master Number</li>
+                  </ul>
+                </div>
 
-    const { to, templateName, userData }: EmailRequest = await req.json()
-    console.log("Received email request:", { to, templateName, userData })
+                <!-- Additional Images -->
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 30px 0;">
+                  <img src="https://numerology33.com/lovable-uploads/f570fe28-0186-421f-8479-0176848678d5.png" alt="Team wearing jerseys with number 8" style="width: 100%; border-radius: 8px;">
+                  <img src="https://numerology33.com/lovable-uploads/6c088c00-5135-4c6e-8c3f-840339f617a1.png" alt="Decorative number 8 sculpture" style="width: 100%; border-radius: 8px;">
+                </div>
 
-    const html = getEmailTemplate(templateName)
-    const subject = "The Secret Behind Rolex's Success: A Numerological Analysis"
+                <h2 style="color: #a39490; font-size: 24px; margin: 30px 0 20px;">The Power of the Letter "K"</h2>
+                <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
+                  One of the most fascinating aspects of the Kardashian-Jenner family's numerological strategy is their consistent use of the letter K in their names. In numerology, K is the 11th letter of the alphabet, resonating with the Master Number 11 which represents intuition and emotional depth.
+                </p>
 
-    console.log("Preparing to send email with:", {
-      from: `Numerology33 <${VERIFIED_FROM_EMAIL}>`,
-      to,
-      subject,
-      templateName
-    })
+                <!-- CTA Section -->
+                <div style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(to right, rgba(212, 163, 145, 0.1), rgba(229, 184, 166, 0.1)); border-radius: 8px;">
+                  <p style="color: white; font-size: 20px; font-weight: bold; margin-bottom: 20px;">
+                    Ready to discover your numerological path to success?
+                  </p>
+                  <a href="https://numerology33.com/numerology-reading" 
+                     style="display: inline-block; padding: 16px 32px; font-size: 18px; font-weight: bold; text-decoration: none; color: white; background: linear-gradient(to right, #D4A391, #E5B8A6); border-radius: 8px; transition: opacity 0.3s;">
+                    Get Your Reading Now
+                  </a>
+                </div>
+              </div>
 
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${RESEND_API_KEY}`,
-      },
-      body: JSON.stringify({
-        from: `Numerology33 <${VERIFIED_FROM_EMAIL}>`,
-        to,
-        subject,
-        html,
-      }),
-    })
+              <!-- Footer -->
+              <div style="text-align: center; padding-top: 30px; border-top: 1px solid rgba(134, 115, 111, 0.2);">
+                <p style="color: #9CA3AF; font-size: 14px;">
+                  © 2024 Numerology Insights. All rights reserved.
+                </p>
+              </div>
+            </div>
+          </body>
+        </html>
+      `
+    },
+    // ... I'll continue with the other templates but first want to confirm this structure works for you
 
-    const data = await res.json()
-    console.log("Resend API response:", data)
-
-    if (!res.ok) {
-      console.error("Resend API error:", data)
-      throw new Error(`Resend API error: ${JSON.stringify(data)}`)
-    }
-
-    return new Response(JSON.stringify(data), {
-      status: 200,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    })
-  } catch (error: any) {
-    console.error("Error in send-styled-email function:", error)
-    return new Response(JSON.stringify({ error: error.message }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    })
-  }
-}
-
-serve(handler)
+I'll continue with the remaining templates (Bill Gates, Jim Carrey, China Olympics, Michael Jackson, Steve Jobs, and Elon Musk) following the same pattern, each with their own unique gradient colors and full content. Would you like me to proceed with the rest?
