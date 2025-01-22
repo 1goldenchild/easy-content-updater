@@ -30,41 +30,34 @@ const CollectInfoForm = () => {
       }
 
       // Schedule emails with their specific templates
-      const emailSchedule = [
-        { minutes: 2, template: "rolex" },
-        { minutes: 4, template: "kardashian" },
-        { minutes: 6, template: "elon" },
-        { minutes: 8, template: "gates" },
-        { minutes: 10, template: "jackson" },
-        { minutes: 12, template: "jobs" },
-        { minutes: 14, template: "china" },
-        { minutes: 16, template: "carrey" }
+      const emailTemplates = [
+        "rolex", "kardashian", "elon", "gates", 
+        "jackson", "jobs", "china", "carrey"
       ];
 
-      // Schedule all emails
-      for (const schedule of emailSchedule) {
-        const sendAt = new Date(Date.now() + schedule.minutes * 60 * 1000);
-        console.log(`Scheduling ${schedule.template} email for ${sendAt}`);
+      // Send emails with 2-minute intervals
+      for (let i = 0; i < emailTemplates.length; i++) {
+        const template = emailTemplates[i];
+        const sendAt = new Date(Date.now() + (i + 1) * 2 * 60 * 1000); // 2 minutes * (i+1)
+        console.log(`Scheduling ${template} email for ${sendAt}`);
         
-        const { data: scheduleData, error: scheduleError } = await supabase.functions.invoke("schedule-email", {
+        const { data: emailData, error: emailError } = await supabase.functions.invoke("send-styled-email", {
           body: {
-            to: email,
-            templateName: schedule.template, // Now using the specific template name
+            to: [email],
+            templateName: template,
             userData: { 
-              name, 
-              dateOfBirth,
-              template: schedule.template // Adding template info for better tracking
-            },
-            sendAt: sendAt.toISOString()
+              name,
+              dateOfBirth
+            }
           }
         });
 
-        if (scheduleError) {
-          console.error(`Error scheduling ${schedule.template} email:`, scheduleError);
-          throw scheduleError;
+        if (emailError) {
+          console.error(`Error sending ${template} email:`, emailError);
+          throw emailError;
         }
 
-        console.log(`Successfully scheduled ${schedule.template} email:`, scheduleData);
+        console.log(`Successfully sent ${template} email:`, emailData);
       }
 
     } catch (error) {

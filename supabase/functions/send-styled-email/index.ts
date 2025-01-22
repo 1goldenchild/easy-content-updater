@@ -1,7 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts"
 import { corsHeaders } from "../_shared/cors.ts"
 
-const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY")
+const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')
 const VERIFIED_FROM_EMAIL = "info@numerology33.com"
 
 interface EmailRequest {
@@ -10,9 +10,7 @@ interface EmailRequest {
   userData: {
     name?: string
     dateOfBirth?: string
-    template?: string
   }
-  scheduledTime?: string
 }
 
 const getEmailTemplate = (templateName: string, userData: EmailRequest["userData"]) => {
