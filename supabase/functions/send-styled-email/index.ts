@@ -459,11 +459,16 @@ const handler = async (req: Request): Promise<Response> => {
     const emailRequest: EmailRequest = await req.json();
     console.log("Received email request:", emailRequest);
 
+    // Array of templates in the order they should be sent
+    const templateSequence = ['rolex', 'kardashian', 'gates', 'carrey', 'china', 'jackson', 'jobs', 'musk'];
+    
+    // Get the current template
     const template = getEmailTemplate(emailRequest.templateName);
     if (!template) {
       throw new Error("Template not found");
     }
 
+    // Send the current email
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -485,6 +490,40 @@ const handler = async (req: Request): Promise<Response> => {
 
     const data = await res.json();
     console.log("Email sent successfully:", data);
+
+    // Schedule next emails in sequence
+    const currentIndex = templateSequence.indexOf(emailRequest.templateName);
+    if (currentIndex !== -1 && currentIndex < templateSequence.length - 1) {
+      // Schedule next email
+      const nextTemplate = templateSequence[currentIndex + 1];
+      const delay = (currentIndex + 1) * 60000; // 1 minute increments
+
+      setTimeout(async () => {
+        try {
+          const nextEmailRes = await fetch("https://api.resend.com/emails", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${RESEND_API_KEY}`,
+            },
+            body: JSON.stringify({
+              from: VERIFIED_FROM_EMAIL,
+              to: emailRequest.to,
+              subject: getEmailTemplate(nextTemplate)?.title,
+              html: getEmailTemplate(nextTemplate)?.content,
+            }),
+          });
+
+          if (!nextEmailRes.ok) {
+            console.error(`Failed to send next email (${nextTemplate}):`, await nextEmailRes.text());
+          } else {
+            console.log(`Successfully scheduled and sent ${nextTemplate} email`);
+          }
+        } catch (error) {
+          console.error(`Error sending scheduled email (${nextTemplate}):`, error);
+        }
+      }, delay);
+    }
 
     return new Response(JSON.stringify(data), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
