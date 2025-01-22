@@ -27,8 +27,8 @@ const getEmailTemplate = (templateName: string) => {
           </head>
           <body style="margin: 0; padding: 0; background-color: #121212; color: #E5E7EB; font-family: Arial, sans-serif; line-height: 1.6;">
             <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-              <!-- Header Section -->
-              <div style="background: linear-gradient(to right, #86736f, #a39490, #c4b5b1); padding: 40px 20px; border-radius: 8px; text-align: center; margin-bottom: 30px;">
+              <!-- Header Section with Rolex Green Gradient -->
+              <div style="background: linear-gradient(to right, #006039, #007a49, #006039); padding: 40px 20px; border-radius: 8px; text-align: center; margin-bottom: 30px;">
                 <h1 style="color: white; margin: 0; font-size: 28px; line-height: 1.3;">The Secret Behind Rolex's Success: A Numerological Analysis</h1>
                 <div style="color: #E5E7EB; margin-top: 10px; font-size: 14px;">
                   March 29, 2024 • 8 min read
