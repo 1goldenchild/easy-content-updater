@@ -129,8 +129,12 @@ const handler = async (req: Request): Promise<Response> => {
 
     const subject = templates[templateName as keyof typeof templates] || "Your Numerology Analysis"
 
-    console.log("Sending email with subject:", subject)
-    console.log("From email:", VERIFIED_FROM_EMAIL)
+    console.log("Preparing to send email with:", {
+      from: `Numerology33 <${VERIFIED_FROM_EMAIL}>`,
+      to,
+      subject,
+      templateName
+    })
 
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
