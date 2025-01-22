@@ -42,12 +42,16 @@ const handler = async (req: Request): Promise<Response> => {
     // Create a unique job name using the email and timestamp
     const jobName = `send-${templateName}-${to}-${Date.now()}`
 
+    // Ensure the URL is properly formatted without a trailing colon
+    const functionUrl = `${supabaseUrl}/functions/v1/send-styled-email`
+    console.log("Function URL:", functionUrl)
+
     // Schedule the job using pg_cron via RPC
     const { data: scheduleData, error: scheduleError } = await supabase.rpc('schedule_email', {
       p_job_name: jobName,
       p_schedule: '* * * * *', // Run every minute
       p_command: JSON.stringify({
-        url: `${supabaseUrl}/functions/v1/send-styled-email`,
+        url: functionUrl,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${supabaseKey}`
