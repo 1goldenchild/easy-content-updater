@@ -15,6 +15,35 @@ const CollectInfoForm = () => {
   });
   const [date, setDate] = useState<Date>();
 
+  const scheduleEmailSequence = async (userReadingId: string, email: string, name: string, dateOfBirth: string) => {
+    try {
+      // Insert email sequence status
+      const { error: sequenceError } = await supabase
+        .from("email_sequence_status")
+        .insert([{ user_reading_id: userReadingId }]);
+
+      if (sequenceError) throw sequenceError;
+
+      // Schedule first email (Rolex) for 8 minutes from now
+      const firstEmailDate = new Date(Date.now() + 8 * 60 * 1000);
+      
+      const { error: scheduleError } = await supabase.functions.invoke("schedule-email", {
+        body: {
+          to: email,
+          templateName: "analysis",
+          userData: { name, dateOfBirth },
+          sendAt: firstEmailDate.toISOString()
+        }
+      });
+
+      if (scheduleError) throw scheduleError;
+
+    } catch (error) {
+      console.error("Error scheduling email sequence:", error);
+      throw error;
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Form submission started");
@@ -65,12 +94,21 @@ const CollectInfoForm = () => {
 
       console.log("Data saved successfully:", data);
 
+      // Schedule email sequence
+      if (data && data[0]) {
+        await scheduleEmailSequence(
+          data[0].id,
+          formData.email,
+          formData.name,
+          formattedDate
+        );
+      }
+
       toast({
         title: "Success!",
         description: "Your information has been submitted successfully.",
       });
 
-      // Updated redirect URL
       window.location.replace("https://checkout.numerology33.com/checkout");
       
     } catch (error) {
