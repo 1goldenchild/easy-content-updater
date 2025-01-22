@@ -24,19 +24,34 @@ const CollectInfoForm = () => {
 
       if (sequenceError) throw sequenceError;
 
-      // Schedule first email (Rolex) for 8 minutes from now
-      const firstEmailDate = new Date(Date.now() + 8 * 60 * 1000);
-      
-      const { error: scheduleError } = await supabase.functions.invoke("schedule-email", {
-        body: {
-          to: email,
-          templateName: "analysis",
-          userData: { name, dateOfBirth },
-          sendAt: firstEmailDate.toISOString()
-        }
-      });
+      // Schedule emails with shorter intervals for testing
+      const emailSchedule = [
+        { minutes: 2, template: "rolex" },
+        { minutes: 4, template: "kardashian" },
+        { minutes: 6, template: "elon" },
+        { minutes: 8, template: "gates" },
+        { minutes: 10, template: "jackson" },
+        { minutes: 12, template: "jobs" },
+        { minutes: 14, template: "china" },
+        { minutes: 16, template: "carrey" }
+      ];
 
-      if (scheduleError) throw scheduleError;
+      // Schedule all emails
+      for (const schedule of emailSchedule) {
+        const sendAt = new Date(Date.now() + schedule.minutes * 60 * 1000);
+        
+        const { error: scheduleError } = await supabase.functions.invoke("schedule-email", {
+          body: {
+            to: email,
+            templateName: "analysis",
+            userData: { name, dateOfBirth },
+            sendAt: sendAt.toISOString()
+          }
+        });
+
+        if (scheduleError) throw scheduleError;
+        console.log(`Scheduled ${schedule.template} email for ${sendAt}`);
+      }
 
     } catch (error) {
       console.error("Error scheduling email sequence:", error);
@@ -106,7 +121,7 @@ const CollectInfoForm = () => {
 
       toast({
         title: "Success!",
-        description: "Your information has been submitted successfully.",
+        description: "Your information has been submitted successfully. You will receive the first email in about 2 minutes.",
       });
 
       window.location.replace("https://checkout.numerology33.com/checkout");
