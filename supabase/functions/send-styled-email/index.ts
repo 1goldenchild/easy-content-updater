@@ -4,11 +4,11 @@ import { getWelcomeTemplate } from "./templates/welcome.ts";
 import { getAnalysisTemplate } from "./templates/analysis.ts";
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
-const VERIFIED_FROM_EMAIL = "info@numerology33.com"; // Using your verified domain
+const VERIFIED_FROM_EMAIL = "info@numerology33.com";
 
 interface EmailRequest {
   to: string[];
-  templateName: "welcome" | "analysis";
+  templateName: string;
   userData?: {
     name?: string;
     dateOfBirth?: string;
@@ -22,7 +22,8 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    // Check if RESEND_API_KEY is configured
+    console.log("Starting email send process");
+    
     if (!RESEND_API_KEY) {
       console.error("RESEND_API_KEY is not configured");
       throw new Error("Email service is not configured properly");
@@ -34,20 +35,39 @@ const handler = async (req: Request): Promise<Response> => {
     let emailHtml = "";
     let subject = "";
 
-    switch (templateName) {
-      case "welcome":
-        emailHtml = getWelcomeTemplate(userData?.name || "there");
-        subject = "Welcome to Your Numerology Journey!";
-        break;
-      case "analysis":
-        if (!userData?.dateOfBirth) {
-          throw new Error("Date of birth is required for analysis template");
-        }
-        emailHtml = getAnalysisTemplate(userData.name || "there", userData.dateOfBirth);
-        subject = "Your Numerology Analysis Is Ready!";
-        break;
-      default:
-        throw new Error("Invalid template name");
+    // Map template names to their corresponding subjects
+    const templateConfig: Record<string, { title: string }> = {
+      rolex: { title: "The Secret Behind Rolex's Success: A Numerological Analysis" },
+      kardashian: { title: "The Kardashian Empire: How They Used Numerology" },
+      elon: { title: "How Elon Musk Uses Numerology to Get Rich" },
+      gates: { title: "Bill Gates and the Power of Numerology" },
+      jackson: { title: "Michael Jackson's Numerological Journey" },
+      jobs: { title: "Steve Jobs: A Numerological Success Story" },
+      china: { title: "China's Numerological Success Secrets" },
+      carrey: { title: "Jim Carrey's Numerological Path to Success" }
+    };
+
+    // Get template configuration
+    const config = templateConfig[templateName];
+    if (config) {
+      subject = config.title;
+      emailHtml = getAnalysisTemplate(userData?.name || "there", userData?.dateOfBirth || "");
+    } else {
+      switch (templateName) {
+        case "welcome":
+          emailHtml = getWelcomeTemplate(userData?.name || "there");
+          subject = "Welcome to Your Numerology Journey!";
+          break;
+        case "analysis":
+          if (!userData?.dateOfBirth) {
+            throw new Error("Date of birth is required for analysis template");
+          }
+          emailHtml = getAnalysisTemplate(userData.name || "there", userData.dateOfBirth);
+          subject = "Your Numerology Analysis Is Ready!";
+          break;
+        default:
+          throw new Error("Invalid template name");
+      }
     }
 
     console.log("Sending email with subject:", subject);
