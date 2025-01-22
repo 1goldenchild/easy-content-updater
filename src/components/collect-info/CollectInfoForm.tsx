@@ -17,14 +17,19 @@ const CollectInfoForm = () => {
 
   const scheduleEmailSequence = async (userReadingId: string, email: string, name: string, dateOfBirth: string) => {
     try {
+      console.log("Starting email sequence scheduling for:", email);
+      
       // Insert email sequence status
       const { error: sequenceError } = await supabase
         .from("email_sequence_status")
         .insert([{ user_reading_id: userReadingId }]);
 
-      if (sequenceError) throw sequenceError;
+      if (sequenceError) {
+        console.error("Error inserting email sequence status:", sequenceError);
+        throw sequenceError;
+      }
 
-      // Schedule emails with shorter intervals for testing
+      // Schedule emails with their specific templates
       const emailSchedule = [
         { minutes: 2, template: "rolex" },
         { minutes: 4, template: "kardashian" },
@@ -39,22 +44,31 @@ const CollectInfoForm = () => {
       // Schedule all emails
       for (const schedule of emailSchedule) {
         const sendAt = new Date(Date.now() + schedule.minutes * 60 * 1000);
+        console.log(`Scheduling ${schedule.template} email for ${sendAt}`);
         
-        const { error: scheduleError } = await supabase.functions.invoke("schedule-email", {
+        const { data: scheduleData, error: scheduleError } = await supabase.functions.invoke("schedule-email", {
           body: {
             to: email,
-            templateName: "analysis",
-            userData: { name, dateOfBirth },
+            templateName: schedule.template, // Now using the specific template name
+            userData: { 
+              name, 
+              dateOfBirth,
+              template: schedule.template // Adding template info for better tracking
+            },
             sendAt: sendAt.toISOString()
           }
         });
 
-        if (scheduleError) throw scheduleError;
-        console.log(`Scheduled ${schedule.template} email for ${sendAt}`);
+        if (scheduleError) {
+          console.error(`Error scheduling ${schedule.template} email:`, scheduleError);
+          throw scheduleError;
+        }
+
+        console.log(`Successfully scheduled ${schedule.template} email:`, scheduleData);
       }
 
     } catch (error) {
-      console.error("Error scheduling email sequence:", error);
+      console.error("Error in scheduleEmailSequence:", error);
       throw error;
     }
   };

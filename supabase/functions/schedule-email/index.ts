@@ -4,10 +4,11 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3"
 
 interface ScheduleEmailRequest {
   to: string
-  templateName: "welcome" | "analysis"
+  templateName: string
   userData: {
     name?: string
     dateOfBirth?: string
+    template?: string
   }
   sendAt: string
 }
