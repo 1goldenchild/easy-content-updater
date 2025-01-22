@@ -36,33 +36,39 @@ const handler = async (req: Request): Promise<Response> => {
       throw new Error("Missing Supabase configuration")
     }
 
+    console.log("Supabase URL:", supabaseUrl)
+
     // Initialize Supabase client with service role key
     const supabase = createClient(supabaseUrl, supabaseKey)
 
     // Create a unique job name using the email and timestamp
     const jobName = `send-${templateName}-${to}-${Date.now()}`
 
-    // Ensure the URL is properly formatted without a trailing colon
-    const functionUrl = `${supabaseUrl}/functions/v1/send-styled-email`
-    console.log("Function URL:", functionUrl)
+    // Construct the function URL properly
+    const functionUrl = new URL("/functions/v1/send-styled-email", supabaseUrl).toString()
+    console.log("Function URL constructed:", functionUrl)
+
+    const command = {
+      url: functionUrl,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${supabaseKey}`
+      },
+      body: {
+        to: [to],
+        templateName,
+        userData,
+        scheduledTime: sendAt
+      }
+    }
+
+    console.log("Scheduling command:", JSON.stringify(command, null, 2))
 
     // Schedule the job using pg_cron via RPC
     const { data: scheduleData, error: scheduleError } = await supabase.rpc('schedule_email', {
       p_job_name: jobName,
       p_schedule: '* * * * *', // Run every minute
-      p_command: JSON.stringify({
-        url: functionUrl,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${supabaseKey}`
-        },
-        body: {
-          to: [to],
-          templateName,
-          userData,
-          scheduledTime: sendAt
-        }
-      })
+      p_command: JSON.stringify(command)
     })
 
     if (scheduleError) {
@@ -70,6 +76,7 @@ const handler = async (req: Request): Promise<Response> => {
       throw scheduleError
     }
 
+    console.log("Schedule response:", scheduleData)
     console.log(`Successfully scheduled ${templateName} email to ${to} at ${sendAt}`)
 
     return new Response(
