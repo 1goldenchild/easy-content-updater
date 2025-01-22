@@ -77,7 +77,7 @@ const getEmailTemplate = (templateName: string) => {
                 </p>
                 <h2 style="color: white; font-size: 24px; margin: 30px 0 20px;">Rolex's Subtle Numerology: 28 and 10:11</h2>
                 <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
-                  Now, back to Rolex and the 28. When you look at a Rolex watch in marketing materials, you'll notice that the date window highlights the number 28. But that's not all. If you look carefully, Rolex also sets the time at 10:11, a powerful numerological sequence. In numerology, 111 is a number of manifestation, inspiration, and new beginnings—perfectly fitting for a brand that symbolizes elite success.
+                  Now, back to Rolex and the 28. When you look at a Rolex watch in marketing materials, you'll notice that the date window highlights the number 28. But that's not all. If you look carefully, Rolex also sets the time at 10:11, a powerful numerological sequence. In numerology, 111 is a number of manifestation, inspiration, and new beginnings—perfectly fitting for a brand that symbolizes elite success. The positioning of the time on the dial reflects the brand's alignment with manifesting wealth and success and also directly passing that force onto the customers.
                 </p>
                 <div style="text-align: center; margin-top: 40px;">
                   <a href="https://numerology33.com/numerology-reading" style="display: inline-block; padding: 16px 32px; font-size: 18px; font-weight: bold; text-decoration: none; color: white; background: linear-gradient(to right, #006039, #007a49); border-radius: 8px; transition: opacity 0.3s;">
@@ -117,7 +117,7 @@ const getEmailTemplate = (templateName: string) => {
                 </div>
                 <h2 style="color: white; font-size: 24px; margin: 30px 0 20px;">The Numerology Behind the Kardashian-Jenner Family</h2>
                 <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
-                  Each member of the Kardashian-Jenner family has a unique Life Path number that influences their decisions, shapes their personality, and has been an essential part of their rise to global stardom.
+                  Each member of the Kardashian-Jenner family has a unique Life Path number that influences their decisions, shapes their personality, and has been an essential part of their rise to global stardom. Let's take a closer look at their Life Path numbers and what they reveal about them:
                 </p>
                 <div style="background-color: rgba(212, 163, 145, 0.1); border: 1px solid rgba(212, 163, 145, 0.2); border-radius: 8px; padding: 20px; margin: 30px 0;">
                   <ul style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin: 0; padding-left: 20px;">
@@ -174,11 +174,27 @@ const getEmailTemplate = (templateName: string) => {
               </div>
               <div style="background-color: rgba(26, 31, 44, 0.95); border: 1px solid rgba(134, 115, 111, 0.2); border-radius: 8px; padding: 30px; margin-bottom: 30px;">
                 <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
-                  Bill Gates, the co-founder of Microsoft, has been using numerology to influence his business decisions throughout his career. From choosing product launch dates to naming conventions, Gates has leveraged the power of numbers.
+                  When we think of the world's most successful and influential tech giants, Bill Gates is undoubtedly one of the first names that come to mind. The co-founder of Microsoft revolutionized the technology industry and amassed an unimaginable fortune over the decades. But what if we told you that Bill Gates' success wasn't just due to his business acumen and relentless drive?
                 </p>
                 <div style="margin: 30px 0;">
                   <img src="https://numerology33.com/lovable-uploads/bc46eaf5-772c-48e1-8dd7-fdfd1952a3ae.png" alt="Bill Gates presenting" style="width: 100%; border-radius: 8px;">
                 </div>
+                <h2 style="color: white; font-size: 24px; margin: 30px 0 20px;">Bill Gates and the Number 28: The Key to His Wealth</h2>
+                <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
+                  One of the most fascinating aspects of Bill Gates' numerology is the number 28, which plays a critical role in his life path and his wealth. Gates was born on October 28, 1955. In numerology, 28 is the number of wealth, success, and power. The number is connected to individuals who are destined for financial prosperity and significant accomplishments.
+                </p>
+                <div style="background-color: rgba(0, 164, 239, 0.1); border: 1px solid rgba(0, 164, 239, 0.2); border-radius: 8px; padding: 20px; margin: 30px 0;">
+                  <ul style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin: 0; padding-left: 20px;">
+                    <li>Birth Date: October 28, 1955 - The power of 28</li>
+                    <li>Net Worth: Over $100 billion</li>
+                    <li>Company: Microsoft's strategic decisions</li>
+                    <li>Product Strategy: Skipping Windows 9</li>
+                  </ul>
+                </div>
+                <h2 style="color: white; font-size: 24px; margin: 30px 0 20px;">Bill Gates and Steve Jobs: The Rivalry and Numerology Connection</h2>
+                <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
+                  Bill Gates' biggest competitor in the tech world was none other than Steve Jobs, the iconic co-founder of Apple. While their rivalry is well-known in the business world, what's less commonly known is that both Gates and Jobs were deeply influenced by numerology in their respective careers.
+                </p>
                 <div style="text-align: center; margin-top: 40px;">
                   <a href="https://numerology33.com/numerology-reading" style="display: inline-block; padding: 16px 32px; font-size: 18px; font-weight: bold; text-decoration: none; color: white; background: linear-gradient(to right, #00A4EF, #7FBA00); border-radius: 8px; transition: opacity 0.3s;">
                     Get Your Reading Now
@@ -210,10 +226,22 @@ const getEmailTemplate = (templateName: string) => {
               </div>
               <div style="background-color: rgba(26, 31, 44, 0.95); border: 1px solid rgba(134, 115, 111, 0.2); border-radius: 8px; padding: 30px; margin-bottom: 30px;">
                 <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
-                  Jim Carrey's connection to numerology, particularly his fascination with the number 23, has played a significant role in shaping his career choices and personal philosophy.
+                  Jim Carrey, the legendary actor and comedian, is known for his larger-than-life personality, unhinged humor, and, of course, his unforgettable roles in films like Ace Ventura, The Truman Show, and The Mask. But behind the humor and the manic energy, Carrey's life is influenced by something far deeper: numerology.
                 </p>
                 <div style="margin: 30px 0;">
                   <img src="https://numerology33.com/lovable-uploads/fbe09605-e28e-4bb2-98d1-5266c9efa916.png" alt="Jim Carrey" style="width: 100%; border-radius: 8px;">
+                </div>
+                <h2 style="color: white; font-size: 24px; margin: 30px 0 20px;">The Number 23: Jim Carrey's Fascination and the Cosmic Meaning Behind It</h2>
+                <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
+                  It all began with the number 23, a number that Carrey has repeatedly mentioned in interviews and public talks. According to Carrey, he became intrigued by the number while making The Number 23, a thriller where his character spirals into obsession with the number. But what's more interesting is how 23 kept appearing in his life outside of the film.
+                </p>
+                <div style="background-color: rgba(255, 107, 107, 0.1); border: 1px solid rgba(255, 107, 107, 0.2); border-radius: 8px; padding: 20px; margin: 30px 0;">
+                  <ul style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin: 0; padding-left: 20px;">
+                    <li>Earth's Axial Tilt: The Earth's axial tilt is 23 degrees</li>
+                    <li>Blood Circulation: Blood circulates through the human body in 23 seconds</li>
+                    <li>Birth Time: Born at 2:30 AM (2 + 3 = 5 in numerology)</li>
+                    <li>Production Company: Named his company JC23 Entertainment</li>
+                  </ul>
                 </div>
                 <div style="text-align: center; margin-top: 40px;">
                   <a href="https://numerology33.com/numerology-reading" style="display: inline-block; padding: 16px 32px; font-size: 18px; font-weight: bold; text-decoration: none; color: white; background: linear-gradient(to right, #FF6B6B, #4ECDC4); border-radius: 8px; transition: opacity 0.3s;">
@@ -246,10 +274,22 @@ const getEmailTemplate = (templateName: string) => {
               </div>
               <div style="background-color: rgba(26, 31, 44, 0.95); border: 1px solid rgba(134, 115, 111, 0.2); border-radius: 8px; padding: 30px; margin-bottom: 30px;">
                 <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
-                  China's remarkable transformation and the strategic use of numerology during the 2008 Beijing Olympics showcases how numbers can influence global success.
+                  China's remarkable transformation over the past few decades is nothing short of extraordinary. From being the 15th largest economy in the world to becoming the 2nd largest in a matter of years, China's rise to global prominence has been driven by a combination of economic reforms, strategic vision, and—believe it or not—numerology.
                 </p>
                 <div style="margin: 30px 0;">
                   <img src="https://numerology33.com/lovable-uploads/a15fb902-5972-4403-b638-89b8760626e1.png" alt="Beijing Olympics" style="width: 100%; border-radius: 8px;">
+                </div>
+                <h2 style="color: white; font-size: 24px; margin: 30px 0 20px;">The Power of the Number 8: Why China Chose 8:08 PM on 8/8/2008</h2>
+                <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
+                  China's use of numerology during the 2008 Olympics is one of the most striking examples of how deeply ingrained numerology is in their culture. The Beijing Olympics were set to begin on August 8, 2008, at exactly 8:08 PM. The 8th day of the 8th month of 2008 at 8pm and 8 minutes.
+                </p>
+                <div style="background-color: rgba(222, 41, 16, 0.1); border: 1px solid rgba(222, 41, 16, 0.2); border-radius: 8px; padding: 20px; margin: 30px 0;">
+                  <ul style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin: 0; padding-left: 20px;">
+                    <li>Number 8 Significance: Associated with wealth, prosperity, and good fortune</li>
+                    <li>Pronunciation: Sounds like "fa" (發) meaning "wealth" and "prosper" in Mandarin</li>
+                    <li>Strategic Timing: 8:08 PM on 8/8/2008 for maximum prosperity energy</li>
+                    <li>Global Impact: Marked China's emergence as a global superpower</li>
+                  </ul>
                 </div>
                 <div style="text-align: center; margin-top: 40px;">
                   <a href="https://numerology33.com/numerology-reading" style="display: inline-block; padding: 16px 32px; font-size: 18px; font-weight: bold; text-decoration: none; color: white; background: linear-gradient(to right, #DE2910, #FFDE00); border-radius: 8px; transition: opacity 0.3s;">
@@ -282,10 +322,22 @@ const getEmailTemplate = (templateName: string) => {
               </div>
               <div style="background-color: rgba(26, 31, 44, 0.95); border: 1px solid rgba(134, 115, 111, 0.2); border-radius: 8px; padding: 30px; margin-bottom: 30px;">
                 <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
-                  Michael Jackson, the King of Pop, used numerology throughout his career, with the number 7 playing a particularly significant role in his success.
+                  Michael Jackson, the King of Pop, forever changed the world with his groundbreaking music, unparalleled performances, and revolutionary style. But beyond his global fame and musical genius, Jackson's connection to numerology and his fascination with certain numbers played a unique role in his rise to superstardom.
                 </p>
                 <div style="margin: 30px 0;">
                   <img src="https://numerology33.com/lovable-uploads/787349e3-6668-40c9-90db-3dd2d0f8d6ef.png" alt="Michael Jackson" style="width: 100%; border-radius: 8px;">
+                </div>
+                <h2 style="color: white; font-size: 24px; margin: 30px 0 20px;">The Significance of 7 in Michael Jackson's Life and Career</h2>
+                <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
+                  Michael Jackson was more than just a music icon; he was also deeply influenced by numerology. The number 7 is especially significant, and it showed up in countless ways throughout Jackson's career. Why 7? It's a spiritual number, with wisdom, spiritual awakening, and intelligence.
+                </p>
+                <div style="background-color: rgba(74, 20, 140, 0.1); border: 1px solid rgba(74, 20, 140, 0.2); border-radius: 8px; padding: 20px; margin: 30px 0;">
+                  <ul style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin: 0; padding-left: 20px;">
+                    <li>'Scream' Music Video: Michael Jackson wore the number 7 prominently</li>
+                    <li>'Dangerous' Album Cover: The number 7 appears on a hat</li>
+                    <li>HIStory World Tour: Michael had 7 embossed on each leg guard</li>
+                    <li>HIStory Album Statue: Features 777 on his arm</li>
+                  </ul>
                 </div>
                 <div style="text-align: center; margin-top: 40px;">
                   <a href="https://numerology33.com/numerology-reading" style="display: inline-block; padding: 16px 32px; font-size: 18px; font-weight: bold; text-decoration: none; color: white; background: linear-gradient(to right, #4A148C, #311B92); border-radius: 8px; transition: opacity 0.3s;">
@@ -318,10 +370,21 @@ const getEmailTemplate = (templateName: string) => {
               </div>
               <div style="background-color: rgba(26, 31, 44, 0.95); border: 1px solid rgba(134, 115, 111, 0.2); border-radius: 8px; padding: 30px; margin-bottom: 30px;">
                 <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
-                  Steve Jobs' journey from his early days in India studying numerology to building Apple into a $3.5 trillion empire was guided by his understanding of numbers.
+                  Steve Jobs, the co-founder of Apple, needs no introduction. His vision transformed the world of technology and consumer electronics, leading Apple to become the largest company in the world, now valued at a staggering $3.5 trillion. However, what many may not know is that he used numerology as a driving force.
                 </p>
                 <div style="margin: 30px 0;">
                   <img src="https://numerology33.com/lovable-uploads/73da4848-4fc6-412c-b1a9-0efc609335e3.png" alt="Steve Jobs" style="width: 100%; border-radius: 8px;">
+                </div>
+                <h2 style="color: white; font-size: 24px; margin: 30px 0 20px;">Steve Jobs' Journey to India and learning the Power of Numbers</h2>
+                <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
+                  Before Steve Jobs became the tech icon we know today, he embarked on a life-changing journey to India. This trip, inspired by his interest in numerology and astrology, helped shape his view of the world and the way he approached business decisions.
+                </p>
+                <div style="background-color: rgba(162, 170, 173, 0.1); border: 1px solid rgba(162, 170, 173, 0.2); border-radius: 8px; padding: 20px; margin: 30px 0;">
+                  <ul style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin: 0; padding-left: 20px;">
+                    <li>Apple's founding date: January 3, 1977 – When you add up the digits (1 + 3 + 1 + 9 + 7 + 7), you get 28</li>
+                    <li>Apple's official incorporation: April 1, 1976 – Again, adding up the digits (4 + 1 + 1 + 9 + 7 + 6) gives you 28</li>
+                    <li>Jobs' birthdate: February 24, 1955 also adds up to 28</li>
+                  </ul>
                 </div>
                 <div style="text-align: center; margin-top: 40px;">
                   <a href="https://numerology33.com/numerology-reading" style="display: inline-block; padding: 16px 32px; font-size: 18px; font-weight: bold; text-decoration: none; color: white; background: linear-gradient(to right, #A2AAAD, #666666); border-radius: 8px; transition: opacity 0.3s;">
@@ -354,10 +417,22 @@ const getEmailTemplate = (templateName: string) => {
               </div>
               <div style="background-color: rgba(26, 31, 44, 0.95); border: 1px solid rgba(134, 115, 111, 0.2); border-radius: 8px; padding: 30px; margin-bottom: 30px;">
                 <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
-                  Elon Musk, the world's richest person, has been strategically leveraging the power of numbers, specifically 28 and 8, to fuel his meteoric rise.
+                  Elon Musk is one of the most successful and innovative entrepreneurs of our time. But beyond his groundbreaking work with Tesla, SpaceX, and his ventures into the world of cryptocurrency, there's a fascinating aspect to his success that many people overlook: numerology.
                 </p>
                 <div style="margin: 30px 0;">
                   <img src="https://numerology33.com/lovable-uploads/4c2bf36a-524f-4700-86f4-fcb7d217d5fd.png" alt="Elon Musk" style="width: 100%; border-radius: 8px;">
+                </div>
+                <h2 style="color: white; font-size: 24px; margin: 30px 0 20px;">Elon Musk's Numerology Lotto: The Power of 28</h2>
+                <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
+                  Elon Musk was born on June 28, 1971, and as anyone who knows numerology can tell you, 28 is a highly significant number. In numerology, 28 is the number of wealth, success, and abundance. It's the number of those who are destined for financial prosperity.
+                </p>
+                <div style="background-color: rgba(204, 0, 0, 0.1); border: 1px solid rgba(204, 0, 0, 0.2); border-radius: 8px; padding: 20px; margin: 30px 0;">
+                  <ul style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin: 0; padding-left: 20px;">
+                    <li>Number 2 represents cooperation, partnership, and balance</li>
+                    <li>Number 8 symbolizes material wealth, business success, and power</li>
+                    <li>Twitter Purchase: $44 billion (4+4 = 8)</li>
+                    <li>Tesla Model Numbers: S, 3, X, Y (adds to 28 in numerology)</li>
+                  </ul>
                 </div>
                 <div style="text-align: center; margin-top: 40px;">
                   <a href="https://numerology33.com/numerology-reading" style="display: inline-block; padding: 16px 32px; font-size: 18px; font-weight: bold; text-decoration: none; color: white; background: linear-gradient(to right, #CC0000, #E31937); border-radius: 8px; transition: opacity 0.3s;">
