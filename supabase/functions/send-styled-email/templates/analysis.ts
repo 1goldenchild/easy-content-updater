@@ -39,7 +39,7 @@ export const getAnalysisTemplate = (name: string, dateOfBirth: string) => {
     <html>
       <head>
         <meta charset="utf-8">
-        <title>Your Numerology Analysis</title>
+        <title>${blogPosts.rolex.title}</title>
         <style>
           body {
             font-family: Arial, sans-serif;
@@ -48,10 +48,6 @@ export const getAnalysisTemplate = (name: string, dateOfBirth: string) => {
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
-          }
-          .header {
-            color: #8B5CF6;
-            margin-bottom: 24px;
           }
           .content {
             margin-bottom: 32px;
@@ -64,21 +60,10 @@ export const getAnalysisTemplate = (name: string, dateOfBirth: string) => {
             border-radius: 5px;
             display: inline-block;
           }
-          .footer {
-            font-size: 12px;
-            color: #666;
-            margin-top: 40px;
-          }
         </style>
       </head>
       <body>
-        <div class="header">
-          <h1>Hello ${name}!</h1>
-        </div>
-        
         <div class="content">
-          <p>Thank you for starting your numerology journey with us. Based on your date of birth (${dateOfBirth}), we've prepared a special series of insights for you.</p>
-          
           <h2>${blogPosts.rolex.title}</h2>
           <p>${blogPosts.rolex.content}</p>
         </div>
@@ -87,10 +72,6 @@ export const getAnalysisTemplate = (name: string, dateOfBirth: string) => {
           <a href="https://numerology33.com/numerology-reading" class="cta-button">
             Find Out More About Your Numerology
           </a>
-        </div>
-
-        <div class="footer">
-          <p>You're receiving this email because you signed up for a numerology reading.</p>
         </div>
       </body>
     </html>
