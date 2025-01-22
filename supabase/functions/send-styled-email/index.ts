@@ -13,6 +13,7 @@ interface EmailRequest {
     name?: string;
     dateOfBirth?: string;
   };
+  scheduledTime?: string;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -27,8 +28,8 @@ const handler = async (req: Request): Promise<Response> => {
       throw new Error("Email service is not configured properly");
     }
 
-    const { to, templateName, userData }: EmailRequest = await req.json();
-    console.log("Received email request:", { to, templateName, userData });
+    const { to, templateName, userData, scheduledTime }: EmailRequest = await req.json();
+    console.log("Received email request:", { to, templateName, userData, scheduledTime });
 
     let emailHtml = "";
     let subject = "";
@@ -50,6 +51,7 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     console.log("Sending email with subject:", subject);
+    console.log("From email:", VERIFIED_FROM_EMAIL);
 
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -69,6 +71,7 @@ const handler = async (req: Request): Promise<Response> => {
     console.log("Resend API response:", data);
 
     if (!res.ok) {
+      console.error("Resend API error:", data);
       throw new Error(`Resend API error: ${JSON.stringify(data)}`);
     }
 
