@@ -29,36 +29,27 @@ const CollectInfoForm = () => {
         throw sequenceError;
       }
 
-      // Schedule emails with their specific templates
-      const emailTemplates = [
-        "rolex", "kardashian", "elon", "gates", 
-        "jackson", "jobs", "china", "carrey"
-      ];
-
-      // Send emails with 2-minute intervals
-      for (let i = 0; i < emailTemplates.length; i++) {
-        const template = emailTemplates[i];
-        const sendAt = new Date(Date.now() + (i + 1) * 2 * 60 * 1000); // 2 minutes * (i+1)
-        console.log(`Scheduling ${template} email for ${sendAt}`);
-        
-        const { data: emailData, error: emailError } = await supabase.functions.invoke("send-styled-email", {
-          body: {
-            to: [email],
-            templateName: template,
-            userData: { 
-              name,
-              dateOfBirth
-            }
+      // Schedule only the Rolex email with 1-minute delay
+      const sendAt = new Date(Date.now() + 60 * 1000); // 1 minute delay
+      console.log(`Scheduling rolex email for ${sendAt}`);
+      
+      const { data: emailData, error: emailError } = await supabase.functions.invoke("send-styled-email", {
+        body: {
+          to: [email],
+          templateName: "rolex",
+          userData: { 
+            name,
+            dateOfBirth
           }
-        });
-
-        if (emailError) {
-          console.error(`Error sending ${template} email:`, emailError);
-          throw emailError;
         }
+      });
 
-        console.log(`Successfully sent ${template} email:`, emailData);
+      if (emailError) {
+        console.error("Error sending rolex email:", emailError);
+        throw emailError;
       }
+
+      console.log("Successfully sent rolex email:", emailData);
 
     } catch (error) {
       console.error("Error in scheduleEmailSequence:", error);
@@ -128,7 +119,7 @@ const CollectInfoForm = () => {
 
       toast({
         title: "Success!",
-        description: "Your information has been submitted successfully. You will receive the first email in about 2 minutes.",
+        description: "Your information has been submitted successfully. You will receive the email in about 1 minute.",
       });
 
       window.location.replace("https://checkout.numerology33.com/checkout");
