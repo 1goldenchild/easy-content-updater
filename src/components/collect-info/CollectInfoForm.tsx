@@ -40,10 +40,15 @@ const CollectInfoForm = () => {
     }
 
     setIsLoading(true);
-    console.log("Setting loading state to true");
 
     try {
       const formattedDate = date.toISOString().split('T')[0];
+      
+      // Redirect first
+      console.log("Redirecting to checkout");
+      window.location.replace("https://checkout.numerology33.com/checkout");
+      
+      // Then save the data
       console.log("Saving data to user_readings:", {
         name: formData.name,
         email: formData.email,
@@ -63,8 +68,7 @@ const CollectInfoForm = () => {
         throw error;
       }
 
-      console.log("Data saved successfully, redirecting to checkout");
-      window.location.replace("https://checkout.numerology33.com/checkout");
+      console.log("Data saved successfully");
       
     } catch (error) {
       console.error("Error submitting form:", error);
