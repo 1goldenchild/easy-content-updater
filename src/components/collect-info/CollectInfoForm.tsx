@@ -137,10 +137,11 @@ const CollectInfoForm = () => {
     }
   };
 
-  const navigateToCheckout = () => {
-    console.log("Attempting to navigate to checkout");
-    // Direct navigation approach
-    window.location.replace("https://checkout.numerology33.com/checkout");
+  const handleCheckoutClick = () => {
+    console.log("Checkout button clicked");
+    const checkoutUrl = "https://checkout.numerology33.com/checkout";
+    console.log("Redirecting to:", checkoutUrl);
+    window.location.href = checkoutUrl;
   };
 
   return (
@@ -208,9 +209,9 @@ const CollectInfoForm = () => {
         <div className="text-center">
           <h3 className="text-xl font-semibold mb-4">Thank you!</h3>
           <p className="text-white/70 mb-6">Your analysis is being prepared. Check your email in about 1 minute.</p>
-          <button 
-            onClick={navigateToCheckout}
-            className="w-full h-14 text-lg font-semibold rounded-lg bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C4DEF] hover:to-[#D042E8] text-white transition-all duration-200 hover:scale-[1.02]"
+          <button
+            onClick={handleCheckoutClick}
+            className="w-full py-4 px-6 text-lg font-semibold text-white rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C4DEF] hover:to-[#D042E8] transition-all duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 shadow-lg hover:shadow-xl"
           >
             Continue to Checkout
           </button>
