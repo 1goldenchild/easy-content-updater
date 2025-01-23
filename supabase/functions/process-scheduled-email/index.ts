@@ -16,16 +16,21 @@ interface ScheduledEmailRequest {
 }
 
 const handler = async (req: Request): Promise<Response> => {
+  console.log("Process scheduled email function started");
+
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
     if (!RESEND_API_KEY) {
+      console.error("RESEND_API_KEY is not set");
       throw new Error("RESEND_API_KEY is not set");
     }
 
     const { to, name, template, scheduledTime } = await req.json() as ScheduledEmailRequest;
+    console.log("Processing scheduled email:", { to, name, template, scheduledTime });
+
     const scheduledDate = new Date(scheduledTime);
     const now = new Date();
 
@@ -55,23 +60,15 @@ const handler = async (req: Request): Promise<Response> => {
           break;
       }
 
-      await sendEmail(
-        RESEND_API_KEY,
-        to,
-        subject,
-        htmlContent
-      );
-
+      await sendEmail(RESEND_API_KEY, to, subject, htmlContent);
       console.log(`Successfully sent ${template} email to ${to}`);
-      return new Response(JSON.stringify({ success: true }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
     } else {
       console.log(`Skipping ${template} email for ${to} - scheduled for ${scheduledTime}`);
-      return new Response(JSON.stringify({ success: false, reason: "Not yet scheduled time" }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
     }
+
+    return new Response(JSON.stringify({ success: true }), {
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
   } catch (error) {
     console.error("Error in process-scheduled-email function:", error);
     return new Response(
