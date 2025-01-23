@@ -44,33 +44,26 @@ const CollectInfoForm = () => {
 
     try {
       const formattedDate = date.toISOString().split('T')[0];
-      console.log("Attempting to save data:", {
+      console.log("Saving data to user_readings:", {
         name: formData.name,
         email: formData.email,
         date_of_birth: formattedDate,
       });
       
-      const { data, error } = await supabase.from("user_readings").insert([
+      const { error } = await supabase.from("user_readings").insert([
         {
           name: formData.name,
           email: formData.email,
           date_of_birth: formattedDate,
         },
-      ]).select();
+      ]);
 
       if (error) {
         console.error("Supabase error:", error);
         throw error;
       }
 
-      console.log("Data saved successfully:", data);
-
-      toast({
-        title: "Success!",
-        description: "Your information has been submitted successfully.",
-      });
-
-      // Updated redirect URL
+      console.log("Data saved successfully, redirecting to checkout");
       window.location.replace("https://checkout.numerology33.com/checkout");
       
     } catch (error) {
@@ -81,7 +74,6 @@ const CollectInfoForm = () => {
         description: "There was a problem submitting your information. Please try again.",
       });
     } finally {
-      console.log("Setting loading state to false");
       setIsLoading(false);
     }
   };
