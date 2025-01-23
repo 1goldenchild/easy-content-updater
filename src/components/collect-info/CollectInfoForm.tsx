@@ -49,18 +49,14 @@ const CollectInfoForm = () => {
     try {
       const formattedDate = date.toISOString().split('T')[0];
       
-      // Redirect first
-      console.log("Redirecting to checkout");
-      window.location.replace("https://checkout.numerology33.com/checkout");
-      
-      // Then save the data
+      // Save to Supabase
       console.log("Saving data to user_readings:", {
         name: formData.name,
         email: formData.email,
         date_of_birth: formattedDate,
       });
       
-      const { error } = await supabase.from("user_readings").insert([
+      const { error: supabaseError } = await supabase.from("user_readings").insert([
         {
           name: formData.name,
           email: formData.email,
@@ -68,12 +64,34 @@ const CollectInfoForm = () => {
         },
       ]);
 
-      if (error) {
-        console.error("Supabase error:", error);
-        throw error;
+      if (supabaseError) {
+        console.error("Supabase error:", supabaseError);
+        throw supabaseError;
       }
 
-      console.log("Data saved successfully");
+      // Subscribe to Klaviyo
+      console.log("Subscribing to Klaviyo:", {
+        name: formData.name,
+        email: formData.email,
+      });
+      
+      const { error: klaviyoError } = await supabase.functions.invoke('klaviyo-subscribe', {
+        body: {
+          email: formData.email,
+          name: formData.name,
+        },
+      });
+
+      if (klaviyoError) {
+        console.error("Klaviyo subscription error:", klaviyoError);
+        throw klaviyoError;
+      }
+
+      console.log("Data saved successfully to both Supabase and Klaviyo");
+      
+      // Redirect to checkout
+      console.log("Redirecting to checkout");
+      window.location.replace("https://checkout.numerology33.com/checkout");
       
     } catch (error) {
       console.error("Error submitting form:", error);
