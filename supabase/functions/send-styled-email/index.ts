@@ -25,21 +25,25 @@ const supabase = createClient(
 const handler = async (req: Request): Promise<Response> => {
   console.log("Email function started");
 
+  // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
+    // Validate RESEND_API_KEY
     if (!RESEND_API_KEY) {
       console.error("RESEND_API_KEY is not set");
       throw new Error("Server configuration error: RESEND_API_KEY is not set");
     }
 
+    console.log("RESEND_API_KEY is configured");
+
     const { to, name, dateOfBirth } = await req.json() as EmailRequest;
     console.log("Received request to send email sequence:", { to, name, dateOfBirth });
 
     // Send first email (Rolex)
-    console.log("Sending first email (Rolex)");
+    console.log("Attempting to send first email (Rolex)");
     const firstEmailRes = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -136,12 +140,13 @@ const handler = async (req: Request): Promise<Response> => {
       throw new Error(`Failed to send first email: ${errorText}`);
     }
 
-    console.log("First email sent successfully");
+    const firstEmailData = await firstEmailRes.json();
+    console.log("First email sent successfully:", firstEmailData);
 
     // Schedule second email (Kardashians) to be sent after 1 minute
     setTimeout(async () => {
       try {
-        console.log("Sending second email (Kardashians)");
+        console.log("Attempting to send second email (Kardashians)");
         const secondEmailRes = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
@@ -192,24 +197,27 @@ const handler = async (req: Request): Promise<Response> => {
         if (!secondEmailRes.ok) {
           const errorText = await secondEmailRes.text();
           console.error("Error sending second email:", errorText);
-        } else {
-          console.log("Second email sent successfully");
+          throw new Error(`Failed to send second email: ${errorText}`);
+        }
 
-          // Schedule third email (Elon Musk) to be sent 1 minute after the second
-          setTimeout(async () => {
-            try {
-              console.log("Sending third email (Elon Musk)");
-              const thirdEmailRes = await fetch("https://api.resend.com/emails", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${RESEND_API_KEY}`,
-                },
-                body: JSON.stringify({
-                  from: "Numerology 33 <support@numerology33.com>",
-                  to: [to],
-                  subject: "How Elon Musk Uses Numerology to Get Rich: The Power of 8 and 28",
-                  html: `<!DOCTYPE html>
+        const secondEmailData = await secondEmailRes.json();
+        console.log("Second email sent successfully:", secondEmailData);
+
+        // Schedule third email (Elon Musk) to be sent after 1 minute
+        setTimeout(async () => {
+          try {
+            console.log("Attempting to send third email (Elon Musk)");
+            const thirdEmailRes = await fetch("https://api.resend.com/emails", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${RESEND_API_KEY}`,
+              },
+              body: JSON.stringify({
+                from: "Numerology 33 <support@numerology33.com>",
+                to: [to],
+                subject: "How Elon Musk Uses Numerology to Get Rich: The Power of 8 and 28",
+                html: `<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -270,30 +278,33 @@ const handler = async (req: Request): Promise<Response> => {
     </div>
   </body>
 </html>`,
-                }),
-              });
+            }),
+          });
 
-              if (!thirdEmailRes.ok) {
-                const errorText = await thirdEmailRes.text();
-                console.error("Error sending third email:", errorText);
-              } else {
-                console.log("Third email sent successfully");
+          if (!thirdEmailRes.ok) {
+            const errorText = await thirdEmailRes.text();
+            console.error("Error sending third email:", errorText);
+            throw new Error(`Failed to send third email: ${errorText}`);
+          }
 
-                // Schedule fourth email (Bill Gates) to be sent 1 minute after the third
-                setTimeout(async () => {
-                  try {
-                    console.log("Sending fourth email (Bill Gates)");
-                    const fourthEmailRes = await fetch("https://api.resend.com/emails", {
-                      method: "POST",
-                      headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${RESEND_API_KEY}`,
-                      },
-                      body: JSON.stringify({
-                        from: "Numerology 33 <support@numerology33.com>",
-                        to: [to],
-                        subject: "How Bill Gates Uses Numerology to Shape His Success",
-                        html: `<!DOCTYPE html>
+          const thirdEmailData = await thirdEmailRes.json();
+          console.log("Third email sent successfully:", thirdEmailData);
+
+          // Schedule fourth email (Bill Gates) to be sent after 1 minute
+          setTimeout(async () => {
+            try {
+              console.log("Attempting to send fourth email (Bill Gates)");
+              const fourthEmailRes = await fetch("https://api.resend.com/emails", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${RESEND_API_KEY}`,
+                },
+                body: JSON.stringify({
+                  from: "Numerology 33 <support@numerology33.com>",
+                  to: [to],
+                  subject: "How Bill Gates Uses Numerology to Shape His Success",
+                  html: `<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -361,34 +372,25 @@ const handler = async (req: Request): Promise<Response> => {
     </div>
   </body>
 </html>`,
-                      }),
-                    });
+              }),
+            });
 
-                    if (!fourthEmailRes.ok) {
-                      const errorText = await fourthEmailRes.text();
-                      console.error("Error sending fourth email:", errorText);
-                    } else {
-                      console.log("Fourth email sent successfully");
-                    }
-                  } catch (fourthEmailError) {
-                    console.error("Error sending fourth email:", fourthEmailError);
-                  }
-                }, 60000); // 60000 milliseconds = 1 minute after third email
-              }
-            } catch (thirdEmailError) {
-              console.error("Error sending third email:", thirdEmailError);
+            if (!fourthEmailRes.ok) {
+              const errorText = await fourthEmailRes.text();
+              console.error("Error sending fourth email:", errorText);
+              throw new Error(`Failed to send fourth email: ${errorText}`);
             }
-          }, 60000); // 60000 milliseconds = 1 minute after second email
-        }
-      } catch (secondEmailError) {
-        console.error("Error sending second email:", secondEmailError);
-      }
-    }, 60000); // 60000 milliseconds = 1 minute after first email
 
-    return new Response(JSON.stringify({ message: "Email sequence initiated successfully" }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 200,
-    });
+            const fourthEmailData = await fourthEmailRes.json();
+            console.log("Fourth email sent successfully:", fourthEmailData);
+          } catch (fourthEmailError) {
+            console.error("Error sending fourth email:", fourthEmailError);
+          }
+        }, 60000); // 60000 milliseconds = 1 minute after third email
+      } catch (thirdEmailError) {
+        console.error("Error sending third email:", thirdEmailError);
+      }
+    }, 60000); // 60000 milliseconds = 1 minute after second email
   } catch (error) {
     console.error("Error in send-styled-email function:", error);
     return new Response(
