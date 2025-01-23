@@ -2,18 +2,23 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import DateSelector from "@/components/numerology/DateSelector";
+import FormFields from "./FormFields";
+import SubmitButton from "./SubmitButton";
+import { FormData } from "./types";
 
 const CollectInfoForm = () => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
   });
   const [date, setDate] = useState<Date>();
+
+  const handleFieldChange = (field: keyof FormData, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,58 +94,18 @@ const CollectInfoForm = () => {
       className="bg-white/5 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-white/10"
     >
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
-          <label
-            htmlFor="name"
-            className="block text-sm font-medium text-white/70 mb-2"
-          >
-            Full Name
-          </label>
-          <Input
-            id="name"
-            type="text"
-            required
-            value={formData.name}
-            onChange={(e) =>
-              setFormData({ ...formData, name: e.target.value })
-            }
-            className="w-full"
-            placeholder="Enter your full name"
-          />
-        </div>
-
-        <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-white/70 mb-2"
-          >
-            Email
-          </label>
-          <Input
-            id="email"
-            type="email"
-            required
-            value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
-            className="w-full"
-            placeholder="Enter your email"
-          />
-        </div>
+        <FormFields
+          isLoading={isLoading}
+          formData={formData}
+          onFormChange={handleFieldChange}
+        />
 
         <DateSelector 
           date={date}
           setDate={setDate}
         />
 
-        <Button
-          type="submit"
-          disabled={isLoading}
-          className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C4DEF] hover:to-[#D042E8]"
-        >
-          {isLoading ? "Processing..." : "Get Your Analysis"}
-        </Button>
+        <SubmitButton isLoading={isLoading} />
       </form>
     </motion.div>
   );
