@@ -30,48 +30,67 @@ const handler = async (req: Request): Promise<Response> => {
     const { to, name, dateOfBirth } = await req.json() as EmailRequest;
     console.log("Received request to send email sequence:", { to, name, dateOfBirth });
 
-    // Send Rolex email immediately
-    console.log("Sending Rolex email...");
-    await sendEmail(
-      RESEND_API_KEY,
-      to,
-      "The Secret Behind Rolex's Success: A Numerological Analysis",
-      generateRolexEmail(name)
-    );
-    console.log("Rolex email sent successfully at:", new Date().toISOString());
+    // Schedule Rolex email for 8 minutes after signup
+    const scheduleRolexEmail = async () => {
+      await new Promise(resolve => setTimeout(resolve, 8 * 60 * 1000)); // 8 minutes
+      console.log("Sending Rolex email...");
+      await sendEmail(
+        RESEND_API_KEY,
+        to,
+        "The Secret Behind Rolex's Success: A Numerological Analysis",
+        generateRolexEmail(name)
+      );
+      console.log("Rolex email sent successfully at:", new Date().toISOString());
+    };
 
-    // Send Kardashian email
-    console.log("Sending Kardashian email...");
-    await sendEmail(
-      RESEND_API_KEY,
-      to,
-      "The Kardashian Empire: How They Used Numerology to Power Their Success",
-      generateKardashianEmail(name)
-    );
-    console.log("Kardashian email sent successfully at:", new Date().toISOString());
+    // Schedule Kardashian email for 24 hours after Rolex
+    const scheduleKardashianEmail = async () => {
+      await new Promise(resolve => setTimeout(resolve, (8 * 60 * 1000) + (24 * 60 * 60 * 1000))); // 8 minutes + 24 hours
+      console.log("Sending Kardashian email...");
+      await sendEmail(
+        RESEND_API_KEY,
+        to,
+        "The Kardashian Empire: How They Used Numerology to Power Their Success",
+        generateKardashianEmail(name)
+      );
+      console.log("Kardashian email sent successfully at:", new Date().toISOString());
+    };
 
-    // Send Musk email
-    console.log("Sending Musk email...");
-    await sendEmail(
-      RESEND_API_KEY,
-      to,
-      "How Elon Musk Uses Numerology to Get Rich",
-      generateMuskEmail(name)
-    );
-    console.log("Musk email sent successfully at:", new Date().toISOString());
+    // Schedule Musk email for 48 hours after Rolex
+    const scheduleMuskEmail = async () => {
+      await new Promise(resolve => setTimeout(resolve, (8 * 60 * 1000) + (48 * 60 * 60 * 1000))); // 8 minutes + 48 hours
+      console.log("Sending Musk email...");
+      await sendEmail(
+        RESEND_API_KEY,
+        to,
+        "How Elon Musk Uses Numerology to Get Rich",
+        generateMuskEmail(name)
+      );
+      console.log("Musk email sent successfully at:", new Date().toISOString());
+    };
 
-    // Wait for 1 minute before sending Gates email
-    await new Promise(resolve => setTimeout(resolve, 60000));
+    // Schedule Gates email for 72 hours after Rolex
+    const scheduleGatesEmail = async () => {
+      await new Promise(resolve => setTimeout(resolve, (8 * 60 * 1000) + (72 * 60 * 60 * 1000))); // 8 minutes + 72 hours
+      console.log("Sending Gates email...");
+      await sendEmail(
+        RESEND_API_KEY,
+        to,
+        "How Bill Gates Uses Numerology to Shape His Success",
+        generateGatesEmail(name)
+      );
+      console.log("Gates email sent successfully at:", new Date().toISOString());
+    };
 
-    // Send Gates email
-    console.log("Sending Gates email...");
-    await sendEmail(
-      RESEND_API_KEY,
-      to,
-      "How Bill Gates Uses Numerology to Shape His Success",
-      generateGatesEmail(name)
-    );
-    console.log("Gates email sent successfully at:", new Date().toISOString());
+    // Start all email schedules concurrently
+    Promise.all([
+      scheduleRolexEmail(),
+      scheduleKardashianEmail(),
+      scheduleMuskEmail(),
+      scheduleGatesEmail()
+    ]).catch(error => {
+      console.error("Error in email scheduling:", error);
+    });
 
     return new Response(JSON.stringify({ success: true }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
