@@ -2,7 +2,7 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { corsHeaders } from "../_shared/cors.ts";
 
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
-const VERIFIED_FROM_EMAIL = "onboarding@resend.dev"; // Temporarily using Resend's default domain
+const VERIFIED_FROM_EMAIL = "onboarding@resend.dev"; // Using Resend's default domain for now
 
 interface EmailRequest {
   to: string[];
@@ -53,111 +53,6 @@ const getEmailTemplate = (templateName: string, userData: EmailRequest['userData
     </div>
   </body>
 </html>`
-    },
-    kardashian: {
-      subject: "The Kardashian Empire: How They Used Numerology to Power Their Success",
-      content: `<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kardashian Numerology Analysis</title>
-  </head>
-  <body>
-    <h1>Hello ${userData.name},</h1>
-    <p>Discover how the Kardashians utilized numerology to achieve their success.</p>
-  </body>
-</html>`
-    },
-    musk: {
-      subject: "How Elon Musk Uses Numerology to Get Rich: The Power of 8 and 28",
-      content: `<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elon Musk Numerology Analysis</title>
-  </head>
-  <body>
-    <h1>Hello ${userData.name},</h1>
-    <p>Learn about Elon Musk's use of numerology in his success.</p>
-  </body>
-</html>`
-    },
-    gates: {
-      subject: "How Bill Gates Uses Numerology to Shape His Success: The Power of 28, 9, and Apple's Legacy",
-      content: `<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bill Gates Numerology Analysis</title>
-  </head>
-  <body>
-    <h1>Hello ${userData.name},</h1>
-    <p>Explore how Bill Gates has used numerology to influence his career.</p>
-  </body>
-</html>`
-    },
-    jackson: {
-      subject: "How Michael Jackson used the Power of Numerology: The Influence of the Number 7 on His Career",
-      content: `<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Michael Jackson Numerology Analysis</title>
-  </head>
-  <body>
-    <h1>Hello ${userData.name},</h1>
-    <p>Discover the impact of numerology on Michael Jackson's career.</p>
-  </body>
-</html>`
-    },
-    jobs: {
-      subject: "How Steve Jobs Used Numerology to Shape His Success: The Power of 28, 9, and Apple's Legacy",
-      content: `<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Steve Jobs Numerology Analysis</title>
-  </head>
-  <body>
-    <h1>Hello ${userData.name},</h1>
-    <p>Learn how Steve Jobs utilized numerology in his success.</p>
-  </body>
-</html>`
-    },
-    carrey: {
-      subject: "How Jim Carrey Uses Numerology to Shape His Life and Career",
-      content: `<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jim Carrey Numerology Analysis</title>
-  </head>
-  <body>
-    <h1>Hello ${userData.name},</h1>
-    <p>Explore Jim Carrey's use of numerology in his life.</p>
-  </body>
-</html>`
-    },
-    china: {
-      subject: "How China Uses Numerology to Power Success: The 2008 Beijing Olympics and Beyond",
-      content: `<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>China Numerology Analysis</title>
-  </head>
-  <body>
-    <h1>Hello ${userData.name},</h1>
-    <p>Discover how China has used numerology for success.</p>
-  </body>
-</html>`
     }
   };
 
@@ -174,6 +69,9 @@ serve(async (req) => {
     const { to, templateName, userData } = await req.json() as EmailRequest;
     console.log('Received request to send email:', { to, templateName, userData });
 
+    // For testing: force the recipient to be the verified email
+    const testRecipient = ["mafi28tv@gmail.com"];
+    
     const template = getEmailTemplate(templateName, userData);
     console.log('Using template:', templateName);
 
@@ -185,7 +83,7 @@ serve(async (req) => {
       },
       body: JSON.stringify({
         from: `Numerology 33 <${VERIFIED_FROM_EMAIL}>`,
-        to,
+        to: testRecipient, // Using test recipient instead of the provided email
         subject: template.subject,
         html: template.content,
       })
