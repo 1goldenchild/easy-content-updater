@@ -23,15 +23,23 @@ const supabase = createClient(
 );
 
 const handler = async (req: Request): Promise<Response> => {
+  console.log("Email function started");
+
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
+    if (!RESEND_API_KEY) {
+      console.error("RESEND_API_KEY is not set");
+      throw new Error("Server configuration error: RESEND_API_KEY is not set");
+    }
+
     const { to, name, dateOfBirth } = await req.json() as EmailRequest;
     console.log("Received request to send email sequence:", { to, name, dateOfBirth });
 
     // Send first email (Rolex)
+    console.log("Sending first email (Rolex)");
     const firstEmailRes = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -123,14 +131,17 @@ const handler = async (req: Request): Promise<Response> => {
     });
 
     if (!firstEmailRes.ok) {
-      throw new Error(`Failed to send first email: ${await firstEmailRes.text()}`);
+      const errorText = await firstEmailRes.text();
+      console.error("Error sending first email:", errorText);
+      throw new Error(`Failed to send first email: ${errorText}`);
     }
 
-    console.log("First email (Rolex) sent successfully");
+    console.log("First email sent successfully");
 
     // Schedule second email (Kardashians) to be sent after 1 minute
     setTimeout(async () => {
       try {
+        console.log("Sending second email (Kardashians)");
         const secondEmailRes = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
@@ -179,13 +190,15 @@ const handler = async (req: Request): Promise<Response> => {
         });
 
         if (!secondEmailRes.ok) {
-          console.error("Error sending second email:", await secondEmailRes.text());
+          const errorText = await secondEmailRes.text();
+          console.error("Error sending second email:", errorText);
         } else {
-          console.log("Second email (Kardashians) sent successfully");
+          console.log("Second email sent successfully");
 
           // Schedule third email (Elon Musk) to be sent 1 minute after the second
           setTimeout(async () => {
             try {
+              console.log("Sending third email (Elon Musk)");
               const thirdEmailRes = await fetch("https://api.resend.com/emails", {
                 method: "POST",
                 headers: {
@@ -261,13 +274,15 @@ const handler = async (req: Request): Promise<Response> => {
               });
 
               if (!thirdEmailRes.ok) {
-                console.error("Error sending third email:", await thirdEmailRes.text());
+                const errorText = await thirdEmailRes.text();
+                console.error("Error sending third email:", errorText);
               } else {
-                console.log("Third email (Elon Musk) sent successfully");
+                console.log("Third email sent successfully");
 
                 // Schedule fourth email (Bill Gates) to be sent 1 minute after the third
                 setTimeout(async () => {
                   try {
+                    console.log("Sending fourth email (Bill Gates)");
                     const fourthEmailRes = await fetch("https://api.resend.com/emails", {
                       method: "POST",
                       headers: {
@@ -320,6 +335,7 @@ const handler = async (req: Request): Promise<Response> => {
         <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
           This move was even before Jobs' move with Apple, as both tech moguls seemed to understand that 9 represented completion, and they wanted to avoid that finality energy in their product launches.
         </p>
+        
         <h2 style="color: #9b87f5; font-size: 24px; margin: 24px 0;">The Power of 28 in the World of Wealth</h2>
         <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
           Some of the wealthiest figures of our time were born on the 28th of the month. Take Elon Musk, born on June 28, 1971, who is currently the richest person in the world, with a net worth frequently surpassing $416 billion. His immense wealth and groundbreaking companies, including Tesla and SpaceX, align perfectly with the numerological energy of the number 28.
@@ -349,112 +365,25 @@ const handler = async (req: Request): Promise<Response> => {
                     });
 
                     if (!fourthEmailRes.ok) {
-                      console.error("Error sending fourth email:", await fourthEmailRes.text());
+                      const errorText = await fourthEmailRes.text();
+                      console.error("Error sending fourth email:", errorText);
                     } else {
-                      console.log("Fourth email (Bill Gates) sent successfully");
-
-                      // Update email sequence status for fourth email
-                      const { data: userReading } = await supabase
-                        .from("user_readings")
-                        .select("id")
-                        .eq("email", to)
-                        .eq("date_of_birth", dateOfBirth)
-                        .single();
-
-                      if (userReading) {
-                        const { error: sequenceError } = await supabase
-                          .from("email_sequence_status")
-                          .upsert({
-                            user_reading_id: userReading.id,
-                            sequence_position: 4,
-                            last_email_sent: new Date().toISOString(),
-                          });
-
-                        if (sequenceError) {
-                          console.error("Error updating sequence status for fourth email:", sequenceError);
-                        }
-                      }
+                      console.log("Fourth email sent successfully");
                     }
                   } catch (fourthEmailError) {
                     console.error("Error sending fourth email:", fourthEmailError);
                   }
                 }, 60000); // 60000 milliseconds = 1 minute after third email
               }
-
-              // Update email sequence status for third email
-              const { data: userReading } = await supabase
-                .from("user_readings")
-                .select("id")
-                .eq("email", to)
-                .eq("date_of_birth", dateOfBirth)
-                .single();
-
-              if (userReading) {
-                const { error: sequenceError } = await supabase
-                  .from("email_sequence_status")
-                  .upsert({
-                    user_reading_id: userReading.id,
-                    sequence_position: 3,
-                    last_email_sent: new Date().toISOString(),
-                  });
-
-                if (sequenceError) {
-                  console.error("Error updating sequence status for third email:", sequenceError);
-                }
-              }
             } catch (thirdEmailError) {
               console.error("Error sending third email:", thirdEmailError);
             }
           }, 60000); // 60000 milliseconds = 1 minute after second email
         }
-
-        // Update email sequence status for second email
-        const { data: userReading } = await supabase
-          .from("user_readings")
-          .select("id")
-          .eq("email", to)
-          .eq("date_of_birth", dateOfBirth)
-          .single();
-
-        if (userReading) {
-          const { error: sequenceError } = await supabase
-            .from("email_sequence_status")
-            .upsert({
-              user_reading_id: userReading.id,
-              sequence_position: 2,
-              last_email_sent: new Date().toISOString(),
-            });
-
-          if (sequenceError) {
-            console.error("Error updating sequence status for second email:", sequenceError);
-          }
-        }
       } catch (secondEmailError) {
         console.error("Error sending second email:", secondEmailError);
       }
     }, 60000); // 60000 milliseconds = 1 minute after first email
-
-    // Update email sequence status for first email
-    const { data: userReading } = await supabase
-      .from("user_readings")
-      .select("id")
-      .eq("email", to)
-      .eq("date_of_birth", dateOfBirth)
-      .single();
-
-    if (userReading) {
-      const { error: sequenceError } = await supabase
-        .from("email_sequence_status")
-        .upsert({
-          user_reading_id: userReading.id,
-          sequence_position: 1,
-          last_email_sent: new Date().toISOString(),
-        });
-
-      if (sequenceError) {
-        console.error("Error updating sequence status for first email:", sequenceError);
-      }
-    }
 
     return new Response(JSON.stringify({ message: "Email sequence initiated successfully" }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -463,7 +392,7 @@ const handler = async (req: Request): Promise<Response> => {
   } catch (error) {
     console.error("Error in send-styled-email function:", error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: error instanceof Error ? error.message : "Unknown error occurred" }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 500,
