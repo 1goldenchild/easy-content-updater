@@ -137,6 +137,21 @@ const CollectInfoForm = () => {
     }
   };
 
+  const handleCheckout = () => {
+    console.log("Checkout button clicked");
+    console.log("isSubmitted state:", isSubmitted);
+    
+    try {
+      const checkoutUrl = "https://checkout.numerology33.com/checkout";
+      console.log("Navigating to:", checkoutUrl);
+      window.location.href = checkoutUrl;
+    } catch (error) {
+      console.error("Navigation error:", error);
+      // Fallback method if direct navigation fails
+      window.open("https://checkout.numerology33.com/checkout", "_blank", "noopener,noreferrer");
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -202,12 +217,12 @@ const CollectInfoForm = () => {
         <div className="text-center">
           <h3 className="text-xl font-semibold mb-4">Thank you!</h3>
           <p className="text-white/70 mb-6">Your analysis is being prepared. Check your email in about 1 minute.</p>
-          <button
-            onClick={() => window.open('https://checkout.numerology33.com/checkout', '_blank')}
-            className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C4DEF] hover:to-[#D042E8] text-white font-semibold py-3 px-4 rounded-md transition-colors cursor-pointer"
+          <Button
+            onClick={handleCheckout}
+            className="w-full h-12 text-lg bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C4DEF] hover:to-[#D042E8]"
           >
             Continue to Checkout
-          </button>
+          </Button>
         </div>
       )}
     </motion.div>
