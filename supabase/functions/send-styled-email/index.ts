@@ -1,7 +1,7 @@
-import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { corsHeaders } from "./cors.ts";
 import { sendEmail } from "./email-sender.ts";
 import { generateRolexEmail } from "./templates/rolex-email.ts";
+import { generateKardashianEmail } from "./templates/kardashian-email.ts";
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 
@@ -27,9 +27,9 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     const { to, name, dateOfBirth } = await req.json() as EmailRequest;
-    console.log("Received request to send email:", { to, name, dateOfBirth });
+    console.log("Received request to send email sequence:", { to, name, dateOfBirth });
 
-    // Send Rolex email
+    // Send first email (Rolex)
     await sendEmail(
       RESEND_API_KEY,
       to,
@@ -38,6 +38,21 @@ const handler = async (req: Request): Promise<Response> => {
     );
 
     console.log("Rolex email sent successfully");
+
+    // Schedule Kardashian email to be sent 1 minute later
+    setTimeout(async () => {
+      try {
+        await sendEmail(
+          RESEND_API_KEY,
+          to,
+          "The Kardashian Empire: How They Used Numerology to Power Their Success",
+          generateKardashianEmail(name)
+        );
+        console.log("Kardashian email sent successfully");
+      } catch (error) {
+        console.error("Error sending Kardashian email:", error);
+      }
+    }, 60000); // 1 minute delay
 
     return new Response(JSON.stringify({ success: true }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
