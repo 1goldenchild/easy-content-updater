@@ -204,13 +204,15 @@ const CollectInfoForm = () => {
           <p className="text-white/70 mb-6">Your analysis is being prepared. Check your email in about 1 minute.</p>
           <a 
             href="https://checkout.numerology33.com/checkout"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block w-full"
           >
-            <Button
-              className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C4DEF] hover:to-[#D042E8]"
+            <div
+              className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C4DEF] hover:to-[#D042E8] text-white font-semibold py-2 px-4 rounded-md transition-colors cursor-pointer"
             >
               Continue to Checkout
-            </Button>
+            </div>
           </a>
         </div>
       )}
