@@ -14,7 +14,6 @@ const CollectInfoForm = () => {
     email: "",
   });
   const [date, setDate] = useState<Date>();
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const scheduleEmailSequence = async (userReadingId: string, email: string, name: string, dateOfBirth: string) => {
     try {
@@ -117,12 +116,8 @@ const CollectInfoForm = () => {
         );
       }
 
-      toast({
-        title: "Success!",
-        description: "Your information has been submitted successfully. You will receive the email in about 1 minute.",
-      });
-
-      setIsSubmitted(true);
+      // Redirect to checkout
+      window.location.href = "https://checkout.numerology33.com/checkout";
       
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -137,96 +132,66 @@ const CollectInfoForm = () => {
     }
   };
 
-  const handleCheckoutClick = () => {
-    console.log("Checkout button clicked");
-    try {
-      window.location.href = "https://checkout.numerology33.com/checkout";
-      console.log("Navigation initiated");
-    } catch (error) {
-      console.error("Navigation error:", error);
-      // Fallback navigation method
-      window.open("https://checkout.numerology33.com/checkout", "_self");
-    }
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="bg-white/5 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-white/10"
     >
-      {!isSubmitted ? (
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-white/70 mb-2"
-            >
-              Full Name
-            </label>
-            <Input
-              id="name"
-              type="text"
-              required
-              value={formData.name}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
-              className="w-full"
-              placeholder="Enter your full name"
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-white/70 mb-2"
-            >
-              Email
-            </label>
-            <Input
-              id="email"
-              type="email"
-              required
-              value={formData.email}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
-              className="w-full"
-              placeholder="Enter your email"
-            />
-          </div>
-
-          <DateSelector 
-            date={date}
-            setDate={setDate}
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div>
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-white/70 mb-2"
+          >
+            Full Name
+          </label>
+          <Input
+            id="name"
+            type="text"
+            required
+            value={formData.name}
+            onChange={(e) =>
+              setFormData({ ...formData, name: e.target.value })
+            }
+            className="w-full"
+            placeholder="Enter your full name"
           />
-
-          <Button
-            type="submit"
-            disabled={isLoading}
-            className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C4DEF] hover:to-[#D042E8]"
-          >
-            {isLoading ? "Processing..." : "Get Your Analysis!"}
-          </Button>
-        </form>
-      ) : (
-        <div className="text-center">
-          <h3 className="text-xl font-semibold mb-4">Thank you!</h3>
-          <p className="text-white/70 mb-6">Your analysis is being prepared. Check your email in about 1 minute.</p>
-          <a
-            href="https://checkout.numerology33.com/checkout"
-            target="_self"
-            onClick={(e) => {
-              e.preventDefault();
-              handleCheckoutClick();
-            }}
-            className="inline-block w-full py-4 px-6 text-lg font-semibold text-white rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C4DEF] hover:to-[#D042E8] transition-all duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 shadow-lg hover:shadow-xl cursor-pointer"
-          >
-            Continue to Checkout
-          </a>
         </div>
-      )}
+
+        <div>
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-white/70 mb-2"
+          >
+            Email
+          </label>
+          <Input
+            id="email"
+            type="email"
+            required
+            value={formData.email}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
+            className="w-full"
+            placeholder="Enter your email"
+          />
+        </div>
+
+        <DateSelector 
+          date={date}
+          setDate={setDate}
+        />
+
+        <Button
+          type="submit"
+          disabled={isLoading}
+          className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C4DEF] hover:to-[#D042E8]"
+        >
+          {isLoading ? "Processing..." : "Get Your Analysis!"}
+        </Button>
+      </form>
     </motion.div>
   );
 };
