@@ -29,8 +29,9 @@ const CollectInfoForm = () => {
         throw sequenceError;
       }
 
-      // Schedule the rolex email
-      console.log("Scheduling rolex email");
+      // Schedule only the Rolex email with 1-minute delay
+      const sendAt = new Date(Date.now() + 60 * 1000); // 1 minute delay
+      console.log(`Scheduling rolex email for ${sendAt}`);
       
       const { data: emailData, error: emailError } = await supabase.functions.invoke("send-styled-email", {
         body: {
@@ -116,8 +117,12 @@ const CollectInfoForm = () => {
         );
       }
 
-      // Redirect to checkout
-      window.location.href = "https://checkout.numerology33.com/checkout";
+      toast({
+        title: "Success!",
+        description: "Your information has been submitted successfully. You will receive the email in about 1 minute.",
+      });
+
+      window.location.replace("https://checkout.numerology33.com/checkout");
       
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -189,7 +194,7 @@ const CollectInfoForm = () => {
           disabled={isLoading}
           className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C4DEF] hover:to-[#D042E8]"
         >
-          {isLoading ? "Processing..." : "Get Your Analysis!"}
+          {isLoading ? "Processing..." : "Get Your Analysis"}
         </Button>
       </form>
     </motion.div>
