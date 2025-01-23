@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import DateSelector from "@/components/numerology/DateSelector";
@@ -50,7 +50,7 @@ const CollectInfoForm = () => {
         date_of_birth: formattedDate,
       });
       
-      const { data: savedData, error: saveError } = await supabase.from("user_readings").insert([
+      const { data, error } = await supabase.from("user_readings").insert([
         {
           name: formData.name,
           email: formData.email,
@@ -58,48 +58,27 @@ const CollectInfoForm = () => {
         },
       ]).select();
 
-      if (saveError) {
-        console.error("Supabase save error:", saveError);
-        throw saveError;
+      if (error) {
+        console.error("Supabase error:", error);
+        throw error;
       }
 
-      console.log("Data saved successfully:", savedData);
-
-      if (!savedData || savedData.length === 0) {
-        throw new Error("No data returned after saving user reading");
-      }
-
-      // Initiate email sequence using the user reading ID
-      console.log("Initiating email sequence");
-      const emailResponse = await supabase.functions.invoke('send-styled-email', {
-        body: {
-          to: formData.email,
-          name: formData.name,
-          userReadingId: savedData[0].id, // Pass the user reading ID
-          dateOfBirth: formattedDate,
-        }
-      });
-
-      if (!emailResponse.data) {
-        console.error("Error response from email function:", emailResponse.error);
-        throw new Error(`Failed to initiate email sequence: ${emailResponse.error?.message || 'Unknown error'}`);
-      }
-
-      console.log("Email sequence initiated successfully:", emailResponse.data);
+      console.log("Data saved successfully:", data);
 
       toast({
         title: "Success!",
-        description: "Your information has been submitted. Check your email for your analysis.",
+        description: "Your information has been submitted successfully.",
       });
 
-      // Redirect to checkout page
-      window.location.href = "https://checkout.numerology33.com/checkout";
+      // Updated redirect URL
+      window.location.replace("https://checkout.numerology33.com/checkout");
+      
     } catch (error) {
       console.error("Error submitting form:", error);
       toast({
         variant: "destructive",
         title: "Error",
-        description: error instanceof Error ? error.message : "There was a problem submitting your information. Please try again.",
+        description: "There was a problem submitting your information. Please try again.",
       });
     } finally {
       console.log("Setting loading state to false");

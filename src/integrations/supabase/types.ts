@@ -63,44 +63,6 @@ export type Database = {
         }
         Relationships: []
       }
-      email_sequence_status: {
-        Row: {
-          created_at: string
-          id: string
-          last_email_sent: string | null
-          scheduled_for: string | null
-          sent: boolean | null
-          sequence_position: number
-          user_reading_id: string
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          last_email_sent?: string | null
-          scheduled_for?: string | null
-          sent?: boolean | null
-          sequence_position?: number
-          user_reading_id: string
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          last_email_sent?: string | null
-          scheduled_for?: string | null
-          sent?: boolean | null
-          sequence_position?: number
-          user_reading_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "email_sequence_status_user_reading_id_fkey"
-            columns: ["user_reading_id"]
-            isOneToOne: false
-            referencedRelation: "user_readings"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       profiles: {
         Row: {
           chinese_zodiac: string | null
@@ -160,16 +122,6 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      get_scheduled_jobs: {
-        Args: {
-          p_pattern: string
-        }
-        Returns: {
-          jobname: string
-          schedule: string
-          command: string
-        }[]
-      }
       schedule_email: {
         Args: {
           p_job_name: string
@@ -177,12 +129,6 @@ export type Database = {
           p_command: Json
         }
         Returns: string
-      }
-      unschedule_job: {
-        Args: {
-          p_job_name: string
-        }
-        Returns: undefined
       }
     }
     Enums: {

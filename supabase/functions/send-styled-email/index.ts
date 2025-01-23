@@ -1,57 +1,87 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { corsHeaders } from "../_shared/cors.ts";
-import { scheduleEmails } from "./email-scheduler.ts";
+import { getWelcomeTemplate } from "./templates/welcome.ts";
+import { getAnalysisTemplate } from "./templates/analysis.ts";
+
+const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+const VERIFIED_FROM_EMAIL = "info@numerology33.com"; // Using your verified domain
+
+interface EmailRequest {
+  to: string[];
+  templateName: "welcome" | "analysis";
+  userData?: {
+    name?: string;
+    dateOfBirth?: string;
+  };
+}
 
 const handler = async (req: Request): Promise<Response> => {
-  console.log("[send-styled-email] Function started");
-
-  // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    if (!Deno.env.get("RESEND_API_KEY")) {
-      console.error("[send-styled-email] RESEND_API_KEY is not set");
-      throw new Error("Server configuration error: RESEND_API_KEY is not set");
+    // Check if RESEND_API_KEY is configured
+    if (!RESEND_API_KEY) {
+      console.error("RESEND_API_KEY is not configured");
+      throw new Error("Email service is not configured properly");
     }
 
-    const { to, name, userReadingId, dateOfBirth } = await req.json();
-    console.log("[send-styled-email] Processing request for:", { to, name, userReadingId, dateOfBirth });
+    const { to, templateName, userData }: EmailRequest = await req.json();
+    console.log("Received email request:", { to, templateName, userData });
 
-    if (!to || !name || !userReadingId) {
-      console.error("[send-styled-email] Missing required fields:", { to, name, userReadingId });
-      throw new Error("Missing required fields: email, name, and userReadingId are required");
-    }
+    let emailHtml = "";
+    let subject = "";
 
-    try {
-      await scheduleEmails(to, name, userReadingId);
-      console.log("[send-styled-email] Emails scheduled successfully");
-
-      return new Response(
-        JSON.stringify({ success: true }),
-        {
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-          status: 200,
+    switch (templateName) {
+      case "welcome":
+        emailHtml = getWelcomeTemplate(userData?.name || "there");
+        subject = "Welcome to Your Numerology Journey!";
+        break;
+      case "analysis":
+        if (!userData?.dateOfBirth) {
+          throw new Error("Date of birth is required for analysis template");
         }
-      );
-    } catch (scheduleError) {
-      console.error("[send-styled-email] Error scheduling emails:", scheduleError);
-      throw new Error(`Failed to schedule emails: ${scheduleError.message}`);
+        emailHtml = getAnalysisTemplate(userData.name || "there", userData.dateOfBirth);
+        subject = "Your Numerology Analysis Is Ready!";
+        break;
+      default:
+        throw new Error("Invalid template name");
     }
 
-  } catch (error) {
-    console.error("[send-styled-email] Error in function:", error);
-    return new Response(
-      JSON.stringify({ 
-        error: error instanceof Error ? error.message : "Unknown error occurred",
-        details: error instanceof Error ? error.stack : undefined
+    console.log("Sending email with subject:", subject);
+
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+      },
+      body: JSON.stringify({
+        from: `Numerology33 <${VERIFIED_FROM_EMAIL}>`,
+        to,
+        subject,
+        html: emailHtml,
       }),
-      {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 500,
-      }
-    );
+    });
+
+    const data = await res.json();
+    console.log("Resend API response:", data);
+
+    if (!res.ok) {
+      throw new Error(`Resend API error: ${JSON.stringify(data)}`);
+    }
+
+    return new Response(JSON.stringify(data), {
+      status: 200,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  } catch (error: any) {
+    console.error("Error in send-styled-email function:", error);
+    return new Response(JSON.stringify({ error: error.message }), {
+      status: 500,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
   }
 };
 
