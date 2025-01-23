@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { getAnalysisTemplate } from "@/supabase/functions/send-styled-email/templates/analysis";
+import { getAnalysisTemplate } from "../supabase/functions/send-styled-email/templates/analysis";
 
 const EmailPreview = () => {
   const previewData = [
