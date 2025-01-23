@@ -67,8 +67,8 @@ const handler = async (req: Request): Promise<Response> => {
       }
 
       try {
-        await sendEmail(RESEND_API_KEY, to, subject, htmlContent);
-        console.log(`[process-scheduled-email] Successfully sent ${template} email to ${to}`);
+        const result = await sendEmail(RESEND_API_KEY, to, subject, htmlContent);
+        console.log(`[process-scheduled-email] Successfully sent ${template} email to ${to}:`, result);
       } catch (error) {
         console.error(`[process-scheduled-email] Error sending email:`, error);
         throw error;

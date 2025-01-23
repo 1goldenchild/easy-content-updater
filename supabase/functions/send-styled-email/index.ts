@@ -43,52 +43,49 @@ const handler = async (req: Request): Promise<Response> => {
     // Initialize Supabase client
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
-    // If we have a template and scheduledTime, this is a scheduled email that needs to be sent
+    // If we have a template and scheduledTime, send the email immediately
     if (template && scheduledTime) {
       const now = new Date();
       const scheduleTime = new Date(scheduledTime);
 
-      console.log("[send-styled-email] Checking scheduled time:", {
+      console.log("[send-styled-email] Processing immediate email:", {
         now: now.toISOString(),
         scheduledTime: scheduleTime.toISOString(),
-        shouldSend: now >= scheduleTime
+        template,
+        to
       });
 
-      if (now >= scheduleTime) {
-        console.log(`[send-styled-email] Processing ${template} email for ${to}`);
-        let subject: string;
-        let htmlContent: string;
+      let subject: string;
+      let htmlContent: string;
 
-        switch (template) {
-          case 'rolex':
-            subject = "The Secret Behind Rolex's Success: A Numerological Analysis";
-            htmlContent = generateRolexEmail(name);
-            break;
-          case 'kardashian':
-            subject = "The Kardashian Empire: How They Used Numerology to Power Their Success";
-            htmlContent = generateKardashianEmail(name);
-            break;
-          case 'musk':
-            subject = "How Elon Musk Uses Numerology to Get Rich";
-            htmlContent = generateMuskEmail(name);
-            break;
-          case 'gates':
-            subject = "How Bill Gates Uses Numerology to Shape His Success";
-            htmlContent = generateGatesEmail(name);
-            break;
-          default:
-            throw new Error("Invalid template specified");
-        }
+      switch (template) {
+        case 'rolex':
+          subject = "The Secret Behind Rolex's Success: A Numerological Analysis";
+          htmlContent = generateRolexEmail(name);
+          break;
+        case 'kardashian':
+          subject = "The Kardashian Empire: How They Used Numerology to Power Their Success";
+          htmlContent = generateKardashianEmail(name);
+          break;
+        case 'musk':
+          subject = "How Elon Musk Uses Numerology to Get Rich";
+          htmlContent = generateMuskEmail(name);
+          break;
+        case 'gates':
+          subject = "How Bill Gates Uses Numerology to Shape His Success";
+          htmlContent = generateGatesEmail(name);
+          break;
+        default:
+          throw new Error("Invalid template specified");
+      }
 
-        try {
-          await sendEmail(RESEND_API_KEY, to, subject, htmlContent);
-          console.log(`[send-styled-email] Successfully sent ${template} email to ${to}`);
-        } catch (error) {
-          console.error(`[send-styled-email] Error sending ${template} email:`, error);
-          throw error;
-        }
-      } else {
-        console.log(`[send-styled-email] Not yet time to send ${template} email to ${to}. Scheduled for ${scheduledTime}`);
+      try {
+        console.log(`[send-styled-email] Sending ${template} email to ${to}`);
+        const emailResult = await sendEmail(RESEND_API_KEY, to, subject, htmlContent);
+        console.log("[send-styled-email] Email sent successfully:", emailResult);
+      } catch (error) {
+        console.error(`[send-styled-email] Error sending ${template} email:`, error);
+        throw error;
       }
 
       return new Response(JSON.stringify({ success: true }), {
@@ -99,17 +96,16 @@ const handler = async (req: Request): Promise<Response> => {
     // This is a new user registration, let's schedule all the emails
     console.log("[send-styled-email] Scheduling email sequence for new user:", { to, name });
 
-    // Calculate schedule times
+    // Calculate schedule times - using shorter intervals for testing
     const now = new Date();
-    const rolexTime = new Date(now.getTime() + 8 * 60 * 1000); // 8 minutes
-    const kardashianTime = new Date(now.getTime() + 24 * 60 * 60 * 1000); // 24 hours
-    const muskTime = new Date(now.getTime() + 48 * 60 * 60 * 1000); // 48 hours
-    const gatesTime = new Date(now.getTime() + 72 * 60 * 60 * 1000); // 72 hours
+    const rolexTime = new Date(now.getTime() + 2 * 60 * 1000); // 2 minutes
+    const kardashianTime = new Date(now.getTime() + 5 * 60 * 1000); // 5 minutes
+    const muskTime = new Date(now.getTime() + 8 * 60 * 1000); // 8 minutes
+    const gatesTime = new Date(now.getTime() + 11 * 60 * 1000); // 11 minutes
 
     const scheduleEmail = async (template: string, scheduleTime: Date) => {
       console.log(`[send-styled-email] Scheduling ${template} email for:`, scheduleTime.toISOString());
       
-      // Create a unique job name using timestamp and random string
       const jobName = `${template}-email-${to}-${Date.now()}-${Math.random().toString(36).substring(7)}`;
       
       const { error } = await supabase.rpc('schedule_email', {
@@ -137,7 +133,7 @@ const handler = async (req: Request): Promise<Response> => {
       console.log(`[send-styled-email] Successfully scheduled ${template} email with job name: ${jobName}`);
     };
 
-    // Schedule all emails
+    // Schedule all emails with shorter intervals for testing
     try {
       await scheduleEmail('rolex', rolexTime);
       await scheduleEmail('kardashian', kardashianTime);
