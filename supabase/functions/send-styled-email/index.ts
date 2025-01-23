@@ -29,10 +29,10 @@ const handler = async (req: Request): Promise<Response> => {
 
   try {
     const { to, name, dateOfBirth } = await req.json() as EmailRequest;
-    console.log("Received request to send email:", { to, name, dateOfBirth });
+    console.log("Received request to send email sequence:", { to, name, dateOfBirth });
 
     // Send first email (Rolex)
-    const res = await fetch("https://api.resend.com/emails", {
+    const firstEmailRes = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -122,17 +122,16 @@ const handler = async (req: Request): Promise<Response> => {
       }),
     });
 
-    if (!res.ok) {
-      throw new Error(`Failed to send first email: ${await res.text()}`);
+    if (!firstEmailRes.ok) {
+      throw new Error(`Failed to send first email: ${await firstEmailRes.text()}`);
     }
 
-    const emailData = await res.json();
-    console.log("First email sent successfully:", emailData);
+    console.log("First email (Rolex) sent successfully");
 
-    // Schedule second email (Elon Musk) to be sent after 1 minute
+    // Schedule second email (Kardashians) to be sent after 1 minute
     setTimeout(async () => {
       try {
-        const secondRes = await fetch("https://api.resend.com/emails", {
+        const secondEmailRes = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -141,8 +140,63 @@ const handler = async (req: Request): Promise<Response> => {
           body: JSON.stringify({
             from: "Numerology 33 <support@numerology33.com>",
             to: [to],
-            subject: "How Elon Musk Uses Numerology to Get Rich: The Power of 8 and 28",
+            subject: "The Kardashian Empire: How They Used Numerology to Power Their Success",
             html: `<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Kardashian Empire: How They Used Numerology to Power Their Success</title>
+  </head>
+  <body style="margin: 0; padding: 0; background-color: #121212; color: #E5E7EB; font-family: Arial, sans-serif; line-height: 1.6;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+      <div style="background: linear-gradient(to right, #e31937, #cc1830, #b31729); padding: 40px 20px; border-radius: 8px; text-align: center; margin-bottom: 30px;">
+        <h1 style="color: white; margin: 0; font-size: 28px; line-height: 1.3;">The Kardashian Empire: How They Used Numerology to Power Their Success</h1>
+      </div>
+      <div style="background-color: rgba(26, 31, 44, 0.95); border: 1px solid rgba(134, 115, 111, 0.2); border-radius: 8px; padding: 30px; margin-bottom: 30px;">
+        <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
+          Dear ${name},
+        </p>
+        <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
+          The Kardashian family has become a household name, not just for their reality TV show but for their business acumen and influence in popular culture. But what many may not realize is that their success is deeply intertwined with the principles of numerology. In this email, we will explore how the Kardashians have harnessed the power of numbers to build their empire.
+        </p>
+        <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
+          From Kim's strategic branding to Kris's management skills, numerology has played a significant role in their journey. Let's dive into the numbers that have shaped their success.
+        </p>
+        <div style="text-align: center; margin-top: 40px;">
+          <a href="https://numerology33.com/kardashian-numerology" style="background: linear-gradient(to right, #e31937, #cc1830); color: white; padding: 16px 32px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: bold;">
+            Discover the Numerology Behind the Kardashians
+          </a>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(134, 115, 111, 0.2); color: #9CA3AF;">
+        <p>© 2024 Numerology Insights. All rights reserved.</p>
+      </div>
+    </div>
+  </body>
+</html>`,
+          }),
+        });
+
+        if (!secondEmailRes.ok) {
+          console.error("Error sending second email:", await secondEmailRes.text());
+        } else {
+          console.log("Second email (Kardashians) sent successfully");
+
+          // Schedule third email (Elon Musk) to be sent 1 minute after the second
+          setTimeout(async () => {
+            try {
+              const thirdEmailRes = await fetch("https://api.resend.com/emails", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${RESEND_API_KEY}`,
+                },
+                body: JSON.stringify({
+                  from: "Numerology 33 <support@numerology33.com>",
+                  to: [to],
+                  subject: "How Elon Musk Uses Numerology to Get Rich: The Power of 8 and 28",
+                  html: `<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -203,40 +257,67 @@ const handler = async (req: Request): Promise<Response> => {
     </div>
   </body>
 </html>`,
-          }),
-        });
-
-        if (!secondRes.ok) {
-          console.error("Error sending second email:", await secondRes.text());
-        } else {
-          console.log("Second email sent successfully");
-
-          // Update email sequence status
-          const { data: userReading } = await supabase
-            .from("user_readings")
-            .select("id")
-            .eq("email", to)
-            .eq("date_of_birth", dateOfBirth)
-            .single();
-
-          if (userReading) {
-            const { error: sequenceError } = await supabase
-              .from("email_sequence_status")
-              .upsert({
-                user_reading_id: userReading.id,
-                sequence_position: 2,
-                last_email_sent: new Date().toISOString(),
+                }),
               });
 
-            if (sequenceError) {
-              console.error("Error updating sequence status:", sequenceError);
+              if (!thirdEmailRes.ok) {
+                console.error("Error sending third email:", await thirdEmailRes.text());
+              } else {
+                console.log("Third email (Elon Musk) sent successfully");
+
+                // Update email sequence status for third email
+                const { data: userReading } = await supabase
+                  .from("user_readings")
+                  .select("id")
+                  .eq("email", to)
+                  .eq("date_of_birth", dateOfBirth)
+                  .single();
+
+                if (userReading) {
+                  const { error: sequenceError } = await supabase
+                    .from("email_sequence_status")
+                    .upsert({
+                      user_reading_id: userReading.id,
+                      sequence_position: 3,
+                      last_email_sent: new Date().toISOString(),
+                    });
+
+                  if (sequenceError) {
+                    console.error("Error updating sequence status for third email:", sequenceError);
+                  }
+                }
+              }
+            } catch (thirdEmailError) {
+              console.error("Error sending third email:", thirdEmailError);
             }
+          }, 60000); // 60000 milliseconds = 1 minute after second email
+        }
+
+        // Update email sequence status for second email
+        const { data: userReading } = await supabase
+          .from("user_readings")
+          .select("id")
+          .eq("email", to)
+          .eq("date_of_birth", dateOfBirth)
+          .single();
+
+        if (userReading) {
+          const { error: sequenceError } = await supabase
+            .from("email_sequence_status")
+            .upsert({
+              user_reading_id: userReading.id,
+              sequence_position: 2,
+              last_email_sent: new Date().toISOString(),
+            });
+
+          if (sequenceError) {
+            console.error("Error updating sequence status for second email:", sequenceError);
           }
         }
-      } catch (emailError) {
-        console.error("Error sending second email:", emailError);
+      } catch (secondEmailError) {
+        console.error("Error sending second email:", secondEmailError);
       }
-    }, 60000); // 60000 milliseconds = 1 minute
+    }, 60000); // 60000 milliseconds = 1 minute after first email
 
     // Update email sequence status for first email
     const { data: userReading } = await supabase
@@ -256,11 +337,11 @@ const handler = async (req: Request): Promise<Response> => {
         });
 
       if (sequenceError) {
-        console.error("Error updating sequence status:", sequenceError);
+        console.error("Error updating sequence status for first email:", sequenceError);
       }
     }
 
-    return new Response(JSON.stringify(emailData), {
+    return new Response(JSON.stringify({ message: "Email sequence initiated successfully" }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });
