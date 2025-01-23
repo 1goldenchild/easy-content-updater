@@ -139,9 +139,14 @@ const CollectInfoForm = () => {
 
   const handleCheckoutClick = () => {
     console.log("Checkout button clicked");
-    const checkoutUrl = "https://checkout.numerology33.com/checkout";
-    console.log("Redirecting to:", checkoutUrl);
-    window.location.href = checkoutUrl;
+    try {
+      window.location.href = "https://checkout.numerology33.com/checkout";
+      console.log("Navigation initiated");
+    } catch (error) {
+      console.error("Navigation error:", error);
+      // Fallback navigation method
+      window.open("https://checkout.numerology33.com/checkout", "_self");
+    }
   };
 
   return (
@@ -209,12 +214,17 @@ const CollectInfoForm = () => {
         <div className="text-center">
           <h3 className="text-xl font-semibold mb-4">Thank you!</h3>
           <p className="text-white/70 mb-6">Your analysis is being prepared. Check your email in about 1 minute.</p>
-          <button
-            onClick={handleCheckoutClick}
-            className="w-full py-4 px-6 text-lg font-semibold text-white rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C4DEF] hover:to-[#D042E8] transition-all duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 shadow-lg hover:shadow-xl"
+          <a
+            href="https://checkout.numerology33.com/checkout"
+            target="_self"
+            onClick={(e) => {
+              e.preventDefault();
+              handleCheckoutClick();
+            }}
+            className="inline-block w-full py-4 px-6 text-lg font-semibold text-white rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C4DEF] hover:to-[#D042E8] transition-all duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 shadow-lg hover:shadow-xl cursor-pointer"
           >
             Continue to Checkout
-          </button>
+          </a>
         </div>
       )}
     </motion.div>
