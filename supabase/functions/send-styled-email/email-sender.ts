@@ -6,7 +6,8 @@ export const sendEmail = async (
   subject: string,
   html: string
 ) => {
-  console.log(`[email-sender] Attempting to send email to ${to} with subject: ${subject}`);
+  console.log(`[email-sender] Attempting to send email to ${to}`);
+  console.log(`[email-sender] Subject: ${subject}`);
   
   try {
     const emailRes = await fetch("https://api.resend.com/emails", {

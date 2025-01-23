@@ -26,24 +26,30 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    if (!RESEND_API_KEY) {
-      console.error("[process-scheduled-email] RESEND_API_KEY is not set");
-      throw new Error("Server configuration error: RESEND_API_KEY is not set");
-    }
-
-    if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
-      console.error("[process-scheduled-email] Missing Supabase configuration");
-      throw new Error("Missing Supabase configuration");
+    if (!RESEND_API_KEY || !SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
+      throw new Error("Missing required environment variables");
     }
 
     const { to, name, template, scheduledTime } = await req.json() as EmailRequest;
     console.log("[process-scheduled-email] Processing request:", { to, name, template, scheduledTime });
 
-    // Initialize Supabase client
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+    const scheduleTime = new Date(scheduledTime);
+    const now = new Date();
 
-    // Check if this email was already sent
-    const { data: existingStatus, error: statusError } = await supabase
+    // Check if it's time to send the email
+    if (now < scheduleTime) {
+      console.log("[process-scheduled-email] Not yet time to send email:", {
+        now: now.toISOString(),
+        scheduledTime: scheduleTime.toISOString()
+      });
+      return new Response(JSON.stringify({ status: "pending" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    // Check if email was already sent
+    const { data: emailStatus, error: statusError } = await supabase
       .from('email_sequence_status')
       .select('*')
       .eq('user_reading_id', to)
@@ -52,19 +58,21 @@ const handler = async (req: Request): Promise<Response> => {
 
     if (statusError) {
       console.error("[process-scheduled-email] Error checking email status:", statusError);
+      throw statusError;
     }
 
-    if (existingStatus?.last_email_sent) {
+    if (emailStatus?.sent) {
       console.log("[process-scheduled-email] Email already sent:", {
         template,
         to,
-        sentAt: existingStatus.last_email_sent
+        sentAt: emailStatus.last_email_sent
       });
       return new Response(JSON.stringify({ success: true, alreadySent: true }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
+    // Prepare email content
     let subject: string;
     let htmlContent: string;
 
@@ -89,27 +97,24 @@ const handler = async (req: Request): Promise<Response> => {
         throw new Error("Invalid template specified");
     }
 
-    try {
-      console.log(`[process-scheduled-email] Sending ${template} email to ${to}`);
-      const emailResult = await sendEmail(RESEND_API_KEY, to, subject, htmlContent);
-      console.log("[process-scheduled-email] Email sent successfully:", emailResult);
+    // Send email
+    console.log(`[process-scheduled-email] Sending ${template} email to ${to}`);
+    const emailResult = await sendEmail(RESEND_API_KEY, to, subject, htmlContent);
+    console.log("[process-scheduled-email] Email sent successfully:", emailResult);
 
-      // Update email sequence status
-      const { error: updateError } = await supabase
-        .from('email_sequence_status')
-        .upsert({
-          user_reading_id: to,
-          sequence_position: getSequencePosition(template),
-          last_email_sent: new Date().toISOString()
-        });
+    // Update email status
+    const { error: updateError } = await supabase
+      .from('email_sequence_status')
+      .update({
+        sent: true,
+        last_email_sent: new Date().toISOString()
+      })
+      .eq('user_reading_id', to)
+      .eq('sequence_position', getSequencePosition(template));
 
-      if (updateError) {
-        console.error("[process-scheduled-email] Error updating email status:", updateError);
-      }
-
-    } catch (error) {
-      console.error(`[process-scheduled-email] Error sending ${template} email:`, error);
-      throw error;
+    if (updateError) {
+      console.error("[process-scheduled-email] Error updating email status:", updateError);
+      throw updateError;
     }
 
     return new Response(JSON.stringify({ success: true }), {

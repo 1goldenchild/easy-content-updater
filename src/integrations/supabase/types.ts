@@ -68,6 +68,8 @@ export type Database = {
           created_at: string
           id: string
           last_email_sent: string | null
+          scheduled_for: string | null
+          sent: boolean | null
           sequence_position: number
           user_reading_id: string
         }
@@ -75,6 +77,8 @@ export type Database = {
           created_at?: string
           id?: string
           last_email_sent?: string | null
+          scheduled_for?: string | null
+          sent?: boolean | null
           sequence_position?: number
           user_reading_id: string
         }
@@ -82,6 +86,8 @@ export type Database = {
           created_at?: string
           id?: string
           last_email_sent?: string | null
+          scheduled_for?: string | null
+          sent?: boolean | null
           sequence_position?: number
           user_reading_id?: string
         }
