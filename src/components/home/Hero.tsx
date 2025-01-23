@@ -1,9 +1,11 @@
+import { memo } from "react"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
 
-const Hero = () => {
+// Memoize the Hero component since it doesn't need to re-render
+const Hero = memo(() => {
   // Lighter purple shades (15% lighter)
   const purpleShades = [
     '#b09df7',
@@ -12,7 +14,7 @@ const Hero = () => {
     '#deccfb',
     '#eae5ff',
     '#a173f7',
-  ];
+  ]
 
   // Lighter gold shades (15% lighter)
   const goldShades = [
@@ -22,14 +24,14 @@ const Hero = () => {
     '#e1b449',
     '#c49d39',
     '#d4aa3d',
-  ];
+  ]
 
   return (
     <section className="relative min-h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden">
       {/* Stars Background - Purple Stars */}
       <div className="absolute inset-0 z-0 will-change-transform" style={{ transform: 'translateZ(0)' }}>
         {[...Array(90)].map((_, i) => {
-          const color = purpleShades[Math.floor(Math.random() * purpleShades.length)];
+          const color = purpleShades[Math.floor(Math.random() * purpleShades.length)]
           return (
             <div
               key={`purple-${i}`}
@@ -44,11 +46,11 @@ const Hero = () => {
                 transform: 'translateZ(0)'
               }}
             />
-          );
+          )
         })}
         {/* Golden Stars */}
         {[...Array(90)].map((_, i) => {
-          const color = goldShades[Math.floor(Math.random() * goldShades.length)];
+          const color = goldShades[Math.floor(Math.random() * goldShades.length)]
           return (
             <div
               key={`gold-${i}`}
@@ -63,7 +65,7 @@ const Hero = () => {
                 transform: 'translateZ(0)'
               }}
             />
-          );
+          )
         })}
       </div>
 
@@ -106,6 +108,8 @@ const Hero = () => {
       />
     </section>
   )
-}
+})
+
+Hero.displayName = 'Hero'
 
 export default Hero

@@ -1,39 +1,58 @@
+import { lazy, Suspense } from "react"
 import Hero from "@/components/home/Hero"
-import SecretKnowledge from "@/components/home/SecretKnowledge"
-import Benefits from "@/components/home/Benefits"
-import SalesPitch from "@/components/home/SalesPitch"
-import Testimonials from "@/components/home/Testimonials"
-import BlogSection from "@/components/home/sections/BlogSection"
 import Navbar from "@/components/layout/Navbar"
 import Footer from "@/components/layout/Footer"
+
+// Lazy load components that are not immediately visible
+const SecretKnowledge = lazy(() => import("@/components/home/SecretKnowledge"))
+const Benefits = lazy(() => import("@/components/home/Benefits"))
+const SalesPitch = lazy(() => import("@/components/home/SalesPitch"))
+const Testimonials = lazy(() => import("@/components/home/Testimonials"))
+const BlogSection = lazy(() => import("@/components/home/sections/BlogSection"))
 
 const Index = () => {
   return (
     <>
       <Navbar />
       <div className="flex-1">
+        {/* Hero is not lazy loaded as it's above the fold */}
         <div id="hero">
           <Hero />
         </div>
-        <div id="benefits">
-          <Benefits />
-        </div>
-        <div id="sales">
-          <SalesPitch />
-        </div>
-        <div id="knowledge">
-          <SecretKnowledge />
-        </div>
-        <div id="testimonials">
-          <Testimonials />
-        </div>
-        <div id="blog">
-          <BlogSection />
-        </div>
+        
+        <Suspense fallback={<div className="min-h-[400px]" />}>
+          <div id="benefits">
+            <Benefits />
+          </div>
+        </Suspense>
+
+        <Suspense fallback={<div className="min-h-[400px]" />}>
+          <div id="sales">
+            <SalesPitch />
+          </div>
+        </Suspense>
+
+        <Suspense fallback={<div className="min-h-[400px]" />}>
+          <div id="knowledge">
+            <SecretKnowledge />
+          </div>
+        </Suspense>
+
+        <Suspense fallback={<div className="min-h-[400px]" />}>
+          <div id="testimonials">
+            <Testimonials />
+          </div>
+        </Suspense>
+
+        <Suspense fallback={<div className="min-h-[400px]" />}>
+          <div id="blog">
+            <BlogSection />
+          </div>
+        </Suspense>
       </div>
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export default Index;
+export default Index
