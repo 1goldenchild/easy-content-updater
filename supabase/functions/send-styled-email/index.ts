@@ -20,7 +20,7 @@ interface EmailRequest {
 }
 
 const handler = async (req: Request): Promise<Response> => {
-  console.log("Email function started");
+  console.log("[send-styled-email] Function started");
 
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -28,17 +28,17 @@ const handler = async (req: Request): Promise<Response> => {
 
   try {
     if (!RESEND_API_KEY) {
-      console.error("RESEND_API_KEY is not set");
+      console.error("[send-styled-email] RESEND_API_KEY is not set");
       throw new Error("Server configuration error: RESEND_API_KEY is not set");
     }
 
     if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
-      console.error("Missing Supabase configuration");
+      console.error("[send-styled-email] Missing Supabase configuration");
       throw new Error("Missing Supabase configuration");
     }
 
     const { to, name, template, scheduledTime } = await req.json() as EmailRequest;
-    console.log("Received request:", { to, name, template, scheduledTime });
+    console.log("[send-styled-email] Received request:", { to, name, template, scheduledTime });
 
     // Initialize Supabase client
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
@@ -48,14 +48,14 @@ const handler = async (req: Request): Promise<Response> => {
       const now = new Date();
       const scheduleTime = new Date(scheduledTime);
 
-      console.log("Checking scheduled time:", {
+      console.log("[send-styled-email] Checking scheduled time:", {
         now: now.toISOString(),
         scheduledTime: scheduleTime.toISOString(),
         shouldSend: now >= scheduleTime
       });
 
       if (now >= scheduleTime) {
-        console.log(`Processing ${template} email for ${to}`);
+        console.log(`[send-styled-email] Processing ${template} email for ${to}`);
         let subject: string;
         let htmlContent: string;
 
@@ -82,13 +82,13 @@ const handler = async (req: Request): Promise<Response> => {
 
         try {
           await sendEmail(RESEND_API_KEY, to, subject, htmlContent);
-          console.log(`Successfully sent ${template} email to ${to}`);
+          console.log(`[send-styled-email] Successfully sent ${template} email to ${to}`);
         } catch (error) {
-          console.error(`Error sending ${template} email:`, error);
+          console.error(`[send-styled-email] Error sending ${template} email:`, error);
           throw error;
         }
       } else {
-        console.log(`Not yet time to send ${template} email to ${to}. Scheduled for ${scheduledTime}`);
+        console.log(`[send-styled-email] Not yet time to send ${template} email to ${to}. Scheduled for ${scheduledTime}`);
       }
 
       return new Response(JSON.stringify({ success: true }), {
@@ -97,7 +97,7 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     // This is a new user registration, let's schedule all the emails
-    console.log("Scheduling email sequence for new user:", { to, name });
+    console.log("[send-styled-email] Scheduling email sequence for new user:", { to, name });
 
     // Calculate schedule times
     const now = new Date();
@@ -107,9 +107,13 @@ const handler = async (req: Request): Promise<Response> => {
     const gatesTime = new Date(now.getTime() + 72 * 60 * 60 * 1000); // 72 hours
 
     const scheduleEmail = async (template: string, scheduleTime: Date) => {
-      console.log(`Scheduling ${template} email for:`, scheduleTime.toISOString());
+      console.log(`[send-styled-email] Scheduling ${template} email for:`, scheduleTime.toISOString());
+      
+      // Create a unique job name using timestamp and random string
+      const jobName = `${template}-email-${to}-${Date.now()}-${Math.random().toString(36).substring(7)}`;
+      
       const { error } = await supabase.rpc('schedule_email', {
-        p_job_name: `${template}-email-${to}-${Date.now()}`,
+        p_job_name: jobName,
         p_schedule: '* * * * *', // Run every minute
         p_command: JSON.stringify({
           url: `${SUPABASE_URL}/functions/v1/process-scheduled-email`,
@@ -127,10 +131,10 @@ const handler = async (req: Request): Promise<Response> => {
       });
 
       if (error) {
-        console.error(`Error scheduling ${template} email:`, error);
+        console.error(`[send-styled-email] Error scheduling ${template} email:`, error);
         throw error;
       }
-      console.log(`Successfully scheduled ${template} email`);
+      console.log(`[send-styled-email] Successfully scheduled ${template} email with job name: ${jobName}`);
     };
 
     // Schedule all emails
@@ -140,17 +144,17 @@ const handler = async (req: Request): Promise<Response> => {
       await scheduleEmail('musk', muskTime);
       await scheduleEmail('gates', gatesTime);
     } catch (error) {
-      console.error("Error scheduling emails:", error);
+      console.error("[send-styled-email] Error scheduling emails:", error);
       throw error;
     }
 
-    console.log("Successfully scheduled all emails");
+    console.log("[send-styled-email] Successfully scheduled all emails");
     return new Response(JSON.stringify({ success: true }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
 
   } catch (error) {
-    console.error("Error in send-styled-email function:", error);
+    console.error("[send-styled-email] Error in function:", error);
     return new Response(
       JSON.stringify({ error: error instanceof Error ? error.message : "Unknown error occurred" }),
       {
