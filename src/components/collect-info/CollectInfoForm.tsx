@@ -121,7 +121,7 @@ const CollectInfoForm = () => {
         description: "Your information has been submitted successfully. You will receive the email in about 1 minute.",
       });
 
-      // Use window.location.href instead of replace for more reliable navigation
+      // Redirect to checkout page
       window.location.href = "https://checkout.numerology33.com/checkout";
       
     } catch (error) {
