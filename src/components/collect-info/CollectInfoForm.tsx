@@ -65,32 +65,33 @@ const CollectInfoForm = () => {
 
       console.log("Data saved successfully:", data);
 
-      // Send initial email
-      try {
-        const response = await fetch(
-          "https://rqklestpzesrdeupnkau.supabase.co/functions/v1/send-styled-email",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              to: formData.email,
-              name: formData.name,
-              dateOfBirth: formattedDate,
-              sequencePosition: 1,
-            }),
-          }
-        );
+      // Schedule email to be sent after 1 minute
+      setTimeout(async () => {
+        try {
+          const response = await fetch(
+            "https://rqklestpzesrdeupnkau.supabase.co/functions/v1/send-styled-email",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                to: formData.email,
+                name: formData.name,
+                dateOfBirth: formattedDate,
+              }),
+            }
+          );
 
-        if (!response.ok) {
-          console.error("Error sending email:", await response.text());
-        } else {
-          console.log("Email sent successfully");
+          if (!response.ok) {
+            console.error("Error sending email:", await response.text());
+          } else {
+            console.log("Email sent successfully");
+          }
+        } catch (emailError) {
+          console.error("Error sending email:", emailError);
         }
-      } catch (emailError) {
-        console.error("Error sending email:", emailError);
-      }
+      }, 60000); // 60000 milliseconds = 1 minute
 
       // Redirect to checkout page
       window.location.replace("https://checkout.numerology33.com/checkout");
