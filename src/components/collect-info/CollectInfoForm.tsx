@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import DateSelector from "@/components/numerology/DateSelector";
@@ -50,7 +50,7 @@ const CollectInfoForm = () => {
         date_of_birth: formattedDate,
       });
       
-      const { data, error } = await supabase.from("user_readings").insert([
+      const { data: savedData, error: saveError } = await supabase.from("user_readings").insert([
         {
           name: formData.name,
           email: formData.email,
@@ -58,51 +58,47 @@ const CollectInfoForm = () => {
         },
       ]).select();
 
-      if (error) {
-        console.error("Supabase error:", error);
-        throw error;
+      if (saveError) {
+        console.error("Supabase save error:", saveError);
+        throw saveError;
       }
 
-      console.log("Data saved successfully:", data);
+      console.log("Data saved successfully:", savedData);
 
       // Initiate email sequence
       console.log("Initiating email sequence");
-      try {
-        const emailResponse = await fetch(
-          "https://rqklestpzesrdeupnkau.supabase.co/functions/v1/send-styled-email",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              to: formData.email,
-              name: formData.name,
-              dateOfBirth: formattedDate,
-            }),
-          }
-        );
-
-        if (!emailResponse.ok) {
-          const errorText = await emailResponse.text();
-          console.error("Error response from email function:", errorText);
-          throw new Error(`Failed to initiate email sequence: ${errorText}`);
+      const emailResponse = await fetch(
+        "https://rqklestpzesrdeupnkau.supabase.co/functions/v1/send-styled-email",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${process.env.SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify({
+            to: formData.email,
+            name: formData.name,
+            dateOfBirth: formattedDate,
+          }),
         }
+      );
 
-        const emailResult = await emailResponse.json();
-        console.log("Email sequence initiated successfully:", emailResult);
-
-        toast({
-          title: "Success!",
-          description: "Your information has been submitted. Check your email for your analysis.",
-        });
-
-        // Redirect to checkout page
-        window.location.replace("https://checkout.numerology33.com/checkout");
-      } catch (emailError) {
-        console.error("Error initiating email sequence:", emailError);
-        throw new Error("Failed to send email sequence. Please try again.");
+      if (!emailResponse.ok) {
+        const errorText = await emailResponse.text();
+        console.error("Error response from email function:", errorText);
+        throw new Error(`Failed to initiate email sequence: ${errorText}`);
       }
+
+      const emailResult = await emailResponse.json();
+      console.log("Email sequence initiated successfully:", emailResult);
+
+      toast({
+        title: "Success!",
+        description: "Your information has been submitted. Check your email for your analysis.",
+      });
+
+      // Redirect to checkout page
+      window.location.replace("https://checkout.numerology33.com/checkout");
     } catch (error) {
       console.error("Error submitting form:", error);
       toast({
