@@ -31,6 +31,7 @@ const handler = async (req: Request): Promise<Response> => {
     console.log("Received request to send email sequence:", { to, name, dateOfBirth });
 
     // Send Rolex email immediately
+    console.log("Sending Rolex email...");
     await sendEmail(
       RESEND_API_KEY,
       to,
@@ -39,57 +40,35 @@ const handler = async (req: Request): Promise<Response> => {
     );
     console.log("Rolex email sent successfully at:", new Date().toISOString());
 
-    // Schedule Kardashian email (1 minute later)
-    setTimeout(async () => {
-      try {
-        console.log("Attempting to send Kardashian email at:", new Date().toISOString());
-        await sendEmail(
-          RESEND_API_KEY,
-          to,
-          "The Kardashian Empire: How They Used Numerology to Power Their Success",
-          generateKardashianEmail(name)
-        );
-        console.log("Kardashian email sent successfully at:", new Date().toISOString());
+    // Send Kardashian email
+    console.log("Sending Kardashian email...");
+    await sendEmail(
+      RESEND_API_KEY,
+      to,
+      "The Kardashian Empire: How They Used Numerology to Power Their Success",
+      generateKardashianEmail(name)
+    );
+    console.log("Kardashian email sent successfully at:", new Date().toISOString());
 
-        // Schedule Elon Musk email (1 minute after Kardashian)
-        console.log("Scheduling Musk email for 1 minute after Kardashian");
-        setTimeout(async () => {
-          try {
-            console.log("Attempting to send Musk email at:", new Date().toISOString());
-            await sendEmail(
-              RESEND_API_KEY,
-              to,
-              "How Elon Musk Uses Numerology to Get Rich",
-              generateMuskEmail(name)
-            );
-            console.log("Elon Musk email sent successfully at:", new Date().toISOString());
+    // Send Musk email
+    console.log("Sending Musk email...");
+    await sendEmail(
+      RESEND_API_KEY,
+      to,
+      "How Elon Musk Uses Numerology to Get Rich",
+      generateMuskEmail(name)
+    );
+    console.log("Musk email sent successfully at:", new Date().toISOString());
 
-            // Schedule Bill Gates email (1 minute after Musk)
-            console.log("Scheduling Gates email for 1 minute after Musk");
-            setTimeout(async () => {
-              try {
-                console.log("Attempting to send Gates email at:", new Date().toISOString());
-                await sendEmail(
-                  RESEND_API_KEY,
-                  to,
-                  "How Bill Gates Uses Numerology to Shape His Success",
-                  generateGatesEmail(name)
-                );
-                console.log("Bill Gates email sent successfully at:", new Date().toISOString());
-              } catch (error) {
-                console.error("Error sending Bill Gates email:", error);
-              }
-            }, 60000);
-
-          } catch (error) {
-            console.error("Error sending Elon Musk email:", error, "at:", new Date().toISOString());
-          }
-        }, 60000);
-
-      } catch (error) {
-        console.error("Error sending Kardashian email:", error);
-      }
-    }, 60000);
+    // Send Gates email
+    console.log("Sending Gates email...");
+    await sendEmail(
+      RESEND_API_KEY,
+      to,
+      "How Bill Gates Uses Numerology to Shape His Success",
+      generateGatesEmail(name)
+    );
+    console.log("Gates email sent successfully at:", new Date().toISOString());
 
     return new Response(JSON.stringify({ success: true }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
