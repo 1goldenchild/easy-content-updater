@@ -1,4 +1,4 @@
-import { corsHeaders } from "./cors.ts";
+import { corsHeaders } from "../_shared/cors.ts";
 
 export const sendEmail = async (
   RESEND_API_KEY: string,

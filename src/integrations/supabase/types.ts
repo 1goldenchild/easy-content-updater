@@ -154,6 +154,16 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_scheduled_jobs: {
+        Args: {
+          p_pattern: string
+        }
+        Returns: {
+          jobname: string
+          schedule: string
+          command: string
+        }[]
+      }
       schedule_email: {
         Args: {
           p_job_name: string
@@ -161,6 +171,12 @@ export type Database = {
           p_command: Json
         }
         Returns: string
+      }
+      unschedule_job: {
+        Args: {
+          p_job_name: string
+        }
+        Returns: undefined
       }
     }
     Enums: {

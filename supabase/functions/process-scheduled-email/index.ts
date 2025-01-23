@@ -5,10 +5,13 @@ import { generateRolexEmail } from "../send-styled-email/templates/rolex-email.t
 import { generateKardashianEmail } from "../send-styled-email/templates/kardashian-email.ts";
 import { generateMuskEmail } from "../send-styled-email/templates/musk-email.ts";
 import { generateGatesEmail } from "../send-styled-email/templates/gates-email.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 
-interface ScheduledEmailRequest {
+interface EmailRequest {
   to: string;
   name: string;
   template: 'rolex' | 'kardashian' | 'musk' | 'gates';
@@ -25,56 +28,88 @@ const handler = async (req: Request): Promise<Response> => {
   try {
     if (!RESEND_API_KEY) {
       console.error("[process-scheduled-email] RESEND_API_KEY is not set");
-      throw new Error("RESEND_API_KEY is not set");
+      throw new Error("Server configuration error: RESEND_API_KEY is not set");
     }
 
-    const { to, name, template, scheduledTime } = await req.json() as ScheduledEmailRequest;
-    console.log("[process-scheduled-email] Processing scheduled email:", { to, name, template, scheduledTime });
+    if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
+      console.error("[process-scheduled-email] Missing Supabase configuration");
+      throw new Error("Missing Supabase configuration");
+    }
 
-    const scheduledDate = new Date(scheduledTime);
-    const now = new Date();
+    const { to, name, template, scheduledTime } = await req.json() as EmailRequest;
+    console.log("[process-scheduled-email] Processing request:", { to, name, template, scheduledTime });
 
-    console.log("[process-scheduled-email] Time check:", {
-      now: now.toISOString(),
-      scheduledTime: scheduledDate.toISOString(),
-      shouldSend: now >= scheduledDate
-    });
+    // Initialize Supabase client
+    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
-    // Only send if we're past the scheduled time
-    if (now >= scheduledDate) {
-      console.log(`[process-scheduled-email] Processing ${template} email for ${to}`);
+    // Check if this email was already sent
+    const { data: existingStatus, error: statusError } = await supabase
+      .from('email_sequence_status')
+      .select('*')
+      .eq('user_reading_id', to)
+      .eq('sequence_position', getSequencePosition(template))
+      .single();
 
-      let subject: string;
-      let htmlContent: string;
+    if (statusError) {
+      console.error("[process-scheduled-email] Error checking email status:", statusError);
+    }
 
-      switch (template) {
-        case 'rolex':
-          subject = "The Secret Behind Rolex's Success: A Numerological Analysis";
-          htmlContent = generateRolexEmail(name);
-          break;
-        case 'kardashian':
-          subject = "The Kardashian Empire: How They Used Numerology to Power Their Success";
-          htmlContent = generateKardashianEmail(name);
-          break;
-        case 'musk':
-          subject = "How Elon Musk Uses Numerology to Get Rich";
-          htmlContent = generateMuskEmail(name);
-          break;
-        case 'gates':
-          subject = "How Bill Gates Uses Numerology to Shape His Success";
-          htmlContent = generateGatesEmail(name);
-          break;
+    if (existingStatus?.last_email_sent) {
+      console.log("[process-scheduled-email] Email already sent:", {
+        template,
+        to,
+        sentAt: existingStatus.last_email_sent
+      });
+      return new Response(JSON.stringify({ success: true, alreadySent: true }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    let subject: string;
+    let htmlContent: string;
+
+    switch (template) {
+      case 'rolex':
+        subject = "The Secret Behind Rolex's Success: A Numerological Analysis";
+        htmlContent = generateRolexEmail(name);
+        break;
+      case 'kardashian':
+        subject = "The Kardashian Empire: How They Used Numerology to Power Their Success";
+        htmlContent = generateKardashianEmail(name);
+        break;
+      case 'musk':
+        subject = "How Elon Musk Uses Numerology to Get Rich";
+        htmlContent = generateMuskEmail(name);
+        break;
+      case 'gates':
+        subject = "How Bill Gates Uses Numerology to Shape His Success";
+        htmlContent = generateGatesEmail(name);
+        break;
+      default:
+        throw new Error("Invalid template specified");
+    }
+
+    try {
+      console.log(`[process-scheduled-email] Sending ${template} email to ${to}`);
+      const emailResult = await sendEmail(RESEND_API_KEY, to, subject, htmlContent);
+      console.log("[process-scheduled-email] Email sent successfully:", emailResult);
+
+      // Update email sequence status
+      const { error: updateError } = await supabase
+        .from('email_sequence_status')
+        .upsert({
+          user_reading_id: to,
+          sequence_position: getSequencePosition(template),
+          last_email_sent: new Date().toISOString()
+        });
+
+      if (updateError) {
+        console.error("[process-scheduled-email] Error updating email status:", updateError);
       }
 
-      try {
-        const result = await sendEmail(RESEND_API_KEY, to, subject, htmlContent);
-        console.log(`[process-scheduled-email] Successfully sent ${template} email to ${to}:`, result);
-      } catch (error) {
-        console.error(`[process-scheduled-email] Error sending email:`, error);
-        throw error;
-      }
-    } else {
-      console.log(`[process-scheduled-email] Skipping ${template} email for ${to} - scheduled for ${scheduledTime}`);
+    } catch (error) {
+      console.error(`[process-scheduled-email] Error sending ${template} email:`, error);
+      throw error;
     }
 
     return new Response(JSON.stringify({ success: true }), {
@@ -91,5 +126,20 @@ const handler = async (req: Request): Promise<Response> => {
     );
   }
 };
+
+function getSequencePosition(template: string): number {
+  switch (template) {
+    case 'rolex':
+      return 1;
+    case 'kardashian':
+      return 2;
+    case 'musk':
+      return 3;
+    case 'gates':
+      return 4;
+    default:
+      return 0;
+  }
+}
 
 serve(handler);
