@@ -14,6 +14,7 @@ const CollectInfoForm = () => {
     email: "",
   });
   const [date, setDate] = useState<Date>();
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const scheduleEmailSequence = async (userReadingId: string, email: string, name: string, dateOfBirth: string) => {
     try {
@@ -121,10 +122,7 @@ const CollectInfoForm = () => {
         description: "Your information has been submitted successfully. You will receive the email in about 1 minute.",
       });
 
-      // Redirect to checkout page
-      console.log("Redirecting to checkout page...");
-      window.location.assign("https://checkout.numerology33.com/checkout");
-      return;
+      setIsSubmitted(true);
       
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -145,60 +143,77 @@ const CollectInfoForm = () => {
       animate={{ opacity: 1, y: 0 }}
       className="bg-white/5 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-white/10"
     >
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
-          <label
-            htmlFor="name"
-            className="block text-sm font-medium text-white/70 mb-2"
-          >
-            Full Name
-          </label>
-          <Input
-            id="name"
-            type="text"
-            required
-            value={formData.name}
-            onChange={(e) =>
-              setFormData({ ...formData, name: e.target.value })
-            }
-            className="w-full"
-            placeholder="Enter your full name"
+      {!isSubmitted ? (
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-white/70 mb-2"
+            >
+              Full Name
+            </label>
+            <Input
+              id="name"
+              type="text"
+              required
+              value={formData.name}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
+              className="w-full"
+              placeholder="Enter your full name"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-white/70 mb-2"
+            >
+              Email
+            </label>
+            <Input
+              id="email"
+              type="email"
+              required
+              value={formData.email}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+              className="w-full"
+              placeholder="Enter your email"
+            />
+          </div>
+
+          <DateSelector 
+            date={date}
+            setDate={setDate}
           />
-        </div>
 
-        <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-white/70 mb-2"
+          <Button
+            type="submit"
+            disabled={isLoading}
+            className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C4DEF] hover:to-[#D042E8]"
           >
-            Email
-          </label>
-          <Input
-            id="email"
-            type="email"
-            required
-            value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
-            className="w-full"
-            placeholder="Enter your email"
-          />
+            {isLoading ? "Processing..." : "Get Your Analysis"}
+          </Button>
+        </form>
+      ) : (
+        <div className="text-center">
+          <h3 className="text-xl font-semibold mb-4">Thank you!</h3>
+          <p className="text-white/70 mb-6">Your analysis is being prepared. Check your email in about 1 minute.</p>
+          <a 
+            href="https://checkout.numerology33.com/checkout"
+            className="inline-block w-full"
+          >
+            <Button
+              className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C4DEF] hover:to-[#D042E8]"
+            >
+              Continue to Checkout
+            </Button>
+          </a>
         </div>
-
-        <DateSelector 
-          date={date}
-          setDate={setDate}
-        />
-
-        <Button
-          type="submit"
-          disabled={isLoading}
-          className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C4DEF] hover:to-[#D042E8]"
-        >
-          {isLoading ? "Processing..." : "Get Your Analysis"}
-        </Button>
-      </form>
+      )}
     </motion.div>
   );
 };
