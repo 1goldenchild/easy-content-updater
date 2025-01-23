@@ -15,6 +15,7 @@ interface EmailRequest {
   to: string;
   name: string;
   template: 'rolex' | 'kardashian' | 'musk' | 'gates';
+  userReadingId: string;
   scheduledTime: string;
 }
 
@@ -30,8 +31,8 @@ const handler = async (req: Request): Promise<Response> => {
       throw new Error("Missing required environment variables");
     }
 
-    const { to, name, template, scheduledTime } = await req.json() as EmailRequest;
-    console.log("[process-scheduled-email] Processing request:", { to, name, template, scheduledTime });
+    const { to, name, template, userReadingId, scheduledTime } = await req.json() as EmailRequest;
+    console.log("[process-scheduled-email] Processing request:", { to, name, template, userReadingId, scheduledTime });
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
     const scheduleTime = new Date(scheduledTime);
@@ -52,7 +53,7 @@ const handler = async (req: Request): Promise<Response> => {
     const { data: emailStatus, error: statusError } = await supabase
       .from('email_sequence_status')
       .select('*')
-      .eq('user_reading_id', to)
+      .eq('user_reading_id', userReadingId)
       .eq('sequence_position', getSequencePosition(template))
       .single();
 
@@ -109,7 +110,7 @@ const handler = async (req: Request): Promise<Response> => {
         sent: true,
         last_email_sent: new Date().toISOString()
       })
-      .eq('user_reading_id', to)
+      .eq('user_reading_id', userReadingId)
       .eq('sequence_position', getSequencePosition(template));
 
     if (updateError) {
