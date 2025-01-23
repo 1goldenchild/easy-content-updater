@@ -121,9 +121,10 @@ const CollectInfoForm = () => {
         description: "Your information has been submitted successfully. You will receive the email in about 1 minute.",
       });
 
+      // Redirect to checkout page
       console.log("Redirecting to checkout page...");
-      window.location.href = "https://checkout.numerology33.com/checkout";
-      return; // Add return statement to ensure code stops here
+      window.location.assign("https://checkout.numerology33.com/checkout");
+      return;
       
     } catch (error) {
       console.error("Error submitting form:", error);
