@@ -64,13 +64,13 @@ export const generateRolexEmail = (name: string) => `<!DOCTYPE html>
           Now, back to Rolex and the 28. When you look at a Rolex watch in marketing materials, you'll notice that the date window highlights the number 28. But that's not all. If you look carefully, Rolex also sets the time at 10:11, a powerful numerological sequence. In numerology, 111 is a number of manifestation, inspiration, and new beginnings—perfectly fitting for a brand that symbolizes elite success. The positioning of the time on the dial reflects the brand's alignment with manifesting wealth and success and also directly passing that force onto the customers.
         </p>
         <div style="text-align: center; margin-top: 40px;">
-          <a href="https://numerology33.com/numerology-reading" style="background: linear-gradient(to right, #86736f, #a39490); color: white; padding: 16px 32px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: bold;">
+          <a href="https://numerology33.com/" style="background: linear-gradient(to right, #86736f, #a39490); color: white; padding: 16px 32px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: bold;">
             Discover Your Numerological Path to Success
           </a>
         </div>
       </div>
       <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(134, 115, 111, 0.2); color: #9CA3AF;">
-        <p>© 2024 Numerology Insights. All rights reserved.</p>
+        <p>© 2025 Numerology 33. All rights reserved.</p>
       </div>
     </div>
   </body>
