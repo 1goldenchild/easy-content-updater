@@ -15,48 +15,6 @@ const CollectInfoForm = () => {
   });
   const [date, setDate] = useState<Date>();
 
-  const scheduleEmailSequence = async (userReadingId: string, email: string, name: string, dateOfBirth: string) => {
-    try {
-      console.log("Starting email sequence scheduling for:", email);
-      
-      // Insert email sequence status
-      const { error: sequenceError } = await supabase
-        .from("email_sequence_status")
-        .insert([{ user_reading_id: userReadingId }]);
-
-      if (sequenceError) {
-        console.error("Error inserting email sequence status:", sequenceError);
-        throw sequenceError;
-      }
-
-      // Schedule only the Rolex email with 1-minute delay
-      const sendAt = new Date(Date.now() + 60 * 1000); // 1 minute delay
-      console.log(`Scheduling rolex email for ${sendAt}`);
-      
-      const { data: emailData, error: emailError } = await supabase.functions.invoke("send-styled-email", {
-        body: {
-          to: [email],
-          templateName: "rolex",
-          userData: { 
-            name,
-            dateOfBirth
-          }
-        }
-      });
-
-      if (emailError) {
-        console.error("Error sending rolex email:", emailError);
-        throw emailError;
-      }
-
-      console.log("Successfully sent rolex email:", emailData);
-
-    } catch (error) {
-      console.error("Error in scheduleEmailSequence:", error);
-      throw error;
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Form submission started");
@@ -107,21 +65,12 @@ const CollectInfoForm = () => {
 
       console.log("Data saved successfully:", data);
 
-      // Schedule email sequence
-      if (data && data[0]) {
-        await scheduleEmailSequence(
-          data[0].id,
-          formData.email,
-          formData.name,
-          formattedDate
-        );
-      }
-
       toast({
         title: "Success!",
-        description: "Your information has been submitted successfully. You will receive the email in about 1 minute.",
+        description: "Your information has been submitted successfully.",
       });
 
+      // Updated redirect URL
       window.location.replace("https://checkout.numerology33.com/checkout");
       
     } catch (error) {

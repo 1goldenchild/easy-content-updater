@@ -63,38 +63,6 @@ export type Database = {
         }
         Relationships: []
       }
-      email_sequence_status: {
-        Row: {
-          created_at: string
-          id: string
-          last_email_sent: string | null
-          sequence_position: number
-          user_reading_id: string
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          last_email_sent?: string | null
-          sequence_position?: number
-          user_reading_id: string
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          last_email_sent?: string | null
-          sequence_position?: number
-          user_reading_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "email_sequence_status_user_reading_id_fkey"
-            columns: ["user_reading_id"]
-            isOneToOne: false
-            referencedRelation: "user_readings"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       profiles: {
         Row: {
           chinese_zodiac: string | null
