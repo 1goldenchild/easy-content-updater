@@ -17,39 +17,36 @@ const getEmailTemplate = (templateName: string, userData: EmailRequest['userData
   const templates: Record<string, { subject: string, content: string }> = {
     rolex: {
       subject: "The Secret Behind Rolex's Success: A Numerological Analysis",
-      content: `
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>The Secret Behind Rolex's Success: A Numerological Analysis</title>
-          </head>
-          <body style="margin: 0; padding: 0; background-color: #121212; color: #E5E7EB; font-family: Arial, sans-serif; line-height: 1.6;">
-            <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-              <div style="background: linear-gradient(to right, #006039, #007a49, #006039); padding: 40px 20px; border-radius: 8px; text-align: center; margin-bottom: 30px;">
-                <h1 style="color: white; margin: 0; font-size: 28px; line-height: 1.3;">The Secret Behind Rolex's Success: A Numerological Analysis</h1>
-              </div>
-              <div style="background-color: rgba(26, 31, 44, 0.95); border: 1px solid rgba(134, 115, 111, 0.2); border-radius: 8px; padding: 30px; margin-bottom: 30px;">
-                <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
-                  Dear ${userData.name},
-                </p>
-                <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
-                  When it comes to luxury and prestige, few brands resonate with success like Rolex. Beyond its impeccable craftsmanship and status as the ultimate symbol of achievement, Rolex uses a secret that many may not know about—numerology.
-                </p>
-                <div style="margin: 30px 0;">
-                  <img src="https://numerology33.com/lovable-uploads/841cc51b-3942-436f-a692-be30a0b5b243.png" alt="Luxurious Rolex watch" style="width: 100%; border-radius: 8px;">
-                </div>
-                <p style="color: #E5E7EB; font-size: 16px; line-height: 1.8;">
-                  Stay tuned for more fascinating insights into how numerology shapes the world around us.
-                </p>
-              </div>
-            </div>
-          </body>
-        </html>
-      `
+      content: `// ... keep existing code (Rolex email template)`
     },
-    // Add other email templates here
+    kardashian: {
+      subject: "The Kardashian Empire: How They Used Numerology to Power Their Success",
+      content: `// ... keep existing code (Kardashian email template)`
+    },
+    musk: {
+      subject: "How Elon Musk Uses Numerology to Get Rich: The Power of 8 and 28",
+      content: `// ... keep existing code (Elon Musk email template)`
+    },
+    gates: {
+      subject: "How Bill Gates Uses Numerology to Shape His Success: The Power of 28, 9, and Apple's Legacy",
+      content: `// ... keep existing code (Bill Gates email template)`
+    },
+    jackson: {
+      subject: "How Michael Jackson used the Power of Numerology: The Influence of the Number 7 on His Career",
+      content: `// ... keep existing code (Michael Jackson email template)`
+    },
+    jobs: {
+      subject: "How Steve Jobs Used Numerology to Shape His Success: The Power of 28, 9, and Apple's Legacy",
+      content: `// ... keep existing code (Steve Jobs email template)`
+    },
+    carrey: {
+      subject: "How Jim Carrey Uses Numerology to Shape His Life and Career",
+      content: `// ... keep existing code (Jim Carrey email template)`
+    },
+    china: {
+      subject: "How China Uses Numerology to Power Success: The 2008 Beijing Olympics and Beyond",
+      content: `// ... keep existing code (China email template)`
+    }
   };
 
   return templates[templateName] || templates.rolex;
@@ -75,7 +72,7 @@ serve(async (req) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: VERIFIED_FROM_EMAIL,
+        from: "Numerology 33 <info@numerology33.com>",
         to,
         subject: template.subject,
         html: template.content,
