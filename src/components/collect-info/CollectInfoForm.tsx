@@ -65,12 +65,7 @@ const CollectInfoForm = () => {
 
       console.log("Data saved successfully:", data);
 
-      toast({
-        title: "Success!",
-        description: "Your information has been submitted successfully.",
-      });
-
-      // Updated redirect URL
+      // Redirect to checkout page
       window.location.replace("https://checkout.numerology33.com/checkout");
       
     } catch (error) {
