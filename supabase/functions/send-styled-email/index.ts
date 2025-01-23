@@ -50,18 +50,18 @@ const handler = async (req: Request): Promise<Response> => {
         );
         console.log("Kardashian email sent successfully");
 
-        // Schedule Elon Musk email (2 minutes after start)
+        // Schedule Elon Musk email (1 minute after Kardashian)
         setTimeout(async () => {
           try {
             await sendEmail(
               RESEND_API_KEY,
               to,
-              "How Elon Musk Uses Numerology to Get Rich: The Power of 8 and 28",
+              "How Elon Musk Uses Numerology to Get Rich",
               generateMuskEmail(name)
             );
             console.log("Elon Musk email sent successfully");
 
-            // Schedule Bill Gates email (3 minutes after start)
+            // Schedule Bill Gates email (1 minute after Musk)
             setTimeout(async () => {
               try {
                 await sendEmail(
@@ -74,17 +74,17 @@ const handler = async (req: Request): Promise<Response> => {
               } catch (error) {
                 console.error("Error sending Bill Gates email:", error);
               }
-            }, 60000); // 1 minute after Musk email
+            }, 60000);
 
           } catch (error) {
             console.error("Error sending Elon Musk email:", error);
           }
-        }, 60000); // 1 minute after Kardashian email
+        }, 60000);
 
       } catch (error) {
         console.error("Error sending Kardashian email:", error);
       }
-    }, 60000); // 1 minute after Rolex email
+    }, 60000);
 
     return new Response(JSON.stringify({ success: true }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
