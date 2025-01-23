@@ -60,6 +60,9 @@ const handler = async (req: Request): Promise<Response> => {
     );
     console.log("Musk email sent successfully at:", new Date().toISOString());
 
+    // Wait for 1 minute before sending Gates email
+    await new Promise(resolve => setTimeout(resolve, 60000));
+
     // Send Gates email
     console.log("Sending Gates email...");
     await sendEmail(
