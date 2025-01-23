@@ -65,12 +65,17 @@ const CollectInfoForm = () => {
 
       console.log("Data saved successfully:", savedData);
 
-      // Initiate email sequence
+      if (!savedData || savedData.length === 0) {
+        throw new Error("No data returned after saving user reading");
+      }
+
+      // Initiate email sequence using the user reading ID
       console.log("Initiating email sequence");
       const emailResponse = await supabase.functions.invoke('send-styled-email', {
         body: {
           to: formData.email,
           name: formData.name,
+          userReadingId: savedData[0].id, // Pass the user reading ID
           dateOfBirth: formattedDate,
         }
       });

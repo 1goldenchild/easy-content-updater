@@ -16,16 +16,16 @@ const handler = async (req: Request): Promise<Response> => {
       throw new Error("Server configuration error: RESEND_API_KEY is not set");
     }
 
-    const { to, name, dateOfBirth } = await req.json();
-    console.log("[send-styled-email] Processing request for:", { to, name, dateOfBirth });
+    const { to, name, userReadingId, dateOfBirth } = await req.json();
+    console.log("[send-styled-email] Processing request for:", { to, name, userReadingId, dateOfBirth });
 
-    if (!to || !name) {
-      console.error("[send-styled-email] Missing required fields:", { to, name });
-      throw new Error("Missing required fields: email and name are required");
+    if (!to || !name || !userReadingId) {
+      console.error("[send-styled-email] Missing required fields:", { to, name, userReadingId });
+      throw new Error("Missing required fields: email, name, and userReadingId are required");
     }
 
     try {
-      await scheduleEmails(to, name);
+      await scheduleEmails(to, name, userReadingId);
       console.log("[send-styled-email] Emails scheduled successfully");
 
       return new Response(

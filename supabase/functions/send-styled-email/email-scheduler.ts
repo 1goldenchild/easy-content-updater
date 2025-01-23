@@ -3,8 +3,8 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
-export const scheduleEmails = async (to: string, name: string) => {
-  console.log("[email-scheduler] Starting email scheduling for:", { to, name });
+export const scheduleEmails = async (to: string, name: string, userReadingId: string) => {
+  console.log("[email-scheduler] Starting email scheduling for:", { to, name, userReadingId });
   
   const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
   
@@ -28,25 +28,25 @@ export const scheduleEmails = async (to: string, name: string) => {
       .from('email_sequence_status')
       .insert([
         { 
-          user_reading_id: to, 
+          user_reading_id: userReadingId, 
           sequence_position: 1, 
           scheduled_for: firstEmailTime.toISOString(),
           sent: false 
         },
         { 
-          user_reading_id: to, 
+          user_reading_id: userReadingId, 
           sequence_position: 2, 
           scheduled_for: secondEmailTime.toISOString(),
           sent: false 
         },
         { 
-          user_reading_id: to, 
+          user_reading_id: userReadingId, 
           sequence_position: 3, 
           scheduled_for: thirdEmailTime.toISOString(),
           sent: false 
         },
         { 
-          user_reading_id: to, 
+          user_reading_id: userReadingId, 
           sequence_position: 4, 
           scheduled_for: fourthEmailTime.toISOString(),
           sent: false 
@@ -66,7 +66,7 @@ export const scheduleEmails = async (to: string, name: string) => {
   const scheduleEmail = async (template: string, scheduleTime: Date) => {
     console.log(`[email-scheduler] Scheduling ${template} email for:`, scheduleTime.toISOString());
     
-    const jobName = `${template}-email-${to}-${Date.now()}-${Math.random().toString(36).substring(7)}`;
+    const jobName = `${template}-email-${userReadingId}-${Date.now()}-${Math.random().toString(36).substring(7)}`;
     
     const { error } = await supabase.rpc('schedule_email', {
       p_job_name: jobName,
@@ -81,6 +81,7 @@ export const scheduleEmails = async (to: string, name: string) => {
           to,
           name,
           template,
+          userReadingId,
           scheduledTime: scheduleTime.toISOString()
         }
       })
