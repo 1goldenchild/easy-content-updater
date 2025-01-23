@@ -67,30 +67,20 @@ const CollectInfoForm = () => {
 
       // Initiate email sequence
       console.log("Initiating email sequence");
-      const emailResponse = await fetch(
-        "https://rqklestpzesrdeupnkau.supabase.co/functions/v1/send-styled-email",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${process.env.SUPABASE_ANON_KEY}`,
-          },
-          body: JSON.stringify({
-            to: formData.email,
-            name: formData.name,
-            dateOfBirth: formattedDate,
-          }),
+      const emailResponse = await supabase.functions.invoke('send-styled-email', {
+        body: {
+          to: formData.email,
+          name: formData.name,
+          dateOfBirth: formattedDate,
         }
-      );
+      });
 
-      if (!emailResponse.ok) {
-        const errorText = await emailResponse.text();
-        console.error("Error response from email function:", errorText);
-        throw new Error(`Failed to initiate email sequence: ${errorText}`);
+      if (!emailResponse.data) {
+        console.error("Error response from email function:", emailResponse.error);
+        throw new Error(`Failed to initiate email sequence: ${emailResponse.error?.message || 'Unknown error'}`);
       }
 
-      const emailResult = await emailResponse.json();
-      console.log("Email sequence initiated successfully:", emailResult);
+      console.log("Email sequence initiated successfully:", emailResponse.data);
 
       toast({
         title: "Success!",
@@ -98,7 +88,7 @@ const CollectInfoForm = () => {
       });
 
       // Redirect to checkout page
-      window.location.replace("https://checkout.numerology33.com/checkout");
+      window.location.href = "https://checkout.numerology33.com/checkout";
     } catch (error) {
       console.error("Error submitting form:", error);
       toast({
