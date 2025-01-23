@@ -22,25 +22,6 @@ export const scheduleEmails = async (to: string, name: string) => {
     fourthEmail: fourthEmailTime.toISOString(),
   });
 
-  // Clean up any existing scheduled emails for this user
-  try {
-    const { data: existingJobs } = await supabase.rpc('get_scheduled_jobs', {
-      p_pattern: `%${to}%`
-    });
-
-    if (existingJobs && existingJobs.length > 0) {
-      console.log("[email-scheduler] Found existing jobs:", existingJobs);
-      for (const job of existingJobs) {
-        await supabase.rpc('unschedule_job', {
-          p_job_name: job.jobname
-        });
-      }
-      console.log("[email-scheduler] Cleaned up existing jobs");
-    }
-  } catch (error) {
-    console.error("[email-scheduler] Error cleaning up existing jobs:", error);
-  }
-
   // Initialize email sequence status
   try {
     const { error: statusError } = await supabase
@@ -81,6 +62,7 @@ export const scheduleEmails = async (to: string, name: string) => {
     throw error;
   }
 
+  // Schedule all emails using pg_cron
   const scheduleEmail = async (template: string, scheduleTime: Date) => {
     console.log(`[email-scheduler] Scheduling ${template} email for:`, scheduleTime.toISOString());
     
