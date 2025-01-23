@@ -40,3 +40,26 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Add contain property to optimize paint performance */
+.animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+  contain: layout style paint;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* Optimize animations for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-twinkle {
+    animation: none;
+  }
+  
+  .animate-shine,
+  .animate-shimmer {
+    animation: none;
+  }
+}

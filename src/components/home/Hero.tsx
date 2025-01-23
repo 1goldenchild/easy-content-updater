@@ -1,11 +1,19 @@
-import { memo } from "react"
+import { memo, useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 // Memoize the Hero component since it doesn't need to re-render
 const Hero = memo(() => {
+  const isMobile = useIsMobile()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   // Lighter purple shades (15% lighter)
   const purpleShades = [
     '#b09df7',
@@ -26,48 +34,63 @@ const Hero = memo(() => {
     '#d4aa3d',
   ]
 
+  // Reduce number of stars on mobile
+  const starCount = isMobile ? 40 : 90
+
   return (
     <section className="relative min-h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden">
-      {/* Stars Background - Purple Stars */}
-      <div className="absolute inset-0 z-0 will-change-transform" style={{ transform: 'translateZ(0)' }}>
-        {[...Array(90)].map((_, i) => {
-          const color = purpleShades[Math.floor(Math.random() * purpleShades.length)]
-          return (
-            <div
-              key={`purple-${i}`}
-              className="absolute w-[0.375px] h-[0.375px] rounded-full animate-twinkle will-change-transform"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                opacity: Math.random() * 0.7 + 0.3,
-                backgroundColor: color,
-                boxShadow: `0 0 3px 1px ${color}`,
-                transform: 'translateZ(0)'
-              }}
-            />
-          )
-        })}
-        {/* Golden Stars */}
-        {[...Array(90)].map((_, i) => {
-          const color = goldShades[Math.floor(Math.random() * goldShades.length)]
-          return (
-            <div
-              key={`gold-${i}`}
-              className="absolute w-[0.375px] h-[0.375px] rounded-full animate-twinkle will-change-transform"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                opacity: Math.random() * 0.7 + 0.3,
-                backgroundColor: color,
-                boxShadow: `0 0 3px 1px ${color}`,
-                transform: 'translateZ(0)'
-              }}
-            />
-          )
-        })}
-      </div>
+      {/* Stars Background - Only render if mounted to avoid hydration issues */}
+      {mounted && (
+        <div 
+          className="absolute inset-0 z-0 will-change-transform" 
+          style={{ 
+            transform: 'translateZ(0)',
+            contain: 'strict',
+            contentVisibility: 'auto'
+          }}
+        >
+          {/* Purple Stars */}
+          {[...Array(starCount)].map((_, i) => {
+            const color = purpleShades[i % purpleShades.length]
+            return (
+              <div
+                key={`purple-${i}`}
+                className="absolute w-[0.375px] h-[0.375px] rounded-full animate-twinkle will-change-transform"
+                style={{
+                  left: `${(i / starCount) * 100}%`,
+                  top: `${Math.sin((i / starCount) * Math.PI * 2) * 50 + 50}%`,
+                  animationDelay: `${(i / starCount) * 3}s`,
+                  opacity: 0.3 + (i % 7) * 0.1,
+                  backgroundColor: color,
+                  boxShadow: isMobile ? 'none' : `0 0 3px 1px ${color}`,
+                  transform: 'translateZ(0)',
+                  contain: 'layout style paint'
+                }}
+              />
+            )
+          })}
+          {/* Golden Stars */}
+          {[...Array(starCount)].map((_, i) => {
+            const color = goldShades[i % goldShades.length]
+            return (
+              <div
+                key={`gold-${i}`}
+                className="absolute w-[0.375px] h-[0.375px] rounded-full animate-twinkle will-change-transform"
+                style={{
+                  left: `${(i / starCount) * 100}%`,
+                  top: `${Math.cos((i / starCount) * Math.PI * 2) * 50 + 50}%`,
+                  animationDelay: `${(i / starCount) * 3}s`,
+                  opacity: 0.3 + (i % 7) * 0.1,
+                  backgroundColor: color,
+                  boxShadow: isMobile ? 'none' : `0 0 3px 1px ${color}`,
+                  transform: 'translateZ(0)',
+                  contain: 'layout style paint'
+                }}
+              />
+            )
+          })}
+        </div>
+      )}
 
       <div className="container px-4 md:px-6">
         <motion.div 
