@@ -1,7 +1,0 @@
-project_id = "rqklestpzesrdeupnkau"
-
-[functions.klaviyo-subscribe]
-verify_jwt = false
-
-[functions.create-payment]
-verify_jwt = false
