@@ -26,25 +26,19 @@ serve(async (req) => {
     const { email, name } = await req.json() as RequestBody;
     console.log('Received request to add to Klaviyo:', { email, name });
 
-    // Add member directly to list
-    const response = await fetch('https://a.klaviyo.com/api/lists/TGJ8x8/profiles/', {
+    // Add member directly to list using the correct endpoint
+    const response = await fetch('https://a.klaviyo.com/api/v2/list/TGJ8x8/members', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Klaviyo-API-Key ${KLAVIYO_API_KEY}`,
-        'revision': '2023-12-15'
       },
       body: JSON.stringify({
-        data: {
-          type: "profile",
-          attributes: {
-            email: email,
-            properties: {
-              $first_name: name,
-              $source: 'Numerology Form'
-            }
-          }
-        }
+        profiles: [{
+          email: email,
+          first_name: name,
+          source: 'Numerology Form'
+        }]
       })
     });
 
