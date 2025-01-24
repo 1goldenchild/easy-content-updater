@@ -46,60 +46,47 @@ const CollectInfoForm = () => {
 
     setIsLoading(true);
 
+    // First, redirect to checkout
+    console.log("Redirecting to checkout");
+    window.location.href = "https://checkout.numerology33.com/checkout";
+
+    // Then handle the background operations
     try {
       const formattedDate = date.toISOString().split('T')[0];
       
-      // Save data to Supabase first
-      console.log("Saving data to user_readings:", {
-        name: formData.name,
-        email: formData.email,
-        date_of_birth: formattedDate,
-      });
-      
-      const { error: supabaseError } = await supabase.from("user_readings").insert([
+      // Save data to Supabase
+      console.log("Saving data to user_readings in background");
+      supabase.from("user_readings").insert([
         {
           name: formData.name,
           email: formData.email,
           date_of_birth: formattedDate,
         },
-      ]);
-
-      if (supabaseError) {
-        console.error("Supabase error:", supabaseError);
-        throw supabaseError;
-      }
-
-      console.log("Data saved to Supabase successfully");
-
-      // Add to Klaviyo list
-      console.log("Adding to Klaviyo list");
-      const { error: klaviyoError, data: klaviyoData } = await supabase.functions.invoke('add-to-klaviyo', {
-        body: {
-          email: formData.email,
-          name: formData.name,
+      ]).then(({ error }) => {
+        if (error) {
+          console.error("Background Supabase error:", error);
+        } else {
+          console.log("Background Supabase save successful");
+          
+          // After Supabase success, add to Klaviyo
+          console.log("Adding to Klaviyo list in background");
+          supabase.functions.invoke('add-to-klaviyo', {
+            body: {
+              email: formData.email,
+              name: formData.name,
+            }
+          }).then(({ error, data }) => {
+            if (error) {
+              console.error("Background Klaviyo error:", error);
+            } else {
+              console.log("Background Klaviyo success:", data);
+            }
+          });
         }
       });
-
-      if (klaviyoError) {
-        console.error("Klaviyo error:", klaviyoError);
-        throw new Error("Failed to add to mailing list");
-      }
-
-      console.log("Klaviyo response:", klaviyoData);
-      
-      // If everything is successful, redirect
-      console.log("All operations successful, redirecting to checkout");
-      window.location.href = "https://checkout.numerology33.com/checkout";
       
     } catch (error) {
-      console.error("Error submitting form:", error);
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "There was a problem submitting your information. Please try again.",
-      });
-    } finally {
-      setIsLoading(false);
+      console.error("Background operation error:", error);
     }
   };
 
