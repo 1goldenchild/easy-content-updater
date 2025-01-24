@@ -49,6 +49,20 @@ const CollectInfoForm = () => {
     try {
       const formattedDate = date.toISOString().split('T')[0];
       
+      // Add to Klaviyo list
+      console.log("Adding to Klaviyo list");
+      const { error: klaviyoError } = await supabase.functions.invoke('add-to-klaviyo', {
+        body: {
+          email: formData.email,
+          name: formData.name,
+        }
+      });
+
+      if (klaviyoError) {
+        console.error("Klaviyo error:", klaviyoError);
+        throw new Error("Failed to add to mailing list");
+      }
+      
       // Redirect first
       console.log("Redirecting to checkout");
       window.location.replace("https://checkout.numerology33.com/checkout");
