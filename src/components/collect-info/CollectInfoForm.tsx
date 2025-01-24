@@ -6,11 +6,9 @@ import DateSelector from "@/components/numerology/DateSelector";
 import FormFields from "./FormFields";
 import SubmitButton from "./SubmitButton";
 import { FormData } from "./types";
-import { useNavigate } from "react-router-dom"; // Add this import
 
 const CollectInfoForm = () => {
   const { toast } = useToast();
-  const navigate = useNavigate(); // Add this
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -83,9 +81,9 @@ const CollectInfoForm = () => {
       }
       console.log("Klaviyo function called successfully");
 
-      // If everything is successful, redirect to local checkout route
+      // If everything is successful, redirect
       console.log("All operations successful, redirecting to checkout");
-      navigate('/checkout');
+      window.location.href = "https://checkout.numerology33.com/checkout";
       
     } catch (error) {
       console.error("Operation failed:", error);
