@@ -1,7 +1,8 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 const blogPosts = {
   "kardashian-numerology": {
@@ -536,39 +537,43 @@ const BlogPost = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container max-w-4xl px-4 py-8">
-        <Link 
-          to="/numerology-reading" 
-          className="inline-flex items-center text-[#86736f] hover:text-[#a39490] mb-8 transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Home
-        </Link>
+    <>
+      <Navbar />
+      <div className="min-h-screen bg-background">
+        <div className="container max-w-4xl px-4 py-8">
+          <Link 
+            to="/blog" 
+            className="inline-flex items-center text-[#86736f] hover:text-[#a39490] mb-8 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Blog
+          </Link>
 
-        <motion.article
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="prose prose-invert prose-lg max-w-none"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">
-            {post.title}
-          </h1>
-          
-          <div className="flex items-center gap-4 text-sm text-[#86736f] mb-8">
-            <span>{post.date}</span>
-            <span>•</span>
-            <span>{post.readTime}</span>
-          </div>
+          <motion.article
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="prose prose-invert prose-lg max-w-none"
+          >
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text">
+              {post.title}
+            </h1>
+            
+            <div className="flex items-center gap-4 text-sm text-[#86736f] mb-8">
+              <span>{post.date}</span>
+              <span>•</span>
+              <span>{post.readTime}</span>
+            </div>
 
-          <div 
-            className="prose prose-invert prose-headings:text-[#a39490] prose-a:text-[#86736f] hover:prose-a:text-[#a39490] prose-p:text-gray-300"
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
-        </motion.article>
+            <div 
+              className="prose prose-invert prose-headings:text-[#a39490] prose-a:text-[#86736f] hover:prose-a:text-[#a39490] prose-p:text-gray-300"
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            />
+          </motion.article>
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

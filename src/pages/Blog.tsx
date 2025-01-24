@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 const blogPosts = [
   {
@@ -72,68 +74,72 @@ const blogPosts = [
 
 const Blog = () => {
   return (
-    <div className="py-16 bg-gradient-to-b from-background/80 to-background">
-      <div className="container px-4 md:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text animate-text-shimmer inline-block">
-              Numerology Blog
-            </span>
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            Explore our latest articles on numerology and spiritual growth
-          </p>
-        </motion.div>
+    <>
+      <Navbar />
+      <div className="py-16 bg-gradient-to-b from-background/80 to-background">
+        <div className="container px-4 md:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-[#86736f] via-[#a39490] to-[#c4b5b1] text-transparent bg-clip-text animate-text-shimmer inline-block">
+                Numerology Blog
+              </span>
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              Explore our latest articles on numerology and spiritual growth
+            </p>
+          </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {blogPosts.map((post, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <Link to={`/blog/${post.slug}`}>
-                <Card className="group h-full bg-card/50 backdrop-blur-sm border border-[#86736f]/20 hover:border-[#86736f]/40 transition-all duration-300">
-                  <CardHeader className="p-0">
-                    <div className="relative h-64 w-full overflow-hidden rounded-t-lg">
-                      <img
-                        src={post.mainImage}
-                        alt={post.title}
-                        className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                  </CardHeader>
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-4 text-sm text-[#86736f] mb-3">
-                      <span>{post.date}</span>
-                      <span>•</span>
-                      <span>{post.readTime}</span>
-                    </div>
-                    <CardTitle className="text-xl mb-2 group-hover:text-white/90 transition-colors">
-                      {post.title}
-                    </CardTitle>
-                    <CardDescription className="text-muted-foreground mb-4">
-                      {post.description}
-                    </CardDescription>
-                    <div className="flex items-center text-sm text-[#86736f] group-hover:text-[#a39490] transition-colors">
-                      Read More
-                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            </motion.div>
-          ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {blogPosts.map((post, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Link to={`/blog/${post.slug}`}>
+                  <Card className="group h-full bg-card/50 backdrop-blur-sm border border-[#86736f]/20 hover:border-[#86736f]/40 transition-all duration-300">
+                    <CardHeader className="p-0">
+                      <div className="relative h-64 w-full overflow-hidden rounded-t-lg">
+                        <img
+                          src={post.mainImage}
+                          alt={post.title}
+                          className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                    </CardHeader>
+                    <CardContent className="p-6">
+                      <div className="flex items-center gap-4 text-sm text-[#86736f] mb-3">
+                        <span>{post.date}</span>
+                        <span>•</span>
+                        <span>{post.readTime}</span>
+                      </div>
+                      <CardTitle className="text-xl mb-2 group-hover:text-white/90 transition-colors">
+                        {post.title}
+                      </CardTitle>
+                      <CardDescription className="text-muted-foreground mb-4">
+                        {post.description}
+                      </CardDescription>
+                      <div className="flex items-center text-sm text-[#86736f] group-hover:text-[#a39490] transition-colors">
+                        Read More
+                        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
