@@ -49,9 +49,31 @@ const CollectInfoForm = () => {
     try {
       const formattedDate = date.toISOString().split('T')[0];
       
+      // Save data to Supabase first
+      console.log("Saving data to user_readings:", {
+        name: formData.name,
+        email: formData.email,
+        date_of_birth: formattedDate,
+      });
+      
+      const { error: supabaseError } = await supabase.from("user_readings").insert([
+        {
+          name: formData.name,
+          email: formData.email,
+          date_of_birth: formattedDate,
+        },
+      ]);
+
+      if (supabaseError) {
+        console.error("Supabase error:", supabaseError);
+        throw supabaseError;
+      }
+
+      console.log("Data saved to Supabase successfully");
+
       // Add to Klaviyo list
       console.log("Adding to Klaviyo list");
-      const { error: klaviyoError } = await supabase.functions.invoke('add-to-klaviyo', {
+      const { error: klaviyoError, data: klaviyoData } = await supabase.functions.invoke('add-to-klaviyo', {
         body: {
           email: formData.email,
           name: formData.name,
@@ -62,32 +84,12 @@ const CollectInfoForm = () => {
         console.error("Klaviyo error:", klaviyoError);
         throw new Error("Failed to add to mailing list");
       }
-      
-      // Redirect first
-      console.log("Redirecting to checkout");
-      window.location.replace("https://checkout.numerology33.com/checkout");
-      
-      // Then save the data
-      console.log("Saving data to user_readings:", {
-        name: formData.name,
-        email: formData.email,
-        date_of_birth: formattedDate,
-      });
-      
-      const { error } = await supabase.from("user_readings").insert([
-        {
-          name: formData.name,
-          email: formData.email,
-          date_of_birth: formattedDate,
-        },
-      ]);
 
-      if (error) {
-        console.error("Supabase error:", error);
-        throw error;
-      }
-
-      console.log("Data saved successfully");
+      console.log("Klaviyo response:", klaviyoData);
+      
+      // If everything is successful, redirect
+      console.log("All operations successful, redirecting to checkout");
+      window.location.href = "https://checkout.numerology33.com/checkout";
       
     } catch (error) {
       console.error("Error submitting form:", error);

@@ -19,6 +19,7 @@ serve(async (req) => {
   try {
     const KLAVIYO_API_KEY = Deno.env.get('KLAVIYO_PRIVATE_KEY');
     if (!KLAVIYO_API_KEY) {
+      console.error('Klaviyo API key not found');
       throw new Error('Klaviyo API key not found');
     }
 
@@ -42,18 +43,22 @@ serve(async (req) => {
       })
     });
 
+    const responseText = await response.text();
+    console.log('Klaviyo API response status:', response.status);
+    console.log('Klaviyo API response:', responseText);
+
     if (!response.ok) {
-      const errorData = await response.text();
-      console.error('Klaviyo API error:', errorData);
+      console.error('Klaviyo API error:', responseText);
       throw new Error(`Klaviyo API error: ${response.status}`);
     }
 
-    const data = await response.json();
-    console.log('Successfully added to Klaviyo:', data);
-
-    return new Response(JSON.stringify({ success: true }), {
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    });
+    return new Response(
+      JSON.stringify({ success: true, message: 'Successfully added to Klaviyo' }), 
+      { 
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200 
+      }
+    );
 
   } catch (error) {
     console.error('Error:', error);
