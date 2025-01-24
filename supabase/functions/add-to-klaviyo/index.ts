@@ -26,30 +26,75 @@ serve(async (req) => {
     const { email, name } = await req.json() as RequestBody;
     console.log('Received request to add to Klaviyo:', { email, name });
 
-    const response = await fetch('https://a.klaviyo.com/api/v2/list/TGJ8x8/members', {
+    const response = await fetch('https://a.klaviyo.com/api/profiles/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Klaviyo-API-Key ${KLAVIYO_API_KEY}`,
+        'revision': '2023-12-15'
       },
       body: JSON.stringify({
-        profiles: [{
-          email: email,
-          properties: {
-            name: name,
-            $source: 'Numerology Form'
+        data: {
+          type: "profile",
+          attributes: {
+            email: email,
+            properties: {
+              name: name,
+              $source: 'Numerology Form'
+            }
           }
-        }]
+        }
       })
     });
 
-    const responseText = await response.text();
+    const responseData = await response.json();
     console.log('Klaviyo API response status:', response.status);
-    console.log('Klaviyo API response:', responseText);
+    console.log('Klaviyo API response:', responseData);
 
     if (!response.ok) {
-      console.error('Klaviyo API error:', responseText);
+      console.error('Klaviyo API error:', responseData);
       throw new Error(`Klaviyo API error: ${response.status}`);
+    }
+
+    // After profile creation, add to list
+    const listResponse = await fetch('https://a.klaviyo.com/api/list-memberships/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Klaviyo-API-Key ${KLAVIYO_API_KEY}`,
+        'revision': '2023-12-15'
+      },
+      body: JSON.stringify({
+        data: {
+          type: "list-membership",
+          attributes: {
+            custom_source: "Numerology Form"
+          },
+          relationships: {
+            list: {
+              data: {
+                type: "list",
+                id: "TGJ8x8"
+              }
+            },
+            profile: {
+              data: {
+                type: "profile",
+                id: responseData.data.id
+              }
+            }
+          }
+        }
+      })
+    });
+
+    const listResponseData = await listResponse.json();
+    console.log('Klaviyo List API response status:', listResponse.status);
+    console.log('Klaviyo List API response:', listResponseData);
+
+    if (!listResponse.ok) {
+      console.error('Klaviyo List API error:', listResponseData);
+      throw new Error(`Klaviyo List API error: ${listResponse.status}`);
     }
 
     return new Response(
