@@ -26,7 +26,8 @@ serve(async (req) => {
     const { email, name } = await req.json() as RequestBody;
     console.log('Received request to add to Klaviyo:', { email, name });
 
-    const response = await fetch('https://a.klaviyo.com/api/profiles/', {
+    // Add member directly to list
+    const response = await fetch('https://a.klaviyo.com/api/lists/TGJ8x8/profiles/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -39,7 +40,7 @@ serve(async (req) => {
           attributes: {
             email: email,
             properties: {
-              name: name,
+              $first_name: name,
               $source: 'Numerology Form'
             }
           }
@@ -54,47 +55,6 @@ serve(async (req) => {
     if (!response.ok) {
       console.error('Klaviyo API error:', responseData);
       throw new Error(`Klaviyo API error: ${response.status}`);
-    }
-
-    // After profile creation, add to list
-    const listResponse = await fetch('https://a.klaviyo.com/api/list-memberships/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Klaviyo-API-Key ${KLAVIYO_API_KEY}`,
-        'revision': '2023-12-15'
-      },
-      body: JSON.stringify({
-        data: {
-          type: "list-membership",
-          attributes: {
-            custom_source: "Numerology Form"
-          },
-          relationships: {
-            list: {
-              data: {
-                type: "list",
-                id: "TGJ8x8"
-              }
-            },
-            profile: {
-              data: {
-                type: "profile",
-                id: responseData.data.id
-              }
-            }
-          }
-        }
-      })
-    });
-
-    const listResponseData = await listResponse.json();
-    console.log('Klaviyo List API response status:', listResponse.status);
-    console.log('Klaviyo List API response:', listResponseData);
-
-    if (!listResponse.ok) {
-      console.error('Klaviyo List API error:', listResponseData);
-      throw new Error(`Klaviyo List API error: ${listResponse.status}`);
     }
 
     return new Response(
