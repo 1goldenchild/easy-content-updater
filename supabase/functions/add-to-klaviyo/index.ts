@@ -41,7 +41,8 @@ serve(async (req) => {
             email: email,
             first_name: name,
             properties: {
-              source: 'Numerology Form'
+              source: 'Numerology Form',
+              created_at: new Date().toISOString()
             }
           }
         }
