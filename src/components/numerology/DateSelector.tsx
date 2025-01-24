@@ -58,12 +58,6 @@ const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
     );
   };
 
-  // Array of English month names
-  const monthNames = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-  ];
-
   return (
     <div className="space-y-4">
       <Label className="block text-sm font-medium text-white/70">
@@ -81,7 +75,7 @@ const DateSelector = ({ date, setDate, onCalculate }: DateSelectorProps) => {
             >
               {months.map((m) => (
                 <SelectItem key={m} value={m}>
-                  {monthNames[parseInt(m) - 1]}
+                  {new Date(2000, parseInt(m) - 1, 1).toLocaleString('default', { month: 'long' })}
                 </SelectItem>
               ))}
             </SelectContent>
