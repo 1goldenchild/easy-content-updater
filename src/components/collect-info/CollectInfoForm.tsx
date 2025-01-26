@@ -6,9 +6,11 @@ import DateSelector from "@/components/numerology/DateSelector";
 import FormFields from "./FormFields";
 import SubmitButton from "./SubmitButton";
 import { FormData } from "./types";
+import { useNavigate } from "react-router-dom"; // Add this import
 
 const CollectInfoForm = () => {
   const { toast } = useToast();
+  const navigate = useNavigate(); // Add this
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -45,48 +47,54 @@ const CollectInfoForm = () => {
     }
 
     setIsLoading(true);
+    console.log("Starting background operations with data:", { ...formData, date });
 
-    // First, redirect to checkout
-    console.log("Redirecting to checkout");
-    window.location.href = "https://checkout.numerology33.com/checkout";
-
-    // Then handle the background operations
     try {
       const formattedDate = date.toISOString().split('T')[0];
       
       // Save data to Supabase
-      console.log("Saving data to user_readings in background");
-      supabase.from("user_readings").insert([
-        {
+      console.log("Attempting to save data to user_readings");
+      const { error: supabaseError } = await supabase
+        .from("user_readings")
+        .insert([{
           name: formData.name,
           email: formData.email,
           date_of_birth: formattedDate,
-        },
-      ]).then(({ error }) => {
-        if (error) {
-          console.error("Background Supabase error:", error);
-        } else {
-          console.log("Background Supabase save successful");
-          
-          // After Supabase success, add to Klaviyo
-          console.log("Adding to Klaviyo list in background");
-          supabase.functions.invoke('add-to-klaviyo', {
-            body: {
-              email: formData.email,
-              name: formData.name,
-            }
-          }).then(({ error, data }) => {
-            if (error) {
-              console.error("Background Klaviyo error:", error);
-            } else {
-              console.log("Background Klaviyo success:", data);
-            }
-          });
+        }]);
+
+      if (supabaseError) {
+        console.error("Supabase save error:", supabaseError);
+        throw supabaseError;
+      }
+      console.log("Successfully saved to user_readings");
+
+      // Add to Klaviyo
+      console.log("Attempting to add to Klaviyo");
+      const { error: klaviyoError } = await supabase.functions.invoke('add-to-klaviyo', {
+        body: {
+          email: formData.email,
+          name: formData.name,
         }
       });
+
+      if (klaviyoError) {
+        console.error("Klaviyo error:", klaviyoError);
+        throw klaviyoError;
+      }
+      console.log("Klaviyo function called successfully");
+
+      // If everything is successful, redirect to local checkout route
+      console.log("All operations successful, redirecting to checkout");
+      navigate('/checkout');
       
     } catch (error) {
-      console.error("Background operation error:", error);
+      console.error("Operation failed:", error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "An error occurred. Please try again.",
+      });
+      setIsLoading(false);
     }
   };
 
