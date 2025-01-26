@@ -66,22 +66,24 @@ const CollectInfoForm = () => {
       }
       console.log("Successfully saved to user_readings");
 
-      // Redirect immediately after saving to Supabase
-      window.location.href = "https://checkout.numerology33.com/checkout";
-
-      // Add to Klaviyo in the background
+      // Call Klaviyo function before redirecting
       console.log("Attempting to add to Klaviyo");
-      supabase.functions.invoke('add-to-klaviyo', {
-        body: {
-          email: formData.email,
-          name: formData.name,
-        }
-      }).then(() => {
+      try {
+        await supabase.functions.invoke('add-to-klaviyo', {
+          body: {
+            email: formData.email,
+            name: formData.name,
+          }
+        });
         console.log("Klaviyo function called successfully");
-      }).catch((error) => {
-        console.error("Klaviyo error:", error);
-        // Don't throw here since we're already redirecting
-      });
+      } catch (klaviyoError) {
+        console.error("Klaviyo error:", klaviyoError);
+        // Log but don't block the redirect
+      }
+
+      // Redirect after both operations are complete
+      console.log("Redirecting to checkout");
+      window.location.href = "https://checkout.numerology33.com/checkout";
       
     } catch (error) {
       console.error("Operation failed:", error);
