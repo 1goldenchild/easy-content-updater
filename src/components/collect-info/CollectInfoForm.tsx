@@ -73,20 +73,28 @@ const CollectInfoForm = () => {
       };
       localStorage.setItem('pendingKlaviyoData', JSON.stringify(klaviyoData));
       
-      // Redirect immediately
+      // Call Klaviyo function before redirecting
+      console.log("Attempting to add to Klaviyo");
+      try {
+        const { error: klaviyoError } = await supabase.functions.invoke('add-to-klaviyo', {
+          body: klaviyoData
+        });
+        
+        if (klaviyoError) {
+          console.error("Klaviyo function error:", klaviyoError);
+          // Don't throw, we'll still redirect
+        } else {
+          console.log("Klaviyo function called successfully");
+          localStorage.removeItem('pendingKlaviyoData'); // Clean up after successful submission
+        }
+      } catch (klaviyoError) {
+        console.error("Klaviyo call failed:", klaviyoError);
+        // Don't throw, we'll still redirect
+      }
+
+      // Redirect after Klaviyo attempt
       console.log("Redirecting to checkout");
       window.location.href = "https://checkout.numerology33.com/checkout";
-
-      // The Klaviyo call will happen in the background after redirect
-      console.log("Attempting to add to Klaviyo in background");
-      supabase.functions.invoke('add-to-klaviyo', {
-        body: klaviyoData
-      }).then(() => {
-        console.log("Klaviyo function called successfully");
-        localStorage.removeItem('pendingKlaviyoData'); // Clean up after successful submission
-      }).catch((error) => {
-        console.error("Klaviyo error:", error);
-      });
       
     } catch (error) {
       console.error("Operation failed:", error);
