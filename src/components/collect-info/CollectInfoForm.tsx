@@ -45,44 +45,53 @@ const CollectInfoForm = () => {
     }
 
     setIsLoading(true);
+    console.log("Starting background operations with data:", { ...formData, date });
 
     try {
       const formattedDate = date.toISOString().split('T')[0];
       
-      // Redirect first
-      console.log("Redirecting to checkout");
-      window.location.replace("https://checkout.numerology33.com/checkout");
-      
-      // Then save the data
-      console.log("Saving data to user_readings:", {
-        name: formData.name,
-        email: formData.email,
-        date_of_birth: formattedDate,
-      });
-      
-      const { error } = await supabase.from("user_readings").insert([
-        {
+      // Save data to Supabase
+      console.log("Attempting to save data to user_readings");
+      const { error: supabaseError } = await supabase
+        .from("user_readings")
+        .insert([{
           name: formData.name,
           email: formData.email,
           date_of_birth: formattedDate,
-        },
-      ]);
+        }]);
 
-      if (error) {
-        console.error("Supabase error:", error);
-        throw error;
+      if (supabaseError) {
+        console.error("Supabase save error:", supabaseError);
+        throw supabaseError;
       }
+      console.log("Successfully saved to user_readings");
 
-      console.log("Data saved successfully");
+      // Add to Klaviyo
+      console.log("Attempting to add to Klaviyo");
+      const { error: klaviyoError } = await supabase.functions.invoke('add-to-klaviyo', {
+        body: {
+          email: formData.email,
+          name: formData.name,
+        }
+      });
+
+      if (klaviyoError) {
+        console.error("Klaviyo error:", klaviyoError);
+        throw klaviyoError;
+      }
+      console.log("Klaviyo function called successfully");
+
+      // If everything is successful, redirect
+      console.log("All operations successful, redirecting to checkout");
+      window.location.href = "https://checkout.numerology33.com/checkout";
       
     } catch (error) {
-      console.error("Error submitting form:", error);
+      console.error("Operation failed:", error);
       toast({
         variant: "destructive",
         title: "Error",
-        description: "There was a problem submitting your information. Please try again.",
+        description: "An error occurred. Please try again.",
       });
-    } finally {
       setIsLoading(false);
     }
   };
