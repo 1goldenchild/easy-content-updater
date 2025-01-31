@@ -1,4 +1,4 @@
-import { Check, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Sales = () => {
@@ -7,139 +7,148 @@ const Sales = () => {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
+        staggerChildren: 0.2
       }
     }
   };
 
   const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 }
+    hidden: { opacity: 0, x: -20 },
+    show: { opacity: 1, x: 0 }
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-8">
-      <div className="text-center mb-12">
-        <motion.h2 
+    <div className="min-h-screen bg-gradient-to-br from-purple-900/20 to-indigo-900/20 p-8">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-3xl md:text-4xl font-bold mb-4"
+          className="text-center mb-16"
         >
-          <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-400 bg-clip-text text-transparent">
-            What You Receive In Your Analysis
-          </span>
-        </motion.h2>
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto rounded-full"
-        />
-      </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-400 bg-clip-text text-transparent animate-text-shimmer">
+              What You Receive In Your Analysis
+            </span>
+          </h2>
+          <div className="w-32 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto rounded-full" />
+        </motion.div>
 
-      <motion.div 
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="grid gap-6"
-      >
-        {/* Core Features Section */}
-        <motion.div variants={item} className="space-y-4">
-          <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
-            <div className="relative p-6 bg-black/40 backdrop-blur-sm rounded-lg border border-purple-500/20">
-              <div className="flex items-start gap-4">
+        {/* Benefits List */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="space-y-12"
+        >
+          {/* Core Analysis Section */}
+          <motion.div variants={item} className="relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-lg blur-lg" />
+            <div className="relative bg-black/40 backdrop-blur-sm p-8 rounded-lg border border-purple-500/20">
+              <div className="flex items-center gap-4 mb-6">
                 <div className="p-2 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg">
                   <Sparkles className="w-6 h-6 text-white" />
                 </div>
-                <div className="space-y-4 flex-1">
-                  <div className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-purple-400 flex-shrink-0 mt-1" />
-                    <div>
-                      <h3 className="font-semibold text-white bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Lifepath Number</h3>
-                      <p className="text-gray-400">Uncover your unique energetic blueprint</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-purple-400 flex-shrink-0 mt-1" />
-                    <div>
-                      <h3 className="font-semibold text-white bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Partial Energy</h3>
-                      <p className="text-gray-400">Understand the subtle influences that shape your personality</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-purple-400 flex-shrink-0 mt-1" />
-                    <div>
-                      <h3 className="font-semibold text-white bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Cycle Number</h3>
-                      <p className="text-gray-400">Gain awareness of your current energy cycle</p>
-                    </div>
-                  </div>
+                <h3 className="text-2xl font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  Core Energy Analysis
+                </h3>
+              </div>
+              <div className="space-y-6 pl-4 border-l-2 border-purple-500/30">
+                <div className="group">
+                  <h4 className="text-xl font-medium text-white mb-2 group-hover:text-purple-400 transition-colors">
+                    ✧ Lifepath Number
+                  </h4>
+                  <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
+                    Uncover your unique energetic blueprint that guides your journey
+                  </p>
+                </div>
+                <div className="group">
+                  <h4 className="text-xl font-medium text-white mb-2 group-hover:text-purple-400 transition-colors">
+                    ✧ Partial Energy
+                  </h4>
+                  <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
+                    Understand the subtle influences that shape your personality
+                  </p>
+                </div>
+                <div className="group">
+                  <h4 className="text-xl font-medium text-white mb-2 group-hover:text-purple-400 transition-colors">
+                    ✧ Cycle Number
+                  </h4>
+                  <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
+                    Gain awareness of your current energy cycle and its impact
+                  </p>
                 </div>
               </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
 
-        {/* Advanced Features Section */}
-        <motion.div variants={item} className="space-y-4">
-          <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-600 to-orange-600 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
-            <div className="relative p-6 bg-black/40 backdrop-blur-sm rounded-lg border border-pink-500/20">
-              <div className="flex items-start gap-4">
+          {/* Path Mastery Section */}
+          <motion.div variants={item} className="relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-pink-600/20 to-orange-600/20 rounded-lg blur-lg" />
+            <div className="relative bg-black/40 backdrop-blur-sm p-8 rounded-lg border border-pink-500/20">
+              <div className="flex items-center gap-4 mb-6">
                 <div className="p-2 bg-gradient-to-br from-pink-500 to-orange-500 rounded-lg">
                   <Sparkles className="w-6 h-6 text-white" />
                 </div>
-                <div className="space-y-4 flex-1">
-                  <div className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-pink-400 flex-shrink-0 mt-1" />
-                    <div>
-                      <h3 className="font-semibold text-white bg-gradient-to-r from-pink-400 to-orange-400 bg-clip-text text-transparent">Numerological Compatibility</h3>
-                      <p className="text-gray-400">Master relationship and business dynamics</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-pink-400 flex-shrink-0 mt-1" />
-                    <div>
-                      <h3 className="font-semibold text-white bg-gradient-to-r from-pink-400 to-orange-400 bg-clip-text text-transparent">Career Path Insights</h3>
-                      <p className="text-gray-400">Discover industries aligned with your energy</p>
-                    </div>
-                  </div>
+                <h3 className="text-2xl font-semibold bg-gradient-to-r from-pink-400 to-orange-400 bg-clip-text text-transparent">
+                  Path Mastery
+                </h3>
+              </div>
+              <div className="space-y-6 pl-4 border-l-2 border-pink-500/30">
+                <div className="group">
+                  <h4 className="text-xl font-medium text-white mb-2 group-hover:text-pink-400 transition-colors">
+                    ✧ Numerological Compatibility
+                  </h4>
+                  <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
+                    Master relationship and business dynamics through numbers
+                  </p>
+                </div>
+                <div className="group">
+                  <h4 className="text-xl font-medium text-white mb-2 group-hover:text-pink-400 transition-colors">
+                    ✧ Career Path Insights
+                  </h4>
+                  <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
+                    Discover industries and paths perfectly aligned with your energy
+                  </p>
                 </div>
               </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
 
-        {/* Premium Features Section */}
-        <motion.div variants={item} className="space-y-4">
-          <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-600 to-yellow-600 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
-            <div className="relative p-6 bg-black/40 backdrop-blur-sm rounded-lg border border-orange-500/20">
-              <div className="flex items-start gap-4">
+          {/* Advanced Mastery Section */}
+          <motion.div variants={item} className="relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-orange-600/20 to-yellow-600/20 rounded-lg blur-lg" />
+            <div className="relative bg-black/40 backdrop-blur-sm p-8 rounded-lg border border-orange-500/20">
+              <div className="flex items-center gap-4 mb-6">
                 <div className="p-2 bg-gradient-to-br from-orange-500 to-yellow-500 rounded-lg">
                   <Sparkles className="w-6 h-6 text-white" />
                 </div>
-                <div className="space-y-4 flex-1">
-                  <div className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-orange-400 flex-shrink-0 mt-1" />
-                    <div>
-                      <h3 className="font-semibold text-white bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">Environment Energy Control</h3>
-                      <p className="text-gray-400">Master the art of energy manipulation</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-orange-400 flex-shrink-0 mt-1" />
-                    <div>
-                      <h3 className="font-semibold text-white bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">VIP Energy Mastery Bonus</h3>
-                      <p className="text-gray-400">Exclusive advanced manifestation techniques</p>
-                    </div>
-                  </div>
+                <h3 className="text-2xl font-semibold bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">
+                  Advanced Mastery
+                </h3>
+              </div>
+              <div className="space-y-6 pl-4 border-l-2 border-orange-500/30">
+                <div className="group">
+                  <h4 className="text-xl font-medium text-white mb-2 group-hover:text-orange-400 transition-colors">
+                    ✧ Environment Energy Control
+                  </h4>
+                  <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
+                    Master the art of energy manipulation in your surroundings
+                  </p>
+                </div>
+                <div className="group">
+                  <h4 className="text-xl font-medium text-white mb-2 group-hover:text-orange-400 transition-colors">
+                    ✧ VIP Energy Mastery Bonus
+                  </h4>
+                  <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
+                    Exclusive advanced manifestation techniques and practices
+                  </p>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   );
 };
