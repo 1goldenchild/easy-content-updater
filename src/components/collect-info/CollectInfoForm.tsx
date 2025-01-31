@@ -74,9 +74,9 @@ const CollectInfoForm = () => {
         // Don't throw, we'll still redirect
       }
 
-      // Redirect after Klaviyo attempt
-      console.log("Redirecting to checkout");
-      window.location.href = "https://checkout.numerology33.com/checkout";
+      // Redirect to portal instead of checkout
+      console.log("Redirecting to portal");
+      window.location.href = "/portal";
       
     } catch (error) {
       console.error("Operation failed:", error);

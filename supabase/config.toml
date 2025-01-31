@@ -1,4 +1,4 @@
 project_id = "rqklestpzesrdeupnkau"
 
-[functions.create-payment]
+[functions.add-to-klaviyo]
 verify_jwt = false
