@@ -144,7 +144,7 @@ const Testimonials = () => {
           </h2>
           <p className="text-lg text-muted-foreground flex items-center justify-center gap-2">
             <Star className="w-5 h-5 fill-emerald-500 text-emerald-500" />
-            Join over 1000 educated members
+            Join thousands of educated members
             <Star className="w-5 h-5 fill-emerald-500 text-emerald-500" />
           </p>
         </div>
