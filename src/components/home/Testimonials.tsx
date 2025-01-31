@@ -79,7 +79,7 @@ const testimonials = [
     text: "I was strictly interested in numerology to know the money secret tricks and I was stunned by it but I think the best was with my personality and I react in certain ways when I'm in stressful environments. This deepness of this value is really something so thanks to Numerology33.com!",
     rating: 5,
     image: "/lovable-uploads/ddcf7f13-8161-4035-8bf0-380df27a4222.png"
-  },
+  }
 ];
 
 const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => (
@@ -122,7 +122,7 @@ const Testimonials = () => {
   const tripleTestimonials = [...testimonials, ...testimonials, ...testimonials]
 
   return (
-    <section className="py-16 bg-gradient-to-b from-background to-background/80 overflow-hidden">
+    <section className="py-16 bg-[#2c303a] overflow-hidden">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-12">
           <h2 
@@ -141,8 +141,8 @@ const Testimonials = () => {
         </div>
         
         <div className="relative w-full">
-          <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-background to-transparent z-10" />
-          <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-background to-transparent z-10" />
+          <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-[#2c303a] to-transparent z-10" />
+          <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-[#2c303a] to-transparent z-10" />
           
           <div className="overflow-hidden mask-edges">
             <div 
