@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import DateSelector from "@/components/numerology/DateSelector";
 import FormFields from "./FormFields";
 import SubmitButton from "./SubmitButton";
 import { FormData } from "./types";
+import { supabase } from "@/integrations/supabase/client";
 
 const CollectInfoForm = () => {
   const { toast } = useToast();
@@ -48,24 +48,6 @@ const CollectInfoForm = () => {
     console.log("Starting background operations with data:", { ...formData, date });
 
     try {
-      const formattedDate = date.toISOString().split('T')[0];
-      
-      // Save data to Supabase
-      console.log("Attempting to save data to user_readings");
-      const { error: supabaseError } = await supabase
-        .from("user_readings")
-        .insert([{
-          name: formData.name,
-          email: formData.email,
-          date_of_birth: formattedDate,
-        }]);
-
-      if (supabaseError) {
-        console.error("Supabase save error:", supabaseError);
-        throw supabaseError;
-      }
-      console.log("Successfully saved to user_readings");
-
       // Store form data in localStorage before redirecting
       const klaviyoData = {
         email: formData.email,
