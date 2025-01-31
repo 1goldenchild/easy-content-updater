@@ -74,9 +74,9 @@ const CollectInfoForm = () => {
         // Don't throw, we'll still redirect
       }
 
-      // Redirect to portal instead of checkout
-      console.log("Redirecting to portal");
-      window.location.href = "/portal";
+      // Redirect to external checkout URL
+      console.log("Redirecting to checkout");
+      window.location.href = "https://checkout.numerology33.com/checkout";
       
     } catch (error) {
       console.error("Operation failed:", error);
