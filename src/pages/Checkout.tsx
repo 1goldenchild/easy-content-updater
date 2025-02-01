@@ -57,10 +57,11 @@ const Checkout = () => {
                   <img 
                     src="/lovable-uploads/6562a548-8e2c-472e-adb9-695f89da1cbd.png"
                     alt="Numerology Reading Preview" 
-                    className="w-full h-auto rounded-lg"
+                    className="w-full h-auto rounded-lg object-cover border-2 border-purple-500/20 shadow-lg"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.src = 'https://via.placeholder.com/180x320';
+                      console.error('Image failed to load:', target.src);
                     }}
                   />
                 </div>
