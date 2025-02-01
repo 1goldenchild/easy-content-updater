@@ -55,7 +55,7 @@ const Checkout = () => {
               <div className="flex items-center gap-4 w-full">
                 <div className="w-32 sm:w-40 flex-shrink-0">
                   <img 
-                    src="https://numerology33.com/lovable-uploads/20c580ea-6bb0-4ee6-b9b9-a65bfbd4c503.png"
+                    src="https://numerology33.com/lovable-uploads/7e3de187-e110-4438-87f7-3c00cfbedc71.png"
                     alt="Numerology Reading Preview" 
                     className="w-full h-auto rounded-lg"
                     onError={(e) => {
