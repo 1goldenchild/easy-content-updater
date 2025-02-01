@@ -77,9 +77,9 @@ const Hero = memo(() => {
           className="flex flex-col items-center space-y-8 text-center relative z-10"
         >
           <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none bg-gradient-to-r from-white via-amber-200 to-white bg-[length:200%_auto] animate-shine bg-clip-text text-transparent">
-            Reach the next level with{" "}
+            Dive Into the Depth of Your Personality with{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-200 to-amber-400">
-              Numerology
+              Numerology Reading
             </span>
           </h1>
           <p className="mx-auto max-w-[700px] text-white/90 md:text-xl dark:text-white/90">
