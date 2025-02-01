@@ -52,13 +52,28 @@ const Checkout = () => {
 
           <div className="w-full flex justify-center">
             <div className="inline-flex flex-col items-center px-6 py-3 rounded-lg bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 backdrop-blur-sm w-full sm:w-auto">
-              <p className="text-purple-200 font-medium mb-2 text-center text-sm sm:text-base">
-                Due to high demand, we are limiting the number of readings available to 20 per day.
-              </p>
-              <div className="flex items-center gap-4">
-                <span className="px-3 py-1 rounded-full bg-purple-500/30 text-purple-200 font-semibold text-sm">
-                  3 spots remaining
-                </span>
+              <div className="flex items-center gap-4 w-full">
+                <div className="w-32 sm:w-40 flex-shrink-0">
+                  <img 
+                    src="https://numerology33.com/lovable-uploads/20c580ea-6bb0-4ee6-b9b9-a65bfbd4c503.png"
+                    alt="Numerology Reading Preview" 
+                    className="w-full h-auto rounded-lg"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = 'https://via.placeholder.com/180x320';
+                    }}
+                  />
+                </div>
+                <div className="flex-1">
+                  <p className="text-purple-200 font-medium mb-2 text-sm sm:text-base">
+                    Due to high demand, we are limiting the number of readings available to 20 per day.
+                  </p>
+                  <div className="inline-flex px-3 py-1 rounded-full bg-purple-500/30">
+                    <span className="text-purple-200 font-semibold text-sm">
+                      3 spots remaining
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
