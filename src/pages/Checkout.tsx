@@ -157,20 +157,18 @@ const Checkout = () => {
                 </div>
                 <div className="text-left">
                   <h4 className="font-medium text-gray-200 text-sm">Money-Back Guarantee</h4>
-                  <Link to="/refund" className="text-xs text-purple-400 hover:text-purple-300">Read refund policy</Link>
+                  <p className="text-xs text-gray-400">Read refund policy for more information</p>
                 </div>
               </div>
             </div>
 
             {/* Email Support Section */}
-            <div className="mt-4 flex justify-center">
-              <Link 
-                to="/support"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#2A2F3C] border border-purple-500/20 text-sm text-gray-200 hover:bg-[#2A2F3C]/80 transition-colors"
-              >
+            <div className="mt-4 flex flex-col items-center gap-2">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#2A2F3C] border border-purple-500/20 text-sm text-gray-200">
                 <Mail className="w-4 h-4 text-purple-400" />
                 24/7 Email Support
-              </Link>
+              </div>
+              <span className="text-sm text-gray-400">thenumerologysource@gmail.com</span>
             </div>
           </div>
         </div>
