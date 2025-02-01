@@ -78,6 +78,20 @@ const Checkout = () => {
             <span className="text-emerald-400">Rated by</span>
             <span className="text-teal-400 font-semibold">1,283 Happy Customers</span>
           </div>
+
+          <div className="inline-flex flex-col items-center px-6 py-3 rounded-lg bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 backdrop-blur-sm">
+            <p className="text-purple-200 font-medium mb-2">
+              Due to high demand, we are limiting the number of readings available to 20 per day.
+            </p>
+            <div className="flex items-center gap-4">
+              <span className="px-3 py-1 rounded-full bg-purple-500/30 text-purple-200 font-semibold">
+                3 spots remaining
+              </span>
+              <span className="text-blue-300">
+                Resets in 11 hours
+              </span>
+            </div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
