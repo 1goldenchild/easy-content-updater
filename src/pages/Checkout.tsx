@@ -55,14 +55,9 @@ const Checkout = () => {
               <div className="flex items-center gap-4 w-full">
                 <div className="w-16 sm:w-20 flex-shrink-0">
                   <img 
-                    src="https://numerology33.com/lovable-uploads/a58a32b8-8b25-4fe0-832e-cf4443499deb.png"
+                    src="https://numerology33.com/lovable-uploads/58066eb5-48f7-46be-a5ca-cab6972e16ea.png"
                     alt="Numerology Reading Preview" 
                     className="w-full h-auto rounded-lg object-cover border-2 border-purple-500/20 shadow-lg"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = 'https://via.placeholder.com/180x320';
-                      console.error('Image failed to load:', target.src);
-                    }}
                   />
                 </div>
                 <div className="flex-1">
