@@ -72,7 +72,7 @@ const ReadingHero = memo(() => {
           className="flex flex-col items-center space-y-8 text-center relative z-10"
         >
           <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none bg-gradient-to-r from-white via-amber-200 to-white bg-[length:200%_auto] animate-shine bg-clip-text text-transparent">
-            Dive Into the Depth of Your Personality with{" "}
+            Dive Into the Depth of Your Personality with a{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-200 to-amber-400">
               Numerology Reading
             </span>
