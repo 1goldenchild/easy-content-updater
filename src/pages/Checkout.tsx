@@ -55,7 +55,7 @@ const Checkout = () => {
               <div className="flex items-center gap-4 w-full">
                 <div className="w-16 sm:w-20 flex-shrink-0">
                   <img 
-                    src="https://numerology33.com/lovable-uploads/58066eb5-48f7-46be-a5ca-cab6972e16ea.png"
+                    src="/lovable-uploads/d6e64fb1-70d7-434f-9730-4d2a2a64134a.png"
                     alt="Numerology Reading Preview" 
                     className="w-full h-auto rounded-lg object-cover border-2 border-purple-500/20 shadow-lg"
                   />
