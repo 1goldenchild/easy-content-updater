@@ -9,6 +9,7 @@ import Refund from "./pages/Refund";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import LifepathNumberNine from "./pages/LifepathNumberNine";
+import Reading from "./pages/Reading";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/lifepath-number-9" element={<LifepathNumberNine />} />
+        <Route path="/reading" element={<Reading />} />
       </Routes>
     </Router>
   );

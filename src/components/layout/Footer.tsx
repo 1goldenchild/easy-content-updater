@@ -46,6 +46,14 @@ const Footer = () => {
                 Analysis
               </Link>
               <Link 
+                to="/reading" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-sm text-muted-foreground hover:text-amber-200/90 transition-colors"
+              >
+                Reading
+              </Link>
+              <Link 
                 to="/blog" 
                 target="_blank" 
                 rel="noopener noreferrer" 
