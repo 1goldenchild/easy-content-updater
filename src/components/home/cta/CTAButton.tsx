@@ -9,7 +9,7 @@ const CTAButton = () => {
   const buttonText = isReadingPage ? "Start Your Reading" : "Start Your Analysis";
 
   const handleGetStarted = () => {
-    navigate('/collect-info');
+    navigate(isReadingPage ? '/collect-reading-info' : '/collect-info');
     scrollToTop();
   };
 

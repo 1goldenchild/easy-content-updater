@@ -10,7 +10,8 @@ const PreviewSection = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
 
   const handleGetStarted = () => {
-    navigate('/collect-info');
+    const isReadingPage = window.location.pathname === '/reading';
+    navigate(isReadingPage ? '/collect-reading-info' : '/collect-info');
     scrollToTop();
   };
 
