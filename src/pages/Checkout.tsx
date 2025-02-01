@@ -3,7 +3,7 @@ import PackageSelection from "@/components/checkout/PackageSelection"
 import VIPOption from "@/components/checkout/VIPOption"
 import BillingInfo from "@/components/checkout/BillingInfo"
 import { useState } from "react"
-import { Star } from "lucide-react"
+import { Star, Lock, ShieldCheck, CreditCard } from "lucide-react"
 
 const Checkout = () => {
   const [selectedPackage, setSelectedPackage] = useState("supreme")
@@ -118,6 +118,61 @@ const Checkout = () => {
                   <span className="font-semibold text-gray-200">Total</span>
                   <span className="font-semibold text-white">${isVip ? "82.00" : "71.00"}</span>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Trust Payment Section */}
+        <div className="mt-16 max-w-4xl mx-auto">
+          <div className="bg-[#2A2F3C]/50 rounded-lg p-8 backdrop-blur-sm border border-purple-500/20">
+            <div className="text-center mb-8">
+              <h3 className="text-xl font-semibold text-gray-200 mb-2">Secure Payment & Trust</h3>
+              <p className="text-gray-400">Your payment information is processed securely</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Security Badge */}
+              <div className="flex flex-col items-center text-center p-4 bg-[#2A2F3C] rounded-lg border border-purple-500/20">
+                <div className="w-12 h-12 bg-purple-500/10 rounded-full flex items-center justify-center mb-3">
+                  <Lock className="w-6 h-6 text-purple-400" />
+                </div>
+                <h4 className="font-medium text-gray-200 mb-2">256-bit SSL Encryption</h4>
+                <p className="text-sm text-gray-400">Your data is protected with bank-level security</p>
+              </div>
+
+              {/* Payment Methods */}
+              <div className="flex flex-col items-center text-center p-4 bg-[#2A2F3C] rounded-lg border border-purple-500/20">
+                <div className="w-12 h-12 bg-purple-500/10 rounded-full flex items-center justify-center mb-3">
+                  <CreditCard className="w-6 h-6 text-purple-400" />
+                </div>
+                <h4 className="font-medium text-gray-200 mb-2">Secure Payments</h4>
+                <p className="text-sm text-gray-400">We accept all major credit cards and PayPal</p>
+              </div>
+
+              {/* Guarantee */}
+              <div className="flex flex-col items-center text-center p-4 bg-[#2A2F3C] rounded-lg border border-purple-500/20">
+                <div className="w-12 h-12 bg-purple-500/10 rounded-full flex items-center justify-center mb-3">
+                  <ShieldCheck className="w-6 h-6 text-purple-400" />
+                </div>
+                <h4 className="font-medium text-gray-200 mb-2">Money-Back Guarantee</h4>
+                <p className="text-sm text-gray-400">100% satisfaction or your money back</p>
+              </div>
+            </div>
+
+            {/* Payment Methods Icons */}
+            <div className="mt-8 flex justify-center items-center gap-4">
+              <div className="px-4 py-2 bg-white/5 rounded-lg">
+                <span className="text-sm text-gray-400">Visa</span>
+              </div>
+              <div className="px-4 py-2 bg-white/5 rounded-lg">
+                <span className="text-sm text-gray-400">Mastercard</span>
+              </div>
+              <div className="px-4 py-2 bg-white/5 rounded-lg">
+                <span className="text-sm text-gray-400">American Express</span>
+              </div>
+              <div className="px-4 py-2 bg-white/5 rounded-lg">
+                <span className="text-sm text-gray-400">PayPal</span>
               </div>
             </div>
           </div>
