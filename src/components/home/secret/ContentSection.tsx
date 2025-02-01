@@ -6,6 +6,7 @@ import { scrollToTop } from "../CallToAction";
 
 const ContentSection = () => {
   const navigate = useNavigate();
+  const isReadingPage = window.location.pathname === '/reading';
 
   const handleNavigate = () => {
     navigate('/collect-info');
@@ -45,7 +46,7 @@ const ContentSection = () => {
             className="relative w-full sm:w-auto bg-gradient-to-r from-[#534363] to-[#a39356] hover:from-[#534363] hover:to-[#a39356] text-amber-200/90 font-normal tracking-wider shadow-[0_0_15px_rgba(251,191,36,0.1)] transition-all duration-500 bg-[length:200%_auto] hover:bg-right-top hover:shadow-[0_0_20px_rgba(251,191,36,0.2)] border border-[#86736f] rounded-md overflow-hidden px-8 py-6"
           >
             <span className="relative z-10 flex items-center gap-2 text-base">
-              Get Your Numerology Analysis
+              Get Your Numerology {isReadingPage ? 'Reading' : 'Analysis'}
               <Sparkles className="w-5 h-5" />
             </span>
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-900/10 to-transparent translate-x-[-200%] animate-shimmer" />
