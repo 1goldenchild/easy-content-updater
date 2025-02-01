@@ -57,11 +57,9 @@ const Checkout = () => {
             </div>
           </div>
 
-          <div className="inline-flex flex-col sm:flex-row items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-indigo-500/20 to-violet-500/20 border border-indigo-500/30 backdrop-blur-sm">
-            <div className="flex items-center gap-2">
-              <Mail className="w-4 h-4 text-indigo-400" />
-              <span className="text-indigo-300">Support:</span>
-            </div>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-indigo-500/20 to-violet-500/20 border border-indigo-500/30 backdrop-blur-sm">
+            <Mail className="w-4 h-4 text-indigo-400" />
+            <span className="text-indigo-300">Support:</span>
             <span className="text-violet-300 font-medium text-sm">Thenumerologysource@gmail.com</span>
           </div>
         </div>
