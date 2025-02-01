@@ -14,7 +14,9 @@ const CTAButton = ({ onClick, text, icon = "arrow" }: CTAButtonProps) => {
     if (onClick) {
       onClick();
     } else {
-      window.location.href = "https://numerology33.com/collect-info";
+      window.location.href = isReadingPage 
+        ? "https://numerology33.com/collect-reading-info"
+        : "https://numerology33.com/collect-info";
     }
   };
 

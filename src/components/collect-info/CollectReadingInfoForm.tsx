@@ -7,7 +7,7 @@ import SubmitButton from "./SubmitButton";
 import { FormData } from "./types";
 import { supabase } from "@/integrations/supabase/client";
 
-const CollectInfoForm = () => {
+const CollectReadingInfoForm = () => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<FormData>({
@@ -56,8 +56,8 @@ const CollectInfoForm = () => {
       localStorage.setItem('pendingKlaviyoData', JSON.stringify(klaviyoData));
       
       // Redirect first
-      console.log("Redirecting to checkout");
-      window.location.href = "https://checkout.numerology33.com/checkout";
+      console.log("Redirecting to checkout2");
+      window.location.href = "https://checkout.numerology33.com/checkout2";
       
       // Call Klaviyo function after redirect
       console.log("Attempting to add to Klaviyo");
@@ -105,10 +105,10 @@ const CollectInfoForm = () => {
           setDate={setDate}
         />
 
-        <SubmitButton isLoading={isLoading} />
+        <SubmitButton isLoading={isLoading} text="Get Your Reading" />
       </form>
     </motion.div>
   );
 };
 
-export default CollectInfoForm;
+export default CollectReadingInfoForm;
