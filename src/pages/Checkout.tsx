@@ -3,7 +3,7 @@ import PackageSelection from "@/components/checkout/PackageSelection"
 import VIPOption from "@/components/checkout/VIPOption"
 import BillingInfo from "@/components/checkout/BillingInfo"
 import { useState } from "react"
-import { Star, Mail } from "lucide-react"
+import { Star } from "lucide-react"
 
 const Checkout = () => {
   const [selectedPackage, setSelectedPackage] = useState("supreme")
@@ -55,7 +55,7 @@ const Checkout = () => {
               <div className="flex items-center gap-4 w-full">
                 <div className="w-32 sm:w-40 flex-shrink-0">
                   <img 
-                    src="https://numerology33.com/lovable-uploads/7e3de187-e110-4438-87f7-3c00cfbedc71.png"
+                    src="/lovable-uploads/6562a548-8e2c-472e-adb9-695f89da1cbd.png"
                     alt="Numerology Reading Preview" 
                     className="w-full h-auto rounded-lg"
                     onError={(e) => {
@@ -75,14 +75,6 @@ const Checkout = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div className="w-full flex justify-center">
-            <div className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-indigo-500/20 to-violet-500/20 border border-indigo-500/30 backdrop-blur-sm">
-              <Mail className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-indigo-400" />
-              <span className="text-indigo-300 text-xs">Support:</span>
-              <span className="text-violet-300 font-medium text-xs">Thenumerologysource@gmail.com</span>
             </div>
           </div>
         </div>
