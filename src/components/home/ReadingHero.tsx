@@ -82,7 +82,7 @@ const ReadingHero = memo(() => {
           </p>
           <div className="w-full max-w-[280px] relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-[#534363] via-[#534363] to-[#534363] rounded-md blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
-            <Link to="/collect-info" className="w-full block relative">
+            <Link to="/collect-reading-info" className="w-full block relative">
               <Button 
                 size="lg" 
                 className="w-full bg-gradient-to-r from-[#534363] to-[#a39356] hover:from-[#534363] hover:to-[#a39356] text-amber-200/90 font-normal tracking-wider shadow-[0_0_15px_rgba(251,191,36,0.1)] transition-all duration-500 bg-[length:200%_auto] hover:bg-right-top hover:shadow-[0_0_20px_rgba(251,191,36,0.2)] border border-[#86736f] rounded-md relative overflow-hidden"
