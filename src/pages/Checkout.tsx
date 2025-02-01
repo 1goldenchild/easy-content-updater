@@ -34,7 +34,7 @@ const Checkout = () => {
         <div className="mb-8 flex flex-col items-center justify-center gap-4 w-full max-w-2xl mx-auto">
           <div className="w-full flex justify-center">
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-red-500/20 to-orange-500/20 border border-red-500/30 backdrop-blur-sm">
-              <span className="text-red-400 font-semibold text-sm sm:text-base">LIMITED TIME OFFER - Resets in 11 hours</span>
+              <span className="text-red-400 font-semibold text-sm sm:text-base">LIMITED TIME OFFER</span>
             </div>
           </div>
           
@@ -53,7 +53,7 @@ const Checkout = () => {
           <div className="w-full flex justify-center">
             <div className="inline-flex flex-col items-center px-6 py-3 rounded-lg bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 backdrop-blur-sm w-full sm:w-auto">
               <div className="flex items-center gap-4 w-full">
-                <div className="w-24 sm:w-32 flex-shrink-0">
+                <div className="w-16 sm:w-24 flex-shrink-0">
                   <img 
                     src="/lovable-uploads/6562a548-8e2c-472e-adb9-695f89da1cbd.png"
                     alt="Numerology Reading Preview" 
@@ -66,7 +66,7 @@ const Checkout = () => {
                 </div>
                 <div className="flex-1">
                   <p className="text-purple-200 font-medium mb-2 text-sm sm:text-base">
-                    Due to high demand, we are limiting the number of readings available to 20 per day.
+                    Due to high demand, we are limiting the number of readings available to 20 per day. Resets in 11 hours.
                   </p>
                   <div className="inline-flex px-3 py-1 rounded-full bg-purple-500/30">
                     <span className="text-purple-200 font-semibold text-sm">
