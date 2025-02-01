@@ -123,56 +123,41 @@ const Checkout = () => {
           </div>
         </div>
 
-        {/* Trust Payment Section */}
+        {/* Trust Badge Section */}
         <div className="mt-16 max-w-4xl mx-auto">
-          <div className="bg-[#2A2F3C]/50 rounded-lg p-8 backdrop-blur-sm border border-purple-500/20">
-            <div className="text-center mb-8">
-              <h3 className="text-xl font-semibold text-gray-200 mb-2">Secure Payment & Trust</h3>
-              <p className="text-gray-400">Your payment information is processed securely</p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-[#2A2F3C]/50 rounded-lg p-6 backdrop-blur-sm border border-purple-500/20">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {/* Security Badge */}
-              <div className="flex flex-col items-center text-center p-4 bg-[#2A2F3C] rounded-lg border border-purple-500/20">
-                <div className="w-12 h-12 bg-purple-500/10 rounded-full flex items-center justify-center mb-3">
-                  <Lock className="w-6 h-6 text-purple-400" />
+              <div className="flex items-center gap-3 p-4 bg-[#2A2F3C] rounded-lg border border-purple-500/20">
+                <div className="w-10 h-10 bg-purple-500/10 rounded-full flex items-center justify-center shrink-0">
+                  <Lock className="w-5 h-5 text-purple-400" />
                 </div>
-                <h4 className="font-medium text-gray-200 mb-2">256-bit SSL Encryption</h4>
-                <p className="text-sm text-gray-400">Your data is protected with bank-level security</p>
+                <div className="text-left">
+                  <h4 className="font-medium text-gray-200 text-sm">256-bit SSL Encryption</h4>
+                  <p className="text-xs text-gray-400">Bank-level security</p>
+                </div>
               </div>
 
-              {/* Payment Methods */}
-              <div className="flex flex-col items-center text-center p-4 bg-[#2A2F3C] rounded-lg border border-purple-500/20">
-                <div className="w-12 h-12 bg-purple-500/10 rounded-full flex items-center justify-center mb-3">
-                  <CreditCard className="w-6 h-6 text-purple-400" />
+              {/* Secure Payments */}
+              <div className="flex items-center gap-3 p-4 bg-[#2A2F3C] rounded-lg border border-purple-500/20">
+                <div className="w-10 h-10 bg-purple-500/10 rounded-full flex items-center justify-center shrink-0">
+                  <CreditCard className="w-5 h-5 text-purple-400" />
                 </div>
-                <h4 className="font-medium text-gray-200 mb-2">Secure Payments</h4>
-                <p className="text-sm text-gray-400">We accept all major credit cards and PayPal</p>
+                <div className="text-left">
+                  <h4 className="font-medium text-gray-200 text-sm">Secure Payments</h4>
+                  <p className="text-xs text-gray-400">All major cards accepted</p>
+                </div>
               </div>
 
-              {/* Guarantee */}
-              <div className="flex flex-col items-center text-center p-4 bg-[#2A2F3C] rounded-lg border border-purple-500/20">
-                <div className="w-12 h-12 bg-purple-500/10 rounded-full flex items-center justify-center mb-3">
-                  <ShieldCheck className="w-6 h-6 text-purple-400" />
+              {/* Money-Back Guarantee */}
+              <div className="flex items-center gap-3 p-4 bg-[#2A2F3C] rounded-lg border border-purple-500/20">
+                <div className="w-10 h-10 bg-purple-500/10 rounded-full flex items-center justify-center shrink-0">
+                  <ShieldCheck className="w-5 h-5 text-purple-400" />
                 </div>
-                <h4 className="font-medium text-gray-200 mb-2">Money-Back Guarantee</h4>
-                <p className="text-sm text-gray-400">100% satisfaction or your money back</p>
-              </div>
-            </div>
-
-            {/* Payment Methods Icons */}
-            <div className="mt-8 flex justify-center items-center gap-4">
-              <div className="px-4 py-2 bg-white/5 rounded-lg">
-                <span className="text-sm text-gray-400">Visa</span>
-              </div>
-              <div className="px-4 py-2 bg-white/5 rounded-lg">
-                <span className="text-sm text-gray-400">Mastercard</span>
-              </div>
-              <div className="px-4 py-2 bg-white/5 rounded-lg">
-                <span className="text-sm text-gray-400">American Express</span>
-              </div>
-              <div className="px-4 py-2 bg-white/5 rounded-lg">
-                <span className="text-sm text-gray-400">PayPal</span>
+                <div className="text-left">
+                  <h4 className="font-medium text-gray-200 text-sm">Money-Back Guarantee</h4>
+                  <p className="text-xs text-gray-400">100% satisfaction</p>
+                </div>
               </div>
             </div>
           </div>
