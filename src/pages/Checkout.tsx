@@ -53,13 +53,6 @@ const Checkout = () => {
           <div className="w-full flex justify-center">
             <div className="inline-flex flex-col items-center px-6 py-3 rounded-lg bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 backdrop-blur-sm w-full sm:w-auto">
               <div className="flex items-center gap-4 w-full">
-                <div className="w-16 sm:w-20 flex-shrink-0">
-                  <img 
-                    src="/lovable-uploads/d6e64fb1-70d7-434f-9730-4d2a2a64134a.png"
-                    alt="Numerology Reading Preview" 
-                    className="w-full h-auto rounded-lg object-cover border-2 border-purple-500/20 shadow-lg"
-                  />
-                </div>
                 <div className="flex-1">
                   <p className="text-purple-200 font-medium mb-2 text-sm sm:text-base">
                     Due to high demand, we are limiting the number of readings available to 20 per day.
