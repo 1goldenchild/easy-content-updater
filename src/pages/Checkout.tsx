@@ -53,7 +53,7 @@ const Checkout = () => {
           <div className="w-full flex justify-center">
             <div className="inline-flex flex-col items-center px-6 py-3 rounded-lg bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 backdrop-blur-sm w-full sm:w-auto">
               <div className="flex items-center gap-4 w-full">
-                <div className="w-14 sm:w-20 flex-shrink-0">
+                <div className="w-16 sm:w-20 flex-shrink-0">
                   <img 
                     src="/lovable-uploads/6562a548-8e2c-472e-adb9-695f89da1cbd.png"
                     alt="Numerology Reading Preview" 
