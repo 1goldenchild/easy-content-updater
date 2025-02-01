@@ -3,7 +3,6 @@ import PackageSelection from "@/components/checkout/PackageSelection"
 import VIPOption from "@/components/checkout/VIPOption"
 import BillingInfo from "@/components/checkout/BillingInfo"
 import { useState, useEffect } from "react"
-import { Badge } from "@/components/ui/badge"
 import { Star } from "lucide-react"
 
 const Checkout = () => {
@@ -70,10 +69,14 @@ const Checkout = () => {
             </span>
           </div>
           
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 backdrop-blur-sm">
-            <Star className="w-4 h-4 text-yellow-400 mr-1" />
-            <span className="text-emerald-400 font-semibold">1,238</span>
-            <span className="text-teal-400 ml-1">5-star reviews</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 backdrop-blur-sm">
+            <div className="flex items-center">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+              ))}
+            </div>
+            <span className="text-emerald-400">Rated by</span>
+            <span className="text-teal-400 font-semibold">1,283 Happy Customers</span>
           </div>
         </div>
 
