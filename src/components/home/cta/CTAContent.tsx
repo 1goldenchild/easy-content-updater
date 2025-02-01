@@ -3,6 +3,9 @@ import { Sparkles } from "lucide-react";
 import CTAButton from "./CTAButton";
 
 const CTAContent = () => {
+  const isReadingPage = window.location.pathname === '/reading';
+  const buttonText = isReadingPage ? "Ready to Discover Your Reading?" : "Ready to Discover Your Analysis?";
+
   return (
     <div className="relative z-10 space-y-6 text-center">
       <motion.div
@@ -19,11 +22,11 @@ const CTAContent = () => {
       </motion.div>
       
       <h3 className="text-2xl md:text-3xl font-bold text-white">
-        Ready to Discover Your True Path?
+        {buttonText}
       </h3>
       
       <p className="text-white/80 max-w-md mx-auto">
-        Get your personalized numerology reading today and unlock the secrets of your life's journey.
+        Get your personalized numerology {isReadingPage ? "reading" : "analysis"} today and unlock the secrets of your life's journey.
       </p>
       
       <CTAButton />
