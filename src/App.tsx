@@ -11,6 +11,7 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import LifepathNumberNine from "./pages/LifepathNumberNine";
 import Reading from "./pages/Reading";
+import Checkout from "./pages/Checkout";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/lifepath-number-9" element={<LifepathNumberNine />} />
         <Route path="/reading" element={<Reading />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </Router>
   );
