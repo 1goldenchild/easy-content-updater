@@ -57,10 +57,10 @@ const Checkout = () => {
             </div>
           </div>
 
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-indigo-500/20 to-violet-500/20 border border-indigo-500/30 backdrop-blur-sm">
-            <Mail className="w-4 h-4 text-indigo-400" />
-            <span className="text-indigo-300">Support:</span>
-            <span className="text-violet-300 font-medium text-sm">Thenumerologysource@gmail.com</span>
+          <div className="inline-flex items-center justify-center w-full sm:w-auto gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-indigo-500/20 to-violet-500/20 border border-indigo-500/30 backdrop-blur-sm">
+            <Mail className="w-3.5 h-3.5 text-indigo-400" />
+            <span className="text-indigo-300 text-xs">Support:</span>
+            <span className="text-violet-300 font-medium text-xs">Thenumerologysource@gmail.com</span>
           </div>
         </div>
 
