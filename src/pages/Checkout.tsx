@@ -34,7 +34,7 @@ const Checkout = () => {
         <div className="mb-8 flex flex-col items-center justify-center gap-4 w-full max-w-2xl mx-auto">
           <div className="w-full flex justify-center">
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-red-500/20 to-orange-500/20 border border-red-500/30 backdrop-blur-sm">
-              <span className="text-red-400 font-semibold text-sm sm:text-base">LIMITED TIME OFFER</span>
+              <span className="text-red-400 font-semibold text-sm sm:text-base">LIMITED TIME OFFER - Resets in 11 hours</span>
             </div>
           </div>
           
@@ -53,7 +53,7 @@ const Checkout = () => {
           <div className="w-full flex justify-center">
             <div className="inline-flex flex-col items-center px-6 py-3 rounded-lg bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 backdrop-blur-sm w-full sm:w-auto">
               <div className="flex items-center gap-4 w-full">
-                <div className="w-32 sm:w-40 flex-shrink-0">
+                <div className="w-24 sm:w-32 flex-shrink-0">
                   <img 
                     src="/lovable-uploads/6562a548-8e2c-472e-adb9-695f89da1cbd.png"
                     alt="Numerology Reading Preview" 
