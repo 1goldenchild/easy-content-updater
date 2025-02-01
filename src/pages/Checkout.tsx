@@ -3,7 +3,8 @@ import PackageSelection from "@/components/checkout/PackageSelection"
 import VIPOption from "@/components/checkout/VIPOption"
 import BillingInfo from "@/components/checkout/BillingInfo"
 import { useState } from "react"
-import { Star, Lock, ShieldCheck, CreditCard } from "lucide-react"
+import { Star, Lock, ShieldCheck, CreditCard, Mail } from "lucide-react"
+import { Link } from "react-router-dom"
 
 const Checkout = () => {
   const [selectedPackage, setSelectedPackage] = useState("supreme")
@@ -156,9 +157,20 @@ const Checkout = () => {
                 </div>
                 <div className="text-left">
                   <h4 className="font-medium text-gray-200 text-sm">Money-Back Guarantee</h4>
-                  <p className="text-xs text-gray-400">100% satisfaction</p>
+                  <Link to="/refund" className="text-xs text-purple-400 hover:text-purple-300">Read refund policy</Link>
                 </div>
               </div>
+            </div>
+
+            {/* Email Support Section */}
+            <div className="mt-4 flex justify-center">
+              <Link 
+                to="/support"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#2A2F3C] border border-purple-500/20 text-sm text-gray-200 hover:bg-[#2A2F3C]/80 transition-colors"
+              >
+                <Mail className="w-4 h-4 text-purple-400" />
+                24/7 Email Support
+              </Link>
             </div>
           </div>
         </div>
