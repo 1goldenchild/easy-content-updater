@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import PortalHeader from "@/components/portal/PortalHeader";
 import DateInputSection from "@/components/portal/DateInputSection";
 import ResultsSection from "@/components/portal/ResultsSection";
+import ProgressIndicator from "@/components/numerology/ProgressIndicator";
 import { 
   calculateLifePath, 
   calculatePartialEnergy, 
