@@ -7,7 +7,6 @@ import { supabase } from "@/integrations/supabase/client";
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [lastAttempt, setLastAttempt] = useState(0);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -23,18 +22,6 @@ const Auth = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Rate limiting check - only allow one attempt every 30 seconds
-    const now = Date.now();
-    if (now - lastAttempt < 30000) {
-      toast({
-        variant: "destructive",
-        title: "Please wait",
-        description: "Please wait 30 seconds before trying again.",
-      });
-      return;
-    }
-
     setIsLoading(true);
     console.log("Starting auth process for email:", email);
 
@@ -76,51 +63,25 @@ const Auth = () => {
       if (signInError) {
         console.log("Sign in failed, attempting signup:", signInError.message);
         
-        // Only attempt signup if it's not an invalid credentials error
-        if (signInError.message === "Invalid login credentials") {
-          try {
-            const { error: signUpError } = await supabase.auth.signUp({
-              email: email.toLowerCase().trim(),
-              password: formattedDate,
-            });
+        // If login fails, try to sign up
+        const { error: signUpError } = await supabase.auth.signUp({
+          email: email.toLowerCase().trim(),
+          password: formattedDate,
+        });
 
-            if (signUpError) {
-              console.error("Signup error:", signUpError);
-              
-              if (signUpError.message.includes("rate limit")) {
-                toast({
-                  variant: "destructive",
-                  title: "Too Many Attempts",
-                  description: "Please wait a few minutes before trying again.",
-                });
-              } else {
-                toast({
-                  variant: "destructive",
-                  title: "Signup Error",
-                  description: "Unable to create account. Please try again later.",
-                });
-              }
-              setLastAttempt(now);
-            } else {
-              toast({
-                title: "Check Your Email",
-                description: "We've sent you a confirmation email. Please verify your email to continue.",
-              });
-            }
-          } catch (signUpError) {
-            console.error("Signup attempt failed:", signUpError);
-            toast({
-              variant: "destructive",
-              title: "Error",
-              description: "An unexpected error occurred. Please try again later.",
-            });
-          }
-        } else {
+        if (signUpError) {
+          console.error("Signup error:", signUpError);
           toast({
             variant: "destructive",
-            title: "Login Failed",
-            description: "Invalid credentials. Please try again.",
+            title: "Error",
+            description: "Unable to create account. Please try again.",
           });
+        } else {
+          toast({
+            title: "Success",
+            description: "Account created successfully. You can now access your numerology.",
+          });
+          navigate("/mynumerology");
         }
       } else {
         // Successful login
