@@ -27,30 +27,42 @@ const Auth = () => {
 
     try {
       // First, get the user's DOB from user_readings
+      console.log("Querying user_readings for:", email);
       const { data: readingData, error: readingError } = await supabase
         .from('user_readings')
         .select('date_of_birth')
-        .eq('email', email)
+        .eq('email', email.toLowerCase().trim())
         .single();
 
-      if (readingError || !readingData) {
+      console.log("Reading data result:", { readingData, readingError });
+
+      if (readingError) {
+        console.error("Reading lookup error:", readingError);
         throw new Error("No reading found for this email. Please complete the analysis form first.");
       }
 
-      // Use the DOB as password
+      if (!readingData) {
+        console.error("No reading data found");
+        throw new Error("No reading found for this email. Please complete the analysis form first.");
+      }
+
+      // Try to sign in first
+      console.log("Attempting sign in with:", { email, dob: readingData.date_of_birth });
       const { error: signInError } = await supabase.auth.signInWithPassword({
         email,
         password: readingData.date_of_birth,
       });
 
       if (signInError) {
-        // If user doesn't exist, create them
+        console.log("Sign in failed, attempting signup:", signInError);
+        // If sign in fails, try to sign up
         const { error: signUpError } = await supabase.auth.signUp({
           email,
           password: readingData.date_of_birth,
         });
 
         if (signUpError) {
+          console.error("Signup error:", signUpError);
           throw signUpError;
         }
       }
@@ -58,7 +70,7 @@ const Auth = () => {
       toast.success("Successfully signed in!");
       navigate("/portal");
     } catch (error) {
-      console.error("Login error:", error);
+      console.error("Auth error:", error);
       toast.error(error instanceof Error ? error.message : "An error occurred during sign in");
     } finally {
       setLoading(false);
