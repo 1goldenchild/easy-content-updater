@@ -48,19 +48,22 @@ const Auth = () => {
         throw new Error("No reading found for this email. Please complete the analysis form first.");
       }
 
+      // Format the date consistently for use as password
+      const formattedDate = readingData.date_of_birth.split('T')[0];
+      console.log("Attempting sign in with:", { email, password: formattedDate });
+
       // Try to sign in first
-      console.log("Attempting sign in with:", { email, dob: readingData.date_of_birth });
       const { error: signInError } = await supabase.auth.signInWithPassword({
-        email,
-        password: readingData.date_of_birth,
+        email: email.toLowerCase().trim(),
+        password: formattedDate,
       });
 
       if (signInError) {
         console.log("Sign in failed, attempting signup:", signInError);
         // If sign in fails, try to sign up
         const { error: signUpError } = await supabase.auth.signUp({
-          email,
-          password: readingData.date_of_birth,
+          email: email.toLowerCase().trim(),
+          password: formattedDate,
         });
 
         if (signUpError) {
