@@ -34,7 +34,6 @@ const Auth = () => {
       });
       return;
     }
-    setLastAttempt(now);
 
     setIsLoading(true);
     console.log("Starting auth process for email:", email);
@@ -79,47 +78,52 @@ const Auth = () => {
         
         // Only attempt signup if it's not an invalid credentials error
         if (signInError.message === "Invalid login credentials") {
-          // Try to sign up
-          const { error: signUpError } = await supabase.auth.signUp({
-            email: email.toLowerCase().trim(),
-            password: formattedDate,
-          });
+          try {
+            const { error: signUpError } = await supabase.auth.signUp({
+              email: email.toLowerCase().trim(),
+              password: formattedDate,
+            });
 
-          if (signUpError) {
-            console.error("Signup error:", signUpError);
-            
-            // Handle rate limit error specifically
-            if (signUpError.message === "email rate limit exceeded") {
-              toast({
-                variant: "destructive",
-                title: "Rate Limit Exceeded",
-                description: "Please wait a few minutes before trying again.",
-              });
+            if (signUpError) {
+              console.error("Signup error:", signUpError);
+              
+              if (signUpError.message.includes("rate limit")) {
+                toast({
+                  variant: "destructive",
+                  title: "Too Many Attempts",
+                  description: "Please wait a few minutes before trying again.",
+                });
+              } else {
+                toast({
+                  variant: "destructive",
+                  title: "Signup Error",
+                  description: "Unable to create account. Please try again later.",
+                });
+              }
+              setLastAttempt(now);
             } else {
               toast({
-                variant: "destructive",
-                title: "Error",
-                description: signUpError.message,
+                title: "Check Your Email",
+                description: "We've sent you a confirmation email. Please verify your email to continue.",
               });
             }
-            return;
+          } catch (signUpError) {
+            console.error("Signup attempt failed:", signUpError);
+            toast({
+              variant: "destructive",
+              title: "Error",
+              description: "An unexpected error occurred. Please try again later.",
+            });
           }
-          
-          // If signup was successful
-          toast({
-            title: "Check your email",
-            description: "We've sent you a confirmation email.",
-          });
         } else {
-          // Handle other sign in errors
           toast({
             variant: "destructive",
-            title: "Error",
-            description: signInError.message,
+            title: "Login Failed",
+            description: "Invalid credentials. Please try again.",
           });
         }
       } else {
-        // If we get here, sign in was successful
+        // Successful login
         console.log("Authentication successful, navigating to /mynumerology");
         navigate("/mynumerology");
       }
