@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
@@ -10,23 +10,13 @@ const Auth = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        navigate("/mynumerology");
-      }
-    };
-    checkAuth();
-  }, [navigate]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    console.log("Starting auth process for email:", email);
+    console.log("Looking up DOB for email:", email);
 
     try {
-      // First, check if the email exists in pending_users
+      // Check if the email exists in pending_users
       const { data: pendingData, error: pendingError } = await supabase
         .from('pending_users')
         .select('date_of_birth')
@@ -47,52 +37,14 @@ const Auth = () => {
       }
 
       // Store DOB in localStorage for /mynumerology page
-      const formattedDate = pendingData.date_of_birth;
-      console.log("Retrieved DOB from pending_users:", formattedDate);
-      localStorage.setItem('userDOB', formattedDate);
-
-      // Try to sign in first (this will work if the user exists)
-      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
-        email: email.toLowerCase().trim(),
-        password: formattedDate,
-      });
-
-      if (signInError) {
-        console.log("Sign in failed, attempting signup");
-        // If sign in fails, try to sign up
-        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
-          email: email.toLowerCase().trim(),
-          password: formattedDate,
-          options: {
-            data: {
-              date_of_birth: formattedDate
-            }
-          }
-        });
-
-        if (signUpError) {
-          console.error("Signup error:", signUpError);
-          toast({
-            variant: "destructive",
-            title: "Error",
-            description: "Unable to authenticate. Please try again.",
-          });
-        } else if (signUpData.user) {
-          // After successful signup, try to sign in immediately
-          const { error: finalSignInError } = await supabase.auth.signInWithPassword({
-            email: email.toLowerCase().trim(),
-            password: formattedDate,
-          });
-
-          if (!finalSignInError) {
-            navigate("/mynumerology");
-          }
-        }
-      } else if (signInData.user) {
-        navigate("/mynumerology");
-      }
+      console.log("Retrieved DOB from pending_users:", pendingData.date_of_birth);
+      localStorage.setItem('userDOB', pendingData.date_of_birth);
+      
+      // Redirect to numerology page
+      navigate("/mynumerology");
+      
     } catch (error) {
-      console.error("Authentication error:", error);
+      console.error("Error during email lookup:", error);
       toast({
         variant: "destructive",
         title: "Error",
