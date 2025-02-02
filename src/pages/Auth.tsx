@@ -53,55 +53,46 @@ const Auth = () => {
       const formattedDate = pendingData.date_of_birth;
       console.log("Using formatted date for auth:", formattedDate);
 
-      // Try to sign in first
-      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+      // Try to sign up first (this will work if the user doesn't exist)
+      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
         email: email.toLowerCase().trim(),
         password: formattedDate,
+        options: {
+          data: {
+            date_of_birth: formattedDate
+          },
+          emailRedirectTo: undefined
+        }
       });
 
-      if (signInError) {
-        console.log("Sign in failed, attempting signup:", signInError.message);
-        
-        // If login fails, try to sign up without email verification
-        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+      if (signUpError) {
+        console.error("Signup error:", signUpError);
+        // If signup fails, try to sign in
+        const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
           email: email.toLowerCase().trim(),
           password: formattedDate,
-          options: {
-            data: {
-              date_of_birth: formattedDate
-            }
-          }
         });
 
-        if (signUpError) {
-          console.error("Signup error:", signUpError);
+        if (signInError) {
+          console.error("Sign in error:", signInError);
           toast({
             variant: "destructive",
             title: "Error",
-            description: "Unable to create account. Please try again.",
+            description: "Unable to authenticate. Please try again.",
           });
-        } else if (signUpData.user) {
-          // If signup is successful, try to sign in immediately
-          const { error: immediateSignInError } = await supabase.auth.signInWithPassword({
-            email: email.toLowerCase().trim(),
-            password: formattedDate,
-          });
-
-          if (!immediateSignInError) {
-            navigate("/mynumerology");
-          } else {
-            console.error("Immediate sign in error:", immediateSignInError);
-            toast({
-              variant: "destructive",
-              title: "Error",
-              description: "Unable to sign in. Please try again.",
-            });
-          }
+        } else if (signInData.user) {
+          navigate("/mynumerology");
         }
-      } else if (signInData.user) {
-        // Successful login
-        console.log("Authentication successful, navigating to /mynumerology");
-        navigate("/mynumerology");
+      } else if (signUpData.user) {
+        // If signup is successful, try to sign in immediately
+        const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+          email: email.toLowerCase().trim(),
+          password: formattedDate,
+        });
+
+        if (!signInError && signInData.user) {
+          navigate("/mynumerology");
+        }
       }
       
     } catch (error) {
