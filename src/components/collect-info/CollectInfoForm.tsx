@@ -52,6 +52,34 @@ const CollectInfoForm = ({ onSubmit }: CollectInfoFormProps) => {
     console.log("Starting background operations with data:", { ...formData, date });
 
     try {
+      // First create the auth user
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: date.toISOString().split('T')[0], // Using birth date as password
+        options: {
+          data: {
+            name: formData.name,
+          }
+        }
+      });
+
+      if (authError) {
+        console.error("Auth error:", authError);
+        // If user already exists, try to sign them in
+        if (authError.message.includes("already registered")) {
+          const { error: signInError } = await supabase.auth.signInWithPassword({
+            email: formData.email,
+            password: date.toISOString().split('T')[0],
+          });
+
+          if (signInError) {
+            throw new Error("Unable to sign in. Please try the login page.");
+          }
+        } else {
+          throw authError;
+        }
+      }
+
       // Call the onSubmit prop if it exists
       if (onSubmit) {
         await onSubmit(date);
@@ -90,7 +118,7 @@ const CollectInfoForm = ({ onSubmit }: CollectInfoFormProps) => {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "An error occurred. Please try again.",
+        description: error instanceof Error ? error.message : "An error occurred. Please try again.",
       });
       setIsLoading(false);
     }
