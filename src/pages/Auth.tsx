@@ -6,12 +6,20 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useAuth } from "@/components/auth/AuthProvider";
 
 const Auth = () => {
   const navigate = useNavigate();
+  const { session } = useAuth();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // Redirect if already logged in
+  if (session) {
+    navigate("/portal");
+    return null;
+  }
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
