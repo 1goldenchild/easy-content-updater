@@ -16,8 +16,8 @@ import Auth from "./pages/Auth";
 
 const App = () => {
   return (
-    <AuthProvider>
-      <Router>
+    <Router>
+      <AuthProvider>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/portal" element={<Portal />} />
@@ -33,8 +33,8 @@ const App = () => {
           <Route path="/reading" element={<Reading />} />
           <Route path="/auth" element={<Auth />} />
         </Routes>
-      </Router>
-    </AuthProvider>
+      </AuthProvider>
+    </Router>
   );
 };
 
