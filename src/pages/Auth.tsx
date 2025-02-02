@@ -63,12 +63,11 @@ const Auth = () => {
       if (signInError) {
         console.log("Sign in failed, attempting signup:", signInError.message);
         
-        // If login fails, try to sign up
+        // If login fails, try to sign up without email verification
         const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
           email: email.toLowerCase().trim(),
           password: formattedDate,
           options: {
-            emailRedirectTo: window.location.origin + "/mynumerology",
             data: {
               date_of_birth: formattedDate
             }
@@ -80,7 +79,7 @@ const Auth = () => {
           toast({
             variant: "destructive",
             title: "Error",
-            description: "Unable to create account. Please try again in a few minutes.",
+            description: "Unable to create account. Please try again.",
           });
         } else if (signUpData.user) {
           // If signup is successful, try to sign in immediately
@@ -92,9 +91,11 @@ const Auth = () => {
           if (!immediateSignInError) {
             navigate("/mynumerology");
           } else {
+            console.error("Immediate sign in error:", immediateSignInError);
             toast({
-              title: "Account Created",
-              description: "Please check your email to verify your account.",
+              variant: "destructive",
+              title: "Error",
+              description: "Unable to sign in. Please try again.",
             });
           }
         }
