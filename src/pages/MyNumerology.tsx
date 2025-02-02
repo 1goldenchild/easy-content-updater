@@ -26,7 +26,9 @@ const MyNumerology = () => {
     // Check for stored DOB on component mount
     const storedDOB = localStorage.getItem('userDOB');
     if (storedDOB) {
+      console.log("Found stored DOB:", storedDOB);
       const date = new Date(storedDOB);
+      console.log("Converted to Date object:", date);
       setSelectedDate(date);
       handleCalculate(date);
       // Clear the stored DOB after using it
@@ -34,7 +36,7 @@ const MyNumerology = () => {
     }
   }, []);
 
-  const handleCalculate = async (date: Date) => {
+  const handleCalculate = (date: Date) => {
     console.log("Calculating numerology for date:", date);
     setSelectedDate(date);
     

@@ -45,6 +45,7 @@ const Auth = () => {
       }
 
       // Store DOB in localStorage for /mynumerology page
+      console.log("Storing DOB in localStorage:", pendingData.date_of_birth);
       localStorage.setItem('userDOB', pendingData.date_of_birth);
 
       // Format the date consistently for use as password
