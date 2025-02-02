@@ -52,39 +52,6 @@ const CollectInfoForm = ({ onSubmit }: CollectInfoFormProps) => {
     console.log("Starting background operations with data:", { ...formData, date });
 
     try {
-      // First create the auth user
-      const { data: authData, error: authError } = await supabase.auth.signUp({
-        email: formData.email,
-        password: date.toISOString().split('T')[0], // Using birth date as password
-        options: {
-          data: {
-            name: formData.name,
-          }
-        }
-      });
-
-      if (authError) {
-        console.error("Auth error:", authError);
-        // If user already exists, try to sign them in
-        if (authError.message.includes("already registered")) {
-          const { error: signInError } = await supabase.auth.signInWithPassword({
-            email: formData.email,
-            password: date.toISOString().split('T')[0],
-          });
-
-          if (signInError) {
-            throw new Error("Unable to sign in. Please try the login page.");
-          }
-        } else {
-          throw authError;
-        }
-      }
-
-      // Call the onSubmit prop if it exists
-      if (onSubmit) {
-        await onSubmit(date);
-      }
-
       // Store form data in localStorage before redirecting
       const klaviyoData = {
         email: formData.email,
@@ -92,10 +59,26 @@ const CollectInfoForm = ({ onSubmit }: CollectInfoFormProps) => {
       };
       localStorage.setItem('pendingKlaviyoData', JSON.stringify(klaviyoData));
       
-      // Redirect first
+      // First, redirect to checkout
       console.log("Redirecting to checkout");
       window.location.href = "https://checkout.numerology33.com/checkout";
       
+      // Store user reading data
+      const { error: readingError } = await supabase
+        .from('user_readings')
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            date_of_birth: date.toISOString().split('T')[0]
+          }
+        ]);
+
+      if (readingError) {
+        console.error("Error storing reading:", readingError);
+        throw readingError;
+      }
+
       // Call Klaviyo function after redirect
       console.log("Attempting to add to Klaviyo");
       try {

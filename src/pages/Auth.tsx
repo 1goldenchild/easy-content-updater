@@ -1,20 +1,17 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/components/auth/AuthProvider";
 
 const Auth = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const { session } = useAuth();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("numerology"); // Default password
 
   // Redirect if already logged in
   useEffect(() => {
@@ -29,21 +26,40 @@ const Auth = () => {
     console.log("Attempting signin with:", { email });
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      // First, get the user's DOB from user_readings
+      const { data: readingData, error: readingError } = await supabase
+        .from('user_readings')
+        .select('date_of_birth')
+        .eq('email', email)
+        .single();
+
+      if (readingError || !readingData) {
+        throw new Error("No reading found for this email. Please complete the analysis form first.");
+      }
+
+      // Use the DOB as password
+      const { error: signInError } = await supabase.auth.signInWithPassword({
         email,
-        password,
+        password: readingData.date_of_birth,
       });
 
-      if (error) {
-        console.error("Login error:", error.message);
-        toast.error(error.message);
-      } else {
-        toast.success("Successfully signed in!");
-        navigate("/portal");
+      if (signInError) {
+        // If user doesn't exist, create them
+        const { error: signUpError } = await supabase.auth.signUp({
+          email,
+          password: readingData.date_of_birth,
+        });
+
+        if (signUpError) {
+          throw signUpError;
+        }
       }
+
+      toast.success("Successfully signed in!");
+      navigate("/portal");
     } catch (error) {
       console.error("Login error:", error);
-      toast.error("An error occurred during sign in");
+      toast.error(error instanceof Error ? error.message : "An error occurred during sign in");
     } finally {
       setLoading(false);
     }
@@ -61,7 +77,7 @@ const Auth = () => {
             Access Your Reading
           </h1>
           <p className="text-white/70 mt-2">
-            Sign in to view your numerological destiny
+            Enter your email to view your numerological destiny
           </p>
         </div>
 
@@ -74,16 +90,6 @@ const Auth = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-              />
-            </div>
-            <div>
-              <Input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                disabled
               />
             </div>
             <Button
