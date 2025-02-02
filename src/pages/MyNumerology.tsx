@@ -1,29 +1,23 @@
 import { useState, useEffect } from "react";
-import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useToast } from "@/components/ui/use-toast";
+import DateSelector from "@/components/numerology/DateSelector";
+import NumerologyResults from "@/components/numerology/NumerologyResults";
+import { calculateLifePath, calculatePartialEnergy, calculateSecretNumber } from "@/utils/numerologyCalculations";
 import { supabase } from "@/integrations/supabase/client";
-import PortalHeader from "@/components/portal/PortalHeader";
-import DateInputSection from "@/components/portal/DateInputSection";
-import ResultsSection from "@/components/portal/ResultsSection";
-import ProgressIndicator from "@/components/numerology/ProgressIndicator";
-import { 
-  calculateLifePath, 
-  calculatePartialEnergy, 
-  calculateSecretNumber, 
-  getChineseZodiac 
-} from "@/utils/numerologyCalculations";
 
 const MyNumerology = () => {
-  const [showResults, setShowResults] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date>();
-  const [results, setResults] = useState({
-    lifePath: 0,
-    partialEnergy: 0,
-    secretNumber: 0,
-    chineseZodiac: ""
-  });
+  const [showResults, setShowResults] = useState(false);
+  const [lifePath, setLifePath] = useState<number>();
+  const [partialEnergy, setPartialEnergy] = useState<number>();
+  const [secretNumber, setSecretNumber] = useState<number>();
+  const navigate = useNavigate();
+  const toast = useToast();
 
   useEffect(() => {
-    // Check for stored DOB on component mount
+    // Check for stored DOB from auth flow
     const storedDOB = localStorage.getItem('userDOB');
     if (storedDOB) {
       console.log("Found stored DOB:", storedDOB);
@@ -51,41 +45,39 @@ const MyNumerology = () => {
     setSelectedDate(date);
     
     const lifePath = calculateLifePath(date);
-    const partialEnergy = calculatePartialEnergy(date.getDate());
+    console.log("Calculated Life Path:", lifePath);
+    setLifePath(lifePath);
+
+    const partialEnergy = calculatePartialEnergy(date);
+    console.log("Calculated Partial Energy:", partialEnergy);
+    setPartialEnergy(partialEnergy);
+
     const secretNumber = calculateSecretNumber(date);
-    const chineseZodiac = getChineseZodiac(date.getFullYear());
+    console.log("Calculated Secret Number:", secretNumber);
+    setSecretNumber(secretNumber);
 
-    console.log("Calculated numbers:", {
-      lifePath,
-      partialEnergy,
-      secretNumber,
-      chineseZodiac
-    });
-
-    setResults({
-      lifePath,
-      partialEnergy,
-      secretNumber,
-      chineseZodiac
-    });
     setShowResults(true);
-    toast.success("Calculation complete!");
+    toast.toast({
+      title: "Success!",
+      description: "Your numerology reading is ready.",
+    });
   };
 
   return (
     <div className="min-h-screen w-full overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex flex-col items-center">
-          {showResults && <ProgressIndicator />}
-          <div className="w-full space-y-8">
-            <PortalHeader />
-            {!showResults && (
-              <DateInputSection onCalculate={handleCalculate} />
-            )}
-            {selectedDate && (
-              <ResultsSection 
-                results={results}
-                dateOfBirth={selectedDate}
+        <div className="grid grid-cols-1 gap-8">
+          <div className="space-y-8">
+            <DateSelector
+              date={selectedDate}
+              setDate={(date) => date && handleCalculate(date)}
+            />
+
+            {showResults && lifePath && partialEnergy && secretNumber && (
+              <NumerologyResults
+                lifePath={lifePath}
+                partialEnergy={partialEnergy}
+                secretNumber={secretNumber}
                 isVisible={showResults}
               />
             )}
