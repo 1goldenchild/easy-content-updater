@@ -7,7 +7,11 @@ import SubmitButton from "./SubmitButton";
 import { FormData } from "./types";
 import { supabase } from "@/integrations/supabase/client";
 
-const CollectInfoForm = () => {
+interface CollectInfoFormProps {
+  onSubmit?: (date: Date) => Promise<void>;
+}
+
+const CollectInfoForm = ({ onSubmit }: CollectInfoFormProps) => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<FormData>({
@@ -48,6 +52,11 @@ const CollectInfoForm = () => {
     console.log("Starting background operations with data:", { ...formData, date });
 
     try {
+      // Call the onSubmit prop if it exists
+      if (onSubmit) {
+        await onSubmit(date);
+      }
+
       // Store form data in localStorage before redirecting
       const klaviyoData = {
         email: formData.email,
