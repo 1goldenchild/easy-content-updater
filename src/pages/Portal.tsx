@@ -16,7 +16,7 @@ import {
 
 const Portal = () => {
   const navigate = useNavigate();
-  const { session } = useAuth();
+  const { session, loading } = useAuth();
   const [showResults, setShowResults] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date>();
   const [results, setResults] = useState({
@@ -26,15 +26,16 @@ const Portal = () => {
     chineseZodiac: ""
   });
 
-  // Redirect to login if not authenticated
+  // Redirect to login if not authenticated, but only after loading is complete
   useEffect(() => {
-    if (!session) {
+    console.log("Auth state:", { session, loading });
+    if (!loading && !session) {
+      console.log("User not authenticated, redirecting to auth");
       toast.error("Please sign in to access your reading");
       navigate("/auth");
     }
-  }, [session, navigate]);
+  }, [session, loading, navigate]);
 
-  // Load user's profile data if available
   useEffect(() => {
     const loadProfile = async () => {
       if (!session?.user.id) return;
@@ -96,6 +97,16 @@ const Portal = () => {
     window.open(url, '_blank');
   };
 
+  // Show loading state while auth is being checked
+  if (loading) {
+    return (
+      <div className="min-h-screen w-full flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-500"></div>
+      </div>
+    );
+  }
+
+  // Don't render anything if not authenticated
   if (!session) return null;
 
   return (
