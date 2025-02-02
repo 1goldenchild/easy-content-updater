@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { useAuth } from "@/components/auth/AuthProvider";
+import { supabase } from "@/integrations/supabase/client";
 import PortalHeader from "@/components/portal/PortalHeader";
 import DateInputSection from "@/components/portal/DateInputSection";
 import ResultsSection from "@/components/portal/ResultsSection";
@@ -12,6 +15,8 @@ import {
 } from "@/utils/numerologyCalculations";
 
 const Portal = () => {
+  const navigate = useNavigate();
+  const { session } = useAuth();
   const [showResults, setShowResults] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date>();
   const [results, setResults] = useState({
@@ -21,11 +26,47 @@ const Portal = () => {
     chineseZodiac: ""
   });
 
+  // Redirect to login if not authenticated
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    if (!session) {
+      toast.error("Please sign in to access your reading");
+      navigate("/auth");
+    }
+  }, [session, navigate]);
 
-  const handleCalculate = (date: Date) => {
+  // Load user's profile data if available
+  useEffect(() => {
+    const loadProfile = async () => {
+      if (!session?.user.id) return;
+
+      try {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', session.user.id)
+          .single();
+
+        if (error) throw error;
+
+        if (data.date_of_birth) {
+          setSelectedDate(new Date(data.date_of_birth));
+          setResults({
+            lifePath: data.life_path || 0,
+            partialEnergy: data.partial_energy || 0,
+            secretNumber: data.secret_number || 0,
+            chineseZodiac: data.chinese_zodiac || ""
+          });
+          setShowResults(true);
+        }
+      } catch (error) {
+        console.error("Error loading profile:", error);
+      }
+    };
+
+    loadProfile();
+  }, [session?.user.id]);
+
+  const handleCalculate = async (date: Date) => {
     console.log("Calculating numerology for date:", date);
     setSelectedDate(date);
     
@@ -34,7 +75,7 @@ const Portal = () => {
     const secretNumber = calculateSecretNumber(date);
     const chineseZodiac = getChineseZodiac(date.getFullYear());
 
-    console.log("Calculation results:", {
+    console.log("Calculated numbers:", {
       lifePath,
       partialEnergy,
       secretNumber,
@@ -55,6 +96,8 @@ const Portal = () => {
     window.open(url, '_blank');
   };
 
+  if (!session) return null;
+
   return (
     <div className="min-h-screen w-full overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 py-8">
@@ -62,7 +105,9 @@ const Portal = () => {
           {showResults && <ProgressIndicator />}
           <div className="w-full space-y-8">
             <PortalHeader />
-            <DateInputSection onCalculate={handleCalculate} />
+            {!showResults && (
+              <DateInputSection onCalculate={handleCalculate} />
+            )}
             {selectedDate && (
               <ResultsSection 
                 results={results}
