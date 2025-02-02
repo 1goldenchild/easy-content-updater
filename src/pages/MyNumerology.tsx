@@ -14,6 +14,7 @@ const MyNumerology = () => {
   const [partialEnergy, setPartialEnergy] = useState<number>();
   const [secretNumber, setSecretNumber] = useState<number>();
   const [chineseZodiac, setChineseZodiac] = useState<string>("");
+  const [showDateSelector, setShowDateSelector] = useState(true);
   const navigate = useNavigate();
   const toast = useToast();
 
@@ -30,6 +31,7 @@ const MyNumerology = () => {
       console.log("Date string representation:", date.toISOString());
       setSelectedDate(date);
       handleCalculate(date);
+      setShowDateSelector(false); // Hide the date selector
       // Clear the stored DOB after using it
       localStorage.removeItem('userDOB');
     }
@@ -73,10 +75,12 @@ const MyNumerology = () => {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 gap-8">
           <div className="space-y-8">
-            <DateSelector
-              date={selectedDate}
-              setDate={(date) => date && handleCalculate(date)}
-            />
+            {showDateSelector && (
+              <DateSelector
+                date={selectedDate}
+                setDate={(date) => date && handleCalculate(date)}
+              />
+            )}
 
             {showResults && lifePath && partialEnergy && secretNumber && selectedDate && (
               <NumerologyResults
