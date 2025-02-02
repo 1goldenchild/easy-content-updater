@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useToast } from "@/components/ui/use-toast";
 import DateSelector from "@/components/numerology/DateSelector";
 import NumerologyResults from "@/components/numerology/NumerologyResults";
-import { calculateLifePath, calculatePartialEnergy, calculateSecretNumber } from "@/utils/numerologyCalculations";
+import { calculateLifePath, calculatePartialEnergy, calculateSecretNumber, getChineseZodiac } from "@/utils/numerologyCalculations";
 import { supabase } from "@/integrations/supabase/client";
 
 const MyNumerology = () => {
@@ -13,6 +13,7 @@ const MyNumerology = () => {
   const [lifePath, setLifePath] = useState<number>();
   const [partialEnergy, setPartialEnergy] = useState<number>();
   const [secretNumber, setSecretNumber] = useState<number>();
+  const [chineseZodiac, setChineseZodiac] = useState<string>("");
   const navigate = useNavigate();
   const toast = useToast();
 
@@ -48,13 +49,17 @@ const MyNumerology = () => {
     console.log("Calculated Life Path:", lifePath);
     setLifePath(lifePath);
 
-    const partialEnergy = calculatePartialEnergy(date);
+    const partialEnergy = calculatePartialEnergy(date.getDate()); // Pass only the day
     console.log("Calculated Partial Energy:", partialEnergy);
     setPartialEnergy(partialEnergy);
 
     const secretNumber = calculateSecretNumber(date);
     console.log("Calculated Secret Number:", secretNumber);
     setSecretNumber(secretNumber);
+
+    const zodiac = getChineseZodiac(date.getFullYear());
+    console.log("Calculated Chinese Zodiac:", zodiac);
+    setChineseZodiac(zodiac);
 
     setShowResults(true);
     toast.toast({
@@ -73,11 +78,13 @@ const MyNumerology = () => {
               setDate={(date) => date && handleCalculate(date)}
             />
 
-            {showResults && lifePath && partialEnergy && secretNumber && (
+            {showResults && lifePath && partialEnergy && secretNumber && selectedDate && (
               <NumerologyResults
                 lifePath={lifePath}
                 partialEnergy={partialEnergy}
                 secretNumber={secretNumber}
+                chineseZodiac={chineseZodiac}
+                dateOfBirth={selectedDate}
                 isVisible={showResults}
               />
             )}
