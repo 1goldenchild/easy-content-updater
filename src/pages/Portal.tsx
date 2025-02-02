@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { useAuth } from "@/components/auth/AuthProvider";
 import { supabase } from "@/integrations/supabase/client";
 import PortalHeader from "@/components/portal/PortalHeader";
 import DateInputSection from "@/components/portal/DateInputSection";
@@ -15,8 +13,6 @@ import {
 } from "@/utils/numerologyCalculations";
 
 const Portal = () => {
-  const navigate = useNavigate();
-  const { session, loading } = useAuth();
   const [showResults, setShowResults] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date>();
   const [results, setResults] = useState({
@@ -25,47 +21,6 @@ const Portal = () => {
     secretNumber: 0,
     chineseZodiac: ""
   });
-
-  // Redirect to login if not authenticated, but only after loading is complete
-  useEffect(() => {
-    console.log("Auth state:", { session, loading });
-    if (!loading && !session) {
-      console.log("User not authenticated, redirecting to auth");
-      toast.error("Please sign in to access your reading");
-      navigate("/auth");
-    }
-  }, [session, loading, navigate]);
-
-  useEffect(() => {
-    const loadProfile = async () => {
-      if (!session?.user.id) return;
-
-      try {
-        const { data, error } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', session.user.id)
-          .single();
-
-        if (error) throw error;
-
-        if (data.date_of_birth) {
-          setSelectedDate(new Date(data.date_of_birth));
-          setResults({
-            lifePath: data.life_path || 0,
-            partialEnergy: data.partial_energy || 0,
-            secretNumber: data.secret_number || 0,
-            chineseZodiac: data.chinese_zodiac || ""
-          });
-          setShowResults(true);
-        }
-      } catch (error) {
-        console.error("Error loading profile:", error);
-      }
-    };
-
-    loadProfile();
-  }, [session?.user.id]);
 
   const handleCalculate = async (date: Date) => {
     console.log("Calculating numerology for date:", date);
@@ -96,18 +51,6 @@ const Portal = () => {
   const handleEbookDownload = (url: string) => {
     window.open(url, '_blank');
   };
-
-  // Show loading state while auth is being checked
-  if (loading) {
-    return (
-      <div className="min-h-screen w-full flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-500"></div>
-      </div>
-    );
-  }
-
-  // Don't render anything if not authenticated
-  if (!session) return null;
 
   return (
     <div className="min-h-screen w-full overflow-x-hidden">
