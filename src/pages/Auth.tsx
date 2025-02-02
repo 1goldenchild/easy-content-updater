@@ -47,54 +47,50 @@ const Auth = () => {
       }
 
       // Store DOB in localStorage for /mynumerology page
-      console.log("Retrieved DOB from pending_users:", pendingData.date_of_birth);
-      localStorage.setItem('userDOB', pendingData.date_of_birth);
-
       const formattedDate = pendingData.date_of_birth;
-      console.log("Using formatted date for auth:", formattedDate);
+      console.log("Retrieved DOB from pending_users:", formattedDate);
+      localStorage.setItem('userDOB', formattedDate);
 
-      // Try to sign up first (this will work if the user doesn't exist)
-      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+      // Try to sign in first (this will work if the user exists)
+      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
         email: email.toLowerCase().trim(),
         password: formattedDate,
-        options: {
-          data: {
-            date_of_birth: formattedDate
-          },
-          emailRedirectTo: undefined
-        }
       });
 
-      if (signUpError) {
-        console.error("Signup error:", signUpError);
-        // If signup fails, try to sign in
-        const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+      if (signInError) {
+        console.log("Sign in failed, attempting signup");
+        // If sign in fails, try to sign up
+        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
           email: email.toLowerCase().trim(),
           password: formattedDate,
+          options: {
+            data: {
+              date_of_birth: formattedDate
+            }
+          }
         });
 
-        if (signInError) {
-          console.error("Sign in error:", signInError);
+        if (signUpError) {
+          console.error("Signup error:", signUpError);
           toast({
             variant: "destructive",
             title: "Error",
             description: "Unable to authenticate. Please try again.",
           });
-        } else if (signInData.user) {
-          navigate("/mynumerology");
-        }
-      } else if (signUpData.user) {
-        // If signup is successful, try to sign in immediately
-        const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
-          email: email.toLowerCase().trim(),
-          password: formattedDate,
-        });
+        } else if (signUpData.user) {
+          // After successful signup, try to sign in immediately
+          const { error: finalSignInError } = await supabase.auth.signInWithPassword({
+            email: email.toLowerCase().trim(),
+            password: formattedDate,
+          });
 
-        if (!signInError && signInData.user) {
-          navigate("/mynumerology");
+          if (!finalSignInError) {
+            navigate("/mynumerology");
+          }
         }
+      } else if (signInData.user) {
+        navigate("/mynumerology");
       }
-      
     } catch (error) {
       console.error("Authentication error:", error);
       toast({
