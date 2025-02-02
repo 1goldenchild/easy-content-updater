@@ -1,8 +1,5 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { toast } from "sonner";
-import { useAuth } from "@/components/auth/AuthProvider";
-import { supabase } from "@/integrations/supabase/client";
 import CollectInfoForm from "@/components/collect-info/CollectInfoForm";
 import CollectInfoPreview from "@/components/collect-info/CollectInfoPreview";
 import { 
@@ -11,19 +8,10 @@ import {
   calculateSecretNumber,
   getChineseZodiac 
 } from "@/utils/numerologyCalculations";
+import { supabase } from "@/integrations/supabase/client";
 
 const CollectInfo = () => {
-  const navigate = useNavigate();
-  const { session } = useAuth();
   const [showPreview, setShowPreview] = useState(false);
-
-  // Redirect to login if not authenticated
-  useEffect(() => {
-    if (!session) {
-      toast.error("Please sign in to access your reading");
-      navigate("/auth");
-    }
-  }, [session, navigate]);
 
   const handleDateSubmit = async (date: Date) => {
     console.log("Calculating numerology for date:", date);
@@ -42,29 +30,24 @@ const CollectInfo = () => {
     });
 
     try {
-      // Save to user's profile
+      // Create a user reading entry
       const { error } = await supabase
-        .from('profiles')
-        .update({
+        .from('user_readings')
+        .insert([{
           date_of_birth: date.toISOString(),
-          life_path: lifePath,
-          partial_energy: partialEnergy,
-          secret_number: secretNumber,
-          chinese_zodiac: chineseZodiac
-        })
-        .eq('id', session?.user.id);
+          name: 'Anonymous', // We'll update this later when we collect more info
+          email: 'anonymous@example.com' // We'll update this later when we collect more info
+        }]);
 
       if (error) throw error;
 
-      toast.success("Your numerology reading has been saved!");
+      toast.success("Your numerology reading is ready!");
       setShowPreview(true);
     } catch (error) {
-      console.error("Error saving profile:", error);
+      console.error("Error saving reading:", error);
       toast.error("Failed to save your reading. Please try again.");
     }
   };
-
-  if (!session) return null;
 
   return (
     <div className="min-h-screen bg-[#0F1117]">
