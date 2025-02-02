@@ -55,7 +55,7 @@ const Auth = () => {
       console.log("Using formatted date for auth:", formattedDate);
 
       // Try to sign in first
-      const { error: signInError } = await supabase.auth.signInWithPassword({
+      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
         email: email.toLowerCase().trim(),
         password: formattedDate,
       });
@@ -64,9 +64,15 @@ const Auth = () => {
         console.log("Sign in failed, attempting signup:", signInError.message);
         
         // If login fails, try to sign up
-        const { error: signUpError } = await supabase.auth.signUp({
+        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
           email: email.toLowerCase().trim(),
           password: formattedDate,
+          options: {
+            emailRedirectTo: window.location.origin + "/mynumerology",
+            data: {
+              date_of_birth: formattedDate
+            }
+          }
         });
 
         if (signUpError) {
@@ -74,16 +80,25 @@ const Auth = () => {
           toast({
             variant: "destructive",
             title: "Error",
-            description: "Unable to create account. Please try again.",
+            description: "Unable to create account. Please try again in a few minutes.",
           });
-        } else {
-          toast({
-            title: "Success",
-            description: "Account created successfully. You can now access your numerology.",
+        } else if (signUpData.user) {
+          // If signup is successful, try to sign in immediately
+          const { error: immediateSignInError } = await supabase.auth.signInWithPassword({
+            email: email.toLowerCase().trim(),
+            password: formattedDate,
           });
-          navigate("/mynumerology");
+
+          if (!immediateSignInError) {
+            navigate("/mynumerology");
+          } else {
+            toast({
+              title: "Account Created",
+              description: "Please check your email to verify your account.",
+            });
+          }
         }
-      } else {
+      } else if (signInData.user) {
         // Successful login
         console.log("Authentication successful, navigating to /mynumerology");
         navigate("/mynumerology");
