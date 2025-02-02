@@ -45,12 +45,13 @@ const Auth = () => {
       }
 
       // Store DOB in localStorage for /mynumerology page
-      console.log("Storing DOB in localStorage:", pendingData.date_of_birth);
+      console.log("Retrieved DOB from pending_users:", pendingData.date_of_birth);
+      console.log("DOB type:", typeof pendingData.date_of_birth);
       localStorage.setItem('userDOB', pendingData.date_of_birth);
 
       // Format the date consistently for use as password
       const formattedDate = pendingData.date_of_birth;
-      console.log("Attempting sign in with:", { email, password: formattedDate });
+      console.log("Using formatted date for auth:", formattedDate);
 
       // Try to sign in first
       const { error: signInError } = await supabase.auth.signInWithPassword({

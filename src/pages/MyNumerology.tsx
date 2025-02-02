@@ -27,8 +27,12 @@ const MyNumerology = () => {
     const storedDOB = localStorage.getItem('userDOB');
     if (storedDOB) {
       console.log("Found stored DOB:", storedDOB);
-      const date = new Date(storedDOB);
+      // Parse the date string into a Date object
+      const [year, month, day] = storedDOB.split('-').map(Number);
+      const date = new Date(year, month - 1, day); // month is 0-indexed in JS
+      console.log("Parsed date components:", { year, month, day });
       console.log("Converted to Date object:", date);
+      console.log("Date string representation:", date.toISOString());
       setSelectedDate(date);
       handleCalculate(date);
       // Clear the stored DOB after using it
@@ -38,6 +42,12 @@ const MyNumerology = () => {
 
   const handleCalculate = (date: Date) => {
     console.log("Calculating numerology for date:", date);
+    console.log("Date components:", {
+      year: date.getFullYear(),
+      month: date.getMonth() + 1,
+      day: date.getDate()
+    });
+    
     setSelectedDate(date);
     
     const lifePath = calculateLifePath(date);
@@ -62,10 +72,6 @@ const MyNumerology = () => {
     toast.success("Calculation complete!");
   };
 
-  const handleEbookDownload = (url: string) => {
-    window.open(url, '_blank');
-  };
-
   return (
     <div className="min-h-screen w-full overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 py-8">
@@ -82,32 +88,6 @@ const MyNumerology = () => {
                 dateOfBirth={selectedDate}
                 isVisible={showResults}
               />
-            )}
-            
-            {showResults && (
-              <div className="mt-16 p-8 rounded-lg bg-gradient-to-r from-[#2A2F3C] to-[#221F26] border border-[#FFD700]/20">
-                <h2 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-[#FFD700] to-[#FDB931] bg-clip-text text-transparent">
-                  Offered Numerology eBooks
-                </h2>
-                
-                <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                  <button 
-                    onClick={() => handleEbookDownload("https://d2saw6je89goi1.cloudfront.net/uploads/digital_asset/file/1195754/the-golden-numerology-guide-2023-edition..pdf")}
-                    className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#3A3F4C] to-[#2A2F3C] hover:from-[#FFD700]/20 hover:to-[#FDB931]/20 transition-all duration-300 text-white/90 hover:text-[#FFD700] border border-[#FFD700]/20 hover:border-[#FFD700]/40 flex items-center gap-2"
-                  >
-                    <span>📚</span>
-                    The Golden Numerology Guide
-                  </button>
-                  
-                  <button 
-                    onClick={() => handleEbookDownload("https://d2saw6je89goi1.cloudfront.net/uploads/digital_asset/file/1195755/get-rich-using-numerology-ebook-2023-editon.pdf")}
-                    className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#3A3F4C] to-[#2A2F3C] hover:from-[#FFD700]/20 hover:to-[#FDB931]/20 transition-all duration-300 text-white/90 hover:text-[#FFD700] border border-[#FFD700]/20 hover:border-[#FFD700]/40 flex items-center gap-2"
-                  >
-                    <span>💰</span>
-                    Get Rich Using Numerology
-                  </button>
-                </div>
-              </div>
             )}
           </div>
         </div>
