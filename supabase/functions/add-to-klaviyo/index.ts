@@ -30,7 +30,7 @@ serve(async (req) => {
       data: {
         type: 'profile',
         attributes: {
-          email: email.toLowerCase().trim(),
+          email: email,
           first_name: name,
           properties: {
             source: 'Numerology Form',
@@ -53,21 +53,28 @@ serve(async (req) => {
       body: JSON.stringify(requestBody)
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Klaviyo API error response:', errorText);
-      throw new Error(`Klaviyo API error: ${response.status} - ${errorText}`);
+    const responseText = await response.text();
+    console.log('Raw Klaviyo API response:', responseText);
+
+    let responseData;
+    try {
+      responseData = JSON.parse(responseText);
+    } catch (e) {
+      console.error('Failed to parse Klaviyo response as JSON:', e);
+      responseData = { error: 'Invalid JSON response' };
     }
 
-    const responseData = await response.json();
-    console.log('Klaviyo API success response:', responseData);
+    console.log('Klaviyo API response status:', response.status);
+    console.log('Klaviyo API response headers:', Object.fromEntries(response.headers.entries()));
+    console.log('Klaviyo API parsed response:', responseData);
+
+    if (!response.ok) {
+      console.error('Klaviyo API error:', responseData);
+      throw new Error(`Klaviyo API error: ${response.status} - ${JSON.stringify(responseData)}`);
+    }
 
     return new Response(
-      JSON.stringify({ 
-        success: true, 
-        message: 'Successfully created Klaviyo profile', 
-        data: responseData 
-      }), 
+      JSON.stringify({ success: true, message: 'Successfully created Klaviyo profile', data: responseData }), 
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         status: 200 
