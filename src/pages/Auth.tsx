@@ -26,30 +26,29 @@ const Auth = () => {
     console.log("Attempting signin with:", { email });
 
     try {
-      // Get the most recent reading for this email
-      console.log("Querying user_readings for:", email);
-      const { data: readingData, error: readingError } = await supabase
-        .from('user_readings')
+      // First check pending_users table
+      console.log("Checking pending_users for:", email);
+      const { data: pendingData, error: pendingError } = await supabase
+        .from('pending_users')
         .select('date_of_birth')
         .eq('email', email.toLowerCase().trim())
-        .order('created_at', { ascending: false })
-        .limit(1)
         .single();
 
-      console.log("Reading data result:", { readingData, readingError });
-
-      if (readingError) {
-        console.error("Reading lookup error:", readingError);
+      if (pendingError) {
+        console.error("Pending user lookup error:", pendingError);
         throw new Error("No reading found for this email. Please complete the analysis form first.");
       }
 
-      if (!readingData) {
-        console.error("No reading data found");
+      if (!pendingData) {
+        console.error("No pending user data found");
         throw new Error("No reading found for this email. Please complete the analysis form first.");
       }
+
+      // Store DOB in localStorage for /mynumerology page
+      localStorage.setItem('userDOB', pendingData.date_of_birth);
 
       // Format the date consistently for use as password
-      const formattedDate = readingData.date_of_birth.split('T')[0];
+      const formattedDate = pendingData.date_of_birth;
       console.log("Attempting sign in with:", { email, password: formattedDate });
 
       // Try to sign in first
@@ -73,7 +72,7 @@ const Auth = () => {
       }
 
       toast.success("Successfully signed in!");
-      navigate("/portal");
+      navigate("/mynumerology");
     } catch (error) {
       console.error("Auth error:", error);
       toast.error(error instanceof Error ? error.message : "An error occurred during sign in");

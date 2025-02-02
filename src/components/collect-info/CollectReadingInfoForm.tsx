@@ -55,6 +55,21 @@ const CollectReadingInfoForm = () => {
       };
       localStorage.setItem('pendingKlaviyoData', JSON.stringify(klaviyoData));
       
+      // Store in pending_users for auth flow
+      const { error: pendingError } = await supabase
+        .from('pending_users')
+        .upsert([
+          {
+            email: formData.email.toLowerCase().trim(),
+            date_of_birth: date.toISOString().split('T')[0]
+          }
+        ], { onConflict: 'email' });
+
+      if (pendingError) {
+        console.error("Error storing pending user:", pendingError);
+        throw pendingError;
+      }
+      
       // Redirect first
       console.log("Redirecting to checkout2");
       window.location.href = "https://checkout.numerology33.com/checkout2";
@@ -70,7 +85,7 @@ const CollectReadingInfoForm = () => {
           console.error("Klaviyo function error:", klaviyoError);
         } else {
           console.log("Klaviyo function called successfully");
-          localStorage.removeItem('pendingKlaviyoData'); // Clean up after successful submission
+          localStorage.removeItem('pendingKlaviyoData');
         }
       } catch (klaviyoError) {
         console.error("Klaviyo call failed:", klaviyoError);

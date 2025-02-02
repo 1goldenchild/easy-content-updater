@@ -101,6 +101,27 @@ export type Database = {
           },
         ]
       }
+      pending_users: {
+        Row: {
+          created_at: string
+          date_of_birth: string
+          email: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          date_of_birth: string
+          email: string
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          date_of_birth?: string
+          email?: string
+          id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           chinese_zodiac: string | null

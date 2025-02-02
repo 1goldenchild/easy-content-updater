@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import PortalHeader from "@/components/portal/PortalHeader";
@@ -21,6 +21,18 @@ const MyNumerology = () => {
     secretNumber: 0,
     chineseZodiac: ""
   });
+
+  useEffect(() => {
+    // Check for stored DOB on component mount
+    const storedDOB = localStorage.getItem('userDOB');
+    if (storedDOB) {
+      const date = new Date(storedDOB);
+      setSelectedDate(date);
+      handleCalculate(date);
+      // Clear the stored DOB after using it
+      localStorage.removeItem('userDOB');
+    }
+  }, []);
 
   const handleCalculate = async (date: Date) => {
     console.log("Calculating numerology for date:", date);
