@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [lastAttempt, setLastAttempt] = useState(0);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -22,6 +23,19 @@ const Auth = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Rate limiting check - only allow one attempt every 30 seconds
+    const now = Date.now();
+    if (now - lastAttempt < 30000) {
+      toast({
+        variant: "destructive",
+        title: "Please wait",
+        description: "Please wait 30 seconds before trying again.",
+      });
+      return;
+    }
+    setLastAttempt(now);
+
     setIsLoading(true);
     console.log("Starting auth process for email:", email);
 
@@ -48,7 +62,6 @@ const Auth = () => {
 
       // Store DOB in localStorage for /mynumerology page
       console.log("Retrieved DOB from pending_users:", pendingData.date_of_birth);
-      console.log("DOB type:", typeof pendingData.date_of_birth);
       localStorage.setItem('userDOB', pendingData.date_of_birth);
 
       // Format the date consistently for use as password
@@ -64,27 +77,52 @@ const Auth = () => {
       if (signInError) {
         console.log("Sign in failed, attempting signup:", signInError.message);
         
-        // If sign in fails, try to sign up
-        const { error: signUpError } = await supabase.auth.signUp({
-          email: email.toLowerCase().trim(),
-          password: formattedDate,
-        });
+        // Only attempt signup if it's not an invalid credentials error
+        if (signInError.message === "Invalid login credentials") {
+          // Try to sign up
+          const { error: signUpError } = await supabase.auth.signUp({
+            email: email.toLowerCase().trim(),
+            password: formattedDate,
+          });
 
-        if (signUpError) {
-          console.error("Signup error:", signUpError);
+          if (signUpError) {
+            console.error("Signup error:", signUpError);
+            
+            // Handle rate limit error specifically
+            if (signUpError.message === "email rate limit exceeded") {
+              toast({
+                variant: "destructive",
+                title: "Rate Limit Exceeded",
+                description: "Please wait a few minutes before trying again.",
+              });
+            } else {
+              toast({
+                variant: "destructive",
+                title: "Error",
+                description: signUpError.message,
+              });
+            }
+            return;
+          }
+          
+          // If signup was successful
+          toast({
+            title: "Check your email",
+            description: "We've sent you a confirmation email.",
+          });
+        } else {
+          // Handle other sign in errors
           toast({
             variant: "destructive",
             title: "Error",
-            description: signUpError.message,
+            description: signInError.message,
           });
-          setIsLoading(false);
-          return;
         }
+      } else {
+        // If we get here, sign in was successful
+        console.log("Authentication successful, navigating to /mynumerology");
+        navigate("/mynumerology");
       }
-
-      // If we get here, either sign in or sign up was successful
-      console.log("Authentication successful, navigating to /mynumerology");
-      navigate("/mynumerology");
       
     } catch (error) {
       console.error("Authentication error:", error);
@@ -128,6 +166,7 @@ const Auth = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-500 text-white"
                 placeholder="Enter your email"
+                disabled={isLoading}
               />
             </div>
 
