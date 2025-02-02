@@ -27,7 +27,7 @@ const PreviewSection = () => {
   }, []);
 
   const isReadingPage = window.location.pathname === '/reading';
-  const headingText = isReadingPage ? "What's Included in Your Reading?" : "What's Included in Your Analysis?";
+  const headingText = isReadingPage ? "What's Included in Your Reading?" : "What's Included in Your Reading?";
   const buttonText = "Unlock Your Reading";
 
   return (
