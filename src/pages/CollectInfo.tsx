@@ -30,24 +30,21 @@ const CollectInfo = () => {
     });
 
     try {
-      // Save to profiles table
+      // Create a user reading entry
       const { error } = await supabase
-        .from('profiles')
-        .update({
+        .from('user_readings')
+        .insert([{
           date_of_birth: date.toISOString(),
-          life_path: lifePath,
-          partial_energy: partialEnergy,
-          secret_number: secretNumber,
-          chinese_zodiac: chineseZodiac
-        })
-        .eq('id', session?.user.id);
+          name: 'Anonymous', // We'll update this later when we collect more info
+          email: 'anonymous@example.com' // We'll update this later when we collect more info
+        }]);
 
       if (error) throw error;
 
-      toast.success("Your numerology reading has been saved!");
+      toast.success("Your numerology reading is ready!");
       setShowPreview(true);
     } catch (error) {
-      console.error("Error saving profile:", error);
+      console.error("Error saving reading:", error);
       toast.error("Failed to save your reading. Please try again.");
     }
   };
