@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/components/auth/AuthProvider";
 import Index from "./pages/Index";
 import Portal from "./pages/Portal";
+import MyNumerology from "./pages/MyNumerology";
 import CollectInfo from "./pages/CollectInfo";
 import CollectReadingInfo from "./pages/CollectReadingInfo";
 import Support from "./pages/Support";
@@ -21,6 +22,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/portal" element={<Portal />} />
+          <Route path="/mynumerology" element={<MyNumerology />} />
           <Route path="/collect-info" element={<CollectInfo />} />
           <Route path="/collect-reading-info" element={<CollectReadingInfo />} />
           <Route path="/support" element={<Support />} />
