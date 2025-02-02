@@ -26,12 +26,14 @@ const Auth = () => {
     console.log("Attempting signin with:", { email });
 
     try {
-      // First, get the user's DOB from user_readings
+      // Get the most recent reading for this email
       console.log("Querying user_readings for:", email);
       const { data: readingData, error: readingError } = await supabase
         .from('user_readings')
         .select('date_of_birth')
         .eq('email', email.toLowerCase().trim())
+        .order('created_at', { ascending: false })
+        .limit(1)
         .single();
 
       console.log("Reading data result:", { readingData, readingError });
