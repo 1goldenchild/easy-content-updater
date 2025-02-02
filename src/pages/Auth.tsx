@@ -50,7 +50,6 @@ const Auth = () => {
       console.log("Retrieved DOB from pending_users:", pendingData.date_of_birth);
       localStorage.setItem('userDOB', pendingData.date_of_birth);
 
-      // Format the date consistently for use as password
       const formattedDate = pendingData.date_of_birth;
       console.log("Using formatted date for auth:", formattedDate);
 
