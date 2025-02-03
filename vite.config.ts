@@ -29,7 +29,6 @@ export default defineConfig(({ mode }) => ({
           ],
           ui: [
             '@radix-ui/react-slot',
-            '@radix-ui/react-icons',
             'class-variance-authority',
             'clsx',
             'tailwind-merge'
@@ -54,7 +53,6 @@ export default defineConfig(({ mode }) => ({
       'react', 
       'react-dom', 
       'react-router-dom',
-      '@radix-ui/react-icons',
       '@radix-ui/react-slot',
       'framer-motion'
     ]
