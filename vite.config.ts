@@ -21,20 +21,31 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: [
-            'react',
-            'react-dom',
-            'react-router-dom'
-          ],
-          ui: [
-            '@radix-ui/react-slot',
-            'class-variance-authority',
-            'clsx',
-            'tailwind-merge'
-          ],
-          motion: ['framer-motion'],
-          utils: ['date-fns', 'lucide-react']
+        manualChunks: (id) => {
+          // Create separate chunks for major dependencies
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'react-vendor';
+            }
+            if (id.includes('@radix-ui')) {
+              return 'ui-vendor';
+            }
+            if (id.includes('framer-motion')) {
+              return 'animation-vendor';
+            }
+            if (id.includes('lucide-react')) {
+              return 'icons-vendor';
+            }
+            return 'vendor'; // Other dependencies
+          }
+          // Split route components into separate chunks
+          if (id.includes('/pages/')) {
+            return 'pages';
+          }
+          if (id.includes('/components/')) {
+            const componentType = id.split('/components/')[1].split('/')[0];
+            return `component-${componentType}`;
+          }
         }
       },
     },

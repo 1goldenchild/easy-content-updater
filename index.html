@@ -6,14 +6,32 @@
     <title>Numerology 33</title>
     <link rel="icon" type="image/png" href="/lovable-uploads/0a40578d-731f-4ffc-88d6-741c851aa5b0.png" />
     <meta name="description" content="Curious about Life Path Number 9? Uncover how this numerology number can provide insights into your personal journey, challenges, and potential for growth." />
-    <meta name="keywords" content="numerology, life path number, destiny number, numerology reading, personal numbers, spiritual guidance, numerological analysis" />
-    <meta name="author" content="Numerology Insights" />
     
     <!-- Preload critical assets -->
     <link rel="preload" href="/src/main.tsx" as="script" type="module" />
     <link rel="preload" href="/src/index.css" as="style" />
     
-    <!-- Google tag (gtag.js) - Deferred loading -->
+    <!-- Inline critical CSS -->
+    <style>
+      /* Add only the most critical styles needed for initial render */
+      body {
+        margin: 0;
+        background-color: #221F26;
+        color: #fff;
+      }
+      #root {
+        min-height: 100vh;
+      }
+    </style>
+    
+    <!-- Defer non-critical CSS -->
+    <link rel="stylesheet" href="/src/index.css" media="print" onload="this.media='all'" />
+    
+    <!-- Meta tags -->
+    <meta name="keywords" content="numerology, life path number, destiny number, numerology reading, personal numbers, spiritual guidance, numerological analysis" />
+    <meta name="author" content="Numerology Insights" />
+    
+    <!-- Deferred Google Analytics -->
     <script>
       window.addEventListener('load', function() {
         setTimeout(function() {
@@ -28,28 +46,24 @@
             gtag('js', new Date());
             gtag('config', 'AW-11340854297');
           };
-        }, 3000); // Delay loading by 3 seconds after page load
+        }, 3000);
       });
     </script>
     
-    <!-- Open Graph / Social Media -->
+    <!-- Social Media Meta Tags -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Numerology 33" />
     <meta property="og:description" content="Curious about Life Path Number 9? Uncover how this numerology number can provide insights into your personal journey, challenges, and potential for growth." />
     <meta property="og:image" content="/og-image.png" />
-    
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Numerology 33" />
-    <meta name="twitter:description" content="Curious about Life Path Number 9? Uncover how this numerology number can provide insights into your personal journey, challenges, and potential for growth." />
-    <meta property="twitter:image" content="/og-image.png" />
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://numerology33.com" />
     
-    <!-- Sitemap -->
-    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-
+    <!-- Preconnect to required origins -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    
     <!-- Schema.org structured data -->
     <script type="application/ld+json">
       {
@@ -57,36 +71,12 @@
         "@type": "WebSite",
         "name": "Numerology 33",
         "description": "Advanced Numerology Analysis and Life Path Readings",
-        "url": "https://numerology33.com",
-        "potentialAction": {
-          "@type": "ReadAction",
-          "target": {
-            "@type": "EntryPoint",
-            "urlTemplate": "https://numerology33.com/numerology-reading"
-          }
-        }
-      }
-    </script>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "Numerology Reading",
-        "description": "Discover your life path number, destiny number, and personal numerology analysis to unlock your full potential.",
-        "provider": {
-          "@type": "Organization",
-          "name": "Numerology 33",
-          "logo": "https://numerology33.com/og-image.png"
-        },
-        "areaServed": "Worldwide",
-        "serviceType": "Numerology Analysis"
+        "url": "https://numerology33.com"
       }
     </script>
   </head>
-
   <body>
     <div id="root"></div>
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module" defer></script>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/src/main.tsx" async></script>
   </body>
 </html>
