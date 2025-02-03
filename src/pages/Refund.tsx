@@ -20,8 +20,6 @@ const Refund = () => {
           <section className="space-y-4">
             <h2 className="text-xl font-semibold text-foreground">Refund Eligibility</h2>
             <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
-              <li>We offer a full refund on numerology analyses if you do not learn any new information from the analysis.</li>
-              <li>To be eligible for a refund, you must have filled in the email sent at the time of purchase, answering the questions provided.</li>
               <li>Refund requests must be submitted within 1 day of receiving your numerology analysis.</li>
             </ul>
           </section>
@@ -29,7 +27,7 @@ const Refund = () => {
           <section className="space-y-4">
             <h2 className="text-xl font-semibold text-foreground">How to Request a Refund</h2>
             <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
-              <li>To request a refund, please contact us at Support@numerology33.com with your refund request and the email you provided at the time of purchase.</li>
+              <li>To request a refund, please contact us at Support@numerology33.com or Thenumerologysource@gmail.com with your refund request and the email you provided at the time of purchase.</li>
               <li>Please include the reasons why you believe you did not learn any new information from the analysis.</li>
             </ul>
           </section>
