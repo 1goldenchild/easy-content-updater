@@ -5,11 +5,21 @@ import { Toaster } from "sonner";
 import { AuthProvider } from "./components/auth/AuthProvider";
 import "./index.css";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <AuthProvider>
-      <App />
-      <Toaster position="top-center" />
-    </AuthProvider>
-  </React.StrictMode>
-);
+// Defer non-critical initialization
+const init = () => {
+  ReactDOM.createRoot(document.getElementById("root")!).render(
+    <React.StrictMode>
+      <AuthProvider>
+        <App />
+        <Toaster position="top-center" />
+      </AuthProvider>
+    </React.StrictMode>
+  );
+};
+
+// Check if the document is already loaded
+if (document.readyState === 'complete') {
+  init();
+} else {
+  window.addEventListener('load', init);
+}

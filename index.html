@@ -10,14 +10,20 @@
     <meta name="author" content="Numerology Insights" />
     
     <!-- Preload critical assets -->
-    <link rel="preload" href="/src/main.tsx" as="script" type="module" />
+    <link rel="preload" href="/src/main.tsx" as="script" type="module" crossorigin="anonymous" />
     <link rel="preload" href="/src/index.css" as="style" />
     
-    <!-- Google tag (gtag.js) - Deferred loading -->
+    <!-- Deferred Google Tag Manager -->
     <script>
       window.addEventListener('load', function() {
-        setTimeout(function() {
-          var script = document.createElement('script');
+        // Only load GTM if user has scrolled or after 3 seconds
+        let gtmLoaded = false;
+        
+        function loadGTM() {
+          if (gtmLoaded) return;
+          gtmLoaded = true;
+          
+          const script = document.createElement('script');
           script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-11340854297';
           script.async = true;
           document.head.appendChild(script);
@@ -26,9 +32,19 @@
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'AW-11340854297');
+            gtag('config', 'AW-11340854297', {
+              'send_page_view': false // Only send page views when needed
+            });
           };
-        }, 3000); // Delay loading by 3 seconds after page load
+        }
+
+        // Load GTM after user interaction or 3 seconds
+        let scrollHandler = function() {
+          loadGTM();
+          window.removeEventListener('scroll', scrollHandler);
+        };
+        window.addEventListener('scroll', scrollHandler);
+        setTimeout(loadGTM, 3000);
       });
     </script>
     
@@ -86,7 +102,9 @@
 
   <body>
     <div id="root"></div>
+    <!-- Load GPT Engineer script with defer -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module" defer></script>
-    <script type="module" src="/src/main.tsx"></script>
+    <!-- Load main application script with defer -->
+    <script type="module" src="/src/main.tsx" defer></script>
   </body>
 </html>
