@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react"
 import ReadingHero from "@/components/home/ReadingHero"
 import Navbar from "@/components/layout/Navbar"
 import Footer from "@/components/layout/Footer"
+import { usePageTracking } from "@/hooks/usePageTracking"
 
 // Lazy load components that are not immediately visible
 const SecretKnowledge = lazy(() => import("@/components/home/SecretKnowledge"))
@@ -11,6 +12,8 @@ const Testimonials = lazy(() => import("@/components/home/Testimonials"))
 const BlogSection = lazy(() => import("@/components/home/sections/BlogSection"))
 
 const Reading = () => {
+  usePageTracking();
+
   return (
     <>
       <Navbar />

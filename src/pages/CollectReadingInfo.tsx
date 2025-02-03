@@ -3,8 +3,11 @@ import CollectReadingInfoForm from "@/components/collect-info/CollectReadingInfo
 import CollectInfoPreview from "@/components/collect-info/CollectInfoPreview";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { usePageTracking } from "@/hooks/usePageTracking";
 
 const CollectReadingInfo = () => {
+  usePageTracking();
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
