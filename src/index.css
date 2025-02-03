@@ -37,36 +37,10 @@
 
   body {
     @apply bg-[#221F26] text-[hsl(var(--foreground))] min-h-screen;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
 
   #root {
     @apply min-h-screen;
-  }
-
-  /* Optimize images for mobile */
-  img {
-    @apply max-w-full h-auto;
-    content-visibility: auto;
-  }
-
-  /* Reduce motion on mobile */
-  @media (prefers-reduced-motion: reduce) {
-    * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
-
-  /* Optimize paint performance */
-  .lazy-section {
-    will-change: transform;
-    transform: translateZ(0);
-    backface-visibility: hidden;
   }
 }
 
