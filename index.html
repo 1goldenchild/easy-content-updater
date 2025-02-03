@@ -13,23 +13,13 @@
     <link rel="preload" href="/src/main.tsx" as="script" type="module" />
     <link rel="preload" href="/src/index.css" as="style" />
     
-    <!-- Google tag (gtag.js) - Deferred loading -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11340854297"></script>
     <script>
-      window.addEventListener('load', function() {
-        setTimeout(function() {
-          var script = document.createElement('script');
-          script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-11340854297';
-          script.async = true;
-          document.head.appendChild(script);
-          
-          script.onload = function() {
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'AW-11340854297');
-          };
-        }, 3000); // Delay loading by 3 seconds after page load
-      });
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-11340854297');
     </script>
     
     <!-- Open Graph / Social Media -->

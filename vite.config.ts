@@ -21,21 +21,15 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: [
-            'react',
-            'react-dom',
-            'react-router-dom'
-          ],
-          ui: [
-            '@radix-ui/react-slot',
-            '@radix-ui/react-icons',
-            'class-variance-authority',
-            'clsx',
-            'tailwind-merge'
-          ],
-          motion: ['framer-motion'],
-          utils: ['date-fns', 'lucide-react']
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
+              return 'vendor';
+            }
+            if (id.includes('@radix-ui')) {
+              return 'radix';
+            }
+          }
         }
       },
     },
@@ -44,19 +38,11 @@ export default defineConfig(({ mode }) => ({
     terserOptions: {
       compress: {
         drop_console: mode !== 'development',
-        drop_debugger: mode !== 'development',
-        pure_funcs: mode !== 'development' ? ['console.log'] : []
+        drop_debugger: mode !== 'development'
       }
     }
   },
   optimizeDeps: {
-    include: [
-      'react', 
-      'react-dom', 
-      'react-router-dom',
-      '@radix-ui/react-icons',
-      '@radix-ui/react-slot',
-      'framer-motion'
-    ]
+    include: ['react', 'react-dom', 'react-router-dom', '@radix-ui/react-icons', '@radix-ui/react-slot']
   }
 }));
