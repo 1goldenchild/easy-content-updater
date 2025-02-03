@@ -24,27 +24,11 @@ export default defineConfig(({ mode }) => ({
         manualChunks: (id) => {
           if (id.includes('node_modules')) {
             if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
-              return 'vendor-react';
+              return 'vendor';
             }
             if (id.includes('@radix-ui')) {
-              return 'vendor-radix';
+              return 'radix';
             }
-            if (id.includes('framer-motion')) {
-              return 'vendor-framer';
-            }
-            if (id.includes('lucide-react')) {
-              return 'vendor-lucide';
-            }
-            // Group remaining vendor code
-            return 'vendor-other';
-          }
-          // Group page-specific code
-          if (id.includes('/pages/')) {
-            return 'pages';
-          }
-          // Group shared components
-          if (id.includes('/components/')) {
-            return 'components';
           }
         }
       },
@@ -59,6 +43,6 @@ export default defineConfig(({ mode }) => ({
     }
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom', '@radix-ui/react-icons', '@radix-ui/react-slot', 'framer-motion', 'lucide-react']
+    include: ['react', 'react-dom', 'react-router-dom', '@radix-ui/react-icons', '@radix-ui/react-slot']
   }
 }));
