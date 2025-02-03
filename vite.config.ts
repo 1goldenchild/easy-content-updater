@@ -21,30 +21,20 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: (id) => {
-          // Create separate chunks for major dependencies
-          if (id.includes('node_modules')) {
-            if (id.includes('react/') || id.includes('react-dom/')) {
-              return 'react-vendor';
-            }
-            if (id.includes('framer-motion')) {
-              return 'animations';
-            }
-            if (id.includes('@radix-ui/')) {
-              return 'ui-components';
-            }
-            if (id.includes('lucide-react') || id.includes('date-fns')) {
-              return 'utils';
-            }
-            return 'vendor'; // Other dependencies
-          }
-          // Split app code into logical chunks
-          if (id.includes('/components/numerology/')) {
-            return 'numerology';
-          }
-          if (id.includes('/components/home/')) {
-            return 'home';
-          }
+        manualChunks: {
+          vendor: [
+            'react',
+            'react-dom',
+            'react-router-dom'
+          ],
+          ui: [
+            '@radix-ui/react-slot',
+            'class-variance-authority',
+            'clsx',
+            'tailwind-merge'
+          ],
+          motion: ['framer-motion'],
+          utils: ['date-fns', 'lucide-react']
         }
       },
     },
@@ -63,6 +53,7 @@ export default defineConfig(({ mode }) => ({
       'react', 
       'react-dom', 
       'react-router-dom',
+      '@radix-ui/react-slot',
       'framer-motion'
     ]
   }

@@ -10,18 +10,14 @@
     <meta name="author" content="Numerology Insights" />
     
     <!-- Preload critical assets -->
+    <link rel="preload" href="/src/main.tsx" as="script" type="module" />
     <link rel="preload" href="/src/index.css" as="style" />
     
-    <!-- Deferred Google Tag Manager -->
+    <!-- Google tag (gtag.js) - Deferred loading -->
     <script>
       window.addEventListener('load', function() {
-        let gtmLoaded = false;
-        
-        function loadGTM() {
-          if (gtmLoaded) return;
-          gtmLoaded = true;
-          
-          const script = document.createElement('script');
+        setTimeout(function() {
+          var script = document.createElement('script');
           script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-11340854297';
           script.async = true;
           document.head.appendChild(script);
@@ -30,13 +26,9 @@
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'AW-11340854297', {
-              'send_page_view': false
-            });
+            gtag('config', 'AW-11340854297');
           };
-        }
-
-        setTimeout(loadGTM, 3000);
+        }, 3000); // Delay loading by 3 seconds after page load
       });
     </script>
     
@@ -94,7 +86,7 @@
 
   <body>
     <div id="root"></div>
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module" defer></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
