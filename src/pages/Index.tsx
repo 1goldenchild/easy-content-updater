@@ -3,19 +3,12 @@ import Hero from "@/components/home/Hero"
 import Navbar from "@/components/layout/Navbar"
 import Footer from "@/components/layout/Footer"
 
-// Lazy load components with loading fallbacks
+// Lazy load components that are not immediately visible
 const SecretKnowledge = lazy(() => import("@/components/home/SecretKnowledge"))
 const Benefits = lazy(() => import("@/components/home/Benefits"))
 const SalesPitch = lazy(() => import("@/components/home/SalesPitch"))
 const Testimonials = lazy(() => import("@/components/home/Testimonials"))
 const BlogSection = lazy(() => import("@/components/home/sections/BlogSection"))
-
-// Loading placeholder component
-const LoadingPlaceholder = () => (
-  <div className="min-h-[400px] flex items-center justify-center">
-    <div className="w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
-  </div>
-)
 
 const Index = () => {
   return (
@@ -27,31 +20,31 @@ const Index = () => {
           <Hero />
         </div>
         
-        <Suspense fallback={<LoadingPlaceholder />}>
+        <Suspense fallback={<div className="min-h-[400px]" />}>
           <div id="benefits">
             <Benefits />
           </div>
         </Suspense>
 
-        <Suspense fallback={<LoadingPlaceholder />}>
+        <Suspense fallback={<div className="min-h-[400px]" />}>
           <div id="sales">
             <SalesPitch />
           </div>
         </Suspense>
 
-        <Suspense fallback={<LoadingPlaceholder />}>
+        <Suspense fallback={<div className="min-h-[400px]" />}>
           <div id="knowledge">
             <SecretKnowledge />
           </div>
         </Suspense>
 
-        <Suspense fallback={<LoadingPlaceholder />}>
+        <Suspense fallback={<div className="min-h-[400px]" />}>
           <div id="testimonials">
             <Testimonials />
           </div>
         </Suspense>
 
-        <Suspense fallback={<LoadingPlaceholder />}>
+        <Suspense fallback={<div className="min-h-[400px]" />}>
           <div id="blog">
             <BlogSection />
           </div>

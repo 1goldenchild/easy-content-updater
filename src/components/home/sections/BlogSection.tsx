@@ -35,16 +35,8 @@ const blogPosts = [
     description: "Explore how Rolex strategically uses numerology in their pricing, model numbers, and launch dates to maintain their status as the world's most prestigious watch brand.",
     date: "March 29, 2024",
     readTime: "8 min read",
-    mainImage: "photo-1460925895917-afdab827c52f",
+    mainImage: "/lovable-uploads/841cc51b-3942-436f-a692-be30a0b5b243.png",
     slug: "rolex-numerology"
-  },
-  {
-    title: "How Elon Musk Uses Numerology to Get Rich: The Power of 8 and 28",
-    description: "Discover how the world's richest man strategically uses numerology, particularly the numbers 8 and 28, to build his fortune through Tesla, SpaceX, and Twitter.",
-    date: "March 20, 2024",
-    readTime: "10 min read",
-    mainImage: "photo-1485833077593-4278bba3f11f",
-    slug: "elon-musk-numerology"
   },
   {
     title: "How Michael Jackson used the Power of Numerology: The Influence of the Number 7 on His Career",
@@ -54,6 +46,14 @@ const blogPosts = [
     mainImage: "/lovable-uploads/787349e3-6668-40c9-90db-3dd2d0f8d6ef.png",
     slug: "michael-jackson-numerology"
   },
+  {
+    title: "How Elon Musk Uses Numerology to Get Rich: The Power of 8 and 28",
+    description: "Discover how the world's richest man strategically uses numerology, particularly the numbers 8 and 28, to build his fortune through Tesla, SpaceX, and Twitter.",
+    date: "March 20, 2024",
+    readTime: "10 min read",
+    mainImage: "/lovable-uploads/4c2bf36a-524f-4700-86f4-fcb7d217d5fd.png",
+    slug: "elon-musk-numerology"
+  }
 ];
 
 const BlogSection = () => {

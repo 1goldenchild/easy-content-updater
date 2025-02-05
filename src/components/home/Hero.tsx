@@ -5,24 +5,28 @@ import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
 
 const Hero = memo(() => {
-  // Reduced number of particles for better performance
   const purpleShades = [
     '#b09df7',
     '#9580bd',
     '#8570b7',
+    '#deccfb',
+    '#eae5ff',
+    '#a173f7',
   ]
 
   const goldShades = [
     '#ffdf33',
     '#ffcd51',
     '#ffc642',
+    '#e1b449',
+    '#c49d39',
+    '#d4aa3d',
   ]
 
   return (
     <section className="relative min-h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 z-0 will-change-transform opacity-60" style={{ transform: 'translateZ(0)' }}>
-        {/* Reduced number of particles from 90 to 45 */}
-        {[...Array(45)].map((_, i) => {
+      <div className="absolute inset-0 z-0 will-change-transform" style={{ transform: 'translateZ(0)' }}>
+        {[...Array(90)].map((_, i) => {
           const color = purpleShades[Math.floor(Math.random() * purpleShades.length)]
           return (
             <div
@@ -40,7 +44,7 @@ const Hero = memo(() => {
             />
           )
         })}
-        {[...Array(45)].map((_, i) => {
+        {[...Array(90)].map((_, i) => {
           const color = goldShades[Math.floor(Math.random() * goldShades.length)]
           return (
             <div
@@ -64,7 +68,7 @@ const Hero = memo(() => {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }} // Reduced from 0.8 to 0.5
+          transition={{ duration: 0.8 }}
           className="flex flex-col items-center space-y-8 text-center relative z-10"
         >
           <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none bg-gradient-to-r from-white via-amber-200 to-white bg-[length:200%_auto] animate-shine bg-clip-text text-transparent">
@@ -74,7 +78,7 @@ const Hero = memo(() => {
             </span>
           </h1>
           <p className="mx-auto max-w-[700px] text-white/90 md:text-xl dark:text-white/90">
-            Uncover the secrets of your personality through numerology that the 1% don't want you to know—and how this powerful knowledge can transform your life.
+            Uncover the secrets of your personality through numerology that the 1% don't want you to know—and how this powerful knowledge can transform your life, enhance your relationships, and elevate your finances.
           </p>
           <div className="w-full max-w-[280px] relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-[#534363] via-[#534363] to-[#534363] rounded-md blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
