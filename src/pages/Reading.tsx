@@ -16,12 +16,9 @@ const Reading = () => {
 
   useEffect(() => {
     // Track Facebook Pixel ViewContent event
-    if (typeof fbq !== 'undefined') {
+    if (typeof window.fbq !== 'undefined') {
       console.log('Tracking Facebook Pixel ViewContent event');
-      fbq('track', 'ViewContent', {
-        value: 888,
-        currency: 'usd',
-      });
+      window.fbq('track', 'ViewContent');
     } else {
       console.warn('Facebook Pixel is not initialized');
     }
