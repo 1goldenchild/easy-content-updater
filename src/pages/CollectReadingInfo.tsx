@@ -4,9 +4,20 @@ import CollectInfoPreview from "@/components/collect-info/CollectInfoPreview";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { usePageTracking } from "@/hooks/usePageTracking";
+import { useEffect } from "react";
 
 const CollectReadingInfo = () => {
   usePageTracking();
+
+  useEffect(() => {
+    // Track Facebook Pixel CompleteRegistration event
+    if (typeof window.fbq !== 'undefined') {
+      console.log('Tracking Facebook Pixel CompleteRegistration event');
+      window.fbq('track', 'CompleteRegistration');
+    } else {
+      console.warn('Facebook Pixel is not initialized');
+    }
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
