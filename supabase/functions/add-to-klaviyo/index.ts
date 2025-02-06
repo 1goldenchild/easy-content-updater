@@ -1,3 +1,4 @@
+
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 const corsHeaders = {
@@ -17,11 +18,14 @@ serve(async (req) => {
   }
 
   try {
+    console.log('Starting Klaviyo profile creation...');
+    
     const KLAVIYO_API_KEY = Deno.env.get('KLAVIYO_PRIVATE_KEY');
     if (!KLAVIYO_API_KEY) {
       console.error('Klaviyo API key not found');
       throw new Error('Klaviyo API key not found');
     }
+    console.log('Klaviyo API key found');
 
     const { email, name } = await req.json() as RequestBody;
     console.log('Received request to create Klaviyo profile:', { email, name });
@@ -48,7 +52,7 @@ serve(async (req) => {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Klaviyo-API-Key ${KLAVIYO_API_KEY}`,
-        'revision': '2023-12-15'
+        'revision': '2023-12-15'  // Using latest stable API version
       },
       body: JSON.stringify(requestBody)
     });
