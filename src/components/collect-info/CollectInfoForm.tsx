@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useToast } from "@/components/ui/use-toast";
@@ -52,12 +53,21 @@ const CollectInfoForm = ({ onSubmit }: CollectInfoFormProps) => {
     console.log("Starting background operations with data:", { ...formData, date });
 
     try {
-      // Store form data in localStorage before redirecting
-      const klaviyoData = {
-        email: formData.email,
-        name: formData.name,
-      };
-      localStorage.setItem('pendingKlaviyoData', JSON.stringify(klaviyoData));
+      // First, call Klaviyo function
+      console.log("Attempting to add to Klaviyo");
+      const { error: klaviyoError } = await supabase.functions.invoke('add-to-klaviyo', {
+        body: {
+          email: formData.email,
+          name: formData.name,
+        }
+      });
+      
+      if (klaviyoError) {
+        console.error("Klaviyo function error:", klaviyoError);
+        // Continue with form submission even if Klaviyo fails
+      } else {
+        console.log("Klaviyo function called successfully");
+      }
       
       // Store user reading data
       const { error: readingError } = await supabase
@@ -90,26 +100,9 @@ const CollectInfoForm = ({ onSubmit }: CollectInfoFormProps) => {
         throw pendingError;
       }
 
-      // First, redirect to checkout
+      // Redirect to checkout
       console.log("Redirecting to checkout");
       window.location.href = "https://checkout.numerology33.com/checkout";
-      
-      // Call Klaviyo function after redirect
-      console.log("Attempting to add to Klaviyo");
-      try {
-        const { error: klaviyoError } = await supabase.functions.invoke('add-to-klaviyo', {
-          body: klaviyoData
-        });
-        
-        if (klaviyoError) {
-          console.error("Klaviyo function error:", klaviyoError);
-        } else {
-          console.log("Klaviyo function called successfully");
-          localStorage.removeItem('pendingKlaviyoData');
-        }
-      } catch (klaviyoError) {
-        console.error("Klaviyo call failed:", klaviyoError);
-      }
       
     } catch (error) {
       console.error("Operation failed:", error);
