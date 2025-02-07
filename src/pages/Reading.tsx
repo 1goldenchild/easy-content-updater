@@ -1,3 +1,4 @@
+
 import { lazy, Suspense, useEffect } from "react"
 import ReadingHero from "@/components/home/ReadingHero"
 import Navbar from "@/components/layout/Navbar"
