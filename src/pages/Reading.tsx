@@ -1,5 +1,5 @@
 
-import { lazy, Suspense, useEffect } from "react"
+import { lazy, Suspense } from "react"
 import ReadingHero from "@/components/home/ReadingHero"
 import Navbar from "@/components/layout/Navbar"
 import Footer from "@/components/layout/Footer"
@@ -14,16 +14,6 @@ const BlogSection = lazy(() => import("@/components/home/sections/BlogSection"))
 
 const Reading = () => {
   usePageTracking();
-
-  useEffect(() => {
-    // Track Facebook Pixel ViewContent event
-    if (typeof window.fbq !== 'undefined') {
-      console.log('Tracking Facebook Pixel ViewContent event');
-      window.fbq('track', 'ViewContent');
-    } else {
-      console.warn('Facebook Pixel is not initialized');
-    }
-  }, []);
 
   return (
     <>
