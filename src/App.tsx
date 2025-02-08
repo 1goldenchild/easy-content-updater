@@ -1,3 +1,4 @@
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/components/auth/AuthProvider";
 import Index from "./pages/Index";
@@ -12,6 +13,7 @@ import Refund from "./pages/Refund";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import LifepathNumberNine from "./pages/LifepathNumberNine";
+import NumerologyLifePathNine from "./pages/NumerologyLifePathNine";
 import Reading from "./pages/Reading";
 import Auth from "./pages/Auth";
 
@@ -32,6 +34,7 @@ const App = () => {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/lifepath-number-9" element={<LifepathNumberNine />} />
+          <Route path="/numerology-life-path-9" element={<NumerologyLifePathNine />} />
           <Route path="/reading" element={<Reading />} />
           <Route path="/auth" element={<Auth />} />
         </Routes>
