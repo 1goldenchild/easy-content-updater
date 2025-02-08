@@ -6,7 +6,6 @@ import Footer from "@/components/layout/Footer"
 import { usePageTracking } from "@/hooks/usePageTracking"
 
 // Lazy load components that are not immediately visible
-const SecretKnowledge = lazy(() => import("@/components/home/SecretKnowledge"))
 const Benefits = lazy(() => import("@/components/home/Benefits"))
 const SalesPitch = lazy(() => import("@/components/home/SalesPitch"))
 const Testimonials = lazy(() => import("@/components/home/Testimonials"))
@@ -32,12 +31,6 @@ const Reading = () => {
         <Suspense fallback={<div className="min-h-[400px]" />}>
           <div id="sales">
             <SalesPitch />
-          </div>
-        </Suspense>
-
-        <Suspense fallback={<div className="min-h-[400px]" />}>
-          <div id="knowledge">
-            <SecretKnowledge />
           </div>
         </Suspense>
 
