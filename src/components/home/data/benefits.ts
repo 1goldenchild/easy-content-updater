@@ -1,4 +1,5 @@
-import { TrendingUp, Target, DollarSign, Users, Zap, Sparkles } from "lucide-react";
+
+import { TrendingUp, Target, Users, Zap, Sparkles } from "lucide-react";
 import { Benefit } from "../types/benefits";
 
 export const benefits: Benefit[] = [
@@ -49,18 +50,6 @@ export const benefits: Benefit[] = [
     glowColor: "purple",
     neonColor: "rgba(126, 105, 171, 0.5)",
     iconBg: "bg-gradient-to-br from-[#7E69AB] to-[#D946EF]"
-  },
-  {
-    icon: DollarSign,
-    title: "Thrive and prosper",
-    description: "With numerology, you can pinpoint your natural gifts and leverage them across various career fields where you can thrive and prosper. Gain insight into the industries and areas that are uniquely aligned with your strengths, allowing you to excel and dominate.",
-    bgGradient: "from-[#0EA5E9] via-[#3B82F6]/20 to-[#6366F1]/30",
-    iconColor: "text-white",
-    borderColor: "border-[#0EA5E9]/20",
-    burnGradient: "from-[#0EA5E9]/0 via-[#0EA5E9]/20 to-[#3B82F6]/10",
-    glowColor: "blue",
-    neonColor: "rgba(14, 165, 233, 0.5)",
-    iconBg: "bg-gradient-to-br from-[#0EA5E9] to-[#3B82F6]"
   },
   {
     icon: Sparkles,
