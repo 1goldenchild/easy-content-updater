@@ -1,3 +1,4 @@
+
 import { memo } from "react"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
@@ -78,7 +79,7 @@ const Hero = memo(() => {
             </span>
           </h1>
           <p className="mx-auto max-w-[700px] text-white/90 md:text-xl dark:text-white/90">
-            Uncover the secrets of your personality through numerology that the 1% don't want you to know—and how this powerful knowledge can transform your life, enhance your relationships, and elevate your finances.
+            Uncover the secrets of your personality through numerology—hidden insights that can transform your life, deepen your relationships, and unlock your true potential.
           </p>
           <div className="w-full max-w-[280px] relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-[#534363] via-[#534363] to-[#534363] rounded-md blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
