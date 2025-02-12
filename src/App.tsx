@@ -16,6 +16,7 @@ import LifepathNumberNine from "./pages/LifepathNumberNine";
 import NumerologyLifePathNine from "./pages/NumerologyLifePathNine";
 import Reading from "./pages/Reading";
 import Auth from "./pages/Auth";
+import Home from "./pages/Home";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
       <AuthProvider>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/portal" element={<Portal />} />
           <Route path="/mynumerology" element={<MyNumerology />} />
           <Route path="/collect-info" element={<CollectInfo />} />
