@@ -15,21 +15,6 @@ const Home = () => {
     scrollToTop();
   };
 
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 }
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#1a1f3c] to-[#2d2b4a]">
       <Navbar />
@@ -61,48 +46,70 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Truth Section */}
+      <section className="py-12 md:py-20 bg-purple-900/10">
+        <div className="container px-4 mx-auto">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">
+              The Truth No One Told You About Your Life Path
+            </h2>
+            <div className="space-y-6 text-white/80">
+              <p>
+                You feel stuck. You wonder why things don't seem to align for you. Relationships, career, finances—everything feels like a struggle.
+              </p>
+              <p className="text-xl text-amber-200">
+                What if we told you that the answers have been in front of you this whole time? That your birth date reveals a roadmap, guiding you to abundance, love, and fulfillment?
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Pain Points Section */}
       <section className="py-12 md:py-20">
         <div className="container px-4 mx-auto">
-          <motion.div 
-            variants={container}
-            initial="hidden"
-            animate="show"
-            className="max-w-4xl mx-auto"
-          >
+          <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
               The Pain You're Experiencing Is <span className="text-red-400">NOT</span> a Coincidence
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                {
-                  icon: Target,
-                  title: "Facing Obstacles",
-                  description: "Unsure why life feels like an uphill battle?"
-                },
-                {
-                  icon: Heart,
-                  title: "Repeating Patterns",
-                  description: "Making the same mistakes in love, career, or self development?"
-                },
-                {
-                  icon: Star,
-                  title: "Untapped Potential",
-                  description: "Feel like you're meant for more but can't figure out how to reach it?"
-                }
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  variants={item}
-                  className="bg-white/5 p-6 rounded-xl border border-purple-500/20"
-                >
-                  <item.icon className="w-12 h-12 text-purple-400 mb-4" />
-                  <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
-                  <p className="text-white/70">{item.description}</p>
-                </motion.div>
-              ))}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="bg-white/5 p-6 rounded-xl border border-purple-500/20"
+              >
+                <Target className="w-12 h-12 text-purple-400 mb-4" />
+                <h3 className="text-xl font-semibold text-white mb-2">Facing Obstacles</h3>
+                <p className="text-white/70">Unsure why life feels like an uphill battle?</p>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="bg-white/5 p-6 rounded-xl border border-purple-500/20"
+              >
+                <Heart className="w-12 h-12 text-purple-400 mb-4" />
+                <h3 className="text-xl font-semibold text-white mb-2">Repeating Patterns</h3>
+                <p className="text-white/70">Making the same mistakes in love, career, or self development?</p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="bg-white/5 p-6 rounded-xl border border-purple-500/20"
+              >
+                <Star className="w-12 h-12 text-purple-400 mb-4" />
+                <h3 className="text-xl font-semibold text-white mb-2">Untapped Potential</h3>
+                <p className="text-white/70">Feel like you're meant for more but can't figure out how to reach it?</p>
+              </motion.div>
             </div>
-          </motion.div>
+            
+            <p className="text-white/80 mt-8 text-center">
+              Your struggles are NOT random. They're patterns written in your numbers, and until you decode them, you'll keep facing the same roadblocks.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -120,7 +127,12 @@ const Home = () => {
                 "Your natural strengths and how to use them to create success",
                 "The ideal career, relationships, and opportunities for your unique numbers",
                 "A step-by-step action plan to align with your true path",
-                "Advanced insights including Partial Energy, Core Traits, and more!"
+                "Advanced insights including Partial Energy, Core Traits, Cycle Number Analysis",
+                "2025 Energy Analysis, Secret Number Analysis, Lucky Number",
+                "Compatibility for Love and Friendship, Best Career Path",
+                "Best House to Live In, Best Car, Best Countries and Travel Locations",
+                "Best Color, Best Crystal, and Most Compatible Technology Brand",
+                "And Much More Advanced Insights!"
               ].map((feature, index) => (
                 <motion.div
                   key={index}
@@ -145,44 +157,75 @@ const Home = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
               Why Trust Us? Here's Our Proven Track Record
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {[
-                {
-                  icon: TrendingUp,
-                  title: "100,000+ Followers",
-                  description: "Over 24 million views on TikTok in the last 12 months"
-                },
-                {
-                  icon: Trophy,
-                  title: "Thousands Helped",
-                  description: "We've helped thousands find clarity and purpose"
-                }
-              ].map((stat, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.2 }}
-                  className="bg-white/5 p-6 rounded-xl border border-purple-500/20"
-                >
-                  <stat.icon className="w-12 h-12 text-amber-400 mb-4" />
-                  <h3 className="text-xl font-semibold text-white mb-2">{stat.title}</h3>
-                  <p className="text-white/70">{stat.description}</p>
-                </motion.div>
-              ))}
+            <div className="space-y-6">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="bg-white/5 p-6 rounded-xl border border-purple-500/20"
+              >
+                <div className="flex items-start gap-4">
+                  <TrendingUp className="w-12 h-12 text-amber-400 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-xl font-semibold text-white mb-2">100,000+ TikTok Followers</h3>
+                    <p className="text-white/70">
+                      Over 24 million views in the last 12 months. Unlike other numerologists who simply regurgitate 
+                      the same information, we actively practice what we preach and bring real, actionable insights 
+                      from working with thousands of people.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="bg-white/5 p-6 rounded-xl border border-purple-500/20"
+              >
+                <div className="flex items-start gap-4">
+                  <Trophy className="w-12 h-12 text-amber-400 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-xl font-semibold text-white mb-2">Global Recognition</h3>
+                    <p className="text-white/70">
+                      We've helped thousands of customers find clarity, purpose, and life-changing breakthroughs. 
+                      Our readings are renowned for their accuracy and premium quality all over the world.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Offer Section */}
+      {/* What You'll Get Section */}
       <section className="py-12 md:py-20 bg-gradient-to-br from-purple-900/20 to-pink-900/20">
         <div className="container px-4 mx-auto">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="bg-white/5 p-8 rounded-2xl border border-purple-500/20">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-                Special Offer
-              </h2>
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
+              Here's What You'll Get With Your Personalized Numerology Reading
+            </h2>
+            <div className="space-y-4 mb-12">
+              {[
+                "A detailed, in-depth numerology reading tailored specifically to you",
+                "Actionable insights and guidance you can apply immediately",
+                "A step-by-step breakdown of your numbers and how to use them",
+                "A BONUS Numerology Ebook to deepen your understanding"
+              ].map((benefit, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="flex items-center gap-3 bg-white/5 p-4 rounded-lg border border-purple-500/20"
+                >
+                  <CheckCircle2 className="w-6 h-6 text-green-400 flex-shrink-0" />
+                  <p className="text-white/80">{benefit}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="bg-white/5 p-8 rounded-2xl border border-purple-500/20 text-center">
               <div className="mb-8">
                 <p className="text-2xl text-red-400 line-through mb-2">Total Value: $197</p>
                 <p className="text-4xl md:text-5xl font-bold text-green-400">Today Only: $27!</p>
@@ -197,7 +240,13 @@ const Home = () => {
               >
                 Get Your Reading Now
               </Button>
-              <p className="mt-4 text-white/60 text-sm">100% Money-Back Guarantee</p>
+              <div className="mt-6 p-4 bg-white/5 rounded-lg">
+                <h3 className="text-lg font-semibold text-white mb-2">100% Risk-Free Guarantee</h3>
+                <p className="text-white/70 text-sm">
+                  We're so confident in the accuracy and life-changing impact of our readings that we offer a 100% Money-Back Guarantee. 
+                  If you don't find immense value in your reading, just let us know—we'll refund you, no questions asked.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -208,37 +257,4 @@ const Home = () => {
         <div className="container px-4 mx-auto">
           <div className="max-w-3xl mx-auto">
             <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-6 mb-12">
-              <div className="flex items-center gap-3 mb-4">
-                <AlertTriangle className="w-6 h-6 text-red-400" />
-                <h3 className="text-xl font-semibold text-white">Warning: This Offer Won't Last Forever</h3>
-              </div>
-              <p className="text-white/80">
-                Due to high demand, we may close this special offer at any time and increase prices. 
-                If you leave this page, you might not see this deal again.
-              </p>
-            </div>
-            <div className="text-center">
-              <h3 className="text-2xl font-bold text-white mb-4">
-                P.S. Don't Miss This Life-Changing Opportunity
-              </h3>
-              <p className="text-white/80 mb-8">
-                Your birth numbers have been waiting for you to decode them. Stop wondering and start knowing. 
-                Grab your personalized numerology reading now and unlock the clarity and direction you deserve!
-              </p>
-              <Button
-                onClick={handleGetStarted}
-                className="bg-gradient-to-r from-amber-400 to-amber-600 text-white px-8 py-6 text-xl h-auto hover:opacity-90 transition-opacity"
-              >
-                Unlock Your Numerology Reading Now
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <Footer />
-    </div>
-  );
-};
-
-export default Home;
+              <div className="flex items-
