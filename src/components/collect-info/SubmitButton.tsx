@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 
 interface SubmitButtonProps {
@@ -5,7 +6,7 @@ interface SubmitButtonProps {
   text?: string;
 }
 
-const SubmitButton = ({ isLoading, text = "Get Your Analysis" }: SubmitButtonProps) => {
+const SubmitButton = ({ isLoading, text = "Submit" }: SubmitButtonProps) => {
   return (
     <div className="space-y-2">
       <Button

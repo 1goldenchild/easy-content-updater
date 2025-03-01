@@ -22,7 +22,7 @@ const CollectReadingInfo = () => {
               <span className="relative inline-block">
                 <span className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500 opacity-50 blur-lg animate-pulse" />
                 <span className="relative bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500 bg-clip-text text-transparent animate-shine">
-                  Get Your Numerology Reading
+                  Enter your analysis information
                 </span>
               </span>
             </h1>
