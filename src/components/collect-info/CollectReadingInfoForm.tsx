@@ -153,7 +153,7 @@ const CollectReadingInfoForm = () => {
             setDate={setDate}
           />
 
-          <SubmitButton isLoading={isLoading} text="Get Your Reading" />
+          <SubmitButton isLoading={isLoading} text="Submit" />
         </form>
       )}
     </motion.div>
